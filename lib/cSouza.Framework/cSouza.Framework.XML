@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>cSouza.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:cSouza.Framework.File.CSV.CsvFileParserOptions">
+            <summary>
+            Description of Options.
+            </summary>
+        </member>
+    </members>
+</doc>

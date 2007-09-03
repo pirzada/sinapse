@@ -1,0 +1,8 @@
+This is a modified and reduced version of the AForge.NET Framework created to support Network Serialization. AForge.NET is released under the GNU General Public License 2.0
+
+Modified source code is and will ever be distributed together with this application under the same licensing terms.
+
+Original project copyright Andrew Kirillov
+http://code.google.com/p/aforge/
+
+Minor changes by Cesar Souza
