@@ -1,9 +1,0 @@
-#summary Artificial Neural Networks
-
-= Introduction =
-
-
-
-
-= Details =
-
