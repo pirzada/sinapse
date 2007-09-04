@@ -1,0 +1,5 @@
+Sinapse 
+
+Sinapse is a opensource program for training neural networks to perform simple tasks, like function approximation, pattern recognition, classification and more
+
+http://code.google.com/p/sinapse/
