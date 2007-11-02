@@ -131,6 +131,29 @@ namespace AForge.Neuro.Learning
 			return error;
 		}
 
+        public double MeasureError(double[] input, double[] output)
+        {
+            // compute the network's output
+            network.Compute(input);
+
+            // calculate network error
+            double error = CalculateError(output);
+
+            return error;
+        }
+
+        public double MeasureEpochError(double[][] input, double[][] output)
+        {
+            double error = 0.0;
+
+            for (int i = 0; i < input.Length; ++i)
+            {
+                error += MeasureError(input[i], output[i]);
+            }
+
+            return error;
+        }
+
 		/// <summary>
 		/// Runs learning epoch
 		/// </summary>

@@ -122,8 +122,9 @@ namespace AForge.Neuro
 
 			return output;
 		}
-		
-		/// <summary>
+
+
+        /// <summary>
 		/// Randomize layers of the network
 		/// </summary>
 		/// 
