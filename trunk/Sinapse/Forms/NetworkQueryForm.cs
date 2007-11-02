@@ -62,5 +62,10 @@ namespace Sinapse.Forms
             this.Close();
         }
 
+        private void networkDataQueryControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

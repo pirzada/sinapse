@@ -194,6 +194,7 @@ namespace Sinapse.Forms
             this.networkDataQueryControl.Name = "networkDataQueryControl";
             this.networkDataQueryControl.Size = new System.Drawing.Size(698, 585);
             this.networkDataQueryControl.TabIndex = 12;
+            this.networkDataQueryControl.Load += new System.EventHandler(this.networkDataQueryControl_Load);
             // 
             // NetworkQueryForm
             // 

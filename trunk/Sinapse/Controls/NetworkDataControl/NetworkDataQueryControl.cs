@@ -124,15 +124,33 @@ namespace Sinapse.Controls
 
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            CsvFileParserOptions options = new CsvFileParserOptions(openFileDialog.FileName);
+            /*CsvFileParserOptions options = new CsvFileParserOptions(openFileDialog.FileName);
             options.AutoDetectCsvDelimiter = true;
-            options.HeadersAction = HeadersAction.UseAsColumnNames;
+            options.HeadersAction = HeadersAction.UseAsColumnNames;*/
+            
             try
             {
-                DataTable table = CsvParser.Parse(options);
+                //DataTable table = CsvParser.Parse(options);
+                DataTable table = CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, '\t');
 
-                this.m_networkData.DataTable.Clear();
-                this.m_networkData.DataTable.Merge(table, true, MissingSchemaAction.Ignore);
+/*
+                foreach (DataRow row in table.Rows)
+                {
+                    DataRow newRow = this.m_networkData.DataTable.NewRow();
+                    foreach (DataColumn col in table.Columns)
+                    {
+                        if (newRow.Table.Columns.Contains(col.ColumnName))
+                        {
+                            newRow[col.ColumnName] = row[col.ColumnName];
+                        }
+                    }
+                    //newRow.EndEdit();
+                    this.m_networkData.DataTable.Rows.Add(newRow);
+                }
+                */
+                
+              //  this.m_networkData.DataTable.Clear();
+                this.m_networkData.DataTable.Merge(table, false, MissingSchemaAction.Ignore);
             }
             catch
             {
