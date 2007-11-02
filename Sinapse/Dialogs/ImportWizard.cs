@@ -80,9 +80,9 @@ namespace Sinapse.Dialogs
                     break;
 
                 case 1:
-                    if (File.Exists(tbDatapath.Text))
+                    if (File.Exists(tbDatapath.Text) && loadDataTable())
                     {
-                        loadDataTable();
+                        //loadDataTable();
                         loadInputCombobox();
                     }
                     else
@@ -153,9 +153,18 @@ namespace Sinapse.Dialogs
         //---------------------------------------------
 
         #region Load Controls
-        private void loadDataTable()
+        private bool loadDataTable()
         {
-            this.m_dataTable = CsvParser.Parse(tbDatapath.Text, Encoding.Default, true);
+            try
+            {
+                this.m_dataTable = CsvParser.Parse(tbDatapath.Text, Encoding.Default, true, '\t');
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show(e.Message, "Error opening file");
+                return false;
+            }
+            return true;
         }
 
         private void loadInputCombobox()

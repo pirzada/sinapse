@@ -59,7 +59,7 @@ namespace Sinapse.Dialogs
             // 
             // wizardControl
             // 
-            this.wizardControl.BackButtonEnabled = false;
+            this.wizardControl.BackButtonEnabled = true;
             this.wizardControl.BackButtonVisible = true;
             this.wizardControl.CancelButtonEnabled = true;
             this.wizardControl.CancelButtonVisible = true;
@@ -178,7 +178,7 @@ namespace Sinapse.Dialogs
             this.clbInput.FormattingEnabled = true;
             this.clbInput.Location = new System.Drawing.Point(374, 83);
             this.clbInput.Name = "clbInput";
-            this.clbInput.Size = new System.Drawing.Size(120, 229);
+            this.clbInput.Size = new System.Drawing.Size(150, 229);
             this.clbInput.Sorted = true;
             this.clbInput.TabIndex = 0;
             // 
@@ -209,7 +209,7 @@ namespace Sinapse.Dialogs
             this.clbOutput.FormattingEnabled = true;
             this.clbOutput.Location = new System.Drawing.Point(374, 83);
             this.clbOutput.Name = "clbOutput";
-            this.clbOutput.Size = new System.Drawing.Size(120, 229);
+            this.clbOutput.Size = new System.Drawing.Size(150, 229);
             this.clbOutput.Sorted = true;
             this.clbOutput.TabIndex = 1;
             // 
@@ -251,7 +251,7 @@ namespace Sinapse.Dialogs
             this.clbString.FormattingEnabled = true;
             this.clbString.Location = new System.Drawing.Point(374, 83);
             this.clbString.Name = "clbString";
-            this.clbString.Size = new System.Drawing.Size(120, 229);
+            this.clbString.Size = new System.Drawing.Size(150, 229);
             this.clbString.Sorted = true;
             this.clbString.TabIndex = 2;
             // 
