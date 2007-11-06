@@ -29,6 +29,7 @@ namespace Sinapse.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportWizard));
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.wizardControl = new WizardBase.WizardControl();
             this.startStep = new WizardBase.StartStep();
             this.intermediateStep1 = new WizardBase.IntermediateStep();
@@ -49,13 +50,17 @@ namespace Sinapse.Dialogs
             this.clbString = new System.Windows.Forms.CheckedListBox();
             this.finishStep = new WizardBase.FinishStep();
             this.label5 = new System.Windows.Forms.Label();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.intermediateStep1.SuspendLayout();
             this.intermediateStep2.SuspendLayout();
             this.intermediateStep3.SuspendLayout();
             this.intermediateStep4.SuspendLayout();
             this.finishStep.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "All Files (*.*)|*.*";
+            this.openFileDialog.Title = "Select data location";
             // 
             // wizardControl
             // 
@@ -269,11 +274,6 @@ namespace Sinapse.Dialogs
             this.label5.TabIndex = 0;
             this.label5.Text = "We are ready to begin manipulating your data.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.Filter = "All Files (*.*)|*.*";
-            this.openFileDialog.Title = "Select data location";
             // 
             // ImportWizard
             // 

@@ -40,12 +40,20 @@ namespace Sinapse.Data
         public double[,] GetErrors()
         {
             //Create error's dynamics
-            //Array's length cannot exceed 16000!
-            double[,] errorMatrix = new double[ErrorList.Count, 2];
-            for (int i = 0; i < ErrorList.Count; i++)
+            double[,] errorMatrix;
+            try
             {
-                errorMatrix[i, 0] = i;
-                errorMatrix[i, 1] = ErrorList[i];
+                errorMatrix = new double[ErrorList.Count, 2];
+                for (int i = 0; i < ErrorList.Count; i++)
+                {
+                    errorMatrix[i, 0] = i;
+                    errorMatrix[i, 1] = ErrorList[i];
+                }
+            }
+            catch
+            {
+                errorMatrix = new double[1, 2];
+                errorMatrix.Initialize();
             }
             return errorMatrix;
         }

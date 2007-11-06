@@ -142,7 +142,7 @@ namespace Sinapse.Forms
         #region Other Controls Events
         private void networkCreatorControl_NetworkCreated(object sender, EventArgs e)
         {
-            if (this.CurrentNetwork != null && MessageBox.Show("Would you like to overwride your current network?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (this.CurrentNetwork != null && MessageBox.Show("Would you like to overwrite your current network?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 this.setStatus("Nothing changed");
                 return;
