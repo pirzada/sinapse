@@ -38,7 +38,7 @@ namespace Sinapse.Forms
     internal sealed partial class MainForm : Form
     {
 
-        private NeuralNetwork m_neuralNetwork;
+        private NetworkContainer m_neuralNetwork;
 
         //---------------------------------------------
 
@@ -52,7 +52,7 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
         #region Properties
-        internal NeuralNetwork CurrentNetwork
+        internal NetworkContainer CurrentNetwork
         {
             get { return m_neuralNetwork; }
             set
@@ -262,7 +262,7 @@ namespace Sinapse.Forms
         {
             try
             {
-                NeuralNetwork.Serialize(this.CurrentNetwork, path);
+                NetworkContainer.Serialize(this.CurrentNetwork, path);
             }
             catch
             {
@@ -272,11 +272,11 @@ namespace Sinapse.Forms
 
         private void networkLoad(string path)
         {
-            NeuralNetwork neuralNetwork = null;
+            NetworkContainer neuralNetwork = null;
 
             try
             {
-                neuralNetwork = NeuralNetwork.Deserialize(path);
+                neuralNetwork = NetworkContainer.Deserialize(path);
             }
             catch
             {

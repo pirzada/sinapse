@@ -33,12 +33,12 @@ namespace Sinapse.Forms
     internal sealed partial class NetworkQueryForm : Form
     {
 
-        private NeuralNetwork m_neuralNetwork;
+        private NetworkContainer m_neuralNetwork;
 
         //---------------------------------------------
 
         #region Constructor
-        internal NetworkQueryForm(NeuralNetwork neuralNetwork)
+        internal NetworkQueryForm(NetworkContainer neuralNetwork)
         {
             InitializeComponent();
 

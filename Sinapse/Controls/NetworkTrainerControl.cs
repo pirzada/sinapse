@@ -46,7 +46,7 @@ namespace Sinapse.Controls
         public EventHandler OnDataNeeded;
         public EventHandler OnStatusChanged;
 
-        private NeuralNetwork m_neuralNetwork;
+        private NetworkContainer m_neuralNetwork;
         private int m_epoch;
         private int m_progress;
         private bool m_autoUpdate;
@@ -67,7 +67,7 @@ namespace Sinapse.Controls
         //---------------------------------------------
 
         #region Properties
-        internal NeuralNetwork NeuralNetwork
+        internal NetworkContainer NeuralNetwork
         {
             get { return m_neuralNetwork; }
             set
@@ -128,6 +128,11 @@ namespace Sinapse.Controls
             }
         }
 
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnStop_Click(object sender, EventArgs e)
         {
             this.Stop();
@@ -147,6 +152,21 @@ namespace Sinapse.Controls
 
         #region Public Methods
         public void Stop()
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                this.setStatus("Stopping Thread");
+                this.backgroundWorker.CancelAsync();
+            }
+            else
+            {
+                this.setStatus("Thread is not running");
+            }
+
+            this.setTrainingInfo(0, 0, 0);
+        }
+
+        public void Pause()
         {
             if (backgroundWorker.IsBusy)
             {
@@ -206,6 +226,9 @@ namespace Sinapse.Controls
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             NetworkState networkState = new NetworkState();
+            networkState.Epoch = m_epoch;
+            networkState.ErrorRate = m_errorRate;
+            
             NetworkOptions options = e.Argument as NetworkOptions;
 
             if (options == null)
@@ -294,8 +317,7 @@ namespace Sinapse.Controls
             
             if (e.Cancelled)
             {
-                this.setStatus("Training cancelled");
-                this.setTrainingInfo(0, 0, 0);
+                this.setStatus("Training stopped");
             }
             else
             {
@@ -315,6 +337,7 @@ namespace Sinapse.Controls
             }
         }
         #endregion
+
 
     }
 }

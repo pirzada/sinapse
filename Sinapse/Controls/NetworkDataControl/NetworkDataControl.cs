@@ -24,6 +24,8 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
+using cSouza.Framework.File.CSV;
+
 using Sinapse.Data;
 using Sinapse.Dialogs;
 
@@ -46,6 +48,7 @@ namespace Sinapse.Controls
 
         //----------------------------------------
 
+
         #region Constructor
         public NetworkDataControl()
         {
@@ -59,7 +62,9 @@ namespace Sinapse.Controls
 
         #endregion
 
+
         //----------------------------------------
+
 
         #region Properties
         internal NetworkData NetworkData
@@ -106,6 +111,7 @@ namespace Sinapse.Controls
         }
         #endregion
 
+
         //----------------------------------------
 
         #region Public Methods
@@ -117,7 +123,13 @@ namespace Sinapse.Controls
 
         //----------------------------------------
 
+
         #region Control Events
+        /// <summary>
+        /// Provides paste support for the datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void dataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.C)
@@ -172,7 +184,9 @@ namespace Sinapse.Controls
         }
         #endregion
 
+
         //----------------------------------------
+
 
         #region Private Methods
         private void setHeaderColors()
@@ -196,6 +210,53 @@ namespace Sinapse.Controls
             }
         }
         #endregion
+
+
+        //----------------------------------------
+
+
+        #region Data Import
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog.ShowDialog();
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            /*CsvFileParserOptions options = new CsvFileParserOptions(openFileDialog.FileName);
+            options.AutoDetectCsvDelimiter = true;
+            options.HeadersAction = HeadersAction.UseAsColumnNames;*/
+
+            try
+            {
+                //DataTable table = CsvParser.Parse(options);
+                DataTable table = CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, '\t');
+
+                /*
+                                foreach (DataRow row in table.Rows)
+                                {
+                                    DataRow newRow = this.m_networkData.DataTable.NewRow();
+                                    foreach (DataColumn col in table.Columns)
+                                    {
+                                        if (newRow.Table.Columns.Contains(col.ColumnName))
+                                        {
+                                            newRow[col.ColumnName] = row[col.ColumnName];
+                                        }
+                                    }
+                                    //newRow.EndEdit();
+                                    this.m_networkData.DataTable.Rows.Add(newRow);
+                                }
+                                */
+
+                //  this.m_networkData.DataTable.Clear();
+                this.m_networkData.DataTable.Merge(table, false, MissingSchemaAction.Ignore);
+            }
+            catch
+            {
+                MessageBox.Show("Erro ao abrir arquivo");
+            }
+        }
+#endregion
 
     }
 }

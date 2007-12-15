@@ -84,11 +84,13 @@ namespace Sinapse.Forms
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.networkDisplayControl = new Sinapse.Controls.NetworkDisplayControl();
             this.networkRangesControl = new Sinapse.Controls.NetworkRangesControl();
             this.networkCreatorControl = new Sinapse.Controls.NetworkCreatorControl();
             this.networkTrainerControl = new Sinapse.Controls.NetworkTrainerControl();
             this.networkDataControl = new Sinapse.Controls.NetworkDataTrainControl();
-            this.networkDisplayControl = new Sinapse.Controls.NetworkDisplayControl();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -116,19 +118,19 @@ namespace Sinapse.Forms
             // 
             this.lbNetworkName.AutoSize = true;
             this.lbNetworkName.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbNetworkName.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNetworkName.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNetworkName.ForeColor = System.Drawing.SystemColors.Window;
             this.lbNetworkName.Location = new System.Drawing.Point(12, 4);
             this.lbNetworkName.Name = "lbNetworkName";
-            this.lbNetworkName.Size = new System.Drawing.Size(479, 25);
+            this.lbNetworkName.Size = new System.Drawing.Size(397, 29);
             this.lbNetworkName.TabIndex = 0;
-            this.lbNetworkName.Text = "Neural Networks: A General Implementation";
+            this.lbNetworkName.Text = "Sinapse Neural Networking Tool";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label6.Location = new System.Drawing.Point(42, 31);
+            this.label6.Location = new System.Drawing.Point(42, 33);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 0;
@@ -140,7 +142,7 @@ namespace Sinapse.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label1.Location = new System.Drawing.Point(718, 31);
+            this.label1.Location = new System.Drawing.Point(718, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -152,7 +154,7 @@ namespace Sinapse.Forms
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label7.Location = new System.Drawing.Point(829, 31);
+            this.label7.Location = new System.Drawing.Point(829, 33);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 0;
@@ -186,7 +188,7 @@ namespace Sinapse.Forms
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label8.Location = new System.Drawing.Point(924, 31);
+            this.label8.Location = new System.Drawing.Point(924, 33);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 0;
@@ -196,7 +198,7 @@ namespace Sinapse.Forms
             // 
             this.lbRowCount.AutoSize = true;
             this.lbRowCount.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbRowCount.Location = new System.Drawing.Point(118, 31);
+            this.lbRowCount.Location = new System.Drawing.Point(118, 33);
             this.lbRowCount.Name = "lbRowCount";
             this.lbRowCount.Size = new System.Drawing.Size(52, 13);
             this.lbRowCount.TabIndex = 0;
@@ -280,6 +282,8 @@ namespace Sinapse.Forms
             this.MenuFileSave,
             this.MenuFileSaveAs,
             this.toolStripSeparator2,
+            this.exportToolStripMenuItem,
+            this.toolStripSeparator1,
             this.MenuFileExit});
             this.MenuFile.Name = "MenuFile";
             this.MenuFile.Size = new System.Drawing.Size(35, 20);
@@ -291,7 +295,7 @@ namespace Sinapse.Forms
             this.MenuFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuFileNew.Name = "MenuFileNew";
             this.MenuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.MenuFileNew.Size = new System.Drawing.Size(151, 22);
+            this.MenuFileNew.Size = new System.Drawing.Size(152, 22);
             this.MenuFileNew.Text = "&New";
             this.MenuFileNew.Click += new System.EventHandler(this.MenuFileNew_Click);
             // 
@@ -410,6 +414,16 @@ namespace Sinapse.Forms
             this.saveFileDialog.Title = "Save Network Object";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 
+            // networkDisplayControl
+            // 
+            this.networkDisplayControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.networkDisplayControl.Enabled = false;
+            this.networkDisplayControl.Location = new System.Drawing.Point(813, 79);
+            this.networkDisplayControl.Name = "networkDisplayControl";
+            this.networkDisplayControl.ReadOnly = false;
+            this.networkDisplayControl.Size = new System.Drawing.Size(200, 290);
+            this.networkDisplayControl.TabIndex = 15;
+            // 
             // networkRangesControl
             // 
             this.networkRangesControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -450,15 +464,16 @@ namespace Sinapse.Forms
             this.networkDataControl.Size = new System.Drawing.Size(601, 551);
             this.networkDataControl.TabIndex = 11;
             // 
-            // networkDisplayControl
+            // exportToolStripMenuItem
             // 
-            this.networkDisplayControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.networkDisplayControl.Enabled = false;
-            this.networkDisplayControl.Location = new System.Drawing.Point(813, 79);
-            this.networkDisplayControl.Name = "networkDisplayControl";
-            this.networkDisplayControl.ReadOnly = false;
-            this.networkDisplayControl.Size = new System.Drawing.Size(200, 290);
-            this.networkDisplayControl.TabIndex = 15;
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
@@ -478,7 +493,7 @@ namespace Sinapse.Forms
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(780, 500);
             this.Name = "MainForm";
-            this.Text = "Network Trainer";
+            this.Text = "Sinapse";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
@@ -535,5 +550,7 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripStatusLabel lbItems;
         private Sinapse.Controls.NetworkRangesControl networkRangesControl;
         private Sinapse.Controls.NetworkDisplayControl networkDisplayControl;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
