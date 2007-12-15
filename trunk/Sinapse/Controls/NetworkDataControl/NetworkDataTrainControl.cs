@@ -28,12 +28,15 @@ namespace Sinapse.Controls
 {
     sealed internal partial class NetworkDataTrainControl : Sinapse.Controls.NetworkDataControl
     {
-        #region Color Definitions
-        private readonly Color validationColor = Color.Gainsboro;
+
+        #region Constant Definitions
         private readonly Color testingColor = SystemColors.Control;
+        private readonly Color validationColor = Color.Gainsboro;
+        private readonly string validationTag  = "Validation";       
         #endregion
 
         //---------------------------------------------
+
 
         #region Constructor
         public NetworkDataTrainControl()
@@ -41,10 +44,13 @@ namespace Sinapse.Controls
             InitializeComponent();
 
             this.panelValidationCaption.BackColor = validationColor;
+            this.dataGridView.ContextMenuStrip = this.contextMenu;
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Properties
         internal int ValidationItemCount
@@ -75,12 +81,11 @@ namespace Sinapse.Controls
         }
         #endregion
 
-        private void btnShuffle_Click(object sender, EventArgs e)
-        {
-            shuffleTable(this.m_networkData.DataTable,this.m_networkData.DataTable.Rows.Count*3);
-            ((DataTable)this.dataGridView.DataSource).DefaultView.Sort = String.Empty;
-        }
 
+        //---------------------------------------------
+
+
+        #region Private Methods
         /// <summary>
         /// Randomizes the order of the rows in a DataTable by pulling out a single row and moving it to the end for
         /// shuffleIterations iterations.
@@ -101,7 +106,38 @@ namespace Sinapse.Controls
                 inputTable.Rows.RemoveAt(index);
             }
         }
+        #endregion
 
+
+        //---------------------------------------------
+
+
+        #region Buttons
+        private void btnShuffle_Click(object sender, EventArgs e)
+        {
+            shuffleTable(this.m_networkData.DataTable, this.m_networkData.DataTable.Rows.Count * 3);
+            ((DataTable)this.dataGridView.DataSource).DefaultView.Sort = String.Empty;
+        }
+
+
+        private void MenuValidationAdd_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            {
+                row.Tag = validationTag;
+                row.DefaultCellStyle.BackColor = validationColor;
+            }
+        }
+
+        private void MenuValidationRem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            {
+                row.Tag = String.Empty;
+                row.DefaultCellStyle.BackColor = testingColor;
+            }
+        }
+        #endregion
     }
 }
 

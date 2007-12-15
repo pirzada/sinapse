@@ -121,8 +121,8 @@
   <data name="btnShuffle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCwAA
-        CwsBbQSEtwAABFlJREFUSEuFlX1MlVUcx7+Q4IYJtFxUlJHVWLpkrkbW5ix1KZFbCbWWtfCPNqVcTW2N
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCgAA
+        CwoBv0NmUwAABFlJREFUSEuFlX1MlVUcx7+Q4IYJtFxUlJHVWLpkrkbW5ix1KZFbCbWWtfCPNqVcTW2N
         l1qNpGK5wnBNUHQD7WViBQ4xhUQDjXifgLw0kJfrLm9Cl3sv995xv32f514JHNGzfXbO83v5nnN+5znn
         CYD/eTIMyN4IlHYCEQuBsEDc8/jDWB8YiU0hkXhqwSLcSS+8jlH0lVfjtz8aceZENy78DdhvaszZGsLV
         LwMZKxBWsRUf9RfBQitIxojXxdtih0gQUfR2gpey0LRhCV6bV/iJUAlvxn31Kaj2CcaLM6KfXteYsIsJ
@@ -144,4 +144,7 @@
         rkJggg==
 </value>
   </data>
+  <metadata name="contextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

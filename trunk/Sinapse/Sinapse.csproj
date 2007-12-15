@@ -111,7 +111,7 @@
     </Compile>
     <Compile Include="Data\NetworkOptions.cs" />
     <Compile Include="Data\NetworkState.cs" />
-    <Compile Include="Data\NeuralNetwork.cs" />
+    <Compile Include="Data\NetworkContainer.cs" />
     <Compile Include="Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

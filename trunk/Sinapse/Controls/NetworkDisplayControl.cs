@@ -32,7 +32,7 @@ namespace Sinapse.Controls
     public partial class NetworkDisplayControl : UserControl
     {
 
-        private NeuralNetwork m_neuralNetwork;
+        private NetworkContainer m_neuralNetwork;
         private bool m_readOnly;
         private bool m_visible;
 
@@ -44,7 +44,7 @@ namespace Sinapse.Controls
         //---------------------------------------------
 
         #region Properties
-        internal NeuralNetwork NeuralNetwork
+        internal NetworkContainer NeuralNetwork
         {
             get
             {

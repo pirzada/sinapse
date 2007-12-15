@@ -46,13 +46,16 @@ namespace Sinapse.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkDataTrainControl));
             this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnShuffle = new System.Windows.Forms.Button();
             this.panelValidationCaption = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuValidationAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuValidationRem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -60,33 +63,19 @@ namespace Sinapse.Controls
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(307, 353);
+            this.label3.Location = new System.Drawing.Point(269, 353);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(13, 12);
+            this.label3.Size = new System.Drawing.Size(26, 12);
             this.label3.TabIndex = 21;
-            this.label3.Text = "%";
+            this.label3.Text = "(0 %)";
             this.label3.Visible = false;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown1.BackColor = System.Drawing.SystemColors.Control;
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(269, 353);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(39, 14);
-            this.numericUpDown1.TabIndex = 20;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown1.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.numericUpDown1.Visible = false;
             // 
             // btnShuffle
             // 
             this.btnShuffle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnShuffle.Image = ((System.Drawing.Image)(resources.GetObject("btnShuffle.Image")));
             this.btnShuffle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnShuffle.Location = new System.Drawing.Point(494, 349);
+            this.btnShuffle.Location = new System.Drawing.Point(418, 348);
             this.btnShuffle.Name = "btnShuffle";
             this.btnShuffle.Size = new System.Drawing.Size(78, 23);
             this.btnShuffle.TabIndex = 19;
@@ -117,11 +106,32 @@ namespace Sinapse.Controls
             this.label4.Text = "Validation";
             this.label4.Visible = false;
             // 
+            // contextMenu
+            // 
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuValidationAdd,
+            this.MenuValidationRem});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(192, 70);
+            // 
+            // MenuValidationAdd
+            // 
+            this.MenuValidationAdd.Name = "MenuValidationAdd";
+            this.MenuValidationAdd.Size = new System.Drawing.Size(191, 22);
+            this.MenuValidationAdd.Text = "Use as validation data";
+            this.MenuValidationAdd.Click += new System.EventHandler(this.MenuValidationAdd_Click);
+            // 
+            // MenuValidationRem
+            // 
+            this.MenuValidationRem.Name = "MenuValidationRem";
+            this.MenuValidationRem.Size = new System.Drawing.Size(191, 22);
+            this.MenuValidationRem.Text = "Use as training data";
+            this.MenuValidationRem.Click += new System.EventHandler(this.MenuValidationRem_Click);
+            // 
             // NetworkDataTrainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.btnShuffle);
             this.Controls.Add(this.panelValidationCaption);
             this.Controls.Add(this.label4);
@@ -129,9 +139,8 @@ namespace Sinapse.Controls
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.panelValidationCaption, 0);
             this.Controls.SetChildIndex(this.btnShuffle, 0);
-            this.Controls.SetChildIndex(this.numericUpDown1, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,9 +149,11 @@ namespace Sinapse.Controls
         #endregion
 
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnShuffle;
         private System.Windows.Forms.Panel panelValidationCaption;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem MenuValidationAdd;
+        private System.Windows.Forms.ToolStripMenuItem MenuValidationRem;
     }
 }

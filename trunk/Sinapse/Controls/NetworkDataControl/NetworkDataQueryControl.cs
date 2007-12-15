@@ -49,7 +49,7 @@ namespace Sinapse.Controls
         //----------------------------------------
 
         #region Public Methods
-        internal void Compute(NeuralNetwork neuralNetwork)
+        internal void Compute(NetworkContainer neuralNetwork)
         {
             this.dataGridView.EndEdit();
             this.dataGridView.CurrentCell = null;
@@ -117,46 +117,6 @@ namespace Sinapse.Controls
         //----------------------------------------
 
         #region Private Methods
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            this.openFileDialog.ShowDialog();
-        }
-
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            /*CsvFileParserOptions options = new CsvFileParserOptions(openFileDialog.FileName);
-            options.AutoDetectCsvDelimiter = true;
-            options.HeadersAction = HeadersAction.UseAsColumnNames;*/
-            
-            try
-            {
-                //DataTable table = CsvParser.Parse(options);
-                DataTable table = CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, '\t');
-
-/*
-                foreach (DataRow row in table.Rows)
-                {
-                    DataRow newRow = this.m_networkData.DataTable.NewRow();
-                    foreach (DataColumn col in table.Columns)
-                    {
-                        if (newRow.Table.Columns.Contains(col.ColumnName))
-                        {
-                            newRow[col.ColumnName] = row[col.ColumnName];
-                        }
-                    }
-                    //newRow.EndEdit();
-                    this.m_networkData.DataTable.Rows.Add(newRow);
-                }
-                */
-                
-              //  this.m_networkData.DataTable.Clear();
-                this.m_networkData.DataTable.Merge(table, false, MissingSchemaAction.Ignore);
-            }
-            catch
-            {
-                MessageBox.Show("Erro ao abrir arquivo");
-            }
-        }
         #endregion
 
     }

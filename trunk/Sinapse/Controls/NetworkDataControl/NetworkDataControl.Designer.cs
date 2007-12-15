@@ -28,11 +28,14 @@ namespace Sinapse.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkDataControl));
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panelOutputCaption = new System.Windows.Forms.Panel();
             this.panelInputCaption = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,10 +95,35 @@ namespace Sinapse.Controls
             this.label10.TabIndex = 11;
             this.label10.Text = "Input";
             // 
+            // btnImport
+            // 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImport.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.Image")));
+            this.btnImport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnImport.Location = new System.Drawing.Point(502, 348);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(70, 23);
+            this.btnImport.TabIndex = 21;
+            this.btnImport.Text = "Import";
+            this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.DefaultExt = "csv";
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "All Files (*.*)|*.*";
+            this.openFileDialog.RestoreDirectory = true;
+            this.openFileDialog.ShowReadOnly = true;
+            this.openFileDialog.Title = "Import";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            // 
             // NetworkDataControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.panelOutputCaption);
             this.Controls.Add(this.panelInputCaption);
             this.Controls.Add(this.label9);
@@ -116,6 +144,8 @@ namespace Sinapse.Controls
         private System.Windows.Forms.Panel panelInputCaption;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         protected System.Windows.Forms.DataGridView dataGridView;
     }
 }

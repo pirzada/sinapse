@@ -34,7 +34,7 @@ namespace Sinapse.Controls
     {
 
         private NetworkSchema m_networkSchema;
-        private NeuralNetwork m_neuralNetwork;
+        private NetworkContainer m_neuralNetwork;
 
         public EventHandler OnNetworkCreated;
 
@@ -69,7 +69,7 @@ namespace Sinapse.Controls
             }
         }
 
-        internal NeuralNetwork NeuralNetwork
+        internal NetworkContainer NeuralNetwork
         {
             get { return this.m_neuralNetwork; }
         }
@@ -102,27 +102,27 @@ namespace Sinapse.Controls
         }
 
 
-        private NeuralNetwork createNetwork()
+        private NetworkContainer createNetwork()
         {
-            NeuralNetwork neuralNetwork;
+            NetworkContainer neuralNetwork;
 
             if (rbBipolarSigmoid.Checked)
             {
-                neuralNetwork = new NeuralNetwork(tbNetworkName.Text,
+                neuralNetwork = new NetworkContainer(tbNetworkName.Text,
                     m_networkSchema,
                    new BipolarSigmoidFunction((double)numSigmoidAlpha.Value),
                    (int)numHiddenLayer.Value);
             }
             else if (rbSigmoid.Checked)
             {
-                neuralNetwork = new NeuralNetwork(tbNetworkName.Text,
+                neuralNetwork = new NetworkContainer(tbNetworkName.Text,
                     m_networkSchema,
                      new SigmoidFunction((double)numSigmoidAlpha.Value),
                      (int)numHiddenLayer.Value);
             }
             else if (rbThreshold.Checked)
             {
-                neuralNetwork = new NeuralNetwork(tbNetworkName.Text,
+                neuralNetwork = new NetworkContainer(tbNetworkName.Text,
                     m_networkSchema,
                      new ThresholdFunction(),
                      (int)numHiddenLayer.Value);

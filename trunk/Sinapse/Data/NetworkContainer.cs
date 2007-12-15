@@ -30,7 +30,7 @@ namespace Sinapse.Data
 {
 
     [Serializable]
-    internal sealed class NeuralNetwork
+    internal sealed class NetworkContainer
     {
 
         private NetworkSchema m_networkSchema;
@@ -53,7 +53,7 @@ namespace Sinapse.Data
         //---------------------------------------------
 
         #region Constructor & Destructor
-        public NeuralNetwork(string networkName, NetworkSchema schema, IActivationFunction function, int hiddenLayer)
+        public NetworkContainer(string networkName, NetworkSchema schema, IActivationFunction function, int hiddenLayer)
         {
             this.m_networkSchema = schema;
             this.m_networkName = networkName;
@@ -63,7 +63,7 @@ namespace Sinapse.Data
             this.LastSavePath = String.Empty;
         }
 
-        public NeuralNetwork(NetworkSchema schema, IActivationFunction function, int hiddenLayer)
+        public NetworkContainer(NetworkSchema schema, IActivationFunction function, int hiddenLayer)
             : this(String.Empty, schema, function, hiddenLayer)
         {
         }
@@ -155,7 +155,7 @@ namespace Sinapse.Data
         }
         #endregion
 
-        public static void Serialize(NeuralNetwork network, string path)
+        public static void Serialize(NetworkContainer network, string path)
         {
             FileStream fs = null;
             bool success = true;
@@ -194,9 +194,9 @@ namespace Sinapse.Data
             }
         }
 
-        public static NeuralNetwork Deserialize(string path)
+        public static NetworkContainer Deserialize(string path)
         {
-            NeuralNetwork nn = null;
+            NetworkContainer nn = null;
             FileStream fs = null;
             bool success = true;
 
@@ -204,7 +204,7 @@ namespace Sinapse.Data
             {
                 fs = new FileStream(path, FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
-                nn = (NeuralNetwork)bf.Deserialize(fs);
+                nn = (NetworkContainer)bf.Deserialize(fs);
             }
             catch (FileNotFoundException e)
             {

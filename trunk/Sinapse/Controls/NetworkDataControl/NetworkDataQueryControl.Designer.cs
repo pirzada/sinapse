@@ -63,7 +63,6 @@ namespace Sinapse.Controls
             this.btnImport.Text = "Import";
             this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // openFileDialog
             // 
@@ -73,7 +72,6 @@ namespace Sinapse.Controls
             this.openFileDialog.RestoreDirectory = true;
             this.openFileDialog.ShowReadOnly = true;
             this.openFileDialog.Title = "Import";
-            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
             // NetworkDataQueryControl
             // 
