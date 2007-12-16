@@ -52,6 +52,7 @@ namespace Sinapse.Data
 
         //---------------------------------------------
 
+
         #region Constructor & Destructor
         public NetworkContainer(string networkName, NetworkSchema schema, IActivationFunction function, int hiddenLayer)
         {
@@ -69,25 +70,27 @@ namespace Sinapse.Data
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Properties
         internal ActivationNetwork ActivationNetwork
         {
-            get { return m_activationNetwork; }
+            get { return this.m_activationNetwork; }
         }
 
         internal NetworkSchema Schema
         {
-            get { return m_networkSchema; }
+            get { return this.m_networkSchema; }
         }
 
         internal string Name
         {
-            get { return m_networkName; }
+            get { return this.m_networkName; }
             set
             {
-                m_networkName = value;
+                this.m_networkName = value;
 
                 if (this.OnNetworkChanged != null)
                     this.OnNetworkChanged.Invoke(this, EventArgs.Empty);
@@ -136,10 +139,12 @@ namespace Sinapse.Data
         }
         #endregion
 
+
         //---------------------------------------------
 
+
         #region Public Methods
-        public string LayoutString()
+        public string GetLayoutString()
         {
             string layout = String.Empty;
 
@@ -155,6 +160,11 @@ namespace Sinapse.Data
         }
         #endregion
 
+
+        //---------------------------------------------
+
+
+        #region Static Methods
         public static void Serialize(NetworkContainer network, string path)
         {
             FileStream fs = null;
@@ -196,6 +206,7 @@ namespace Sinapse.Data
 
         public static NetworkContainer Deserialize(string path)
         {
+
             NetworkContainer nn = null;
             FileStream fs = null;
             bool success = true;
@@ -234,6 +245,7 @@ namespace Sinapse.Data
 
             return nn;
         }
+        #endregion
 
     }
 }

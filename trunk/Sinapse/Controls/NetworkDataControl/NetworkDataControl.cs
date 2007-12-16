@@ -31,13 +31,9 @@ using Sinapse.Dialogs;
 
 namespace Sinapse.Controls
 {
+
     internal partial class NetworkDataControl : UserControl
     {
-
-        #region Colors Definition
-        private readonly Color inputColor = Color.Honeydew;
-        private readonly Color outputColor = Color.AliceBlue;
-        #endregion
 
         protected NetworkData m_networkData;
 
@@ -53,9 +49,8 @@ namespace Sinapse.Controls
         public NetworkDataControl()
         {
             this.InitializeComponent();
-            this.panelInputCaption.BackColor = inputColor;
-            this.panelOutputCaption.BackColor = outputColor;
-           
+
+            this.dataGridView.AutoGenerateColumns = false;
             this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
         }
 
@@ -77,17 +72,20 @@ namespace Sinapse.Controls
             {
                 if (this.m_networkData != value)
                 {
+                    this.dataGridView.SuspendLayout();
+
                     this.m_networkData = value;
 
                     if (this.m_networkData != null)
                     {
                         this.Enabled = true;
+                        this.setColumns();
                         this.dataGridView.DataSource = this.m_networkData.DataTable;
-                        this.setHeaderColors();
                     }
                     else
                     {
                         this.Enabled = false;
+                        this.dataGridView.Columns.Clear();
                         this.dataGridView.DataSource = null;
                     }
 
@@ -96,6 +94,9 @@ namespace Sinapse.Controls
 
                     if (this.OnDataChanged != null)
                         this.OnDataChanged.Invoke(this, EventArgs.Empty);
+
+                    this.dataGridView.ResumeLayout();
+
                 }
             }
         }
@@ -111,15 +112,6 @@ namespace Sinapse.Controls
         }
         #endregion
 
-
-        //----------------------------------------
-
-        #region Public Methods
-        public void GetNetworkData(out double[][] input, out double[][] output)
-        {
-            this.m_networkData.CreateVectors(out input, out output);
-        }
-        #endregion
 
         //----------------------------------------
 
@@ -159,7 +151,7 @@ namespace Sinapse.Controls
                                 dataGridView[col + i, row].Value = Convert.ChangeType(cells[i], dataGridView[col + i, row].ValueType);
                             }
                         }
-                        row++;
+                        ++row;
                     }
                 }
             }
@@ -189,18 +181,28 @@ namespace Sinapse.Controls
 
 
         #region Private Methods
-        private void setHeaderColors()
+        private void setColumns()
         {
+            DataGridViewColumn column;
+
             foreach (String colName in this.m_networkData.NetworkSchema.InputColumns)
             {
-                if (this.dataGridView.Columns.Contains(colName))
-                    this.dataGridView.Columns[colName].DefaultCellStyle.BackColor = inputColor;
+                column = new DataGridViewColumn();
+                column.DataPropertyName = colName;
+                column.HeaderText = colName;
+                column.CellTemplate = new DataGridViewTextBoxCell();
+                column.DefaultCellStyle.BackColor = panelInputCaption.BackColor;
+                this.dataGridView.Columns.Add(column);
             }
 
             foreach (String colName in this.m_networkData.NetworkSchema.OutputColumns)
             {
-                if (this.dataGridView.Columns.Contains(colName))
-                    this.dataGridView.Columns[colName].DefaultCellStyle.BackColor = outputColor;
+                column = new DataGridViewColumn();
+                column.DataPropertyName = colName;
+                column.HeaderText = colName;
+                column.CellTemplate = new DataGridViewTextBoxCell();
+                column.DefaultCellStyle.BackColor = panelOutputCaption.BackColor;
+                this.dataGridView.Columns.Add(column);
             }
 
             foreach (String colName in this.m_networkData.NetworkSchema.StringColumns)
@@ -253,7 +255,7 @@ namespace Sinapse.Controls
             }
             catch
             {
-                MessageBox.Show("Erro ao abrir arquivo");
+                MessageBox.Show("Error opening file");
             }
         }
 #endregion

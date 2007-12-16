@@ -24,16 +24,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+using Sinapse.Data;
+
 namespace Sinapse.Controls
 {
+
     sealed internal partial class NetworkDataTrainControl : Sinapse.Controls.NetworkDataControl
     {
-
-        #region Constant Definitions
-        private readonly Color testingColor = SystemColors.Control;
-        private readonly Color validationColor = Color.Gainsboro;
-        private readonly string validationTag  = "Validation";       
-        #endregion
 
         //---------------------------------------------
 
@@ -43,8 +40,9 @@ namespace Sinapse.Controls
         {
             InitializeComponent();
 
-            this.panelValidationCaption.BackColor = validationColor;
+            this.panelValidationCaption.BackColor = panelValidationCaption.BackColor;
             this.dataGridView.ContextMenuStrip = this.contextMenu;
+
         }
         #endregion
 
@@ -80,8 +78,8 @@ namespace Sinapse.Controls
             get { return this.dataGridView.SelectedRows.Count; }
         }
         #endregion
-
-
+        
+        
         //---------------------------------------------
 
 
@@ -106,6 +104,21 @@ namespace Sinapse.Controls
                 inputTable.Rows.RemoveAt(index);
             }
         }
+
+
+        private void updateValidationStatus()
+        {
+            int validationCount = m_networkData.DataTable.Select("[" + NetworkData.ColumnValidationId + "] = TRUE").Length;
+
+            if (dataGridView.Rows.Count > 0)
+            {
+                lbValidationPercent.Text = String.Concat("(",(((float)validationCount / dataGridView.Rows.Count) * 100)," %)");
+            }
+            else
+            {
+                lbValidationPercent.Text = String.Empty;
+            }
+        }
         #endregion
 
 
@@ -122,22 +135,33 @@ namespace Sinapse.Controls
 
         private void MenuValidationAdd_Click(object sender, EventArgs e)
         {
+            if (dataGridView.SelectedRows.Count == 0)
+                dataGridView.CurrentRow.Selected = true;
+
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                row.Tag = validationTag;
-                row.DefaultCellStyle.BackColor = validationColor;
+                ((DataRowView)row.DataBoundItem).Row[NetworkData.ColumnValidationId] = true;
+                row.HeaderCell.Style.BackColor = panelValidationCaption.BackColor;
             }
+
+            updateValidationStatus();
         }
 
         private void MenuValidationRem_Click(object sender, EventArgs e)
         {
+            if (dataGridView.SelectedRows.Count == 0)
+                dataGridView.CurrentRow.Selected = true;
+
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                row.Tag = String.Empty;
-                row.DefaultCellStyle.BackColor = testingColor;
+                ((DataRowView)row.DataBoundItem).Row[NetworkData.ColumnValidationId] = false;
+                row.HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control;
             }
+
+            updateValidationStatus();
         }
         #endregion
+
     }
 }
 

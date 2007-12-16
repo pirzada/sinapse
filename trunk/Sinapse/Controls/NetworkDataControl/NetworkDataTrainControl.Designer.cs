@@ -48,7 +48,7 @@ namespace Sinapse.Controls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkDataTrainControl));
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbValidationPercent = new System.Windows.Forms.Label();
             this.btnShuffle = new System.Windows.Forms.Button();
             this.panelValidationCaption = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,17 +58,16 @@ namespace Sinapse.Controls
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label3
+            // lbValidationPercent
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(269, 353);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 12);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "(0 %)";
-            this.label3.Visible = false;
+            this.lbValidationPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbValidationPercent.AutoSize = true;
+            this.lbValidationPercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbValidationPercent.Location = new System.Drawing.Point(269, 353);
+            this.lbValidationPercent.Name = "lbValidationPercent";
+            this.lbValidationPercent.Size = new System.Drawing.Size(26, 12);
+            this.lbValidationPercent.TabIndex = 21;
+            this.lbValidationPercent.Text = "(0 %)";
             // 
             // btnShuffle
             // 
@@ -87,12 +86,12 @@ namespace Sinapse.Controls
             // panelValidationCaption
             // 
             this.panelValidationCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelValidationCaption.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelValidationCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelValidationCaption.Location = new System.Drawing.Point(161, 353);
             this.panelValidationCaption.Name = "panelValidationCaption";
             this.panelValidationCaption.Size = new System.Drawing.Size(14, 12);
             this.panelValidationCaption.TabIndex = 18;
-            this.panelValidationCaption.Visible = false;
             // 
             // label4
             // 
@@ -104,7 +103,6 @@ namespace Sinapse.Controls
             this.label4.Size = new System.Drawing.Size(85, 11);
             this.label4.TabIndex = 17;
             this.label4.Text = "Validation";
-            this.label4.Visible = false;
             // 
             // contextMenu
             // 
@@ -112,7 +110,7 @@ namespace Sinapse.Controls
             this.MenuValidationAdd,
             this.MenuValidationRem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(192, 70);
+            this.contextMenu.Size = new System.Drawing.Size(192, 48);
             // 
             // MenuValidationAdd
             // 
@@ -131,7 +129,7 @@ namespace Sinapse.Controls
             // NetworkDataTrainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbValidationPercent);
             this.Controls.Add(this.btnShuffle);
             this.Controls.Add(this.panelValidationCaption);
             this.Controls.Add(this.label4);
@@ -139,7 +137,7 @@ namespace Sinapse.Controls
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.panelValidationCaption, 0);
             this.Controls.SetChildIndex(this.btnShuffle, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.lbValidationPercent, 0);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -148,7 +146,7 @@ namespace Sinapse.Controls
 
         #endregion
 
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbValidationPercent;
         private System.Windows.Forms.Button btnShuffle;
         private System.Windows.Forms.Panel panelValidationCaption;
         private System.Windows.Forms.Label label4;

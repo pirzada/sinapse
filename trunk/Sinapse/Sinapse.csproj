@@ -109,8 +109,8 @@
     <Compile Include="Data\NetworkSchema.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\NetworkOptions.cs" />
-    <Compile Include="Data\NetworkState.cs" />
+    <Compile Include="Data\Structures\NetworkOptions.cs" />
+    <Compile Include="Data\Structures\NetworkState.cs" />
     <Compile Include="Data\NetworkContainer.cs" />
     <Compile Include="Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
