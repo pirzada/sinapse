@@ -58,6 +58,7 @@ namespace Sinapse.Controls
             // panelOutputCaption
             // 
             this.panelOutputCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelOutputCaption.BackColor = System.Drawing.Color.AliceBlue;
             this.panelOutputCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelOutputCaption.Location = new System.Drawing.Point(81, 353);
             this.panelOutputCaption.Name = "panelOutputCaption";
@@ -67,6 +68,7 @@ namespace Sinapse.Controls
             // panelInputCaption
             // 
             this.panelInputCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelInputCaption.BackColor = System.Drawing.Color.Honeydew;
             this.panelInputCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelInputCaption.Location = new System.Drawing.Point(5, 353);
             this.panelInputCaption.Name = "panelInputCaption";

@@ -103,7 +103,7 @@ namespace Sinapse.Controls
         internal void UpdateDisplayData()
         {
             this.lbName.Text = m_neuralNetwork.Name;
-            this.lbLayout.Text = m_neuralNetwork.LayoutString();
+            this.lbLayout.Text = m_neuralNetwork.GetLayoutString();
             this.lbDescription.Text = m_neuralNetwork.Description;
             this.lbErrorRate.Text = m_neuralNetwork.Precision.ToString("0.000000");
         }

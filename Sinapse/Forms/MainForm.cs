@@ -64,9 +64,11 @@ namespace Sinapse.Forms
                 if (value != null)
                 {
                     this.MenuNetwork.Enabled = true;
+
                     this.MenuFileSave.Enabled = true;
-                    this.MenuFileSaveAs.Enabled = true;
-                    this.lbNeuronCount.Text = m_neuralNetwork.LayoutString();
+                    this.MenuFileSaveAs.Enabled = false;
+                    
+                    this.lbNeuronCount.Text = m_neuralNetwork.GetLayoutString();
 
                     this.m_neuralNetwork.OnSavePathChanged += neuralNetwork_SavePathChanged;
                     this.neuralNetwork_SavePathChanged(null, EventArgs.Empty);
@@ -158,7 +160,7 @@ namespace Sinapse.Forms
         private void networkTrainerControl_DataNeeded(object sender, EventArgs e)
         {
             double[][] input, output;
-            this.networkDataControl.NetworkData.CreateVectors(out input, out output);
+            this.networkDataControl.NetworkData.CreateTrainingVectors(out input, out output);
             this.networkTrainerControl.Start(input, output);
         }
 
@@ -190,7 +192,7 @@ namespace Sinapse.Forms
             this.openFileDialog.FileName = this.m_neuralNetwork.LastSavePath;
             this.saveFileDialog.FileName = this.m_neuralNetwork.LastSavePath;
 
-            this.MenuFileSave.Enabled = (this.m_neuralNetwork.LastSavePath.Length > 0);
+            this.MenuFileSaveAs.Enabled = (this.m_neuralNetwork.LastSavePath.Length > 0);
         }
         #endregion
 
@@ -210,7 +212,10 @@ namespace Sinapse.Forms
 
         private void MenuFileSave_Click(object sender, EventArgs e)
         {
-            this.networkSave(this.CurrentNetwork.LastSavePath);
+            if (this.m_neuralNetwork.LastSavePath.Length > 0)
+                this.networkSave(this.CurrentNetwork.LastSavePath);
+
+            else this.saveFileDialog.ShowDialog(this);
         }
 
         private void MenuFileSaveAs_Click(object sender, EventArgs e)

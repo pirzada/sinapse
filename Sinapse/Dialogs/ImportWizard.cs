@@ -189,7 +189,9 @@ namespace Sinapse.Dialogs
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Buttons
         private void btnBrowse_Click(object sender, EventArgs e)
