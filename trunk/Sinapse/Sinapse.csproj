@@ -112,6 +112,7 @@
     <Compile Include="Data\Structures\NetworkOptions.cs" />
     <Compile Include="Data\Structures\NetworkState.cs" />
     <Compile Include="Data\NetworkContainer.cs" />
+    <Compile Include="Data\Structures\NetworkVectors.cs" />
     <Compile Include="Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +130,18 @@
     </Compile>
     <Compile Include="Dialogs\InputDialog.Designer.cs">
       <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsDialog.Designer.cs">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RefreshRateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RefreshRateDialog.Designer.cs">
+      <DependentUpon>RefreshRateDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -183,6 +196,10 @@
     <EmbeddedResource Include="Dialogs\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RefreshRateDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RefreshRateDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>

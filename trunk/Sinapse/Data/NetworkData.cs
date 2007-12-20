@@ -23,6 +23,8 @@ using System.Data;
 
 using AForge;
 
+using Sinapse.Data.Structures;
+
 namespace Sinapse.Data
 {
     /// <summary>
@@ -91,9 +93,9 @@ namespace Sinapse.Data
         /// </summary>
         /// <param name="inputData"></param>
         /// <param name="outputData"></param>
-        internal void CreateTrainingVectors(out double[][] inputData, out double[][] outputData)
+        internal NetworkVectors CreateTrainingVectors()
         {
-            this.createVectors(out inputData, out outputData, NetworkSet.Training);
+            return this.createVectors(NetworkSet.Training);
         }
 
 
@@ -102,9 +104,9 @@ namespace Sinapse.Data
         /// </summary>
         /// <param name="inputData"></param>
         /// <param name="outputData"></param>
-        internal void CreateValidationVectors(out double[][] inputData, out double[][] outputData)
+        internal NetworkVectors CreateValidationVectors()
         {
-            this.createVectors(out inputData, out outputData, NetworkSet.Validation);
+            return this.createVectors(NetworkSet.Validation);
         }
 
 
@@ -210,9 +212,10 @@ namespace Sinapse.Data
         /// <param name="inputData"></param>
         /// <param name="outputData"></param>
         /// <param name="set"></param>
-        private void createVectors(out double[][] inputData, out double[][] outputData, NetworkSet set)
+        private NetworkVectors createVectors(NetworkSet set)
         {
 
+            NetworkVectors vectors;
             string strQuery = String.Empty;
 
             switch (set)
@@ -232,14 +235,16 @@ namespace Sinapse.Data
 
             DataRow[] query = dataTable.Select(strQuery);
 
-            inputData = new double[query.Length][];
-            outputData = new double[query.Length][];
+            vectors.Input = new double[query.Length][];
+            vectors.Output = new double[query.Length][];
 
             for (int i = 0; i < query.Length; ++i)
             {
-                inputData[i] = this.NormalizeRow(query[i], networkSchema.InputColumns);
-                outputData[i] = this.NormalizeRow(query[i], networkSchema.OutputColumns);
+                vectors.Input[i] = this.NormalizeRow(query[i], networkSchema.InputColumns);
+                vectors.Output[i] = this.NormalizeRow(query[i], networkSchema.OutputColumns);
             }
+
+            return vectors;
         }
         #endregion
 

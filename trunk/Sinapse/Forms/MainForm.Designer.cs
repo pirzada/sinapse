@@ -73,6 +73,8 @@ namespace Sinapse.Forms
             this.MenuFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuNetwork = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuNetworkQuery = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,8 +91,6 @@ namespace Sinapse.Forms
             this.networkCreatorControl = new Sinapse.Controls.NetworkCreatorControl();
             this.networkTrainerControl = new Sinapse.Controls.NetworkTrainerControl();
             this.networkDataControl = new Sinapse.Controls.NetworkDataTrainControl();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -228,6 +228,7 @@ namespace Sinapse.Forms
             this.statusStrip.Size = new System.Drawing.Size(1016, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip1";
+            this.statusStrip.DoubleClick += new System.EventHandler(this.statusStrip_DoubleClick);
             // 
             // lbStatus
             // 
@@ -246,13 +247,13 @@ namespace Sinapse.Forms
             // lbStatusEpoch
             // 
             this.lbStatusEpoch.Name = "lbStatusEpoch";
-            this.lbStatusEpoch.Size = new System.Drawing.Size(109, 17);
+            this.lbStatusEpoch.Size = new System.Drawing.Size(94, 17);
             this.lbStatusEpoch.Spring = true;
             // 
             // lbStatusError
             // 
             this.lbStatusError.Name = "lbStatusError";
-            this.lbStatusError.Size = new System.Drawing.Size(109, 17);
+            this.lbStatusError.Size = new System.Drawing.Size(94, 17);
             this.lbStatusError.Spring = true;
             // 
             // lbItems
@@ -295,7 +296,7 @@ namespace Sinapse.Forms
             this.MenuFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuFileNew.Name = "MenuFileNew";
             this.MenuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.MenuFileNew.Size = new System.Drawing.Size(152, 22);
+            this.MenuFileNew.Size = new System.Drawing.Size(151, 22);
             this.MenuFileNew.Text = "&New";
             this.MenuFileNew.Click += new System.EventHandler(this.MenuFileNew_Click);
             // 
@@ -335,6 +336,17 @@ namespace Sinapse.Forms
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(148, 6);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
             // 
             // MenuFileExit
             // 
@@ -463,17 +475,6 @@ namespace Sinapse.Forms
             this.networkDataControl.Name = "networkDataControl";
             this.networkDataControl.Size = new System.Drawing.Size(601, 551);
             this.networkDataControl.TabIndex = 11;
-            // 
-            // exportToolStripMenuItem
-            // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportToolStripMenuItem.Text = "Export";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
