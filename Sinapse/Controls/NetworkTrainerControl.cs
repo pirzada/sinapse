@@ -30,6 +30,7 @@ using AForge.Controls;
 using AForge;
 
 using Sinapse.Data;
+using Sinapse.Data.Structures;
 
 
 namespace Sinapse.Controls
@@ -38,6 +39,7 @@ namespace Sinapse.Controls
     {
 
         private const string errorLabel = "errorMatrix";
+        private const string crossLabel = "crossMatrix";
 
       //  public EventHandler OnTrainingStarted;
       //  public EventHandler OnTrainingStopped;
@@ -52,6 +54,9 @@ namespace Sinapse.Controls
         private bool m_autoUpdate;
         private double m_errorRate;
         private string m_statusText;
+
+        private int m_statusRefresh = 500;
+
 
         //---------------------------------------------
 
@@ -108,10 +113,17 @@ namespace Sinapse.Controls
         {
             get { return this.backgroundWorker.IsBusy; }
         }
+
+        public int StatusRefreshRate
+        {
+            get { return m_statusRefresh; }
+            set { m_statusRefresh = value; }
+        }
         #endregion
 
         //---------------------------------------------
 
+       
         #region Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -130,7 +142,7 @@ namespace Sinapse.Controls
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-
+            this.Pause();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -170,7 +182,7 @@ namespace Sinapse.Controls
         {
             if (backgroundWorker.IsBusy)
             {
-                this.setStatus("Stopping Thread");
+                this.setStatus("Pausing Thread");
                 this.backgroundWorker.CancelAsync();
             }
             else
@@ -179,14 +191,20 @@ namespace Sinapse.Controls
             }
         }
 
-        public void Start(double[][] input, double[][] output)
+        public void Start(NetworkVectors trainingVectors, NetworkVectors validationVectors)
         {
             NetworkOptions options = new NetworkOptions();
             options.momentum = (double)numMomentum.Value;
             options.learningRate = (double)numLearningRate.Value;
             options.errorLimit = (double)numErrorLimit.Value;
-            options.input = input;
-            options.output = output;
+            options.TrainingVectors = trainingVectors;
+
+            if (cbValidate.Checked && !validationVectors.isEmpty)
+                options.ValidationVectors = validationVectors;
+            else options.ValidationVectors = null;
+
+            options.epochLimit = (int)numEpochLimit.Value;
+            options.errorBased = rbErrorLimit.Checked;
 
             this.setStatus("Starting thread");
             this.backgroundWorker.RunWorkerAsync(options);
@@ -227,7 +245,7 @@ namespace Sinapse.Controls
         {
             NetworkState networkState = new NetworkState();
             networkState.Epoch = m_epoch;
-            networkState.ErrorRate = m_errorRate;
+            networkState.TrainingErrorRate = m_errorRate;
             
             NetworkOptions options = e.Argument as NetworkOptions;
 
@@ -257,24 +275,45 @@ namespace Sinapse.Controls
             {
 
                 //Run currentEpoch of learning procedure
-                networkState.ErrorRate = networkTeacher.RunEpoch(options.input, options.output);
-                networkState.ErrorList.Add(networkState.ErrorRate);
+                networkState.TrainingErrorRate = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output);
+                networkState.TrainingErrorList.Add(networkState.TrainingErrorRate);
+
+                if (options.ValidationVectors.HasValue)
+                {
+                    networkState.ValidationErrorRate = networkTeacher.MeasureEpochError(options.ValidationVectors.Value.Input, options.ValidationVectors.Value.Output);
+                    networkState.ValidationErrorList.Add(networkState.ValidationErrorRate);
+                }
+
                 networkState.Epoch++;
 
                 //Updates GUI almost every 500 iterations
-                if (networkState.Epoch > lastReportEpoch + 499)
+                if (networkState.Epoch >= lastReportEpoch + m_statusRefresh)
                 {
-                    if (networkState.ErrorRate != 0)
-                        progress = Math.Max(Math.Min((int)((options.errorLimit * 100) / networkState.ErrorRate), 100), 0);
-                    //else progress = 100;
+                    if (options.errorBased)
+                    {
+                        if (networkState.TrainingErrorRate != 0)
+                            progress = Math.Max(Math.Min((int)((options.errorLimit * 100) / networkState.TrainingErrorRate), 100), 0);
+                        //else progress = 100;
+                    }
+                    else
+                    {
+                        if (networkState.Epoch != 0)
+                            progress = Math.Max(Math.Min((int)((networkState.Epoch * 100) / options.epochLimit), 100), 0);
+                    }
 
                     backgroundWorker.ReportProgress(progress, networkState);
                     lastReportEpoch = networkState.Epoch;
                 }
 
                 //Determine if there is need to stop
-                if (networkState.ErrorRate <= options.errorLimit)
+                if (options.errorBased)
+                {
+                    if (networkState.TrainingErrorRate <= options.errorLimit)
+                        stop = true;
+                }
+                else if (networkState.Epoch >= options.epochLimit)
                     stop = true;
+
 
                 if (backgroundWorker.CancellationPending)
                 {
@@ -294,7 +333,7 @@ namespace Sinapse.Controls
             if (networkState != null)
             {
                 this.m_epoch = networkState.Epoch;
-                this.m_errorRate = networkState.ErrorRate;
+                this.m_errorRate = networkState.TrainingErrorRate;
                 this.m_statusText = networkState.StatusText;
                 this.m_progress = e.ProgressPercentage;
 
@@ -302,8 +341,12 @@ namespace Sinapse.Controls
                 {
                     this.errorChart.RemoveAllDataSeries();
                     this.errorChart.AddDataSeries(errorLabel, Color.Red, Chart.SeriesType.Line, 1, true);
+                    this.errorChart.AddDataSeries(crossLabel, Color.Blue, Chart.SeriesType.Line, 1, true);
                     this.errorChart.RangeX = new DoubleRange(0, networkState.Epoch);
-                    this.errorChart.UpdateDataSeries(errorLabel, networkState.GetErrors());
+                    this.errorChart.UpdateDataSeries(errorLabel, networkState.GetTrainingErrors());
+
+                    if (networkState.ValidationErrorList.Count > 0)
+                        this.errorChart.UpdateDataSeries(crossLabel, networkState.GetValidationErrors());
                 }
 
                 if (this.OnStatusChanged != null)
@@ -328,8 +371,12 @@ namespace Sinapse.Controls
                 {
                     this.errorChart.RemoveAllDataSeries();
                     this.errorChart.AddDataSeries(errorLabel, Color.Red, Chart.SeriesType.Line, 1, true);
+                    this.errorChart.AddDataSeries(crossLabel, Color.Blue, Chart.SeriesType.Line, 1, true);
                     this.errorChart.RangeX = new DoubleRange(0, networkState.Epoch);
-                    this.errorChart.UpdateDataSeries(errorLabel, networkState.GetErrors());
+                    this.errorChart.UpdateDataSeries(errorLabel, networkState.GetTrainingErrors());
+                    
+                    if (networkState.ValidationErrorList.Count > 0)
+                        this.errorChart.UpdateDataSeries(crossLabel, networkState.GetValidationErrors());
                 }
 
                 if (this.OnTrainingComplete != null)
@@ -338,6 +385,6 @@ namespace Sinapse.Controls
         }
         #endregion
 
-
+        
     }
 }

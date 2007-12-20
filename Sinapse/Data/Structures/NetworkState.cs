@@ -25,29 +25,56 @@ namespace Sinapse.Data
     internal sealed class NetworkState
     {
         public int Epoch;
-        public double ErrorRate;
+        public double TrainingErrorRate;
+        public double ValidationErrorRate;
         public string StatusText;
-        public List<Double> ErrorList;
+        public List<Double> TrainingErrorList;
+        public List<Double> ValidationErrorList;
 
         public NetworkState()
         {
             this.Epoch = 0;
-            this.ErrorRate = 0D;
-            this.ErrorList = new List<double>();
+            this.TrainingErrorRate = 0D;
+            this.ValidationErrorRate = 0D;
+            this.TrainingErrorList = new List<double>();
+            this.ValidationErrorList = new List<double>();
             this.StatusText = String.Empty;
         }
 
-        public double[,] GetErrors()
+        public double[,] GetTrainingErrors()
         {
             //Create error's dynamics
             double[,] errorMatrix;
             try
             {
-                errorMatrix = new double[ErrorList.Count, 2];
-                for (int i = 0; i < ErrorList.Count; i++)
+                errorMatrix = new double[TrainingErrorList.Count, 2];
+
+                for (int i = 0; i < TrainingErrorList.Count; i++)
                 {
                     errorMatrix[i, 0] = i;
-                    errorMatrix[i, 1] = ErrorList[i];
+                    errorMatrix[i, 1] = TrainingErrorList[i];
+                }
+            }
+            catch
+            {
+                errorMatrix = new double[1, 2];
+                errorMatrix.Initialize();
+            }
+            return errorMatrix;
+        }
+
+        public double[,] GetValidationErrors()
+        {
+            //Create error's dynamics
+            double[,] errorMatrix;
+            try
+            {
+                errorMatrix = new double[ValidationErrorList.Count, 2];
+
+                for (int i = 0; i < ValidationErrorList.Count; i++)
+                {
+                    errorMatrix[i, 0] = i;
+                    errorMatrix[i, 1] = ValidationErrorList[i];
                 }
             }
             catch

@@ -25,6 +25,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
+using Sinapse.Data.Structures;
 using Sinapse.Dialogs;
 
 using AForge;
@@ -39,6 +40,7 @@ namespace Sinapse.Forms
     {
 
         private NetworkContainer m_neuralNetwork;
+        private RefreshRateDialog m_refreshRateDialog;
 
         //---------------------------------------------
 
@@ -159,9 +161,10 @@ namespace Sinapse.Forms
         #region Network Trainer Control Events
         private void networkTrainerControl_DataNeeded(object sender, EventArgs e)
         {
-            double[][] input, output;
-            this.networkDataControl.NetworkData.CreateTrainingVectors(out input, out output);
-            this.networkTrainerControl.Start(input, output);
+            NetworkVectors trainingVectors = this.networkDataControl.NetworkData.CreateTrainingVectors();
+            NetworkVectors validationVectors = this.networkDataControl.NetworkData.CreateValidationVectors();
+            
+            this.networkTrainerControl.Start(trainingVectors, validationVectors);
         }
 
         private void networkTrainerControl_StatusChanged(object sender, EventArgs e)
@@ -296,6 +299,22 @@ namespace Sinapse.Forms
             }
         }
         #endregion
+
+        private void statusStrip_DoubleClick(object sender, EventArgs e)
+        {
+            if (m_refreshRateDialog == null || m_refreshRateDialog.IsDisposed)
+            {
+                m_refreshRateDialog = new RefreshRateDialog();
+                m_refreshRateDialog.RefreshRate = networkTrainerControl.StatusRefreshRate;
+                m_refreshRateDialog.RefreshRateChanged += new EventHandler(delegate
+                {
+                    networkTrainerControl.StatusRefreshRate = m_refreshRateDialog.RefreshRate;
+                });
+            }
+
+            m_refreshRateDialog.Show();
+
+        }
 
     }
 }
