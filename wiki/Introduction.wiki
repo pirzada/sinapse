@@ -4,8 +4,9 @@
 = Introduction =
 
 This will be an introductory text to Neural Networks.
+An slideshow (in portuguese) can be found at http://www.comp.ufscar.br/~cesarsouza/projects.php
+
+This page will be written soon.
 
 
 = Details =
-
-
