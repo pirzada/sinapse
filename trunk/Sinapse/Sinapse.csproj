@@ -228,6 +228,14 @@
       <SubType>Designer</SubType>
       <DependentUpon>SideTrainerControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TrainingTabs\TabTesting.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabTesting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TrainingTabs\TabValidation.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabValidation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TrainingTabs\TrainingTabBase.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TrainingTabBase.cs</DependentUpon>
@@ -290,7 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Resources\Samples\logic functions.csv">
+    <None Include="Samples\Logic Functions.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -301,19 +309,19 @@
     <None Include="Optimizer.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Samples\imc 40.csv">
+    <None Include="Samples\BMI 40.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Samples\imc 400.csv">
+    <None Include="Samples\BMI 400.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Samples\imc 999.csv">
+    <None Include="Samples\BMI 999.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Samples\imc new.csv">
+    <None Include="Samples\BMI 999 %282%29.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Samples\linear separation.csv">
+    <None Include="Samples\Linear Separation.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -546,6 +554,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\network1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\desktop_enhancements.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Settings\" />

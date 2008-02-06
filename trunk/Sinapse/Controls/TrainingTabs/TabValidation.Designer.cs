@@ -28,8 +28,21 @@ namespace Sinapse.Controls.TrainingTabs
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Size = new System.Drawing.Size(144, 23);
+            this.label1.Text = "Validation Set";
+            // 
+            // TabValidation
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "TabValidation";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

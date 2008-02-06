@@ -310,7 +310,7 @@ namespace Sinapse.Forms
 
         private void Show_VisualOptions(object sender, EventArgs e)
         {
-            new StatusBarOptions().Show();
+            new StatusBarOptions().Show(this);
         }
 
     }

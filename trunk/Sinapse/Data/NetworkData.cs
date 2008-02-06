@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -33,7 +33,8 @@ namespace Sinapse.Data
     internal sealed class NetworkData
     {
 
-        public const string ColumnValidationId = "@_validationOnly";
+        public const string ColumnRoleId = "@_informationRoleId";
+        public const string ColumnTrainingSetId = "@_trainingSetId";
 
 
         private NetworkSchema networkSchema;
@@ -96,6 +97,16 @@ namespace Sinapse.Data
         internal NetworkVectors CreateTrainingVectors()
         {
             return this.createVectors(NetworkSet.Training);
+        }
+
+        /// <summary>
+        /// Creates the training vectors needed to fed a neural network with training data
+        /// </summary>
+        /// <param name="inputData"></param>
+        /// <param name="outputData"></param>
+        internal NetworkVectors CreateTrainingVectors(uint trainingSet)
+        {
+            return this.createVectors(NetworkSet.Training, trainingSet);
         }
 
 
@@ -183,11 +194,19 @@ namespace Sinapse.Data
         {
             DataColumn col;
 
-            if (!dataTable.Columns.Contains(ColumnValidationId))
+            if (!dataTable.Columns.Contains(ColumnRoleId))
             {
-                col = new DataColumn(ColumnValidationId, typeof(bool));
+                col = new DataColumn(ColumnRoleId, typeof(bool));
                 col.AllowDBNull = false;
                 col.DefaultValue = false;
+                dataTable.Columns.Add(col);
+            }
+
+            if (!dataTable.Columns.Contains(ColumnTrainingSetId))
+            {
+                col = new DataColumn(ColumnRoleId, typeof(uint));
+                col.AllowDBNull = false;
+                col.DefaultValue = 1;
                 dataTable.Columns.Add(col);
             }
 
@@ -214,6 +233,11 @@ namespace Sinapse.Data
         /// <param name="set"></param>
         private NetworkVectors createVectors(NetworkSet set)
         {
+            return createVectors(set, 0);
+        }
+
+        private NetworkVectors createVectors(NetworkSet set, uint trainingSet)
+        {
 
             NetworkVectors vectors;
             string strQuery = String.Empty;
@@ -224,11 +248,11 @@ namespace Sinapse.Data
                     break;
 
                 case NetworkSet.Training:
-                    strQuery = String.Format("[{0}] = FALSE", ColumnValidationId);
+                    strQuery = String.Format("[{0}] = FALSE AND [{1}] = {2}", ColumnRoleId, ColumnTrainingSetId, trainingSet);
                     break;
 
                 case NetworkSet.Validation:
-                    strQuery = String.Format("[{0}] = TRUE", ColumnValidationId);
+                    strQuery = String.Format("[{0}] = TRUE", ColumnRoleId);
                     break;
             }
 

@@ -15,10 +15,10 @@ namespace Sinapse.Controls.TrainingTabs
         private NetworkData m_networkData;
 
 
+        private TabTraining m_tabTraining;
         private TabTesting m_tabTesting;
         private TabValidation m_tabValidation;
-        private TabTraining[] m_tabTraining;
-
+        
 
         public EventHandler OnSelectionChanged;
         public EventHandler OnSchemaChanged;
@@ -33,12 +33,21 @@ namespace Sinapse.Controls.TrainingTabs
         {
             m_tabTesting = new TabTesting();
             m_tabValidation = new TabValidation();
-
-            this.TabPages.Add(CreateTab(m_tabTesting,"Testing Set",0));
-            this.TabPages.Add(CreateTab(m_tabValidation,"Validation Set",1));
+            m_tabTraining = new TabTraining();            
         }
         #endregion
-                                                  
+
+        protected override void OnCreateControl()
+        {
+            if (!DesignMode)
+            {
+                this.TabPages.Add(CreateTab(m_tabTraining, "Training Sets", 0));
+                this.TabPages.Add(CreateTab(m_tabValidation, "Validation Set", 1));
+                this.TabPages.Add(CreateTab(m_tabTesting, "Testing Set", 2));
+            }
+
+            base.OnCreateControl();
+        }
 
         //----------------------------------------            
 
