@@ -24,7 +24,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using cSouza.Framework.File.CSV;
 
 using Sinapse.Data;
 using AForge;

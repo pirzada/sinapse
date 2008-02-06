@@ -24,9 +24,9 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-using cSouza.Framework.File.CSV;
 
 using Sinapse.Data;
+using Sinapse.Data.CsvParser;
 using Sinapse.Dialogs;
 
 namespace Sinapse.Controls
@@ -232,7 +232,7 @@ namespace Sinapse.Controls
             try
             {
                 //DataTable table = CsvParser.Parse(options);
-                DataTable table = CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, '\t');
+                DataTable table = CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, CsvDelimiter.Tabulation);
 
                 /*
                                 foreach (DataRow row in table.Rows)

@@ -50,6 +50,9 @@ namespace Sinapse.Dialogs
             this.clbString = new System.Windows.Forms.CheckedListBox();
             this.finishStep = new WizardBase.FinishStep();
             this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbDelimiter = new System.Windows.Forms.ComboBox();
+            this.btnAutodetect = new System.Windows.Forms.Button();
             this.intermediateStep1.SuspendLayout();
             this.intermediateStep2.SuspendLayout();
             this.intermediateStep3.SuspendLayout();
@@ -99,8 +102,11 @@ namespace Sinapse.Dialogs
             // intermediateStep1
             // 
             this.intermediateStep1.BindingImage = ((System.Drawing.Image)(resources.GetObject("intermediateStep1.BindingImage")));
+            this.intermediateStep1.Controls.Add(this.cbDelimiter);
+            this.intermediateStep1.Controls.Add(this.label9);
             this.intermediateStep1.Controls.Add(this.label2);
             this.intermediateStep1.Controls.Add(this.label4);
+            this.intermediateStep1.Controls.Add(this.btnAutodetect);
             this.intermediateStep1.Controls.Add(this.btnBrowse);
             this.intermediateStep1.Controls.Add(this.label1);
             this.intermediateStep1.Controls.Add(this.tbDatapath);
@@ -113,13 +119,13 @@ namespace Sinapse.Dialogs
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(25, 222);
+            this.label2.Location = new System.Drawing.Point(24, 184);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(449, 38);
+            this.label2.Size = new System.Drawing.Size(472, 48);
             this.label2.TabIndex = 4;
             this.label2.Text = "The training samples should be presented as a field delimited file. Delimiter car" +
-                "acters may be commas, semicolons or tabulations, which will be detected from you" +
-                "r data automatically.";
+                "acters may be commas, semicolons or tabulations, which I hope will be detected f" +
+                "rom your data automatically.";
             // 
             // label4
             // 
@@ -275,6 +281,38 @@ namespace Sinapse.Dialogs
             this.label5.Text = "We are ready to begin manipulating your data.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(24, 263);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(121, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Field delimiter character:";
+            // 
+            // cbDelimiter
+            // 
+            this.cbDelimiter.FormattingEnabled = true;
+            this.cbDelimiter.Items.AddRange(new object[] {
+            "Comma",
+            "Semi-colon",
+            "Space",
+            "Tab"});
+            this.cbDelimiter.Location = new System.Drawing.Point(151, 259);
+            this.cbDelimiter.Name = "cbDelimiter";
+            this.cbDelimiter.Size = new System.Drawing.Size(84, 21);
+            this.cbDelimiter.TabIndex = 6;
+            // 
+            // btnAutodetect
+            // 
+            this.btnAutodetect.Location = new System.Drawing.Point(241, 258);
+            this.btnAutodetect.Name = "btnAutodetect";
+            this.btnAutodetect.Size = new System.Drawing.Size(232, 23);
+            this.btnAutodetect.TabIndex = 2;
+            this.btnAutodetect.Text = "Attempt auto-detection from specified file:";
+            this.btnAutodetect.UseVisualStyleBackColor = true;
+            this.btnAutodetect.Click += new System.EventHandler(this.btnAutodetect_Click);
+            // 
             // ImportWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,6 +357,9 @@ namespace Sinapse.Dialogs
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbDelimiter;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnAutodetect;
 
     }
 }

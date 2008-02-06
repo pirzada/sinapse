@@ -167,15 +167,15 @@ namespace Sinapse.Data
         #region Static Methods
         public static void Serialize(NetworkContainer network, string path)
         {
-            FileStream fs = null;
+            FileStream fileStream = null;
             bool success = true;
 
             try
             {
-                fs = new FileStream(path, FileMode.Create);
+                fileStream = new FileStream(path, FileMode.Create);
 
                 BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fs, network);
+                bf.Serialize(fileStream, network);
             }
             catch (DirectoryNotFoundException e)
             {
@@ -196,8 +196,8 @@ namespace Sinapse.Data
             }
             finally
             {
-                if (fs != null)
-                    fs.Close();
+                if (fileStream != null)
+                    fileStream.Close();
 
                 if (success)
                     network.LastSavePath = path;

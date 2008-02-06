@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -39,10 +39,11 @@ namespace Sinapse.Forms
     internal sealed partial class MainForm : Form
     {
 
-        private NetworkContainer m_neuralNetwork;
-        private RefreshRateDialog m_refreshRateDialog;
+        private NetworkContainer m_networkContainer;
+
 
         //---------------------------------------------
+
 
         #region Constructor & Destructor
         public MainForm()
@@ -51,15 +52,19 @@ namespace Sinapse.Forms
         }
         #endregion
 
+
         //---------------------------------------------
 
+
         #region Properties
-        internal NetworkContainer CurrentNetwork
+        internal NetworkContainer CurrentNetworkContainer
         {
-            get { return m_neuralNetwork; }
+            get {
+                return m_networkContainer;
+            }
             set
             {
-                this.m_neuralNetwork = value;
+                this.m_networkContainer = value;
                 this.networkTrainerControl.NeuralNetwork = value;
                 this.networkDisplayControl.NeuralNetwork = value;
 
@@ -70,13 +75,14 @@ namespace Sinapse.Forms
                     this.MenuFileSave.Enabled = true;
                     this.MenuFileSaveAs.Enabled = false;
                     
-                    this.lbNeuronCount.Text = m_neuralNetwork.GetLayoutString();
+                    this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
 
-                    this.m_neuralNetwork.OnSavePathChanged += neuralNetwork_SavePathChanged;
+                    this.m_networkContainer.OnSavePathChanged += neuralNetwork_SavePathChanged;
                     this.neuralNetwork_SavePathChanged(null, EventArgs.Empty);
                 }
                 else
                 {
+                    //No active network
                     this.lbNeuronCount.Text = "0";
                     this.MenuNetwork.Enabled = false;
                     this.MenuFileSave.Enabled = false;
@@ -92,21 +98,20 @@ namespace Sinapse.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {
             //Wire up controls and events
-            this.networkDataControl.OnDataChanged += networkDataControl_DataChanged;
+         /*   this.networkDataControl.OnDataChanged += networkDataControl_DataChanged;
             this.networkDataControl.OnSchemaChanged += networkDataControl_SchemaChanged;
             this.networkDataControl.OnSelectionChanged += networkDataControl_SelectionChanged;
-            this.networkCreatorControl.OnNetworkCreated += networkCreatorControl_NetworkCreated;
-            this.networkTrainerControl.OnStatusChanged += networkTrainerControl_StatusChanged;
+         */   this.networkTrainerControl.OnStatusChanged += networkTrainerControl_StatusChanged;
             this.networkTrainerControl.OnDataNeeded += networkTrainerControl_DataNeeded;
             this.networkTrainerControl.OnTrainingComplete += networkTrainerControl_TrainingComplete;
 
-            this.CurrentNetwork = null;
-            this.setStatus("Waiting data");
+            this.CurrentNetworkContainer = null;
+            this.UpdateStatus("Waiting data");
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.setStatus("Exiting...");
+            this.UpdateStatus("Exiting...");
 
             if (this.networkTrainerControl.IsTraining)
             {
@@ -120,65 +125,47 @@ namespace Sinapse.Forms
         #region Network Data Control Events
         private void networkDataControl_SchemaChanged(object sender, EventArgs e)
         {
-            this.lbInputCount.Text = this.networkDataControl.NetworkData.NetworkSchema.InputColumns.Length.ToString();
-            this.lbOutputCount.Text = this.networkDataControl.NetworkData.NetworkSchema.OutputColumns.Length.ToString();
+            this.lbInputCount.Text = this.m_networkContainer.Schema.InputColumns.Length.ToString();
+            this.lbOutputCount.Text = this.m_networkContainer.Schema.OutputColumns.Length.ToString();
 
-            this.networkCreatorControl.NetworkSchema = this.networkDataControl.NetworkData.NetworkSchema;
-            this.networkRangesControl.NetworkData = this.networkDataControl.NetworkData;
-            this.networkTrainerControl.NeuralNetwork = null;
+            //this.networkRangesControl.NetworkData = this.networkDataControl.NetworkData;
+            //this.networkTrainerControl.NeuralNetwork = null;
         }
 
         private void networkDataControl_DataChanged(object sender, EventArgs e)
         {
-            this.lbRowCount.Text = String.Format("({0} items)", networkDataControl.ItemCount);
-            this.lbItems.Text = String.Format("{0}/{1}", this.networkDataControl.ItemCount, this.networkDataControl.SelectedItemCount);
+//            this.lbItems.Text = String.Format("{0}/{1}", this.networkDataControl.ItemCount, this.networkDataControl.SelectedItemCount);
         }
 
         private void networkDataControl_SelectionChanged(object sender, EventArgs e)
         {
-            this.lbItems.Text = String.Format("{0}/{1}", this.networkDataControl.ItemCount, this.networkDataControl.SelectedItemCount);
+  //          this.lbItems.Text = String.Format("{0}/{1}", this.networkDataControl.ItemCount, this.networkDataControl.SelectedItemCount);
         }
         #endregion
+
 
         //---------------------------------------------
-
-
-        #region Other Controls Events
-        private void networkCreatorControl_NetworkCreated(object sender, EventArgs e)
-        {
-            if (this.CurrentNetwork != null && MessageBox.Show("Would you like to overwrite your current network?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No)
-            {
-                this.setStatus("Nothing changed");
-                return;
-            }
-
-            this.CurrentNetwork = this.networkCreatorControl.NeuralNetwork;
-            this.setStatus("Network Created");
-        }
-        #endregion
 
 
         #region Network Trainer Control Events
         private void networkTrainerControl_DataNeeded(object sender, EventArgs e)
         {
-            NetworkVectors trainingVectors = this.networkDataControl.NetworkData.CreateTrainingVectors();
-            NetworkVectors validationVectors = this.networkDataControl.NetworkData.CreateValidationVectors();
+//            NetworkVectors trainingVectors = this.networkDataControl.NetworkData.CreateTrainingVectors();
+//            NetworkVectors validationVectors = this.networkDataControl.NetworkData.CreateValidationVectors();
             
-            this.networkTrainerControl.Start(trainingVectors, validationVectors);
+  //          this.networkTrainerControl.Start(trainingVectors, validationVectors);
         }
 
         private void networkTrainerControl_StatusChanged(object sender, EventArgs e)
         {
-            this.lbStatus.Text = this.networkTrainerControl.Status;
-            this.progressBar.Value = this.networkTrainerControl.Progress;
-            this.lbStatusEpoch.Text = String.Format("Epoch: {0}", this.networkTrainerControl.Epoch);
-            this.lbStatusError.Text = String.Format("Error Rate: {0:0.00000}", this.networkTrainerControl.ErrorRate);
+            this.lbStatus.Text = this.networkTrainerControl.TrainingStatus.StatusText;
+            this.progressBar.Value = this.networkTrainerControl.TrainingStatus.Progress;
+            this.lbStatusEpoch.Text = String.Format("Epoch: {0}", this.networkTrainerControl.TrainingStatus.Epoch);
+            this.lbStatusError.Text = String.Format("Error Rate: {0:0.00000}", this.networkTrainerControl.TrainingStatus.TrainingErrorRate);
         }
 
         private void networkTrainerControl_TrainingComplete(object sender, EventArgs e)
         {
-            this.m_neuralNetwork.Precision = this.networkTrainerControl.ErrorRate;
-
             if (MessageBox.Show("Training completed. Would you like to start querying the Network?",
                 "Done", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1) == DialogResult.Yes)
@@ -189,13 +176,16 @@ namespace Sinapse.Forms
         #endregion
 
 
+        //---------------------------------------------
+
+
         #region Neural Network Events
         private void neuralNetwork_SavePathChanged(object sender, EventArgs e)
         {
-            this.openFileDialog.FileName = this.m_neuralNetwork.LastSavePath;
-            this.saveFileDialog.FileName = this.m_neuralNetwork.LastSavePath;
+            this.openFileDialog.FileName = this.m_networkContainer.LastSavePath;
+            this.saveFileDialog.FileName = this.m_networkContainer.LastSavePath;
 
-            this.MenuFileSaveAs.Enabled = (this.m_neuralNetwork.LastSavePath.Length > 0);
+            this.MenuFileSaveAs.Enabled = (this.m_networkContainer.LastSavePath.Length > 0);
         }
         #endregion
 
@@ -203,20 +193,36 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
         #region Menus
+        private void MenuNetworkNew_Click(object sender, EventArgs e)
+        {
+            //if (this.net
+            if (this.CurrentNetworkContainer != null &&
+                MessageBox.Show("Would you like to overwrite your current network?" +
+                                "\nAny unsaved training sessions will be lost. Are you sure?",
+                                "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                NetworkCreationDialog creationDlg = new NetworkCreationDialog(m_networkContainer.Schema);
+                if (creationDlg.ShowDialog() == DialogResult.OK)
+                {
+                    this.CurrentNetworkContainer = creationDlg.CreateNetworkContainer();
+                }
+            }
+        }
+
         private void MenuFileNew_Click(object sender, EventArgs e)
         {
             ImportWizard importWizard = new ImportWizard();
             if (importWizard.ShowDialog(this) == DialogResult.OK)
             {
-                this.networkDataControl.NetworkData = importWizard.GetNetworkData();
-                this.CurrentNetwork = null;
+   //             this.networkDataControl.NetworkData = importWizard.GetNetworkData();
+                this.CurrentNetworkContainer = null;
             }
         }
 
         private void MenuFileSave_Click(object sender, EventArgs e)
         {
-            if (this.m_neuralNetwork.LastSavePath.Length > 0)
-                this.networkSave(this.CurrentNetwork.LastSavePath);
+            if (this.m_networkContainer.LastSavePath.Length > 0)
+                this.networkSave(this.CurrentNetworkContainer.LastSavePath);
 
             else this.saveFileDialog.ShowDialog(this);
         }
@@ -233,9 +239,9 @@ namespace Sinapse.Forms
 
         private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
-            this.setStatus("Querying network");
-            new NetworkQueryForm(this.m_neuralNetwork).ShowDialog(this);
-            this.setStatus("Ready");
+            this.UpdateStatus("Querying network");
+            new NetworkInquirer(this.m_networkContainer).ShowDialog(this);
+            this.UpdateStatus("Ready");
         }
 
         private void MenuHelpAbout_Click(object sender, EventArgs e)
@@ -247,7 +253,7 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
         #region Statusbar Update
-        private void setStatus(string text)
+        private void UpdateStatus(string text)
         {
             this.lbStatus.Text = text;
         }
@@ -270,7 +276,7 @@ namespace Sinapse.Forms
         {
             try
             {
-                NetworkContainer.Serialize(this.CurrentNetwork, path);
+                NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
             }
             catch
             {
@@ -294,26 +300,17 @@ namespace Sinapse.Forms
             {
                 if (neuralNetwork != null)
                 {
-                    this.CurrentNetwork = neuralNetwork;
+                    this.CurrentNetworkContainer = neuralNetwork;
                 }
             }
         }
         #endregion
 
-        private void statusStrip_DoubleClick(object sender, EventArgs e)
+        //---------------------------------------------
+
+        private void Show_VisualOptions(object sender, EventArgs e)
         {
-            if (m_refreshRateDialog == null || m_refreshRateDialog.IsDisposed)
-            {
-                m_refreshRateDialog = new RefreshRateDialog();
-                m_refreshRateDialog.RefreshRate = networkTrainerControl.StatusRefreshRate;
-                m_refreshRateDialog.RefreshRateChanged += new EventHandler(delegate
-                {
-                    networkTrainerControl.StatusRefreshRate = m_refreshRateDialog.RefreshRate;
-                });
-            }
-
-            m_refreshRateDialog.Show();
-
+            new StatusBarOptions().Show();
         }
 
     }

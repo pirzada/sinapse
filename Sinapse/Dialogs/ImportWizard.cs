@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -27,9 +27,9 @@ using System.IO;
 
 using WizardBase;
 
-using cSouza.Framework.File.CSV;
-
 using Sinapse.Data;
+using Sinapse.Data.CsvParser;
+
 
 namespace Sinapse.Dialogs
 {
@@ -46,6 +46,7 @@ namespace Sinapse.Dialogs
         public ImportWizard()
         {
             InitializeComponent();
+            cbDelimiter.DataSource = Enum.GetValues(typeof(CsvDelimiter));
         }
         #endregion
 
@@ -82,7 +83,6 @@ namespace Sinapse.Dialogs
                 case 1:
                     if (File.Exists(tbDatapath.Text) && loadDataTable())
                     {
-                        //loadDataTable();
                         loadInputCombobox();
                     }
                     else
@@ -103,11 +103,13 @@ namespace Sinapse.Dialogs
             }
         }
 
+
         private void wizardControl_CancelButtonClick(object sender, EventArgs e)
         {
             this.m_dataTable = null;
             this.Close();
         }
+
 
         private void wizardControl_FinishButtonClick(object sender, EventArgs e)
         {
@@ -143,7 +145,6 @@ namespace Sinapse.Dialogs
                 inputColumns.ToArray(),
                 outputColumns.ToArray(),
                 stringColumns.ToArray());
-//            this.networkData = new NetworkData(schema, m_dataTable);
             
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -157,11 +158,11 @@ namespace Sinapse.Dialogs
         {
             try
             {
-                this.m_dataTable = CsvParser.Parse(tbDatapath.Text, Encoding.Default, true, '\t');
+                this.m_dataTable = CsvParser.Parse(tbDatapath.Text, Encoding.Default, true, (CsvDelimiter)cbDelimiter.SelectedValue);
             }
             catch (IOException e)
             {
-                MessageBox.Show(e.Message, "Error opening file");
+                MessageBox.Show(e.Message, "Error opening file. Please ensure no other process is using that file and try again.");
                 return false;
             }
             return true;
@@ -199,8 +200,19 @@ namespace Sinapse.Dialogs
             if (openFileDialog.ShowDialog() == DialogResult.OK)
                 tbDatapath.Text = openFileDialog.FileName;
         }
-        #endregion
 
+        private void btnAutodetect_Click(object sender, EventArgs e)
+        {
+            if (tbDatapath.Text.Length > 0 && File.Exists(tbDatapath.Text))
+            {
+                cbDelimiter.SelectedItem = Enum.GetName(typeof(CsvDelimiter), CsvUtils.DetectFieldDelimiterChar(tbDatapath.Text, Encoding.Default));
+            }
+            else
+            {
+                MessageBox.Show("Invalid path specified");
+            }
+        }
+        #endregion
 
     }
 }

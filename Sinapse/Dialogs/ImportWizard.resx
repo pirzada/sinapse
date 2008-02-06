@@ -767,9 +767,6 @@
         /GrgZf/QwODPRgY1hYyfhYBCYBt/mt6ZKuT/Ad3Q4H0WY/sDAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Unfortunately, Neural Networks are unable to understand categorical data directly. To bypass this limitation, we will transform this kind of data (i.e: categories, types or labels) in a nummerical representation.</value>
-  </data>
   <data name="finishStep.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAhcAAAGTCAIAAAAUcqdMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -954,6 +951,9 @@
         vQAV0duxEgEEEECAirAHEEAAAQT0AlREb8dKBBBAAAEqwh5AAAEEENALUBG9HSsRQAABBKgIewABBBBA
         QC9ARfR2rEQAAQQQ+P8/+vxS0rdjogAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Unfortunately, Neural Networks are unable to understand categorical data directly. To bypass this limitation, we will transform this kind of data (i.e: categories, types or labels) in a nummerical representation.</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

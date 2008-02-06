@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -50,13 +50,11 @@ namespace Sinapse.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbNetworkName = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lbNeuronCount = new System.Windows.Forms.Label();
             this.lbInputCount = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.lbRowCount = new System.Windows.Forms.Label();
             this.lbOutputCount = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lbStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -67,16 +65,14 @@ namespace Sinapse.Forms
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuFileNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuNetwork = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuNetworkNew = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuNetworkQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,32 +82,73 @@ namespace Sinapse.Forms
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.networkDisplayControl = new Sinapse.Controls.NetworkDisplayControl();
-            this.networkRangesControl = new Sinapse.Controls.NetworkRangesControl();
-            this.networkCreatorControl = new Sinapse.Controls.NetworkCreatorControl();
-            this.networkTrainerControl = new Sinapse.Controls.NetworkTrainerControl();
-            this.networkDataControl = new Sinapse.Controls.NetworkDataTrainControl();
+            this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.toolStripMain = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTraining = new System.Windows.Forms.ToolStrip();
+            this.toolStripTabs = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.tcSidebar = new Dotnetrix.Controls.TabControlEX();
+            this.tabStatus = new Dotnetrix.Controls.TabPageEX();
+            this.networkDisplayControl = new Sinapse.Controls.Sidebar.SideDisplayControl();
+            this.tabData = new Dotnetrix.Controls.TabPageEX();
+            this.networkRangesControl = new Sinapse.Controls.Sidebar.SideRangesControl();
+            this.tabSets = new Dotnetrix.Controls.TabPageEX();
+            this.tabTraining = new Dotnetrix.Controls.TabPageEX();
+            this.networkTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
+            this.trainingTabControl = new Sinapse.Controls.TrainingTabs.TrainingTabControl();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnLoad = new System.Windows.Forms.ToolStripButton();
+            this.btnImport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnTrainForget = new System.Windows.Forms.ToolStripButton();
+            this.btnTrainStart = new System.Windows.Forms.ToolStripButton();
+            this.btnTrainPause = new System.Windows.Forms.ToolStripButton();
+            this.btnTrainStop = new System.Windows.Forms.ToolStripButton();
+            this.btnTrainQuery = new System.Windows.Forms.ToolStripButton();
+            this.btnAddTab = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnAddTabTraining = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddTabValidation = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddTabTesting = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRemTab = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.MenuFileNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.toolStripContainer.ContentPanel.SuspendLayout();
+            this.toolStripContainer.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer.SuspendLayout();
+            this.toolStripMain.SuspendLayout();
+            this.toolStripTraining.SuspendLayout();
+            this.toolStripTabs.SuspendLayout();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
+            this.tcSidebar.SuspendLayout();
+            this.tabStatus.SuspendLayout();
+            this.tabData.SuspendLayout();
+            this.tabTraining.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkBlue;
             this.panel1.Controls.Add(this.lbNetworkName);
-            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.lbNeuronCount);
             this.panel1.Controls.Add(this.lbInputCount);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.lbRowCount);
             this.panel1.Controls.Add(this.lbOutputCount);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1016, 52);
+            this.panel1.Size = new System.Drawing.Size(1016, 50);
             this.panel1.TabIndex = 5;
             // 
             // lbNetworkName
@@ -120,29 +157,19 @@ namespace Sinapse.Forms
             this.lbNetworkName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbNetworkName.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNetworkName.ForeColor = System.Drawing.SystemColors.Window;
-            this.lbNetworkName.Location = new System.Drawing.Point(12, 4);
+            this.lbNetworkName.Location = new System.Drawing.Point(12, 8);
             this.lbNetworkName.Name = "lbNetworkName";
             this.lbNetworkName.Size = new System.Drawing.Size(397, 29);
             this.lbNetworkName.TabIndex = 0;
             this.lbNetworkName.Text = "Sinapse Neural Networking Tool";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label6.Location = new System.Drawing.Point(42, 33);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Training data";
-            // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label1.Location = new System.Drawing.Point(718, 33);
+            this.label1.Location = new System.Drawing.Point(718, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -150,11 +177,11 @@ namespace Sinapse.Forms
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label7.Location = new System.Drawing.Point(829, 33);
+            this.label7.Location = new System.Drawing.Point(829, 31);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 0;
@@ -162,7 +189,7 @@ namespace Sinapse.Forms
             // 
             // lbNeuronCount
             // 
-            this.lbNeuronCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbNeuronCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbNeuronCount.AutoSize = true;
             this.lbNeuronCount.ForeColor = System.Drawing.Color.AliceBlue;
             this.lbNeuronCount.Location = new System.Drawing.Point(782, 31);
@@ -173,7 +200,7 @@ namespace Sinapse.Forms
             // 
             // lbInputCount
             // 
-            this.lbInputCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbInputCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbInputCount.AutoSize = true;
             this.lbInputCount.ForeColor = System.Drawing.Color.AliceBlue;
             this.lbInputCount.Location = new System.Drawing.Point(877, 31);
@@ -184,29 +211,19 @@ namespace Sinapse.Forms
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label8.Location = new System.Drawing.Point(924, 33);
+            this.label8.Location = new System.Drawing.Point(924, 31);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 0;
             this.label8.Text = "Outputs:";
             // 
-            // lbRowCount
-            // 
-            this.lbRowCount.AutoSize = true;
-            this.lbRowCount.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbRowCount.Location = new System.Drawing.Point(118, 33);
-            this.lbRowCount.Name = "lbRowCount";
-            this.lbRowCount.Size = new System.Drawing.Size(52, 13);
-            this.lbRowCount.TabIndex = 0;
-            this.lbRowCount.Text = "(00 items)";
-            // 
             // lbOutputCount
             // 
-            this.lbOutputCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbOutputCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbOutputCount.AutoSize = true;
             this.lbOutputCount.ForeColor = System.Drawing.Color.AliceBlue;
             this.lbOutputCount.Location = new System.Drawing.Point(981, 31);
@@ -222,17 +239,22 @@ namespace Sinapse.Forms
             this.progressBar,
             this.lbStatusEpoch,
             this.lbStatusError,
-            this.lbItems});
+            this.lbItems,
+            this.toolStripDropDownButton1});
             this.statusStrip.Location = new System.Drawing.Point(0, 644);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1016, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip1";
-            this.statusStrip.DoubleClick += new System.EventHandler(this.statusStrip_DoubleClick);
+            this.statusStrip.DoubleClick += new System.EventHandler(this.Show_VisualOptions);
             // 
             // lbStatus
             // 
             this.lbStatus.AutoSize = false;
+            this.lbStatus.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.lbStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.Size = new System.Drawing.Size(250, 17);
             this.lbStatus.Text = "Status";
@@ -246,19 +268,31 @@ namespace Sinapse.Forms
             // 
             // lbStatusEpoch
             // 
+            this.lbStatusEpoch.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.lbStatusEpoch.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatusEpoch.Name = "lbStatusEpoch";
-            this.lbStatusEpoch.Size = new System.Drawing.Size(94, 17);
+            this.lbStatusEpoch.Size = new System.Drawing.Size(61, 17);
             this.lbStatusEpoch.Spring = true;
             // 
             // lbStatusError
             // 
+            this.lbStatusError.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.lbStatusError.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatusError.Name = "lbStatusError";
-            this.lbStatusError.Size = new System.Drawing.Size(94, 17);
+            this.lbStatusError.Size = new System.Drawing.Size(61, 17);
             this.lbStatusError.Spring = true;
             // 
             // lbItems
             // 
             this.lbItems.AutoSize = false;
+            this.lbItems.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.lbItems.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbItems.Name = "lbItems";
             this.lbItems.Size = new System.Drawing.Size(80, 17);
             // 
@@ -268,7 +302,7 @@ namespace Sinapse.Forms
             this.MenuFile,
             this.MenuNetwork,
             this.MenuHelp});
-            this.menuStrip.Location = new System.Drawing.Point(0, 52);
+            this.menuStrip.Location = new System.Drawing.Point(0, 50);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1016, 24);
             this.menuStrip.TabIndex = 10;
@@ -290,40 +324,10 @@ namespace Sinapse.Forms
             this.MenuFile.Size = new System.Drawing.Size(35, 20);
             this.MenuFile.Text = "&File";
             // 
-            // MenuFileNew
-            // 
-            this.MenuFileNew.Image = ((System.Drawing.Image)(resources.GetObject("MenuFileNew.Image")));
-            this.MenuFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.MenuFileNew.Name = "MenuFileNew";
-            this.MenuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.MenuFileNew.Size = new System.Drawing.Size(151, 22);
-            this.MenuFileNew.Text = "&New";
-            this.MenuFileNew.Click += new System.EventHandler(this.MenuFileNew_Click);
-            // 
-            // MenuFileOpen
-            // 
-            this.MenuFileOpen.Image = ((System.Drawing.Image)(resources.GetObject("MenuFileOpen.Image")));
-            this.MenuFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.MenuFileOpen.Name = "MenuFileOpen";
-            this.MenuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.MenuFileOpen.Size = new System.Drawing.Size(151, 22);
-            this.MenuFileOpen.Text = "&Open";
-            this.MenuFileOpen.Click += new System.EventHandler(this.MenuFileOpen_Click);
-            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(148, 6);
-            // 
-            // MenuFileSave
-            // 
-            this.MenuFileSave.Image = ((System.Drawing.Image)(resources.GetObject("MenuFileSave.Image")));
-            this.MenuFileSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.MenuFileSave.Name = "MenuFileSave";
-            this.MenuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.MenuFileSave.Size = new System.Drawing.Size(151, 22);
-            this.MenuFileSave.Text = "&Save";
-            this.MenuFileSave.Click += new System.EventHandler(this.MenuFileSave_Click);
             // 
             // MenuFileSaveAs
             // 
@@ -357,10 +361,18 @@ namespace Sinapse.Forms
             // MenuNetwork
             // 
             this.MenuNetwork.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuNetworkNew,
             this.MenuNetworkQuery});
             this.MenuNetwork.Name = "MenuNetwork";
             this.MenuNetwork.Size = new System.Drawing.Size(59, 20);
             this.MenuNetwork.Text = "Network";
+            // 
+            // MenuNetworkNew
+            // 
+            this.MenuNetworkNew.Name = "MenuNetworkNew";
+            this.MenuNetworkNew.Size = new System.Drawing.Size(115, 22);
+            this.MenuNetworkNew.Text = "New";
+            this.MenuNetworkNew.Click += new System.EventHandler(this.MenuNetworkNew_Click);
             // 
             // MenuNetworkQuery
             // 
@@ -426,73 +438,382 @@ namespace Sinapse.Forms
             this.saveFileDialog.Title = "Save Network Object";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 
+            // toolStripContainer
+            // 
+            // 
+            // toolStripContainer.ContentPanel
+            // 
+            this.toolStripContainer.ContentPanel.Controls.Add(this.splitContainer);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(1016, 547);
+            this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer.Location = new System.Drawing.Point(0, 74);
+            this.toolStripContainer.Name = "toolStripContainer";
+            this.toolStripContainer.Size = new System.Drawing.Size(1016, 570);
+            this.toolStripContainer.TabIndex = 16;
+            this.toolStripContainer.Text = "toolStripContainer";
+            // 
+            // toolStripContainer.TopToolStripPanel
+            // 
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripMain);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTraining);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTabs);
+            this.toolStripContainer.TopToolStripPanel.MaximumSize = new System.Drawing.Size(0, 25);
+            // 
+            // toolStripMain
+            // 
+            this.toolStripMain.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNew,
+            this.btnLoad,
+            this.btnImport,
+            this.toolStripButton3,
+            this.toolStripButton4,
+            this.toolStripSeparator3});
+            this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.toolStripMain.Location = new System.Drawing.Point(5, 0);
+            this.toolStripMain.Name = "toolStripMain";
+            this.toolStripMain.Size = new System.Drawing.Size(122, 23);
+            this.toolStripMain.TabIndex = 0;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 23);
+            // 
+            // toolStripTraining
+            // 
+            this.toolStripTraining.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripTraining.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnTrainForget,
+            this.btnTrainStart,
+            this.btnTrainPause,
+            this.btnTrainStop,
+            this.btnTrainQuery});
+            this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.toolStripTraining.Location = new System.Drawing.Point(127, 0);
+            this.toolStripTraining.Name = "toolStripTraining";
+            this.toolStripTraining.Size = new System.Drawing.Size(116, 23);
+            this.toolStripTraining.TabIndex = 1;
+            // 
+            // toolStripTabs
+            // 
+            this.toolStripTabs.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripTabs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator4,
+            this.btnAddTab,
+            this.btnRemTab});
+            this.toolStripTabs.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.toolStripTabs.Location = new System.Drawing.Point(243, 0);
+            this.toolStripTabs.Name = "toolStripTabs";
+            this.toolStripTabs.Size = new System.Drawing.Size(59, 23);
+            this.toolStripTabs.TabIndex = 2;
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 23);
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.tcSidebar);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.trainingTabControl);
+            this.splitContainer.Size = new System.Drawing.Size(1016, 547);
+            this.splitContainer.SplitterDistance = 236;
+            this.splitContainer.TabIndex = 17;
+            // 
+            // tcSidebar
+            // 
+            this.tcSidebar.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tcSidebar.Appearance = Dotnetrix.Controls.TabAppearanceEX.Bevel;
+            this.tcSidebar.AutoLoadTabPages = true;
+            this.tcSidebar.Controls.Add(this.tabStatus);
+            this.tcSidebar.Controls.Add(this.tabData);
+            this.tcSidebar.Controls.Add(this.tabSets);
+            this.tcSidebar.Controls.Add(this.tabTraining);
+            this.tcSidebar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcSidebar.HotTrack = true;
+            this.tcSidebar.Location = new System.Drawing.Point(0, 0);
+            this.tcSidebar.Multiline = true;
+            this.tcSidebar.Name = "tcSidebar";
+            this.tcSidebar.SelectedIndex = 0;
+            this.tcSidebar.Size = new System.Drawing.Size(236, 547);
+            this.tcSidebar.TabIndex = 16;
+            this.tcSidebar.UseVisualStyles = false;
+            // 
+            // tabStatus
+            // 
+            this.tabStatus.Controls.Add(this.networkDisplayControl);
+            this.tabStatus.Location = new System.Drawing.Point(27, 4);
+            this.tabStatus.Name = "tabStatus";
+            this.tabStatus.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStatus.Size = new System.Drawing.Size(205, 539);
+            this.tabStatus.TabIndex = 1;
+            this.tabStatus.Text = "Network Status";
+            this.tabStatus.UseVisualStyleBackColor = true;
+            // 
             // networkDisplayControl
             // 
-            this.networkDisplayControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.networkDisplayControl.BackColor = System.Drawing.SystemColors.Window;
+            this.networkDisplayControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.networkDisplayControl.Enabled = false;
-            this.networkDisplayControl.Location = new System.Drawing.Point(813, 79);
+            this.networkDisplayControl.Location = new System.Drawing.Point(3, 3);
             this.networkDisplayControl.Name = "networkDisplayControl";
             this.networkDisplayControl.ReadOnly = false;
-            this.networkDisplayControl.Size = new System.Drawing.Size(200, 290);
-            this.networkDisplayControl.TabIndex = 15;
+            this.networkDisplayControl.Size = new System.Drawing.Size(199, 533);
+            this.networkDisplayControl.TabIndex = 16;
+            // 
+            // tabData
+            // 
+            this.tabData.Controls.Add(this.networkRangesControl);
+            this.tabData.Location = new System.Drawing.Point(27, 4);
+            this.tabData.Name = "tabData";
+            this.tabData.Size = new System.Drawing.Size(205, 539);
+            this.tabData.TabIndex = 3;
+            this.tabData.Text = "Training Data";
             // 
             // networkRangesControl
             // 
-            this.networkRangesControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.networkRangesControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.networkRangesControl.Enabled = false;
-            this.networkRangesControl.Location = new System.Drawing.Point(813, 375);
+            this.networkRangesControl.Location = new System.Drawing.Point(0, 0);
             this.networkRangesControl.Name = "networkRangesControl";
             this.networkRangesControl.ReadOnly = false;
-            this.networkRangesControl.Size = new System.Drawing.Size(200, 263);
-            this.networkRangesControl.TabIndex = 14;
+            this.networkRangesControl.Size = new System.Drawing.Size(205, 539);
+            this.networkRangesControl.TabIndex = 15;
             // 
-            // networkCreatorControl
+            // tabSets
             // 
-            this.networkCreatorControl.Enabled = false;
-            this.networkCreatorControl.Location = new System.Drawing.Point(5, 79);
-            this.networkCreatorControl.Name = "networkCreatorControl";
-            this.networkCreatorControl.Size = new System.Drawing.Size(195, 248);
-            this.networkCreatorControl.TabIndex = 13;
+            this.tabSets.Location = new System.Drawing.Point(27, 4);
+            this.tabSets.Name = "tabSets";
+            this.tabSets.Size = new System.Drawing.Size(205, 539);
+            this.tabSets.TabIndex = 4;
+            this.tabSets.Text = "Training Sets";
+            // 
+            // tabTraining
+            // 
+            this.tabTraining.Controls.Add(this.networkTrainerControl);
+            this.tabTraining.Location = new System.Drawing.Point(27, 4);
+            this.tabTraining.Name = "tabTraining";
+            this.tabTraining.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTraining.Size = new System.Drawing.Size(205, 539);
+            this.tabTraining.TabIndex = 0;
+            this.tabTraining.Text = "Network Trainer";
+            this.tabTraining.UseVisualStyleBackColor = true;
             // 
             // networkTrainerControl
             // 
-            this.networkTrainerControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.networkTrainerControl.BackColor = System.Drawing.SystemColors.Control;
+            this.networkTrainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.networkTrainerControl.Enabled = false;
-            this.networkTrainerControl.Location = new System.Drawing.Point(5, 333);
+            this.networkTrainerControl.Location = new System.Drawing.Point(3, 3);
             this.networkTrainerControl.Name = "networkTrainerControl";
-            this.networkTrainerControl.Size = new System.Drawing.Size(195, 305);
+            this.networkTrainerControl.Size = new System.Drawing.Size(199, 533);
             this.networkTrainerControl.TabIndex = 12;
             // 
-            // networkDataControl
+            // trainingTabControl
             // 
-            this.networkDataControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.networkDataControl.Enabled = false;
-            this.networkDataControl.Location = new System.Drawing.Point(206, 86);
-            this.networkDataControl.Name = "networkDataControl";
-            this.networkDataControl.Size = new System.Drawing.Size(601, 551);
-            this.networkDataControl.TabIndex = 11;
+            this.trainingTabControl.Appearance = Dotnetrix.Controls.TabAppearanceEX.Bevel;
+            this.trainingTabControl.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.trainingTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trainingTabControl.HotTrack = true;
+            this.trainingTabControl.Location = new System.Drawing.Point(0, 0);
+            this.trainingTabControl.Name = "trainingTabControl";
+            this.trainingTabControl.Size = new System.Drawing.Size(776, 547);
+            this.trainingTabControl.TabIndex = 0;
+            this.trainingTabControl.UseVisualStyles = false;
+            // 
+            // btnNew
+            // 
+            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNew.Image = global::Sinapse.Properties.Resources.filenew;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(23, 20);
+            this.btnNew.Text = "New";
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLoad.Image = global::Sinapse.Properties.Resources.folder;
+            this.btnLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(23, 20);
+            this.btnLoad.Text = "toolStripButton2";
+            // 
+            // btnImport
+            // 
+            this.btnImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnImport.Image = global::Sinapse.Properties.Resources.webexport;
+            this.btnImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(23, 20);
+            this.btnImport.Text = "toolStripButton1";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 20);
+            this.toolStripButton3.Text = "toolStripButton3";
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 20);
+            this.toolStripButton4.Text = "toolStripButton4";
+            // 
+            // btnTrainForget
+            // 
+            this.btnTrainForget.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrainForget.Image = global::Sinapse.Properties.Resources.player_rew1;
+            this.btnTrainForget.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrainForget.Name = "btnTrainForget";
+            this.btnTrainForget.Size = new System.Drawing.Size(23, 20);
+            this.btnTrainForget.Text = "Forget";
+            // 
+            // btnTrainStart
+            // 
+            this.btnTrainStart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrainStart.Image = global::Sinapse.Properties.Resources.player_play1;
+            this.btnTrainStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrainStart.Name = "btnTrainStart";
+            this.btnTrainStart.Size = new System.Drawing.Size(23, 20);
+            this.btnTrainStart.Text = "Start Training";
+            // 
+            // btnTrainPause
+            // 
+            this.btnTrainPause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrainPause.Image = global::Sinapse.Properties.Resources.player_pause;
+            this.btnTrainPause.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrainPause.Name = "btnTrainPause";
+            this.btnTrainPause.Size = new System.Drawing.Size(23, 20);
+            this.btnTrainPause.Text = "Pause Training";
+            // 
+            // btnTrainStop
+            // 
+            this.btnTrainStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrainStop.Image = global::Sinapse.Properties.Resources.player_stop1;
+            this.btnTrainStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrainStop.Name = "btnTrainStop";
+            this.btnTrainStop.Size = new System.Drawing.Size(23, 20);
+            this.btnTrainStop.Text = "Stop Training";
+            // 
+            // btnTrainQuery
+            // 
+            this.btnTrainQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrainQuery.Image = global::Sinapse.Properties.Resources.software_development;
+            this.btnTrainQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrainQuery.Name = "btnTrainQuery";
+            this.btnTrainQuery.Size = new System.Drawing.Size(23, 20);
+            this.btnTrainQuery.Text = "Query Network";
+            // 
+            // btnAddTab
+            // 
+            this.btnAddTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddTab.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddTabTraining,
+            this.btnAddTabValidation,
+            this.btnAddTabTesting});
+            this.btnAddTab.Image = global::Sinapse.Properties.Resources.tab_new;
+            this.btnAddTab.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddTab.Name = "btnAddTab";
+            this.btnAddTab.Size = new System.Drawing.Size(29, 20);
+            this.btnAddTab.Text = "Add Set";
+            // 
+            // btnAddTabTraining
+            // 
+            this.btnAddTabTraining.Name = "btnAddTabTraining";
+            this.btnAddTabTraining.Size = new System.Drawing.Size(150, 22);
+            this.btnAddTabTraining.Text = "Training Set";
+            // 
+            // btnAddTabValidation
+            // 
+            this.btnAddTabValidation.Name = "btnAddTabValidation";
+            this.btnAddTabValidation.Size = new System.Drawing.Size(150, 22);
+            this.btnAddTabValidation.Text = "Validation Set";
+            // 
+            // btnAddTabTesting
+            // 
+            this.btnAddTabTesting.Name = "btnAddTabTesting";
+            this.btnAddTabTesting.Size = new System.Drawing.Size(150, 22);
+            this.btnAddTabTesting.Text = "Testing Set";
+            // 
+            // btnRemTab
+            // 
+            this.btnRemTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRemTab.Image = global::Sinapse.Properties.Resources.tab_remove;
+            this.btnRemTab.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRemTab.Name = "btnRemTab";
+            this.btnRemTab.Size = new System.Drawing.Size(23, 20);
+            this.btnRemTab.Text = "Remove Set";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.Image = global::Sinapse.Properties.Resources.greenled;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(96, 17);
+            this.toolStripDropDownButton1.Text = "Network Active";
+            this.toolStripDropDownButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
+            // MenuFileNew
+            // 
+            this.MenuFileNew.Image = ((System.Drawing.Image)(resources.GetObject("MenuFileNew.Image")));
+            this.MenuFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.MenuFileNew.Name = "MenuFileNew";
+            this.MenuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.MenuFileNew.Size = new System.Drawing.Size(151, 22);
+            this.MenuFileNew.Text = "&New";
+            this.MenuFileNew.Click += new System.EventHandler(this.MenuFileNew_Click);
+            // 
+            // MenuFileOpen
+            // 
+            this.MenuFileOpen.Image = ((System.Drawing.Image)(resources.GetObject("MenuFileOpen.Image")));
+            this.MenuFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.MenuFileOpen.Name = "MenuFileOpen";
+            this.MenuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.MenuFileOpen.Size = new System.Drawing.Size(151, 22);
+            this.MenuFileOpen.Text = "&Open";
+            this.MenuFileOpen.Click += new System.EventHandler(this.MenuFileOpen_Click);
+            // 
+            // MenuFileSave
+            // 
+            this.MenuFileSave.Image = ((System.Drawing.Image)(resources.GetObject("MenuFileSave.Image")));
+            this.MenuFileSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.MenuFileSave.Name = "MenuFileSave";
+            this.MenuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.MenuFileSave.Size = new System.Drawing.Size(151, 22);
+            this.MenuFileSave.Text = "&Save";
+            this.MenuFileSave.Click += new System.EventHandler(this.MenuFileSave_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1016, 666);
-            this.Controls.Add(this.networkDisplayControl);
-            this.Controls.Add(this.networkRangesControl);
-            this.Controls.Add(this.networkCreatorControl);
-            this.Controls.Add(this.networkTrainerControl);
-            this.Controls.Add(this.networkDataControl);
+            this.Controls.Add(this.toolStripContainer);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(780, 500);
+            this.MinimumSize = new System.Drawing.Size(800, 550);
             this.Name = "MainForm";
             this.Text = "Sinapse";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -503,6 +824,24 @@ namespace Sinapse.Forms
             this.statusStrip.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.toolStripContainer.ContentPanel.ResumeLayout(false);
+            this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer.ResumeLayout(false);
+            this.toolStripContainer.PerformLayout();
+            this.toolStripMain.ResumeLayout(false);
+            this.toolStripMain.PerformLayout();
+            this.toolStripTraining.ResumeLayout(false);
+            this.toolStripTraining.PerformLayout();
+            this.toolStripTabs.ResumeLayout(false);
+            this.toolStripTabs.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.ResumeLayout(false);
+            this.tcSidebar.ResumeLayout(false);
+            this.tabStatus.ResumeLayout(false);
+            this.tabData.ResumeLayout(false);
+            this.tabTraining.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,11 +851,9 @@ namespace Sinapse.Forms
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbNetworkName;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbInputCount;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lbRowCount;
         private System.Windows.Forms.Label lbOutputCount;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel lbStatus;
@@ -526,7 +863,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem MenuNetwork;
-        private Sinapse.Controls.NetworkDataTrainControl networkDataControl;
         private System.Windows.Forms.ToolStripMenuItem MenuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuFileNew;
         private System.Windows.Forms.ToolStripMenuItem MenuFileOpen;
@@ -542,16 +878,45 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem MenuHelpAbout;
-        private Sinapse.Controls.NetworkTrainerControl networkTrainerControl;
+        private Sinapse.Controls.Sidebar.SideTrainerControl networkTrainerControl;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbNeuronCount;
-        private Sinapse.Controls.NetworkCreatorControl networkCreatorControl;
         private System.Windows.Forms.ToolStripStatusLabel lbItems;
-        private Sinapse.Controls.NetworkRangesControl networkRangesControl;
-        private Sinapse.Controls.NetworkDisplayControl networkDisplayControl;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer;
+        private System.Windows.Forms.ToolStrip toolStripMain;
+        private System.Windows.Forms.ToolStripButton btnImport;
+        private System.Windows.Forms.ToolStripButton btnLoad;
+        private System.Windows.Forms.ToolStrip toolStripTraining;
+        private System.Windows.Forms.ToolStripButton btnTrainStart;
+        private System.Windows.Forms.ToolStripButton btnTrainPause;
+        private System.Windows.Forms.ToolStripButton btnTrainStop;
+        private System.Windows.Forms.ToolStripButton btnTrainForget;
+        private System.Windows.Forms.ToolStripMenuItem MenuNetworkNew;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private Dotnetrix.Controls.TabControlEX tcSidebar;
+        private Dotnetrix.Controls.TabPageEX tabTraining;
+        private Dotnetrix.Controls.TabPageEX tabStatus;
+        private Dotnetrix.Controls.TabPageEX tabData;
+        private Sinapse.Controls.Sidebar.SideRangesControl networkRangesControl;
+        private Sinapse.Controls.Sidebar.SideDisplayControl networkDisplayControl;
+        private Dotnetrix.Controls.TabPageEX tabSets;
+        private System.Windows.Forms.ToolStrip toolStripTabs;
+        private System.Windows.Forms.ToolStripButton btnRemTab;
+        private System.Windows.Forms.ToolStripButton btnNew;
+        private System.Windows.Forms.ToolStripButton btnTrainQuery;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private Sinapse.Controls.TrainingTabs.TrainingTabControl trainingTabControl;
+        private System.Windows.Forms.ToolStripDropDownButton btnAddTab;
+        private System.Windows.Forms.ToolStripMenuItem btnAddTabTraining;
+        private System.Windows.Forms.ToolStripMenuItem btnAddTabValidation;
+        private System.Windows.Forms.ToolStripMenuItem btnAddTabTesting;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripDropDownButton1;
     }
 }
