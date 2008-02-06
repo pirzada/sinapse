@@ -10,11 +10,14 @@ using ZedGraph;
 
 namespace Sinapse.Dialogs
 {
+
     public partial class GraphDialog : Form
     {
 
         LineItem trainingCurve;
         LineItem validationCurve;
+
+        Boolean forceClose;
         
 
         //---------------------------------------------
@@ -60,6 +63,12 @@ namespace Sinapse.Dialogs
             zedGraphControl.AxisChange();
             this.Invalidate();
         }
+
+        public new void Close()
+        {
+            this.forceClose = true;
+            base.Close();
+        }
         #endregion
 
 
@@ -77,10 +86,24 @@ namespace Sinapse.Dialogs
         //---------------------------------------------
 
 
+        #region Form Events
         private void GraphDialog_Load(object sender, EventArgs e)
         {
             this.CreateChart(zedGraphControl);
         }
+
+        private void GraphDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.forceClose)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+        }
+        #endregion
+
+
+        //---------------------------------------------
 
 
         private void CreateChart(ZedGraphControl zgc)
@@ -117,6 +140,7 @@ namespace Sinapse.Dialogs
             zgc.AxisChange();
 
         }
+
 
     }
 }

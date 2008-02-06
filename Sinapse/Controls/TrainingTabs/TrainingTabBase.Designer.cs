@@ -35,6 +35,7 @@ namespace Sinapse.Controls.TrainingTabs
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.btnImport = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,7 +96,7 @@ namespace Sinapse.Controls.TrainingTabs
             // btnImport
             // 
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImport.Image = global::Sinapse.Properties.Resources.network1;
+            this.btnImport.Image = global::Sinapse.Properties.Resources.network_22;
             this.btnImport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnImport.Location = new System.Drawing.Point(515, 372);
             this.btnImport.Name = "btnImport";
@@ -142,6 +143,7 @@ namespace Sinapse.Controls.TrainingTabs
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         protected System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Label label1;
+        protected internal System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

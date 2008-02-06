@@ -34,5 +34,41 @@ namespace Sinapse.Properties {
                 this["display_refreshRate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600, 500")]
+        public global::System.Drawing.Point Graph_location {
+            get {
+                return ((global::System.Drawing.Point)(this["Graph_location"]));
+            }
+            set {
+                this["Graph_location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200, 200")]
+        public global::System.Drawing.Point Main_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["Main_Location"]));
+            }
+            set {
+                this["Main_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState Main_windowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["Main_windowState"]));
+            }
+            set {
+                this["Main_windowState"] = value;
+            }
+        }
     }
 }

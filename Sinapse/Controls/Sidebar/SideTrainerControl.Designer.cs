@@ -49,6 +49,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbPause = new System.Windows.Forms.PictureBox();
             this.pbStart = new System.Windows.Forms.PictureBox();
             this.pbForget = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMomentum)).BeginInit();
@@ -60,6 +61,7 @@ namespace Sinapse.Controls.Sidebar
             ((System.ComponentModel.ISupportInitialize)(this.pbPause)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbForget)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -74,7 +76,7 @@ namespace Sinapse.Controls.Sidebar
             // 
             this.rbErrorLimit.AutoSize = true;
             this.rbErrorLimit.Checked = true;
-            this.rbErrorLimit.Location = new System.Drawing.Point(16, 79);
+            this.rbErrorLimit.Location = new System.Drawing.Point(12, 47);
             this.rbErrorLimit.Name = "rbErrorLimit";
             this.rbErrorLimit.Size = new System.Drawing.Size(84, 17);
             this.rbErrorLimit.TabIndex = 31;
@@ -85,7 +87,7 @@ namespace Sinapse.Controls.Sidebar
             // rbEpochLimit
             // 
             this.rbEpochLimit.AutoSize = true;
-            this.rbEpochLimit.Location = new System.Drawing.Point(16, 53);
+            this.rbEpochLimit.Location = new System.Drawing.Point(12, 21);
             this.rbEpochLimit.Name = "rbEpochLimit";
             this.rbEpochLimit.Size = new System.Drawing.Size(78, 17);
             this.rbEpochLimit.TabIndex = 32;
@@ -94,17 +96,19 @@ namespace Sinapse.Controls.Sidebar
             // 
             // cbValidationStop
             // 
-            this.cbValidationStop.Location = new System.Drawing.Point(16, 306);
+            this.cbValidationStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbValidationStop.Location = new System.Drawing.Point(12, 274);
             this.cbValidationStop.Name = "cbValidationStop";
-            this.cbValidationStop.Size = new System.Drawing.Size(182, 31);
+            this.cbValidationStop.Size = new System.Drawing.Size(169, 31);
             this.cbValidationStop.TabIndex = 28;
             this.cbValidationStop.Text = "Stop training when validation error start increasing";
             // 
             // cbValidate
             // 
-            this.cbValidate.Location = new System.Drawing.Point(16, 243);
+            this.cbValidate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbValidate.Location = new System.Drawing.Point(12, 211);
             this.cbValidate.Name = "cbValidate";
-            this.cbValidate.Size = new System.Drawing.Size(182, 45);
+            this.cbValidate.Size = new System.Drawing.Size(169, 45);
             this.cbValidate.TabIndex = 29;
             this.cbValidate.Text = "Enable network cross-validation (needs validation data)";
             this.cbValidate.UseVisualStyleBackColor = true;
@@ -113,7 +117,7 @@ namespace Sinapse.Controls.Sidebar
             // 
             this.cbChangeRate.AutoSize = true;
             this.cbChangeRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbChangeRate.Location = new System.Drawing.Point(16, 156);
+            this.cbChangeRate.Location = new System.Drawing.Point(12, 124);
             this.cbChangeRate.Name = "cbChangeRate";
             this.cbChangeRate.Size = new System.Drawing.Size(118, 16);
             this.cbChangeRate.TabIndex = 30;
@@ -129,14 +133,14 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             0});
-            this.numEpochLimit.Location = new System.Drawing.Point(125, 53);
+            this.numEpochLimit.Location = new System.Drawing.Point(121, 21);
             this.numEpochLimit.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numEpochLimit.Name = "numEpochLimit";
-            this.numEpochLimit.Size = new System.Drawing.Size(73, 20);
+            this.numEpochLimit.Size = new System.Drawing.Size(60, 20);
             this.numEpochLimit.TabIndex = 26;
             this.numEpochLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numEpochLimit.ThousandsSeparator = true;
@@ -151,14 +155,14 @@ namespace Sinapse.Controls.Sidebar
             this.numErrorLimit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.numErrorLimit.DecimalPlaces = 4;
-            this.numErrorLimit.Location = new System.Drawing.Point(125, 79);
+            this.numErrorLimit.Location = new System.Drawing.Point(121, 47);
             this.numErrorLimit.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numErrorLimit.Name = "numErrorLimit";
-            this.numErrorLimit.Size = new System.Drawing.Size(73, 20);
+            this.numErrorLimit.Size = new System.Drawing.Size(60, 20);
             this.numErrorLimit.TabIndex = 27;
             this.numErrorLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numErrorLimit.Value = new decimal(new int[] {
@@ -177,21 +181,21 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numMomentum.Location = new System.Drawing.Point(133, 196);
+            this.numMomentum.Location = new System.Drawing.Point(129, 164);
             this.numMomentum.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numMomentum.Name = "numMomentum";
-            this.numMomentum.Size = new System.Drawing.Size(65, 20);
+            this.numMomentum.Size = new System.Drawing.Size(52, 20);
             this.numMomentum.TabIndex = 25;
             this.numMomentum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 198);
+            this.label4.Location = new System.Drawing.Point(9, 166);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 22;
@@ -200,7 +204,7 @@ namespace Sinapse.Controls.Sidebar
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 134);
+            this.label5.Location = new System.Drawing.Point(9, 102);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 21;
@@ -217,14 +221,14 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numChangeRate.Location = new System.Drawing.Point(133, 155);
+            this.numChangeRate.Location = new System.Drawing.Point(129, 123);
             this.numChangeRate.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numChangeRate.Name = "numChangeRate";
-            this.numChangeRate.Size = new System.Drawing.Size(65, 18);
+            this.numChangeRate.Size = new System.Drawing.Size(52, 18);
             this.numChangeRate.TabIndex = 24;
             this.numChangeRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numChangeRate.Value = new decimal(new int[] {
@@ -243,14 +247,14 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numLearningRate.Location = new System.Drawing.Point(133, 132);
+            this.numLearningRate.Location = new System.Drawing.Point(129, 100);
             this.numLearningRate.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numLearningRate.Name = "numLearningRate";
-            this.numLearningRate.Size = new System.Drawing.Size(65, 20);
+            this.numLearningRate.Size = new System.Drawing.Size(52, 20);
             this.numLearningRate.TabIndex = 23;
             this.numLearningRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numLearningRate.Value = new decimal(new int[] {
@@ -262,7 +266,7 @@ namespace Sinapse.Controls.Sidebar
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 350);
+            this.label1.Location = new System.Drawing.Point(16, 325);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 34;
@@ -278,14 +282,14 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(133, 348);
+            this.numericUpDown1.Location = new System.Drawing.Point(129, 323);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
             this.numericUpDown1.TabIndex = 25;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -334,7 +338,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbPause.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPause.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbPause.Image = global::Sinapse.Properties.Resources.player_pause2;
+            this.pbPause.Image = global::Sinapse.Properties.Resources.player_pause_32;
             this.pbPause.Location = new System.Drawing.Point(84, 411);
             this.pbPause.Name = "pbPause";
             this.pbPause.Size = new System.Drawing.Size(32, 32);
@@ -348,7 +352,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pbStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbStart.Image = global::Sinapse.Properties.Resources.player_play2;
+            this.pbStart.Image = global::Sinapse.Properties.Resources.player_play_32;
             this.pbStart.Location = new System.Drawing.Point(46, 411);
             this.pbStart.Name = "pbStart";
             this.pbStart.Size = new System.Drawing.Size(32, 32);
@@ -362,7 +366,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbForget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pbForget.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbForget.Image = global::Sinapse.Properties.Resources.player_rew2;
+            this.pbForget.Image = global::Sinapse.Properties.Resources.player_rew_32;
             this.pbForget.Location = new System.Drawing.Point(8, 411);
             this.pbForget.Name = "pbForget";
             this.pbForget.Size = new System.Drawing.Size(32, 32);
@@ -371,32 +375,45 @@ namespace Sinapse.Controls.Sidebar
             this.pbForget.TabStop = false;
             this.pbForget.Click += new System.EventHandler(this.btnForget_Click);
             // 
-            // NetworkTrainerControl
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.rbErrorLimit);
+            this.panel1.Controls.Add(this.rbEpochLimit);
+            this.panel1.Controls.Add(this.cbValidationStop);
+            this.panel1.Controls.Add(this.cbValidate);
+            this.panel1.Controls.Add(this.cbChangeRate);
+            this.panel1.Controls.Add(this.numEpochLimit);
+            this.panel1.Controls.Add(this.numErrorLimit);
+            this.panel1.Controls.Add(this.numericUpDown1);
+            this.panel1.Controls.Add(this.numMomentum);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.numChangeRate);
+            this.panel1.Controls.Add(this.numLearningRate);
+            this.panel1.Location = new System.Drawing.Point(6, 40);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(189, 362);
+            this.panel1.TabIndex = 37;
+            // 
+            // SideTrainerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbGraph);
             this.Controls.Add(this.pbStop);
             this.Controls.Add(this.pbPause);
             this.Controls.Add(this.pbStart);
             this.Controls.Add(this.pbForget);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.rbErrorLimit);
-            this.Controls.Add(this.rbEpochLimit);
-            this.Controls.Add(this.cbValidationStop);
-            this.Controls.Add(this.cbValidate);
-            this.Controls.Add(this.cbChangeRate);
-            this.Controls.Add(this.numEpochLimit);
-            this.Controls.Add(this.numErrorLimit);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.numMomentum);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.numChangeRate);
-            this.Controls.Add(this.numLearningRate);
-            this.Name = "NetworkTrainerControl";
+            this.Name = "SideTrainerControl";
             this.Size = new System.Drawing.Size(201, 456);
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).EndInit();
@@ -409,6 +426,8 @@ namespace Sinapse.Controls.Sidebar
             ((System.ComponentModel.ISupportInitialize)(this.pbPause)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbForget)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,5 +456,6 @@ namespace Sinapse.Controls.Sidebar
         private System.Windows.Forms.PictureBox pbStop;
         private System.Windows.Forms.PictureBox pbGraph;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

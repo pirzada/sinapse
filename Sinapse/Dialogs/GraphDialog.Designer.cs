@@ -90,9 +90,14 @@ namespace Sinapse.Dialogs
             this.Controls.Add(this.zedGraphControl);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnClear);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Sinapse.Properties.Settings.Default, "Graph_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Location = global::Sinapse.Properties.Settings.Default.Graph_location;
             this.Name = "GraphDialog";
+            this.ShowInTaskbar = false;
             this.Text = "Training Graph";
+            this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphDialog_FormClosing);
             this.Load += new System.EventHandler(this.GraphDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
