@@ -22,5 +22,17 @@ namespace Sinapse.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public uint display_refreshRate {
+            get {
+                return ((uint)(this["display_refreshRate"]));
+            }
+            set {
+                this["display_refreshRate"] = value;
+            }
+        }
     }
 }

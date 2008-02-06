@@ -7,31 +7,27 @@ using Sinapse.Data.Structures;
 namespace Sinapse.Data
 {
 
-    internal sealed class NetworkOptions
+    internal enum TrainingType { ByError, ByEpoch };
+
+    internal struct NetworkOptions
     {
 
+        public TrainingType TrainingType;
 
-        public bool errorBased; //Set to true to error limit based training;
-                                // false to default epoch limit based training.
-
-        public int epochLimit;
-        public double errorLimit;
+        public int limEpoch;
+        public double limError;
 
         public double momentum;
         public double learningRate;
+
+        public bool validateNetwork;
 
 
         [NonSerialized]
         public NetworkVectors TrainingVectors;
 
         [NonSerialized]
-        public NetworkVectors? ValidationVectors;
-
-
-        public NetworkOptions()
-        {
-
-        }
+        public NetworkVectors ValidationVectors;
 
     }
 }

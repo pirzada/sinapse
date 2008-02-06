@@ -55,9 +55,17 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TabControlEX, Version=0.0.2808.39891, Culture=neutral, PublicKeyToken=1db242dc828e4b4e">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\TabControlEX.dll</HintPath>
+    </Reference>
     <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\WizardBase\bin\Release\WizardBase.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph, Version=5.0.4.13542, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,42 +75,61 @@
     <Compile Include="Controls\NetworkDataControl\NetworkDataControl.Designer.cs">
       <DependentUpon>NetworkDataControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkCreatorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkCreatorControl.Designer.cs">
-      <DependentUpon>NetworkCreatorControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\NetworkDataControl\NetworkDataQueryControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\NetworkDataControl\NetworkDataQueryControl.Designer.cs">
       <DependentUpon>NetworkDataQueryControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDataControl\NetworkDataTrainControl.cs">
+    <Compile Include="Controls\Sidebar\SideDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataControl\NetworkDataTrainControl.Designer.cs">
-      <DependentUpon>NetworkDataTrainControl.cs</DependentUpon>
+    <Compile Include="Controls\Sidebar\SideDisplayControl.Designer.cs">
+      <DependentUpon>SideDisplayControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDisplayControl.cs">
+    <Compile Include="Controls\Sidebar\SideRangesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDisplayControl.Designer.cs">
-      <DependentUpon>NetworkDisplayControl.cs</DependentUpon>
+    <Compile Include="Controls\Sidebar\SideRangesControl.Designer.cs">
+      <DependentUpon>SideRangesControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkRangesControl.cs">
+    <Compile Include="Controls\Sidebar\SideTrainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkRangesControl.Designer.cs">
-      <DependentUpon>NetworkRangesControl.cs</DependentUpon>
+    <Compile Include="Controls\Sidebar\SideTrainerControl.Designer.cs">
+      <DependentUpon>SideTrainerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkTrainerControl.cs">
+    <Compile Include="Controls\TrainingTabs\TrainingTabBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkTrainerControl.Designer.cs">
-      <DependentUpon>NetworkTrainerControl.cs</DependentUpon>
+    <Compile Include="Controls\TrainingTabs\TrainingTabBase.Designer.cs">
+      <DependentUpon>TrainingTabBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TrainingTabs\TabTesting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TrainingTabs\TabTesting.Designer.cs">
+      <DependentUpon>TabTesting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TrainingTabs\TrainingTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TrainingTabs\TabTraining.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TrainingTabs\TabTraining.Designer.cs">
+      <DependentUpon>TabTraining.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TrainingTabs\TabValidation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TrainingTabs\TabValidation.Designer.cs">
+      <DependentUpon>TabValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CsvParser\Common.cs" />
+    <Compile Include="Data\CsvParser\Parser.cs" />
+    <Compile Include="Data\CsvParser\Utils.cs" />
+    <Compile Include="Data\CsvParser\Writer.cs" />
     <Compile Include="Data\NetworkData.cs" />
     <Compile Include="Data\NetworkCaptions.cs" />
     <Compile Include="Data\NetworkRanges.cs" />
@@ -119,29 +146,47 @@
     <Compile Include="Dialogs\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\GraphDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GraphDialog.Designer.cs">
+      <DependentUpon>GraphDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\HistoryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\HistoryDialog.Designer.cs">
+      <DependentUpon>HistoryDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ImportWizard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\ImportWizard.Designer.cs">
       <DependentUpon>ImportWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\InputDialog.cs">
+    <Compile Include="Dialogs\InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\InputDialog.Designer.cs">
-      <DependentUpon>InputDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\OptionsDialog.cs">
+    <Compile Include="Dialogs\NetworkCreationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\OptionsDialog.Designer.cs">
-      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\NetworkCreationDialog.Designer.cs">
+      <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RefreshRateDialog.cs">
+    <Compile Include="Dialogs\GeneralOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RefreshRateDialog.Designer.cs">
-      <DependentUpon>RefreshRateDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\GeneralOptions.Designer.cs">
+      <DependentUpon>GeneralOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\StatusBarOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\StatusBarOptions.Designer.cs">
+      <DependentUpon>StatusBarOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -149,11 +194,17 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NetworkQueryForm.cs">
+    <Compile Include="Forms\NetworkInquirer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NetworkQueryForm.Designer.cs">
-      <DependentUpon>NetworkQueryForm.cs</DependentUpon>
+    <Compile Include="Forms\NetworkInquirer.Designer.cs">
+      <DependentUpon>NetworkInquirer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SchemaEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SchemaEditor.Designer.cs">
+      <DependentUpon>SchemaEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,52 +212,60 @@
       <DependentUpon>NetworkDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkCreatorControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NetworkCreatorControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\NetworkDataControl\NetworkDataQueryControl.resx">
-      <SubType>Designer</SubType>
       <DependentUpon>NetworkDataQueryControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataControl\NetworkDataTrainControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NetworkDataTrainControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDisplayControl.resx">
-      <DependentUpon>NetworkDisplayControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkRangesControl.resx">
+    <EmbeddedResource Include="Controls\Sidebar\SideDisplayControl.resx">
+      <DependentUpon>SideDisplayControl.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <DependentUpon>NetworkRangesControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkTrainerControl.resx">
+    <EmbeddedResource Include="Controls\Sidebar\SideRangesControl.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NetworkTrainerControl.cs</DependentUpon>
+      <DependentUpon>SideRangesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sidebar\SideTrainerControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SideTrainerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TrainingTabs\TrainingTabBase.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TrainingTabBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TrainingTabs\TabTraining.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabTraining.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GraphDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GraphDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ImportWizard.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ImportWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\InputDialog.resx">
-      <DependentUpon>InputDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RefreshRateDialog.resx">
+    <EmbeddedResource Include="Dialogs\NetworkCreationDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>RefreshRateDialog.cs</DependentUpon>
+      <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\StatusBarOptions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StatusBarOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NetworkQueryForm.resx">
-      <DependentUpon>NetworkQueryForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\NetworkInquirer.resx">
+      <DependentUpon>NetworkInquirer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -271,10 +330,6 @@
       <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>
       <Name>AForge.Neuro</Name>
     </ProjectReference>
-    <ProjectReference Include="..\lib\cSouza.Framework\cSouza.Framework.csproj">
-      <Project>{371AD0BB-5AB2-4A2A-AE8A-2468D39005B5}</Project>
-      <Name>cSouza.Framework %28lib\cSouza.Framework\cSouza.Framework%29</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -287,6 +342,210 @@
     <None Include="Samples\Logic Functions.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\webexport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_choose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starhot5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starhot4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starhot3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starhot2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starhot1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starhot0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_stop1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_start1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_rew1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_play1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_fwd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_eject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\locationbar_erase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\finish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filefind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileclose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documentinfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\configure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clear_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_support.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_pause-queue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Globe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileclose1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filenew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\finish1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\software-development.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_pause1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_rew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_pause2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_play2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_rew2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_start2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_stop2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_softwareD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_softwareD1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greenled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Volume Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\funct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Settings\" />

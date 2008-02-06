@@ -17,7 +17,7 @@ namespace Sinapse.Data.Structures
         }
 
 
-        public bool isEmpty
+        public bool IsEmpty
         {
             get
             {
