@@ -53,9 +53,9 @@ namespace Sinapse.Dialogs
         //---------------------------------------------
 
         #region Public Methods
-        internal NetworkData GetNetworkData()
+        internal NetworkDatabase GetNetworkData()
         {
-            return new NetworkData(m_networkSchema, m_dataTable);
+            return new NetworkDatabase(m_networkSchema, m_dataTable);
         }
 
         internal DataTable GetDataTable()

@@ -35,7 +35,7 @@ namespace Sinapse.Controls
     internal partial class NetworkDataControl : UserControl
     {
 
-        protected NetworkData m_networkData;
+        protected NetworkDatabase m_networkData;
 
         public EventHandler OnSelectionChanged;
         public EventHandler OnSchemaChanged;
@@ -62,7 +62,7 @@ namespace Sinapse.Controls
 
 
         #region Properties
-        internal NetworkData NetworkData
+        internal NetworkDatabase NetworkData
         {
             get
             {

@@ -31,7 +31,7 @@ namespace Sinapse.Controls.Sidebar
     internal sealed partial class SideRangesControl : UserControl
     {
 
-        private NetworkData networkData;
+        private NetworkDatabase networkData;
         private bool readOnly;
 
         //---------------------------------------------
@@ -46,7 +46,7 @@ namespace Sinapse.Controls.Sidebar
         //---------------------------------------------
 
         #region Properties
-        internal NetworkData NetworkData
+        internal NetworkDatabase NetworkData
         {
             get { return this.networkData; }
             set

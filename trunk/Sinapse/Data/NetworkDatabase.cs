@@ -27,43 +27,45 @@ using Sinapse.Data.Structures;
 
 namespace Sinapse.Data
 {
+
+    public enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2 };
+
+
     /// <summary>
     /// Class to hold samples or query information
     /// </summary>
-    internal sealed class NetworkData
+    internal sealed class NetworkDatabase
     {
 
         public const string ColumnRoleId = "@_informationRoleId";
         public const string ColumnTrainingSetId = "@_trainingSetId";
 
 
-        private NetworkSchema networkSchema;
-        private DataTable dataTable;
-
-        private enum NetworkSet { Training, Testing, Validation };
+        private NetworkSchema m_networkSchema;
+        private DataTable m_dataTable;
 
 
         //----------------------------------------
 
 
         #region Constructors
-        public NetworkData(NetworkSchema schema, DataTable dataTable)
+        public NetworkDatabase(NetworkSchema schema, DataTable dataTable)
         {
-            this.networkSchema = schema;
-            this.dataTable = dataTable;
+            this.m_networkSchema = schema;
+            this.m_dataTable = dataTable;
 
             this.createColumns(dataTable, schema);
 
-            this.networkSchema.DataCategories.AutodetectCaptions(dataTable);
-            this.networkSchema.DataRanges.AutodetectRanges(dataTable);
+            this.m_networkSchema.DataCategories.AutodetectCaptions(dataTable);
+            this.m_networkSchema.DataRanges.AutodetectRanges(dataTable);
         }
 
-        public NetworkData(NetworkSchema schema)
+        public NetworkDatabase(NetworkSchema schema)
         {
-            this.networkSchema = schema;
-            this.dataTable = new DataTable();
+            this.m_networkSchema = schema;
+            this.m_dataTable = new DataTable();
 
-            this.createColumns(dataTable, schema);
+            this.createColumns(m_dataTable, schema);
 
         }
         #endregion
@@ -75,13 +77,19 @@ namespace Sinapse.Data
         #region Properties
         internal NetworkSchema NetworkSchema
         {
-            get { return this.networkSchema; }
+            get { return this.m_networkSchema; }
         }
 
         internal DataTable DataTable
         {
-            get { return this.dataTable; }
+            get { return this.m_dataTable; }
         }
+
+        internal int TrainingSets
+        {
+            get { return m_dataTable.DefaultView.ToTable(true, ColumnTrainingSetId).Select(ColumnRoleId + " = " + (ushort)NetworkSet.Testing).Length; }
+        }
+
         #endregion
 
 
@@ -89,37 +97,75 @@ namespace Sinapse.Data
 
 
         #region Public Methods
-        /// <summary>
-        /// Creates the training vectors needed to fed a neural network with training data
-        /// </summary>
-        /// <param name="inputData"></param>
-        /// <param name="outputData"></param>
-        internal NetworkVectors CreateTrainingVectors()
-        {
-            return this.createVectors(NetworkSet.Training);
-        }
 
-        /// <summary>
-        /// Creates the training vectors needed to fed a neural network with training data
-        /// </summary>
-        /// <param name="inputData"></param>
-        /// <param name="outputData"></param>
-        internal NetworkVectors CreateTrainingVectors(uint trainingSet)
+        internal void ImportData(DataTable dataTable, NetworkSet networkSet, ushort trainingSet)
         {
-            return this.createVectors(NetworkSet.Training, trainingSet);
+            this.createColumns(dataTable, m_networkSchema, networkSet, trainingSet);
+            this.m_dataTable.Merge(dataTable, false, MissingSchemaAction.Ignore);
         }
 
 
         /// <summary>
-        /// Creates the validation vectors needed to validate a neural network through cross-validation
+        /// Creates the desired set of input or output vectors based on the current data.
         /// </summary>
-        /// <param name="inputData"></param>
-        /// <param name="outputData"></param>
-        internal NetworkVectors CreateValidationVectors()
+        /// <param name="set">The set of data.</param>
+        internal NetworkVectors CreateVectors(NetworkSet set)
         {
-            return this.createVectors(NetworkSet.Validation);
+            return this.CreateVectors(set, 0);
         }
 
+        /// <summary>
+        /// Creates the desired set of input or output vectors based on the current data.
+        /// </summary>
+        /// <param name="set">The set of data.</param>
+        /// <param name="trainingSet">The training subset of the data.</param>
+        /// <returns></returns>
+        internal NetworkVectors CreateVectors(NetworkSet set, ushort trainingSet)
+        {
+
+            NetworkVectors vectors;
+            string strQuery = String.Empty;
+
+            switch (set)
+            {
+                case NetworkSet.Testing:
+                    strQuery = String.Format("[{0}] = {1}",
+                        ColumnRoleId, (ushort)NetworkSet.Testing);
+                    break;
+
+                
+                case NetworkSet.Training:
+                    strQuery = String.Format("[{0}] = {1}",
+                    ColumnRoleId, (ushort)NetworkSet.Training);
+
+                    if (trainingSet > 0)
+                    {
+                        strQuery = String.Format("{0} AND [{1}] = {2}",
+                            strQuery, ColumnTrainingSetId, trainingSet);
+                    }
+                    break;
+
+             
+                case NetworkSet.Validation:
+                    strQuery = String.Format("[{0}] = {1}",
+                        ColumnRoleId, (ushort)NetworkSet.Validation);
+                    break;
+            }
+
+
+            DataRow[] query = m_dataTable.Select(strQuery);
+
+            vectors.Input = new double[query.Length][];
+            vectors.Output = new double[query.Length][];
+
+            for (int i = 0; i < query.Length; ++i)
+            {
+                vectors.Input[i] = this.NormalizeRow(query[i], m_networkSchema.InputColumns);
+                vectors.Output[i] = this.NormalizeRow(query[i], m_networkSchema.OutputColumns);
+            }
+
+            return vectors;
+        }
 
         /// <summary>
         /// Normalizes the given datarow so the data can be interpreted by a neural network. Use the RevertRow method to revert the row back to its original state
@@ -135,13 +181,13 @@ namespace Sinapse.Data
             {
                 string columnName = columnList[i];
 
-                DoubleRange range = this.networkSchema.DataRanges.GetRange(columnName);
-                bool hasCaption = (Array.IndexOf(this.networkSchema.StringColumns, columnName) >= 0);
+                DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
+                bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
 
                 double data;
 
                 if (hasCaption)
-                    data = this.networkSchema.DataCategories.GetID(columnName, (string)sourceRow[columnName]);
+                    data = this.m_networkSchema.DataCategories.GetID(columnName, (string)sourceRow[columnName]);
                 else
                 {
                     string strData = (string)sourceRow[columnName];
@@ -169,13 +215,13 @@ namespace Sinapse.Data
             {
                 string columnName = columnList[i];
 
-                DoubleRange range = this.networkSchema.DataRanges.GetRange(columnName);
-                bool hasCaption = (Array.IndexOf(this.networkSchema.StringColumns, columnName) >= 0);
+                DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
+                bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
 
                 double data = normalizedData[i] * (range.Max - range.Min) + range.Min;
 
                 if (hasCaption)
-                    dataRow[columnName] = this.networkSchema.DataCategories.GetCaption(columnName, (int)Math.Round(data));
+                    dataRow[columnName] = this.m_networkSchema.DataCategories.GetCaption(columnName, (int)Math.Round(data));
                 else
                     dataRow[columnName] = data.ToString();
             }
@@ -190,23 +236,37 @@ namespace Sinapse.Data
         /// <summary>
         /// Creates the internal structure needed in the datatable, such as hidden columns and support data
         /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="schema"></param>
         private void createColumns(DataTable dataTable, NetworkSchema schema)
+        {
+            this.createColumns(dataTable, schema, NetworkSet.Training, 1);
+        }
+
+        /// <summary>
+        /// Creates the internal structure needed in the datatable, such as hidden columns and support data
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="schema"></param>
+        /// <param name="networkSet"></param>
+        /// <param name="trainingSet"></param>
+        private void createColumns(DataTable dataTable, NetworkSchema schema, NetworkSet networkSet, ushort trainingSet)
         {
             DataColumn col;
 
             if (!dataTable.Columns.Contains(ColumnRoleId))
             {
-                col = new DataColumn(ColumnRoleId, typeof(bool));
+                col = new DataColumn(ColumnRoleId, typeof(ushort));
                 col.AllowDBNull = false;
-                col.DefaultValue = false;
+                col.DefaultValue = (ushort)networkSet;
                 dataTable.Columns.Add(col);
             }
 
             if (!dataTable.Columns.Contains(ColumnTrainingSetId))
             {
-                col = new DataColumn(ColumnRoleId, typeof(uint));
+                col = new DataColumn(ColumnTrainingSetId, typeof(ushort));
                 col.AllowDBNull = false;
-                col.DefaultValue = 1;
+                col.DefaultValue = trainingSet;
                 dataTable.Columns.Add(col);
             }
 
@@ -220,55 +280,6 @@ namespace Sinapse.Data
                     dataTable.Columns.Add(col);
                 }
             }
-        }
-
-    
-
-
-        /// <summary>
-        /// Creates the desired set of input or output vectors based on the current data.
-        /// </summary>
-        /// <param name="inputData"></param>
-        /// <param name="outputData"></param>
-        /// <param name="set"></param>
-        private NetworkVectors createVectors(NetworkSet set)
-        {
-            return createVectors(set, 0);
-        }
-
-        private NetworkVectors createVectors(NetworkSet set, uint trainingSet)
-        {
-
-            NetworkVectors vectors;
-            string strQuery = String.Empty;
-
-            switch (set)
-            {
-                case NetworkSet.Testing:
-                    break;
-
-                case NetworkSet.Training:
-                    strQuery = String.Format("[{0}] = FALSE AND [{1}] = {2}", ColumnRoleId, ColumnTrainingSetId, trainingSet);
-                    break;
-
-                case NetworkSet.Validation:
-                    strQuery = String.Format("[{0}] = TRUE", ColumnRoleId);
-                    break;
-            }
-
-
-            DataRow[] query = dataTable.Select(strQuery);
-
-            vectors.Input = new double[query.Length][];
-            vectors.Output = new double[query.Length][];
-
-            for (int i = 0; i < query.Length; ++i)
-            {
-                vectors.Input[i] = this.NormalizeRow(query[i], networkSchema.InputColumns);
-                vectors.Output[i] = this.NormalizeRow(query[i], networkSchema.OutputColumns);
-            }
-
-            return vectors;
         }
         #endregion
 

@@ -116,6 +116,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap edit {
+            get {
+                object obj = ResourceManager.GetObject("edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap editclear {
             get {
                 object obj = ResourceManager.GetObject("editclear", resourceCulture);
@@ -126,6 +133,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap exit1 {
+            get {
+                object obj = ResourceManager.GetObject("exit1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -168,6 +182,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap filesave {
             get {
                 object obj = ResourceManager.GetObject("filesave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap filesaveas {
+            get {
+                object obj = ResourceManager.GetObject("filesaveas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -231,6 +252,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap greenled {
             get {
                 object obj = ResourceManager.GetObject("greenled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap help {
+            get {
+                object obj = ResourceManager.GetObject("help", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -417,6 +445,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap shutdown {
+            get {
+                object obj = ResourceManager.GetObject("shutdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap star0 {
             get {
                 object obj = ResourceManager.GetObject("star0", resourceCulture);
@@ -501,6 +536,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap switchuser {
+            get {
+                object obj = ResourceManager.GetObject("switchuser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap tab_new {
             get {
                 object obj = ResourceManager.GetObject("tab_new", resourceCulture);
@@ -522,6 +564,20 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap viewmagfit {
+            get {
+                object obj = ResourceManager.GetObject("viewmagfit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Volume_Manager {
+            get {
+                object obj = ResourceManager.GetObject("Volume Manager", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap volume_manager_32 {
             get {
                 object obj = ResourceManager.GetObject("volume_manager_32", resourceCulture);
@@ -532,6 +588,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap webexport_16 {
             get {
                 object obj = ResourceManager.GetObject("webexport_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap wizard {
+            get {
+                object obj = ResourceManager.GetObject("wizard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

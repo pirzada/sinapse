@@ -99,38 +99,45 @@
     <Compile Include="Controls\Sidebar\SideTrainerControl.Designer.cs">
       <DependentUpon>SideTrainerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TrainingTabBase.cs">
+    <Compile Include="Controls\StatusBarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TrainingTabBase.Designer.cs">
-      <DependentUpon>TrainingTabBase.cs</DependentUpon>
+    <Compile Include="Controls\StatusBarControl.Designer.cs">
+      <DependentUpon>StatusBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TabTesting.cs">
+    <Compile Include="Controls\DataTabs\TabPageBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TabTesting.Designer.cs">
+    <Compile Include="Controls\DataTabs\TabPageBase.Designer.cs">
+      <DependentUpon>TabPageBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataTabs\TabTesting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataTabs\TabTesting.Designer.cs">
       <DependentUpon>TabTesting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TrainingTabControl.cs">
+    <Compile Include="Controls\DataTabs\NetworkDataTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TabTraining.cs">
+    <Compile Include="Controls\DataTabs\TabTraining.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TabTraining.Designer.cs">
+    <Compile Include="Controls\DataTabs\TabTraining.Designer.cs">
       <DependentUpon>TabTraining.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TabValidation.cs">
+    <Compile Include="Controls\DataTabs\TabValidation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TrainingTabs\TabValidation.Designer.cs">
+    <Compile Include="Controls\DataTabs\TabValidation.Designer.cs">
       <DependentUpon>TabValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\CsvParser\Common.cs" />
     <Compile Include="Data\CsvParser\Parser.cs" />
     <Compile Include="Data\CsvParser\Utils.cs" />
     <Compile Include="Data\CsvParser\Writer.cs" />
-    <Compile Include="Data\NetworkData.cs" />
+    <Compile Include="Data\HistoryLogger.cs" />
+    <Compile Include="Data\NetworkDatabase.cs" />
     <Compile Include="Data\NetworkCaptions.cs" />
     <Compile Include="Data\NetworkRanges.cs" />
     <Compile Include="Data\NetworkSchema.cs">
@@ -228,19 +235,23 @@
       <SubType>Designer</SubType>
       <DependentUpon>SideTrainerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TrainingTabs\TabTesting.resx">
+    <EmbeddedResource Include="Controls\StatusBarControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StatusBarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataTabs\TabTesting.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabTesting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TrainingTabs\TabValidation.resx">
+    <EmbeddedResource Include="Controls\DataTabs\TabValidation.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabValidation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TrainingTabs\TrainingTabBase.resx">
+    <EmbeddedResource Include="Controls\DataTabs\TabPageBase.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TrainingTabBase.cs</DependentUpon>
+      <DependentUpon>TabPageBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TrainingTabs\TabTraining.resx">
+    <EmbeddedResource Include="Controls\DataTabs\TabTraining.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabTraining.cs</DependentUpon>
     </EmbeddedResource>
@@ -307,18 +318,6 @@
     <None Include="cSouza Company SecurityCode.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Optimizer.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Samples\BMI 40.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Samples\BMI 400.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Samples\BMI 999.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Samples\BMI 999 %282%29.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Samples\Linear Separation.csv">
@@ -559,7 +558,34 @@
     <None Include="Resources\desktop_enhancements.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Settings\" />
+    <None Include="Resources\switchuser.png" />
+    <None Include="Samples\Body Mass Index.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Volume Manager1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmagfit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shutdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesaveas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
