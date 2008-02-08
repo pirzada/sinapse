@@ -44,7 +44,7 @@ namespace Sinapse.Forms
 
             this.m_neuralNetwork = neuralNetwork;
             this.networkDisplayControl.NeuralNetwork = neuralNetwork;
-            this.networkDataQueryControl.NetworkData = new NetworkData(neuralNetwork.Schema);
+            this.networkDataQueryControl.NetworkData = new NetworkDatabase(neuralNetwork.Schema);
             this.networkRangesControl.NetworkData = networkDataQueryControl.NetworkData;
 
         }

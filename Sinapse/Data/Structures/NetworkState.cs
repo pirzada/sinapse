@@ -26,9 +26,7 @@ namespace Sinapse.Data
     {
         public int Epoch;
         public int Progress;
-        public double TrainingErrorRate;
-        public double ValidationErrorRate;
-        public string StatusText;
-
+        public double ErrorTraining;
+        public double ErrorValidation;
     }
 }

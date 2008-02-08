@@ -93,7 +93,7 @@ namespace Sinapse.Controls.Sidebar
             }
         }
 
-        public NetworkState TrainingStatus
+        public NetworkState NetworkState
         {
             get { return this.m_networkState; }
         }
@@ -145,21 +145,23 @@ namespace Sinapse.Controls.Sidebar
             this.m_neuralNetwork.ActivationNetwork.Randomize();
             this.m_neuralNetwork.Precision = 0;
             this.m_networkState = new NetworkState();
-            this.UpdateStatus("Network learnings cleared");
+            HistoryLogger.Write("Network learnings cleared");
+            this.UpdateStatus();
         }
 
         public void Stop()
         {
             this.m_networkState = new NetworkState();
+            this.UpdateStatus();
 
             if (backgroundWorker.IsBusy)
             {
-                this.UpdateStatus("Stopping Thread");
+                HistoryLogger.Write("Stopping Thread");
                 this.backgroundWorker.CancelAsync();
             }
             else
             {
-                this.UpdateStatus("Thread is not running");
+                HistoryLogger.Write("Thread is not running");
             }
         }
 
@@ -167,12 +169,12 @@ namespace Sinapse.Controls.Sidebar
         {
             if (backgroundWorker.IsBusy)
             {
-                this.UpdateStatus("Pausing Thread");
+                HistoryLogger.Write("Pausing Thread");
                 this.backgroundWorker.CancelAsync();
             }
             else
             {
-                this.UpdateStatus("Thread is not running");
+                HistoryLogger.Write("Thread is not running");
             }
         }
 
@@ -180,11 +182,11 @@ namespace Sinapse.Controls.Sidebar
         {
             if (this.backgroundWorker.IsBusy)
             {
-                this.UpdateStatus("Trainer thread is busy!");
+                HistoryLogger.Write("Trainer thread is busy!");
             }
             else
             {
-                this.UpdateStatus("Gathering information...");
+                HistoryLogger.Write("Gathering information...");
 
                 if (this.OnDataNeeded != null)
                     this.OnDataNeeded.Invoke(this, EventArgs.Empty);
@@ -200,12 +202,13 @@ namespace Sinapse.Controls.Sidebar
             options.limError = (double)numErrorLimit.Value;
             options.limEpoch = (int)numEpochLimit.Value;
             options.TrainingVectors = trainingVectors;
+            options.ValidationVectors = validationVectors;
             options.validateNetwork = cbValidate.Checked;
 
             options.TrainingType = rbErrorLimit.Checked ? TrainingType.ByError : TrainingType.ByEpoch;
-                
-            
-            this.UpdateStatus("Starting thread");
+
+
+            HistoryLogger.Write("Starting thread");
             this.backgroundWorker.RunWorkerAsync(options);
         
         }
@@ -221,12 +224,6 @@ namespace Sinapse.Controls.Sidebar
             if (this.OnStatusChanged != null)
                 this.OnStatusChanged.Invoke(this, EventArgs.Empty);
         }
-
-        private void UpdateStatus(string text)
-        {
-            this.m_networkState.StatusText = text;
-            this.UpdateStatus();
-        }
         #endregion
 
 
@@ -239,7 +236,7 @@ namespace Sinapse.Controls.Sidebar
             
             if (!(e.Argument is NetworkOptions))
             {
-                this.m_networkState.StatusText = "Bad thread argument!";
+                HistoryLogger.Write("Bad thread argument!");
                 backgroundWorker.ReportProgress(0);
                 e.Cancel = true;
                 return;
@@ -258,7 +255,7 @@ namespace Sinapse.Controls.Sidebar
             bool stop = false;
             int lastReportEpoch = 0;
                               
-            this.m_networkState.StatusText = "Training";
+            HistoryLogger.Write("Training");
             backgroundWorker.ReportProgress(0);
 
 
@@ -267,11 +264,11 @@ namespace Sinapse.Controls.Sidebar
 
 
                 #region Training Epoch
-                this.m_networkState.TrainingErrorRate = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output);
-                this.m_graphDialog.TrainingCurve.AddPoint(m_networkState.Epoch, m_networkState.TrainingErrorRate);
+                this.m_networkState.ErrorTraining = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output);
+                this.m_graphDialog.TrainingCurve.AddPoint(m_networkState.Epoch, m_networkState.ErrorTraining);
 
-                this.m_networkState.ValidationErrorRate = networkTeacher.MeasureEpochError(options.ValidationVectors.Input, options.ValidationVectors.Output);
-                this.m_graphDialog.ValidationCurve.AddPoint(m_networkState.Epoch, m_networkState.ValidationErrorRate);
+                this.m_networkState.ErrorValidation = networkTeacher.MeasureEpochError(options.ValidationVectors.Input, options.ValidationVectors.Output);
+                this.m_graphDialog.ValidationCurve.AddPoint(m_networkState.Epoch, m_networkState.ErrorValidation);
 
                 m_networkState.Epoch++;
                 #endregion
@@ -282,8 +279,8 @@ namespace Sinapse.Controls.Sidebar
                 {
                     if (options.TrainingType == TrainingType.ByError)
                     {
-                        if (m_networkState.TrainingErrorRate != 0)
-                            m_networkState.Progress = Math.Max(Math.Min((int)((options.limError * 100) / m_networkState.TrainingErrorRate), 100), 0);
+                        if (m_networkState.ErrorTraining != 0)
+                            m_networkState.Progress = Math.Max(Math.Min((int)((options.limError * 100) / m_networkState.ErrorTraining), 100), 0);
                     }
                     else
                     {
@@ -300,7 +297,7 @@ namespace Sinapse.Controls.Sidebar
                 //Determine if there is need to stop
                 if (options.TrainingType == TrainingType.ByError)
                 {
-                    if (m_networkState.TrainingErrorRate <= options.limError)
+                    if (m_networkState.ErrorTraining <= options.limError)
                         stop = true;
                 }
                 else
@@ -322,9 +319,6 @@ namespace Sinapse.Controls.Sidebar
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            NetworkState networkState = (NetworkState)e.UserState;
-            this.m_networkState = networkState;
-
             if (this.m_graphDialog.Visible && this.m_graphDialog.AutoUpdate)
             {
                 this.m_graphDialog.UpdateGraph();
@@ -336,19 +330,15 @@ namespace Sinapse.Controls.Sidebar
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.m_neuralNetwork.Precision = this.m_networkState.TrainingErrorRate;
+            this.m_neuralNetwork.Precision = this.m_networkState.ErrorTraining;
             
             if (e.Cancelled)
             {
-                this.UpdateStatus("Training stopped");
-
-            /*  if (this.OnTrainingCancelled != null)
-                   this.OnTrainingCancelled.Invoke(this, EventArgs.Empty);
-                                                                                */ 
+                HistoryLogger.Write("Training stopped");    
             }
             else
             {
-                this.UpdateStatus("Training Finished!");
+                HistoryLogger.Write("Training Finished!");
 
                 if (this.OnTrainingComplete != null)
                     this.OnTrainingComplete.Invoke(this, EventArgs.Empty);

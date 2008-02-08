@@ -59,23 +59,24 @@ namespace Sinapse.Forms
         #region Properties
         internal NetworkContainer CurrentNetworkContainer
         {
-            get {
+            get
+            {
                 return m_networkContainer;
             }
             set
             {
                 this.m_networkContainer = value;
-                this.networkTrainerControl.NeuralNetwork = value;
-                this.networkDisplayControl.NeuralNetwork = value;
+                this.sideTrainerControl.NeuralNetwork = value;
+                this.sideDisplayControl.NeuralNetwork = value;
 
                 if (value != null)
                 {
-                    this.MenuNetwork.Enabled = true;
+              //      this.MenuDatabase.Enabled = true;
 
-                    this.MenuFileSave.Enabled = true;
-                    this.MenuFileSaveAs.Enabled = false;
-                    
-                    this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
+              //      this.MenuWorkplaceOpen.Enabled = true;
+              //      this.MenuFileSaveAs.Enabled = false;
+
+              //      this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
 
                     this.m_networkContainer.OnSavePathChanged += neuralNetwork_SavePathChanged;
                     this.neuralNetwork_SavePathChanged(null, EventArgs.Empty);
@@ -84,43 +85,48 @@ namespace Sinapse.Forms
                 {
                     //No active network
                     this.lbNeuronCount.Text = "0";
-                    this.MenuNetwork.Enabled = false;
-                    this.MenuFileSave.Enabled = false;
-                    this.MenuFileSaveAs.Enabled = false;
+              //      this.MenuDatabase.Enabled = false;
+              //      this.MenuWorkplaceOpen.Enabled = false;
+              //      this.MenuFileSaveAs.Enabled = false;
                 }
             }
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region MainForm Events
         private void MainForm_Load(object sender, EventArgs e)
         {
             //Wire up controls and events
-         /*   this.networkDataControl.OnDataChanged += networkDataControl_DataChanged;
-            this.networkDataControl.OnSchemaChanged += networkDataControl_SchemaChanged;
-            this.networkDataControl.OnSelectionChanged += networkDataControl_SelectionChanged;
-         */   this.networkTrainerControl.OnStatusChanged += networkTrainerControl_StatusChanged;
-            this.networkTrainerControl.OnDataNeeded += networkTrainerControl_DataNeeded;
-            this.networkTrainerControl.OnTrainingComplete += networkTrainerControl_TrainingComplete;
+            this.tabControlNetworkData.OnDataChanged += networkDataControl_DataChanged;
+            this.tabControlNetworkData.OnSchemaChanged += networkDataControl_SchemaChanged;
+            this.tabControlNetworkData.OnSelectionChanged += networkDataControl_SelectionChanged;
+
+            this.sideTrainerControl.OnStatusChanged += sideTrainerControl_StatusChanged;
+            this.sideTrainerControl.OnDataNeeded += sideTrainerControl_DataNeeded;
+            this.sideTrainerControl.OnTrainingComplete += sideTrainerControl_TrainingComplete;
 
             this.CurrentNetworkContainer = null;
-            this.UpdateStatus("Waiting data");
+            HistoryLogger.Write("Waiting data");
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.UpdateStatus("Exiting...");
+            HistoryLogger.Write("Exiting...");
 
-            if (this.networkTrainerControl.IsTraining)
+            if (this.sideTrainerControl.IsTraining)
             {
-                this.networkTrainerControl.Stop();
+                this.sideTrainerControl.Stop();
             }
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Network Data Control Events
         private void networkDataControl_SchemaChanged(object sender, EventArgs e)
@@ -128,18 +134,14 @@ namespace Sinapse.Forms
             this.lbInputCount.Text = this.m_networkContainer.Schema.InputColumns.Length.ToString();
             this.lbOutputCount.Text = this.m_networkContainer.Schema.OutputColumns.Length.ToString();
 
-            //this.networkRangesControl.NetworkData = this.networkDataControl.NetworkData;
-            //this.networkTrainerControl.NeuralNetwork = null;
+            this.sideRangesControl.NetworkData = this.tabControlNetworkData.NetworkData;
+            this.sideTrainerControl.NeuralNetwork = null;
         }
 
-        private void networkDataControl_DataChanged(object sender, EventArgs e)
-        {
-//            this.lbItems.Text = String.Format("{0}/{1}", this.networkDataControl.ItemCount, this.networkDataControl.SelectedItemCount);
-        }
 
         private void networkDataControl_SelectionChanged(object sender, EventArgs e)
         {
-  //          this.lbItems.Text = String.Format("{0}/{1}", this.networkDataControl.ItemCount, this.networkDataControl.SelectedItemCount);
+            this.statusBarControl.UpdateSelectedItems(tabControlNetworkData.SelectedItemCount, tabControlNetworkData.ItemCount);
         }
         #endregion
 
@@ -148,29 +150,26 @@ namespace Sinapse.Forms
 
 
         #region Network Trainer Control Events
-        private void networkTrainerControl_DataNeeded(object sender, EventArgs e)
+        private void sideTrainerControl_DataNeeded(object sender, EventArgs e)
         {
-//            NetworkVectors trainingVectors = this.networkDataControl.NetworkData.CreateTrainingVectors();
-//            NetworkVectors validationVectors = this.networkDataControl.NetworkData.CreateValidationVectors();
-            
-  //          this.networkTrainerControl.Start(trainingVectors, validationVectors);
+            NetworkVectors trainingVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Training);
+            NetworkVectors validationVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Validation);
+
+            this.sideTrainerControl.Start(trainingVectors, validationVectors);
         }
 
-        private void networkTrainerControl_StatusChanged(object sender, EventArgs e)
+        private void sideTrainerControl_StatusChanged(object sender, EventArgs e)
         {
-            this.lbStatus.Text = this.networkTrainerControl.TrainingStatus.StatusText;
-            this.progressBar.Value = this.networkTrainerControl.TrainingStatus.Progress;
-            this.lbStatusEpoch.Text = String.Format("Epoch: {0}", this.networkTrainerControl.TrainingStatus.Epoch);
-            this.lbStatusError.Text = String.Format("Error Rate: {0:0.00000}", this.networkTrainerControl.TrainingStatus.TrainingErrorRate);
+            this.statusBarControl.UpdateNetworkState(this.sideTrainerControl.NetworkState);
         }
 
-        private void networkTrainerControl_TrainingComplete(object sender, EventArgs e)
+        private void sideTrainerControl_TrainingComplete(object sender, EventArgs e)
         {
             if (MessageBox.Show("Training completed. Would you like to start querying the Network?",
                 "Done", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
-                 this.MenuNetworkQuery_Click(this, EventArgs.Empty);
+                this.eventNetworkQuery(this, EventArgs.Empty);
             }
         }
         #endregion
@@ -185,17 +184,36 @@ namespace Sinapse.Forms
             this.openFileDialog.FileName = this.m_networkContainer.LastSavePath;
             this.saveFileDialog.FileName = this.m_networkContainer.LastSavePath;
 
-            this.MenuFileSaveAs.Enabled = (this.m_networkContainer.LastSavePath.Length > 0);
+            this.MenuNetworkSaveAs.Enabled = (this.m_networkContainer.LastSavePath.Length > 0);
         }
         #endregion
 
 
         //---------------------------------------------
 
-        #region Menus
-        private void MenuNetworkNew_Click(object sender, EventArgs e)
+
+        #region Buttons & Menus
+
+        private void eventShowWizard(object sender, EventArgs e)
         {
-            //if (this.net
+            ImportWizard importWizard = new ImportWizard();
+            if (importWizard.ShowDialog(this) == DialogResult.OK)
+            {
+                this.tabControlNetworkData.NetworkData = importWizard.GetNetworkData();
+                if (this.CurrentNetworkContainer == null)
+                {
+                    if (MessageBox.Show("Data imported successfuly. Would you like to create" +
+                        "the neural network now?", "Import Complete", MessageBoxButtons.YesNo)
+                        == DialogResult.Yes)
+                    {
+                        eventNetworkNew(this, e);
+                    }
+                }
+            }
+        }
+
+        private void eventNetworkNew(object sender, EventArgs e)
+        {
             if (this.CurrentNetworkContainer != null &&
                 MessageBox.Show("Would you like to overwrite your current network?" +
                                 "\nAny unsaved training sessions will be lost. Are you sure?",
@@ -209,17 +227,8 @@ namespace Sinapse.Forms
             }
         }
 
-        private void MenuFileNew_Click(object sender, EventArgs e)
-        {
-            ImportWizard importWizard = new ImportWizard();
-            if (importWizard.ShowDialog(this) == DialogResult.OK)
-            {
-   //             this.networkDataControl.NetworkData = importWizard.GetNetworkData();
-                this.CurrentNetworkContainer = null;
-            }
-        }
 
-        private void MenuFileSave_Click(object sender, EventArgs e)
+        private void eventNetworkSave(object sender, EventArgs e)
         {
             if (this.m_networkContainer.LastSavePath.Length > 0)
                 this.networkSave(this.CurrentNetworkContainer.LastSavePath);
@@ -227,44 +236,41 @@ namespace Sinapse.Forms
             else this.saveFileDialog.ShowDialog(this);
         }
 
-        private void MenuFileSaveAs_Click(object sender, EventArgs e)
+
+        private void eventNetworkSaveAs(object sender, EventArgs e)
         {
             this.saveFileDialog.ShowDialog(this);
         }
 
-        private void MenuFileOpen_Click(object sender, EventArgs e)
+
+        private void eventNetworkOpen(object sender, EventArgs e)
         {
             this.openFileDialog.ShowDialog(this);
         }
 
-        private void MenuNetworkQuery_Click(object sender, EventArgs e)
+
+        private void eventNetworkQuery(object sender, EventArgs e)
         {
-            this.UpdateStatus("Querying network");
+            HistoryLogger.Write("Querying network");
             new NetworkInquirer(this.m_networkContainer).ShowDialog(this);
-            this.UpdateStatus("Ready");
+            HistoryLogger.Write("Ready");
         }
 
-        private void MenuHelpAbout_Click(object sender, EventArgs e)
+
+        private void eventShowHelp(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
         }
         #endregion
 
-        //---------------------------------------------
-
-        #region Statusbar Update
-        private void UpdateStatus(string text)
-        {
-            this.lbStatus.Text = text;
-        }
-        #endregion
 
         //---------------------------------------------
+
 
         #region Open & Save Network
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            this.networkLoad(openFileDialog.FileName);
+            this.networkOpen(openFileDialog.FileName);
         }
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -284,7 +290,7 @@ namespace Sinapse.Forms
             }
         }
 
-        private void networkLoad(string path)
+        private void networkOpen(string path)
         {
             NetworkContainer neuralNetwork = null;
 
@@ -306,12 +312,9 @@ namespace Sinapse.Forms
         }
         #endregion
 
+
         //---------------------------------------------
 
-        private void Show_VisualOptions(object sender, EventArgs e)
-        {
-            new StatusBarOptions().Show(this);
-        }
 
     }
 }

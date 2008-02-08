@@ -22,7 +22,6 @@ namespace Sinapse.Data
 
         public bool validateNetwork;
 
-
         [NonSerialized]
         public NetworkVectors TrainingVectors;
 
