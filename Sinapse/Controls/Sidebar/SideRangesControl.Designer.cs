@@ -85,7 +85,7 @@ namespace Sinapse.Controls.Sidebar
             // 
             this.btnAutodetect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAutodetect.Image = global::Sinapse.Properties.Resources.desktop_enhancements;
+            this.btnAutodetect.Image = global::Sinapse.Properties.Resources.upleft_arrow_48;
             this.btnAutodetect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAutodetect.Location = new System.Drawing.Point(6, 408);
             this.btnAutodetect.Name = "btnAutodetect";

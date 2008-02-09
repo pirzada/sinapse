@@ -310,7 +310,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pbGraph.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbGraph.Image = global::Sinapse.Properties.Resources.funct;
+            this.pbGraph.Image = global::Sinapse.Properties.Resources.function;
             this.pbGraph.Location = new System.Drawing.Point(160, 411);
             this.pbGraph.Name = "pbGraph";
             this.pbGraph.Size = new System.Drawing.Size(32, 32);
@@ -324,7 +324,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pbStop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbStop.Image = global::Sinapse.Properties.Resources.player_stop2;
+            this.pbStop.Image = global::Sinapse.Properties.Resources.player_stop_32;
             this.pbStop.Location = new System.Drawing.Point(122, 411);
             this.pbStop.Name = "pbStop";
             this.pbStop.Size = new System.Drawing.Size(32, 32);

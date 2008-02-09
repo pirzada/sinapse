@@ -105,44 +105,45 @@
     <Compile Include="Controls\StatusBarControl.Designer.cs">
       <DependentUpon>StatusBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabPageBase.cs">
+    <Compile Include="Controls\NetworkDataTab\TabPageBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabPageBase.Designer.cs">
+    <Compile Include="Controls\NetworkDataTab\TabPageBase.Designer.cs">
       <DependentUpon>TabPageBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabTesting.cs">
+    <Compile Include="Controls\NetworkDataTab\TabPageTesting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabTesting.Designer.cs">
-      <DependentUpon>TabTesting.cs</DependentUpon>
+    <Compile Include="Controls\NetworkDataTab\TabPageTesting.Designer.cs">
+      <DependentUpon>TabPageTesting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataTabs\NetworkDataTabControl.cs">
+    <Compile Include="Controls\NetworkDataTab\NetworkDataTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabTraining.cs">
+    <Compile Include="Controls\NetworkDataTab\TabPageTraining.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabTraining.Designer.cs">
-      <DependentUpon>TabTraining.cs</DependentUpon>
+    <Compile Include="Controls\NetworkDataTab\TabPageTraining.Designer.cs">
+      <DependentUpon>TabPageTraining.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabValidation.cs">
+    <Compile Include="Controls\NetworkDataTab\TabPageValidation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataTabs\TabValidation.Designer.cs">
-      <DependentUpon>TabValidation.cs</DependentUpon>
+    <Compile Include="Controls\NetworkDataTab\TabPageValidation.Designer.cs">
+      <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\CsvParser\Common.cs" />
     <Compile Include="Data\CsvParser\Parser.cs" />
     <Compile Include="Data\CsvParser\Utils.cs" />
     <Compile Include="Data\CsvParser\Writer.cs" />
-    <Compile Include="Data\HistoryLogger.cs" />
+    <Compile Include="Data\HistoryListener.cs" />
     <Compile Include="Data\NetworkDatabase.cs" />
     <Compile Include="Data\NetworkCaptions.cs" />
     <Compile Include="Data\NetworkRanges.cs" />
     <Compile Include="Data\NetworkSchema.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\NetworkWorkplace.cs" />
     <Compile Include="Data\Structures\NetworkOptions.cs" />
     <Compile Include="Data\Structures\NetworkState.cs" />
     <Compile Include="Data\NetworkContainer.cs" />
@@ -239,21 +240,21 @@
       <SubType>Designer</SubType>
       <DependentUpon>StatusBarControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataTabs\TabTesting.resx">
+    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageTesting.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabTesting.cs</DependentUpon>
+      <DependentUpon>TabPageTesting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataTabs\TabValidation.resx">
+    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageValidation.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabValidation.cs</DependentUpon>
+      <DependentUpon>TabPageValidation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataTabs\TabPageBase.resx">
+    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageBase.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataTabs\TabTraining.resx">
+    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageTraining.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabTraining.cs</DependentUpon>
+      <DependentUpon>TabPageTraining.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBox.resx">
       <SubType>Designer</SubType>

@@ -44,28 +44,37 @@ namespace Sinapse.Data
         private string m_lastSavePath;
 
         [NonSerialized]
-        internal EventHandler OnNetworkChanged;
+        internal EventHandler NetworkChanged;
 
         [NonSerialized]
-        internal EventHandler OnSavePathChanged;
+        internal EventHandler NetworkLoaded;
+        
+        [NonSerialized]
+        internal FileSystemEventHandler NetworkSaved;      
 
 
         //---------------------------------------------
 
 
         #region Constructor & Destructor
-        public NetworkContainer(string networkName, NetworkSchema schema, IActivationFunction function, int hiddenLayer)
+        public NetworkContainer(string networkName, NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
         {
             this.m_networkSchema = schema;
             this.m_networkName = networkName;
-            this.m_activationNetwork = new ActivationNetwork(function, schema.InputColumns.Length, schema.InputColumns.Length, hiddenLayer, schema.OutputColumns.Length);
+
+            int[] neuronsCount = new int[hiddenLayersNeuronCount.Length + 2];
+            neuronsCount[0] = schema.InputColumns.Length;
+            neuronsCount[hiddenLayersNeuronCount.Length + 1] = schema.OutputColumns.Length;
+            hiddenLayersNeuronCount.CopyTo(neuronsCount, 1); 
+
+            this.m_activationNetwork = new ActivationNetwork(function, schema.InputColumns.Length, neuronsCount);
 
             this.m_creationTime = DateTime.Now;
-            this.LastSavePath = String.Empty;
+            this.m_lastSavePath = String.Empty;
         }
 
-        public NetworkContainer(NetworkSchema schema, IActivationFunction function, int hiddenLayer)
-            : this(String.Empty, schema, function, hiddenLayer)
+        public NetworkContainer(NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
+            : this(String.Empty, schema, function, hiddenLayersNeuronCount)
         {
         }
         #endregion
@@ -91,9 +100,7 @@ namespace Sinapse.Data
             set
             {
                 this.m_networkName = value;
-
-                if (this.OnNetworkChanged != null)
-                    this.OnNetworkChanged.Invoke(this, EventArgs.Empty);
+                this.OnNetworkChanged();
             }
         }
 
@@ -103,9 +110,7 @@ namespace Sinapse.Data
             set
             {
                 this.m_networkDescription = value;
-
-                if (this.OnNetworkChanged != null)
-                    this.OnNetworkChanged.Invoke(this, EventArgs.Empty);
+                this.OnNetworkChanged();
             }
         }
 
@@ -115,22 +120,18 @@ namespace Sinapse.Data
             set
             {
                 this.m_networkPrecision = value;
-
-                if (this.OnNetworkChanged != null)
-                    this.OnNetworkChanged.Invoke(this, EventArgs.Empty);
+                this.OnNetworkChanged();
             }
         }
 
         internal string LastSavePath
         {
             get { return m_lastSavePath; }
-            set
-            {
-                this.m_lastSavePath = value;
+        }
 
-                if (this.OnSavePathChanged != null)
-                    this.OnSavePathChanged.Invoke(this, EventArgs.Empty);
-            }
+        internal bool IsSaved
+        {
+            get { return (m_lastSavePath.Length > 0); }
         }
 
         internal DateTime CreationTime
@@ -148,7 +149,7 @@ namespace Sinapse.Data
         {
             string layout = String.Empty;
 
-            for (int i = 0; i < this.m_activationNetwork.LayersCount; i++)
+            for (int i = 0; i < this.m_activationNetwork.LayersCount; ++i)
             {
                 layout += this.m_activationNetwork[i].NeuronsCount;
 
@@ -157,6 +158,30 @@ namespace Sinapse.Data
             }
 
             return layout;
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Object Events
+        private void OnNetworkSaved(FileSystemEventArgs e)
+        {
+            if (this.NetworkSaved != null)
+                this.NetworkSaved.Invoke(this, e);
+        }
+
+        private void OnNetworkLoaded()
+        {
+            if (this.NetworkLoaded != null)
+                this.NetworkLoaded.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnNetworkChanged()
+        {
+            if (this.NetworkChanged != null)
+                this.NetworkChanged.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -200,7 +225,7 @@ namespace Sinapse.Data
                     fileStream.Close();
 
                 if (success)
-                    network.LastSavePath = path;
+                    network.m_lastSavePath = path;
             }
         }
 
@@ -240,12 +265,13 @@ namespace Sinapse.Data
                     fs.Close();
 
                 if (success)
-                    nn.LastSavePath = path;
+                    nn.m_lastSavePath = path;
             }
 
             return nn;
         }
         #endregion
+
 
     }
 }

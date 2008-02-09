@@ -60,20 +60,6 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap agt_pause_queue {
-            get {
-                object obj = ResourceManager.GetObject("agt_pause_queue", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap agt_support {
-            get {
-                object obj = ResourceManager.GetObject("agt_support", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap apply {
             get {
                 object obj = ResourceManager.GetObject("apply", resourceCulture);
@@ -102,20 +88,6 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap desktop_enhancements {
-            get {
-                object obj = ResourceManager.GetObject("desktop_enhancements", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap documentinfo {
-            get {
-                object obj = ResourceManager.GetObject("documentinfo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
@@ -137,86 +109,72 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap exit1 {
+        internal static System.Drawing.Bitmap exit_round {
             get {
-                object obj = ResourceManager.GetObject("exit1", resourceCulture);
+                object obj = ResourceManager.GetObject("exit_round", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap fileclose {
+        internal static System.Drawing.Bitmap file_close {
             get {
-                object obj = ResourceManager.GetObject("fileclose", resourceCulture);
+                object obj = ResourceManager.GetObject("file_close", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap fileclose1 {
+        internal static System.Drawing.Bitmap file_close_round {
             get {
-                object obj = ResourceManager.GetObject("fileclose1", resourceCulture);
+                object obj = ResourceManager.GetObject("file_close_round", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap filefind {
+        internal static System.Drawing.Bitmap file_export_16 {
             get {
-                object obj = ResourceManager.GetObject("filefind", resourceCulture);
+                object obj = ResourceManager.GetObject("file_export_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap filenew {
+        internal static System.Drawing.Bitmap file_find {
             get {
-                object obj = ResourceManager.GetObject("filenew", resourceCulture);
+                object obj = ResourceManager.GetObject("file_find", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap fileopen {
+        internal static System.Drawing.Bitmap file_new {
             get {
-                object obj = ResourceManager.GetObject("fileopen", resourceCulture);
+                object obj = ResourceManager.GetObject("file_new", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap filesave {
+        internal static System.Drawing.Bitmap file_open {
             get {
-                object obj = ResourceManager.GetObject("filesave", resourceCulture);
+                object obj = ResourceManager.GetObject("file_open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap filesaveas {
+        internal static System.Drawing.Bitmap file_save {
             get {
-                object obj = ResourceManager.GetObject("filesaveas", resourceCulture);
+                object obj = ResourceManager.GetObject("file_save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap finish {
+        internal static System.Drawing.Bitmap file_saveas {
             get {
-                object obj = ResourceManager.GetObject("finish", resourceCulture);
+                object obj = ResourceManager.GetObject("file_saveas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap folder {
+        internal static System.Drawing.Bitmap function {
             get {
-                object obj = ResourceManager.GetObject("folder", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap funct {
-            get {
-                object obj = ResourceManager.GetObject("funct", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap gear {
-            get {
-                object obj = ResourceManager.GetObject("gear", resourceCulture);
+                object obj = ResourceManager.GetObject("function", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -228,30 +186,23 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap gear22 {
+        internal static System.Drawing.Bitmap gear_22 {
             get {
-                object obj = ResourceManager.GetObject("gear22", resourceCulture);
+                object obj = ResourceManager.GetObject("gear_22", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap gear32 {
+        internal static System.Drawing.Bitmap gear_32 {
             get {
-                object obj = ResourceManager.GetObject("gear32", resourceCulture);
+                object obj = ResourceManager.GetObject("gear_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap globe {
+        internal static System.Drawing.Bitmap globe_128 {
             get {
-                object obj = ResourceManager.GetObject("globe", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap greenled {
-            get {
-                object obj = ResourceManager.GetObject("greenled", resourceCulture);
+                object obj = ResourceManager.GetObject("globe_128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +214,23 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap info {
+        internal static System.Drawing.Bitmap info_16 {
             get {
-                object obj = ResourceManager.GetObject("info", resourceCulture);
+                object obj = ResourceManager.GetObject("info_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap info_flat_16 {
+            get {
+                object obj = ResourceManager.GetObject("info_flat_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap led_green_16 {
+            get {
+                object obj = ResourceManager.GetObject("led_green_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -301,6 +266,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap player_end_16 {
             get {
                 object obj = ResourceManager.GetObject("player_end_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_finish {
+            get {
+                object obj = ResourceManager.GetObject("player_finish", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -382,37 +354,23 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap player_start1 {
+        internal static System.Drawing.Bitmap player_stop_16 {
             get {
-                object obj = ResourceManager.GetObject("player_start1", resourceCulture);
+                object obj = ResourceManager.GetObject("player_stop_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap player_start2 {
+        internal static System.Drawing.Bitmap player_stop_22 {
             get {
-                object obj = ResourceManager.GetObject("player_start2", resourceCulture);
+                object obj = ResourceManager.GetObject("player_stop_22", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap player_stop {
+        internal static System.Drawing.Bitmap player_stop_32 {
             get {
-                object obj = ResourceManager.GetObject("player_stop", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap player_stop1 {
-            get {
-                object obj = ResourceManager.GetObject("player_stop1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap player_stop2 {
-            get {
-                object obj = ResourceManager.GetObject("player_stop2", resourceCulture);
+                object obj = ResourceManager.GetObject("player_stop_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -536,6 +494,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap support_16 {
+            get {
+                object obj = ResourceManager.GetObject("support_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap switchuser {
             get {
                 object obj = ResourceManager.GetObject("switchuser", resourceCulture);
@@ -557,6 +522,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap upleft_arrow_48 {
+            get {
+                object obj = ResourceManager.GetObject("upleft_arrow_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap view_choose {
             get {
                 object obj = ResourceManager.GetObject("view_choose", resourceCulture);
@@ -564,16 +536,16 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap viewmagfit {
+        internal static System.Drawing.Bitmap view_magfit {
             get {
-                object obj = ResourceManager.GetObject("viewmagfit", resourceCulture);
+                object obj = ResourceManager.GetObject("view_magfit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Volume_Manager {
+        internal static System.Drawing.Bitmap volume_manager_16 {
             get {
-                object obj = ResourceManager.GetObject("Volume Manager", resourceCulture);
+                object obj = ResourceManager.GetObject("volume_manager_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -581,13 +553,6 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap volume_manager_32 {
             get {
                 object obj = ResourceManager.GetObject("volume_manager_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap webexport_16 {
-            get {
-                object obj = ResourceManager.GetObject("webexport_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

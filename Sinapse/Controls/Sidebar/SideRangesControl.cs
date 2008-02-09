@@ -55,7 +55,7 @@ namespace Sinapse.Controls.Sidebar
                 {
                     this.Enabled = true;
                     this.networkData = value;
-                    this.dataGridView.DataSource = this.networkData.NetworkSchema.DataRanges.Table;
+                    this.dataGridView.DataSource = this.networkData.Schema.DataRanges.Table;
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace Sinapse.Controls.Sidebar
 
         private void btnAutodetect_Click(object sender, EventArgs e)
         {
-            this.networkData.NetworkSchema.DataRanges.AutodetectRanges(this.networkData.DataTable);
+            this.networkData.Schema.DataRanges.AutodetectRanges(this.networkData.DataTable);
         }
 
     }

@@ -58,9 +58,9 @@ namespace Sinapse.Controls
 
             foreach (DataRow row in this.m_networkData.DataTable.Rows)
             {
-                input = this.m_networkData.NormalizeRow(row, this.m_networkData.NetworkSchema.InputColumns);
+                input = this.m_networkData.NormalizeRow(row, this.m_networkData.Schema.InputColumns);
                 output = neuralNetwork.ActivationNetwork.Compute(input);
-                this.m_networkData.RevertRow(row, this.m_networkData.NetworkSchema.OutputColumns, output);
+                this.m_networkData.RevertRow(row, this.m_networkData.Schema.OutputColumns, output);
             }
         }
 
@@ -75,13 +75,13 @@ namespace Sinapse.Controls
 
             foreach (DataRow row in this.m_networkData.DataTable.Rows)
             {
-                foreach (string columnName in this.m_networkData.NetworkSchema.InputColumns)
+                foreach (string columnName in this.m_networkData.Schema.InputColumns)
                 {
                     //Check if field is indeed a category
-                    if (Array.IndexOf(this.m_networkData.NetworkSchema.StringColumns, columnName) >= 0)
+                    if (Array.IndexOf(this.m_networkData.Schema.StringColumns, columnName) >= 0)
                     {
                         string strData = (string)row[columnName];
-                        if (this.m_networkData.NetworkSchema.DataCategories.GetID(columnName, strData) < 0)
+                        if (this.m_networkData.Schema.DataCategories.GetID(columnName, strData) < 0)
                         {
                             row.RowError = "Invalid data at column " + columnName;
                             return false;
@@ -100,10 +100,10 @@ namespace Sinapse.Controls
         {
             foreach (DataRow row in this.m_networkData.DataTable.Rows)
             {
-                foreach (string columnName in this.m_networkData.NetworkSchema.OutputColumns)
+                foreach (string columnName in this.m_networkData.Schema.OutputColumns)
                 {
                     //Check if field isn't a category
-                    if (Array.IndexOf(this.m_networkData.NetworkSchema.StringColumns, columnName) == -1)
+                    if (Array.IndexOf(this.m_networkData.Schema.StringColumns, columnName) == -1)
                     {
                         double value = Double.Parse((string)row[columnName]);
                         row[columnName] = Math.Round(value).ToString();

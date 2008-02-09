@@ -19,7 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System.Diagnostics;
 using System.Data;
+using System.IO;
 
 using AForge;
 
@@ -37,12 +41,23 @@ namespace Sinapse.Data
     internal sealed class NetworkDatabase
     {
 
+
+        #region Const definitions
         public const string ColumnRoleId = "@_informationRoleId";
         public const string ColumnTrainingSetId = "@_trainingSetId";
+        #endregion
 
+
+        //----------------------------------------
 
         private NetworkSchema m_networkSchema;
         private DataTable m_dataTable;
+
+
+        internal FileSystemEventHandler DatabaseSaved;
+        internal EventHandler DatabaseChanged;
+
+        private string m_lastSavePath;
 
 
         //----------------------------------------
@@ -75,7 +90,7 @@ namespace Sinapse.Data
 
 
         #region Properties
-        internal NetworkSchema NetworkSchema
+        internal NetworkSchema Schema
         {
             get { return this.m_networkSchema; }
         }
@@ -87,9 +102,18 @@ namespace Sinapse.Data
 
         internal int TrainingSets
         {
-            get { return m_dataTable.DefaultView.ToTable(true, ColumnTrainingSetId).Select(ColumnRoleId + " = " + (ushort)NetworkSet.Testing).Length; }
+            get { return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingSetId).Select(ColumnRoleId + " = " + (ushort)NetworkSet.Testing).Length; }
         }
 
+        internal string LastSavePath
+        {
+            get { return this.m_lastSavePath; }
+        }
+
+        internal bool IsSaved
+        {
+            get { return this.m_lastSavePath.Length > 0; }
+        }
         #endregion
 
 
@@ -283,7 +307,44 @@ namespace Sinapse.Data
         }
         #endregion
 
+
         //----------------------------------------
+
+
+        #region Object Events
+        private void OnDatabaseSaved(FileSystemEventArgs e)
+        {
+            if (this.DatabaseSaved != null)
+                this.DatabaseSaved.Invoke(this, e);
+        }
+
+        private void OnDatabaseChanged()
+        {
+            if (this.DatabaseChanged != null)
+                this.DatabaseChanged.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Static Methods
+        public static void Serialize(NetworkDatabase network, string path)
+        {
+
+        }
+
+        public static NetworkDatabase Deserialize(string path)
+        {
+
+            NetworkDatabase nn = null;
+
+
+            return nn;
+        }
+
+        #endregion
 
 
     }
