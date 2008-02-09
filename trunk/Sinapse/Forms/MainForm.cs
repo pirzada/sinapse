@@ -23,6 +23,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 using Sinapse.Data;
 using Sinapse.Data.Structures;
@@ -40,6 +41,8 @@ namespace Sinapse.Forms
     {
 
         private NetworkContainer m_networkContainer;
+        private NetworkDatabase m_networkDatabase;
+        private NetworkWorkplace m_networkWorkplace;
 
 
         //---------------------------------------------
@@ -61,7 +64,7 @@ namespace Sinapse.Forms
         {
             get
             {
-                return m_networkContainer;
+                return this.m_networkContainer;
             }
             set
             {
@@ -71,23 +74,80 @@ namespace Sinapse.Forms
 
                 if (value != null)
                 {
-              //      this.MenuDatabase.Enabled = true;
+                    this.MenuNetworkSave.Enabled = true;
+                    this.MenuNetworkSaveAs.Enabled = false;
+                    this.MenuNetworkWeights.Enabled = true;
 
-              //      this.MenuWorkplaceOpen.Enabled = true;
-              //      this.MenuFileSaveAs.Enabled = false;
+                    this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
 
-              //      this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
 
-                    this.m_networkContainer.OnSavePathChanged += neuralNetwork_SavePathChanged;
-                    this.neuralNetwork_SavePathChanged(null, EventArgs.Empty);
+                    this.m_networkContainer.NetworkSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
                 }
                 else
                 {
                     //No active network
-                    this.lbNeuronCount.Text = "0";
-              //      this.MenuDatabase.Enabled = false;
-              //      this.MenuWorkplaceOpen.Enabled = false;
-              //      this.MenuFileSaveAs.Enabled = false;
+                    this.MenuNetworkSave.Enabled = false;
+                    this.MenuNetworkSaveAs.Enabled = false;
+                    this.MenuNetworkWeights.Enabled = false;
+                }
+
+
+            }
+        }
+
+        internal NetworkDatabase CurrentNetworkDatabase
+        {
+            get
+            {
+                return this.m_networkDatabase;
+            }
+            set
+            {
+                this.m_networkDatabase = value;
+
+                this.tabControlNetworkData.NetworkData = value;
+                this.sideRangesControl.NetworkData = value;
+
+
+                if (value != null)
+                {
+                    this.MenuDatabaseSave.Enabled = true;
+                    this.MenuDatabaseSaveAs.Enabled = false;
+                    this.MenuDatabaseEdit.Enabled = true;
+
+                    this.lbInputCount.Text = this.m_networkDatabase.Schema.InputColumns.Length.ToString();
+                    this.lbOutputCount.Text = this.m_networkDatabase.Schema.OutputColumns.Length.ToString();
+
+                    this.m_networkDatabase.DatabaseSaved += new FileSystemEventHandler(currentDatabase_DatabaseSaved);
+                }
+                else
+                {
+                    //No active data
+                    this.MenuDatabaseSave.Enabled = false;
+                    this.MenuDatabaseSaveAs.Enabled = false;
+                    this.MenuDatabaseEdit.Enabled = false;
+
+                    this.lbInputCount.Text = "0";
+                    this.lbOutputCount.Text = "0";
+                }
+            }
+        }
+
+        internal NetworkWorkplace CurrentNetworkWorkplace
+        {
+            get
+            {
+                return this.m_networkWorkplace;
+            }
+            set
+            {
+                this.m_networkWorkplace = value;
+
+                if (value != null)
+                {
+                }
+                else
+                {
                 }
             }
         }
@@ -100,22 +160,26 @@ namespace Sinapse.Forms
         #region MainForm Events
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //Wire up controls and events
-            this.tabControlNetworkData.OnDataChanged += networkDataControl_DataChanged;
-            this.tabControlNetworkData.OnSchemaChanged += networkDataControl_SchemaChanged;
-            this.tabControlNetworkData.OnSelectionChanged += networkDataControl_SelectionChanged;
+            if (!this.DesignMode)
+            {
+                //Wire up controls and events
+                //this.tabControlNetworkData.DataChanged += networkDataControl_SelectionChanged;
+                this.tabControlNetworkData.SelectionChanged += networkDataControl_SelectionChanged;
 
-            this.sideTrainerControl.OnStatusChanged += sideTrainerControl_StatusChanged;
-            this.sideTrainerControl.OnDataNeeded += sideTrainerControl_DataNeeded;
-            this.sideTrainerControl.OnTrainingComplete += sideTrainerControl_TrainingComplete;
+                this.sideTrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
+                this.sideTrainerControl.DataNeeded += sideTrainerControl_DataNeeded;
+                this.sideTrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
 
-            this.CurrentNetworkContainer = null;
-            HistoryLogger.Write("Waiting data");
+                this.CurrentNetworkContainer = null;
+                this.CurrentNetworkDatabase = null;
+                this.CurrentNetworkWorkplace = null;
+                HistoryListener.Write("Waiting data");
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            HistoryLogger.Write("Exiting...");
+            HistoryListener.Write("Exiting...");
 
             if (this.sideTrainerControl.IsTraining)
             {
@@ -129,16 +193,6 @@ namespace Sinapse.Forms
 
 
         #region Network Data Control Events
-        private void networkDataControl_SchemaChanged(object sender, EventArgs e)
-        {
-            this.lbInputCount.Text = this.m_networkContainer.Schema.InputColumns.Length.ToString();
-            this.lbOutputCount.Text = this.m_networkContainer.Schema.OutputColumns.Length.ToString();
-
-            this.sideRangesControl.NetworkData = this.tabControlNetworkData.NetworkData;
-            this.sideTrainerControl.NeuralNetwork = null;
-        }
-
-
         private void networkDataControl_SelectionChanged(object sender, EventArgs e)
         {
             this.statusBarControl.UpdateSelectedItems(tabControlNetworkData.SelectedItemCount, tabControlNetworkData.ItemCount);
@@ -169,7 +223,7 @@ namespace Sinapse.Forms
                 "Done", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
-                this.eventNetworkQuery(this, EventArgs.Empty);
+                this.MenuNetworkQuery_Click(this, EventArgs.Empty);
             }
         }
         #endregion
@@ -178,13 +232,25 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
 
-        #region Neural Network Events
-        private void neuralNetwork_SavePathChanged(object sender, EventArgs e)
+        #region Object Events
+        private void currentNetwork_NetworkSaved(object sender, FileSystemEventArgs e)
         {
-            this.openFileDialog.FileName = this.m_networkContainer.LastSavePath;
-            this.saveFileDialog.FileName = this.m_networkContainer.LastSavePath;
+            this.openNetworkDialog.FileName = e.FullPath;
+            this.saveNetworkDialog.FileName = e.FullPath;
 
-            this.MenuNetworkSaveAs.Enabled = (this.m_networkContainer.LastSavePath.Length > 0);
+            this.MenuNetworkSaveAs.Enabled = true;
+        }
+
+        private void currentDatabase_DatabaseSaved(object sender, FileSystemEventArgs e)
+        {
+            this.openDatabaseDialog.FileName = e.FullPath;
+            this.saveDatabaseDialog.FileName = e.FullPath;
+
+            this.MenuDatabaseSaveAs.Enabled = true;
+        }
+
+        private void currentWorkplace_WorkplaceSaved(object sender, FileSystemEventArgs e)
+        {
         }
         #endregion
 
@@ -192,9 +258,8 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
 
-        #region Buttons & Menus
-
-        private void eventShowWizard(object sender, EventArgs e)
+        #region Menu File
+        private void MenuFileWizard_Click(object sender, EventArgs e)
         {
             ImportWizard importWizard = new ImportWizard();
             if (importWizard.ShowDialog(this) == DialogResult.OK)
@@ -206,13 +271,39 @@ namespace Sinapse.Forms
                         "the neural network now?", "Import Complete", MessageBoxButtons.YesNo)
                         == DialogResult.Yes)
                     {
-                        eventNetworkNew(this, e);
+                        MenuNetworkNew_Click(this, e);
                     }
                 }
             }
         }
+        #endregion
 
-        private void eventNetworkNew(object sender, EventArgs e)
+
+        #region Menu Database
+        private void MenuDatabaseSave_Click(object sender, EventArgs e)
+        {
+            if (this.CurrentNetworkDatabase.IsSaved)
+                this.databaseSave(this.CurrentNetworkDatabase.LastSavePath);
+
+            else this.saveDatabaseDialog.ShowDialog(this);
+        }
+
+
+        private void MenuDatabaseSaveAs_Click(object sender, EventArgs e)
+        {
+            this.saveDatabaseDialog.ShowDialog(this);
+        }
+
+
+        private void MenuDatabaseOpen_Click(object sender, EventArgs e)
+        {
+            this.openDatabaseDialog.ShowDialog(this);
+        }
+        #endregion
+
+
+        #region Menu Network
+        private void MenuNetworkNew_Click(object sender, EventArgs e)
         {
             if (this.CurrentNetworkContainer != null &&
                 MessageBox.Show("Would you like to overwrite your current network?" +
@@ -227,39 +318,69 @@ namespace Sinapse.Forms
             }
         }
 
-
-        private void eventNetworkSave(object sender, EventArgs e)
+        private void MenuNetworkSave_Click(object sender, EventArgs e)
         {
-            if (this.m_networkContainer.LastSavePath.Length > 0)
+            if (this.CurrentNetworkContainer.IsSaved)
                 this.networkSave(this.CurrentNetworkContainer.LastSavePath);
 
-            else this.saveFileDialog.ShowDialog(this);
+            else this.saveNetworkDialog.ShowDialog(this);
         }
 
 
-        private void eventNetworkSaveAs(object sender, EventArgs e)
+        private void MenuNetworkSaveAs_Click(object sender, EventArgs e)
         {
-            this.saveFileDialog.ShowDialog(this);
+            this.saveNetworkDialog.ShowDialog(this);
         }
 
 
-        private void eventNetworkOpen(object sender, EventArgs e)
+        private void MenuNetworkOpen_Click(object sender, EventArgs e)
         {
-            this.openFileDialog.ShowDialog(this);
+            this.openNetworkDialog.ShowDialog(this);
         }
 
-
-        private void eventNetworkQuery(object sender, EventArgs e)
+        private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
-            HistoryLogger.Write("Querying network");
+            HistoryListener.Write("Querying network");
             new NetworkInquirer(this.m_networkContainer).ShowDialog(this);
-            HistoryLogger.Write("Ready");
+            HistoryListener.Write("Ready");
         }
 
+        private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
+        {
+        }
+        #endregion
 
+
+        #region Menu Help
         private void eventShowHelp(object sender, EventArgs e)
         {
-            new AboutBox().ShowDialog();
+            new AboutBox().Show(this);
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region File Dialogs
+        private void openNetworkDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            this.networkOpen(openNetworkDialog.FileName);
+        }
+
+        private void saveNetworkDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            this.networkSave(saveNetworkDialog.FileName);
+        }
+
+        private void openDatabaseDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            this.databaseOpen(openDatabaseDialog.FileName);
+        }
+
+        private void saveDatabaseDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            this.databaseSave(saveDatabaseDialog.FileName);
         }
         #endregion
 
@@ -268,16 +389,6 @@ namespace Sinapse.Forms
 
 
         #region Open & Save Network
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            this.networkOpen(openFileDialog.FileName);
-        }
-
-        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            this.networkSave(saveFileDialog.FileName);
-        }
-
         private void networkSave(string path)
         {
             try
@@ -312,6 +423,45 @@ namespace Sinapse.Forms
         }
         #endregion
 
+
+        #region Open & Save Database
+        private void databaseSave(string path)
+        {
+            try
+            {
+                NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
+            }
+            catch
+            {
+                MessageBox.Show("Error saving database");
+            }
+        }
+
+        private void databaseOpen(string path)
+        {
+            NetworkDatabase networkDatabase = null;
+
+            try
+            {
+                networkDatabase = NetworkDatabase.Deserialize(path);
+            }
+            catch
+            {
+                MessageBox.Show("Error opening database");
+            }
+            finally
+            {
+                if (networkDatabase != null)
+                {
+                    this.CurrentNetworkDatabase = networkDatabase;
+                }
+            }
+        }
+        #endregion
+
+
+        #region Open & Save Workplace
+        #endregion
 
         //---------------------------------------------
 

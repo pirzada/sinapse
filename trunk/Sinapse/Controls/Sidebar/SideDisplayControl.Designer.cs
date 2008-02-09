@@ -56,12 +56,12 @@ namespace Sinapse.Controls.Sidebar
             this.lbLayout = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.lbTableTitle = new System.Windows.Forms.Label();
+            this.lbInput = new System.Windows.Forms.Label();
+            this.lbOutput = new System.Windows.Forms.Label();
+            this.panelInputs = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelOutputs = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbIntro
@@ -85,7 +85,7 @@ namespace Sinapse.Controls.Sidebar
             this.lbDescription.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lbDescription.Location = new System.Drawing.Point(16, 238);
             this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(194, 56);
+            this.lbDescription.Size = new System.Drawing.Size(194, 48);
             this.lbDescription.TabIndex = 24;
             // 
             // lbDescriptionChange
@@ -165,7 +165,7 @@ namespace Sinapse.Controls.Sidebar
             // 
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Image = global::Sinapse.Properties.Resources.globe;
+            this.pictureBox.Image = global::Sinapse.Properties.Resources.globe_128;
             this.pictureBox.Location = new System.Drawing.Point(0, 12);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(216, 128);
@@ -173,64 +173,71 @@ namespace Sinapse.Controls.Sidebar
             this.pictureBox.TabIndex = 18;
             this.pictureBox.TabStop = false;
             // 
-            // label1
+            // lbTableTitle
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.lbTableTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 296);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 27);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "This network has been designed to work with the following data on its input nodes" +
-                ":";
+            this.lbTableTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTableTitle.Location = new System.Drawing.Point(11, 298);
+            this.lbTableTitle.Name = "lbTableTitle";
+            this.lbTableTitle.Size = new System.Drawing.Size(195, 27);
+            this.lbTableTitle.TabIndex = 28;
+            this.lbTableTitle.Text = "This network has been designed to work with the following data:";
             // 
-            // label2
+            // lbInput
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 12);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Inputs";
+            this.lbInput.AutoSize = true;
+            this.lbInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInput.Location = new System.Drawing.Point(10, 331);
+            this.lbInput.Name = "lbInput";
+            this.lbInput.Size = new System.Drawing.Size(37, 12);
+            this.lbInput.TabIndex = 28;
+            this.lbInput.Text = "Inputs";
             // 
-            // label3
+            // lbOutput
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(103, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 12);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "Outputs";
+            this.lbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbOutput.AutoSize = true;
+            this.lbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbOutput.Location = new System.Drawing.Point(111, 331);
+            this.lbOutput.Name = "lbOutput";
+            this.lbOutput.Size = new System.Drawing.Size(45, 12);
+            this.lbOutput.TabIndex = 28;
+            this.lbOutput.Text = "Outputs";
             // 
-            // tableLayoutPanel
+            // panelInputs
             // 
-            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel.AutoScroll = true;
-            this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.label3, 1, 0);
-            this.tableLayoutPanel.Location = new System.Drawing.Point(8, 331);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 1;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(200, 171);
-            this.tableLayoutPanel.TabIndex = 29;
+            this.panelInputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelInputs.AutoScroll = true;
+            this.panelInputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelInputs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelInputs.Location = new System.Drawing.Point(13, 346);
+            this.panelInputs.Name = "panelInputs";
+            this.panelInputs.Size = new System.Drawing.Size(89, 153);
+            this.panelInputs.TabIndex = 30;
+            // 
+            // panelOutputs
+            // 
+            this.panelOutputs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelOutputs.AutoScroll = true;
+            this.panelOutputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelOutputs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelOutputs.Location = new System.Drawing.Point(113, 346);
+            this.panelOutputs.Name = "panelOutputs";
+            this.panelOutputs.Size = new System.Drawing.Size(89, 153);
+            this.panelOutputs.TabIndex = 30;
             // 
             // SideDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.tableLayoutPanel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panelOutputs);
+            this.Controls.Add(this.panelInputs);
+            this.Controls.Add(this.lbOutput);
+            this.Controls.Add(this.lbInput);
+            this.Controls.Add(this.lbTableTitle);
             this.Controls.Add(this.lbIntro);
             this.Controls.Add(this.lbDescription);
             this.Controls.Add(this.lbDescriptionChange);
@@ -245,8 +252,6 @@ namespace Sinapse.Controls.Sidebar
             this.Name = "SideDisplayControl";
             this.Size = new System.Drawing.Size(216, 502);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,10 +269,11 @@ namespace Sinapse.Controls.Sidebar
         private System.Windows.Forms.Label lbLayout;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.Label lbTableTitle;
+        private System.Windows.Forms.Label lbInput;
+        private System.Windows.Forms.Label lbOutput;
+        private System.Windows.Forms.FlowLayoutPanel panelInputs;
+        private System.Windows.Forms.FlowLayoutPanel panelOutputs;
 
     }
 }

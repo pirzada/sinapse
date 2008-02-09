@@ -70,7 +70,7 @@ namespace Sinapse.Controls.Sidebar
                         this.lbIntro.Visible = false;
                         this.setVisible(true);
                         
-                        this.m_neuralNetwork.OnNetworkChanged += new EventHandler(neuralNetwork_NetworkChanged);
+                        this.m_neuralNetwork.NetworkChanged += new EventHandler(neuralNetwork_NetworkChanged);
                     }
                 }
                 else
@@ -112,10 +112,51 @@ namespace Sinapse.Controls.Sidebar
         #region Public Methods
         internal void UpdateDisplayData()
         {
+            if (m_neuralNetwork == null)
+                return;
+            
+            this.SuspendLayout();
+            this.panelInputs.SuspendLayout();
+            this.panelOutputs.SuspendLayout();
+                                             
             this.lbName.Text = m_neuralNetwork.Name;
             this.lbLayout.Text = m_neuralNetwork.GetLayoutString();
             this.lbDescription.Text = m_neuralNetwork.Description;
             this.lbErrorRate.Text = m_neuralNetwork.Precision.ToString("0.000000");
+
+            panelInputs.Controls.Clear();
+            panelOutputs.Controls.Clear();
+
+            Label label;
+            foreach (string inputCol in m_neuralNetwork.Schema.InputColumns)
+            {
+                label = new Label();
+                label.Text = inputCol;
+                label.Font = new System.Drawing.Font(
+                    "Microsoft Sans Serif", 6.75F,
+                    System.Drawing.FontStyle.Regular,
+                    System.Drawing.GraphicsUnit.Point,
+                    ((byte)(0)));
+
+                this.panelInputs.Controls.Add(label);
+            }
+
+            foreach (string outputCol in m_neuralNetwork.Schema.OutputColumns)
+            {
+                label = new Label();
+                label.Text = outputCol;
+                label.Font = new System.Drawing.Font(
+                    "Microsoft Sans Serif", 6.75F,
+                    System.Drawing.FontStyle.Regular,
+                    System.Drawing.GraphicsUnit.Point,
+                    ((byte)(0)));
+
+                this.panelOutputs.Controls.Add(label);
+            }
+
+            this.panelInputs.ResumeLayout(true);
+            this.panelOutputs.ResumeLayout(true);
+            this.ResumeLayout(true);
         }
         #endregion
 
@@ -140,6 +181,11 @@ namespace Sinapse.Controls.Sidebar
             this.lbDescriptionH.Visible = value;
             this.lbNetworkLayoutH.Visible = value;
             this.lbPrecisionH.Visible = value;
+            this.lbTableTitle.Visible = value;
+            this.panelInputs.Visible = value;
+            this.panelOutputs.Visible = value;
+            this.lbInput.Visible = value;
+            this.lbOutput.Visible = value;
 
             if (m_readOnly)
                 this.lbDescriptionChange.Visible = false;

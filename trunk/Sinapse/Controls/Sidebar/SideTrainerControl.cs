@@ -40,10 +40,10 @@ namespace Sinapse.Controls.Sidebar
     internal sealed partial class SideTrainerControl : UserControl
     {
 
-        public EventHandler OnTrainingComplete;
+        public EventHandler TrainingComplete;
 
-        public EventHandler OnDataNeeded;
-        public EventHandler OnStatusChanged;
+        public EventHandler DataNeeded;
+        public EventHandler StatusChanged;
 
         private NetworkContainer m_neuralNetwork;
 
@@ -145,7 +145,7 @@ namespace Sinapse.Controls.Sidebar
             this.m_neuralNetwork.ActivationNetwork.Randomize();
             this.m_neuralNetwork.Precision = 0;
             this.m_networkState = new NetworkState();
-            HistoryLogger.Write("Network learnings cleared");
+            HistoryListener.Write("Network learnings cleared");
             this.UpdateStatus();
         }
 
@@ -156,12 +156,12 @@ namespace Sinapse.Controls.Sidebar
 
             if (backgroundWorker.IsBusy)
             {
-                HistoryLogger.Write("Stopping Thread");
+                HistoryListener.Write("Stopping Thread");
                 this.backgroundWorker.CancelAsync();
             }
             else
             {
-                HistoryLogger.Write("Thread is not running");
+                HistoryListener.Write("Thread is not running");
             }
         }
 
@@ -169,12 +169,12 @@ namespace Sinapse.Controls.Sidebar
         {
             if (backgroundWorker.IsBusy)
             {
-                HistoryLogger.Write("Pausing Thread");
+                HistoryListener.Write("Pausing Thread");
                 this.backgroundWorker.CancelAsync();
             }
             else
             {
-                HistoryLogger.Write("Thread is not running");
+                HistoryListener.Write("Thread is not running");
             }
         }
 
@@ -182,14 +182,14 @@ namespace Sinapse.Controls.Sidebar
         {
             if (this.backgroundWorker.IsBusy)
             {
-                HistoryLogger.Write("Trainer thread is busy!");
+                HistoryListener.Write("Trainer thread is busy!");
             }
             else
             {
-                HistoryLogger.Write("Gathering information...");
+                HistoryListener.Write("Gathering information...");
 
-                if (this.OnDataNeeded != null)
-                    this.OnDataNeeded.Invoke(this, EventArgs.Empty);
+                if (this.DataNeeded != null)
+                    this.DataNeeded.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -208,7 +208,7 @@ namespace Sinapse.Controls.Sidebar
             options.TrainingType = rbErrorLimit.Checked ? TrainingType.ByError : TrainingType.ByEpoch;
 
 
-            HistoryLogger.Write("Starting thread");
+            HistoryListener.Write("Starting thread");
             this.backgroundWorker.RunWorkerAsync(options);
         
         }
@@ -221,8 +221,8 @@ namespace Sinapse.Controls.Sidebar
         #region Private Methods
         private void UpdateStatus()
         {
-            if (this.OnStatusChanged != null)
-                this.OnStatusChanged.Invoke(this, EventArgs.Empty);
+            if (this.StatusChanged != null)
+                this.StatusChanged.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -236,7 +236,7 @@ namespace Sinapse.Controls.Sidebar
             
             if (!(e.Argument is NetworkOptions))
             {
-                HistoryLogger.Write("Bad thread argument!");
+                HistoryListener.Write("Bad thread argument!");
                 backgroundWorker.ReportProgress(0);
                 e.Cancel = true;
                 return;
@@ -255,7 +255,7 @@ namespace Sinapse.Controls.Sidebar
             bool stop = false;
             int lastReportEpoch = 0;
                               
-            HistoryLogger.Write("Training");
+            HistoryListener.Write("Training");
             backgroundWorker.ReportProgress(0);
 
 
@@ -334,14 +334,14 @@ namespace Sinapse.Controls.Sidebar
             
             if (e.Cancelled)
             {
-                HistoryLogger.Write("Training stopped");    
+                HistoryListener.Write("Training stopped");    
             }
             else
             {
-                HistoryLogger.Write("Training Finished!");
+                HistoryListener.Write("Training Finished!");
 
-                if (this.OnTrainingComplete != null)
-                    this.OnTrainingComplete.Invoke(this, EventArgs.Empty);
+                if (this.TrainingComplete != null)
+                    this.TrainingComplete.Invoke(this, EventArgs.Empty);
             }
         }
         #endregion

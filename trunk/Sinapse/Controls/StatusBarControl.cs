@@ -15,8 +15,6 @@ namespace Sinapse.Controls
     internal sealed partial class StatusBarControl : UserControl
     {
 
-        private bool networkReady;
-
 
         //---------------------------------------------
 
@@ -52,13 +50,13 @@ namespace Sinapse.Controls
         
         private void NewActionLogged(object sender, EventArgs e)
         {
-            this.lbStatus.Text = HistoryLogger.GetLastLoggedAction();
+            this.lbStatus.Text = HistoryListener.GetLastLoggedAction();
         }
 
 
         private void StatusBarControl_Load(object sender, EventArgs e)
         {
-            HistoryLogger.NewActionLogged += NewActionLogged;
+            HistoryListener.NewActionLogged += NewActionLogged;
         }
 
 

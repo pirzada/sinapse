@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Sinapse.Data
 {
-    static class HistoryLogger
+    static class HistoryListener
     {
 
         public static EventHandler NewActionLogged;

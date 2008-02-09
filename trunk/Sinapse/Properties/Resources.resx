@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="player_start2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\player_start2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="player_pause_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_pause2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,14 +130,11 @@
   <data name="starhot3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\starhot3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documentinfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="info_flat_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documentinfo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gear.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_rew_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_rew.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,13 +142,13 @@
   <data name="configure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\configure.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fileclose1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fileclose1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="viewmagfit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="view_magfit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\viewmagfit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="finish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="player_finish" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\finish.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_pause_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -163,13 +157,13 @@
   <data name="run" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\run.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="info_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="apply" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\apply.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="desktop_enhancements" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="upleft_arrow_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\desktop_enhancements.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="starhot2" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -178,7 +172,7 @@
   <data name="gear_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\software-development.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="webexport_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_export_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\webexport.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="star5" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -187,16 +181,16 @@
   <data name="reload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reload.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="agt_support" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="support_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\agt_support.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filesave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filesave.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clear_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clear_left.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_stop2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="player_stop_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_stop2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_end_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -220,13 +214,10 @@
   <data name="player_play_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_play2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_start1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\player_start1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fileclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_close_round" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fileclose.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editclear" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -241,22 +232,22 @@
   <data name="player_pause_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_pause1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Volume Manager" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="volume_manager_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Volume Manager1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_eject_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_eject.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filefind" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_find" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filefind.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filenew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filenew.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="globe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="globe_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Globe.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="player_stop_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_fwd_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -265,17 +256,14 @@
   <data name="starhot4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\starhot4.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gear32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="gear_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\agt_softwareD1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="greenled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="led_green_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greenled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="view_choose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\view_choose.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="agt_pause_queue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\agt_pause-queue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="star3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,7 +283,7 @@
   <data name="player_play_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_play1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="exit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="exit_round" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exit1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_rew_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -304,7 +292,7 @@
   <data name="tab_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tab_remove.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fileopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fileopen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="locationbar_erase" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -316,16 +304,13 @@
   <data name="player_time" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_time.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gear22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="gear_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\agt_softwareD.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="starhot0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\starhot0.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_stop1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="player_stop_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_stop1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="network_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -334,7 +319,7 @@
   <data name="star1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="funct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="function" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\funct.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_play_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -346,7 +331,7 @@
   <data name="star0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star0.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filesaveas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_saveas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filesaveas.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

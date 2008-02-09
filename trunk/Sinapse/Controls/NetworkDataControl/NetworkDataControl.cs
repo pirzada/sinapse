@@ -103,7 +103,7 @@ namespace Sinapse.Controls
 
         internal NetworkSchema Schema
         {
-            get { return m_networkData.NetworkSchema; }
+            get { return m_networkData.Schema; }
         }
 
         internal int ItemCount
@@ -185,7 +185,7 @@ namespace Sinapse.Controls
         {
             DataGridViewColumn column;
 
-            foreach (String colName in this.m_networkData.NetworkSchema.InputColumns)
+            foreach (String colName in this.m_networkData.Schema.InputColumns)
             {
                 column = new DataGridViewColumn();
                 column.DataPropertyName = colName;
@@ -195,7 +195,7 @@ namespace Sinapse.Controls
                 this.dataGridView.Columns.Add(column);
             }
 
-            foreach (String colName in this.m_networkData.NetworkSchema.OutputColumns)
+            foreach (String colName in this.m_networkData.Schema.OutputColumns)
             {
                 column = new DataGridViewColumn();
                 column.DataPropertyName = colName;
@@ -205,7 +205,7 @@ namespace Sinapse.Controls
                 this.dataGridView.Columns.Add(column);
             }
 
-            foreach (String colName in this.m_networkData.NetworkSchema.StringColumns)
+            foreach (String colName in this.m_networkData.Schema.StringColumns)
             {
                 if (this.dataGridView.Columns.Contains(colName))
                     this.dataGridView.Columns[colName].HeaderText = dataGridView.Columns[colName].DataPropertyName + " [C]";
