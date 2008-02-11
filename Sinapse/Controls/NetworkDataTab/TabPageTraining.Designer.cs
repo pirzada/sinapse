@@ -28,9 +28,11 @@ namespace Sinapse.Controls.NetworkDataTab
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.cbTrainingSets = new System.Windows.Forms.ComboBox();
+            this.cbTrainingLayer = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnDel = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDel)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -38,36 +40,54 @@ namespace Sinapse.Controls.NetworkDataTab
             this.label1.Size = new System.Drawing.Size(136, 23);
             this.label1.Text = "Training Sets";
             // 
-            // cbTrainingSets
+            // cbTrainingLayer
             // 
-            this.cbTrainingSets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbTrainingSets.FormattingEnabled = true;
-            this.cbTrainingSets.Location = new System.Drawing.Point(492, 6);
-            this.cbTrainingSets.Name = "cbTrainingSets";
-            this.cbTrainingSets.Size = new System.Drawing.Size(92, 21);
-            this.cbTrainingSets.TabIndex = 29;
-            this.cbTrainingSets.SelectedIndexChanged += new System.EventHandler(this.cbTrainingSets_SelectedIndexChanged);
+            this.cbTrainingLayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTrainingLayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTrainingLayer.FormattingEnabled = true;
+            this.cbTrainingLayer.Location = new System.Drawing.Point(466, 7);
+            this.cbTrainingLayer.Name = "cbTrainingLayer";
+            this.cbTrainingLayer.Size = new System.Drawing.Size(92, 21);
+            this.cbTrainingLayer.TabIndex = 29;
+            this.cbTrainingLayer.SelectedIndexChanged += new System.EventHandler(this.cbTrainingSets_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(422, 9);
+            this.label2.Location = new System.Drawing.Point(426, 11);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 30;
-            this.label2.Text = "Set number:";
+            this.label2.Text = "Layer:";
             // 
-            // TabTraining
+            // btnDel
+            // 
+            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDel.Enabled = false;
+            this.btnDel.Image = global::Sinapse.Properties.Resources.edit_remove;
+            this.btnDel.Location = new System.Drawing.Point(564, 9);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(16, 16);
+            this.btnDel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.btnDel.TabIndex = 31;
+            this.btnDel.TabStop = false;
+            // 
+            // TabPageTraining
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cbTrainingSets);
+            this.Controls.Add(this.cbTrainingLayer);
             this.Controls.Add(this.label2);
-            this.Name = "TabTraining";
+            this.Controls.Add(this.btnDel);
+            this.Name = "TabPageTraining";
+            this.Load += new System.EventHandler(this.TabPageTraining_Load);
+            this.Controls.SetChildIndex(this.btnDel, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.cbTrainingSets, 0);
+            this.Controls.SetChildIndex(this.cbTrainingLayer, 0);
             this.Controls.SetChildIndex(this.label1, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -75,8 +95,9 @@ namespace Sinapse.Controls.NetworkDataTab
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbTrainingSets;
+        private System.Windows.Forms.ComboBox cbTrainingLayer;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox btnDel;
 
 
     }

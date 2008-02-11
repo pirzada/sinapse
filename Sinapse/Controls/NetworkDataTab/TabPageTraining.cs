@@ -31,25 +31,21 @@ namespace Sinapse.Controls.NetworkDataTab
 
     internal sealed partial class TabPageTraining : TabPageBase
     {
-        
-        internal override NetworkSet GetNetworkSet()
-        {
-            return NetworkSet.Training;
-        }
 
-        //----------------------------------------
-
-        
-        private ushort trainingSet;
+        private int trainingLayer;
 
 
         //----------------------------------------
 
 
         #region Constructor
-        public TabPageTraining(NetworkDataTabControl parentControl) : base(parentControl)
+        public TabPageTraining(NetworkDataTabControl parentControl)
+            : base(parentControl)
         {
             InitializeComponent();
+            SetUp(NetworkSet.Training);
+
+            cbTrainingLayer.DataSource = new object[] { "All", 1, 2, 3, 4, 5, };
         }
         #endregion
 
@@ -57,36 +53,75 @@ namespace Sinapse.Controls.NetworkDataTab
         //----------------------------------------
 
 
+        #region Control Events
+        private void TabPageTraining_Load(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Private Methods
+    /*
         private void populateCombobox()
         {
+            cbTrainingSets.BeginUpdate();
             cbTrainingSets.Items.Clear();
             cbTrainingSets.Items.Add("All");
             cbTrainingSets.Items.Add("---");
 
-            for (int i = 0; i < this.ParentControl.NetworkData.TrainingSets; ++i)
+            if (this.ParentControl != null && this.ParentControl.NetworkData != null)
             {
-                cbTrainingSets.Items.Add(i);
+                for (ushort i = 1; i <= this.ParentControl.NetworkData.TrainingLayerCount; ++i)
+                {
+                    cbTrainingSets.Items.Add(i);
+                }
             }
-        }
 
+            cbTrainingSets.EndUpdate();
+            cbTrainingSets.SelectedIndex = 0;
+    
+        }
+    */
         private void cbTrainingSets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbTrainingSets.SelectedText == "All" || cbTrainingSets.SelectedText == "---")
+            if (cbTrainingLayer.SelectedIndex == 0)
             {
-                this.trainingSet = 0;
-                this.BindingSource.Filter = this.getFilterStrBase();
+                this.trainingLayer = 0;
+                this.BindingSource.Filter = null;
             }
             else
             {
-                this.trainingSet = (ushort)cbTrainingSets.SelectedItem;
-                this.BindingSource.Filter = String.Format("{0} AND {1} = {2}",
-                    this.getFilterStrBase(), NetworkDatabase.ColumnTrainingSetId, cbTrainingSets.SelectedText);
-            }
-        }
+                this.trainingLayer = cbTrainingLayer.SelectedIndex;
 
+                this.BindingSource.Filter = String.Format("{0} = '{1}'",
+                    NetworkDatabase.ColumnTrainingLayerId, this.trainingLayer);
+            }
+
+        }
+        #endregion
+
+        //----------------------------------------
+
+
+  /*      protected override void OnDatabaseLoaded()
+        {
+            base.OnDatabaseLoaded();
+
+   //         this.populateCombobox();
+        }
+  */
         protected override void OnDataImported(DataTable table)
         {
-            this.ParentControl.NetworkData.ImportData(table, NetworkSet.Training, trainingSet);
+            this.ParentControl.NetworkData.ImportData(table, NetworkSet.Training, trainingLayer);
         }
+
+
+        //----------------------------------------
+        
+
     }
 }

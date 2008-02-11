@@ -44,7 +44,7 @@ namespace Sinapse.Data
 
         #region Const definitions
         public const string ColumnRoleId = "@_informationRoleId";
-        public const string ColumnTrainingSetId = "@_trainingSetId";
+        public const string ColumnTrainingLayerId = "@_trainingLayerId";
         #endregion
 
 
@@ -100,9 +100,28 @@ namespace Sinapse.Data
             get { return this.m_dataTable; }
         }
 
-        internal int TrainingSets
+        /*
+        internal DataView TrainingSet
         {
-            get { return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingSetId).Select(ColumnRoleId + " = " + (ushort)NetworkSet.Testing).Length; }
+            get { return; }
+        }
+
+        internal DataView TestingSet
+        {
+            get { return;
+        }
+
+        internal DataView ValidationSet
+        {
+            get { return; }
+        }   */
+
+        internal int TrainingLayerCount
+        {
+            get
+            {
+                return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingLayerId).Rows.Count;               
+            }
         }
 
         internal string LastSavePath
@@ -122,7 +141,7 @@ namespace Sinapse.Data
 
         #region Public Methods
 
-        internal void ImportData(DataTable dataTable, NetworkSet networkSet, ushort trainingSet)
+        internal void ImportData(DataTable dataTable, NetworkSet networkSet, int trainingSet)
         {
             this.createColumns(dataTable, m_networkSchema, networkSet, trainingSet);
             this.m_dataTable.Merge(dataTable, false, MissingSchemaAction.Ignore);
@@ -144,13 +163,13 @@ namespace Sinapse.Data
         /// <param name="set">The set of data.</param>
         /// <param name="trainingSet">The training subset of the data.</param>
         /// <returns></returns>
-        internal NetworkVectors CreateVectors(NetworkSet set, ushort trainingSet)
+        internal NetworkVectors CreateVectors(NetworkSet networkSet, ushort trainingLayer)
         {
 
             NetworkVectors vectors;
             string strQuery = String.Empty;
 
-            switch (set)
+            switch (networkSet)
             {
                 case NetworkSet.Testing:
                     strQuery = String.Format("[{0}] = {1}",
@@ -162,10 +181,10 @@ namespace Sinapse.Data
                     strQuery = String.Format("[{0}] = {1}",
                     ColumnRoleId, (ushort)NetworkSet.Training);
 
-                    if (trainingSet > 0)
+                    if (trainingLayer > 0)
                     {
                         strQuery = String.Format("{0} AND [{1}] = {2}",
-                            strQuery, ColumnTrainingSetId, trainingSet);
+                            strQuery, ColumnTrainingLayerId, trainingLayer);
                     }
                     break;
 
@@ -274,7 +293,7 @@ namespace Sinapse.Data
         /// <param name="schema"></param>
         /// <param name="networkSet"></param>
         /// <param name="trainingSet"></param>
-        private void createColumns(DataTable dataTable, NetworkSchema schema, NetworkSet networkSet, ushort trainingSet)
+        private void createColumns(DataTable dataTable, NetworkSchema schema, NetworkSet networkSet, int trainingSet)
         {
             DataColumn col;
 
@@ -286,9 +305,9 @@ namespace Sinapse.Data
                 dataTable.Columns.Add(col);
             }
 
-            if (!dataTable.Columns.Contains(ColumnTrainingSetId))
+            if (!dataTable.Columns.Contains(ColumnTrainingLayerId))
             {
-                col = new DataColumn(ColumnTrainingSetId, typeof(ushort));
+                col = new DataColumn(ColumnTrainingLayerId, typeof(int));
                 col.AllowDBNull = false;
                 col.DefaultValue = trainingSet;
                 dataTable.Columns.Add(col);

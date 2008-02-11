@@ -29,10 +29,6 @@ using Sinapse.Data;
 using Sinapse.Data.Structures;
 using Sinapse.Dialogs;
 
-using AForge;
-using AForge.Neuro;
-using AForge.Controls;
-using AForge.Neuro.Learning;
 
 namespace Sinapse.Forms
 {
@@ -352,7 +348,7 @@ namespace Sinapse.Forms
 
 
         #region Menu Help
-        private void eventShowHelp(object sender, EventArgs e)
+        private void MenuHelpAbout_Click(object sender, EventArgs e)
         {
             new AboutBox().Show(this);
         }
@@ -462,6 +458,7 @@ namespace Sinapse.Forms
 
         #region Open & Save Workplace
         #endregion
+
 
         //---------------------------------------------
 

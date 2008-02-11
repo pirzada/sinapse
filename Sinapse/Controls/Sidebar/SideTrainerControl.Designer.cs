@@ -415,6 +415,7 @@ namespace Sinapse.Controls.Sidebar
             this.Controls.Add(this.pbForget);
             this.Name = "SideTrainerControl";
             this.Size = new System.Drawing.Size(201, 456);
+            this.Load += new System.EventHandler(this.SideTrainerControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMomentum)).EndInit();
