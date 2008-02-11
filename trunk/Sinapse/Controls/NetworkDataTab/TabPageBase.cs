@@ -33,8 +33,8 @@ namespace Sinapse.Controls.NetworkDataTab
     {
 
         private NetworkDataTabControl m_parentControl;
+        private NetworkSet m_networkSet;
 
-      
         //----------------------------------------
 
 
@@ -43,12 +43,12 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             InitializeComponent();
         }
-        
+
         protected TabPageBase(NetworkDataTabControl parentControl)
         {
             this.m_parentControl = parentControl;
             this.m_parentControl.DatabaseLoaded += new EventHandler(parentControl_DatabaseLoaded);
-            
+
             InitializeComponent();
         }
         #endregion
@@ -79,16 +79,20 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Virtual Methods
-        internal virtual NetworkSet GetNetworkSet()
-        {
-            if (!this.DesignMode)
-                throw new Exception("Method \"GetNetworkSet()\" should be properly implemented");
-            else return NetworkSet.Training;
-        }
-
         protected virtual void OnDataImported(DataTable table)
         {
             this.m_parentControl.NetworkData.ImportData(table, GetNetworkSet(), 0);
+        }
+
+        protected virtual void OnDatabaseLoaded()
+        {
+            if (this.m_parentControl.NetworkData != null)
+            {
+                DataView dv = new DataView(this.m_parentControl.NetworkData.DataTable);
+                dv.RowFilter = this.getFilterString();
+                this.BindingSource.DataSource = dv;
+                this.setColumns();
+            }
         }
         #endregion
 
@@ -97,9 +101,14 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Protected Methods
-        protected string getFilterStrBase()
+        internal protected NetworkSet GetNetworkSet()
         {
-            return NetworkDatabase.ColumnRoleId + " = " + (ushort)this.GetNetworkSet();
+            return this.m_networkSet;
+        }
+
+        protected void SetUp(NetworkSet networkSet)
+        {
+            this.m_networkSet = networkSet;
         }
         #endregion
 
@@ -112,8 +121,6 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             if (!this.DesignMode)
             {
-                this.BindingSource.Filter = getFilterStrBase();
-
                 this.dataGridView.AutoGenerateColumns = false;
                 this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
                 this.dataGridView.DataSource = this.BindingSource;
@@ -122,9 +129,177 @@ namespace Sinapse.Controls.NetworkDataTab
 
         private void parentControl_DatabaseLoaded(object sender, EventArgs e)
         {
-            this.BindingSource.DataSource = this.m_parentControl.NetworkData;
+            this.OnDatabaseLoaded();
         }
 
+
+
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Private Methods
+        private string getFilterString()
+        {
+            return String.Format("{0}='{1}'", NetworkDatabase.ColumnRoleId, (ushort)this.m_networkSet);
+        }
+
+        private void setSelections(NetworkSet networkSet, int trainingLayer)
+        {
+            foreach (DataGridViewRow viewRow in this.dataGridView.SelectedRows)
+            {
+                DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
+                row[NetworkDatabase.ColumnRoleId] = networkSet;
+                row[NetworkDatabase.ColumnTrainingLayerId] = trainingLayer;
+            }
+        }
+
+        private void setColumns()
+        {
+
+            DataGridViewColumn column;
+
+            foreach (String colName in this.m_parentControl.NetworkData.Schema.InputColumns)
+            {
+                column = new DataGridViewColumn();
+                column.DataPropertyName = colName;
+                column.HeaderText = colName;
+                column.CellTemplate = new DataGridViewTextBoxCell();
+                column.DefaultCellStyle.BackColor = panelInputCaption.BackColor;
+                this.dataGridView.Columns.Add(column);
+            }
+
+            foreach (String colName in this.m_parentControl.NetworkData.Schema.OutputColumns)
+            {
+                column = new DataGridViewColumn();
+                column.DataPropertyName = colName;
+                column.HeaderText = colName;
+                column.CellTemplate = new DataGridViewTextBoxCell();
+                column.DefaultCellStyle.BackColor = panelOutputCaption.BackColor;
+                this.dataGridView.Columns.Add(column);
+            }
+
+            foreach (String colName in this.m_parentControl.NetworkData.Schema.StringColumns)
+            {
+                if (this.dataGridView.Columns.Contains(colName))
+                    this.dataGridView.Columns[colName].HeaderText = dataGridView.Columns[colName].DataPropertyName + " [C]";
+            }
+
+#if DEBUG
+            column = new DataGridViewColumn();
+            column.DataPropertyName = NetworkDatabase.ColumnRoleId;
+            column.HeaderText = "@Role";
+            column.CellTemplate = new DataGridViewTextBoxCell();
+            this.dataGridView.Columns.Add(column);
+
+            column = new DataGridViewColumn();
+            column.DataPropertyName = NetworkDatabase.ColumnTrainingLayerId;
+            column.HeaderText = "@Training Set";
+            column.CellTemplate = new DataGridViewTextBoxCell();
+            this.dataGridView.Columns.Add(column);
+#endif
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Data Import
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog.ShowDialog();
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                this.OnDataImported(CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, CsvDelimiter.Tabulation));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error opening file");
+                throw ex;
+            }
+
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region DataGridView Menus
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+
+            DataRowView drv = (BindingSource.Current as DataRowView);
+
+            if (drv == null)
+                return;
+
+            this.MenuTesting.Checked = false;
+            this.MenuTraining.Checked = false;
+            this.MenuValidation.Checked = false;
+
+            
+                if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Testing)
+                    this.MenuTesting.Checked = true;
+                else if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Training)
+                    this.MenuTraining.Checked = true;
+                else if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Validation)
+                    this.MenuValidation.Checked = true;
+            
+
+            //Populate Training Menu
+            ToolStripMenuItem[] items = new ToolStripMenuItem[5];
+            int layerNumber;
+
+            for (int i = 0; i < items.Length; ++i)
+            {
+                layerNumber = (UInt16)(i + 1);
+                items[i] = new ToolStripMenuItem();
+                items[i].Checked = drv.Row[NetworkDatabase.ColumnTrainingLayerId].Equals(layerNumber);
+                items[i].Text = layerNumber.ToString();
+                items[i].Tag = layerNumber;
+                items[i].Click += new EventHandler(layerMenuItem_Click);
+            }
+
+            this.MenuTraining.DropDownItems.AddRange(items);
+
+        }
+
+        private void layerMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+
+            if (item.Tag is int)
+            {
+                this.setSelections(NetworkSet.Training, (int)item.Tag);
+            }
+        }
+
+        private void MenuTraining_Click(object sender, EventArgs e)
+        {
+            this.setSelections(NetworkSet.Training, 1);
+        }
+
+        private void MenuValidation_Click(object sender, EventArgs e)
+        {
+            this.setSelections(NetworkSet.Validation, 0);
+        }
+
+        private void MenuTesting_Click(object sender, EventArgs e)
+        {
+            this.setSelections(NetworkSet.Testing, 0);
+        }
+        #endregion
+
+
+        #region DataGridView Events
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (this.ParentControl.SelectionChanged != null)
@@ -169,69 +344,6 @@ namespace Sinapse.Controls.NetworkDataTab
                     }
                 }
             }
-        }
-
-        #endregion
-
-
-        //----------------------------------------
-
-
-        #region Private Methods
-        private void setColumns()
-        {
-            DataGridViewColumn column;
-
-            foreach (String colName in this.m_parentControl.NetworkData.Schema.InputColumns)
-            {
-                column = new DataGridViewColumn();
-                column.DataPropertyName = colName;
-                column.HeaderText = colName;
-                column.CellTemplate = new DataGridViewTextBoxCell();
-                column.DefaultCellStyle.BackColor = panelInputCaption.BackColor;
-                this.dataGridView.Columns.Add(column);
-            }
-
-            foreach (String colName in this.m_parentControl.NetworkData.Schema.OutputColumns)
-            {
-                column = new DataGridViewColumn();
-                column.DataPropertyName = colName;
-                column.HeaderText = colName;
-                column.CellTemplate = new DataGridViewTextBoxCell();
-                column.DefaultCellStyle.BackColor = panelOutputCaption.BackColor;
-                this.dataGridView.Columns.Add(column);
-            }
-
-            foreach (String colName in this.m_parentControl.NetworkData.Schema.StringColumns)
-            {
-                if (this.dataGridView.Columns.Contains(colName))
-                    this.dataGridView.Columns[colName].HeaderText = dataGridView.Columns[colName].DataPropertyName + " [C]";
-            }
-        }
-        #endregion
-
-
-        //----------------------------------------
-
-
-        #region Data Import
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            this.openFileDialog.ShowDialog();
-        }
-
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                this.OnDataImported(CsvParser.Parse(openFileDialog.FileName, Encoding.Default, true, CsvDelimiter.Tabulation));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error opening file");
-                throw ex;
-            }
-
         }
         #endregion
 

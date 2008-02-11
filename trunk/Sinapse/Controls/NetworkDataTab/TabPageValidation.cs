@@ -32,17 +32,15 @@ namespace Sinapse.Controls.NetworkDataTab
     internal sealed partial class TabPageValidation : TabPageBase
     {
 
-        internal override NetworkSet GetNetworkSet()
-        {
-            return NetworkSet.Validation;
-        }
 
         //----------------------------------------
+
 
         #region Constructor
         public TabPageValidation(NetworkDataTabControl parentControl) : base(parentControl)
         {
             InitializeComponent();
+            SetUp(NetworkSet.Validation);
         }
         #endregion
 

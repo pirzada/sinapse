@@ -65,7 +65,7 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             if (!DesignMode)
             {
-                this.TabPages.Add(CreateTab(m_tabTraining, "Training Sets", 0));
+                this.TabPages.Add(CreateTab(m_tabTraining, "Training Set", 0));
                 this.TabPages.Add(CreateTab(m_tabValidation, "Validation Set", 1));
                 this.TabPages.Add(CreateTab(m_tabTesting, "Testing Set", 2));
             }
@@ -87,9 +87,16 @@ namespace Sinapse.Controls.NetworkDataTab
             }
             set
             {
-                if (this.m_networkData != value)
+                this.m_networkData = value;
+
+                if (value != null)
                 {
+                    this.Enabled = true;
                     this.OnDatabaseLoaded();
+                }
+                else
+                {
+                    this.Enabled = false;
                 }
             }
         }
@@ -130,7 +137,7 @@ namespace Sinapse.Controls.NetworkDataTab
         private void OnDatabaseLoaded()
         {
             if (this.DatabaseLoaded != null)
-                this.SchemaChanged.Invoke(this, EventArgs.Empty);
+                this.DatabaseLoaded.Invoke(this, EventArgs.Empty);
         }
         #endregion
 

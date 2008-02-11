@@ -32,10 +32,6 @@ namespace Sinapse.Controls.NetworkDataTab
     internal sealed partial class TabPageTesting : TabPageBase
     {
 
-        internal override NetworkSet GetNetworkSet()
-        {
-            return NetworkSet.Testing;
-        }
 
         //----------------------------------------
 
@@ -44,6 +40,7 @@ namespace Sinapse.Controls.NetworkDataTab
         public TabPageTesting(NetworkDataTabControl parentControl) : base(parentControl)
         {
             InitializeComponent();
+            SetUp(NetworkSet.Testing);
         }
         #endregion
 

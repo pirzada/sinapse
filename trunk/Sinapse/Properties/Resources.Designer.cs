@@ -95,6 +95,20 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap edit_add {
+            get {
+                object obj = ResourceManager.GetObject("edit_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap edit_remove {
+            get {
+                object obj = ResourceManager.GetObject("edit_remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap editclear {
             get {
                 object obj = ResourceManager.GetObject("editclear", resourceCulture);
@@ -378,6 +392,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap player_time {
             get {
                 object obj = ResourceManager.GetObject("player_time", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap redled {
+            get {
+                object obj = ResourceManager.GetObject("redled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

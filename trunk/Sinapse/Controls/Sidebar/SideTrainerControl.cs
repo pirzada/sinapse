@@ -48,8 +48,8 @@ namespace Sinapse.Controls.Sidebar
         private NetworkContainer m_neuralNetwork;
 
         private NetworkState m_networkState;
-        private GraphDialog  m_graphDialog;
-        
+        private GraphDialog m_graphDialog;
+
 
 
         //---------------------------------------------
@@ -62,6 +62,17 @@ namespace Sinapse.Controls.Sidebar
 
             this.m_graphDialog = new GraphDialog();
             this.m_networkState = new NetworkState();
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Control Events
+        private void SideTrainerControl_Load(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -107,7 +118,7 @@ namespace Sinapse.Controls.Sidebar
 
         //---------------------------------------------
 
-       
+
         #region Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -195,7 +206,7 @@ namespace Sinapse.Controls.Sidebar
 
         public void Start(NetworkVectors trainingVectors, NetworkVectors validationVectors)
         {
-            
+
             NetworkOptions options = new NetworkOptions();
             options.momentum = (double)numMomentum.Value;
             options.learningRate = (double)numLearningRate.Value;
@@ -210,7 +221,7 @@ namespace Sinapse.Controls.Sidebar
 
             HistoryListener.Write("Starting thread");
             this.backgroundWorker.RunWorkerAsync(options);
-        
+
         }
         #endregion
 
@@ -233,7 +244,7 @@ namespace Sinapse.Controls.Sidebar
         #region Thread
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            
+
             if (!(e.Argument is NetworkOptions))
             {
                 HistoryListener.Write("Bad thread argument!");
@@ -241,10 +252,10 @@ namespace Sinapse.Controls.Sidebar
                 e.Cancel = true;
                 return;
             }
-            
 
-            NetworkOptions options = (NetworkOptions)e.Argument;                       
-            
+
+            NetworkOptions options = (NetworkOptions)e.Argument;
+
 
             //Create Teacher
             BackPropagationLearning networkTeacher = new BackPropagationLearning(m_neuralNetwork.ActivationNetwork);
@@ -254,7 +265,7 @@ namespace Sinapse.Controls.Sidebar
             //Start Training
             bool stop = false;
             int lastReportEpoch = 0;
-                              
+
             HistoryListener.Write("Training");
             backgroundWorker.ReportProgress(0);
 
@@ -326,15 +337,15 @@ namespace Sinapse.Controls.Sidebar
 
             this.UpdateStatus();
         }
-        
+
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.m_neuralNetwork.Precision = this.m_networkState.ErrorTraining;
-            
+
             if (e.Cancelled)
             {
-                HistoryListener.Write("Training stopped");    
+                HistoryListener.Write("Training stopped");
             }
             else
             {
@@ -346,6 +357,6 @@ namespace Sinapse.Controls.Sidebar
         }
         #endregion
 
-        
+
     }
 }

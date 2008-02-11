@@ -34,11 +34,17 @@ namespace Sinapse.Controls.NetworkDataTab
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnImport = new System.Windows.Forms.Button();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.changeRowsToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuTraining = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuValidation = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuTesting = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnImport = new System.Windows.Forms.Button();
             this.BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +63,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.panelInputCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panelInputCaption.BackColor = System.Drawing.Color.Honeydew;
             this.panelInputCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelInputCaption.Location = new System.Drawing.Point(5, 377);
+            this.panelInputCaption.Location = new System.Drawing.Point(3, 377);
             this.panelInputCaption.Name = "panelInputCaption";
             this.panelInputCaption.Size = new System.Drawing.Size(14, 12);
             this.panelInputCaption.TabIndex = 26;
@@ -91,23 +97,50 @@ namespace Sinapse.Controls.NetworkDataTab
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.ContextMenuStrip = this.contextMenuStrip;
             this.dataGridView.Location = new System.Drawing.Point(3, 33);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(582, 337);
             this.dataGridView.TabIndex = 22;
             // 
-            // btnImport
+            // contextMenuStrip
             // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImport.Image = global::Sinapse.Properties.Resources.network_22;
-            this.btnImport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnImport.Location = new System.Drawing.Point(515, 372);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(70, 23);
-            this.btnImport.TabIndex = 27;
-            this.btnImport.Text = "Import";
-            this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImport.UseVisualStyleBackColor = true;
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeRowsToToolStripMenuItem,
+            this.MenuTraining,
+            this.MenuValidation,
+            this.MenuTesting});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(161, 114);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // changeRowsToToolStripMenuItem
+            // 
+            this.changeRowsToToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeRowsToToolStripMenuItem.Name = "changeRowsToToolStripMenuItem";
+            this.changeRowsToToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.changeRowsToToolStripMenuItem.Text = "Mark rows as";
+            // 
+            // MenuTraining
+            // 
+            this.MenuTraining.Name = "MenuTraining";
+            this.MenuTraining.Size = new System.Drawing.Size(160, 22);
+            this.MenuTraining.Text = "Training data";
+            this.MenuTraining.Click += new System.EventHandler(this.MenuTraining_Click);
+            // 
+            // MenuValidation
+            // 
+            this.MenuValidation.Name = "MenuValidation";
+            this.MenuValidation.Size = new System.Drawing.Size(160, 22);
+            this.MenuValidation.Text = "Validation data";
+            this.MenuValidation.Click += new System.EventHandler(this.MenuValidation_Click);
+            // 
+            // MenuTesting
+            // 
+            this.MenuTesting.Name = "MenuTesting";
+            this.MenuTesting.Size = new System.Drawing.Size(160, 22);
+            this.MenuTesting.Text = "Testing data";
+            this.MenuTesting.Click += new System.EventHandler(this.MenuTesting_Click);
             // 
             // label1
             // 
@@ -126,6 +159,20 @@ namespace Sinapse.Controls.NetworkDataTab
             this.openFileDialog.Title = "Import Data";
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
+            // btnImport
+            // 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImport.Image = global::Sinapse.Properties.Resources.network_22;
+            this.btnImport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnImport.Location = new System.Drawing.Point(515, 372);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(70, 23);
+            this.btnImport.TabIndex = 27;
+            this.btnImport.Text = "Import";
+            this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // TabPageBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,6 +188,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.Size = new System.Drawing.Size(588, 398);
             this.Load += new System.EventHandler(this.TabPageBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -158,5 +206,10 @@ namespace Sinapse.Controls.NetworkDataTab
         protected internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         protected internal System.Windows.Forms.BindingSource BindingSource;
+        private System.Windows.Forms.ToolStripMenuItem changeRowsToToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuTraining;
+        private System.Windows.Forms.ToolStripMenuItem MenuValidation;
+        private System.Windows.Forms.ToolStripMenuItem MenuTesting;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
     }
 }

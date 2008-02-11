@@ -23,6 +23,8 @@ namespace Sinapse.Controls
         public StatusBarControl()
         {
             InitializeComponent();
+
+            this.ResetControl();
         }
         #endregion
 
@@ -42,6 +44,13 @@ namespace Sinapse.Controls
         internal void UpdateSelectedItems(int selected, int total)
         {
             this.lbItems.Text = String.Format("{0}/{1}", selected, total);
+        }
+
+        internal void ResetControl()
+        {
+            this.UpdateNetworkState(new NetworkState());
+            this.UpdateSelectedItems(0, 0);
+            this.lbStatus.Text = String.Empty;
         }
         #endregion
 
