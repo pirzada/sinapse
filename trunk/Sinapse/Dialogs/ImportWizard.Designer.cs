@@ -33,8 +33,11 @@ namespace Sinapse.Dialogs
             this.wizardControl = new WizardBase.WizardControl();
             this.startStep = new WizardBase.StartStep();
             this.intermediateStep1 = new WizardBase.IntermediateStep();
+            this.cbDelimiter = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnAutodetect = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbDatapath = new System.Windows.Forms.TextBox();
@@ -50,9 +53,6 @@ namespace Sinapse.Dialogs
             this.clbString = new System.Windows.Forms.CheckedListBox();
             this.finishStep = new WizardBase.FinishStep();
             this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbDelimiter = new System.Windows.Forms.ComboBox();
-            this.btnAutodetect = new System.Windows.Forms.Button();
             this.intermediateStep1.SuspendLayout();
             this.intermediateStep2.SuspendLayout();
             this.intermediateStep3.SuspendLayout();
@@ -116,6 +116,28 @@ namespace Sinapse.Dialogs
             this.intermediateStep1.Title = "Data Location";
             this.intermediateStep1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             // 
+            // cbDelimiter
+            // 
+            this.cbDelimiter.FormattingEnabled = true;
+            this.cbDelimiter.Items.AddRange(new object[] {
+            "Comma",
+            "Semi-colon",
+            "Space",
+            "Tab"});
+            this.cbDelimiter.Location = new System.Drawing.Point(151, 259);
+            this.cbDelimiter.Name = "cbDelimiter";
+            this.cbDelimiter.Size = new System.Drawing.Size(84, 21);
+            this.cbDelimiter.TabIndex = 6;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(24, 263);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(121, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Field delimiter character:";
+            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,8 +146,8 @@ namespace Sinapse.Dialogs
             this.label2.Size = new System.Drawing.Size(472, 48);
             this.label2.TabIndex = 4;
             this.label2.Text = "The training samples should be presented as a field delimited file. Delimiter car" +
-                "acters may be commas, semicolons or tabulations, which I hope will be detected f" +
-                "rom your data automatically.";
+                "acters may be commas, semicolons or tabulations, which can be detected from your" +
+                " data automatically.";
             // 
             // label4
             // 
@@ -135,6 +157,16 @@ namespace Sinapse.Dialogs
             this.label4.Size = new System.Drawing.Size(445, 90);
             this.label4.TabIndex = 4;
             this.label4.Text = resources.GetString("label4.Text");
+            // 
+            // btnAutodetect
+            // 
+            this.btnAutodetect.Location = new System.Drawing.Point(241, 258);
+            this.btnAutodetect.Name = "btnAutodetect";
+            this.btnAutodetect.Size = new System.Drawing.Size(232, 23);
+            this.btnAutodetect.TabIndex = 2;
+            this.btnAutodetect.Text = "Attempt auto-detection from specified file:";
+            this.btnAutodetect.UseVisualStyleBackColor = true;
+            this.btnAutodetect.Click += new System.EventHandler(this.btnAutodetect_Click);
             // 
             // btnBrowse
             // 
@@ -280,38 +312,6 @@ namespace Sinapse.Dialogs
             this.label5.TabIndex = 0;
             this.label5.Text = "We are ready to begin manipulating your data.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(24, 263);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(121, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Field delimiter character:";
-            // 
-            // cbDelimiter
-            // 
-            this.cbDelimiter.FormattingEnabled = true;
-            this.cbDelimiter.Items.AddRange(new object[] {
-            "Comma",
-            "Semi-colon",
-            "Space",
-            "Tab"});
-            this.cbDelimiter.Location = new System.Drawing.Point(151, 259);
-            this.cbDelimiter.Name = "cbDelimiter";
-            this.cbDelimiter.Size = new System.Drawing.Size(84, 21);
-            this.cbDelimiter.TabIndex = 6;
-            // 
-            // btnAutodetect
-            // 
-            this.btnAutodetect.Location = new System.Drawing.Point(241, 258);
-            this.btnAutodetect.Name = "btnAutodetect";
-            this.btnAutodetect.Size = new System.Drawing.Size(232, 23);
-            this.btnAutodetect.TabIndex = 2;
-            this.btnAutodetect.Text = "Attempt auto-detection from specified file:";
-            this.btnAutodetect.UseVisualStyleBackColor = true;
-            this.btnAutodetect.Click += new System.EventHandler(this.btnAutodetect_Click);
             // 
             // ImportWizard
             // 

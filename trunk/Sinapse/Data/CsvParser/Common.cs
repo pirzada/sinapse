@@ -43,7 +43,7 @@ namespace Sinapse.Data.CsvParser
     public enum CsvDelimiter
     {
         Comma = ',',
-        SemiColon = ';',
+        Semicolon = ';',
         Space = ' ',
         Tabulation = '\t',
     }

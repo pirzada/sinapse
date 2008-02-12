@@ -2,17 +2,29 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sinapse.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="display_refreshRate" Type="System.UInt32" Scope="User">
-      <Value Profile="(Default)">500</Value>
-    </Setting>
-    <Setting Name="Graph_location" Type="System.Drawing.Point" Scope="User">
+    <Setting Name="graph_Location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">600, 500</Value>
     </Setting>
-    <Setting Name="Main_Location" Type="System.Drawing.Point" Scope="User">
+    <Setting Name="main_Location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">200, 200</Value>
     </Setting>
-    <Setting Name="Main_windowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+    <Setting Name="main_WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="graph_Autoupdate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="main_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">800, 600</Value>
+    </Setting>
+    <Setting Name="graph_Launch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="graph_UpdateRate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">350</Value>
+    </Setting>
+    <Setting Name="display_UpdateRate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
     </Setting>
   </Settings>
 </SettingsFile>

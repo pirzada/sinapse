@@ -50,6 +50,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbStart = new System.Windows.Forms.PictureBox();
             this.pbForget = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbGraph = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMomentum)).BeginInit();
@@ -97,7 +98,7 @@ namespace Sinapse.Controls.Sidebar
             // cbValidationStop
             // 
             this.cbValidationStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbValidationStop.Location = new System.Drawing.Point(12, 274);
+            this.cbValidationStop.Location = new System.Drawing.Point(12, 231);
             this.cbValidationStop.Name = "cbValidationStop";
             this.cbValidationStop.Size = new System.Drawing.Size(169, 31);
             this.cbValidationStop.TabIndex = 28;
@@ -106,7 +107,7 @@ namespace Sinapse.Controls.Sidebar
             // cbValidate
             // 
             this.cbValidate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbValidate.Location = new System.Drawing.Point(12, 211);
+            this.cbValidate.Location = new System.Drawing.Point(12, 190);
             this.cbValidate.Name = "cbValidate";
             this.cbValidate.Size = new System.Drawing.Size(169, 45);
             this.cbValidate.TabIndex = 29;
@@ -117,7 +118,7 @@ namespace Sinapse.Controls.Sidebar
             // 
             this.cbChangeRate.AutoSize = true;
             this.cbChangeRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbChangeRate.Location = new System.Drawing.Point(12, 124);
+            this.cbChangeRate.Location = new System.Drawing.Point(12, 117);
             this.cbChangeRate.Name = "cbChangeRate";
             this.cbChangeRate.Size = new System.Drawing.Size(118, 16);
             this.cbChangeRate.TabIndex = 30;
@@ -181,7 +182,7 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numMomentum.Location = new System.Drawing.Point(129, 164);
+            this.numMomentum.Location = new System.Drawing.Point(129, 140);
             this.numMomentum.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -195,7 +196,7 @@ namespace Sinapse.Controls.Sidebar
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 166);
+            this.label4.Location = new System.Drawing.Point(9, 142);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 22;
@@ -204,7 +205,7 @@ namespace Sinapse.Controls.Sidebar
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 102);
+            this.label5.Location = new System.Drawing.Point(9, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 21;
@@ -221,7 +222,7 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numChangeRate.Location = new System.Drawing.Point(129, 123);
+            this.numChangeRate.Location = new System.Drawing.Point(129, 116);
             this.numChangeRate.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -247,7 +248,7 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numLearningRate.Location = new System.Drawing.Point(129, 100);
+            this.numLearningRate.Location = new System.Drawing.Point(129, 93);
             this.numLearningRate.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -266,7 +267,7 @@ namespace Sinapse.Controls.Sidebar
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 325);
+            this.label1.Location = new System.Drawing.Point(16, 272);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 34;
@@ -282,7 +283,7 @@ namespace Sinapse.Controls.Sidebar
             0,
             0,
             65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(129, 323);
+            this.numericUpDown1.Location = new System.Drawing.Point(129, 270);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -385,6 +386,7 @@ namespace Sinapse.Controls.Sidebar
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.rbErrorLimit);
             this.panel1.Controls.Add(this.rbEpochLimit);
+            this.panel1.Controls.Add(this.cbGraph);
             this.panel1.Controls.Add(this.cbValidationStop);
             this.panel1.Controls.Add(this.cbValidate);
             this.panel1.Controls.Add(this.cbChangeRate);
@@ -400,6 +402,21 @@ namespace Sinapse.Controls.Sidebar
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(189, 362);
             this.panel1.TabIndex = 37;
+            // 
+            // cbGraph
+            // 
+            this.cbGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbGraph.AutoSize = true;
+            this.cbGraph.Checked = global::Sinapse.Properties.Settings.Default.graph_Launch;
+            this.cbGraph.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbGraph.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Launch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbGraph.Location = new System.Drawing.Point(12, 335);
+            this.cbGraph.Name = "cbGraph";
+            this.cbGraph.Size = new System.Drawing.Size(162, 16);
+            this.cbGraph.TabIndex = 28;
+            this.cbGraph.Text = "Launch graph when training starts";
             // 
             // SideTrainerControl
             // 
@@ -458,5 +475,6 @@ namespace Sinapse.Controls.Sidebar
         private System.Windows.Forms.PictureBox pbGraph;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbGraph;
     }
 }

@@ -123,8 +123,8 @@ namespace Sinapse.Forms
                     this.MenuDatabaseSaveAs.Enabled = false;
                     this.MenuDatabaseEdit.Enabled = false;
 
-                    this.lbInputCount.Text = "0";
-                    this.lbOutputCount.Text = "0";
+                    this.lbInputCount.Text = "00";
+                    this.lbOutputCount.Text = "00";
                 }
             }
         }
@@ -158,8 +158,13 @@ namespace Sinapse.Forms
         {
             if (!this.DesignMode)
             {
-                //Wire up controls and events
-                //this.tabControlNetworkData.DataChanged += networkDataControl_SelectionChanged;
+                // Set form Sizing and Location
+                this.Size = Properties.Settings.Default.main_Size;
+                this.Location = Properties.Settings.Default.main_Location;
+                this.WindowState = Properties.Settings.Default.main_WindowState;
+
+
+                // Wire up controls and events
                 this.tabControlNetworkData.SelectionChanged += networkDataControl_SelectionChanged;
 
                 this.sideTrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
@@ -177,9 +182,19 @@ namespace Sinapse.Forms
         {
             HistoryListener.Write("Exiting...");
 
-            if (this.sideTrainerControl.IsTraining)
+            this.sideTrainerControl.Stop();
+            this.sideTrainerControl.Close();
+
+            Properties.Settings.Default.main_WindowState = this.WindowState;
+            if (this.WindowState == FormWindowState.Normal)
             {
-                this.sideTrainerControl.Stop();
+                Properties.Settings.Default.main_Size = this.Size;
+                Properties.Settings.Default.main_Location = this.Location;
+            }
+            else
+            {
+                Properties.Settings.Default.main_Size = this.RestoreBounds.Size;
+                Properties.Settings.Default.main_Location = this.RestoreBounds.Location;
             }
         }
         #endregion
@@ -202,8 +217,8 @@ namespace Sinapse.Forms
         #region Network Trainer Control Events
         private void sideTrainerControl_DataNeeded(object sender, EventArgs e)
         {
-            NetworkVectors trainingVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Training);
-            NetworkVectors validationVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Validation);
+            TrainingVectors trainingVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Training);
+            TrainingVectors validationVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Validation);
 
             this.sideTrainerControl.Start(trainingVectors, validationVectors);
         }
@@ -260,14 +275,14 @@ namespace Sinapse.Forms
             ImportWizard importWizard = new ImportWizard();
             if (importWizard.ShowDialog(this) == DialogResult.OK)
             {
-                this.tabControlNetworkData.NetworkData = importWizard.GetNetworkData();
+                this.CurrentNetworkDatabase = importWizard.GetNetworkData();
                 if (this.CurrentNetworkContainer == null)
                 {
                     if (MessageBox.Show("Data imported successfuly. Would you like to create" +
                         "the neural network now?", "Import Complete", MessageBoxButtons.YesNo)
                         == DialogResult.Yes)
                     {
-                        MenuNetworkNew_Click(this, e);
+                        this.MenuNetworkNew_Click(this, e);
                     }
                 }
             }
@@ -301,15 +316,25 @@ namespace Sinapse.Forms
         #region Menu Network
         private void MenuNetworkNew_Click(object sender, EventArgs e)
         {
-            if (this.CurrentNetworkContainer != null &&
+            if (this.m_networkDatabase == null)
+            {
+                MessageBox.Show("Please import or create a database schema before creating the Network.");
+                return;
+            }
+
+            if (this.CurrentNetworkContainer == null || 
+                (this.CurrentNetworkContainer != null &&
                 MessageBox.Show("Would you like to overwrite your current network?" +
                                 "\nAny unsaved training sessions will be lost. Are you sure?",
-                                "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No)
+                                "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No))
             {
-                NetworkCreationDialog creationDlg = new NetworkCreationDialog(m_networkContainer.Schema);
-                if (creationDlg.ShowDialog() == DialogResult.OK)
+                NetworkCreationDialog creationDlg = new NetworkCreationDialog(m_networkDatabase.Schema);
+                if (creationDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     this.CurrentNetworkContainer = creationDlg.CreateNetworkContainer();
+                    
+                    //TODO: make this optional.
+                    this.tabControlSidebar.SelectedTab = this.tabTraining;
                 }
             }
         }

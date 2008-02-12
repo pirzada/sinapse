@@ -144,10 +144,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\NetworkWorkplace.cs" />
-    <Compile Include="Data\Structures\NetworkOptions.cs" />
-    <Compile Include="Data\Structures\NetworkState.cs" />
+    <Compile Include="Data\Structures\TrainingOptions.cs" />
+    <Compile Include="Data\Structures\TrainingStatus.cs" />
     <Compile Include="Data\NetworkContainer.cs" />
-    <Compile Include="Data\Structures\NetworkVectors.cs" />
+    <Compile Include="Data\Structures\TrainingVectors.cs" />
     <Compile Include="Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

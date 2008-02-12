@@ -47,8 +47,10 @@ namespace Sinapse.Controls.Sidebar
 
         private NetworkContainer m_neuralNetwork;
 
-        private NetworkState m_networkState;
+        private TrainingStatus m_networkState;
         private GraphDialog m_graphDialog;
+
+        private bool m_trainingPaused;
 
 
 
@@ -56,12 +58,12 @@ namespace Sinapse.Controls.Sidebar
 
 
         #region Constructor
-        public SideTrainerControl()
+        internal SideTrainerControl()
         {
             InitializeComponent();
 
             this.m_graphDialog = new GraphDialog();
-            this.m_networkState = new NetworkState();
+            this.m_networkState = new TrainingStatus();
         }
         #endregion
 
@@ -72,7 +74,7 @@ namespace Sinapse.Controls.Sidebar
         #region Control Events
         private void SideTrainerControl_Load(object sender, EventArgs e)
         {
-
+            
         }
         #endregion
 
@@ -104,7 +106,7 @@ namespace Sinapse.Controls.Sidebar
             }
         }
 
-        public NetworkState NetworkState
+        public TrainingStatus NetworkState
         {
             get { return this.m_networkState; }
         }
@@ -142,7 +144,7 @@ namespace Sinapse.Controls.Sidebar
 
         private void pbGraph_Click(object sender, EventArgs e)
         {
-            this.m_graphDialog.Show();
+            this.m_graphDialog.Show(this.ParentForm);
         }
         #endregion
 
@@ -151,18 +153,26 @@ namespace Sinapse.Controls.Sidebar
 
 
         #region Public Methods
+        public void Close()
+        {
+            this.m_graphDialog.Close();
+        }
+
         public void Forget()
         {
             this.m_neuralNetwork.ActivationNetwork.Randomize();
             this.m_neuralNetwork.Precision = 0;
-            this.m_networkState = new NetworkState();
+            this.m_networkState = new TrainingStatus();
             HistoryListener.Write("Network learnings cleared");
+            this.m_trainingPaused = false;
             this.UpdateStatus();
         }
 
         public void Stop()
         {
-            this.m_networkState = new NetworkState();
+            this.m_networkState = new TrainingStatus();
+            this.m_trainingPaused = false;
+
             this.UpdateStatus();
 
             if (backgroundWorker.IsBusy)
@@ -182,6 +192,8 @@ namespace Sinapse.Controls.Sidebar
             {
                 HistoryListener.Write("Pausing Thread");
                 this.backgroundWorker.CancelAsync();
+
+                this.m_trainingPaused = true;
             }
             else
             {
@@ -204,10 +216,10 @@ namespace Sinapse.Controls.Sidebar
             }
         }
 
-        public void Start(NetworkVectors trainingVectors, NetworkVectors validationVectors)
+        public void Start(TrainingVectors trainingVectors, TrainingVectors validationVectors)
         {
 
-            NetworkOptions options = new NetworkOptions();
+            TrainingOptions options = new TrainingOptions();
             options.momentum = (double)numMomentum.Value;
             options.learningRate = (double)numLearningRate.Value;
             options.limError = (double)numErrorLimit.Value;
@@ -218,6 +230,14 @@ namespace Sinapse.Controls.Sidebar
 
             options.TrainingType = rbErrorLimit.Checked ? TrainingType.ByError : TrainingType.ByEpoch;
 
+            if (this.m_trainingPaused)
+            {
+                this.m_trainingPaused = false;
+                this.m_graphDialog.ClearGraph();
+            }
+
+            if (this.cbGraph.Checked && !this.m_graphDialog.Visible)
+                this.m_graphDialog.Show(this.ParentForm);
 
             HistoryListener.Write("Starting thread");
             this.backgroundWorker.RunWorkerAsync(options);
@@ -245,16 +265,14 @@ namespace Sinapse.Controls.Sidebar
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            if (!(e.Argument is NetworkOptions))
+            if (!(e.Argument is TrainingOptions))
             {
-                HistoryListener.Write("Bad thread argument!");
-                backgroundWorker.ReportProgress(0);
+                backgroundWorker.ReportProgress(0, "Bad thread argument!");
                 e.Cancel = true;
                 return;
             }
 
-
-            NetworkOptions options = (NetworkOptions)e.Argument;
+            TrainingOptions options = (TrainingOptions)e.Argument;
 
 
             //Create Teacher
@@ -264,29 +282,40 @@ namespace Sinapse.Controls.Sidebar
 
             //Start Training
             bool stop = false;
-            int lastReportEpoch = 0;
+            int lastStatusEpoch = 0;
+            int lastGraphEpoch = 0;
 
-            HistoryListener.Write("Training");
-            backgroundWorker.ReportProgress(0);
+            backgroundWorker.ReportProgress(0, "Training");
 
 
             while (!stop)
             {
 
-
                 #region Training Epoch
                 this.m_networkState.ErrorTraining = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output);
-                this.m_graphDialog.TrainingCurve.AddPoint(m_networkState.Epoch, m_networkState.ErrorTraining);
-
                 this.m_networkState.ErrorValidation = networkTeacher.MeasureEpochError(options.ValidationVectors.Input, options.ValidationVectors.Output);
-                this.m_graphDialog.ValidationCurve.AddPoint(m_networkState.Epoch, m_networkState.ErrorValidation);
+                #endregion
 
-                m_networkState.Epoch++;
+
+                #region Graph Update
+                if (m_networkState.Epoch >= lastGraphEpoch + Properties.Settings.Default.graph_UpdateRate)
+                {
+                    this.m_graphDialog.TrainingPoints.Add(m_networkState.Epoch, m_networkState.ErrorTraining);
+                    this.m_graphDialog.ValidationPoints.Add(m_networkState.Epoch, m_networkState.ErrorValidation);
+
+                    if (this.m_graphDialog.Visible && this.m_graphDialog.AutoUpdate)
+                    {
+                        this.m_graphDialog.UpdateGraph();
+                    }
+
+                    lastGraphEpoch = m_networkState.Epoch;
+
+                }
                 #endregion
 
 
                 #region GUI Update
-                if (m_networkState.Epoch >= lastReportEpoch + Properties.Settings.Default.display_refreshRate)
+                if (m_networkState.Epoch >= lastStatusEpoch + Properties.Settings.Default.display_UpdateRate)
                 {
                     if (options.TrainingType == TrainingType.ByError)
                     {
@@ -298,11 +327,14 @@ namespace Sinapse.Controls.Sidebar
                         if (m_networkState.Epoch != 0)
                             m_networkState.Progress = Math.Max(Math.Min((int)((m_networkState.Epoch * 100) / options.limEpoch), 100), 0);
                     }
-
+                  
                     backgroundWorker.ReportProgress(0);
-                    lastReportEpoch = m_networkState.Epoch;
+                    lastStatusEpoch = m_networkState.Epoch;
                 }
                 #endregion
+
+                m_networkState.Epoch++;
+
 
 
                 //Determine if there is need to stop
@@ -325,16 +357,18 @@ namespace Sinapse.Controls.Sidebar
                 }
             }
 
-            backgroundWorker.ReportProgress(100);
+            backgroundWorker.ReportProgress(0);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (this.m_graphDialog.Visible && this.m_graphDialog.AutoUpdate)
-            {
-                this.m_graphDialog.UpdateGraph();
-            }
+            //Update Status Text
+            string statusText = e.UserState as string;
 
+            if (statusText != null)
+                HistoryListener.Write(statusText);
+
+            //Notify StatusbarControl to update information
             this.UpdateStatus();
         }
 
@@ -350,6 +384,9 @@ namespace Sinapse.Controls.Sidebar
             else
             {
                 HistoryListener.Write("Training Finished!");
+
+                this.m_networkState.Progress = 100;
+                this.UpdateStatus();
 
                 if (this.TrainingComplete != null)
                     this.TrainingComplete.Invoke(this, EventArgs.Empty);

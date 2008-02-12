@@ -50,73 +50,57 @@ namespace Sinapse.Controls
             this.lbItems});
             this.statusStrip.Location = new System.Drawing.Point(0, 0);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(817, 22);
+            this.statusStrip.Size = new System.Drawing.Size(910, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip";
             // 
             // lbStatus
             // 
             this.lbStatus.AutoSize = false;
-            this.lbStatus.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lbStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(200, 17);
+            this.lbStatus.Size = new System.Drawing.Size(206, 17);
+            this.lbStatus.Spring = true;
             this.lbStatus.Text = "lbStatus";
             // 
             // progressBar
             // 
+            this.progressBar.AutoSize = false;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(250, 16);
+            this.progressBar.Size = new System.Drawing.Size(350, 16);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
             // lbEpoch
             // 
-            this.lbEpoch.AutoSize = false;
-            this.lbEpoch.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lbEpoch.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbEpoch.Name = "lbEpoch";
-            this.lbEpoch.Size = new System.Drawing.Size(94, 17);
-            this.lbEpoch.Spring = true;
+            this.lbEpoch.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbEpoch.Size = new System.Drawing.Size(54, 17);
             this.lbEpoch.Text = "lbEpoch";
             // 
             // lbTrainingError
             // 
-            this.lbTrainingError.AutoSize = false;
-            this.lbTrainingError.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lbTrainingError.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbTrainingError.Name = "lbTrainingError";
-            this.lbTrainingError.Size = new System.Drawing.Size(94, 17);
-            this.lbTrainingError.Spring = true;
+            this.lbTrainingError.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbTrainingError.Size = new System.Drawing.Size(87, 17);
             this.lbTrainingError.Text = "lbTrainingError";
             // 
             // lbValidationError
             // 
-            this.lbValidationError.AutoSize = false;
-            this.lbValidationError.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lbValidationError.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbValidationError.Name = "lbValidationError";
-            this.lbValidationError.Size = new System.Drawing.Size(94, 17);
-            this.lbValidationError.Spring = true;
+            this.lbValidationError.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbValidationError.Size = new System.Drawing.Size(95, 17);
             this.lbValidationError.Text = "lbValidationError";
             // 
             // lbItems
             // 
-            this.lbItems.AutoSize = false;
-            this.lbItems.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lbItems.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbItems.Name = "lbItems";
-            this.lbItems.Size = new System.Drawing.Size(62, 17);
+            this.lbItems.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbItems.Size = new System.Drawing.Size(68, 17);
             this.lbItems.Text = "lbSelection";
             // 
             // StatusBarControl
@@ -127,7 +111,7 @@ namespace Sinapse.Controls
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.statusStrip);
             this.Name = "StatusBarControl";
-            this.Size = new System.Drawing.Size(817, 22);
+            this.Size = new System.Drawing.Size(910, 22);
             this.Load += new System.EventHandler(this.StatusBarControl_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();

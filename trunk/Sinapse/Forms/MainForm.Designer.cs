@@ -458,7 +458,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseNew.Image = global::Sinapse.Properties.Resources.file_new;
             this.MenuDatabaseNew.Name = "MenuDatabaseNew";
-            this.MenuDatabaseNew.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseNew.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseNew.Text = "&New";
             this.MenuDatabaseNew.Click += new System.EventHandler(this.MenuFileWizard_Click);
             // 
@@ -466,7 +466,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseOpen.Image = global::Sinapse.Properties.Resources.file_open;
             this.MenuDatabaseOpen.Name = "MenuDatabaseOpen";
-            this.MenuDatabaseOpen.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseOpen.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseOpen.Text = "&Open";
             this.MenuDatabaseOpen.Click += new System.EventHandler(this.MenuDatabaseOpen_Click);
             // 
@@ -474,7 +474,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSave.Image = global::Sinapse.Properties.Resources.file_save;
             this.MenuDatabaseSave.Name = "MenuDatabaseSave";
-            this.MenuDatabaseSave.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseSave.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseSave.Text = "&Save";
             this.MenuDatabaseSave.Click += new System.EventHandler(this.MenuDatabaseSave_Click);
             // 
@@ -482,20 +482,20 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSaveAs.Image = global::Sinapse.Properties.Resources.file_saveas;
             this.MenuDatabaseSaveAs.Name = "MenuDatabaseSaveAs";
-            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseSaveAs.Text = "Save &As";
             this.MenuDatabaseSaveAs.Click += new System.EventHandler(this.MenuDatabaseSaveAs_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
             // 
             // MenuDatabaseEdit
             // 
             this.MenuDatabaseEdit.Image = global::Sinapse.Properties.Resources.edit;
             this.MenuDatabaseEdit.Name = "MenuDatabaseEdit";
-            this.MenuDatabaseEdit.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseEdit.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseEdit.Text = "&Edit Schema";
             // 
             // MenuNetwork
@@ -572,33 +572,33 @@ namespace Sinapse.Forms
             // 
             this.MenuHelpContents.Image = global::Sinapse.Properties.Resources.help;
             this.MenuHelpContents.Name = "MenuHelpContents";
-            this.MenuHelpContents.Size = new System.Drawing.Size(152, 22);
+            this.MenuHelpContents.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpContents.Text = "&Contents";
             // 
             // indexToolStripMenuItem
             // 
             this.indexToolStripMenuItem.Enabled = false;
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.indexToolStripMenuItem.Text = "&Index";
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Enabled = false;
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.searchToolStripMenuItem.Text = "&Search";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(126, 6);
             // 
             // MenuHelpAbout
             // 
             this.MenuHelpAbout.Image = global::Sinapse.Properties.Resources.network_16;
             this.MenuHelpAbout.Name = "MenuHelpAbout";
-            this.MenuHelpAbout.Size = new System.Drawing.Size(152, 22);
+            this.MenuHelpAbout.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpAbout.Text = "&About...";
             this.MenuHelpAbout.Click += new System.EventHandler(this.MenuHelpAbout_Click);
             // 
