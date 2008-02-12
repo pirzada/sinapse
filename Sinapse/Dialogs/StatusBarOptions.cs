@@ -14,13 +14,13 @@ namespace Sinapse.Dialogs
         public StatusBarOptions()
         {
             InitializeComponent();
-            numRate.Value = Properties.Settings.Default.display_refreshRate;
+            numRate.Value = Properties.Settings.Default.display_UpdateRate;
         }
 
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.display_refreshRate = (uint)numRate.Value;
+            Properties.Settings.Default.display_UpdateRate = (int)numRate.Value;
             this.Close();
         }
 

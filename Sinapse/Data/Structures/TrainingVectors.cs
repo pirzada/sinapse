@@ -20,13 +20,30 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sinapse.Data
+namespace Sinapse.Data.Structures
 {
-    internal struct NetworkState
+    struct TrainingVectors
     {
-        public int Epoch;
-        public int Progress;
-        public double ErrorTraining;
-        public double ErrorValidation;
+
+        public double[][] Input;
+        public double[][] Output;
+
+
+        public TrainingVectors(double[][] input, double[][] output)
+        {
+            this.Input = input;
+            this.Output = output;
+        }
+
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return (Input == null || Output == null ||
+                    Input.Length == 0 || Output.Length == 0);
+            }
+        }
+
     }
 }

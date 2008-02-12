@@ -1,3 +1,21 @@
+/***************************************************************************
+ *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *  ---------------------------------------------------------------------- *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *                                                                         *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 3 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ ***************************************************************************/
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,13 +29,13 @@ using ZedGraph;
 namespace Sinapse.Dialogs
 {
 
-    public partial class GraphDialog : Form
+    internal sealed partial class GraphDialog : Form
     {
 
-        LineItem trainingCurve;
-        LineItem validationCurve;
+        IPointListEdit m_trainingPoints;
+        IPointListEdit m_validationPoints;
 
-        Boolean forceClose;
+        Boolean m_forceClose;
         
 
         //---------------------------------------------
@@ -28,6 +46,7 @@ namespace Sinapse.Dialogs
         {
             InitializeComponent();
 
+            this.CreateChart(zedGraphControl);
         }
         #endregion
 
@@ -36,14 +55,14 @@ namespace Sinapse.Dialogs
 
 
         #region Properties
-        public LineItem TrainingCurve
+        public IPointListEdit TrainingPoints
         {
-            get { return trainingCurve; }
+            get { return m_trainingPoints; }
         }
 
-        public LineItem ValidationCurve
+        public IPointListEdit ValidationPoints
         {
-            get { return validationCurve; }
+            get { return m_validationPoints; }
         }
 
         public Boolean AutoUpdate
@@ -58,15 +77,23 @@ namespace Sinapse.Dialogs
 
 
         #region Public Methods
-        public void UpdateGraph()
+        internal void UpdateGraph()
         {
-            zedGraphControl.AxisChange();
+            this.zedGraphControl.AxisChange();
+            this.zedGraphControl.Invalidate();
             this.Invalidate();
         }
 
-        public new void Close()
+        internal void ClearGraph()
         {
-            this.forceClose = true;
+            this.TrainingPoints.Clear();
+            this.ValidationPoints.Clear();
+            this.UpdateGraph();
+        }
+
+        internal new void Close()
+        {
+            this.m_forceClose = true;
             base.Close();
         }
         #endregion
@@ -80,6 +107,11 @@ namespace Sinapse.Dialogs
         {
             this.UpdateGraph();
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            this.ClearGraph();
+        }
         #endregion
 
 
@@ -89,12 +121,12 @@ namespace Sinapse.Dialogs
         #region Form Events
         private void GraphDialog_Load(object sender, EventArgs e)
         {
-            this.CreateChart(zedGraphControl);
+   //         this.CreateChart(zedGraphControl);
         }
 
         private void GraphDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!this.forceClose)
+            if (!this.m_forceClose)
             {
                 e.Cancel = true;
                 this.Hide();
@@ -112,35 +144,45 @@ namespace Sinapse.Dialogs
             GraphPane myPane = zgc.GraphPane;
 
             // Set the title and axis labels
-            myPane.Title.Text = "Training Graph";
+            //myPane.Title.Text = "Training Graph";
             myPane.XAxis.Title.Text = "Epochs";
             myPane.YAxis.Title.Text = "Root-Mean-Square Error";
 
-            double[] x = new double[0];
-            double[] y = new double[0];
+            RollingPointPairList trainingList = new RollingPointPairList(1200);
+            RollingPointPairList validationList = new RollingPointPairList(1200);
 
-            // Add a smoothed curve
-            trainingCurve = myPane.AddCurve("Training Set", x, y, Color.Red, SymbolType.Diamond);
-            trainingCurve.Symbol.Fill = new Fill(Color.White);
-            trainingCurve.Symbol.Size = 5;
-            trainingCurve.Line.IsSmooth = true;
-            trainingCurve.Line.SmoothTension = 0.5F;
-            
 
-            validationCurve = myPane.AddCurve("Validation Set", x, y, Color.Blue, SymbolType.Circle);
-            validationCurve.Symbol.Fill = new Fill(Color.White);
-            validationCurve.Symbol.Size = 5;
-            validationCurve.Line.IsSmooth = true;
-            validationCurve.Line.SmoothTension = 0.5F;
+            // Add a curve
+            LineItem curve;
+
+            curve = myPane.AddCurve("Training Set", trainingList, Color.Red, SymbolType.Diamond);
+            curve.Symbol.Fill = new Fill(Color.White);
+            curve.Symbol.Size = 4;
+            m_trainingPoints = curve.Points as IPointListEdit;
+         // trainingCurve.Line.IsSmooth = true;
+         // trainingCurve.Line.SmoothTension = 0.5F;
+
+
+            curve = myPane.AddCurve("Validation Set", validationList, Color.Blue, SymbolType.Circle);
+            curve.Symbol.Fill = new Fill(Color.White);
+            curve.Symbol.Size = 4;
+            m_validationPoints = curve.Points as IPointListEdit;
+         // validationCurve.Line.IsSmooth = true;
+         // validationCurve.Line.SmoothTension = 0.5F;
+
+            myPane.XAxis.Scale.MinAuto = true;
+            myPane.XAxis.Scale.MaxAuto = true;
+            myPane.YAxis.Scale.MinAuto = true;
+            myPane.YAxis.Scale.MaxAuto = true;
+            myPane.XAxis.Scale.MagAuto = true;
+            myPane.YAxis.Scale.MagAuto = true;
 
             // Fill the axis background with a color gradient
             myPane.Chart.Fill = new Fill(Color.White, Color.LightGray, 45.0F);
 
             // Calculate the Axis Scale Ranges
             zgc.AxisChange();
-
         }
-
 
     }
 }

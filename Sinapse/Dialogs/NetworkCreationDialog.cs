@@ -26,6 +26,8 @@ namespace Sinapse.Dialogs
         {
             InitializeComponent();
             this.m_networkSchema = schema;
+
+            this.cbHiddenLayerNumber.DataSource = new int[] { 0, 1, 2, 3, 4 };
         }
         #endregion
 
@@ -63,24 +65,47 @@ namespace Sinapse.Dialogs
         {
             NetworkContainer neuralNetwork = null;
 
+            int[] hiddenLayers = new int[cbHiddenLayerNumber.SelectedIndex];
+
+            switch (hiddenLayers.Length)
+            {
+                case 0:
+                    break;
+                case 1:
+                    hiddenLayers[0] = (int)this.nHidden1.Value;
+                    break;
+                case 2:
+                    hiddenLayers[1] = (int)this.nHidden2.Value;
+                    goto case 1;
+                case 3:
+                    hiddenLayers[2] = (int)this.nHidden3.Value;
+                    goto case 2;
+                case 4:
+                    hiddenLayers[3] = (int)this.nHidden4.Value;
+                    goto case 3;
+                default:
+                    break;
+            }
+
+
             if (rbBipolarSigmoid.Checked)
             {
                 neuralNetwork = new NetworkContainer(tbNetworkName.Text, m_networkSchema,
                    new BipolarSigmoidFunction((double)numSigmoidAlpha.Value),
-                   (int)nHidden1.Value);
+                   hiddenLayers);
             }
             else if (rbSigmoid.Checked)
             {
                 neuralNetwork = new NetworkContainer(tbNetworkName.Text, m_networkSchema,
                      new SigmoidFunction((double)numSigmoidAlpha.Value),
-                     (int)nHidden1.Value);
+                     hiddenLayers);
             }
             else if (rbThreshold.Checked)
             {
                 neuralNetwork = new NetworkContainer(tbNetworkName.Text,
                     m_networkSchema,
                      new ThresholdFunction(),
-                     (int)nHidden1.Value);
+                     hiddenLayers);
             }
 
             return neuralNetwork;
@@ -113,21 +138,21 @@ namespace Sinapse.Dialogs
 
             switch (cbHiddenLayerNumber.SelectedIndex)
             {
-                case 0:
-                    lbHidden1.Enabled = false;
-                    nHidden1.Enabled = false;
-                    break;
                 case 1:
-                    lbHidden2.Enabled = false;
-                    nHidden2.Enabled = false;
-                    goto case 1;
+                    lbHidden1.Enabled = true;
+                    nHidden1.Enabled = true;
+                    break;
                 case 2:
-                    lbHidden3.Enabled = false;
-                    nHidden3.Enabled = false;
-                    goto case 2;
+                    lbHidden2.Enabled = true;
+                    nHidden2.Enabled = true;
+                    goto case 1;
                 case 3:
-                    lbHidden4.Enabled = false;
-                    nHidden4.Enabled = false;
+                    lbHidden3.Enabled = true;
+                    nHidden3.Enabled = true;
+                    goto case 2;
+                case 4:
+                    lbHidden4.Enabled = true;
+                    nHidden4.Enabled = true;
                     goto case 3;
                 default:
                     break;

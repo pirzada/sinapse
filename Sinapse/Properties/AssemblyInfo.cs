@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cSouza Company")]
 [assembly: AssemblyProduct("Sinapse Neural Network Tool")]
-[assembly: AssemblyCopyright("Copyright © Cesar Souza 2007")]
+[assembly: AssemblyCopyright("Copyright © Cesar Souza 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.0.0.1")]
+[assembly: AssemblyVersion("0.0.0.2")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

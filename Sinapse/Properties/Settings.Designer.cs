@@ -25,49 +25,97 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public uint display_refreshRate {
-            get {
-                return ((uint)(this["display_refreshRate"]));
-            }
-            set {
-                this["display_refreshRate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("600, 500")]
-        public global::System.Drawing.Point Graph_location {
+        public global::System.Drawing.Point graph_Location {
             get {
-                return ((global::System.Drawing.Point)(this["Graph_location"]));
+                return ((global::System.Drawing.Point)(this["graph_Location"]));
             }
             set {
-                this["Graph_location"] = value;
+                this["graph_Location"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200, 200")]
-        public global::System.Drawing.Point Main_Location {
+        public global::System.Drawing.Point main_Location {
             get {
-                return ((global::System.Drawing.Point)(this["Main_Location"]));
+                return ((global::System.Drawing.Point)(this["main_Location"]));
             }
             set {
-                this["Main_Location"] = value;
+                this["main_Location"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.Forms.FormWindowState Main_windowState {
+        public global::System.Windows.Forms.FormWindowState main_WindowState {
             get {
-                return ((global::System.Windows.Forms.FormWindowState)(this["Main_windowState"]));
+                return ((global::System.Windows.Forms.FormWindowState)(this["main_WindowState"]));
             }
             set {
-                this["Main_windowState"] = value;
+                this["main_WindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool graph_Autoupdate {
+            get {
+                return ((bool)(this["graph_Autoupdate"]));
+            }
+            set {
+                this["graph_Autoupdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800, 600")]
+        public global::System.Drawing.Size main_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["main_Size"]));
+            }
+            set {
+                this["main_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool graph_Launch {
+            get {
+                return ((bool)(this["graph_Launch"]));
+            }
+            set {
+                this["graph_Launch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("350")]
+        public int graph_UpdateRate {
+            get {
+                return ((int)(this["graph_UpdateRate"]));
+            }
+            set {
+                this["graph_UpdateRate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int display_UpdateRate {
+            get {
+                return ((int)(this["display_UpdateRate"]));
+            }
+            set {
+                this["display_UpdateRate"] = value;
             }
         }
     }

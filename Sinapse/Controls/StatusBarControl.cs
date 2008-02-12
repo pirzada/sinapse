@@ -33,7 +33,7 @@ namespace Sinapse.Controls
 
 
         #region Public Methods
-        internal void UpdateNetworkState(NetworkState networkState)
+        internal void UpdateNetworkState(TrainingStatus networkState)
         {
             this.progressBar.Value = networkState.Progress;
             this.lbEpoch.Text = String.Format("Epoch: {0}", networkState.Epoch);
@@ -48,15 +48,15 @@ namespace Sinapse.Controls
 
         internal void ResetControl()
         {
-            this.UpdateNetworkState(new NetworkState());
+            this.UpdateNetworkState(new TrainingStatus());
             this.UpdateSelectedItems(0, 0);
             this.lbStatus.Text = String.Empty;
         }
         #endregion
 
         //---------------------------------------------
-       
-        
+
+
         private void NewActionLogged(object sender, EventArgs e)
         {
             this.lbStatus.Text = HistoryListener.GetLastLoggedAction();
@@ -71,7 +71,7 @@ namespace Sinapse.Controls
 
         private void progressBar_Click(object sender, EventArgs e)
         {
-            new StatusBarOptions().Show();
+            new StatusBarOptions().Show(this.ParentForm);
         }
 
 

@@ -68,6 +68,7 @@ namespace Sinapse.Dialogs
             this.btnOptimal.TabIndex = 20;
             this.btnOptimal.Text = "Optimal Settings";
             this.btnOptimal.UseVisualStyleBackColor = true;
+            this.btnOptimal.Click += new System.EventHandler(this.btnOptimal_Click);
             // 
             // rbThreshold
             // 
@@ -212,13 +213,8 @@ namespace Sinapse.Dialogs
             // 
             // cbHiddenLayerNumber
             // 
+            this.cbHiddenLayerNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbHiddenLayerNumber.FormattingEnabled = true;
-            this.cbHiddenLayerNumber.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"});
             this.cbHiddenLayerNumber.Location = new System.Drawing.Point(177, 79);
             this.cbHiddenLayerNumber.Name = "cbHiddenLayerNumber";
             this.cbHiddenLayerNumber.Size = new System.Drawing.Size(77, 21);
@@ -358,8 +354,10 @@ namespace Sinapse.Dialogs
             // 
             // NetworkCreationDialog
             // 
+            this.AcceptButton = this.btnCreate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(431, 272);
             this.Controls.Add(this.gbHiddenLayers);
             this.Controls.Add(this.cbHiddenLayerNumber);
@@ -374,6 +372,7 @@ namespace Sinapse.Dialogs
             this.Controls.Add(this.numSigmoidAlpha);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "NetworkCreationDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create new Neural Network...";
             ((System.ComponentModel.ISupportInitialize)(this.numSigmoidAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nHidden1)).EndInit();

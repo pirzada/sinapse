@@ -33,25 +33,34 @@ namespace Sinapse.Dialogs
             this.zedGraphControl = new ZedGraph.ZedGraphControl();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.cbAutoupdate = new System.Windows.Forms.CheckBox();
+            this.numRate = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numRate)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClear
             // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Location = new System.Drawing.Point(376, 187);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(86, 23);
             this.btnClear.TabIndex = 1;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // zedGraphControl
             // 
+            this.zedGraphControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.zedGraphControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.zedGraphControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.zedGraphControl.IsAntiAlias = true;
+            this.zedGraphControl.IsShowCursorValues = true;
             this.zedGraphControl.Location = new System.Drawing.Point(0, 0);
             this.zedGraphControl.Margin = new System.Windows.Forms.Padding(0);
             this.zedGraphControl.Name = "zedGraphControl";
+            this.zedGraphControl.PanButtons = System.Windows.Forms.MouseButtons.Right;
+            this.zedGraphControl.ScrollGrace = 0;
             this.zedGraphControl.ScrollMaxX = 0;
             this.zedGraphControl.ScrollMaxY = 0;
             this.zedGraphControl.ScrollMaxY2 = 0;
@@ -63,6 +72,7 @@ namespace Sinapse.Dialogs
             // 
             // btnUpdate
             // 
+            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.Location = new System.Drawing.Point(277, 187);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(93, 23);
@@ -73,32 +83,71 @@ namespace Sinapse.Dialogs
             // 
             // cbAutoupdate
             // 
+            this.cbAutoupdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbAutoupdate.AutoSize = true;
+            this.cbAutoupdate.Checked = global::Sinapse.Properties.Settings.Default.graph_Autoupdate;
+            this.cbAutoupdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoupdate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Autoupdate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbAutoupdate.Location = new System.Drawing.Point(1, 190);
             this.cbAutoupdate.Name = "cbAutoupdate";
-            this.cbAutoupdate.Size = new System.Drawing.Size(199, 17);
+            this.cbAutoupdate.Size = new System.Drawing.Size(113, 17);
             this.cbAutoupdate.TabIndex = 3;
-            this.cbAutoupdate.Text = "Auto-update during training proccess";
+            this.cbAutoupdate.Text = "Auto-update every";
             this.cbAutoupdate.UseVisualStyleBackColor = true;
+            // 
+            // numRate
+            // 
+            this.numRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numRate.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "graph_updateRate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numRate.Location = new System.Drawing.Point(120, 189);
+            this.numRate.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numRate.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numRate.Name = "numRate";
+            this.numRate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.numRate.Size = new System.Drawing.Size(62, 20);
+            this.numRate.TabIndex = 4;
+            this.numRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numRate.ThousandsSeparator = true;
+            this.numRate.Value = global::Sinapse.Properties.Settings.Default.graph_UpdateRate;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(188, 194);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "epochs";
             // 
             // GraphDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 210);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numRate);
             this.Controls.Add(this.cbAutoupdate);
             this.Controls.Add(this.zedGraphControl);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnClear);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Sinapse.Properties.Settings.Default, "Graph_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Location = global::Sinapse.Properties.Settings.Default.Graph_location;
+            this.Location = global::Sinapse.Properties.Settings.Default.graph_Location;
             this.Name = "GraphDialog";
             this.ShowInTaskbar = false;
             this.Text = "Training Graph";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphDialog_FormClosing);
             this.Load += new System.EventHandler(this.GraphDialog_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numRate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,5 +159,7 @@ namespace Sinapse.Dialogs
         private ZedGraph.ZedGraphControl zedGraphControl;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.CheckBox cbAutoupdate;
+        private System.Windows.Forms.NumericUpDown numRate;
+        private System.Windows.Forms.Label label1;
     }
 }

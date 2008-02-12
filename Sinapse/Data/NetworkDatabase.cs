@@ -152,7 +152,7 @@ namespace Sinapse.Data
         /// Creates the desired set of input or output vectors based on the current data.
         /// </summary>
         /// <param name="set">The set of data.</param>
-        internal NetworkVectors CreateVectors(NetworkSet set)
+        internal TrainingVectors CreateVectors(NetworkSet set)
         {
             return this.CreateVectors(set, 0);
         }
@@ -163,10 +163,10 @@ namespace Sinapse.Data
         /// <param name="set">The set of data.</param>
         /// <param name="trainingSet">The training subset of the data.</param>
         /// <returns></returns>
-        internal NetworkVectors CreateVectors(NetworkSet networkSet, ushort trainingLayer)
+        internal TrainingVectors CreateVectors(NetworkSet networkSet, ushort trainingLayer)
         {
 
-            NetworkVectors vectors;
+            TrainingVectors vectors;
             string strQuery = String.Empty;
 
             switch (networkSet)
