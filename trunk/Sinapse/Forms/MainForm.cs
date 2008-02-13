@@ -78,6 +78,9 @@ namespace Sinapse.Forms
 
 
                     this.m_networkContainer.NetworkSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
+
+                    if (this.m_networkContainer.IsSaved)
+                        this.MenuNetworkSaveAs.Enabled = true;
                 }
                 else
                 {
@@ -101,7 +104,7 @@ namespace Sinapse.Forms
             {
                 this.m_networkDatabase = value;
 
-                this.tabControlNetworkData.NetworkData = value;
+                this.tabControlNetworkData.NetworkDatabase = value;
                 this.sideRangesControl.NetworkData = value;
 
 
@@ -114,7 +117,11 @@ namespace Sinapse.Forms
                     this.lbInputCount.Text = this.m_networkDatabase.Schema.InputColumns.Length.ToString();
                     this.lbOutputCount.Text = this.m_networkDatabase.Schema.OutputColumns.Length.ToString();
 
+
                     this.m_networkDatabase.DatabaseSaved += new FileSystemEventHandler(currentDatabase_DatabaseSaved);
+
+                    if (this.m_networkDatabase.IsSaved)
+                        this.MenuDatabaseSaveAs.Enabled = true;
                 }
                 else
                 {
@@ -182,7 +189,8 @@ namespace Sinapse.Forms
         {
             HistoryListener.Write("Exiting...");
 
-            this.sideTrainerControl.Stop();
+            if (this.sideTrainerControl.IsTraining)
+                this.sideTrainerControl.Stop();
             this.sideTrainerControl.Close();
 
             Properties.Settings.Default.main_WindowState = this.WindowState;
@@ -217,8 +225,8 @@ namespace Sinapse.Forms
         #region Network Trainer Control Events
         private void sideTrainerControl_DataNeeded(object sender, EventArgs e)
         {
-            TrainingVectors trainingVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Training);
-            TrainingVectors validationVectors = this.tabControlNetworkData.NetworkData.CreateVectors(NetworkSet.Validation);
+            TrainingVectors trainingVectors = this.tabControlNetworkData.NetworkDatabase.CreateVectors(NetworkSet.Training);
+            TrainingVectors validationVectors = this.tabControlNetworkData.NetworkDatabase.CreateVectors(NetworkSet.Validation);
 
             this.sideTrainerControl.Start(trainingVectors, validationVectors);
         }
@@ -416,9 +424,9 @@ namespace Sinapse.Forms
             {
                 NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Error saving network");
+                MessageBox.Show(e.Message, "Error saving network");
             }
         }
 
@@ -430,9 +438,9 @@ namespace Sinapse.Forms
             {
                 neuralNetwork = NetworkContainer.Deserialize(path);
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Error opening network");
+                MessageBox.Show(e.Message, "Error opening network");
             }
             finally
             {
@@ -452,10 +460,14 @@ namespace Sinapse.Forms
             {
                 NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Error saving database");
+                MessageBox.Show(e.Message, "Error saving database");
+#if DEBUG
+                throw e;
+#endif
             }
+         
         }
 
         private void databaseOpen(string path)
@@ -466,9 +478,12 @@ namespace Sinapse.Forms
             {
                 networkDatabase = NetworkDatabase.Deserialize(path);
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Error opening database");
+                MessageBox.Show(e.Message, "Error opening database");
+#if DEBUG
+                throw e;
+#endif
             }
             finally
             {

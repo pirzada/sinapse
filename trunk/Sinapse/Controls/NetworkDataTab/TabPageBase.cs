@@ -54,7 +54,6 @@ namespace Sinapse.Controls.NetworkDataTab
         #endregion
 
 
-
         //----------------------------------------
 
 
@@ -68,6 +67,7 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             get { return this.dataGridView.SelectedRows.Count; }
         }
+
         internal NetworkDataTabControl ParentControl
         {
             get { return this.m_parentControl; }
@@ -81,18 +81,23 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Virtual Methods
         protected virtual void OnDataImported(DataTable table)
         {
-            this.m_parentControl.NetworkData.ImportData(table, GetNetworkSet(), 0);
+            this.m_parentControl.NetworkDatabase.ImportData(table, GetNetworkSet(), 0);
         }
 
         protected virtual void OnDatabaseLoaded()
         {
-            if (this.m_parentControl.NetworkData != null)
+            if (this.m_parentControl.NetworkDatabase != null)
             {
-                DataView dv = new DataView(this.m_parentControl.NetworkData.DataTable);
-                dv.RowFilter = this.getFilterString();
+                DataView dv = new DataView(this.m_parentControl.NetworkDatabase.DataTable);
+                dv.RowFilter = this.GetFilterString();
                 this.BindingSource.DataSource = dv;
                 this.setColumns();
             }
+        }
+
+        protected virtual void OnRowValidating(DataRowView row)
+        {
+                row.Row[NetworkDatabase.ColumnRoleId] = (ushort)m_networkSet;
         }
         #endregion
 
@@ -104,6 +109,11 @@ namespace Sinapse.Controls.NetworkDataTab
         internal protected NetworkSet GetNetworkSet()
         {
             return this.m_networkSet;
+        }
+
+        internal protected string GetFilterString()
+        {
+            return String.Format("{0}='{1}'", NetworkDatabase.ColumnRoleId, (ushort)this.m_networkSet);
         }
 
         protected void SetUp(NetworkSet networkSet)
@@ -141,16 +151,28 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Private Methods
-        private string getFilterString()
-        {
-            return String.Format("{0}='{1}'", NetworkDatabase.ColumnRoleId, (ushort)this.m_networkSet);
-        }
-
         private void setSelections(NetworkSet networkSet, int trainingLayer)
         {
-            foreach (DataGridViewRow viewRow in this.dataGridView.SelectedRows)
+            if (this.dataGridView.SelectedRows.Count == 0)
             {
-                DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
+                this.setCurrent(this.dataGridView.CurrentRow, networkSet, trainingLayer);
+            }
+            else
+            {
+                foreach (DataGridViewRow viewRow in this.dataGridView.SelectedRows)
+                {
+                    this.setCurrent(viewRow, networkSet, trainingLayer);
+                }
+            }
+
+            this.BindingSource.ResetBindings(false);
+        }
+
+        private void setCurrent(DataGridViewRow viewRow, NetworkSet networkSet, int trainingLayer)
+        {
+            DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
+            if (row != null)
+            {
                 row[NetworkDatabase.ColumnRoleId] = networkSet;
                 row[NetworkDatabase.ColumnTrainingLayerId] = trainingLayer;
             }
@@ -161,7 +183,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
             DataGridViewColumn column;
 
-            foreach (String colName in this.m_parentControl.NetworkData.Schema.InputColumns)
+            foreach (String colName in this.m_parentControl.NetworkDatabase.Schema.InputColumns)
             {
                 column = new DataGridViewColumn();
                 column.DataPropertyName = colName;
@@ -171,7 +193,7 @@ namespace Sinapse.Controls.NetworkDataTab
                 this.dataGridView.Columns.Add(column);
             }
 
-            foreach (String colName in this.m_parentControl.NetworkData.Schema.OutputColumns)
+            foreach (String colName in this.m_parentControl.NetworkDatabase.Schema.OutputColumns)
             {
                 column = new DataGridViewColumn();
                 column.DataPropertyName = colName;
@@ -181,7 +203,7 @@ namespace Sinapse.Controls.NetworkDataTab
                 this.dataGridView.Columns.Add(column);
             }
 
-            foreach (String colName in this.m_parentControl.NetworkData.Schema.StringColumns)
+            foreach (String colName in this.m_parentControl.NetworkDatabase.Schema.StringColumns)
             {
                 if (this.dataGridView.Columns.Contains(colName))
                     this.dataGridView.Columns[colName].HeaderText = dataGridView.Columns[colName].DataPropertyName + " [C]";
@@ -190,13 +212,13 @@ namespace Sinapse.Controls.NetworkDataTab
 #if DEBUG
             column = new DataGridViewColumn();
             column.DataPropertyName = NetworkDatabase.ColumnRoleId;
-            column.HeaderText = "@Role";
+            column.HeaderText = NetworkDatabase.ColumnRoleId;
             column.CellTemplate = new DataGridViewTextBoxCell();
             this.dataGridView.Columns.Add(column);
 
             column = new DataGridViewColumn();
             column.DataPropertyName = NetworkDatabase.ColumnTrainingLayerId;
-            column.HeaderText = "@Training Set";
+            column.HeaderText = NetworkDatabase.ColumnTrainingLayerId;
             column.CellTemplate = new DataGridViewTextBoxCell();
             this.dataGridView.Columns.Add(column);
 #endif
@@ -245,16 +267,17 @@ namespace Sinapse.Controls.NetworkDataTab
             this.MenuTraining.Checked = false;
             this.MenuValidation.Checked = false;
 
-            
-                if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Testing)
-                    this.MenuTesting.Checked = true;
-                else if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Training)
-                    this.MenuTraining.Checked = true;
-                else if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Validation)
-                    this.MenuValidation.Checked = true;
-            
+
+            if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Testing)
+                this.MenuTesting.Checked = true;
+            else if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Training)
+                this.MenuTraining.Checked = true;
+            else if ((NetworkSet)drv.Row[NetworkDatabase.ColumnRoleId] == NetworkSet.Validation)
+                this.MenuValidation.Checked = true;
+
 
             //Populate Training Menu
+
             ToolStripMenuItem[] items = new ToolStripMenuItem[5];
             int layerNumber;
 
@@ -268,6 +291,7 @@ namespace Sinapse.Controls.NetworkDataTab
                 items[i].Click += new EventHandler(layerMenuItem_Click);
             }
 
+            this.MenuTraining.DropDownItems.Clear();
             this.MenuTraining.DropDownItems.AddRange(items);
 
         }
@@ -345,8 +369,20 @@ namespace Sinapse.Controls.NetworkDataTab
                 }
             }
         }
+
+        private void dataGridView_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataRowView row = this.dataGridView.Rows[e.RowIndex].DataBoundItem as DataRowView;
+
+                if (row != null)
+                    this.OnRowValidating(row);
+            }
+            catch
+            {
+            }
+        }
         #endregion
-
-
     }
 }

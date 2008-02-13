@@ -102,6 +102,7 @@ namespace Sinapse.Forms
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
+            this.sideTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
             this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
@@ -109,7 +110,6 @@ namespace Sinapse.Forms
             this.tabStatus = new Dotnetrix.Controls.TabPageEX();
             this.sideDisplayControl = new Sinapse.Controls.Sidebar.SideDisplayControl();
             this.tabTraining = new Dotnetrix.Controls.TabPageEX();
-            this.sideTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
             this.tabData = new Dotnetrix.Controls.TabPageEX();
             this.sideRangesControl = new Sinapse.Controls.Sidebar.SideRangesControl();
             this.tabWorkplace = new Dotnetrix.Controls.TabPageEX();
@@ -611,6 +611,7 @@ namespace Sinapse.Forms
             // 
             // saveNetworkDialog
             // 
+            this.saveNetworkDialog.DefaultExt = "ann";
             this.saveNetworkDialog.Filter = "Network Objects (*.ann)|*.ann|All Files (*.*)|*.*";
             this.saveNetworkDialog.Title = "Save Network Object";
             this.saveNetworkDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveNetworkDialog_FileOk);
@@ -914,12 +915,14 @@ namespace Sinapse.Forms
             this.saveDatabaseDialog.DefaultExt = "sdo";
             this.saveDatabaseDialog.Filter = "Sinapse Database Objects (*.sdo)|*.sdo|All Files (*.*)|*.*";
             this.saveDatabaseDialog.Title = "Save Database";
+            this.saveDatabaseDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveDatabaseDialog_FileOk);
             // 
             // openDatabaseDialog
             // 
             this.openDatabaseDialog.DefaultExt = "sdo";
             this.openDatabaseDialog.Filter = "Sinapse Database Objects (*.sdo)|*.sdo|All Files (*.*)|*.*";
             this.openDatabaseDialog.Title = "Open Database";
+            this.openDatabaseDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openDatabaseDialog_FileOk);
             // 
             // browseWorkplaceDialog
             // 

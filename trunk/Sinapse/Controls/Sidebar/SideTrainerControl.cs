@@ -230,9 +230,13 @@ namespace Sinapse.Controls.Sidebar
 
             options.TrainingType = rbErrorLimit.Checked ? TrainingType.ByError : TrainingType.ByEpoch;
 
+
             if (this.m_trainingPaused)
             {
                 this.m_trainingPaused = false;
+            }
+            else
+            {
                 this.m_graphDialog.ClearGraph();
             }
 
@@ -285,7 +289,7 @@ namespace Sinapse.Controls.Sidebar
             int lastStatusEpoch = 0;
             int lastGraphEpoch = 0;
 
-            backgroundWorker.ReportProgress(0, "Training");
+            backgroundWorker.ReportProgress(0, "Training...");
 
 
             while (!stop)

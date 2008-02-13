@@ -118,5 +118,17 @@ namespace Sinapse.Properties {
                 this["display_UpdateRate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("517, 276")]
+        public global::System.Drawing.Size graph_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["graph_Size"]));
+            }
+            set {
+                this["graph_Size"] = value;
+            }
+        }
     }
 }

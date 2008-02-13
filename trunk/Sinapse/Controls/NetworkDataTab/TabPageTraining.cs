@@ -32,7 +32,7 @@ namespace Sinapse.Controls.NetworkDataTab
     internal sealed partial class TabPageTraining : TabPageBase
     {
 
-        private int trainingLayer;
+        private int m_trainingLayer;
 
 
         //----------------------------------------
@@ -65,7 +65,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Private Methods
-    /*
+        /*
         private void populateCombobox()
         {
             cbTrainingSets.BeginUpdate();
@@ -90,38 +90,41 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             if (cbTrainingLayer.SelectedIndex == 0)
             {
-                this.trainingLayer = 0;
-                this.BindingSource.Filter = null;
+                this.m_trainingLayer = 0;
+                this.BindingSource.Filter = this.GetFilterString();
             }
             else
             {
-                this.trainingLayer = cbTrainingLayer.SelectedIndex;
-
-                this.BindingSource.Filter = String.Format("{0} = '{1}'",
-                    NetworkDatabase.ColumnTrainingLayerId, this.trainingLayer);
+                this.m_trainingLayer = cbTrainingLayer.SelectedIndex;
+                this.BindingSource.Filter = String.Format("{0} AND {1} = '{2}'",
+                    this.GetFilterString(),
+                    NetworkDatabase.ColumnTrainingLayerId,
+                    this.m_trainingLayer);
             }
 
         }
         #endregion
 
+
         //----------------------------------------
 
 
-  /*      protected override void OnDatabaseLoaded()
+        protected override void OnRowValidating(DataRowView row)
         {
-            base.OnDatabaseLoaded();
+            if (m_trainingLayer > 0)
+                row.Row[NetworkDatabase.ColumnTrainingLayerId] = m_trainingLayer;
 
-   //         this.populateCombobox();
+            base.OnRowValidating(row);
         }
-  */
+
         protected override void OnDataImported(DataTable table)
         {
-            this.ParentControl.NetworkData.ImportData(table, NetworkSet.Training, trainingLayer);
+            this.ParentControl.NetworkDatabase.ImportData(table, NetworkSet.Training, m_trainingLayer);
         }
 
 
         //----------------------------------------
-        
+
 
     }
 }

@@ -121,11 +121,17 @@ namespace Sinapse.Dialogs
         #region Form Events
         private void GraphDialog_Load(object sender, EventArgs e)
         {
-   //         this.CreateChart(zedGraphControl);
+            // Load form sizing and location
+            this.Size = Properties.Settings.Default.graph_Size;
+            this.Location = Properties.Settings.Default.graph_Location;
         }
 
         private void GraphDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Save form sizing and location
+            Properties.Settings.Default.main_Size = this.Size;
+            Properties.Settings.Default.main_Location = this.Location;
+
             if (!this.m_forceClose)
             {
                 e.Cancel = true;
@@ -144,7 +150,7 @@ namespace Sinapse.Dialogs
             GraphPane myPane = zgc.GraphPane;
 
             // Set the title and axis labels
-            //myPane.Title.Text = "Training Graph";
+            myPane.Title.Text = "Training Graph";
             myPane.XAxis.Title.Text = "Epochs";
             myPane.YAxis.Title.Text = "Root-Mean-Square Error";
 

@@ -41,7 +41,7 @@ namespace Sinapse.Dialogs
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(376, 187);
+            this.btnClear.Location = new System.Drawing.Point(431, 253);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(86, 23);
             this.btnClear.TabIndex = 1;
@@ -67,13 +67,13 @@ namespace Sinapse.Dialogs
             this.zedGraphControl.ScrollMinX = 0;
             this.zedGraphControl.ScrollMinY = 0;
             this.zedGraphControl.ScrollMinY2 = 0;
-            this.zedGraphControl.Size = new System.Drawing.Size(462, 184);
+            this.zedGraphControl.Size = new System.Drawing.Size(517, 250);
             this.zedGraphControl.TabIndex = 2;
             // 
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(277, 187);
+            this.btnUpdate.Location = new System.Drawing.Point(332, 253);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(93, 23);
             this.btnUpdate.TabIndex = 1;
@@ -88,7 +88,7 @@ namespace Sinapse.Dialogs
             this.cbAutoupdate.Checked = global::Sinapse.Properties.Settings.Default.graph_Autoupdate;
             this.cbAutoupdate.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAutoupdate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Autoupdate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbAutoupdate.Location = new System.Drawing.Point(1, 190);
+            this.cbAutoupdate.Location = new System.Drawing.Point(1, 256);
             this.cbAutoupdate.Name = "cbAutoupdate";
             this.cbAutoupdate.Size = new System.Drawing.Size(113, 17);
             this.cbAutoupdate.TabIndex = 3;
@@ -99,7 +99,7 @@ namespace Sinapse.Dialogs
             // 
             this.numRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.numRate.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "graph_updateRate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numRate.Location = new System.Drawing.Point(120, 189);
+            this.numRate.Location = new System.Drawing.Point(120, 255);
             this.numRate.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -122,7 +122,7 @@ namespace Sinapse.Dialogs
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(188, 194);
+            this.label1.Location = new System.Drawing.Point(188, 260);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 5;
@@ -132,16 +132,15 @@ namespace Sinapse.Dialogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 210);
+            this.ClientSize = new System.Drawing.Size(517, 276);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numRate);
             this.Controls.Add(this.cbAutoupdate);
             this.Controls.Add(this.zedGraphControl);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnClear);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Sinapse.Properties.Settings.Default, "Graph_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Location = global::Sinapse.Properties.Settings.Default.graph_Location;
+            this.Location = new System.Drawing.Point(600, 500);
             this.Name = "GraphDialog";
             this.ShowInTaskbar = false;
             this.Text = "Training Graph";
