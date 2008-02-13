@@ -50,7 +50,7 @@ namespace Sinapse.Controls
             this.lbItems});
             this.statusStrip.Location = new System.Drawing.Point(0, 0);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(910, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1003, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -59,15 +59,16 @@ namespace Sinapse.Controls
             this.lbStatus.AutoSize = false;
             this.lbStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(206, 17);
+            this.lbStatus.Size = new System.Drawing.Size(297, 17);
             this.lbStatus.Spring = true;
             this.lbStatus.Text = "lbStatus";
+            this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // progressBar
             // 
             this.progressBar.AutoSize = false;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(350, 16);
+            this.progressBar.Size = new System.Drawing.Size(400, 16);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
@@ -111,7 +112,7 @@ namespace Sinapse.Controls
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.statusStrip);
             this.Name = "StatusBarControl";
-            this.Size = new System.Drawing.Size(910, 22);
+            this.Size = new System.Drawing.Size(1003, 22);
             this.Load += new System.EventHandler(this.StatusBarControl_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();

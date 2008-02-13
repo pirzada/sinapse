@@ -131,7 +131,7 @@ namespace Sinapse.Data
 
         internal bool IsSaved
         {
-            get { return (m_lastSavePath.Length > 0); }
+            get { return (m_lastSavePath != null && m_lastSavePath.Length > 0); }
         }
 
         internal DateTime CreationTime
@@ -225,7 +225,10 @@ namespace Sinapse.Data
                     fileStream.Close();
 
                 if (success)
+                {
                     network.m_lastSavePath = path;
+                    network.OnNetworkSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
+                }
             }
         }
 
@@ -233,14 +236,14 @@ namespace Sinapse.Data
         {
 
             NetworkContainer nn = null;
-            FileStream fs = null;
+            FileStream fileStream = null;
             bool success = true;
 
             try
             {
-                fs = new FileStream(path, FileMode.Open);
+                fileStream = new FileStream(path, FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
-                nn = (NetworkContainer)bf.Deserialize(fs);
+                nn = (NetworkContainer)bf.Deserialize(fileStream);
             }
             catch (FileNotFoundException e)
             {
@@ -261,8 +264,8 @@ namespace Sinapse.Data
             }
             finally
             {
-                if (fs != null)
-                    fs.Close();
+                if (fileStream != null)
+                    fileStream.Close();
 
                 if (success)
                     nn.m_lastSavePath = path;

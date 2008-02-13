@@ -102,6 +102,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(582, 337);
             this.dataGridView.TabIndex = 22;
+            this.dataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_RowValidated);
             // 
             // contextMenuStrip
             // 
@@ -111,7 +112,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.MenuValidation,
             this.MenuTesting});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(161, 114);
+            this.contextMenuStrip.Size = new System.Drawing.Size(161, 92);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // changeRowsToToolStripMenuItem

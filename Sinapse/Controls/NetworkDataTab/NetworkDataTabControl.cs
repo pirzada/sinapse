@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 using Dotnetrix.Controls;
 
@@ -27,6 +28,7 @@ using Sinapse.Data;
 
 namespace Sinapse.Controls.NetworkDataTab
 {
+
     internal sealed class NetworkDataTabControl : Dotnetrix.Controls.TabControlEX
     {
 
@@ -50,9 +52,9 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Constructor
         public NetworkDataTabControl()
         {
-            m_tabTesting = new TabPageTesting(this);
-            m_tabValidation = new TabPageValidation(this);
-            m_tabTraining = new TabPageTraining(this);
+            this.m_tabTesting = new TabPageTesting(this);
+            this.m_tabValidation = new TabPageValidation(this);
+            this.m_tabTraining = new TabPageTraining(this);
         }
         #endregion
 
@@ -63,15 +65,18 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Control Events
         protected override void OnCreateControl()
         {
-            if (!DesignMode)
+            if (!this.DesignMode)
             {
-                this.TabPages.Add(CreateTab(m_tabTraining, "Training Set", 0));
-                this.TabPages.Add(CreateTab(m_tabValidation, "Validation Set", 1));
-                this.TabPages.Add(CreateTab(m_tabTesting, "Testing Set", 2));
+                if (this.Controls.Count == 0) // Prevents from inserting tabs twice
+                {
+                    this.Controls.Add(createTab(m_tabTraining, "Training Set", 0));
+                    this.Controls.Add(createTab(m_tabValidation, "Validation Set", 1));
+                    this.Controls.Add(createTab(m_tabTesting, "Testing Set", 2));
+                }
             }
 
             base.OnCreateControl();
-        }
+        }        
         #endregion
 
 
@@ -79,7 +84,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Properties
-        internal NetworkDatabase NetworkData
+        internal NetworkDatabase NetworkDatabase
         {
             get
             {
@@ -151,12 +156,14 @@ namespace Sinapse.Controls.NetworkDataTab
             this.OnSelectionChanged();
         }
 
-        private TabPageEX CreateTab(UserControl control, string text, int imageIndex)
+        private TabPageEX createTab(UserControl control, string text, int imageIndex)
         {
+            control.Dock = DockStyle.Fill;
+
             TabPageEX tabPage = new TabPageEX(text);
             tabPage.ImageIndex = imageIndex;
-            control.Dock = DockStyle.Fill;
             tabPage.Controls.Add(control);
+
             return tabPage;
         }
         #endregion

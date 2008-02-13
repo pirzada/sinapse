@@ -26,5 +26,8 @@
     <Setting Name="display_UpdateRate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
+    <Setting Name="graph_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">517, 276</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

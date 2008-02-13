@@ -315,7 +315,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Class Diagram.cd" />
     <None Include="cSouza Company SecurityCode.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Optimizer.bat">
@@ -596,6 +595,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\redled.png" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

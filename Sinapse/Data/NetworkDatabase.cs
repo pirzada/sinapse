@@ -29,15 +29,14 @@ using AForge;
 
 using Sinapse.Data.Structures;
 
+
 namespace Sinapse.Data
 {
 
     public enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2 };
 
 
-    /// <summary>
-    /// Class to hold samples or query information
-    /// </summary>
+    [Serializable]
     internal sealed class NetworkDatabase
     {
 
@@ -53,8 +52,10 @@ namespace Sinapse.Data
         private NetworkSchema m_networkSchema;
         private DataTable m_dataTable;
 
-
+        [NonSerialized]
         internal FileSystemEventHandler DatabaseSaved;
+
+        [NonSerialized]
         internal EventHandler DatabaseChanged;
 
         private string m_lastSavePath;
@@ -66,6 +67,8 @@ namespace Sinapse.Data
         #region Constructors
         public NetworkDatabase(NetworkSchema schema, DataTable dataTable)
         {
+            this.m_lastSavePath = String.Empty;
+
             this.m_networkSchema = schema;
             this.m_dataTable = dataTable;
 
@@ -77,6 +80,8 @@ namespace Sinapse.Data
 
         public NetworkDatabase(NetworkSchema schema)
         {
+            this.m_lastSavePath = String.Empty;
+
             this.m_networkSchema = schema;
             this.m_dataTable = new DataTable();
 
@@ -131,7 +136,7 @@ namespace Sinapse.Data
 
         internal bool IsSaved
         {
-            get { return this.m_lastSavePath.Length > 0; }
+            get { return (this.m_lastSavePath != null && this.m_lastSavePath.Length > 0); }
         }
         #endregion
 
@@ -349,18 +354,87 @@ namespace Sinapse.Data
 
 
         #region Static Methods
-        public static void Serialize(NetworkDatabase network, string path)
+        public static void Serialize(NetworkDatabase networkDatabase, string path)
         {
+            FileStream fileStream = null;
+            bool success = true;
 
+            try
+            {
+                fileStream = new FileStream(path, FileMode.Create);
+
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fileStream, networkDatabase);
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                Debug.WriteLine("Directory not found during network serialization");
+                success = false;
+                throw e;
+            }
+            catch (SerializationException e)
+            {
+                Debug.WriteLine("Error occured during serialization");
+                success = false;
+                throw e;
+            }
+            catch (Exception e)
+            {
+                success = false;
+                throw e;
+            }
+            finally
+            {
+                if (fileStream != null)
+                    fileStream.Close();
+
+                if (success)
+                    networkDatabase.m_lastSavePath = path;
+            }
         }
 
         public static NetworkDatabase Deserialize(string path)
         {
+            NetworkDatabase ndb = null;
+            FileStream fileStream = null;
+            bool success = true;
 
-            NetworkDatabase nn = null;
+            try
+            {
+                fileStream = new FileStream(path, FileMode.Open);
+                BinaryFormatter bf = new BinaryFormatter();
+                ndb = (NetworkDatabase)bf.Deserialize(fileStream);
+            }
+            catch (FileNotFoundException e)
+            {
+                Debug.WriteLine("File not found during network deserialization");
+                success = false;
+                throw e;
+            }
+            catch (SerializationException e)
+            {
+                Debug.WriteLine("Error occured during deserialization");
+                success = false;
+                throw e;
+            }
+            catch (Exception e)
+            {
+                success = false;
+                throw e;
+            }
+            finally
+            {
+                if (fileStream != null)
+                    fileStream.Close();
 
+                if (success)
+                {
+                    ndb.m_lastSavePath = path;
+                    ndb.OnDatabaseSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
+                }
+            }
 
-            return nn;
+            return ndb;
         }
 
         #endregion
