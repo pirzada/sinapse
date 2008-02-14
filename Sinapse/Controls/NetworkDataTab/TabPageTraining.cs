@@ -43,7 +43,7 @@ namespace Sinapse.Controls.NetworkDataTab
             : base(parentControl)
         {
             InitializeComponent();
-            SetUp(NetworkSet.Training);
+            SetUp(NetworkSet.Training, "Training Set");
 
             cbTrainingLayer.DataSource = new object[] { "All", 1, 2, 3, 4, 5, };
         }

@@ -12,18 +12,18 @@ namespace Sinapse.Data.CsvParser
             TextReader textReader = null;
             CsvDelimiter delimiter;
 
-         //   try
+            try
             {
                 textReader = new StreamReader(filename, encoding);
                 delimiter = DetectFieldDelimiterChar(textReader.ReadLine());
 
             }
-         //   catch (Exception e)
+            catch (Exception e)
             {
-         //       delimiter = CsvDelimiter.Comma;
-         //       throw e;
+                delimiter = CsvDelimiter.Comma;
+                throw e;
             }
-         /*   finally
+            finally
             {
                 if (textReader != null)
                 {
@@ -31,7 +31,7 @@ namespace Sinapse.Data.CsvParser
                     textReader.Dispose();
                 }
             }
-          */ 
+           
             return delimiter;
         }
 
@@ -43,6 +43,7 @@ namespace Sinapse.Data.CsvParser
 
             foreach (CsvDelimiter delimiter in Enum.GetValues(typeof(CsvDelimiter)))
             {
+                
                 curCount = headerLine.Split((char)delimiter).Length;
                 if (curCount > maxCount)
                 {

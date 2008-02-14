@@ -32,7 +32,7 @@ namespace Sinapse.Controls.Sidebar
     public partial class SideDisplayControl : UserControl
     {
 
-        private NetworkContainer m_neuralNetwork;
+        private NetworkContainer m_networkContainer;
         private bool m_readOnly;
         private bool m_visible;
 
@@ -56,21 +56,21 @@ namespace Sinapse.Controls.Sidebar
         {
             get
             {
-                return this.m_neuralNetwork;
+                return this.m_networkContainer;
             }
             set
             {
                 if (value != null)
                 {
-                    if (value != m_neuralNetwork)
+                    if (value != m_networkContainer)
                     {
-                       this.m_neuralNetwork = value;
+                       this.m_networkContainer = value;
                         this.Enabled = true;
                         this.UpdateDisplayData();
                         this.lbIntro.Visible = false;
                         this.setVisible(true);
                         
-                        this.m_neuralNetwork.NetworkChanged += new EventHandler(neuralNetwork_NetworkChanged);
+                        this.m_networkContainer.NetworkChanged += new EventHandler(neuralNetwork_NetworkChanged);
                     }
                 }
                 else
@@ -85,10 +85,10 @@ namespace Sinapse.Controls.Sidebar
         
         public bool ReadOnly
         {
-            get { return m_readOnly; }
+            get { return this.m_readOnly; }
             set
             {
-                m_readOnly = value;
+                this.m_readOnly = value;
 
                 if (value)
                 {
@@ -112,51 +112,18 @@ namespace Sinapse.Controls.Sidebar
         #region Public Methods
         internal void UpdateDisplayData()
         {
-            if (m_neuralNetwork == null)
+            if (m_networkContainer == null)
                 return;
             
-            this.SuspendLayout();
-            this.panelInputs.SuspendLayout();
-            this.panelOutputs.SuspendLayout();
+     //       this.SuspendLayout();
                                              
-            this.lbName.Text = m_neuralNetwork.Name;
-            this.lbLayout.Text = m_neuralNetwork.GetLayoutString();
-            this.lbDescription.Text = m_neuralNetwork.Description;
-            this.lbErrorRate.Text = m_neuralNetwork.Precision.ToString("0.000000");
+            this.lbName.Text = m_networkContainer.Name;
+            this.lbLayout.Text = m_networkContainer.GetLayoutString();
+            this.lbDescription.Text = m_networkContainer.Description;
+            this.lbErrorRate.Text = m_networkContainer.Precision.ToString("0.000000");
 
-            panelInputs.Controls.Clear();
-            panelOutputs.Controls.Clear();
-
-            Label label;
-            foreach (string inputCol in m_neuralNetwork.Schema.InputColumns)
-            {
-                label = new Label();
-                label.Text = inputCol;
-                label.Font = new System.Drawing.Font(
-                    "Microsoft Sans Serif", 6.75F,
-                    System.Drawing.FontStyle.Regular,
-                    System.Drawing.GraphicsUnit.Point,
-                    ((byte)(0)));
-
-                this.panelInputs.Controls.Add(label);
-            }
-
-            foreach (string outputCol in m_neuralNetwork.Schema.OutputColumns)
-            {
-                label = new Label();
-                label.Text = outputCol;
-                label.Font = new System.Drawing.Font(
-                    "Microsoft Sans Serif", 6.75F,
-                    System.Drawing.FontStyle.Regular,
-                    System.Drawing.GraphicsUnit.Point,
-                    ((byte)(0)));
-
-                this.panelOutputs.Controls.Add(label);
-            }
-
-            this.panelInputs.ResumeLayout(true);
-            this.panelOutputs.ResumeLayout(true);
-            this.ResumeLayout(true);
+            this.populateSchemaTable();
+     //       this.ResumeLayout(true);
         }
         #endregion
 
@@ -199,6 +166,48 @@ namespace Sinapse.Controls.Sidebar
             this.lbDescription.Cursor = cursor;
             this.lbName.Cursor = cursor;
         }
+
+        private void populateSchemaTable()
+        {
+            //       this.panelInputs.SuspendLayout();
+            //       this.panelOutputs.SuspendLayout();
+
+            panelInputs.Controls.Clear();
+            panelOutputs.Controls.Clear();
+
+            Label label;
+            foreach (string inputCol in m_networkContainer.Schema.InputColumns)
+            {
+                label = new Label();
+                label.Text = inputCol;
+                label.AutoSize = true;
+                label.Margin = new Padding(2);
+                label.Padding = new Padding(2);
+                label.Font = new System.Drawing.Font(
+                    "Microsoft Sans Serif", 6.75F,
+                    System.Drawing.FontStyle.Regular,
+                    System.Drawing.GraphicsUnit.Point,
+                    ((byte)(0)));
+
+                this.panelInputs.Controls.Add(label);
+            }
+
+            foreach (string outputCol in m_networkContainer.Schema.OutputColumns)
+            {
+                label = new Label();
+                label.Text = outputCol;
+                label.Font = new System.Drawing.Font(
+                    "Microsoft Sans Serif", 6.75F,
+                    System.Drawing.FontStyle.Regular,
+                    System.Drawing.GraphicsUnit.Point,
+                    ((byte)(0)));
+
+                this.panelOutputs.Controls.Add(label);
+            }
+
+      //      this.panelInputs.ResumeLayout(true);
+      //      this.panelOutputs.ResumeLayout(true);
+        }
         #endregion
 
 
@@ -208,25 +217,25 @@ namespace Sinapse.Controls.Sidebar
         #region Events
         private void lbName_Click(object sender, EventArgs e)
         {
-            if (this.m_readOnly)
+            if (this.m_readOnly || this.m_networkContainer == null)
                 return;
 
             string name;
-            if (InputBox.Show("Please type a new network name", "Network name", m_neuralNetwork.Name, out name) == DialogResult.OK)
+            if (InputBox.Show("Please type a new network name", "Network name", m_networkContainer.Name, out name) == DialogResult.OK)
             {
-                this.m_neuralNetwork.Name = name;
+                this.m_networkContainer.Name = name;
             }
         }
 
         private void lbDescription_Click(object sender, EventArgs e)
         {
-            if (this.m_readOnly)
+            if (this.m_readOnly || this.m_networkContainer == null)
                 return;
 
             string description;
-            if (InputBox.Show("Please type a network description", "Network description", m_neuralNetwork.Description, out description) == DialogResult.OK)
+            if (InputBox.Show("Please type a network description", "Network description", m_networkContainer.Description, out description) == DialogResult.OK)
             {
-                this.m_neuralNetwork.Description = description;
+                this.m_networkContainer.Description = description;
             }
         }
         #endregion

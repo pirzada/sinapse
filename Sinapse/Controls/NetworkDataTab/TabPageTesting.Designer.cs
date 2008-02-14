@@ -33,11 +33,6 @@ namespace Sinapse.Controls.NetworkDataTab
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.Size = new System.Drawing.Size(118, 23);
-            this.label1.Text = "Testing Set";
-            // 
             // btnCompare
             // 
             this.btnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -64,16 +59,16 @@ namespace Sinapse.Controls.NetworkDataTab
             this.btnQuery.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuery.UseVisualStyleBackColor = true;
             // 
-            // TabTesting
+            // TabPageTesting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnCompare);
             this.Controls.Add(this.btnQuery);
-            this.Name = "TabTesting";
+            this.Name = "TabPageTesting";
+            this.Controls.SetChildIndex(this.lbSetTitle, 0);
             this.Controls.SetChildIndex(this.btnQuery, 0);
             this.Controls.SetChildIndex(this.btnCompare, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

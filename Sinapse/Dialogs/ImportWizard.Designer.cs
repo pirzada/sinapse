@@ -118,6 +118,7 @@ namespace Sinapse.Dialogs
             // 
             // cbDelimiter
             // 
+            this.cbDelimiter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDelimiter.FormattingEnabled = true;
             this.cbDelimiter.Items.AddRange(new object[] {
             "Comma",

@@ -100,6 +100,7 @@ namespace Sinapse.Controls.Sidebar
             this.lbDescriptionChange.Size = new System.Drawing.Size(41, 12);
             this.lbDescriptionChange.TabIndex = 23;
             this.lbDescriptionChange.Text = "[change]";
+            this.lbDescriptionChange.Click += new System.EventHandler(this.lbDescription_Click);
             // 
             // lbDescriptionH
             // 
@@ -160,6 +161,7 @@ namespace Sinapse.Controls.Sidebar
             this.lbName.TabIndex = 21;
             this.lbName.Text = "Network Not Created";
             this.lbName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbName.Click += new System.EventHandler(this.lbName_Click);
             // 
             // pictureBox
             // 
@@ -175,7 +177,7 @@ namespace Sinapse.Controls.Sidebar
             // 
             // lbTableTitle
             // 
-            this.lbTableTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.lbTableTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTableTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTableTitle.Location = new System.Drawing.Point(11, 298);
@@ -219,7 +221,8 @@ namespace Sinapse.Controls.Sidebar
             // 
             // panelOutputs
             // 
-            this.panelOutputs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelOutputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelOutputs.AutoScroll = true;
             this.panelOutputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelOutputs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;

@@ -31,15 +31,15 @@ namespace Sinapse.Controls.NetworkDataTab
             this.components = new System.ComponentModel.Container();
             this.panelOutputCaption = new System.Windows.Forms.Panel();
             this.panelInputCaption = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lbOutput = new System.Windows.Forms.Label();
+            this.lbInput = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeRowsToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTraining = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuValidation = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTesting = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbSetTitle = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnImport = new System.Windows.Forms.Button();
             this.BindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -68,27 +68,27 @@ namespace Sinapse.Controls.NetworkDataTab
             this.panelInputCaption.Size = new System.Drawing.Size(14, 12);
             this.panelInputCaption.TabIndex = 26;
             // 
-            // label9
+            // lbOutput
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(98, 378);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 11);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "Output";
+            this.lbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbOutput.AutoSize = true;
+            this.lbOutput.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbOutput.Location = new System.Drawing.Point(98, 378);
+            this.lbOutput.Name = "lbOutput";
+            this.lbOutput.Size = new System.Drawing.Size(53, 11);
+            this.lbOutput.TabIndex = 23;
+            this.lbOutput.Text = "Output";
             // 
-            // label10
+            // lbInput
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(21, 378);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(45, 11);
-            this.label10.TabIndex = 24;
-            this.label10.Text = "Input";
+            this.lbInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbInput.AutoSize = true;
+            this.lbInput.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInput.Location = new System.Drawing.Point(21, 378);
+            this.lbInput.Name = "lbInput";
+            this.lbInput.Size = new System.Drawing.Size(45, 11);
+            this.lbInput.TabIndex = 24;
+            this.lbInput.Text = "Input";
             // 
             // dataGridView
             // 
@@ -102,7 +102,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(582, 337);
             this.dataGridView.TabIndex = 22;
-            this.dataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_RowValidated);
+            this.dataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_RowValidating);
             // 
             // contextMenuStrip
             // 
@@ -143,15 +143,15 @@ namespace Sinapse.Controls.NetworkDataTab
             this.MenuTesting.Text = "Testing data";
             this.MenuTesting.Click += new System.EventHandler(this.MenuTesting_Click);
             // 
-            // label1
+            // lbSetTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 23);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "Set Name";
+            this.lbSetTitle.AutoSize = true;
+            this.lbSetTitle.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSetTitle.Location = new System.Drawing.Point(7, 5);
+            this.lbSetTitle.Name = "lbSetTitle";
+            this.lbSetTitle.Size = new System.Drawing.Size(102, 23);
+            this.lbSetTitle.TabIndex = 28;
+            this.lbSetTitle.Text = "Set Name";
             // 
             // openFileDialog
             // 
@@ -174,16 +174,19 @@ namespace Sinapse.Controls.NetworkDataTab
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
+            // BindingSource
+            // 
+            // 
             // TabPageBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbSetTitle);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.panelOutputCaption);
             this.Controls.Add(this.panelInputCaption);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lbOutput);
+            this.Controls.Add(this.lbInput);
             this.Controls.Add(this.dataGridView);
             this.Name = "TabPageBase";
             this.Size = new System.Drawing.Size(588, 398);
@@ -201,10 +204,10 @@ namespace Sinapse.Controls.NetworkDataTab
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Panel panelOutputCaption;
         private System.Windows.Forms.Panel panelInputCaption;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbOutput;
+        private System.Windows.Forms.Label lbInput;
         protected System.Windows.Forms.DataGridView dataGridView;
-        protected internal System.Windows.Forms.Label label1;
+        protected internal System.Windows.Forms.Label lbSetTitle;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         protected internal System.Windows.Forms.BindingSource BindingSource;
         private System.Windows.Forms.ToolStripMenuItem changeRowsToToolStripMenuItem;

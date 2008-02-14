@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -39,6 +39,8 @@ namespace Sinapse.Data
         private string m_networkDescription;
         private double m_networkPrecision;
         private DateTime m_creationTime;
+
+        private List<NetworkCheckPoint> m_checkPointList;
 
         [NonSerialized]
         private string m_lastSavePath;
@@ -92,6 +94,11 @@ namespace Sinapse.Data
         internal NetworkSchema Schema
         {
             get { return this.m_networkSchema; }
+        }
+
+        internal List<NetworkCheckPoint> CheckPoints
+        {
+            get { return this.m_checkPointList; }
         }
 
         internal string Name
@@ -158,6 +165,15 @@ namespace Sinapse.Data
             }
 
             return layout;
+        }
+
+        public void SaveCheckPoint(TrainingStatus trainingStatus)
+        {
+            this.m_checkPointList.Add(new NetworkCheckPoint(m_activationNetwork, trainingStatus));
+        }
+
+        public void LoadCheckPoint(NetworkCheckPoint network)
+        {
         }
         #endregion
 

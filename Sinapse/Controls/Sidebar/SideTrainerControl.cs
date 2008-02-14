@@ -102,7 +102,6 @@ namespace Sinapse.Controls.Sidebar
                 }
 
                 this.UpdateStatus();
-
             }
         }
 
@@ -302,7 +301,8 @@ namespace Sinapse.Controls.Sidebar
 
 
                 #region Graph Update
-                if (m_networkState.Epoch >= lastGraphEpoch + Properties.Settings.Default.graph_UpdateRate)
+                if (Properties.Settings.Default.graph_Disable == false &&
+                    m_networkState.Epoch >= lastGraphEpoch + Properties.Settings.Default.graph_UpdateRate)
                 {
                     this.m_graphDialog.TrainingPoints.Add(m_networkState.Epoch, m_networkState.ErrorTraining);
                     this.m_graphDialog.ValidationPoints.Add(m_networkState.Epoch, m_networkState.ErrorValidation);
@@ -313,7 +313,6 @@ namespace Sinapse.Controls.Sidebar
                     }
 
                     lastGraphEpoch = m_networkState.Epoch;
-
                 }
                 #endregion
 

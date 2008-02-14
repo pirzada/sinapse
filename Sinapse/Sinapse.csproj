@@ -137,6 +137,7 @@
     <Compile Include="Data\CsvParser\Utils.cs" />
     <Compile Include="Data\CsvParser\Writer.cs" />
     <Compile Include="Data\HistoryListener.cs" />
+    <Compile Include="Data\NetworkCheckPoint.cs" />
     <Compile Include="Data\NetworkDatabase.cs" />
     <Compile Include="Data\NetworkCaptions.cs" />
     <Compile Include="Data\NetworkRanges.cs" />

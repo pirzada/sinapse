@@ -52,6 +52,7 @@ namespace Sinapse.Dialogs
 
         //---------------------------------------------
 
+
         #region Public Methods
         internal NetworkDatabase GetNetworkData()
         {
@@ -69,7 +70,9 @@ namespace Sinapse.Dialogs
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Wizard Events
         private void wizardControl_NextButtonClick(WizardControl sender, WizardNextButtonClickEventArgs e)
@@ -96,6 +99,7 @@ namespace Sinapse.Dialogs
                     break;
 
                 case 3:
+                    loadStringCombobox();
                     break;
 
                 default:
@@ -151,7 +155,9 @@ namespace Sinapse.Dialogs
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Load Controls
         private bool loadDataTable()
@@ -171,11 +177,11 @@ namespace Sinapse.Dialogs
         private void loadInputCombobox()
         {
             clbInput.Items.Clear();
-            clbString.Items.Clear();
+   //         clbString.Items.Clear();
             foreach (DataColumn col in m_dataTable.Columns)
             {
                 clbInput.Items.Add(col.ColumnName, false);
-                clbString.Items.Add(col.ColumnName, false);
+     //           clbString.Items.Add(col.ColumnName, false);
             }
         }
 
@@ -186,6 +192,19 @@ namespace Sinapse.Dialogs
             {
                 if (!clbInput.CheckedItems.Contains(col.ColumnName))
                     clbOutput.Items.Add(col.ColumnName, false);
+            }
+        }
+
+        private void loadStringCombobox()
+        {
+            clbString.Items.Clear();
+            foreach (DataColumn col in m_dataTable.Columns)
+            {
+                if (clbInput.CheckedItems.Contains(col.ColumnName) ||
+                    clbOutput.CheckedItems.Contains(col.ColumnName))
+                {
+                    clbString.Items.Add(col.ColumnName, false);
+                }
             }
         }
         #endregion
@@ -205,7 +224,7 @@ namespace Sinapse.Dialogs
         {
             if (tbDatapath.Text.Length > 0 && File.Exists(tbDatapath.Text))
             {
-                cbDelimiter.SelectedItem = Enum.GetName(typeof(CsvDelimiter), CsvUtils.DetectFieldDelimiterChar(tbDatapath.Text, Encoding.Default));
+                cbDelimiter.SelectedItem = CsvUtils.DetectFieldDelimiterChar(tbDatapath.Text, Encoding.Default);
             }
             else
             {

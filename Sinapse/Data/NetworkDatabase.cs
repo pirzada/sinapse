@@ -44,6 +44,7 @@ namespace Sinapse.Data
         #region Const definitions
         public const string ColumnRoleId = "@_informationRoleId";
         public const string ColumnTrainingLayerId = "@_trainingLayerId";
+        public const string ColumnComputedPrefix = "@_computed";
         #endregion
 
 
@@ -323,6 +324,17 @@ namespace Sinapse.Data
                 if (!dataTable.Columns.Contains(colName))
                 {
                     col = new DataColumn(colName, typeof(string));
+                    col.AllowDBNull = false;
+                    col.DefaultValue = String.Empty;
+                    dataTable.Columns.Add(col);
+                }
+            }
+
+            foreach (String colName in schema.OutputColumns)
+            {
+                if (!dataTable.Columns.Contains(ColumnComputedPrefix + colName))
+                {
+                    col = new DataColumn(ColumnComputedPrefix + colName, typeof(string));
                     col.AllowDBNull = false;
                     col.DefaultValue = String.Empty;
                     dataTable.Columns.Add(col);

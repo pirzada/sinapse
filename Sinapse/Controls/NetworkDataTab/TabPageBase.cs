@@ -27,6 +27,8 @@ using System.Windows.Forms;
 using Sinapse.Data;
 using Sinapse.Data.CsvParser;
 
+using Dotnetrix.Controls;
+
 namespace Sinapse.Controls.NetworkDataTab
 {
     internal partial class TabPageBase : UserControl
@@ -34,6 +36,8 @@ namespace Sinapse.Controls.NetworkDataTab
 
         private NetworkDataTabControl m_parentControl;
         private NetworkSet m_networkSet;
+
+        private string m_tabPageName;
 
         //----------------------------------------
 
@@ -46,10 +50,10 @@ namespace Sinapse.Controls.NetworkDataTab
 
         protected TabPageBase(NetworkDataTabControl parentControl)
         {
-            this.m_parentControl = parentControl;
-            this.m_parentControl.DatabaseLoaded += new EventHandler(parentControl_DatabaseLoaded);
-
             InitializeComponent();
+
+            this.Dock = DockStyle.Fill;
+            this.m_parentControl = parentControl;
         }
         #endregion
 
@@ -60,7 +64,7 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Properties
         internal int ItemCount
         {
-            get { return this.dataGridView.Rows.Count; }
+            get { return this.BindingSource.Count; }
         }
 
         internal int SelectedItemCount
@@ -97,7 +101,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
         protected virtual void OnRowValidating(DataRowView row)
         {
-                row.Row[NetworkDatabase.ColumnRoleId] = (ushort)m_networkSet;
+            row.Row[NetworkDatabase.ColumnRoleId] = (ushort)m_networkSet;
         }
         #endregion
 
@@ -116,12 +120,26 @@ namespace Sinapse.Controls.NetworkDataTab
             return String.Format("{0}='{1}'", NetworkDatabase.ColumnRoleId, (ushort)this.m_networkSet);
         }
 
-        protected void SetUp(NetworkSet networkSet)
+        protected void SetUp(NetworkSet networkSet, string displayName)
         {
             this.m_networkSet = networkSet;
+            this.m_tabPageName = displayName;
+            this.lbSetTitle.Text = displayName;
+            this.setTitle();
         }
         #endregion
 
+
+        //----------------------------------------
+
+
+        #region Protected Override
+        protected override void OnParentChanged(EventArgs e)
+        {
+            this.setTitle();
+            base.OnParentChanged(e);
+        }
+        #endregion
 
         //----------------------------------------
 
@@ -131,9 +149,12 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             if (!this.DesignMode)
             {
+                this.m_parentControl.DatabaseLoaded += new EventHandler(parentControl_DatabaseLoaded);
+
                 this.dataGridView.AutoGenerateColumns = false;
                 this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
                 this.dataGridView.DataSource = this.BindingSource;
+                this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
             }
         }
 
@@ -141,8 +162,6 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             this.OnDatabaseLoaded();
         }
-
-
 
         #endregion
 
@@ -180,6 +199,8 @@ namespace Sinapse.Controls.NetworkDataTab
 
         private void setColumns()
         {
+            this.dataGridView.SuspendLayout();
+            this.dataGridView.Columns.Clear();
 
             DataGridViewColumn column;
 
@@ -209,7 +230,7 @@ namespace Sinapse.Controls.NetworkDataTab
                     this.dataGridView.Columns[colName].HeaderText = dataGridView.Columns[colName].DataPropertyName + " [C]";
             }
 
-#if DEBUG
+#if SHOW_HIDDEN_COLUMNS
             column = new DataGridViewColumn();
             column.DataPropertyName = NetworkDatabase.ColumnRoleId;
             column.HeaderText = NetworkDatabase.ColumnRoleId;
@@ -222,6 +243,15 @@ namespace Sinapse.Controls.NetworkDataTab
             column.CellTemplate = new DataGridViewTextBoxCell();
             this.dataGridView.Columns.Add(column);
 #endif
+            this.ResumeLayout(true);
+        }
+
+        private void setTitle()
+        {
+            TabPageEX tabPage = this.Parent as TabPageEX;
+
+            if (tabPage != null)
+                tabPage.Text = String.Format("{0} [{1}]", this.m_tabPageName, this.ItemCount);
         }
         #endregion
 
@@ -326,8 +356,13 @@ namespace Sinapse.Controls.NetworkDataTab
         #region DataGridView Events
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.ParentControl.SelectionChanged != null)
-                this.ParentControl.SelectionChanged.Invoke(sender, e);
+            if (this.ParentControl.DataSelectionChanged != null)
+                this.ParentControl.DataSelectionChanged.Invoke(sender, e);
+        }
+
+        private void Rows_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            this.setTitle();
         }
 
         /// <summary>
@@ -370,7 +405,7 @@ namespace Sinapse.Controls.NetworkDataTab
             }
         }
 
-        private void dataGridView_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
             try
             {
@@ -383,6 +418,8 @@ namespace Sinapse.Controls.NetworkDataTab
             {
             }
         }
+
         #endregion
+
     }
 }

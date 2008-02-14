@@ -50,6 +50,7 @@ namespace Sinapse.Controls.Sidebar
             this.pbStart = new System.Windows.Forms.PictureBox();
             this.pbForget = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbGraphDisable = new System.Windows.Forms.CheckBox();
             this.cbGraph = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).BeginInit();
@@ -386,6 +387,7 @@ namespace Sinapse.Controls.Sidebar
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.rbErrorLimit);
             this.panel1.Controls.Add(this.rbEpochLimit);
+            this.panel1.Controls.Add(this.cbGraphDisable);
             this.panel1.Controls.Add(this.cbGraph);
             this.panel1.Controls.Add(this.cbValidationStop);
             this.panel1.Controls.Add(this.cbValidate);
@@ -402,6 +404,20 @@ namespace Sinapse.Controls.Sidebar
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(189, 362);
             this.panel1.TabIndex = 37;
+            // 
+            // cbGraphDisable
+            // 
+            this.cbGraphDisable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbGraphDisable.AutoSize = true;
+            this.cbGraphDisable.Checked = global::Sinapse.Properties.Settings.Default.graph_Disable;
+            this.cbGraphDisable.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Disable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbGraphDisable.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbGraphDisable.Location = new System.Drawing.Point(12, 313);
+            this.cbGraphDisable.Name = "cbGraphDisable";
+            this.cbGraphDisable.Size = new System.Drawing.Size(181, 16);
+            this.cbGraphDisable.TabIndex = 28;
+            this.cbGraphDisable.Text = "Disable graph (improves performance)";
             // 
             // cbGraph
             // 
@@ -476,5 +492,6 @@ namespace Sinapse.Controls.Sidebar
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox cbGraph;
+        private System.Windows.Forms.CheckBox cbGraphDisable;
     }
 }
