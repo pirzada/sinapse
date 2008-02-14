@@ -17,36 +17,71 @@
  ***************************************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Text;
-using System.Windows.Forms;
 
-using Sinapse.Data;
+using AForge.Neuro;
 
-namespace Sinapse.Controls.NetworkDataTab
+namespace Sinapse.Data
 {
 
-    internal sealed partial class TabPageValidation : TabPageBase
+    [Serializable]
+    internal sealed class NetworkCheckPoint
     {
 
+        private ActivationNetwork m_activationNetwork;
+        private TrainingStatus m_networkStatus;
+        private DateTime m_creationTime;
 
-        //----------------------------------------
+
+        //---------------------------------------------
 
 
         #region Constructor
-        public TabPageValidation(NetworkDataTabControl parentControl)
-            : base(parentControl)
+        internal NetworkCheckPoint(ActivationNetwork activationNetwork, TrainingStatus networkStatus)
         {
-            InitializeComponent();
-            SetUp(NetworkSet.Validation, "Validation Set");
+            this.m_activationNetwork = activationNetwork;
+            this.m_networkStatus = networkStatus;
+            this.m_creationTime = DateTime.Now;
         }
         #endregion
 
-        //----------------------------------------
+
+        //---------------------------------------------
+
+
+        #region Properties
+        internal ActivationNetwork ActivationNetwork
+        {
+            get { return this.m_activationNetwork; }
+            set { this.m_activationNetwork = value; }
+        }
+
+        internal TrainingStatus NetworkStatus
+        {
+            get { return this.m_networkStatus; }
+            set { this.m_networkStatus = value; }
+        }
+
+        internal DateTime CreationTime
+        {
+            get { return this.m_creationTime; }
+        }
+        #endregion
 
 
     }
+
+    /*
+ 
+    [Serializable]
+    internal sealed class NetworkCheckPointCollection : ICollection<NetworkCheckPoint>, IList<NetworkCheckPoint>
+    {
+        internal NetworkCheckPointCollection()
+        {
+        }
+    }
+  
+    */ 
 }

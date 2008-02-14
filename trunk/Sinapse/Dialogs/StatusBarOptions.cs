@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace Sinapse.Dialogs
 {
-    public partial class StatusBarOptions : Form
+    public partial class StatusBarOptionsDialog : Form
     {
 
-        public StatusBarOptions()
+        public StatusBarOptionsDialog()
         {
             InitializeComponent();
             numRate.Value = Properties.Settings.Default.display_UpdateRate;

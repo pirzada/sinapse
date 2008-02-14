@@ -130,5 +130,29 @@ namespace Sinapse.Properties {
                 this["graph_Size"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool main_AutoSwitchToTrainingTab {
+            get {
+                return ((bool)(this["main_AutoSwitchToTrainingTab"]));
+            }
+            set {
+                this["main_AutoSwitchToTrainingTab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool graph_Disable {
+            get {
+                return ((bool)(this["graph_Disable"]));
+            }
+            set {
+                this["graph_Disable"] = value;
+            }
+        }
     }
 }

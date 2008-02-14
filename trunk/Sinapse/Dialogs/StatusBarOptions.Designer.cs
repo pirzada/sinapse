@@ -1,6 +1,6 @@
 namespace Sinapse.Dialogs
 {
-    partial class StatusBarOptions
+    partial class StatusBarOptionsDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -89,7 +89,7 @@ namespace Sinapse.Dialogs
             this.label2.TabIndex = 0;
             this.label2.Text = "passed epochs.";
             // 
-            // RefreshRateDialog
+            // StatusBarOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,8 +99,8 @@ namespace Sinapse.Dialogs
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "RefreshRateDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Name = "StatusBarOptions";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Status Bar Options";
             ((System.ComponentModel.ISupportInitialize)(this.numRate)).EndInit();
             this.ResumeLayout(false);

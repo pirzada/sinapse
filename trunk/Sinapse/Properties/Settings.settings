@@ -29,5 +29,11 @@
     <Setting Name="graph_Size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">517, 276</Value>
     </Setting>
+    <Setting Name="main_AutoSwitchToTrainingTab" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="graph_Disable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -28,20 +28,13 @@ namespace Sinapse.Controls.NetworkDataTab
         /// </summary>
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Size = new System.Drawing.Size(144, 23);
-            this.label1.Text = "Validation Set";
             // 
             // TabPageValidation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "TabPageValidation";
-            ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

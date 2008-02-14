@@ -37,16 +37,37 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Constructor
-        public TabPageTesting(NetworkDataTabControl parentControl) : base(parentControl)
+        public TabPageTesting(NetworkDataTabControl parentControl)
+            : base(parentControl)
         {
             InitializeComponent();
-            SetUp(NetworkSet.Testing);
+            SetUp(NetworkSet.Testing, "Testing Set");
         }
         #endregion
 
 
         //----------------------------------------
 
+
+        protected override void OnDatabaseLoaded()
+        {
+            base.OnDatabaseLoaded();
+
+            if (this.ParentControl.NetworkDatabase != null)
+            {
+                DataGridViewColumn column;
+
+                foreach (String colName in this.ParentControl.NetworkDatabase.Schema.OutputColumns)
+                {
+                    column = new DataGridViewColumn();
+                    column.DataPropertyName = NetworkDatabase.ColumnComputedPrefix + colName;
+                    column.HeaderText = "Network: " + colName;
+                    column.CellTemplate = new DataGridViewTextBoxCell();
+                    column.DefaultCellStyle.BackColor = SystemColors.Window;
+                    this.dataGridView.Columns.Add(column);
+                }
+            }
+        }
 
     }
 }

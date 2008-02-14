@@ -102,7 +102,6 @@ namespace Sinapse.Forms
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
-            this.sideTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
             this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
@@ -123,6 +122,7 @@ namespace Sinapse.Forms
             this.btnNewNetwork = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.btnWizard = new System.Windows.Forms.ToolStripButton();
+            this.sideTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
             this.toolStripTraining = new System.Windows.Forms.ToolStrip();
             this.btnTrainForget = new System.Windows.Forms.ToolStripButton();
             this.btnTrainStart = new System.Windows.Forms.ToolStripButton();
@@ -609,6 +609,16 @@ namespace Sinapse.Forms
             this.openNetworkDialog.Title = "Open Network Object";
             this.openNetworkDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openNetworkDialog_FileOk);
             // 
+            // sideTrainerControl
+            // 
+            this.sideTrainerControl.BackColor = System.Drawing.SystemColors.Control;
+            this.sideTrainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sideTrainerControl.Enabled = false;
+            this.sideTrainerControl.Location = new System.Drawing.Point(0, 0);
+            this.sideTrainerControl.Name = "sideTrainerControl";
+            this.sideTrainerControl.Size = new System.Drawing.Size(205, 444);
+            this.sideTrainerControl.TabIndex = 12;
+            // 
             // saveNetworkDialog
             // 
             this.saveNetworkDialog.DefaultExt = "ann";
@@ -651,7 +661,7 @@ namespace Sinapse.Forms
             // 
             this.splitContainer.Panel2.Controls.Add(this.tabControlNetworkData);
             this.splitContainer.Size = new System.Drawing.Size(792, 452);
-            this.splitContainer.SplitterDistance = 236;
+            this.splitContainer.SplitterDistance = 263;
             this.splitContainer.TabIndex = 17;
             // 
             // tabControlSidebar
@@ -670,7 +680,7 @@ namespace Sinapse.Forms
             this.tabControlSidebar.Multiline = true;
             this.tabControlSidebar.Name = "tabControlSidebar";
             this.tabControlSidebar.SelectedIndex = 0;
-            this.tabControlSidebar.Size = new System.Drawing.Size(236, 452);
+            this.tabControlSidebar.Size = new System.Drawing.Size(263, 452);
             this.tabControlSidebar.TabIndex = 16;
             this.tabControlSidebar.UseVisualStyles = false;
             // 
@@ -680,7 +690,7 @@ namespace Sinapse.Forms
             this.tabStatus.Location = new System.Drawing.Point(27, 4);
             this.tabStatus.Name = "tabStatus";
             this.tabStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStatus.Size = new System.Drawing.Size(205, 444);
+            this.tabStatus.Size = new System.Drawing.Size(232, 444);
             this.tabStatus.TabIndex = 1;
             this.tabStatus.Text = "Network Status";
             this.tabStatus.UseVisualStyleBackColor = true;
@@ -694,7 +704,7 @@ namespace Sinapse.Forms
             this.sideDisplayControl.Location = new System.Drawing.Point(3, 3);
             this.sideDisplayControl.Name = "sideDisplayControl";
             this.sideDisplayControl.ReadOnly = false;
-            this.sideDisplayControl.Size = new System.Drawing.Size(199, 438);
+            this.sideDisplayControl.Size = new System.Drawing.Size(226, 438);
             this.sideDisplayControl.TabIndex = 16;
             // 
             // tabTraining
@@ -706,16 +716,6 @@ namespace Sinapse.Forms
             this.tabTraining.TabIndex = 0;
             this.tabTraining.Text = "Network Trainer";
             this.tabTraining.UseVisualStyleBackColor = true;
-            // 
-            // sideTrainerControl
-            // 
-            this.sideTrainerControl.BackColor = System.Drawing.SystemColors.Control;
-            this.sideTrainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sideTrainerControl.Enabled = false;
-            this.sideTrainerControl.Location = new System.Drawing.Point(0, 0);
-            this.sideTrainerControl.Name = "sideTrainerControl";
-            this.sideTrainerControl.Size = new System.Drawing.Size(205, 444);
-            this.sideTrainerControl.TabIndex = 12;
             // 
             // tabData
             // 
@@ -754,7 +754,7 @@ namespace Sinapse.Forms
             this.tabControlNetworkData.ImageList = this.tabSetImageList;
             this.tabControlNetworkData.Location = new System.Drawing.Point(0, 0);
             this.tabControlNetworkData.Name = "tabControlNetworkData";
-            this.tabControlNetworkData.Size = new System.Drawing.Size(552, 452);
+            this.tabControlNetworkData.Size = new System.Drawing.Size(525, 452);
             this.tabControlNetworkData.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControlNetworkData.TabIndex = 0;
             this.tabControlNetworkData.UseVisualStyles = false;

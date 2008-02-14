@@ -172,7 +172,7 @@ namespace Sinapse.Forms
 
 
                 // Wire up controls and events
-                this.tabControlNetworkData.SelectionChanged += networkDataControl_SelectionChanged;
+                this.tabControlNetworkData.DataSelectionChanged += networkDataControl_SelectionChanged;
 
                 this.sideTrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
                 this.sideTrainerControl.DataNeeded += sideTrainerControl_DataNeeded;
@@ -333,16 +333,18 @@ namespace Sinapse.Forms
             if (this.CurrentNetworkContainer == null || 
                 (this.CurrentNetworkContainer != null &&
                 MessageBox.Show("Would you like to overwrite your current network?" +
-                                "\nAny unsaved training sessions will be lost. Are you sure?",
-                                "Confirmation", MessageBoxButtons.YesNo) == DialogResult.No))
+                                "\nAny unsaved training sessions will be lost",
+                                "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes))
             {
                 NetworkCreationDialog creationDlg = new NetworkCreationDialog(m_networkDatabase.Schema);
                 if (creationDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     this.CurrentNetworkContainer = creationDlg.CreateNetworkContainer();
-                    
-                    //TODO: make this optional.
-                    this.tabControlSidebar.SelectedTab = this.tabTraining;
+
+                    if (Properties.Settings.Default.main_AutoSwitchToTrainingTab)
+                    {
+                        this.tabControlSidebar.SelectedTab = this.tabTraining;
+                    }
                 }
             }
         }

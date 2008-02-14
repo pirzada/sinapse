@@ -40,7 +40,7 @@ namespace Sinapse.Controls.NetworkDataTab
         private TabPageValidation m_tabValidation;
         
 
-        public EventHandler SelectionChanged;
+        public EventHandler DataSelectionChanged;
         public EventHandler DataChanged;
         public EventHandler SchemaChanged;
         public EventHandler DatabaseLoaded;
@@ -52,9 +52,9 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Constructor
         public NetworkDataTabControl()
         {
-            this.m_tabTesting = new TabPageTesting(this);
-            this.m_tabValidation = new TabPageValidation(this);
             this.m_tabTraining = new TabPageTraining(this);
+            this.m_tabValidation = new TabPageValidation(this);
+            this.m_tabTesting = new TabPageTesting(this);
         }
         #endregion
 
@@ -69,14 +69,20 @@ namespace Sinapse.Controls.NetworkDataTab
             {
                 if (this.Controls.Count == 0) // Prevents from inserting tabs twice
                 {
-                    this.Controls.Add(createTab(m_tabTraining, "Training Set", 0));
-                    this.Controls.Add(createTab(m_tabValidation, "Validation Set", 1));
-                    this.Controls.Add(createTab(m_tabTesting, "Testing Set", 2));
+                    this.Controls.Add(createTab(m_tabTraining, 0));
+                    this.Controls.Add(createTab(m_tabValidation, 1));
+                    this.Controls.Add(createTab(m_tabTesting, 2));
                 }
             }
 
             base.OnCreateControl();
-        }        
+        }
+
+        protected override void OnSelectedIndexChanged(EventArgs e)
+        {
+            base.OnSelectedIndexChanged(e);
+            this.OnDataSelectionChanged();
+        }
         #endregion
 
 
@@ -133,10 +139,10 @@ namespace Sinapse.Controls.NetworkDataTab
                 this.DataChanged.Invoke(this, EventArgs.Empty);
         }
 
-        private void OnSelectionChanged()
+        private void OnDataSelectionChanged()
         {
-            if (this.SchemaChanged != null)
-                this.SchemaChanged.Invoke(this, EventArgs.Empty);
+            if (this.DataSelectionChanged != null)
+                this.DataSelectionChanged.Invoke(this, EventArgs.Empty);
         }
 
         private void OnDatabaseLoaded()
@@ -153,14 +159,12 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Private Methods
         private void selectedTab_SelectionChanged(object sender, EventArgs e)
         {
-            this.OnSelectionChanged();
+            this.OnDataSelectionChanged();
         }
 
-        private TabPageEX createTab(UserControl control, string text, int imageIndex)
+        private TabPageEX createTab(UserControl control, int imageIndex)
         {
-            control.Dock = DockStyle.Fill;
-
-            TabPageEX tabPage = new TabPageEX(text);
+            TabPageEX tabPage = new TabPageEX();
             tabPage.ImageIndex = imageIndex;
             tabPage.Controls.Add(control);
 

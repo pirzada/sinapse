@@ -15,6 +15,7 @@ namespace Sinapse.Controls
     internal sealed partial class StatusBarControl : UserControl
     {
 
+        private StatusBarOptionsDialog m_statusBarOptionsDialog;
 
         //---------------------------------------------
 
@@ -24,6 +25,7 @@ namespace Sinapse.Controls
         {
             InitializeComponent();
 
+            this.m_statusBarOptionsDialog = new StatusBarOptionsDialog();
             this.ResetControl();
         }
         #endregion
@@ -71,7 +73,10 @@ namespace Sinapse.Controls
 
         private void progressBar_Click(object sender, EventArgs e)
         {
-            new StatusBarOptions().Show(this.ParentForm);
+            if (!this.m_statusBarOptionsDialog.Visible)
+            {
+                this.m_statusBarOptionsDialog.Show(this);
+            }
         }
 
 
