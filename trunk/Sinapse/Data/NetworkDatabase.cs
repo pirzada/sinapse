@@ -33,7 +33,7 @@ using Sinapse.Data.Structures;
 namespace Sinapse.Data
 {
 
-    public enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2 };
+    public enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2, Query = 3 };
 
 
     [Serializable]
@@ -47,7 +47,6 @@ namespace Sinapse.Data
         public const string ColumnComputedPrefix = "@_computed";
         #endregion
 
-
         //----------------------------------------
 
         private NetworkSchema m_networkSchema;
@@ -57,8 +56,6 @@ namespace Sinapse.Data
         internal FileSystemEventHandler DatabaseSaved;
 
         [NonSerialized]
-        internal EventHandler DatabaseChanged;
-
         private string m_lastSavePath;
 
 
@@ -68,8 +65,6 @@ namespace Sinapse.Data
         #region Constructors
         public NetworkDatabase(NetworkSchema schema, DataTable dataTable)
         {
-            this.m_lastSavePath = String.Empty;
-
             this.m_networkSchema = schema;
             this.m_dataTable = dataTable;
 
@@ -77,17 +72,23 @@ namespace Sinapse.Data
 
             this.m_networkSchema.DataCategories.AutodetectCaptions(dataTable);
             this.m_networkSchema.DataRanges.AutodetectRanges(dataTable);
+
+            this.Initialize();
         }
 
         public NetworkDatabase(NetworkSchema schema)
         {
-            this.m_lastSavePath = String.Empty;
-
             this.m_networkSchema = schema;
             this.m_dataTable = new DataTable();
 
             this.createColumns(m_dataTable, schema);
 
+            this.Initialize();
+        }
+
+        public void Initialize()
+        {
+            this.m_lastSavePath = String.Empty;
         }
         #endregion
 
@@ -106,27 +107,11 @@ namespace Sinapse.Data
             get { return this.m_dataTable; }
         }
 
-        /*
-        internal DataView TrainingSet
-        {
-            get { return; }
-        }
-
-        internal DataView TestingSet
-        {
-            get { return;
-        }
-
-        internal DataView ValidationSet
-        {
-            get { return; }
-        }   */
-
         internal int TrainingLayerCount
         {
             get
             {
-                return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingLayerId).Rows.Count;               
+                return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingLayerId).Rows.Count;
             }
         }
 
@@ -228,7 +213,8 @@ namespace Sinapse.Data
 
             for (int i = 0; i < columnList.Length; i++)
             {
-                string columnName = columnList[i];
+                doubleData[i] = this.NormalizeData(sourceRow, columnList[i]);
+            /*  string columnName = columnList[i];
 
                 DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
                 bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
@@ -247,9 +233,31 @@ namespace Sinapse.Data
                 }
 
                 doubleData[i] = (data - range.Min) / (range.Max - range.Min);
+             */ 
             }
 
             return doubleData;
+        }
+
+        internal double NormalizeData(DataRow sourceRow, string columnName)
+        {
+            DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
+            bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
+
+            double data;
+
+            if (hasCaption)
+                data = this.m_networkSchema.DataCategories.GetID(columnName, (string)sourceRow[columnName]);
+            else
+            {
+                string strData = (string)sourceRow[columnName];
+                if (strData.Length > 0)
+                    data = Double.Parse(strData);
+                else
+                    data = 0;
+            }
+
+            return (data - range.Min) / (range.Max - range.Min);
         }
 
         /// <summary>
@@ -262,7 +270,8 @@ namespace Sinapse.Data
         {
             for (int i = 0; i < columnList.Length; i++)
             {
-                string columnName = columnList[i];
+                dataRow[columnList[i]] = this.RevertData(columnList[i], normalizedData[i]);
+    /*          string columnName = columnList[i];
 
                 DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
                 bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
@@ -273,6 +282,109 @@ namespace Sinapse.Data
                     dataRow[columnName] = this.m_networkSchema.DataCategories.GetCaption(columnName, (int)Math.Round(data));
                 else
                     dataRow[columnName] = data.ToString();
+     */ 
+            }
+        }
+
+        internal string RevertData(string columnName, double normalizedData)
+        {
+            string output;
+
+            DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
+            bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
+
+            double data = normalizedData * (range.Max - range.Min) + range.Min;
+
+            if (hasCaption)
+                output = this.m_networkSchema.DataCategories.GetCaption(columnName, (int)Math.Round(data));
+            else
+                output = data.ToString();
+
+            return output;
+        }
+
+        internal void ComputeRow(NetworkContainer networkContainer, DataRow dataRow, bool testingOnly)
+        {
+            double[] input = this.NormalizeRow(dataRow, this.Schema.InputColumns);
+            double[] output = networkContainer.ActivationNetwork.Compute(input);
+
+            string columnName;
+            for (int i = 0; i < output.Length; ++i)
+            {
+                if (testingOnly)
+                    columnName = ColumnComputedPrefix + this.Schema.OutputColumns[i];
+                else columnName = this.Schema.OutputColumns[i];
+
+                dataRow[columnName] =
+                    this.RevertData(this.Schema.OutputColumns[i], output[i]);
+            }
+
+        }
+
+        internal void ComputeTable(NetworkContainer networkContainer, bool testingOnly)
+        {
+            NetworkSet networkSet = testingOnly ? NetworkSet.Testing : NetworkSet.Query;
+
+            DataRow[] result = this.m_dataTable.Select(String.Format("[{0}] = {1}",
+                ColumnRoleId, (ushort)networkSet));
+
+            foreach (DataRow dataRow in result)
+            {
+                ComputeRow(networkContainer, dataRow, testingOnly);
+            }
+        }
+
+
+        /// <summary>
+        /// Iterates the DataTable and validates categorical input fields
+        /// </summary>
+        /// <returns>Returns true in case of success, false otherwise</returns>
+        internal bool ValidateTable()
+        {
+            bool success = true;
+
+            foreach (DataRow row in this.m_dataTable.Rows)
+            {
+                foreach (string columnName in this.Schema.InputColumns)
+                {
+                    //Check if field is indeed a category
+                    if (Array.IndexOf(this.Schema.StringColumns, columnName) >= 0)
+                    {
+                        string strData = (string)row[columnName];
+                        if (this.Schema.DataCategories.GetID(columnName, strData) < 0)
+                        {
+                            row.RowError = "Invalid data at column " + columnName;
+                            return false;
+                        }
+                    }
+                }
+
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// Iterates the DataTable and rounds non-categorical output fields
+        /// </summary>
+        internal void Round(bool testingOnly)
+        {
+            string columnName;
+
+            foreach (DataRow row in this.m_dataTable.Rows)
+            {
+                foreach (string outputColumn in this.Schema.OutputColumns)
+                {
+                    if (testingOnly)
+                        columnName = ColumnComputedPrefix + outputColumn;
+                    else columnName = outputColumn;
+
+                    //Check if field isn't a category
+                    if (Array.IndexOf(this.Schema.StringColumns, columnName) == -1)
+                    {
+                        double value = Double.Parse((string)row[columnName]);
+                        row[columnName] = Math.Round(value).ToString();
+                    }
+                }
             }
         }
         #endregion
@@ -352,13 +464,7 @@ namespace Sinapse.Data
         {
             if (this.DatabaseSaved != null)
                 this.DatabaseSaved.Invoke(this, e);
-        }
-
-        private void OnDatabaseChanged()
-        {
-            if (this.DatabaseChanged != null)
-                this.DatabaseChanged.Invoke(this, EventArgs.Empty);
-        }
+        }      
         #endregion
 
 

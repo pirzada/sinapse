@@ -76,7 +76,6 @@ namespace Sinapse.Controls.NetworkDataTab
             this.Controls.Add(this.lbLayer);
             this.Controls.Add(this.btnDel);
             this.Name = "TabPageTraining";
-            this.Load += new System.EventHandler(this.TabPageTraining_Load);
             this.Controls.SetChildIndex(this.lbSetTitle, 0);
             this.Controls.SetChildIndex(this.btnDel, 0);
             this.Controls.SetChildIndex(this.lbLayer, 0);

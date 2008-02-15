@@ -32,18 +32,16 @@ namespace Sinapse.Controls.NetworkDataTab
     internal sealed class NetworkDataTabControl : Dotnetrix.Controls.TabControlEX
     {
 
-        private NetworkDatabase m_networkData;
-
+        private NetworkDatabase m_networkDatabase;
+        private NetworkContainer m_networkContainer;
 
         private TabPageTraining m_tabTraining;
         private TabPageTesting m_tabTesting;
         private TabPageValidation m_tabValidation;
+        private TabPageQuery m_tabQuery;
         
 
         public EventHandler DataSelectionChanged;
-        public EventHandler DataChanged;
-        public EventHandler SchemaChanged;
-        public EventHandler DatabaseLoaded;
 
 
         //----------------------------------------
@@ -52,9 +50,10 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Constructor
         public NetworkDataTabControl()
         {
-            this.m_tabTraining = new TabPageTraining(this);
-            this.m_tabValidation = new TabPageValidation(this);
-            this.m_tabTesting = new TabPageTesting(this);
+            this.m_tabTraining = new TabPageTraining();
+            this.m_tabValidation = new TabPageValidation();
+            this.m_tabTesting = new TabPageTesting();
+            this.m_tabQuery = new TabPageQuery();
         }
         #endregion
 
@@ -72,6 +71,7 @@ namespace Sinapse.Controls.NetworkDataTab
                     this.Controls.Add(createTab(m_tabTraining, 0));
                     this.Controls.Add(createTab(m_tabValidation, 1));
                     this.Controls.Add(createTab(m_tabTesting, 2));
+                    this.Controls.Add(createTab(m_tabQuery, 3));
                 }
             }
 
@@ -92,23 +92,30 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Properties
         internal NetworkDatabase NetworkDatabase
         {
-            get
-            {
-                return this.m_networkData;
-            }
+            get { return this.m_networkDatabase; }
             set
             {
-                this.m_networkData = value;
+                this.m_networkDatabase = value;
 
-                if (value != null)
-                {
-                    this.Enabled = true;
-                    this.OnDatabaseLoaded();
-                }
-                else
-                {
-                    this.Enabled = false;
-                }
+                this.SuspendLayout();
+                this.m_tabTraining.NetworkDatabase = value;
+                this.m_tabValidation.NetworkDatabase = value;
+                this.m_tabTesting.NetworkDatabase = value;
+                this.ResumeLayout(true);
+            }
+        }
+
+        internal NetworkContainer NetworkContainer
+        {
+            get { return this.m_networkContainer; }
+            set
+            {
+                this.m_networkContainer = value;
+
+                this.SuspendLayout();
+                this.m_tabTesting.NetworkContainer = value;
+                this.m_tabQuery.NetworkContainer = value;
+                this.ResumeLayout(true);
             }
         }
 
@@ -133,22 +140,10 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Protected Methods
-        private void OnDataChanged()
-        {
-            if (this.DataChanged != null)
-                this.DataChanged.Invoke(this, EventArgs.Empty);
-        }
-
         private void OnDataSelectionChanged()
         {
             if (this.DataSelectionChanged != null)
                 this.DataSelectionChanged.Invoke(this, EventArgs.Empty);
-        }
-
-        private void OnDatabaseLoaded()
-        {
-            if (this.DatabaseLoaded != null)
-                this.DatabaseLoaded.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -162,13 +157,21 @@ namespace Sinapse.Controls.NetworkDataTab
             this.OnDataSelectionChanged();
         }
 
-        private TabPageEX createTab(UserControl control, int imageIndex)
+        private TabPageEX createTab(TabPageBase control, int imageIndex)
         {
+            control.Dock = DockStyle.Fill;
+            control.DataSelectionChanged += tabPage_SelectionChanged;
+            
             TabPageEX tabPage = new TabPageEX();
             tabPage.ImageIndex = imageIndex;
             tabPage.Controls.Add(control);
 
             return tabPage;
+        }
+
+        private void tabPage_SelectionChanged(object sender, EventArgs e)
+        {
+            this.OnDataSelectionChanged();
         }
         #endregion
 

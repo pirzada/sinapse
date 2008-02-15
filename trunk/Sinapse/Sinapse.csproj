@@ -69,17 +69,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\NetworkDataControl\NetworkDataControl.cs">
+    <Compile Include="Controls\NetworkDataTab\TabPageQuery.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataControl\NetworkDataControl.Designer.cs">
-      <DependentUpon>NetworkDataControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkDataControl\NetworkDataQueryControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkDataControl\NetworkDataQueryControl.Designer.cs">
-      <DependentUpon>NetworkDataQueryControl.cs</DependentUpon>
+    <Compile Include="Controls\NetworkDataTab\TabPageQuery.Designer.cs">
+      <DependentUpon>TabPageQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sidebar\SideDisplayControl.cs">
       <SubType>UserControl</SubType>
@@ -141,6 +135,7 @@
     <Compile Include="Data\NetworkDatabase.cs" />
     <Compile Include="Data\NetworkCaptions.cs" />
     <Compile Include="Data\NetworkRanges.cs" />
+    <Compile Include="Data\PerformanceReporter.cs" />
     <Compile Include="Data\NetworkSchema.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -203,12 +198,6 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NetworkInquirer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NetworkInquirer.Designer.cs">
-      <DependentUpon>NetworkInquirer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SchemaEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,13 +206,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\NetworkDataControl\NetworkDataControl.resx">
-      <DependentUpon>NetworkDataControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageQuery.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataControl\NetworkDataQueryControl.resx">
-      <DependentUpon>NetworkDataQueryControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
+      <DependentUpon>TabPageQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sidebar\SideDisplayControl.resx">
       <DependentUpon>SideDisplayControl.cs</DependentUpon>
@@ -284,10 +269,6 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NetworkInquirer.resx">
-      <DependentUpon>NetworkInquirer.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -597,6 +578,18 @@
   <ItemGroup>
     <None Include="Resources\redled.png" />
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\netjaxer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_comit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\precminus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

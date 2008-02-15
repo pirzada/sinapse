@@ -135,6 +135,8 @@ namespace Sinapse.Dialogs
             if (!this.m_forceClose)
             {
                 e.Cancel = true;
+                if (this.ParentForm != null)
+                    this.ParentForm.Focus();
                 this.Hide();
             }
         }

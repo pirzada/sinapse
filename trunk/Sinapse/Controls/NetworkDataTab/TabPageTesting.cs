@@ -32,13 +32,11 @@ namespace Sinapse.Controls.NetworkDataTab
     internal sealed partial class TabPageTesting : TabPageBase
     {
 
-
         //----------------------------------------
 
 
         #region Constructor
-        public TabPageTesting(NetworkDataTabControl parentControl)
-            : base(parentControl)
+        public TabPageTesting()
         {
             InitializeComponent();
             SetUp(NetworkSet.Testing, "Testing Set");
@@ -49,15 +47,25 @@ namespace Sinapse.Controls.NetworkDataTab
         //----------------------------------------
 
 
-        protected override void OnDatabaseLoaded()
-        {
-            base.OnDatabaseLoaded();
+        #region Properties
+        #endregion
 
-            if (this.ParentControl.NetworkDatabase != null)
+
+        //----------------------------------------
+
+
+        #region Control Events
+        protected override void OnCurrentDatabaseChanged()
+        {
+            base.OnCurrentDatabaseChanged();
+
+            this.Enabled = (this.NetworkDatabase != null);
+
+            if (this.NetworkDatabase != null)
             {
                 DataGridViewColumn column;
 
-                foreach (String colName in this.ParentControl.NetworkDatabase.Schema.OutputColumns)
+                foreach (String colName in this.NetworkDatabase.Schema.OutputColumns)
                 {
                     column = new DataGridViewColumn();
                     column.DataPropertyName = NetworkDatabase.ColumnComputedPrefix + colName;
@@ -68,6 +76,54 @@ namespace Sinapse.Controls.NetworkDataTab
                 }
             }
         }
+
+        protected override void OnCurrentNetworkChanged()
+        {
+            base.OnCurrentNetworkChanged();
+
+            btnCompare.Enabled = (this.NetworkContainer != null);
+            btnQuery.Enabled = (this.NetworkContainer != null);
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Buttons
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            this.dataGridView.EndEdit();
+            this.dataGridView.CurrentCell = null;
+
+            this.NetworkDatabase.ComputeTable(this.NetworkContainer, true);
+        }
+
+        private void btnCompare_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRound_Click(object sender, EventArgs e)
+        {
+            this.dataGridView.EndEdit();
+            this.dataGridView.CurrentCell = null;
+
+            this.NetworkDatabase.Round(true);
+        }
+        #endregion
+
+
+
+        //----------------------------------------
+
+
+        #region Private Methods
+
+
+
+        #endregion
+
 
     }
 }
