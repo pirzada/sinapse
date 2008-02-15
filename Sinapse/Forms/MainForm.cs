@@ -65,11 +65,16 @@ namespace Sinapse.Forms
             set
             {
                 this.m_networkContainer = value;
+
+                this.SuspendLayout();
                 this.sideTrainerControl.NeuralNetwork = value;
                 this.sideDisplayControl.NeuralNetwork = value;
+                this.tabControlNetworkData.NetworkContainer = value;
 
                 if (value != null)
                 {
+                    this.toolStripTraining.Enabled = true;
+                    this.btnNetworkSave.Enabled = true;
                     this.MenuNetworkSave.Enabled = true;
                     this.MenuNetworkSaveAs.Enabled = false;
                     this.MenuNetworkWeights.Enabled = true;
@@ -85,12 +90,14 @@ namespace Sinapse.Forms
                 else
                 {
                     //No active network
+                    this.toolStripTraining.Enabled = false;
+                    this.btnNetworkSave.Enabled = false;
                     this.MenuNetworkSave.Enabled = false;
                     this.MenuNetworkSaveAs.Enabled = false;
                     this.MenuNetworkWeights.Enabled = false;
                 }
 
-
+                this.ResumeLayout(true);
             }
         }
 
@@ -104,12 +111,14 @@ namespace Sinapse.Forms
             {
                 this.m_networkDatabase = value;
 
+                this.SuspendLayout();
                 this.tabControlNetworkData.NetworkDatabase = value;
                 this.sideRangesControl.NetworkData = value;
 
 
                 if (value != null)
                 {
+                    this.btnDatabaseSave.Enabled = true;
                     this.MenuDatabaseSave.Enabled = true;
                     this.MenuDatabaseSaveAs.Enabled = false;
                     this.MenuDatabaseEdit.Enabled = true;
@@ -126,6 +135,7 @@ namespace Sinapse.Forms
                 else
                 {
                     //No active data
+                    this.btnDatabaseSave.Enabled = false;
                     this.MenuDatabaseSave.Enabled = false;
                     this.MenuDatabaseSaveAs.Enabled = false;
                     this.MenuDatabaseEdit.Enabled = false;
@@ -133,6 +143,8 @@ namespace Sinapse.Forms
                     this.lbInputCount.Text = "00";
                     this.lbOutputCount.Text = "00";
                 }
+
+                this.ResumeLayout(true);
             }
         }
 
@@ -295,6 +307,16 @@ namespace Sinapse.Forms
                 }
             }
         }
+
+        private void MenuFileCloseNetwork_Click(object sender, EventArgs e)
+        {
+            this.CurrentNetworkContainer = null;
+        }
+
+        private void MenuFileCloseDatabase_Click(object sender, EventArgs e)
+        {
+            this.CurrentNetworkDatabase = null;
+        }
         #endregion
 
 
@@ -372,7 +394,7 @@ namespace Sinapse.Forms
         private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
             HistoryListener.Write("Querying network");
-            new NetworkInquirer(this.m_networkContainer).ShowDialog(this);
+       //     new NetworkInquirer(this.m_networkContainer).ShowDialog(this);
             HistoryListener.Write("Ready");
         }
 

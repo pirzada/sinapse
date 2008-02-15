@@ -88,6 +88,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap db_comit {
+            get {
+                object obj = ResourceManager.GetObject("db_comit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
@@ -256,6 +263,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap netjaxer {
+            get {
+                object obj = ResourceManager.GetObject("netjaxer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap network_16 {
             get {
                 object obj = ResourceManager.GetObject("network_16", resourceCulture);
@@ -396,6 +410,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap precminus {
+            get {
+                object obj = ResourceManager.GetObject("precminus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap redled {
             get {
                 object obj = ResourceManager.GetObject("redled", resourceCulture);
@@ -420,6 +441,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap run {
             get {
                 object obj = ResourceManager.GetObject("run", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap save_all {
+            get {
+                object obj = ResourceManager.GetObject("save_all", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

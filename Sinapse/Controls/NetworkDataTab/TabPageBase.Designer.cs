@@ -174,9 +174,6 @@ namespace Sinapse.Controls.NetworkDataTab
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
-            // BindingSource
-            // 
-            // 
             // TabPageBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,7 +187,6 @@ namespace Sinapse.Controls.NetworkDataTab
             this.Controls.Add(this.dataGridView);
             this.Name = "TabPageBase";
             this.Size = new System.Drawing.Size(588, 398);
-            this.Load += new System.EventHandler(this.TabPageBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();

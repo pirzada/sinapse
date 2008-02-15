@@ -39,8 +39,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Constructor
-        public TabPageTraining(NetworkDataTabControl parentControl)
-            : base(parentControl)
+        public TabPageTraining()
         {
             InitializeComponent();
             SetUp(NetworkSet.Training, "Training Set");
@@ -54,9 +53,11 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Control Events
-        private void TabPageTraining_Load(object sender, EventArgs e)
+        protected override void OnCurrentDatabaseChanged()
         {
+            base.OnCurrentDatabaseChanged();
 
+            this.Enabled = (this.NetworkDatabase != null);
         }
         #endregion
 
@@ -119,7 +120,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
         protected override void OnDataImported(DataTable table)
         {
-            this.ParentControl.NetworkDatabase.ImportData(table, NetworkSet.Training, m_trainingLayer);
+            this.NetworkDatabase.ImportData(table, NetworkSet.Training, m_trainingLayer);
         }
 
 

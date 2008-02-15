@@ -34,11 +34,16 @@ namespace Sinapse.Controls.NetworkDataTab
     internal partial class TabPageBase : UserControl
     {
 
-        private NetworkDataTabControl m_parentControl;
+        private NetworkContainer m_networkContainer;
+        private NetworkDatabase m_networkDatabase;
+        
         private NetworkSet m_networkSet;
-
         private string m_tabPageName;
 
+
+        public EventHandler DataSelectionChanged;
+
+       
         //----------------------------------------
 
 
@@ -47,14 +52,6 @@ namespace Sinapse.Controls.NetworkDataTab
         {
             InitializeComponent();
         }
-
-        protected TabPageBase(NetworkDataTabControl parentControl)
-        {
-            InitializeComponent();
-
-            this.Dock = DockStyle.Fill;
-            this.m_parentControl = parentControl;
-        }
         #endregion
 
 
@@ -62,6 +59,26 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Properties
+        internal NetworkContainer NetworkContainer
+        {
+            get { return this.m_networkContainer; }
+            set
+            {
+                this.m_networkContainer = value;
+                this.OnCurrentNetworkChanged();
+            }
+        }
+
+        internal NetworkDatabase NetworkDatabase
+        {
+            get { return this.m_networkDatabase; }
+            set
+            {
+                this.m_networkDatabase = value;
+                this.OnCurrentDatabaseChanged();
+            }
+        }
+
         internal int ItemCount
         {
             get { return this.BindingSource.Count; }
@@ -70,11 +87,6 @@ namespace Sinapse.Controls.NetworkDataTab
         internal int SelectedItemCount
         {
             get { return this.dataGridView.SelectedRows.Count; }
-        }
-
-        internal NetworkDataTabControl ParentControl
-        {
-            get { return this.m_parentControl; }
         }
         #endregion
 
@@ -85,23 +97,34 @@ namespace Sinapse.Controls.NetworkDataTab
         #region Virtual Methods
         protected virtual void OnDataImported(DataTable table)
         {
-            this.m_parentControl.NetworkDatabase.ImportData(table, GetNetworkSet(), 0);
+            this.NetworkDatabase.ImportData(table, GetNetworkSet(), 0);
         }
 
-        protected virtual void OnDatabaseLoaded()
+        protected virtual void OnCurrentDatabaseChanged()
         {
-            if (this.m_parentControl.NetworkDatabase != null)
+            if (this.NetworkDatabase != null)
             {
-                DataView dv = new DataView(this.m_parentControl.NetworkDatabase.DataTable);
+                DataView dv = new DataView(this.NetworkDatabase.DataTable);
                 dv.RowFilter = this.GetFilterString();
                 this.BindingSource.DataSource = dv;
                 this.setColumns();
             }
         }
 
+        protected virtual void OnCurrentNetworkChanged()
+        {
+            
+        }
+
         protected virtual void OnRowValidating(DataRowView row)
         {
             row.Row[NetworkDatabase.ColumnRoleId] = (ushort)m_networkSet;
+        }
+
+        protected virtual void OnSelectionChanged()
+        {
+            if (this.DataSelectionChanged != null)
+                this.DataSelectionChanged.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -110,12 +133,12 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Protected Methods
-        internal protected NetworkSet GetNetworkSet()
+        protected NetworkSet GetNetworkSet()
         {
             return this.m_networkSet;
         }
 
-        internal protected string GetFilterString()
+        protected string GetFilterString()
         {
             return String.Format("{0}='{1}'", NetworkDatabase.ColumnRoleId, (ushort)this.m_networkSet);
         }
@@ -127,42 +150,50 @@ namespace Sinapse.Controls.NetworkDataTab
             this.lbSetTitle.Text = displayName;
             this.setTitle();
         }
-        #endregion
 
-
-        //----------------------------------------
-
-
-        #region Protected Override
-        protected override void OnParentChanged(EventArgs e)
+        protected new bool Enabled
         {
-            this.setTitle();
-            base.OnParentChanged(e);
+            get
+            {
+                TabPageEX tabPage = this.Parent as TabPageEX;
+                if (tabPage != null)
+                    return this.Parent.Enabled;
+                else return this.Enabled;
+            }
+            set
+            {
+                TabPageEX tabPage = this.Parent as TabPageEX;
+                if (tabPage != null)
+                    this.Parent.Enabled = value;
+                else this.Enabled = value;
+            }
         }
         #endregion
+
 
         //----------------------------------------
 
 
         #region Control Events
-        private void TabPageBase_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
+
             if (!this.DesignMode)
             {
-                this.m_parentControl.DatabaseLoaded += new EventHandler(parentControl_DatabaseLoaded);
-
                 this.dataGridView.AutoGenerateColumns = false;
-                this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
                 this.dataGridView.DataSource = this.BindingSource;
+                this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
                 this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
             }
         }
 
-        private void parentControl_DatabaseLoaded(object sender, EventArgs e)
+        protected override void OnParentChanged(EventArgs e)
         {
-            this.OnDatabaseLoaded();
-        }
+            base.OnParentChanged(e);
 
+            this.setTitle();
+        }
         #endregion
 
 
@@ -204,7 +235,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
             DataGridViewColumn column;
 
-            foreach (String colName in this.m_parentControl.NetworkDatabase.Schema.InputColumns)
+            foreach (String colName in this.NetworkDatabase.Schema.InputColumns)
             {
                 column = new DataGridViewColumn();
                 column.DataPropertyName = colName;
@@ -214,7 +245,7 @@ namespace Sinapse.Controls.NetworkDataTab
                 this.dataGridView.Columns.Add(column);
             }
 
-            foreach (String colName in this.m_parentControl.NetworkDatabase.Schema.OutputColumns)
+            foreach (String colName in this.NetworkDatabase.Schema.OutputColumns)
             {
                 column = new DataGridViewColumn();
                 column.DataPropertyName = colName;
@@ -224,7 +255,7 @@ namespace Sinapse.Controls.NetworkDataTab
                 this.dataGridView.Columns.Add(column);
             }
 
-            foreach (String colName in this.m_parentControl.NetworkDatabase.Schema.StringColumns)
+            foreach (String colName in this.NetworkDatabase.Schema.StringColumns)
             {
                 if (this.dataGridView.Columns.Contains(colName))
                     this.dataGridView.Columns[colName].HeaderText = dataGridView.Columns[colName].DataPropertyName + " [C]";
@@ -356,8 +387,7 @@ namespace Sinapse.Controls.NetworkDataTab
         #region DataGridView Events
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.ParentControl.DataSelectionChanged != null)
-                this.ParentControl.DataSelectionChanged.Invoke(sender, e);
+            this.OnSelectionChanged();
         }
 
         private void Rows_CollectionChanged(object sender, CollectionChangeEventArgs e)

@@ -37,13 +37,26 @@ namespace Sinapse.Controls.NetworkDataTab
 
 
         #region Constructor
-        public TabPageValidation(NetworkDataTabControl parentControl)
-            : base(parentControl)
+        public TabPageValidation()
         {
             InitializeComponent();
             SetUp(NetworkSet.Validation, "Validation Set");
         }
         #endregion
+
+     
+        //----------------------------------------
+
+
+        #region Control Events
+        protected override void OnCurrentDatabaseChanged()
+        {
+            base.OnCurrentDatabaseChanged();
+
+            this.Enabled = (this.NetworkDatabase != null);
+        }
+        #endregion
+
 
         //----------------------------------------
 
