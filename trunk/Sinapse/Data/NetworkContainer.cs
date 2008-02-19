@@ -40,7 +40,7 @@ namespace Sinapse.Data
         private double m_networkPrecision;
         private DateTime m_creationTime;
 
-        private List<NetworkCheckPoint> m_checkPointList;
+        private NetworkSavepointCollection m_savepointCollection;
 
         [NonSerialized]
         private string m_lastSavePath;
@@ -73,6 +73,7 @@ namespace Sinapse.Data
 
             this.m_creationTime = DateTime.Now;
             this.m_lastSavePath = String.Empty;
+            this.m_savepointCollection = new NetworkSavepointCollection();
         }
 
         public NetworkContainer(NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
@@ -96,9 +97,9 @@ namespace Sinapse.Data
             get { return this.m_networkSchema; }
         }
 
-        internal List<NetworkCheckPoint> CheckPoints
+        internal NetworkSavepointCollection Savepoints
         {
-            get { return this.m_checkPointList; }
+            get { return this.m_savepointCollection; }
         }
 
         internal string Name
@@ -167,13 +168,15 @@ namespace Sinapse.Data
             return layout;
         }
 
-        public void SaveCheckPoint(TrainingStatus trainingStatus)
+        public void MarkSavepoint(TrainingStatus trainingStatus)
         {
-            this.m_checkPointList.Add(new NetworkCheckPoint(m_activationNetwork, trainingStatus));
+            this.m_savepointCollection.Add(m_activationNetwork, trainingStatus);
         }
 
-        public void LoadCheckPoint(NetworkCheckPoint network)
+        public void RestoreSavepoint(NetworkSavepoint networkSavepoint)
         {
+            this.m_activationNetwork = networkSavepoint.ActivationNetwork;
+            this.m_networkPrecision = networkSavepoint.NetworkStatus.ErrorTraining;
         }
         #endregion
 

@@ -45,7 +45,7 @@ namespace Sinapse.Controls.Sidebar
         public EventHandler DataNeeded;
         public EventHandler StatusChanged;
 
-        private NetworkContainer m_neuralNetwork;
+        private NetworkContainer m_networkContainer;
 
         private TrainingStatus m_networkState;
         private GraphDialog m_graphDialog;
@@ -87,13 +87,13 @@ namespace Sinapse.Controls.Sidebar
         {
             get
             {
-                return m_neuralNetwork;
+                return m_networkContainer;
             }
             set
             {
                 if (value != null)
                 {
-                    this.m_neuralNetwork = value;
+                    this.m_networkContainer = value;
                     this.Enabled = true;
                 }
                 else
@@ -159,8 +159,8 @@ namespace Sinapse.Controls.Sidebar
 
         public void Forget()
         {
-            this.m_neuralNetwork.ActivationNetwork.Randomize();
-            this.m_neuralNetwork.Precision = 0;
+            this.m_networkContainer.ActivationNetwork.Randomize();
+            this.m_networkContainer.Precision = 0;
             this.m_networkState = new TrainingStatus();
             HistoryListener.Write("Network learnings cleared");
             this.m_trainingPaused = false;
@@ -220,13 +220,15 @@ namespace Sinapse.Controls.Sidebar
 
             TrainingOptions options = new TrainingOptions();
             options.momentum = (double)numMomentum.Value;
-            options.learningRate = (double)numLearningRate.Value;
+            options.firstLearningRate = (double)numLearningRate.Value;
             options.limError = (double)numErrorLimit.Value;
             options.limEpoch = (int)numEpochLimit.Value;
             options.TrainingVectors = trainingVectors;
             options.ValidationVectors = validationVectors;
             options.validateNetwork = cbValidate.Checked;
 
+            options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : options.secondLearningRate = null;
+            
             options.TrainingType = rbErrorLimit.Checked ? TrainingType.ByError : TrainingType.ByEpoch;
 
 
@@ -279,8 +281,8 @@ namespace Sinapse.Controls.Sidebar
 
 
             //Create Teacher
-            BackPropagationLearning networkTeacher = new BackPropagationLearning(m_neuralNetwork.ActivationNetwork);
-            networkTeacher.LearningRate = options.learningRate;
+            BackPropagationLearning networkTeacher = new BackPropagationLearning(m_networkContainer.ActivationNetwork);
+            networkTeacher.LearningRate = options.firstLearningRate;
             networkTeacher.Momentum = options.momentum;
 
             //Start Training
@@ -297,6 +299,20 @@ namespace Sinapse.Controls.Sidebar
                 #region Training Epoch
                 this.m_networkState.ErrorTraining = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output);
                 this.m_networkState.ErrorValidation = networkTeacher.MeasureEpochError(options.ValidationVectors.Input, options.ValidationVectors.Output);
+                #endregion
+
+               
+                #region Training Rate Adjust
+                if (options.secondLearningRate.HasValue)
+                    networkTeacher.LearningRate = options.secondLearningRate.Value;
+                #endregion
+
+
+                #region Mark Network Savepoint
+                if (Properties.Settings.Default.training_Autosave)
+                {
+                    m_networkContainer.MarkSavepoint(m_networkState);
+                }
                 #endregion
 
 
@@ -336,8 +352,8 @@ namespace Sinapse.Controls.Sidebar
                 }
                 #endregion
 
-                m_networkState.Epoch++;
 
+                m_networkState.Epoch++;
 
 
                 //Determine if there is need to stop
@@ -378,7 +394,7 @@ namespace Sinapse.Controls.Sidebar
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.m_neuralNetwork.Precision = this.m_networkState.ErrorTraining;
+            this.m_networkContainer.Precision = this.m_networkState.ErrorTraining;
 
             if (e.Cancelled)
             {

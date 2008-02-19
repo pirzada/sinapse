@@ -102,6 +102,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(582, 337);
             this.dataGridView.TabIndex = 22;
+            this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             this.dataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_RowValidating);
             // 
             // contextMenuStrip

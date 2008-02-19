@@ -18,35 +18,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Text;
+using System.Windows.Forms;
 
-using Sinapse.Data.Structures;
-
-namespace Sinapse.Data
+namespace Sinapse.Controls.NetworkDataTab
 {
-
-    internal enum TrainingType { ByError, ByEpoch };
-
-    internal struct TrainingOptions
+    internal sealed partial class MainTabControl : UserControl
     {
+        //TODO: Replace old NetworkDataTabControl with this.
 
-        public TrainingType TrainingType;
-
-        public int limEpoch;
-        public double limError;
-
-        public double momentum;
-        public double firstLearningRate;
-
-        public double? secondLearningRate;
-
-        public bool validateNetwork;
-
-        [NonSerialized]
-        public TrainingVectors TrainingVectors;
-
-        [NonSerialized]
-        public TrainingVectors ValidationVectors;
-
+        internal MainTabControl()
+        {
+            InitializeComponent();
+        }
     }
 }

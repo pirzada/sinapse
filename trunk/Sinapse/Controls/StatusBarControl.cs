@@ -25,7 +25,6 @@ namespace Sinapse.Controls
         {
             InitializeComponent();
 
-            this.m_statusBarOptionsDialog = new StatusBarOptionsDialog();
             this.ResetControl();
         }
         #endregion
@@ -73,6 +72,11 @@ namespace Sinapse.Controls
 
         private void progressBar_Click(object sender, EventArgs e)
         {
+            if (this.m_statusBarOptionsDialog == null || this.m_statusBarOptionsDialog.IsDisposed)
+            {
+                this.m_statusBarOptionsDialog = new StatusBarOptionsDialog();
+            }
+
             if (!this.m_statusBarOptionsDialog.Visible)
             {
                 this.m_statusBarOptionsDialog.Show(this);

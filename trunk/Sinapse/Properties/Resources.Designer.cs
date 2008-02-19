@@ -284,6 +284,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap oscilloscope {
+            get {
+                object obj = ResourceManager.GetObject("oscilloscope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap player_eject_16 {
             get {
                 object obj = ResourceManager.GetObject("player_eject_16", resourceCulture);
@@ -301,6 +308,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap player_finish {
             get {
                 object obj = ResourceManager.GetObject("player_finish", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_fwd {
+            get {
+                object obj = ResourceManager.GetObject("player_fwd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,6 +427,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap precminus {
             get {
                 object obj = ResourceManager.GetObject("precminus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap quick_restart {
+            get {
+                object obj = ResourceManager.GetObject("quick_restart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -539,6 +560,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap starhot5 {
             get {
                 object obj = ResourceManager.GetObject("starhot5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap start {
+            get {
+                object obj = ResourceManager.GetObject("start", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

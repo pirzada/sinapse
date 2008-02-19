@@ -69,11 +69,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\NetworkDataTab\MainTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkDataTab\MainTabControl.Designer.cs">
+      <DependentUpon>MainTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NetworkDataTab\TabPageGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkDataTab\TabPageGraph.Designer.cs">
+      <DependentUpon>TabPageGraph.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NetworkDataTab\TabPageQuery.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\NetworkDataTab\TabPageQuery.Designer.cs">
       <DependentUpon>TabPageQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sidebar\SideCheckControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sidebar\SideCheckControl.Designer.cs">
+      <DependentUpon>SideCheckControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sidebar\SideDisplayControl.cs">
       <SubType>UserControl</SubType>
@@ -131,7 +149,7 @@
     <Compile Include="Data\CsvParser\Utils.cs" />
     <Compile Include="Data\CsvParser\Writer.cs" />
     <Compile Include="Data\HistoryListener.cs" />
-    <Compile Include="Data\NetworkCheckPoint.cs" />
+    <Compile Include="Data\NetworkSavepoint.cs" />
     <Compile Include="Data\NetworkDatabase.cs" />
     <Compile Include="Data\NetworkCaptions.cs" />
     <Compile Include="Data\NetworkRanges.cs" />
@@ -192,6 +210,12 @@
     <Compile Include="Dialogs\StatusBarOptions.Designer.cs">
       <DependentUpon>StatusBarOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Dialogs\PerformanceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\PerformanceDialog.Designer.cs">
+      <DependentUpon>PerformanceDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +230,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\NetworkDataTab\MainTabControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabPageGraph.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\NetworkDataTab\TabPageQuery.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageQuery.cs</DependentUpon>
@@ -265,6 +297,10 @@
     <EmbeddedResource Include="Dialogs\StatusBarOptions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StatusBarOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\PerformanceDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PerformanceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
@@ -590,6 +626,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\precminus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oscilloscope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_fwd1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quick_restart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Internal\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
