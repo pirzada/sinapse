@@ -379,12 +379,35 @@ namespace Sinapse.Data
                     else columnName = outputColumn;
 
                     //Check if field isn't a category
-                    if (Array.IndexOf(this.Schema.StringColumns, columnName) == -1)
+                    if (this.Schema.IsCategory(columnName))
                     {
                         double value = Double.Parse((string)row[columnName]);
                         row[columnName] = Math.Round(value).ToString();
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Randomizes the order of the rows in a DataTable by pulling out a single row and moving it to the end for
+        /// shuffleIterations iterations.
+        /// </summary>
+        /// <param name="shuffleIterations"></param>
+        /// <returns></returns>
+        internal void Shuffle(int shuffleIterations)
+        {
+            //TODO: shuffle only the training set, not the entire database!
+            int index;
+            int iterations = this.m_dataTable.Rows.Count * shuffleIterations;
+
+            System.Random rnd = new Random();
+
+            // Remove and throw to the end random rows until we have done so n*3 times (shuffles the dataset)
+            for (int i = 0; i < shuffleIterations; i++)
+            {
+                index = rnd.Next(0, m_dataTable.Rows.Count - 1);
+                this.m_dataTable.Rows.Add(m_dataTable.Rows[index].ItemArray);
+                this.m_dataTable.Rows.RemoveAt(index);
             }
         }
         #endregion

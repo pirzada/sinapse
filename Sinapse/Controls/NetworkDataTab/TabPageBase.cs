@@ -412,8 +412,8 @@ namespace Sinapse.Controls.NetworkDataTab
             {
                 string s = Clipboard.GetText();
                 string[] lines = s.Split('\n');
-                int row = dataGridView.CurrentCell.RowIndex;
-                int col = dataGridView.CurrentCell.ColumnIndex;
+                int row = this.dataGridView.CurrentCell.RowIndex;
+                int col = this.dataGridView.CurrentCell.ColumnIndex;
 
                 foreach (string line in lines)
                 {
@@ -426,7 +426,7 @@ namespace Sinapse.Controls.NetworkDataTab
                         {
                             if (col + i < this.dataGridView.ColumnCount)
                             {
-                                dataGridView[col + i, row].Value = Convert.ChangeType(cells[i], dataGridView[col + i, row].ValueType);
+                                this.dataGridView[col + i, row].Value = Convert.ChangeType(cells[i], dataGridView[col + i, row].ValueType);
                             }
                         }
                         ++row;

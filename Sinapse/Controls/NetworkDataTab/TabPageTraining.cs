@@ -59,6 +59,12 @@ namespace Sinapse.Controls.NetworkDataTab
 
             this.Enabled = (this.NetworkDatabase != null);
         }
+
+        private void btnShuffle_Click(object sender, EventArgs e)
+        {
+            this.NetworkDatabase.Shuffle(3);
+        }
+
         #endregion
 
 

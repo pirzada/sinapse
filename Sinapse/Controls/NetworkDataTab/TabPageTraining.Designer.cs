@@ -31,6 +31,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.cbTrainingLayer = new System.Windows.Forms.ComboBox();
             this.lbLayer = new System.Windows.Forms.Label();
             this.btnDel = new System.Windows.Forms.PictureBox();
+            this.btnShuffle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDel)).BeginInit();
             this.SuspendLayout();
@@ -68,10 +69,25 @@ namespace Sinapse.Controls.NetworkDataTab
             this.btnDel.TabIndex = 31;
             this.btnDel.TabStop = false;
             // 
+            // btnShuffle
+            // 
+            this.btnShuffle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShuffle.Image = global::Sinapse.Properties.Resources.quick_restart;
+            this.btnShuffle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnShuffle.Location = new System.Drawing.Point(439, 372);
+            this.btnShuffle.Name = "btnShuffle";
+            this.btnShuffle.Size = new System.Drawing.Size(70, 23);
+            this.btnShuffle.TabIndex = 32;
+            this.btnShuffle.Text = "Shuffle";
+            this.btnShuffle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShuffle.UseVisualStyleBackColor = true;
+            this.btnShuffle.Click += new System.EventHandler(this.btnShuffle_Click);
+            // 
             // TabPageTraining
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnShuffle);
             this.Controls.Add(this.cbTrainingLayer);
             this.Controls.Add(this.lbLayer);
             this.Controls.Add(this.btnDel);
@@ -80,6 +96,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.Controls.SetChildIndex(this.btnDel, 0);
             this.Controls.SetChildIndex(this.lbLayer, 0);
             this.Controls.SetChildIndex(this.cbTrainingLayer, 0);
+            this.Controls.SetChildIndex(this.btnShuffle, 0);
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDel)).EndInit();
             this.ResumeLayout(false);
@@ -92,6 +109,7 @@ namespace Sinapse.Controls.NetworkDataTab
         private System.Windows.Forms.ComboBox cbTrainingLayer;
         private System.Windows.Forms.Label lbLayer;
         private System.Windows.Forms.PictureBox btnDel;
+        private System.Windows.Forms.Button btnShuffle;
 
 
     }

@@ -25,6 +25,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
+using Sinapse.Forms.Dialogs;
 
 namespace Sinapse.Controls.NetworkDataTab
 {
@@ -101,7 +102,7 @@ namespace Sinapse.Controls.NetworkDataTab
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-
+            new PerformanceDialog(this.NetworkContainer, this.NetworkDatabase.DataTable).ShowDialog(this);
         }
 
         private void btnRound_Click(object sender, EventArgs e)

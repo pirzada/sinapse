@@ -139,6 +139,7 @@ namespace Sinapse.Dialogs
             this.Controls.Add(this.zedGraphControl);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnClear);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Location = new System.Drawing.Point(600, 500);
             this.Name = "GraphDialog";

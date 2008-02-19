@@ -22,6 +22,7 @@ namespace Sinapse.Data
         
         // --------------------------------------
 
+
         #region Constructor
         public NetworkSchema(string[] inputColumns, string[] outputColumns, string[] stringColumns)
         {
@@ -35,7 +36,9 @@ namespace Sinapse.Data
         }
         #endregion
 
+
         // --------------------------------------
+
 
         #region Properties
         public string[] InputColumns
@@ -74,6 +77,17 @@ namespace Sinapse.Data
             get { return dataCategories; }
         }
 
+        #endregion
+
+
+        // --------------------------------------
+
+
+        #region Public Methods
+        internal bool IsCategory(string columnName)
+        {
+            return Array.IndexOf(this.StringColumns, columnName) == -1;
+        }
         #endregion
 
     }

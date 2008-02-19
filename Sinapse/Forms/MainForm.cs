@@ -187,7 +187,7 @@ namespace Sinapse.Forms
                 this.tabControlNetworkData.DataSelectionChanged += networkDataControl_SelectionChanged;
 
                 this.sideTrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
-                this.sideTrainerControl.DataNeeded += sideTrainerControl_DataNeeded;
+              this.sideTrainerControl.DataNeeded += sideTrainerControl_DataNeeded;
                 this.sideTrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
 
                 this.CurrentNetworkContainer = null;
@@ -240,7 +240,7 @@ namespace Sinapse.Forms
             TrainingVectors trainingVectors = this.tabControlNetworkData.NetworkDatabase.CreateVectors(NetworkSet.Training);
             TrainingVectors validationVectors = this.tabControlNetworkData.NetworkDatabase.CreateVectors(NetworkSet.Validation);
 
-            this.sideTrainerControl.Start(trainingVectors, validationVectors);
+          this.sideTrainerControl.Start(trainingVectors, validationVectors);
         }
 
         private void sideTrainerControl_StatusChanged(object sender, EventArgs e)

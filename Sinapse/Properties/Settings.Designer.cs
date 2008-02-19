@@ -154,5 +154,17 @@ namespace Sinapse.Properties {
                 this["graph_Disable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool training_Autosave {
+            get {
+                return ((bool)(this["training_Autosave"]));
+            }
+            set {
+                this["training_Autosave"] = value;
+            }
+        }
     }
 }

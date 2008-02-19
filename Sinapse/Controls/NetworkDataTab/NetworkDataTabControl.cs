@@ -39,6 +39,7 @@ namespace Sinapse.Controls.NetworkDataTab
         private TabPageTesting m_tabTesting;
         private TabPageValidation m_tabValidation;
         private TabPageQuery m_tabQuery;
+        private TabPageGraph m_tabGraph;
         
 
         public EventHandler DataSelectionChanged;
@@ -54,6 +55,7 @@ namespace Sinapse.Controls.NetworkDataTab
             this.m_tabValidation = new TabPageValidation();
             this.m_tabTesting = new TabPageTesting();
             this.m_tabQuery = new TabPageQuery();
+            this.m_tabGraph = new TabPageGraph();
         }
         #endregion
 
@@ -72,6 +74,7 @@ namespace Sinapse.Controls.NetworkDataTab
                     this.Controls.Add(createTab(m_tabValidation, 1));
                     this.Controls.Add(createTab(m_tabTesting, 2));
                     this.Controls.Add(createTab(m_tabQuery, 3));
+               //     this.Controls.Add(createTab(m_tabGraph, 4));
                 }
             }
 
@@ -157,10 +160,14 @@ namespace Sinapse.Controls.NetworkDataTab
             this.OnDataSelectionChanged();
         }
 
-        private TabPageEX createTab(TabPageBase control, int imageIndex)
+        private TabPageEX createTab(UserControl control, int imageIndex)
         {
             control.Dock = DockStyle.Fill;
-            control.DataSelectionChanged += tabPage_SelectionChanged;
+
+            if (control is TabPageBase)
+            {
+                (control as TabPageBase).DataSelectionChanged += tabPage_SelectionChanged;
+            }
             
             TabPageEX tabPage = new TabPageEX();
             tabPage.ImageIndex = imageIndex;
