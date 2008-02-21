@@ -45,6 +45,7 @@ namespace Sinapse.Controls.MainTabControl
             this.cbAutoupdate = new System.Windows.Forms.CheckBox();
             this.btnSavepointClear = new System.Windows.Forms.Button();
             this.btnSavepointLoad = new System.Windows.Forms.Button();
+            this.btnSavepointMark = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRate)).BeginInit();
@@ -68,11 +69,14 @@ namespace Sinapse.Controls.MainTabControl
             this.zedGraphControl.ScrollMinY2 = 0;
             this.zedGraphControl.Size = new System.Drawing.Size(483, 368);
             this.zedGraphControl.TabIndex = 3;
+            this.zedGraphControl.DoubleClick += new System.EventHandler(this.zedGraphControl_DoubleClick);
             // 
             // trackBar
             // 
             this.trackBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.trackBar.Enabled = false;
             this.trackBar.Location = new System.Drawing.Point(0, 407);
+            this.trackBar.Maximum = 50;
             this.trackBar.Name = "trackBar";
             this.trackBar.Size = new System.Drawing.Size(690, 42);
             this.trackBar.TabIndex = 4;
@@ -205,9 +209,9 @@ namespace Sinapse.Controls.MainTabControl
             // btnSavepointClear
             // 
             this.btnSavepointClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSavepointClear.Location = new System.Drawing.Point(629, 377);
+            this.btnSavepointClear.Location = new System.Drawing.Point(628, 377);
             this.btnSavepointClear.Name = "btnSavepointClear";
-            this.btnSavepointClear.Size = new System.Drawing.Size(58, 23);
+            this.btnSavepointClear.Size = new System.Drawing.Size(59, 23);
             this.btnSavepointClear.TabIndex = 10;
             this.btnSavepointClear.Text = "Clear";
             this.btnSavepointClear.UseVisualStyleBackColor = true;
@@ -216,19 +220,31 @@ namespace Sinapse.Controls.MainTabControl
             // btnSavepointLoad
             // 
             this.btnSavepointLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSavepointLoad.Location = new System.Drawing.Point(515, 377);
+            this.btnSavepointLoad.Location = new System.Drawing.Point(565, 377);
             this.btnSavepointLoad.Name = "btnSavepointLoad";
-            this.btnSavepointLoad.Size = new System.Drawing.Size(111, 23);
+            this.btnSavepointLoad.Size = new System.Drawing.Size(59, 23);
             this.btnSavepointLoad.TabIndex = 10;
-            this.btnSavepointLoad.Text = "Restore Savepoint";
+            this.btnSavepointLoad.Text = "Restore";
             this.btnSavepointLoad.UseVisualStyleBackColor = true;
             this.btnSavepointLoad.Click += new System.EventHandler(this.btnSavepointLoad_Click);
+            // 
+            // btnSavepointMark
+            // 
+            this.btnSavepointMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSavepointMark.Location = new System.Drawing.Point(500, 378);
+            this.btnSavepointMark.Name = "btnSavepointMark";
+            this.btnSavepointMark.Size = new System.Drawing.Size(59, 23);
+            this.btnSavepointMark.TabIndex = 10;
+            this.btnSavepointMark.Text = "Mark";
+            this.btnSavepointMark.UseVisualStyleBackColor = true;
+            this.btnSavepointMark.Click += new System.EventHandler(this.btnSavepointMark_Click);
             // 
             // TabPageGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.Controls.Add(this.btnSavepointMark);
             this.Controls.Add(this.btnSavepointLoad);
             this.Controls.Add(this.btnSavepointClear);
             this.Controls.Add(this.btnClear);
@@ -265,5 +281,6 @@ namespace Sinapse.Controls.MainTabControl
         private System.Windows.Forms.DataGridViewTextBoxColumn colValidation;
         private System.Windows.Forms.Button btnSavepointClear;
         private System.Windows.Forms.Button btnSavepointLoad;
+        private System.Windows.Forms.Button btnSavepointMark;
     }
 }

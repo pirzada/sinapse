@@ -25,8 +25,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using AForge.Neuro;
-
-using Sinapse.Data;
+using Sinapse.Data.Network;
 
 
 namespace Sinapse.Forms.Dialogs
@@ -55,6 +54,19 @@ namespace Sinapse.Forms.Dialogs
 
         #region Properties
 
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Control Events
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            this.setOptimal();
+        }
         #endregion
 
 

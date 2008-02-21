@@ -26,7 +26,8 @@ using System.Diagnostics;
 
 using AForge.Neuro;
 
-namespace Sinapse.Data
+
+namespace Sinapse.Data.Network
 {
 
     [Serializable]

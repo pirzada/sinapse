@@ -25,10 +25,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
 
-
 using AForge.Neuro;
+using Sinapse.Data.Structures;
 
-namespace Sinapse.Data
+
+namespace Sinapse.Data.Network
 {
 
     [Serializable]
@@ -118,7 +119,7 @@ namespace Sinapse.Data
         private NetworkSavepoint m_currentSavepoint;
         private NetworkContainer m_networkContainer;
 
-        public EventHandler CurrentSavepointChanged;
+   //     public EventHandler CurrentSavepointChanged;
         public EventHandler SavepointRegistered;
         public EventHandler SavepointRestored;
 
@@ -153,7 +154,7 @@ namespace Sinapse.Data
         {
             this.m_currentSavepoint = networkSavepoint;
 
-            this.OnCurrentSavepointChanged();
+   //         this.OnCurrentSavepointChanged();
             this.OnSavepointRestored();
         }
 
@@ -162,7 +163,7 @@ namespace Sinapse.Data
             this.m_currentSavepoint = new NetworkSavepoint(m_networkContainer.ActivationNetwork, trainingStatus);
             this.Add(m_currentSavepoint);
 
-            this.OnCurrentSavepointChanged();
+   //         this.OnCurrentSavepointChanged();
             this.OnSavepointRegistered();
         }
         #endregion
@@ -171,12 +172,12 @@ namespace Sinapse.Data
         //---------------------------------------------
 
 
-        private void OnCurrentSavepointChanged()
+    /*    private void OnCurrentSavepointChanged()
         {
             if (this.CurrentSavepointChanged != null)
                 this.CurrentSavepointChanged.Invoke(this, EventArgs.Empty);
         }
-
+    */
         private void OnSavepointRegistered()
         {
             if (this.SavepointRegistered != null)

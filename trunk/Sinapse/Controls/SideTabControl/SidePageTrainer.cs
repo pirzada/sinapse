@@ -24,15 +24,14 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
+using AForge;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
-using AForge;
 
 using Sinapse.Data;
+using Sinapse.Data.Network;
 using Sinapse.Data.Structures;
 using Sinapse.Forms.Dialogs;
-
-using Sinapse.Controls.MainTabControl;
 
 
 namespace Sinapse.Controls.SideTabControl
@@ -48,7 +47,7 @@ namespace Sinapse.Controls.SideTabControl
         private NetworkDatabase m_networkDatabase;
 
         private TrainingStatus m_networkState;
-        private TabPageGraph m_graphControl;
+        private Sinapse.Controls.MainTabControl.TabPageGraph m_graphControl;
 
         private bool m_trainingPaused;
 
@@ -71,6 +70,7 @@ namespace Sinapse.Controls.SideTabControl
 
 
         #region Control Events
+
         #endregion
 
 
@@ -78,6 +78,7 @@ namespace Sinapse.Controls.SideTabControl
 
 
         #region Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal NetworkContainer NetworkContainer
         {
             get { return this.m_networkContainer; }
@@ -85,11 +86,21 @@ namespace Sinapse.Controls.SideTabControl
             {
                 this.m_networkContainer = value;
 
+                if (value != null)
+                {
+                    this.m_networkContainer.Savepoints.SavepointRestored +=
+                        networkContainer_SavepointRestored;
+                }
+                else
+                {
+                }
+
                 this.UpdateEnabled();
                 this.UpdateStatus();
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal NetworkDatabase NetworkDatabase
         {
             get { return this.m_networkDatabase; }
@@ -101,17 +112,20 @@ namespace Sinapse.Controls.SideTabControl
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal TrainingStatus NetworkState
         {
             get { return this.m_networkState; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal bool IsTraining
         {
             get { return this.backgroundWorker.IsBusy; }
         }
 
-        internal TabPageGraph GraphControl
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal Sinapse.Controls.MainTabControl.TabPageGraph GraphControl
         {
             get { return this.m_graphControl; }
             set { this.m_graphControl = value; }
@@ -156,6 +170,7 @@ namespace Sinapse.Controls.SideTabControl
             this.m_networkState = new TrainingStatus();
             HistoryListener.Write("Network learnings cleared");
             this.m_trainingPaused = false;
+            this.m_graphControl.ClearGraph();
             this.UpdateStatus();
         }
 
@@ -253,7 +268,7 @@ namespace Sinapse.Controls.SideTabControl
             this.Enabled = (this.m_networkDatabase != null && this.m_networkContainer != null);
         }
 
-        private void networkContainer_NetworkChanged(object sender, EventArgs e)
+        private void networkContainer_SavepointRestored(object sender, EventArgs e)
         {
             this.m_networkState = this.m_networkContainer.Savepoints.CurrentSavepoint.NetworkStatus;
             this.UpdateStatus();
@@ -381,7 +396,7 @@ namespace Sinapse.Controls.SideTabControl
 
                 case UpdateType.NetworkSave:
                     m_networkContainer.Savepoints.Register(m_networkState);
-                    HistoryListener.Write("Savepoint Marked");
+      //              HistoryListener.Write("Savepoint Marked");
                     break;
 
 

@@ -24,10 +24,12 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-using Sinapse.Data;
-using Sinapse.Controls.MainTabControl.Base;
-
 using ZedGraph;
+
+using Sinapse.Data;
+using Sinapse.Data.Network;
+using Sinapse.Forms.Dialogs;
+
 
 namespace Sinapse.Controls.MainTabControl
 {
@@ -38,6 +40,8 @@ namespace Sinapse.Controls.MainTabControl
         private IPointListEdit m_trainingPoints;
         private IPointListEdit m_validationPoints;
         private IPointListEdit m_savePoints;
+
+        private SideTabControl.SidePageTrainer m_networkTrainer;
 
 
         //----------------------------------------
@@ -78,6 +82,7 @@ namespace Sinapse.Controls.MainTabControl
                     this.setTabPageEnabled(true);
                     this.dataGridView.DataSource = this.m_networkContainer.Savepoints;
                     this.m_networkContainer.Savepoints.SavepointRegistered += networkContainer_savepointRegistered;
+                    this.m_networkContainer.Savepoints.SavepointRestored += networkContainer_savepointRestored;
                 }
                 else
                 {
@@ -85,6 +90,13 @@ namespace Sinapse.Controls.MainTabControl
                     this.dataGridView.DataSource = null;
                 }
             }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal SideTabControl.SidePageTrainer NetworkTrainer
+        {
+            get { return this.m_networkTrainer; }
+            set { this.m_networkTrainer = value; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -128,6 +140,18 @@ namespace Sinapse.Controls.MainTabControl
         {
             this.SavePoints.Add(this.m_networkContainer.Savepoints.CurrentSavepoint.Epoch,
                 this.m_networkContainer.Savepoints.CurrentSavepoint.ErrorTraining);
+
+            HistoryListener.Write("Savepoint Registered!");
+        }
+
+        private void networkContainer_savepointRestored(object sender, EventArgs e)
+        {
+            HistoryListener.Write("Savepoint Restored!");
+        }
+
+        private void zedGraphControl_DoubleClick(object sender, EventArgs e)
+        {
+            new GraphOptions().ShowDialog();
         }
         #endregion
 
@@ -155,6 +179,11 @@ namespace Sinapse.Controls.MainTabControl
                 if (save != null)
                     this.m_networkContainer.Savepoints.Restore(save);
             }
+        }
+
+        private void btnSavepointMark_Click(object sender, EventArgs e)
+        {
+            this.m_networkContainer.Savepoints.Register(m_networkTrainer.NetworkState);
         }
 
         private void btnSavepointClear_Click(object sender, EventArgs e)
@@ -222,8 +251,8 @@ namespace Sinapse.Controls.MainTabControl
             // validationCurve.Line.SmoothTension = 0.5F;
 
 
-            curve = myPane.AddCurve("Savepoints Mark", savepointList, Color.Green, SymbolType.Square);
-            curve.Symbol.Fill = new Fill(Color.Green);
+            curve = myPane.AddCurve("Savepoints Mark", savepointList, Color.DarkGreen, SymbolType.Star);
+            curve.Symbol.Fill = new Fill(Color.DarkGreen);
             curve.Symbol.Size = 5;
             curve.Line.IsVisible = false;
             m_savePoints = curve.Points as IPointListEdit;
@@ -247,11 +276,6 @@ namespace Sinapse.Controls.MainTabControl
         #endregion
 
 
-
-
-
-
-        
         //----------------------------------------
 
     }

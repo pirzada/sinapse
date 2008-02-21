@@ -24,10 +24,10 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-using Sinapse.Data;
-using Sinapse.Data.CsvParser;
-
 using Dotnetrix.Controls;
+using Sinapse.Data.Network;
+using Sinapse.Data.CsvParser;
+                         
 
 namespace Sinapse.Controls.MainTabControl.Base
 {
@@ -115,6 +115,7 @@ namespace Sinapse.Controls.MainTabControl.Base
                 dv.RowFilter = this.GetFilterString();
               
                 this.BindingSource.DataSource = dv;
+                this.dataGridView.DataSource = this.BindingSource;
                 this.setColumns();
 
                 this.UpdateTitle();
@@ -180,7 +181,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             if (!this.DesignMode)
             {
                 this.dataGridView.AutoGenerateColumns = false;
-                this.dataGridView.DataSource = this.BindingSource;
+                this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                 this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
                 this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
             }
@@ -228,30 +229,29 @@ namespace Sinapse.Controls.MainTabControl.Base
 
         private void setColumns()
         {
-            this.dataGridView.SuspendLayout();
             this.dataGridView.Columns.Clear();
 
             DataGridViewColumn column;
 
             foreach (String colName in this.NetworkDatabase.Schema.InputColumns)
             {
-                column = new DataGridViewColumn();
+                column = new DataGridViewTextBoxColumn();
                 column.DataPropertyName = colName;
                 column.HeaderText = colName;
-                column.CellTemplate = new DataGridViewTextBoxCell();
                 column.DefaultCellStyle.BackColor = panelInputCaption.BackColor;
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 this.dataGridView.Columns.Add(column);
             }
 
             foreach (String colName in this.NetworkDatabase.Schema.OutputColumns)
             {
-                column = new DataGridViewColumn();
+                column = new DataGridViewTextBoxColumn();
                 column.DataPropertyName = colName;
                 column.HeaderText = colName;
-                column.CellTemplate = new DataGridViewTextBoxCell();
                 column.DefaultCellStyle.BackColor = panelOutputCaption.BackColor;
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 this.dataGridView.Columns.Add(column);
             }
 
@@ -274,7 +274,6 @@ namespace Sinapse.Controls.MainTabControl.Base
             column.CellTemplate = new DataGridViewTextBoxCell();
             this.dataGridView.Columns.Add(column);
 #endif
-            this.ResumeLayout(true);
         }
         #endregion
 

@@ -25,12 +25,13 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
-using Sinapse.Controls.MainTabControl.Base;
+using Sinapse.Data.Network;
+
 
 namespace Sinapse.Controls.MainTabControl
 {
 
-    internal sealed partial class TabPageTraining : TabPageDataControlBase
+    internal sealed partial class TabPageTraining : Sinapse.Controls.MainTabControl.Base.TabPageDataControlBase
     {
 
         private int m_trainingLayer;
@@ -59,6 +60,7 @@ namespace Sinapse.Controls.MainTabControl
             base.OnCurrentDatabaseChanged();
 
             this.setTabPageEnabled(this.NetworkDatabase != null);
+            
         }
 
         private void btnShuffle_Click(object sender, EventArgs e)

@@ -25,7 +25,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
+using Sinapse.Data.Structures;
 using Sinapse.Forms.Dialogs;
+
 
 namespace Sinapse.Controls
 {

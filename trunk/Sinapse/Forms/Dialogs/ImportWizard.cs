@@ -27,7 +27,7 @@ using System.IO;
 
 using WizardBase;
 
-using Sinapse.Data;
+using Sinapse.Data.Network;
 using Sinapse.Data.CsvParser;
 
 
