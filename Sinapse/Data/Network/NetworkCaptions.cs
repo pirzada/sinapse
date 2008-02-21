@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-namespace Sinapse.Data
+namespace Sinapse.Data.Network
 {
     [Serializable]
     internal sealed class NetworkCaptions

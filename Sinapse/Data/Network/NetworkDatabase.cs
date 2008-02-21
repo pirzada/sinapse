@@ -26,14 +26,13 @@ using System.Data;
 using System.IO;
 
 using AForge;
-
 using Sinapse.Data.Structures;
 
 
-namespace Sinapse.Data
+namespace Sinapse.Data.Network
 {
 
-    public enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2, Query = 3 };
+    internal enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2, Query = 3 };
 
 
     [Serializable]

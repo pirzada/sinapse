@@ -23,7 +23,8 @@ using System.Data;
 
 using AForge;
 
-namespace Sinapse.Data
+
+namespace Sinapse.Data.Network
 {
     [Serializable]
     internal sealed class NetworkRanges

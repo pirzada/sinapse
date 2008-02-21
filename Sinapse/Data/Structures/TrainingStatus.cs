@@ -20,17 +20,30 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sinapse.Data
+
+namespace Sinapse.Data.Structures
 {
 
     internal enum UpdateType { Statusbar, Graph, NetworkSave, Null };
 
     internal struct TrainingStatus
     {
-        public UpdateType NextUpdateType;
-        public int Epoch;
-        public int Progress;
-        public double ErrorTraining;
-        public double ErrorValidation;
+        internal UpdateType NextUpdateType;
+        internal int Epoch;
+        internal int Progress;
+        internal double ErrorTraining;
+        internal double ErrorValidation;
+
+
+        internal void Reset()
+        {
+            NextUpdateType = UpdateType.Statusbar;
+            Epoch = 0;
+            Progress = 0;
+            ErrorTraining = 0;
+            ErrorValidation = 0;
+        }
     }
+
+    
 }

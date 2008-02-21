@@ -26,6 +26,7 @@ using System.Windows.Forms;
 using System.IO;
 
 using Sinapse.Data;
+using Sinapse.Data.Network;
 using Sinapse.Data.Structures;
 using Sinapse.Forms.Dialogs;
 
@@ -184,6 +185,7 @@ namespace Sinapse.Forms
                 // Wire up controls and events
                 this.tabControlMain.DataSelectionChanged += tabControlMain_SelectionChanged;
                 this.tabControlSide.TrainerControl.GraphControl = this.tabControlMain.GraphControl;
+                this.tabControlMain.GraphControl.NetworkTrainer = this.tabControlSide.TrainerControl;
 
                 this.tabControlSide.TrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
                 this.tabControlSide.TrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;

@@ -25,12 +25,13 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
-using Sinapse.Controls.MainTabControl.Base;
+using Sinapse.Data.Network;
+
 
 namespace Sinapse.Controls.MainTabControl
 {
 
-    internal sealed partial class TabPageValidation : TabPageDataControlBase
+    internal sealed partial class TabPageValidation : Sinapse.Controls.MainTabControl.Base.TabPageDataControlBase
     {
 
 

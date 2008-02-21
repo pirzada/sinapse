@@ -25,13 +25,14 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
+using Sinapse.Data.Network;
 using Sinapse.Forms.Dialogs;
-using Sinapse.Controls.MainTabControl.Base;
+
 
 namespace Sinapse.Controls.MainTabControl
 {
 
-    internal sealed partial class TabPageTesting : TabPageDataControlBase
+    internal sealed partial class TabPageTesting : Sinapse.Controls.MainTabControl.Base.TabPageDataControlBase
     {
 
         //----------------------------------------
@@ -57,6 +58,11 @@ namespace Sinapse.Controls.MainTabControl
 
 
         #region Control Events
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
         protected override void OnCurrentDatabaseChanged()
         {
             base.OnCurrentDatabaseChanged();

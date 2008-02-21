@@ -24,8 +24,9 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-using Sinapse.Data;
+using Sinapse.Data.Network;
 using Sinapse.Forms.Dialogs;
+
 
 namespace Sinapse.Controls.SideTabControl
 {

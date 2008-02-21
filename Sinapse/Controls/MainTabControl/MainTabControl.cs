@@ -24,9 +24,10 @@ using System.ComponentModel;
 
 using Dotnetrix.Controls;
 
-using Sinapse.Data;
 using Sinapse.Controls.Base;
 using Sinapse.Controls.MainTabControl.Base;
+using Sinapse.Data.Network;
+
 
 namespace Sinapse.Controls.MainTabControl
 {
