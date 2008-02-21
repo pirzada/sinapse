@@ -50,6 +50,14 @@ namespace Sinapse.Controls.MainTabControl.Base
         protected TabPageDataControlBase()
         {
             InitializeComponent();
+
+         
+              this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+              ControlStyles.UserPaint |
+              ControlStyles.OptimizedDoubleBuffer,
+        //      ControlStyles.ResizeRedraw,
+              true);
+          
         }
         #endregion
 
@@ -105,8 +113,11 @@ namespace Sinapse.Controls.MainTabControl.Base
             {
                 DataView dv = new DataView(this.NetworkDatabase.DataTable);
                 dv.RowFilter = this.GetFilterString();
+              
                 this.BindingSource.DataSource = dv;
                 this.setColumns();
+
+                this.UpdateTitle();
             }
         }
 
@@ -150,7 +161,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.UpdateTitle();
         }
 
-        protected void UpdateTitle()
+        protected override void UpdateTitle()
         {
             if (this.TabPage != null)
                 this.TabPage.Text = String.Format("{0} [{1}]", this.TabPageName, ItemCount);
@@ -229,6 +240,7 @@ namespace Sinapse.Controls.MainTabControl.Base
                 column.HeaderText = colName;
                 column.CellTemplate = new DataGridViewTextBoxCell();
                 column.DefaultCellStyle.BackColor = panelInputCaption.BackColor;
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
                 this.dataGridView.Columns.Add(column);
             }
 
@@ -239,6 +251,7 @@ namespace Sinapse.Controls.MainTabControl.Base
                 column.HeaderText = colName;
                 column.CellTemplate = new DataGridViewTextBoxCell();
                 column.DefaultCellStyle.BackColor = panelOutputCaption.BackColor;
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
                 this.dataGridView.Columns.Add(column);
             }
 
