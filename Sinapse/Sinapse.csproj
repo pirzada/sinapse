@@ -69,47 +69,62 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\NetworkDataTab\MainTabControl.cs">
+    <Compile Include="Controls\MainTabControl\Base\TabPageDataControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\MainTabControl.Designer.cs">
+    <Compile Include="Controls\MainTabControl\Base\TabPageDataControlBase.Designer.cs">
+      <DependentUpon>TabPageDataControlBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Base\TabPageControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainTabControl\MainTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MainTabControl\MainTabControl.Designer.cs">
       <DependentUpon>MainTabControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageGraph.cs">
+    <Compile Include="Controls\MainTabControl\TabPageGraph.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageGraph.Designer.cs">
+    <Compile Include="Controls\MainTabControl\TabPageGraph.Designer.cs">
       <DependentUpon>TabPageGraph.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageQuery.cs">
+    <Compile Include="Controls\MainTabControl\TabPageQuery.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageQuery.Designer.cs">
+    <Compile Include="Controls\MainTabControl\TabPageQuery.Designer.cs">
       <DependentUpon>TabPageQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideCheckControl.cs">
+    <Compile Include="Controls\SideTabControl\SidePageWorplace.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideCheckControl.Designer.cs">
-      <DependentUpon>SideCheckControl.cs</DependentUpon>
+    <Compile Include="Controls\SideTabControl\SidePageWorplace.Designer.cs">
+      <DependentUpon>SidePageWorplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideDisplayControl.cs">
+    <Compile Include="Controls\SideTabControl\SidePageDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideDisplayControl.Designer.cs">
-      <DependentUpon>SideDisplayControl.cs</DependentUpon>
+    <Compile Include="Controls\SideTabControl\SidePageDisplay.Designer.cs">
+      <DependentUpon>SidePageDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideRangesControl.cs">
+    <Compile Include="Controls\SideTabControl\SidePageRanges.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideRangesControl.Designer.cs">
-      <DependentUpon>SideRangesControl.cs</DependentUpon>
+    <Compile Include="Controls\SideTabControl\SidePageRanges.Designer.cs">
+      <DependentUpon>SidePageRanges.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideTrainerControl.cs">
+    <Compile Include="Controls\SideTabControl\SideTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SideTabControl\SideTabControl.Designer.cs">
+      <DependentUpon>SideTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SideTabControl\SidePageTrainer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sidebar\SideTrainerControl.Designer.cs">
-      <DependentUpon>SideTrainerControl.cs</DependentUpon>
+    <Compile Include="Controls\SideTabControl\SidePageTrainer.Designer.cs">
+      <DependentUpon>SidePageTrainer.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatusBarControl.cs">
       <SubType>UserControl</SubType>
@@ -117,31 +132,22 @@
     <Compile Include="Controls\StatusBarControl.Designer.cs">
       <DependentUpon>StatusBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageBase.cs">
+    <Compile Include="Controls\MainTabControl\TabPageTesting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageBase.Designer.cs">
-      <DependentUpon>TabPageBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageTesting.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageTesting.Designer.cs">
+    <Compile Include="Controls\MainTabControl\TabPageTesting.Designer.cs">
       <DependentUpon>TabPageTesting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\NetworkDataTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageTraining.cs">
+    <Compile Include="Controls\MainTabControl\TabPageTraining.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageTraining.Designer.cs">
+    <Compile Include="Controls\MainTabControl\TabPageTraining.Designer.cs">
       <DependentUpon>TabPageTraining.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageValidation.cs">
+    <Compile Include="Controls\MainTabControl\TabPageValidation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkDataTab\TabPageValidation.Designer.cs">
+    <Compile Include="Controls\MainTabControl\TabPageValidation.Designer.cs">
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\CsvParser\Common.cs" />
@@ -149,72 +155,65 @@
     <Compile Include="Data\CsvParser\Utils.cs" />
     <Compile Include="Data\CsvParser\Writer.cs" />
     <Compile Include="Data\HistoryListener.cs" />
-    <Compile Include="Data\NetworkSavepoint.cs" />
-    <Compile Include="Data\NetworkDatabase.cs" />
-    <Compile Include="Data\NetworkCaptions.cs" />
-    <Compile Include="Data\NetworkRanges.cs" />
-    <Compile Include="Data\PerformanceReporter.cs" />
-    <Compile Include="Data\NetworkSchema.cs">
+    <Compile Include="Data\Network\NetworkSavepoint.cs" />
+    <Compile Include="Data\Network\NetworkDatabase.cs" />
+    <Compile Include="Data\Network\NetworkCaptions.cs" />
+    <Compile Include="Data\Network\NetworkRanges.cs" />
+    <Compile Include="Data\Network\NetworkSchema.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\NetworkWorkplace.cs" />
+    <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Structures\TrainingOptions.cs" />
     <Compile Include="Data\Structures\TrainingStatus.cs" />
-    <Compile Include="Data\NetworkContainer.cs" />
+    <Compile Include="Data\Network\NetworkContainer.cs" />
     <Compile Include="Data\Structures\TrainingVectors.cs" />
-    <Compile Include="Dialogs\AboutBox.cs">
+    <Compile Include="Forms\Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AboutBox.Designer.cs">
+    <Compile Include="Forms\Dialogs\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\GraphDialog.cs">
+    <Compile Include="Forms\Dialogs\HistoryDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\GraphDialog.Designer.cs">
-      <DependentUpon>GraphDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\HistoryDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\HistoryDialog.Designer.cs">
+    <Compile Include="Forms\Dialogs\HistoryDialog.Designer.cs">
       <DependentUpon>HistoryDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\ImportWizard.cs">
+    <Compile Include="Forms\Dialogs\ImportWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\ImportWizard.Designer.cs">
+    <Compile Include="Forms\Dialogs\ImportWizard.Designer.cs">
       <DependentUpon>ImportWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\InputBox.cs">
+    <Compile Include="Forms\Dialogs\InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\InputBox.Designer.cs">
+    <Compile Include="Forms\Dialogs\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\NetworkCreationDialog.cs">
+    <Compile Include="Forms\Dialogs\NetworkCreationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\NetworkCreationDialog.Designer.cs">
+    <Compile Include="Forms\Dialogs\NetworkCreationDialog.Designer.cs">
       <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\GeneralOptions.cs">
+    <Compile Include="Forms\NetworkInspector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\GeneralOptions.Designer.cs">
-      <DependentUpon>GeneralOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\StatusBarOptions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\StatusBarOptions.Designer.cs">
-      <DependentUpon>StatusBarOptions.cs</DependentUpon>
+    <Compile Include="Forms\NetworkInspector.Designer.cs">
+      <DependentUpon>NetworkInspector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\PerformanceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Dialogs\PerformanceDialog.Designer.cs">
       <DependentUpon>PerformanceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dialogs\StatusBarOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\StatusBarOptions.Designer.cs">
+      <DependentUpon>StatusBarOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -230,77 +229,73 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\NetworkDataTab\MainTabControl.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\Base\TabPageDataControlBase.resx">
+      <DependentUpon>TabPageDataControlBase.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <DependentUpon>MainTabControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageGraph.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\MainTabControl.resx">
+      <DependentUpon>MainTabControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageGraph.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageGraph.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageQuery.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageQuery.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sidebar\SideDisplayControl.resx">
-      <DependentUpon>SideDisplayControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SideTabControl\SidePageDisplay.resx">
+      <DependentUpon>SidePageDisplay.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sidebar\SideRangesControl.resx">
+    <EmbeddedResource Include="Controls\SideTabControl\SidePageRanges.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SideRangesControl.cs</DependentUpon>
+      <DependentUpon>SidePageRanges.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sidebar\SideTrainerControl.resx">
+    <EmbeddedResource Include="Controls\SideTabControl\SideTabControl.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SideTrainerControl.cs</DependentUpon>
+      <DependentUpon>SideTabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StatusBarControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StatusBarControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageTesting.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageTesting.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageTesting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageValidation.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageValidation.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageBase.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TabPageBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkDataTab\TabPageTraining.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageTraining.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageTraining.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AboutBox.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\GraphDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>GraphDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ImportWizard.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Forms\Dialogs\ImportWizard.resx">
       <DependentUpon>ImportWizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\InputBox.resx">
+    <EmbeddedResource Include="Forms\Dialogs\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\NetworkCreationDialog.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Forms\Dialogs\NetworkCreationDialog.resx">
       <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\StatusBarOptions.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>StatusBarOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\PerformanceDialog.resx">
-      <SubType>Designer</SubType>
       <DependentUpon>PerformanceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\StatusBarOptions.resx">
+      <DependentUpon>StatusBarOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
@@ -640,7 +635,7 @@
     <None Include="Resources\quick_restart.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Internal\" />
+    <None Include="Resources\start1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
