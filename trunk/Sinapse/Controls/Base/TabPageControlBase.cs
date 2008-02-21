@@ -29,22 +29,6 @@ namespace Sinapse.Controls.Base
 
 
         #region Properties
-        protected bool TabPageEnabled
-        {
-            get
-            {
-                if (this.TabPage != null)
-                    return this.Parent.Enabled;
-                else return this.TabPageEnabled;
-            }
-            set
-            {
-                if (this.TabPage != null)
-                    this.Parent.Enabled = value;
-                else this.TabPageEnabled = value;
-            }
-        }
-
         protected string TabPageName
         {
             get { return this.m_tabPageName; }
@@ -55,14 +39,17 @@ namespace Sinapse.Controls.Base
             }
         }
 
-        internal TabPageEX TabPage
+        protected void setTabPageEnabled(bool value)
         {
-            get
-            {
-                if (this.Parent == null)
-                    return null;
-                else return (this.Parent as TabPageEX);
-            }
+            if (this.getTabPage() != null)
+                this.Parent.Enabled = value;
+        }
+
+        protected TabPageEX getTabPage()
+        {
+            if (this.Parent != null)
+                return (this.Parent as TabPageEX);
+            else return null;
         }
         #endregion
 
@@ -70,23 +57,23 @@ namespace Sinapse.Controls.Base
         //----------------------------------------
 
 
-        internal new void ShowTab()
+        internal void ShowTab()
         {
-            if (this.TabPage != null && this.TabPage.Parent != null)
+            if (this.getTabPage() != null && this.getTabPage().Parent != null)
             {
-                TabControlEX tabControl = this.TabPage.Parent as TabControlEX;
+                TabControlEX tabControl = this.getTabPage().Parent as TabControlEX;
 
                 if (tabControl != null)
                 {
-                    tabControl.SelectedTab = this.TabPage;
+                    tabControl.SelectedTab = this.getTabPage();
                 }
             }
         }
 
         protected virtual void UpdateTitle()
         {
-            if (this.TabPage != null)
-                this.TabPage.Text = this.m_tabPageName;
+            if (this.getTabPage() != null)
+                this.getTabPage().Text = this.m_tabPageName;
         }
 
     }

@@ -339,7 +339,7 @@ namespace Sinapse.Controls.SideTabControl
                             m_networkState.Progress = Math.Max(Math.Min((int)((m_networkState.Epoch * 100) / options.limEpoch), 100), 0);
                     }
 
-                    backgroundWorker.ReportProgress(0);
+                    backgroundWorker.ReportProgress(0, "Training...");
                     lastStatusEpoch = m_networkState.Epoch;
                 }
                 #endregion
@@ -372,6 +372,7 @@ namespace Sinapse.Controls.SideTabControl
             backgroundWorker.ReportProgress(0);
         }
 
+
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 
@@ -380,6 +381,7 @@ namespace Sinapse.Controls.SideTabControl
 
                 case UpdateType.NetworkSave:
                     m_networkContainer.Savepoints.Register(m_networkState);
+                    HistoryListener.Write("Savepoint Marked");
                     break;
 
 

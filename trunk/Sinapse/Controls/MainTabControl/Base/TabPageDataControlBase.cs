@@ -163,8 +163,8 @@ namespace Sinapse.Controls.MainTabControl.Base
 
         protected override void UpdateTitle()
         {
-            if (this.TabPage != null)
-                this.TabPage.Text = String.Format("{0} [{1}]", this.TabPageName, ItemCount);
+            if (this.getTabPage() != null)
+                this.getTabPage().Text = String.Format("{0} [{1}]", this.TabPageName, ItemCount);
         }
         #endregion
 

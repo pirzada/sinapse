@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Sinapse")]
-[assembly: AssemblyDescription("Neural Networks Tool")]
+[assembly: AssemblyDescription("Neural Networking Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cSouza Company")]
 [assembly: AssemblyProduct("Sinapse Neural Network Tool")]

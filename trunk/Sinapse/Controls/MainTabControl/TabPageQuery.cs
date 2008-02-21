@@ -49,7 +49,7 @@ namespace Sinapse.Controls.MainTabControl
         #region Control Events
         protected override void OnCurrentNetworkChanged()
         {
-            this.TabPageEnabled = (this.NetworkContainer != null);
+            this.setTabPageEnabled(this.NetworkContainer != null);
 
             if (this.NetworkContainer != null)
             {

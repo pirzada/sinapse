@@ -48,9 +48,9 @@ namespace Sinapse.Data
         [NonSerialized]
         internal EventHandler NetworkChanged;
 
-        [NonSerialized]
+   /*     [NonSerialized]
         internal EventHandler NetworkLoaded;
-        
+   */    
         [NonSerialized]
         internal FileSystemEventHandler NetworkSaved;      
 
@@ -58,7 +58,7 @@ namespace Sinapse.Data
         //---------------------------------------------
 
 
-        #region Constructor & Destructor
+        #region Constructor
         public NetworkContainer(string networkName, NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
         {
             this.m_networkSchema = schema;
@@ -73,8 +73,10 @@ namespace Sinapse.Data
 
             this.m_creationTime = DateTime.Now;
             this.m_lastSavePath = String.Empty;
+            
             this.m_savepointCollection = new NetworkSavepointCollection(this);
-            this.m_savepointCollection.CurrentSavepointChanged += savepointCollection_CurrentSavepointChanged;
+            this.m_savepointCollection.SavepointRestored += savepointCollection_SavepointRestored;
+
         }
 
         public NetworkContainer(NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
@@ -181,26 +183,28 @@ namespace Sinapse.Data
                 this.NetworkSaved.Invoke(this, e);
         }
 
-        private void OnNetworkLoaded()
+   /*     private void OnNetworkLoaded()
         {
             if (this.NetworkLoaded != null)
                 this.NetworkLoaded.Invoke(this, EventArgs.Empty);
         }
-
+   */
         private void OnNetworkChanged()
         {
             if (this.NetworkChanged != null)
                 this.NetworkChanged.Invoke(this, EventArgs.Empty);
         }
 
-        private void savepointCollection_CurrentSavepointChanged(object sender, EventArgs e)
+        private void savepointCollection_SavepointRestored(object sender, EventArgs e)
         {
-            if (this.ActivationNetwork != m_savepointCollection.CurrentSavepoint.ActivationNetwork)
-            {
-                this.m_activationNetwork = m_savepointCollection.CurrentSavepoint.ActivationNetwork;
-                this.m_networkPrecision = m_savepointCollection.CurrentSavepoint.ErrorTraining;
-                this.OnNetworkChanged();
-            }
+            this.m_activationNetwork = m_savepointCollection.CurrentSavepoint.ActivationNetwork;
+            this.m_networkPrecision = m_savepointCollection.CurrentSavepoint.ErrorTraining;
+            this.OnNetworkChanged();
+        }
+
+        private void savepointCollection_SavepointRegistered(object sender, EventArgs e)
+        {
+
         }
         #endregion
 

@@ -58,7 +58,7 @@ namespace Sinapse.Controls.MainTabControl
         {
             base.OnCurrentDatabaseChanged();
 
-            this.TabPageEnabled = (this.NetworkDatabase != null);
+            this.setTabPageEnabled(this.NetworkDatabase != null);
         }
 
         private void btnShuffle_Click(object sender, EventArgs e)
