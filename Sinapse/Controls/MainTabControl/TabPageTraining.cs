@@ -63,6 +63,7 @@ namespace Sinapse.Controls.MainTabControl
 
         private void btnShuffle_Click(object sender, EventArgs e)
         {
+           // this.BindingSource.RemoveSort();
             this.NetworkDatabase.Shuffle(3);
         }
 

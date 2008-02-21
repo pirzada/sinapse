@@ -69,6 +69,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MainTabControl\Base\TabPageDataControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>

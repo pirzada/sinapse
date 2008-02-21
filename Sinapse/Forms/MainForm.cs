@@ -51,7 +51,8 @@ namespace Sinapse.Forms
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint |
-                          ControlStyles.DoubleBuffer, true);
+                          ControlStyles.OptimizedDoubleBuffer,
+                          true);
 
         }
         #endregion
