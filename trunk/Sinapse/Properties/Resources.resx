@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="db_comit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\db_comit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="player_stop_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,9 +160,6 @@
   <data name="player_rew_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_rew.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="info_flat_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\documentinfo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="info_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -199,8 +193,8 @@
   <data name="view_choose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\view_choose.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="redled" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\redled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="volume_manager_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Volume Manager.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,11 +211,11 @@
   <data name="starhot2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\starhot2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="start" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="shutdown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shutdown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="run" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\run.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,6 +229,9 @@
   <data name="starhot5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\starhot5.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="quick_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\quick_restart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="clear_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clear_left.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -246,6 +243,9 @@
   </data>
   <data name="star3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="player_pause_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\player_pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="apply" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\apply.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,8 +301,8 @@
   <data name="player_pause_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_pause1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="db_comit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\db_comit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_finish" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\finish.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -321,6 +321,9 @@
   </data>
   <data name="gear_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\agt_softwareD.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="configure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\configure.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -361,10 +364,10 @@
   <data name="player_fwd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_fwd1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_pause_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\player_pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="info_flat_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\documentinfo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="quick_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\quick_restart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="start1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\start1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -97,7 +97,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("350")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int graph_UpdateRate {
             get {
                 return ((int)(this["graph_UpdateRate"]));
@@ -109,7 +109,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int display_UpdateRate {
             get {
                 return ((int)(this["display_UpdateRate"]));
@@ -164,6 +164,30 @@ namespace Sinapse.Properties {
             }
             set {
                 this["training_Autosave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool training_Crossvalidation {
+            get {
+                return ((bool)(this["training_Crossvalidation"]));
+            }
+            set {
+                this["training_Crossvalidation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int training_AutosaveEpochs {
+            get {
+                return ((int)(this["training_AutosaveEpochs"]));
+            }
+            set {
+                this["training_AutosaveEpochs"] = value;
             }
         }
     }

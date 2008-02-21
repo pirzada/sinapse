@@ -21,10 +21,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="graph_UpdateRate" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">350</Value>
+      <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="display_UpdateRate" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">500</Value>
+      <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="graph_Size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">517, 276</Value>
@@ -37,6 +37,12 @@
     </Setting>
     <Setting Name="training_Autosave" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="training_Crossvalidation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="training_AutosaveEpochs" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
     </Setting>
   </Settings>
 </SettingsFile>
