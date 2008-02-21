@@ -27,7 +27,7 @@ using System.IO;
 
 using Sinapse.Data;
 using Sinapse.Data.Structures;
-using Sinapse.Dialogs;
+using Sinapse.Forms.Dialogs;
 
 
 namespace Sinapse.Forms
@@ -48,6 +48,11 @@ namespace Sinapse.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+                          ControlStyles.UserPaint |
+                          ControlStyles.DoubleBuffer, true);
+
         }
         #endregion
 
@@ -66,10 +71,8 @@ namespace Sinapse.Forms
             {
                 this.m_networkContainer = value;
 
-                this.SuspendLayout();
-                this.sideTrainerControl.NeuralNetwork = value;
-                this.sideDisplayControl.NeuralNetwork = value;
-                this.tabControlNetworkData.NetworkContainer = value;
+                this.tabControlSide.NetworkContainer = value;
+                this.tabControlMain.NetworkContainer = value;
 
                 if (value != null)
                 {
@@ -80,7 +83,6 @@ namespace Sinapse.Forms
                     this.MenuNetworkWeights.Enabled = true;
 
                     this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
-
 
                     this.m_networkContainer.NetworkSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
 
@@ -97,7 +99,6 @@ namespace Sinapse.Forms
                     this.MenuNetworkWeights.Enabled = false;
                 }
 
-                this.ResumeLayout(true);
             }
         }
 
@@ -111,10 +112,8 @@ namespace Sinapse.Forms
             {
                 this.m_networkDatabase = value;
 
-                this.SuspendLayout();
-                this.tabControlNetworkData.NetworkDatabase = value;
-                this.sideRangesControl.NetworkData = value;
-
+                this.tabControlSide.NetworkDatabase = value;
+                this.tabControlMain.NetworkDatabase = value;
 
                 if (value != null)
                 {
@@ -143,8 +142,6 @@ namespace Sinapse.Forms
                     this.lbInputCount.Text = "00";
                     this.lbOutputCount.Text = "00";
                 }
-
-                this.ResumeLayout(true);
             }
         }
 
@@ -184,15 +181,16 @@ namespace Sinapse.Forms
 
 
                 // Wire up controls and events
-                this.tabControlNetworkData.DataSelectionChanged += networkDataControl_SelectionChanged;
+                this.tabControlMain.DataSelectionChanged += tabControlMain_SelectionChanged;
+                this.tabControlSide.TrainerControl.GraphControl = this.tabControlMain.GraphControl;
 
-                this.sideTrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
-              this.sideTrainerControl.DataNeeded += sideTrainerControl_DataNeeded;
-                this.sideTrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
+                this.tabControlSide.TrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
+                this.tabControlSide.TrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
 
                 this.CurrentNetworkContainer = null;
                 this.CurrentNetworkDatabase = null;
                 this.CurrentNetworkWorkplace = null;
+
                 HistoryListener.Write("Waiting data");
             }
         }
@@ -201,10 +199,10 @@ namespace Sinapse.Forms
         {
             HistoryListener.Write("Exiting...");
 
-            if (this.sideTrainerControl.IsTraining)
-                this.sideTrainerControl.Stop();
-            this.sideTrainerControl.Close();
+            if (this.tabControlSide.TrainerControl.IsTraining)
+                this.tabControlSide.TrainerControl.Stop();
 
+            // Save settings before closing
             Properties.Settings.Default.main_WindowState = this.WindowState;
             if (this.WindowState == FormWindowState.Normal)
             {
@@ -223,10 +221,10 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
 
-        #region Network Data Control Events
-        private void networkDataControl_SelectionChanged(object sender, EventArgs e)
+        #region Main Tab Control Events
+        private void tabControlMain_SelectionChanged(object sender, EventArgs e)
         {
-            this.statusBarControl.UpdateSelectedItems(tabControlNetworkData.SelectedItemCount, tabControlNetworkData.ItemCount);
+            this.statusBarControl.UpdateSelectedItems(tabControlMain.SelectedItemCount, tabControlMain.ItemCount);
         }
         #endregion
 
@@ -235,17 +233,9 @@ namespace Sinapse.Forms
 
 
         #region Network Trainer Control Events
-        private void sideTrainerControl_DataNeeded(object sender, EventArgs e)
-        {
-            TrainingVectors trainingVectors = this.tabControlNetworkData.NetworkDatabase.CreateVectors(NetworkSet.Training);
-            TrainingVectors validationVectors = this.tabControlNetworkData.NetworkDatabase.CreateVectors(NetworkSet.Validation);
-
-          this.sideTrainerControl.Start(trainingVectors, validationVectors);
-        }
-
         private void sideTrainerControl_StatusChanged(object sender, EventArgs e)
         {
-            this.statusBarControl.UpdateNetworkState(this.sideTrainerControl.NetworkState);
+            this.statusBarControl.UpdateNetworkState(this.tabControlSide.TrainerControl.NetworkState);
         }
 
         private void sideTrainerControl_TrainingComplete(object sender, EventArgs e)
@@ -365,7 +355,7 @@ namespace Sinapse.Forms
 
                     if (Properties.Settings.Default.main_AutoSwitchToTrainingTab)
                     {
-                        this.tabControlSidebar.SelectedTab = this.tabTraining;
+                        this.tabControlSide.TrainerControl.ShowTab();
                     }
                 }
             }
@@ -393,8 +383,7 @@ namespace Sinapse.Forms
 
         private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
-            HistoryListener.Write("Querying network");
-       //     new NetworkInquirer(this.m_networkContainer).ShowDialog(this);
+            this.tabControlMain.QueryControl.Show();
             HistoryListener.Write("Ready");
         }
 

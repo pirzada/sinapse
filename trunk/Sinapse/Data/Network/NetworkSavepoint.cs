@@ -19,6 +19,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
@@ -76,26 +77,26 @@ namespace Sinapse.Data
             set { this.m_networkStatus = value; }
         }
 
-        internal DateTime CreationTime
+        public DateTime CreationTime
         {
             get { return this.m_creationTime; }
         }
-   /*
-        internal int Epoch
+   
+        public int Epoch
         {
             get { return this.NetworkStatus.Epoch; }
         }
 
-        internal double ErrorTraining
+        public double ErrorTraining
         {
             get { return this.NetworkStatus.ErrorTraining; }
         }
 
-        internal double ValidationError
+        public double ErrorValidation
         {
             get { return this.NetworkStatus.ErrorValidation; }
         }
-    */ 
+     
         #endregion
 
 
@@ -111,39 +112,66 @@ namespace Sinapse.Data
     
  
     [Serializable]
-    internal sealed class NetworkSavepointCollection : List<NetworkSavepoint>
+    internal sealed class NetworkSavepointCollection : BindingList<NetworkSavepoint>
     {
-        
-        internal NetworkSavepointCollection()
-        {
-        }
 
-        public void Add(ActivationNetwork network, TrainingStatus status)
-        {
-            this.Add(new NetworkSavepoint(network, status));
-        }
-        
-     /*
-        NetworkContainer m_networkContainer;
+        private NetworkSavepoint m_currentSavepoint;
+        private NetworkContainer m_networkContainer;
 
+        public EventHandler CurrentSavepointChanged;
+
+        //---------------------------------------------
+
+
+        #region Constructor
         internal NetworkSavepointCollection(NetworkContainer networkContainer)
         {
             this.m_networkContainer = networkContainer;
+            this.m_currentSavepoint = null;
         }
+        #endregion
 
 
-     
+        //---------------------------------------------
+
+
+        #region Properties
+        public NetworkSavepoint CurrentSavepoint
+        {
+            get { return m_currentSavepoint; }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Public Methods
         public void Restore(NetworkSavepoint networkSavepoint)
         {
-            this.m_networkContainer.ActivationNetwork = networkSavepoint.ActivationNetwork;
-            this.m_networkContainer.Precision = networkSavepoint.NetworkStatus.ErrorTraining;
+            this.m_currentSavepoint = networkSavepoint;
+            this.OnCurrentSavepointChanged();
         }
 
-        public void Save(TrainingStatus trainingStatus)
+        public void Register(TrainingStatus trainingStatus)
         {
-            this.Add(new NetworkSavepoint(m_networkContainer.ActivationNetwork, trainingStatus));
+            this.m_currentSavepoint = new NetworkSavepoint(m_networkContainer.ActivationNetwork, trainingStatus);
+            this.Add(m_currentSavepoint);
+            this.OnCurrentSavepointChanged();
         }
-      */
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        private void OnCurrentSavepointChanged()
+        {
+            if (this.CurrentSavepointChanged != null)
+            {
+                this.CurrentSavepointChanged.Invoke(this, EventArgs.Empty);
+            }
+        }
     }
   
      

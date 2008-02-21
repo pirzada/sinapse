@@ -24,48 +24,49 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using AForge.Neuro;
-
-using Sinapse.Data;
-
-namespace Sinapse.Forms
+namespace Sinapse.Forms.Dialogs
 {
-    internal sealed partial class NetworkInquirer : Form
+    sealed public partial class InputBox : Form
     {
 
-        private NetworkContainer m_neuralNetwork;
+        public static DialogResult Show(string text, string title, string defaultInput, out string userInput)
+        {
+            InputBox dialog = new InputBox();
+            dialog.lbText.Text = text;
+            dialog.Text = title;
+            dialog.tbInput.Text = defaultInput;
 
-        //---------------------------------------------
+            DialogResult result = dialog.ShowDialog();
+            userInput = dialog.tbInput.Text;
 
-        #region Constructor
-        internal NetworkInquirer(NetworkContainer neuralNetwork)
+            return result;
+        }
+
+
+        private InputBox()
         {
             InitializeComponent();
-
-            this.m_neuralNetwork = neuralNetwork;
-            this.networkDisplayControl.NeuralNetwork = neuralNetwork;
-            this.networkDataQueryControl.NetworkData = new NetworkDatabase(neuralNetwork.Schema);
-            this.networkRangesControl.NetworkData = networkDataQueryControl.NetworkData;
-
-        }
-        #endregion
-
-        //---------------------------------------------
-
-        private void btnQuery_Click(object sender, EventArgs e)
-        {
-            this.networkDataQueryControl.Compute(this.m_neuralNetwork);
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void InputDialog_Load(object sender, EventArgs e)
         {
+            tbInput.Focus();
+            tbInput.SelectAll();
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void networkDataQueryControl_Load(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
+
+
 
     }
 }

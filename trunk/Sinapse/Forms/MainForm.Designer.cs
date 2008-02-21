@@ -94,22 +94,14 @@ namespace Sinapse.Forms
             this.MenuHelpContents = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelpIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelpSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.sideTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
             this.MenuHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.tabControlSidebar = new Dotnetrix.Controls.TabControlEX();
-            this.tabStatus = new Dotnetrix.Controls.TabPageEX();
-            this.sideDisplayControl = new Sinapse.Controls.Sidebar.SideDisplayControl();
-            this.tabTraining = new Dotnetrix.Controls.TabPageEX();
-            this.tabData = new Dotnetrix.Controls.TabPageEX();
-            this.sideRangesControl = new Sinapse.Controls.Sidebar.SideRangesControl();
-            this.tabWorkplace = new Dotnetrix.Controls.TabPageEX();
-            this.tabControlNetworkData = new Sinapse.Controls.NetworkDataTab.NetworkDataTabControl();
-            this.tabSetImageList = new System.Windows.Forms.ImageList(this.components);
+            this.tabControlSide = new Sinapse.Controls.SideTabControl.SideTabControl();
+            this.tabControlMain = new Sinapse.Controls.MainTabControl.MainTabControl();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.btnDatabaseNew = new System.Windows.Forms.ToolStripButton();
             this.btnDatabaseOpen = new System.Windows.Forms.ToolStripButton();
@@ -136,7 +128,6 @@ namespace Sinapse.Forms
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.statusBarControl = new Sinapse.Controls.StatusBarControl();
-            this.sideTrainerControl = new Sinapse.Controls.Sidebar.SideTrainerControl();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
@@ -145,10 +136,6 @@ namespace Sinapse.Forms
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.tabControlSidebar.SuspendLayout();
-            this.tabStatus.SuspendLayout();
-            this.tabTraining.SuspendLayout();
-            this.tabData.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripTraining.SuspendLayout();
             this.SuspendLayout();
@@ -248,16 +235,6 @@ namespace Sinapse.Forms
             this.lbOutputCount.Size = new System.Drawing.Size(19, 13);
             this.lbOutputCount.TabIndex = 0;
             this.lbOutputCount.Text = "00";
-            // 
-            // sideTrainerControl
-            // 
-            this.sideTrainerControl.BackColor = System.Drawing.SystemColors.Control;
-            this.sideTrainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sideTrainerControl.Location = new System.Drawing.Point(0, 0);
-            this.sideTrainerControl.Name = "sideTrainerControl";
-            this.sideTrainerControl.Padding = new System.Windows.Forms.Padding(3);
-            this.sideTrainerControl.Size = new System.Drawing.Size(232, 444);
-            this.sideTrainerControl.TabIndex = 0;
             // 
             // menuStrip
             // 
@@ -434,7 +411,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseNew.Image = global::Sinapse.Properties.Resources.file_new;
             this.MenuDatabaseNew.Name = "MenuDatabaseNew";
-            this.MenuDatabaseNew.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseNew.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseNew.Text = "&New";
             this.MenuDatabaseNew.Click += new System.EventHandler(this.MenuFileWizard_Click);
             // 
@@ -442,7 +419,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseOpen.Image = global::Sinapse.Properties.Resources.file_open;
             this.MenuDatabaseOpen.Name = "MenuDatabaseOpen";
-            this.MenuDatabaseOpen.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseOpen.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseOpen.Text = "&Open";
             this.MenuDatabaseOpen.Click += new System.EventHandler(this.MenuDatabaseOpen_Click);
             // 
@@ -450,7 +427,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSave.Image = global::Sinapse.Properties.Resources.file_save;
             this.MenuDatabaseSave.Name = "MenuDatabaseSave";
-            this.MenuDatabaseSave.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseSave.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseSave.Text = "&Save";
             this.MenuDatabaseSave.Click += new System.EventHandler(this.MenuDatabaseSave_Click);
             // 
@@ -458,20 +435,20 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSaveAs.Image = global::Sinapse.Properties.Resources.file_saveas;
             this.MenuDatabaseSaveAs.Name = "MenuDatabaseSaveAs";
-            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseSaveAs.Text = "Save &As";
             this.MenuDatabaseSaveAs.Click += new System.EventHandler(this.MenuDatabaseSaveAs_Click);
             // 
             // MenuDatabaseSeparator
             // 
             this.MenuDatabaseSeparator.Name = "MenuDatabaseSeparator";
-            this.MenuDatabaseSeparator.Size = new System.Drawing.Size(149, 6);
+            this.MenuDatabaseSeparator.Size = new System.Drawing.Size(140, 6);
             // 
             // MenuDatabaseEdit
             // 
             this.MenuDatabaseEdit.Image = global::Sinapse.Properties.Resources.edit;
             this.MenuDatabaseEdit.Name = "MenuDatabaseEdit";
-            this.MenuDatabaseEdit.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseEdit.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseEdit.Text = "&Edit Schema";
             // 
             // MenuNetwork
@@ -548,33 +525,33 @@ namespace Sinapse.Forms
             // 
             this.MenuHelpContents.Image = global::Sinapse.Properties.Resources.help;
             this.MenuHelpContents.Name = "MenuHelpContents";
-            this.MenuHelpContents.Size = new System.Drawing.Size(152, 22);
+            this.MenuHelpContents.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpContents.Text = "&Contents";
             // 
             // MenuHelpIndex
             // 
             this.MenuHelpIndex.Enabled = false;
             this.MenuHelpIndex.Name = "MenuHelpIndex";
-            this.MenuHelpIndex.Size = new System.Drawing.Size(152, 22);
+            this.MenuHelpIndex.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpIndex.Text = "&Index";
             // 
             // MenuHelpSearch
             // 
             this.MenuHelpSearch.Enabled = false;
             this.MenuHelpSearch.Name = "MenuHelpSearch";
-            this.MenuHelpSearch.Size = new System.Drawing.Size(152, 22);
+            this.MenuHelpSearch.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpSearch.Text = "&Search";
             // 
             // MenuHelpSeparator
             // 
             this.MenuHelpSeparator.Name = "MenuHelpSeparator";
-            this.MenuHelpSeparator.Size = new System.Drawing.Size(149, 6);
+            this.MenuHelpSeparator.Size = new System.Drawing.Size(126, 6);
             // 
             // MenuHelpAbout
             // 
             this.MenuHelpAbout.Image = global::Sinapse.Properties.Resources.network_16;
             this.MenuHelpAbout.Name = "MenuHelpAbout";
-            this.MenuHelpAbout.Size = new System.Drawing.Size(152, 22);
+            this.MenuHelpAbout.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpAbout.Text = "&About...";
             this.MenuHelpAbout.Click += new System.EventHandler(this.MenuHelpAbout_Click);
             // 
@@ -621,119 +598,30 @@ namespace Sinapse.Forms
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.tabControlSidebar);
+            this.splitContainer.Panel1.Controls.Add(this.tabControlSide);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.tabControlNetworkData);
+            this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
             this.splitContainer.Size = new System.Drawing.Size(792, 452);
             this.splitContainer.SplitterDistance = 263;
             this.splitContainer.TabIndex = 17;
             // 
-            // tabControlSidebar
+            // tabControlSide
             // 
-            this.tabControlSidebar.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControlSidebar.Appearance = Dotnetrix.Controls.TabAppearanceEX.Bevel;
-            this.tabControlSidebar.AutoLoadTabPages = true;
-            this.tabControlSidebar.Controls.Add(this.tabStatus);
-            this.tabControlSidebar.Controls.Add(this.tabTraining);
-            this.tabControlSidebar.Controls.Add(this.tabData);
-            this.tabControlSidebar.Controls.Add(this.tabWorkplace);
-            this.tabControlSidebar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlSidebar.HotColor = System.Drawing.SystemColors.MenuHighlight;
-            this.tabControlSidebar.HotTrack = true;
-            this.tabControlSidebar.Location = new System.Drawing.Point(0, 0);
-            this.tabControlSidebar.Multiline = true;
-            this.tabControlSidebar.Name = "tabControlSidebar";
-            this.tabControlSidebar.SelectedIndex = 1;
-            this.tabControlSidebar.Size = new System.Drawing.Size(263, 452);
-            this.tabControlSidebar.TabIndex = 16;
-            this.tabControlSidebar.UseVisualStyles = false;
+            this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlSide.Location = new System.Drawing.Point(0, 0);
+            this.tabControlSide.Name = "tabControlSide";
+            this.tabControlSide.Size = new System.Drawing.Size(263, 452);
+            this.tabControlSide.TabIndex = 0;
             // 
-            // tabStatus
+            // tabControlMain
             // 
-            this.tabStatus.Controls.Add(this.sideDisplayControl);
-            this.tabStatus.Location = new System.Drawing.Point(27, 4);
-            this.tabStatus.Name = "tabStatus";
-            this.tabStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStatus.Size = new System.Drawing.Size(232, 444);
-            this.tabStatus.TabIndex = 1;
-            this.tabStatus.Text = "Network Status";
-            this.tabStatus.UseVisualStyleBackColor = true;
-            // 
-            // sideDisplayControl
-            // 
-            this.sideDisplayControl.BackColor = System.Drawing.SystemColors.Window;
-            this.sideDisplayControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.sideDisplayControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sideDisplayControl.Enabled = false;
-            this.sideDisplayControl.Location = new System.Drawing.Point(3, 3);
-            this.sideDisplayControl.Name = "sideDisplayControl";
-            this.sideDisplayControl.ReadOnly = false;
-            this.sideDisplayControl.Size = new System.Drawing.Size(226, 438);
-            this.sideDisplayControl.TabIndex = 16;
-            // 
-            // tabTraining
-            // 
-            this.tabTraining.Controls.Add(this.sideTrainerControl);
-            this.tabTraining.Location = new System.Drawing.Point(27, 4);
-            this.tabTraining.Name = "tabTraining";
-            this.tabTraining.Size = new System.Drawing.Size(232, 444);
-            this.tabTraining.TabIndex = 0;
-            this.tabTraining.Text = "Network Trainer";
-            this.tabTraining.UseVisualStyleBackColor = true;
-            // 
-            // tabData
-            // 
-            this.tabData.Controls.Add(this.sideRangesControl);
-            this.tabData.Location = new System.Drawing.Point(27, 4);
-            this.tabData.Name = "tabData";
-            this.tabData.Size = new System.Drawing.Size(232, 444);
-            this.tabData.TabIndex = 3;
-            this.tabData.Text = "Training Data";
-            // 
-            // sideRangesControl
-            // 
-            this.sideRangesControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sideRangesControl.Enabled = false;
-            this.sideRangesControl.Location = new System.Drawing.Point(0, 0);
-            this.sideRangesControl.Name = "sideRangesControl";
-            this.sideRangesControl.ReadOnly = false;
-            this.sideRangesControl.Size = new System.Drawing.Size(232, 444);
-            this.sideRangesControl.TabIndex = 15;
-            // 
-            // tabWorkplace
-            // 
-            this.tabWorkplace.Enabled = false;
-            this.tabWorkplace.Location = new System.Drawing.Point(27, 4);
-            this.tabWorkplace.Name = "tabWorkplace";
-            this.tabWorkplace.Size = new System.Drawing.Size(232, 444);
-            this.tabWorkplace.TabIndex = 4;
-            this.tabWorkplace.Text = "Workplace";
-            // 
-            // tabControlNetworkData
-            // 
-            this.tabControlNetworkData.Appearance = Dotnetrix.Controls.TabAppearanceEX.Bevel;
-            this.tabControlNetworkData.AutoLoadTabPages = true;
-            this.tabControlNetworkData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlNetworkData.HotColor = System.Drawing.SystemColors.MenuHighlight;
-            this.tabControlNetworkData.ImageList = this.tabSetImageList;
-            this.tabControlNetworkData.Location = new System.Drawing.Point(0, 0);
-            this.tabControlNetworkData.Name = "tabControlNetworkData";
-            this.tabControlNetworkData.Size = new System.Drawing.Size(525, 452);
-            this.tabControlNetworkData.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.tabControlNetworkData.TabIndex = 0;
-            this.tabControlNetworkData.UseVisualStyles = false;
-            // 
-            // tabSetImageList
-            // 
-            this.tabSetImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("tabSetImageList.ImageStream")));
-            this.tabSetImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.tabSetImageList.Images.SetKeyName(0, "Training.png");
-            this.tabSetImageList.Images.SetKeyName(1, "Validating.png");
-            this.tabSetImageList.Images.SetKeyName(2, "Testing.png");
-            this.tabSetImageList.Images.SetKeyName(3, "Query.png");
-            this.tabSetImageList.Images.SetKeyName(4, "Graph");
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.Size = new System.Drawing.Size(525, 452);
+            this.tabControlMain.TabIndex = 0;
             // 
             // toolStripMain
             // 
@@ -859,7 +747,7 @@ namespace Sinapse.Forms
             this.btnTrainGraph,
             this.btnTrainQuery});
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripTraining.Location = new System.Drawing.Point(406, 0);
+            this.toolStripTraining.Location = new System.Drawing.Point(209, 0);
             this.toolStripTraining.Name = "toolStripTraining";
             this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
             this.toolStripTraining.TabIndex = 1;
@@ -1005,10 +893,6 @@ namespace Sinapse.Forms
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.ResumeLayout(false);
-            this.tabControlSidebar.ResumeLayout(false);
-            this.tabStatus.ResumeLayout(false);
-            this.tabTraining.ResumeLayout(false);
-            this.tabData.ResumeLayout(false);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.toolStripTraining.ResumeLayout(false);
@@ -1055,18 +939,11 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnTrainStop;
         private System.Windows.Forms.ToolStripButton btnTrainBack;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private Dotnetrix.Controls.TabControlEX tabControlSidebar;
-        private Dotnetrix.Controls.TabPageEX tabTraining;
-        private Dotnetrix.Controls.TabPageEX tabStatus;
-        private Dotnetrix.Controls.TabPageEX tabData;
-        private Sinapse.Controls.Sidebar.SideRangesControl sideRangesControl;
-        private Sinapse.Controls.Sidebar.SideDisplayControl sideDisplayControl;
         private System.Windows.Forms.ToolStripButton btnDatabaseSave;
         private System.Windows.Forms.ToolStripButton btnTrainQuery;
         private System.Windows.Forms.ToolStripButton btnNetworkNew;
         private System.Windows.Forms.ToolStripButton btnWizard;
-        private Sinapse.Controls.NetworkDataTab.NetworkDataTabControl tabControlNetworkData;
-        private System.Windows.Forms.ImageList tabSetImageList;
+        private Sinapse.Controls.MainTabControl.MainTabControl tabControlMain;
         private Sinapse.Controls.StatusBarControl statusBarControl;
         private System.Windows.Forms.ToolStripMenuItem MenuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuFileExit;
@@ -1090,7 +967,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem MenuNetworkSave;
-        private Dotnetrix.Controls.TabPageEX tabWorkplace;
         private System.Windows.Forms.ToolStripMenuItem MenuWorkplaceSave;
         private System.Windows.Forms.ToolStripMenuItem MenuDatabaseSave;
         private System.Windows.Forms.SaveFileDialog saveDatabaseDialog;
@@ -1107,6 +983,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnTrainNext;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton btnTrainGraph;
-        private Sinapse.Controls.Sidebar.SideTrainerControl sideTrainerControl;
+        private Sinapse.Controls.SideTabControl.SideTabControl tabControlSide;
     }
 }

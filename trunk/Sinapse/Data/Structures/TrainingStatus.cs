@@ -22,8 +22,12 @@ using System.Text;
 
 namespace Sinapse.Data
 {
+
+    internal enum UpdateType { Statusbar, Graph, NetworkSave, Null };
+
     internal struct TrainingStatus
     {
+        public UpdateType NextUpdateType;
         public int Epoch;
         public int Progress;
         public double ErrorTraining;

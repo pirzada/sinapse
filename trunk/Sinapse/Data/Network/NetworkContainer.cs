@@ -73,7 +73,8 @@ namespace Sinapse.Data
 
             this.m_creationTime = DateTime.Now;
             this.m_lastSavePath = String.Empty;
-            this.m_savepointCollection = new NetworkSavepointCollection();
+            this.m_savepointCollection = new NetworkSavepointCollection(this);
+            this.m_savepointCollection.CurrentSavepointChanged += savepointCollection_CurrentSavepointChanged;
         }
 
         public NetworkContainer(NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
@@ -167,17 +168,6 @@ namespace Sinapse.Data
 
             return layout;
         }
-
-        public void MarkSavepoint(TrainingStatus trainingStatus)
-        {
-            this.m_savepointCollection.Add(m_activationNetwork, trainingStatus);
-        }
-
-        public void RestoreSavepoint(NetworkSavepoint networkSavepoint)
-        {
-            this.m_activationNetwork = networkSavepoint.ActivationNetwork;
-            this.m_networkPrecision = networkSavepoint.NetworkStatus.ErrorTraining;
-        }
         #endregion
 
 
@@ -201,6 +191,16 @@ namespace Sinapse.Data
         {
             if (this.NetworkChanged != null)
                 this.NetworkChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        private void savepointCollection_CurrentSavepointChanged(object sender, EventArgs e)
+        {
+            if (this.ActivationNetwork != m_savepointCollection.CurrentSavepoint.ActivationNetwork)
+            {
+                this.m_activationNetwork = m_savepointCollection.CurrentSavepoint.ActivationNetwork;
+                this.m_networkPrecision = m_savepointCollection.CurrentSavepoint.ErrorTraining;
+                this.OnNetworkChanged();
+            }
         }
         #endregion
 
