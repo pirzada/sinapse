@@ -1,3 +1,21 @@
+/***************************************************************************
+ *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *  ---------------------------------------------------------------------- *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *                                                                         *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 3 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ ***************************************************************************/
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +37,7 @@ namespace Sinapse.Controls.MainTabControl
         private NetworkContainer m_networkContainer;
         private IPointListEdit m_trainingPoints;
         private IPointListEdit m_validationPoints;
+        private IPointListEdit m_savePoints;
 
 
         //----------------------------------------
@@ -29,9 +48,14 @@ namespace Sinapse.Controls.MainTabControl
         {
             InitializeComponent();
 
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+              ControlStyles.UserPaint |
+              ControlStyles.OptimizedDoubleBuffer,
+              true);
+
+
             this.TabPageName = "Training History";
             this.dataGridView.AutoGenerateColumns = false;
-
             this.CreateChart(zedGraphControl);
         }
         #endregion
@@ -41,6 +65,7 @@ namespace Sinapse.Controls.MainTabControl
 
 
         #region Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal NetworkContainer NetworkContainer
         {
             get { return this.m_networkContainer; }
@@ -50,25 +75,34 @@ namespace Sinapse.Controls.MainTabControl
 
                 if (value != null)
                 {
-                    this.TabPageEnabled = true;
+                    this.setTabPageEnabled(true);
                     this.dataGridView.DataSource = this.m_networkContainer.Savepoints;
+                    this.m_networkContainer.Savepoints.SavepointRegistered += networkContainer_savepointRegistered;
                 }
                 else
                 {
-                    this.TabPageEnabled = false;
+                    this.setTabPageEnabled(false);
                     this.dataGridView.DataSource = null;
                 }
             }
         }
 
-        public IPointListEdit TrainingPoints
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal IPointListEdit TrainingPoints
         {
             get { return this.m_trainingPoints; }
         }
 
-        public IPointListEdit ValidationPoints
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal IPointListEdit ValidationPoints
         {
             get { return this.m_validationPoints; }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal IPointListEdit SavePoints
+        {
+            get { return this.m_savePoints; }
         }
         #endregion
 
@@ -89,6 +123,12 @@ namespace Sinapse.Controls.MainTabControl
             if (save != null)
                 this.m_networkContainer.Savepoints.Restore(save);
         }
+
+        private void networkContainer_savepointRegistered(object sender, EventArgs e)
+        {
+            this.SavePoints.Add(this.m_networkContainer.Savepoints.CurrentSavepoint.Epoch,
+                this.m_networkContainer.Savepoints.CurrentSavepoint.ErrorTraining);
+        }
         #endregion
 
 
@@ -104,6 +144,22 @@ namespace Sinapse.Controls.MainTabControl
         private void btnClear_Click(object sender, EventArgs e)
         {
             this.ClearGraph();
+        }
+
+        private void btnSavepointLoad_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView.CurrentRow != null)
+            {
+                NetworkSavepoint save = (this.dataGridView.CurrentRow.DataBoundItem as NetworkSavepoint);
+
+                if (save != null)
+                    this.m_networkContainer.Savepoints.Restore(save);
+            }
+        }
+
+        private void btnSavepointClear_Click(object sender, EventArgs e)
+        {
+            this.m_networkContainer.Savepoints.Clear();
         }
         #endregion
 
@@ -123,6 +179,7 @@ namespace Sinapse.Controls.MainTabControl
         {
             this.TrainingPoints.Clear();
             this.ValidationPoints.Clear();
+            this.SavePoints.Clear();
             this.UpdateGraph();
         }
         #endregion
@@ -144,7 +201,7 @@ namespace Sinapse.Controls.MainTabControl
 
             RollingPointPairList trainingList = new RollingPointPairList(1200);
             RollingPointPairList validationList = new RollingPointPairList(1200);
-
+            RollingPointPairList savepointList = new RollingPointPairList(1200);
 
             // Add a curve
             LineItem curve;
@@ -164,6 +221,16 @@ namespace Sinapse.Controls.MainTabControl
             // validationCurve.Line.IsSmooth = true;
             // validationCurve.Line.SmoothTension = 0.5F;
 
+
+            curve = myPane.AddCurve("Savepoints Mark", savepointList, Color.Green, SymbolType.Square);
+            curve.Symbol.Fill = new Fill(Color.Green);
+            curve.Symbol.Size = 5;
+            curve.Line.IsVisible = false;
+            m_savePoints = curve.Points as IPointListEdit;
+            // validationCurve.Line.IsSmooth = true;
+            // validationCurve.Line.SmoothTension = 0.5F;
+
+
             myPane.XAxis.Scale.MinAuto = true;
             myPane.XAxis.Scale.MaxAuto = true;
             myPane.YAxis.Scale.MinAuto = true;
@@ -178,6 +245,11 @@ namespace Sinapse.Controls.MainTabControl
             zgc.AxisChange();
         }
         #endregion
+
+
+
+
+
 
         
         //----------------------------------------

@@ -54,7 +54,7 @@ namespace Sinapse.Controls.MainTabControl
         {
             base.OnCurrentDatabaseChanged();
 
-            this.TabPageEnabled = (this.NetworkDatabase != null);
+            this.setTabPageEnabled(this.NetworkDatabase != null);
         }
         #endregion
 

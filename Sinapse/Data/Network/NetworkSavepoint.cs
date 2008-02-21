@@ -119,6 +119,8 @@ namespace Sinapse.Data
         private NetworkContainer m_networkContainer;
 
         public EventHandler CurrentSavepointChanged;
+        public EventHandler SavepointRegistered;
+        public EventHandler SavepointRestored;
 
         //---------------------------------------------
 
@@ -138,7 +140,7 @@ namespace Sinapse.Data
         #region Properties
         public NetworkSavepoint CurrentSavepoint
         {
-            get { return m_currentSavepoint; }
+            get { return this.m_currentSavepoint; }
         }
         #endregion
 
@@ -150,14 +152,18 @@ namespace Sinapse.Data
         public void Restore(NetworkSavepoint networkSavepoint)
         {
             this.m_currentSavepoint = networkSavepoint;
+
             this.OnCurrentSavepointChanged();
+            this.OnSavepointRestored();
         }
 
         public void Register(TrainingStatus trainingStatus)
         {
             this.m_currentSavepoint = new NetworkSavepoint(m_networkContainer.ActivationNetwork, trainingStatus);
             this.Add(m_currentSavepoint);
+
             this.OnCurrentSavepointChanged();
+            this.OnSavepointRegistered();
         }
         #endregion
 
@@ -168,9 +174,19 @@ namespace Sinapse.Data
         private void OnCurrentSavepointChanged()
         {
             if (this.CurrentSavepointChanged != null)
-            {
                 this.CurrentSavepointChanged.Invoke(this, EventArgs.Empty);
-            }
+        }
+
+        private void OnSavepointRegistered()
+        {
+            if (this.SavepointRegistered != null)
+                this.SavepointRegistered.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnSavepointRestored()
+        {
+            if (this.SavepointRestored != null)
+                this.SavepointRestored.Invoke(this, EventArgs.Empty);
         }
     }
   

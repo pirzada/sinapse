@@ -112,15 +112,15 @@ namespace Sinapse.Forms.Dialogs
             strBuilder.AppendLine("\bTest Summary\b0");
             strBuilder.AppendLine("----------------------------------");
 
-            int errorCount, matchCount;
+         /*   int errorCount, matchCount;
             int falsePositives, truePositives;
             int falseNegatives, trueNegatives;
-          
+         */ 
             foreach (DataRow row in selectedRows)
             {
                 foreach (string outputColumn in network.Schema.OutputColumns)
                 {
-                    int targetValue, networkValue;
+          //          int targetValue, networkValue;
                   //  Math.Round((double)row[outputColumn]);
                 }
             }
