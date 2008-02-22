@@ -291,8 +291,10 @@ namespace Sinapse.Forms
                 this.CurrentNetworkDatabase = importWizard.GetNetworkData();
                 if (this.CurrentNetworkContainer == null)
                 {
+                    HistoryListener.Write("Database imported!");
+
                     if (MessageBox.Show("Data imported successfuly. Would you like to create" +
-                        "the neural network now?", "Import Complete", MessageBoxButtons.YesNo)
+                        " the neural network now?", "Import Complete", MessageBoxButtons.YesNo)
                         == DialogResult.Yes)
                     {
                         this.MenuNetworkNew_Click(this, e);
@@ -355,6 +357,7 @@ namespace Sinapse.Forms
                 if (creationDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     this.CurrentNetworkContainer = creationDlg.CreateNetworkContainer();
+                    HistoryListener.Write("Network created!");
 
                     if (Properties.Settings.Default.main_AutoSwitchToTrainingTab)
                     {
@@ -442,11 +445,6 @@ namespace Sinapse.Forms
         {
             this.tabControlMain.GraphControl.ShowTab();
         }
-
-        private void btnTrainQuery_Click(object sender, EventArgs e)
-        {
-            this.tabControlMain.QueryControl.ShowTab();
-        }
         #endregion
 
 
@@ -496,6 +494,7 @@ namespace Sinapse.Forms
             {
                 NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
                 this.mruProviderNetwork.Insert(path);
+                HistoryListener.Write("Network saved!");
             }
             catch (Exception e)
             {
@@ -521,6 +520,7 @@ namespace Sinapse.Forms
                 {
                     this.CurrentNetworkContainer = neuralNetwork;
                     this.mruProviderNetwork.Insert(path);
+                    HistoryListener.Write("Network loaded!");
                 }
             }
         }
@@ -534,6 +534,7 @@ namespace Sinapse.Forms
             {
                 NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
                 this.mruProviderDatabase.Insert(path);
+                HistoryListener.Write("Database saved!");
             }
             catch (Exception e)
             {
@@ -566,6 +567,7 @@ namespace Sinapse.Forms
                 {
                     this.CurrentNetworkDatabase = networkDatabase;
                     this.mruProviderDatabase.Insert(path);
+                    HistoryListener.Write("Database loaded!");
                 }
             }
         }

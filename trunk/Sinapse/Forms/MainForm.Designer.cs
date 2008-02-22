@@ -845,7 +845,7 @@ namespace Sinapse.Forms
             this.btnTrainQuery.Name = "btnTrainQuery";
             this.btnTrainQuery.Size = new System.Drawing.Size(23, 22);
             this.btnTrainQuery.Text = "Query Network";
-            this.btnTrainQuery.Click += new System.EventHandler(this.btnTrainQuery_Click);
+            this.btnTrainQuery.Click += new System.EventHandler(this.MenuNetworkQuery_Click);
             // 
             // saveDatabaseDialog
             // 

@@ -18,20 +18,56 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.Forms.Base
 {
 
-    internal sealed partial class GraphOptions : Sinapse.Forms.Base.SingleInstanceForm
+    internal class SingleInstanceForm : System.Windows.Forms.Form
     {
-        internal GraphOptions()
+
+        #region Static
+        private static bool hasInstance = false;
+
+        public static bool HasInstance
         {
-            InitializeComponent();
+            get { return hasInstance; }
         }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Constructor & Destructor
+        internal SingleInstanceForm()
+        {
+            hasInstance = true;
+        }
+
+        ~SingleInstanceForm()
+        {
+            hasInstance = false;
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Events
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            hasInstance = false;
+        }
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            hasInstance = false;
+        }
+        #endregion
+
     }
 }

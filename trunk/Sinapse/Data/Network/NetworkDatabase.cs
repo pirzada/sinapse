@@ -108,12 +108,24 @@ namespace Sinapse.Data.Network
 
         internal int TrainingLayerCount
         {
-            get
-            {
-                return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingLayerId).Rows.Count;
-            }
+            get { return this.m_dataTable.DefaultView.ToTable(true, ColumnTrainingLayerId).Rows.Count; }
         }
 
+        internal DataView TrainingSet
+        {
+            get { return this.createDataView(NetworkSet.Training); }
+        }
+
+        internal DataView TestingSet
+        {
+            get { return this.createDataView(NetworkSet.Testing); }
+        }
+
+        internal DataView ValidationSet
+        {
+            get { return this.createDataView(NetworkSet.Validation); }
+        }
+                   
         internal string LastSavePath
         {
             get { return this.m_lastSavePath; }
@@ -243,17 +255,19 @@ namespace Sinapse.Data.Network
             DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
             bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
 
-            double data;
+            double data = 0;
 
             if (hasCaption)
                 data = this.m_networkSchema.DataCategories.GetID(columnName, (string)sourceRow[columnName]);
             else
             {
-                string strData = (string)sourceRow[columnName];
-                if (strData.Length > 0)
-                    data = Double.Parse(strData);
-                else
-                    data = 0;
+                if (sourceRow[columnName] != DBNull.Value)
+                {
+                    string strData = (string)sourceRow[columnName];
+
+                    if (strData.Length > 0)
+                        data = Double.Parse(strData);
+                }
             }
 
             return (data - range.Min) / (range.Max - range.Min);
@@ -416,6 +430,13 @@ namespace Sinapse.Data.Network
 
 
         #region Private Methods
+        private DataView createDataView(NetworkSet networkSet)
+        {
+            DataView dv = new DataView(this.DataTable);
+            dv.RowFilter = String.Format("{0}='{1}'", NetworkDatabase.ColumnRoleId, (ushort)networkSet);
+            return dv;
+        }
+
         /// <summary>
         /// Creates the internal structure needed in the datatable, such as hidden columns and support data
         /// </summary>
