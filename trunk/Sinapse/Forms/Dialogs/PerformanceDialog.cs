@@ -45,6 +45,8 @@ namespace Sinapse.Forms.Dialogs
 
         internal PerformanceDialog(NetworkContainer network, DataTable dataTable)
         {
+            InitializeComponent();
+
             this.richTextBox.Text = this.createReport(network, dataTable);
         }
         #endregion
@@ -141,7 +143,7 @@ namespace Sinapse.Forms.Dialogs
             {
                 foreach (string outputColumn in network.Schema.OutputColumns)
                 {
-                    strBuilder.AppendFormat("\t{0}\t{1}", row[outputColumn], row[outputColumn + NetworkDatabase.ColumnComputedPrefix]);
+                    strBuilder.AppendFormat("\t{0}\t{1}", row[outputColumn], row[NetworkDatabase.ColumnComputedPrefix + outputColumn]);
                 }
             }
             strBuilder.AppendLine("}}");

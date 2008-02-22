@@ -190,5 +190,38 @@ namespace Sinapse.Properties {
                 this["training_AutosaveEpochs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection history_Networks {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["history_Networks"]));
+            }
+            set {
+                this["history_Networks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection history_Database {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["history_Database"]));
+            }
+            set {
+                this["history_Database"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection history_Workplace {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["history_Workplace"]));
+            }
+            set {
+                this["history_Workplace"] = value;
+            }
+        }
     }
 }

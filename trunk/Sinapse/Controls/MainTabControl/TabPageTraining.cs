@@ -60,7 +60,19 @@ namespace Sinapse.Controls.MainTabControl
             base.OnCurrentDatabaseChanged();
 
             this.setTabPageEnabled(this.NetworkDatabase != null);
-            
+
+            if (this.NetworkDatabase != null)
+            {
+                DataGridViewColumn column;
+
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = NetworkDatabase.ColumnTrainingLayerId;
+                column.HeaderText = "Layer";
+                column.DefaultCellStyle.BackColor = SystemColors.Window;
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                this.dataGridView.Columns.Add(column);
+            }
         }
 
         private void btnShuffle_Click(object sender, EventArgs e)

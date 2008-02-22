@@ -46,6 +46,8 @@ namespace Sinapse.Controls.SideTabControl
         public SidePageDisplay()
         {
             InitializeComponent();
+
+            this.setVisible(false);
         }
         #endregion
 

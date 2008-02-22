@@ -407,6 +407,52 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
 
+        #region Menu Training
+        private void btnTrainStart_Click(object sender, EventArgs e)
+        {
+            this.tabControlSide.TrainerControl.Start();
+        }
+
+        private void btnTrainStop_Click(object sender, EventArgs e)
+        {
+            this.tabControlSide.TrainerControl.Stop();
+        }
+
+        private void btnTrainPause_Click(object sender, EventArgs e)
+        {
+            this.tabControlSide.TrainerControl.Pause();
+        }
+
+        private void btnTrainForget_Click(object sender, EventArgs e)
+        {
+            this.tabControlSide.TrainerControl.Forget();
+        }
+
+        private void btnTrainNext_Click(object sender, EventArgs e)
+        {
+            //   this.tabControlSide.TrainerControl.Start();
+        }
+
+        private void btnTrainBack_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTrainGraph_Click(object sender, EventArgs e)
+        {
+            this.tabControlMain.GraphControl.ShowTab();
+        }
+
+        private void btnTrainQuery_Click(object sender, EventArgs e)
+        {
+            this.tabControlMain.QueryControl.ShowTab();
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
         #region File Dialogs
         private void openNetworkDialog_FileOk(object sender, CancelEventArgs e)
         {
@@ -427,6 +473,16 @@ namespace Sinapse.Forms
         {
             this.databaseSave(saveDatabaseDialog.FileName);
         }
+
+        private void mruProviderDatabase_MenuItemClicked(string filename)
+        {
+            this.databaseOpen(filename);
+        }
+
+        private void mruProviderNetwork_MenuItemClicked(string filename)
+        {
+            this.networkOpen(filename);
+        }
         #endregion
 
 
@@ -439,6 +495,7 @@ namespace Sinapse.Forms
             try
             {
                 NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
+                this.mruProviderNetwork.Insert(path);
             }
             catch (Exception e)
             {
@@ -463,6 +520,7 @@ namespace Sinapse.Forms
                 if (neuralNetwork != null)
                 {
                     this.CurrentNetworkContainer = neuralNetwork;
+                    this.mruProviderNetwork.Insert(path);
                 }
             }
         }
@@ -475,6 +533,7 @@ namespace Sinapse.Forms
             try
             {
                 NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
+                this.mruProviderDatabase.Insert(path);
             }
             catch (Exception e)
             {
@@ -506,6 +565,7 @@ namespace Sinapse.Forms
                 if (networkDatabase != null)
                 {
                     this.CurrentNetworkDatabase = networkDatabase;
+                    this.mruProviderDatabase.Insert(path);
                 }
             }
         }
