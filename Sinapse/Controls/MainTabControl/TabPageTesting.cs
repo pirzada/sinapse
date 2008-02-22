@@ -110,7 +110,7 @@ namespace Sinapse.Controls.MainTabControl
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            new PerformanceDialog(this.NetworkContainer, this.NetworkDatabase.DataTable).ShowDialog(this);
+            new PerformanceDialog(this.NetworkContainer, this.NetworkDatabase).ShowDialog(this);
         }
 
         private void btnRound_Click(object sender, EventArgs e)

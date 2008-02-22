@@ -18,20 +18,24 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
 
-namespace Sinapse.Forms.Dialogs
+using Sinapse.Data;
+
+
+namespace Sinapse.Data.Structures
 {
 
-    internal sealed partial class GraphOptions : Sinapse.Forms.Base.SingleInstanceForm
+    internal sealed class TestingPerformance
     {
-        internal GraphOptions()
+
+        public double Error;
+
+
+
+        public TestingPerformance()
         {
-            InitializeComponent();
+
         }
     }
 }

@@ -23,8 +23,11 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+
 
 using Sinapse.Data.Network;
+using Sinapse.Data;
 
 
 namespace Sinapse.Forms.Dialogs
@@ -33,6 +36,7 @@ namespace Sinapse.Forms.Dialogs
     internal sealed partial class PerformanceDialog : Form
     {
 
+        private readonly string reportPath = Path.Combine(Application.StartupPath, @"Resources/NetworkReport.rtf");
 
         //----------------------------------------
 
@@ -43,11 +47,11 @@ namespace Sinapse.Forms.Dialogs
             InitializeComponent();
         }
 
-        internal PerformanceDialog(NetworkContainer network, DataTable dataTable)
+        internal PerformanceDialog(NetworkContainer networkContainer, NetworkDatabase networkDatabase)
         {
             InitializeComponent();
 
-            this.richTextBox.Text = this.createReport(network, dataTable);
+            this.richTextBox.Rtf = this.createReport(networkContainer, networkDatabase);
         }
         #endregion
 
@@ -81,74 +85,133 @@ namespace Sinapse.Forms.Dialogs
 
 
         #region Private Methods
-        private string createReport(NetworkContainer network, DataTable dataTable)
+        private string createReport(NetworkContainer network, NetworkDatabase database)
         {
-            DataRow[] selectedRows = dataTable.Select(NetworkDatabase.ColumnRoleId + "='" + (ushort)NetworkSet.Testing + "'");
+            DataRow[] selectedRows = database.DataTable.Select(NetworkDatabase.ColumnRoleId + "='" + (ushort)NetworkSet.Testing + "'");
 
-            StringBuilder strBuilder = new StringBuilder();
-            strBuilder.AppendLine("{\rtf\ansi {\bNetwork Testing Performance Report\b0");
-            strBuilder.AppendLine("----------------------------------");
-            strBuilder.AppendLine();
+            if (selectedRows.Length == 0)
+                return "No records found";
 
-            strBuilder.AppendLine("\bNetwork Details:\b0");
-            strBuilder.AppendLine("Name: " + network.Name);
-            strBuilder.AppendLine("Description: " + network.Description);
-            strBuilder.AppendLine();
 
-            strBuilder.AppendLine("\bNetwork Schema:\b0");
-            strBuilder.Append("\bInputs:\b0 ");
+            StringBuilder strBuilder = new StringBuilder(this.getBaseReportText());
 
-            foreach (string inputColumn in network.Schema.InputColumns)
+            strBuilder.Replace("[netName]",network.Name);
+            strBuilder.Replace("[netLayout]", network.GetLayoutString());
+            strBuilder.Replace("[netDescription]", network.Description);
+
+            strBuilder.Replace("[setTrain]", database.TrainingSet.Count.ToString());
+            strBuilder.Replace("[setValid]", database.ValidationSet.Count.ToString());
+            strBuilder.Replace("[setTest]", database.TestingSet.Count.ToString());
+            strBuilder.Replace("[TrainRMS]", network.Precision.ToString());
+            //strBuilder.Replace("[TestRMS]", 
+
+
+            //networkDatabase.CreateVectors(NetworkSet.Testing);
+
+
+            #region Columns Generation
+            String columns = String.Empty;
+            foreach (String inputColumn in network.Schema.InputColumns)
             {
-                strBuilder.Append(inputColumn + ", ");
-            }
-            strBuilder.AppendLine();
+                if (network.Schema.IsCategory(inputColumn))
+                {
+                    columns += "*";
+                }
 
-            strBuilder.Append("\bOutputs:\b0 ");
-            foreach (string outputColumn in network.Schema.OutputColumns)
+                    columns += inputColumn + " ";
+            }
+            strBuilder.Replace("[schInput]", columns);
+
+            columns = String.Empty;
+            foreach (String outputColumn in network.Schema.OutputColumns)
             {
-                strBuilder.Append(outputColumn + ", ");
+                if (network.Schema.IsCategory(outputColumn))
+                {
+                    columns += "*";
+                }
+
+                columns += outputColumn + " ";
             }
-            strBuilder.AppendLine();
+            strBuilder.Replace("[schOutput]", columns);
+
+            columns = String.Empty;
+            foreach (String outputColumn in network.Schema.OutputColumns)
+            {
+                if (network.Schema.IsCategory(outputColumn))
+                {
+                    columns += "*";
+                }
+
+                columns += outputColumn + " ";
+            }
+            strBuilder.Replace("[calOutput]", columns);
+            #endregion
 
 
-            strBuilder.AppendLine("\bTest Summary\b0");
-            strBuilder.AppendLine("----------------------------------");
+            #region Scores Generation
+            int hitTotal = 0;// hitPositive=0, hitNegative=0;
+            int errorTotal = 0;// errorPositive=0, errorNegative=0;
 
-         /*   int errorCount, matchCount;
-            int falsePositives, truePositives;
-            int falseNegatives, trueNegatives;
-         */ 
             foreach (DataRow row in selectedRows)
             {
-                foreach (string outputColumn in network.Schema.OutputColumns)
+                foreach (String outputColumn in network.Schema.OutputColumns)
                 {
-          //          int targetValue, networkValue;
-                  //  Math.Round((double)row[outputColumn]);
+                    if (row[outputColumn].Equals(row[NetworkDatabase.ColumnComputedPrefix + outputColumn]))
+                    {
+                        hitTotal++;
+                    }
+                    else
+                    {
+                        errorTotal++;
+                    }
                 }
             }
-             
+
+            strBuilder.Replace("[rHits]", hitTotal.ToString());
+            strBuilder.Replace("[rErrors]", errorTotal.ToString());
+            strBuilder.Replace("[rHitsPerc]", (hitTotal / selectedRows.Length).ToString("D3"));
+            strBuilder.Replace("[rErrorsPerc]", (errorTotal / selectedRows.Length).ToString("D3"));
+
+            #endregion
 
 
-            strBuilder.AppendLine("\bTest Details\b0");
-            strBuilder.AppendLine("----------------------------------");
+      /* 
+            #region Results Generation
+            foreach (DataRow dataRow in 
+            #endregion
+       */
 
-            foreach (string outputColumn in network.Schema.OutputColumns)
-            {
-                strBuilder.AppendFormat("\t\b{0}\b0\tNetwork)", outputColumn);
-            }
-            strBuilder.AppendLine();
-
-            foreach (DataRow row in selectedRows)
-            {
-                foreach (string outputColumn in network.Schema.OutputColumns)
-                {
-                    strBuilder.AppendFormat("\t{0}\t{1}", row[outputColumn], row[NetworkDatabase.ColumnComputedPrefix + outputColumn]);
-                }
-            }
-            strBuilder.AppendLine("}}");
 
             return strBuilder.ToString();
+        }
+
+        private string getBaseReportText()
+        {
+            TextReader textReader = null;
+            String baseReport = null;
+
+            try
+            {
+                textReader = new StreamReader(this.reportPath, Encoding.Default);
+            }
+            catch (Exception ex)
+            {
+                HistoryListener.Write("Error creating the report");
+                MessageBox.Show(ex.Message, "Error creating the report");
+#if DEBUG
+                throw ex;
+#endif
+            }
+            finally
+            {
+                if (textReader != null)
+                {
+                    baseReport = textReader.ReadToEnd();
+                    textReader.Close();
+                }
+            }
+
+            return baseReport; 
         }
         #endregion
 
