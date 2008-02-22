@@ -77,7 +77,7 @@ namespace Sinapse.Controls.MainTabControl
             {
                 this.m_networkContainer = value;
 
-                if (value != null)
+                if (value != null && this.NetworkTrainer.NetworkDatabase != null)
                 {
                     this.setTabPageEnabled(true);
                     this.dataGridView.DataSource = this.m_networkContainer.Savepoints;

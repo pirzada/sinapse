@@ -158,6 +158,9 @@
     <Compile Include="Data\CsvParser\Parser.cs" />
     <Compile Include="Data\CsvParser\Utils.cs" />
     <Compile Include="Data\CsvParser\Writer.cs" />
+    <Compile Include="Components\MruProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Data\HistoryListener.cs" />
     <Compile Include="Data\Network\NetworkSavepoint.cs" />
     <Compile Include="Data\Network\NetworkDatabase.cs" />
@@ -649,6 +652,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sinapse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

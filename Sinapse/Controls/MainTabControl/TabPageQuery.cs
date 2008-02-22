@@ -51,19 +51,22 @@ namespace Sinapse.Controls.MainTabControl
         #region Control Events
         protected override void OnCurrentNetworkChanged()
         {
+            base.OnCurrentNetworkChanged();
+
             this.setTabPageEnabled(this.NetworkContainer != null);
 
             if (this.NetworkContainer != null)
             {
                 this.NetworkDatabase = new NetworkDatabase(this.NetworkContainer.Schema);
-                //this.BindingSource.DataSource = m_networkDatabase;
+             //   this.BindingSource.DataSource = m_networkDatabase;
             }
             else
             {
                 this.NetworkDatabase = null;
-                //this.BindingSource.DataSource = null;
+            //    this.BindingSource.DataSource = null;
             }
         }
+
         #endregion
 
 

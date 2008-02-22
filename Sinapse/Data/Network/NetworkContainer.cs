@@ -157,7 +157,7 @@ namespace Sinapse.Data.Network
 
 
         #region Public Methods
-        public string GetLayoutString()
+        internal string GetLayoutString()
         {
             string layout = String.Empty;
 

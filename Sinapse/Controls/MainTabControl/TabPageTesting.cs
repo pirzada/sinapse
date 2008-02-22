@@ -75,11 +75,12 @@ namespace Sinapse.Controls.MainTabControl
 
                 foreach (String colName in this.NetworkDatabase.Schema.OutputColumns)
                 {
-                    column = new DataGridViewColumn();
+                    column = new DataGridViewTextBoxColumn();
                     column.DataPropertyName = NetworkDatabase.ColumnComputedPrefix + colName;
                     column.HeaderText = "Network: " + colName;
-                    column.CellTemplate = new DataGridViewTextBoxCell();
                     column.DefaultCellStyle.BackColor = SystemColors.Window;
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                     this.dataGridView.Columns.Add(column);
                 }
             }

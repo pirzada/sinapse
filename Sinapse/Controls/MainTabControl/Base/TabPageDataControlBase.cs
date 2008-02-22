@@ -113,13 +113,18 @@ namespace Sinapse.Controls.MainTabControl.Base
             {
                 DataView dv = new DataView(this.NetworkDatabase.DataTable);
                 dv.RowFilter = this.GetFilterString();
-              
-                this.BindingSource.DataSource = dv;
-                this.dataGridView.DataSource = this.BindingSource;
-                this.setColumns();
 
-                this.UpdateTitle();
+                this.BindingSource.DataSource = dv;
             }
+            else
+            {
+                this.BindingSource.DataSource = null;
+            }
+
+            this.setColumns();
+
+            this.UpdateTitle();
+
         }
 
         protected virtual void OnCurrentNetworkChanged()
@@ -160,6 +165,13 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.TabPageName = displayName;
             this.lbSetTitle.Text = displayName;
             this.UpdateTitle();
+
+            this.dataGridView.AutoGenerateColumns = false;
+            this.dataGridView.DataSource = this.BindingSource;
+            this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
+            this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
+
         }
 
         protected override void UpdateTitle()
@@ -174,23 +186,9 @@ namespace Sinapse.Controls.MainTabControl.Base
 
 
         #region Control Events
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            if (!this.DesignMode)
-            {
-                this.dataGridView.AutoGenerateColumns = false;
-                this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
-                this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
-            }
-        }
-
         protected override void OnParentChanged(EventArgs e)
         {
             base.OnParentChanged(e);
-
             this.UpdateTitle();
         }
         #endregion
@@ -230,6 +228,9 @@ namespace Sinapse.Controls.MainTabControl.Base
         private void setColumns()
         {
             this.dataGridView.Columns.Clear();
+
+            if (this.NetworkDatabase == null)
+                return;
 
             DataGridViewColumn column;
 

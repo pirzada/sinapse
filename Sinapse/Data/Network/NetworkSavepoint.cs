@@ -119,8 +119,13 @@ namespace Sinapse.Data.Network
         private NetworkSavepoint m_currentSavepoint;
         private NetworkContainer m_networkContainer;
 
+   //     [NonSerialized]
    //     public EventHandler CurrentSavepointChanged;
+
+        [NonSerialized]
         public EventHandler SavepointRegistered;
+
+        [NonSerialized]
         public EventHandler SavepointRestored;
 
         //---------------------------------------------

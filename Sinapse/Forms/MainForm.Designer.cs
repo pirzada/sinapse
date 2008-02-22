@@ -61,9 +61,9 @@ namespace Sinapse.Forms
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileWizard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuFileRecentWorkplaces = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileRecentDatabases = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileRecentNetworks = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileRecentWorkplaces = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileCloseNetwork = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileCloseDatabase = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,6 +128,9 @@ namespace Sinapse.Forms
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.statusBarControl = new Sinapse.Controls.StatusBarControl();
+            this.mruProviderDatabase = new Sinapse.Components.MruProvider();
+            this.mruProviderNetwork = new Sinapse.Components.MruProvider();
+            this.mruProviderWorkplace = new Sinapse.Components.MruProvider();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
@@ -255,9 +258,9 @@ namespace Sinapse.Forms
             this.MenuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuFileWizard,
             this.toolStripSeparator6,
-            this.MenuFileRecentWorkplaces,
             this.MenuFileRecentDatabases,
             this.MenuFileRecentNetworks,
+            this.MenuFileRecentWorkplaces,
             this.MenuFileSeparator1,
             this.MenuFileCloseNetwork,
             this.MenuFileCloseDatabase,
@@ -280,12 +283,6 @@ namespace Sinapse.Forms
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(174, 6);
             // 
-            // MenuFileRecentWorkplaces
-            // 
-            this.MenuFileRecentWorkplaces.Name = "MenuFileRecentWorkplaces";
-            this.MenuFileRecentWorkplaces.Size = new System.Drawing.Size(177, 22);
-            this.MenuFileRecentWorkplaces.Text = "Recent Workplaces";
-            // 
             // MenuFileRecentDatabases
             // 
             this.MenuFileRecentDatabases.Name = "MenuFileRecentDatabases";
@@ -298,6 +295,12 @@ namespace Sinapse.Forms
             this.MenuFileRecentNetworks.Size = new System.Drawing.Size(177, 22);
             this.MenuFileRecentNetworks.Text = "Recent Networks";
             // 
+            // MenuFileRecentWorkplaces
+            // 
+            this.MenuFileRecentWorkplaces.Name = "MenuFileRecentWorkplaces";
+            this.MenuFileRecentWorkplaces.Size = new System.Drawing.Size(177, 22);
+            this.MenuFileRecentWorkplaces.Text = "Recent Workplaces";
+            // 
             // MenuFileSeparator1
             // 
             this.MenuFileSeparator1.Name = "MenuFileSeparator1";
@@ -305,6 +308,7 @@ namespace Sinapse.Forms
             // 
             // MenuFileCloseNetwork
             // 
+            this.MenuFileCloseNetwork.Image = global::Sinapse.Properties.Resources.file_close_round;
             this.MenuFileCloseNetwork.Name = "MenuFileCloseNetwork";
             this.MenuFileCloseNetwork.Size = new System.Drawing.Size(177, 22);
             this.MenuFileCloseNetwork.Text = "Close Network";
@@ -312,6 +316,7 @@ namespace Sinapse.Forms
             // 
             // MenuFileCloseDatabase
             // 
+            this.MenuFileCloseDatabase.Image = global::Sinapse.Properties.Resources.file_close_round;
             this.MenuFileCloseDatabase.Name = "MenuFileCloseDatabase";
             this.MenuFileCloseDatabase.Size = new System.Drawing.Size(177, 22);
             this.MenuFileCloseDatabase.Text = "Close Database";
@@ -749,7 +754,7 @@ namespace Sinapse.Forms
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripTraining.Location = new System.Drawing.Point(209, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
+            this.toolStripTraining.Size = new System.Drawing.Size(237, 25);
             this.toolStripTraining.TabIndex = 1;
             // 
             // btnTrainForget
@@ -760,6 +765,7 @@ namespace Sinapse.Forms
             this.btnTrainForget.Name = "btnTrainForget";
             this.btnTrainForget.Size = new System.Drawing.Size(23, 22);
             this.btnTrainForget.Text = "toolStripButton1";
+            this.btnTrainForget.Click += new System.EventHandler(this.btnTrainForget_Click);
             // 
             // toolStripSeparator11
             // 
@@ -774,6 +780,7 @@ namespace Sinapse.Forms
             this.btnTrainBack.Name = "btnTrainBack";
             this.btnTrainBack.Size = new System.Drawing.Size(23, 22);
             this.btnTrainBack.Text = "Previous Savepoint";
+            this.btnTrainBack.Click += new System.EventHandler(this.btnTrainBack_Click);
             // 
             // btnTrainStart
             // 
@@ -783,6 +790,7 @@ namespace Sinapse.Forms
             this.btnTrainStart.Name = "btnTrainStart";
             this.btnTrainStart.Size = new System.Drawing.Size(23, 22);
             this.btnTrainStart.Text = "Start Training";
+            this.btnTrainStart.Click += new System.EventHandler(this.btnTrainStart_Click);
             // 
             // btnTrainPause
             // 
@@ -792,6 +800,7 @@ namespace Sinapse.Forms
             this.btnTrainPause.Name = "btnTrainPause";
             this.btnTrainPause.Size = new System.Drawing.Size(23, 22);
             this.btnTrainPause.Text = "Pause Training";
+            this.btnTrainPause.Click += new System.EventHandler(this.btnTrainPause_Click);
             // 
             // btnTrainStop
             // 
@@ -801,6 +810,7 @@ namespace Sinapse.Forms
             this.btnTrainStop.Name = "btnTrainStop";
             this.btnTrainStop.Size = new System.Drawing.Size(23, 22);
             this.btnTrainStop.Text = "Stop Training";
+            this.btnTrainStop.Click += new System.EventHandler(this.btnTrainStop_Click);
             // 
             // btnTrainNext
             // 
@@ -810,6 +820,7 @@ namespace Sinapse.Forms
             this.btnTrainNext.Name = "btnTrainNext";
             this.btnTrainNext.Size = new System.Drawing.Size(23, 22);
             this.btnTrainNext.Text = "Next Savepoint";
+            this.btnTrainNext.Click += new System.EventHandler(this.btnTrainNext_Click);
             // 
             // toolStripSeparator10
             // 
@@ -824,6 +835,7 @@ namespace Sinapse.Forms
             this.btnTrainGraph.Name = "btnTrainGraph";
             this.btnTrainGraph.Size = new System.Drawing.Size(23, 22);
             this.btnTrainGraph.Text = "Show progress graph";
+            this.btnTrainGraph.Click += new System.EventHandler(this.btnTrainGraph_Click);
             // 
             // btnTrainQuery
             // 
@@ -833,6 +845,7 @@ namespace Sinapse.Forms
             this.btnTrainQuery.Name = "btnTrainQuery";
             this.btnTrainQuery.Size = new System.Drawing.Size(23, 22);
             this.btnTrainQuery.Text = "Query Network";
+            this.btnTrainQuery.Click += new System.EventHandler(this.btnTrainQuery_Click);
             // 
             // saveDatabaseDialog
             // 
@@ -862,6 +875,23 @@ namespace Sinapse.Forms
             this.statusBarControl.Name = "statusBarControl";
             this.statusBarControl.Size = new System.Drawing.Size(792, 22);
             this.statusBarControl.TabIndex = 17;
+            // 
+            // mruProviderDatabase
+            // 
+            this.mruProviderDatabase.FilePathList = global::Sinapse.Properties.Settings.Default.history_Database;
+            this.mruProviderDatabase.MenuItem = this.MenuFileRecentDatabases;
+            this.mruProviderDatabase.MenuItemClicked += new Sinapse.Components.MruMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
+            // 
+            // mruProviderNetwork
+            // 
+            this.mruProviderNetwork.FilePathList = global::Sinapse.Properties.Settings.Default.history_Networks;
+            this.mruProviderNetwork.MenuItem = this.MenuFileRecentNetworks;
+            this.mruProviderNetwork.MenuItemClicked += new Sinapse.Components.MruMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
+            // 
+            // mruProviderWorkplace
+            // 
+            this.mruProviderWorkplace.FilePathList = global::Sinapse.Properties.Settings.Default.history_Workplace;
+            this.mruProviderWorkplace.MenuItem = this.MenuFileRecentWorkplaces;
             // 
             // MainForm
             // 
@@ -984,5 +1014,8 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton btnTrainGraph;
         private Sinapse.Controls.SideTabControl.SideTabControl tabControlSide;
+        private Sinapse.Components.MruProvider mruProviderDatabase;
+        private Sinapse.Components.MruProvider mruProviderNetwork;
+        private Sinapse.Components.MruProvider mruProviderWorkplace;
     }
 }

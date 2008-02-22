@@ -72,7 +72,7 @@ namespace Sinapse.Controls.SideTabControl
             this.tabTraining.Name = "tabTraining";
             this.tabTraining.Size = new System.Drawing.Size(234, 447);
             this.tabTraining.TabIndex = 0;
-            this.tabTraining.Text = "Network Training";
+            this.tabTraining.Text = "Training";
             // 
             // tabRanges
             // 
@@ -80,7 +80,7 @@ namespace Sinapse.Controls.SideTabControl
             this.tabRanges.Name = "tabRanges";
             this.tabRanges.Size = new System.Drawing.Size(234, 447);
             this.tabRanges.TabIndex = 2;
-            this.tabRanges.Text = "Network Data";
+            this.tabRanges.Text = "Data Transformation";
             // 
             // tabWorkplace
             // 
