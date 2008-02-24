@@ -105,7 +105,7 @@ namespace Sinapse.Data.Network
         #region Public Methods
         internal bool IsCategory(string columnName)
         {
-            return Array.IndexOf(this.StringColumns, columnName) == -1;
+            return Array.IndexOf(this.StringColumns, columnName) != -1;
         }
         #endregion
 

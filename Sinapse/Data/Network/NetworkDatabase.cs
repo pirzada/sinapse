@@ -44,6 +44,7 @@ namespace Sinapse.Data.Network
         public const string ColumnRoleId = "@_informationRoleId";
         public const string ColumnTrainingLayerId = "@_trainingLayerId";
         public const string ColumnComputedPrefix = "@_computed";
+        public const string ColumnDeltaPrefix = "@_delta";
         #endregion
 
         //----------------------------------------
@@ -401,6 +402,35 @@ namespace Sinapse.Data.Network
             }
         }
 
+        internal double Score()
+        {
+            DataRow[] selectedRows = m_dataTable.Select(String.Format("[{0}] = {1}", ColumnRoleId, (ushort)NetworkSet.Testing));
+
+            double sum = 0;
+            foreach (DataRow row in selectedRows)
+            {
+                foreach (string outputColumn in Schema.OutputColumns)
+                {
+                    sum += Double.Parse((string)row[ColumnDeltaPrefix + outputColumn]);
+                }
+            }
+
+            return sum;
+        }
+
+        internal double Score(string column)
+        {
+            DataRow[] selectedRows = m_dataTable.Select(String.Format("[{0}] = {1}",ColumnRoleId, (ushort)NetworkSet.Testing));
+
+            double sum=0;
+            foreach (DataRow row in selectedRows)
+            {
+                sum += Double.Parse((string)row[column]);
+            }
+
+            return sum;
+        }
+
         /// <summary>
         /// Randomizes the order of the rows in a DataTable by pulling out a single row and moving it to the end for
         /// shuffleIterations iterations.
@@ -492,6 +522,20 @@ namespace Sinapse.Data.Network
                     col = new DataColumn(ColumnComputedPrefix + colName, typeof(string));
                     col.AllowDBNull = false;
                     col.DefaultValue = String.Empty;
+                    dataTable.Columns.Add(col);
+
+                    col = new DataColumn(ColumnDeltaPrefix + colName, typeof(string));
+                    col.AllowDBNull = false;
+                    col.DefaultValue = String.Empty;
+
+                    if (!schema.IsCategory(colName))
+                    {
+                        col.Expression = String.Format("IIF((LEN([{0}{1}]) > 0 AND LEN([{1}]) > 0), Convert([{0}{1}], System.Double) - Convert([{1}], System.Double), '0')", ColumnComputedPrefix, colName);
+                    }
+                    else
+                    {
+                        col.Expression = String.Format("IIF([{0}{1}] = [{1}], '0', '1')", ColumnComputedPrefix, colName);
+                    }
                     dataTable.Columns.Add(col);
                 }
             }

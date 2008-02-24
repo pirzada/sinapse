@@ -53,7 +53,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.panelOutputCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panelOutputCaption.BackColor = System.Drawing.Color.AliceBlue;
             this.panelOutputCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelOutputCaption.Location = new System.Drawing.Point(81, 377);
+            this.panelOutputCaption.Location = new System.Drawing.Point(72, 377);
             this.panelOutputCaption.Name = "panelOutputCaption";
             this.panelOutputCaption.Size = new System.Drawing.Size(14, 12);
             this.panelOutputCaption.TabIndex = 25;
@@ -73,7 +73,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.lbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbOutput.AutoSize = true;
             this.lbOutput.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbOutput.Location = new System.Drawing.Point(98, 378);
+            this.lbOutput.Location = new System.Drawing.Point(89, 378);
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.Size = new System.Drawing.Size(53, 11);
             this.lbOutput.TabIndex = 23;
@@ -180,10 +180,10 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lbSetTitle);
             this.Controls.Add(this.btnImport);
-            this.Controls.Add(this.panelOutputCaption);
             this.Controls.Add(this.panelInputCaption);
-            this.Controls.Add(this.lbOutput);
+            this.Controls.Add(this.panelOutputCaption);
             this.Controls.Add(this.lbInput);
+            this.Controls.Add(this.lbOutput);
             this.Controls.Add(this.dataGridView);
             this.DoubleBuffered = true;
             this.Name = "TabPageDataControlBase";
