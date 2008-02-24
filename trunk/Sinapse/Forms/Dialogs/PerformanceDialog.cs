@@ -169,8 +169,8 @@ namespace Sinapse.Forms.Dialogs
 
             strBuilder.Replace("[rHits]", hitTotal.ToString());
             strBuilder.Replace("[rErrors]", errorTotal.ToString());
-            strBuilder.Replace("[rHitsPerc]", (hitTotal / selectedRows.Length).ToString("D3"));
-            strBuilder.Replace("[rErrorsPerc]", (errorTotal / selectedRows.Length).ToString("D3"));
+            strBuilder.Replace("[rHitsPerc]", (hitTotal / selectedRows.Length).ToString("N3"));
+            strBuilder.Replace("[rErrorsPerc]", (errorTotal / selectedRows.Length).ToString("N3"));
 
             #endregion
 

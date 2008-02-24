@@ -179,6 +179,21 @@ namespace Sinapse.Controls.MainTabControl.Base
             if (this.getTabPage() != null)
                 this.getTabPage().Text = String.Format("{0} [{1}]", this.TabPageName, ItemCount);
         }
+
+        protected DataGridViewColumn CreateColumn(string columnName, string propertyName, Color color)
+        {
+            DataGridViewColumn column;
+
+            column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = propertyName;
+            column.HeaderText = columnName + " (network)";
+            column.DefaultCellStyle.Format = "G5";
+            column.DefaultCellStyle.BackColor = color;
+            column.SortMode = DataGridViewColumnSortMode.Automatic;
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+            return column;
+        }
         #endregion
 
 
