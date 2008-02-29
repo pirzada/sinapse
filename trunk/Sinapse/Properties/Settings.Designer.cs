@@ -223,5 +223,17 @@ namespace Sinapse.Properties {
                 this["history_Workplace"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool history_autoScroll {
+            get {
+                return ((bool)(this["history_autoScroll"]));
+            }
+            set {
+                this["history_autoScroll"] = value;
+            }
+        }
     }
 }
