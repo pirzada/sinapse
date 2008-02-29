@@ -35,6 +35,8 @@ namespace Sinapse.Controls
             this.lbTrainingError = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbValidationError = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbItems = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnClear = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnOptions = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,10 +49,12 @@ namespace Sinapse.Controls
             this.lbEpoch,
             this.lbTrainingError,
             this.lbValidationError,
-            this.lbItems});
+            this.lbItems,
+            this.btnClear,
+            this.btnOptions});
             this.statusStrip.Location = new System.Drawing.Point(0, 0);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1323, 22);
+            this.statusStrip.Size = new System.Drawing.Size(988, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -59,18 +63,18 @@ namespace Sinapse.Controls
             this.lbStatus.AutoSize = false;
             this.lbStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(602, 17);
+            this.lbStatus.Size = new System.Drawing.Size(206, 17);
             this.lbStatus.Spring = true;
             this.lbStatus.Text = "lbStatus";
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbStatus.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // progressBar
             // 
             this.progressBar.AutoSize = false;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(400, 16);
+            this.progressBar.Size = new System.Drawing.Size(330, 16);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
             // lbEpoch
             // 
@@ -104,6 +108,29 @@ namespace Sinapse.Controls
             this.lbItems.Size = new System.Drawing.Size(68, 17);
             this.lbItems.Text = "lbSelection";
             // 
+            // btnClear
+            // 
+            this.btnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnClear.Image = global::Sinapse.Properties.Resources.editclear;
+            this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClear.IsLink = true;
+            this.btnClear.Margin = new System.Windows.Forms.Padding(3);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(16, 16);
+            this.btnClear.Text = "Clear";
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnOptions
+            // 
+            this.btnOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnOptions.Image = global::Sinapse.Properties.Resources.panel_settings;
+            this.btnOptions.IsLink = true;
+            this.btnOptions.Margin = new System.Windows.Forms.Padding(3);
+            this.btnOptions.Name = "btnOptions";
+            this.btnOptions.Size = new System.Drawing.Size(16, 16);
+            this.btnOptions.Text = "Options";
+            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
+            // 
             // StatusBarControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,7 +139,7 @@ namespace Sinapse.Controls
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.statusStrip);
             this.Name = "StatusBarControl";
-            this.Size = new System.Drawing.Size(1323, 22);
+            this.Size = new System.Drawing.Size(988, 22);
             this.Load += new System.EventHandler(this.StatusBarControl_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -130,5 +157,7 @@ namespace Sinapse.Controls
         private System.Windows.Forms.ToolStripStatusLabel lbValidationError;
         private System.Windows.Forms.ToolStripStatusLabel lbItems;
         private System.Windows.Forms.ToolStripStatusLabel lbTrainingError;
+        private System.Windows.Forms.ToolStripStatusLabel btnClear;
+        private System.Windows.Forms.ToolStripStatusLabel btnOptions;
     }
 }

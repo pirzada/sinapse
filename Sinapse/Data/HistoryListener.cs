@@ -25,27 +25,96 @@ using System.IO;
 namespace Sinapse.Data
 {
 
-    static class HistoryListener
+    internal static class HistoryListener
     {
 
         public static EventHandler NewActionLogged;
 
+        private static List<HistoryEvent> actionLog; 
         private static string lastLoggedAction = String.Empty;
 
-       
-        public static void Write(string text)
-        {
 
-            lastLoggedAction = text;
+        //---------------------------------------------
+
+
+        internal static void Initialize()
+        {
+            if (actionLog == null)
+                actionLog = new List<HistoryEvent>();
+        }
+
+
+        //---------------------------------------------
+
+
+        #region Properties
+        internal static HistoryEvent LastAction
+        {
+            get { return actionLog[actionLog.Count - 1]; }
+        }
+
+        internal static List<HistoryEvent> ActionLog
+        {
+            get { return actionLog; }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        internal static void Write(string text)
+        {
+            actionLog.Add(new HistoryEvent(text));
 
             if (NewActionLogged != null)
                 NewActionLogged.Invoke(null, EventArgs.Empty);
         }
 
-        public static string GetLastLoggedAction()
+    }
+
+
+    internal sealed class HistoryEvent
+    {
+
+        private DateTime time;
+        private string action;
+
+
+        //---------------------------------------------
+
+
+        #region Constructor
+        internal HistoryEvent(string text)
         {
-            return lastLoggedAction;
+            this.time = DateTime.Now;
+            this.action = text;
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Properties
+        internal DateTime Time
+        {
+            get { return time; }
         }
 
+        internal string Action
+        {
+            get { return action; }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        public override string ToString()
+        {
+            return String.Format("[{0}] {1}", time, action);
+        }
     }
 }

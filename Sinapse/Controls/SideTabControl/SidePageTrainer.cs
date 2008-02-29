@@ -40,8 +40,8 @@ namespace Sinapse.Controls.SideTabControl
     internal sealed partial class SidePageTrainer : Sinapse.Controls.Base.TabPageControlBase
     {
 
-        public EventHandler TrainingComplete;
-        public EventHandler StatusChanged;
+        internal EventHandler TrainingComplete;
+        internal EventHandler StatusChanged;
 
         private NetworkContainer m_networkContainer;
         private NetworkDatabase m_networkDatabase;
@@ -61,6 +61,7 @@ namespace Sinapse.Controls.SideTabControl
         {
             InitializeComponent();
 
+            this.cbTrainingLayer.DataSource = new object[] { "All", 1, 2, 3, 4, 5, };
             this.m_networkState = new TrainingStatus();
         }
         #endregion
@@ -93,6 +94,9 @@ namespace Sinapse.Controls.SideTabControl
                 }
                 else
                 {
+                    this.m_networkState = new TrainingStatus();
+                    this.m_trainingPaused = false;
+                    this.m_graphControl.ClearGraph();
                 }
 
                 this.UpdateEnabled();
@@ -107,6 +111,17 @@ namespace Sinapse.Controls.SideTabControl
             set
             {
                 this.m_networkDatabase = value;
+
+                if (value != null)
+                {
+                }
+                else
+                {
+                    this.m_networkState = new TrainingStatus();
+                    this.m_trainingPaused = false;
+                    this.m_graphControl.ClearGraph();
+                    this.UpdateStatus();
+                }
 
                 this.UpdateEnabled();
             }
@@ -222,14 +237,29 @@ namespace Sinapse.Controls.SideTabControl
                 options.firstLearningRate = (double)numLearningRate.Value;
                 options.limError = (double)numErrorLimit.Value;
                 options.limEpoch = (int)numEpochLimit.Value;
-                options.TrainingVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Training);
+
+
+                if (cbTrainingLayer.SelectedIndex == 0)
+                {
+                    options.TrainingVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Training);
+                }
+                else
+                {
+                    options.TrainingVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Training, (ushort)cbTrainingLayer.SelectedIndex);
+                }
+
+
                 options.ValidationVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Validation);
                 options.validateNetwork = cbValidate.Checked;
 
                 options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : options.secondLearningRate = null;
 
-                options.TrainingType = rbErrorLimit.Checked ? TrainingType.ByError : TrainingType.ByEpoch;
-
+                if (rbEpochLimit.Checked)
+                options.TrainingType = TrainingType.ByEpoch;
+                else if (rbErrorLimit.Checked)
+                    options.TrainingType = TrainingType.ByError;
+                else if (rbManual.Checked)
+                    options.TrainingType = TrainingType.Manual;
 
                 if (this.m_trainingPaused)
                 {   // Network is paused, then
@@ -369,7 +399,7 @@ namespace Sinapse.Controls.SideTabControl
                     if (m_networkState.ErrorTraining <= options.limError)
                         stop = true;
                 }
-                else
+                else if (options.TrainingType == TrainingType.ByEpoch)
                 {
                     if (m_networkState.Epoch >= options.limEpoch)
                         stop = true;

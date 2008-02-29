@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -25,16 +25,14 @@ using System.Reflection;
 
 namespace Sinapse.Forms.Dialogs
 {
-    partial class AboutBox : Form
+    internal sealed partial class AboutBox : Form
     {
-        public AboutBox()
+
+
+        internal AboutBox()
         {
             InitializeComponent();
 
-            //  Initialize the AboutBox to display the product information from the assembly information.
-            //  Change assembly information settings for your application through either:
-            //  - Project->Properties->Application->Assembly Information
-            //  - AssemblyInfo.cs
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
@@ -42,6 +40,8 @@ namespace Sinapse.Forms.Dialogs
             this.labelCompanyName.Text = AssemblyCompany;
 
         }
+
+
 
         #region Assembly Attribute Accessors
 
@@ -129,5 +129,15 @@ namespace Sinapse.Forms.Dialogs
             }
         }
         #endregion
+
+
+
+        #region Form Buttons
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
     }
 }

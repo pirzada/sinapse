@@ -39,6 +39,7 @@ namespace Sinapse.Data.Network
         private string m_networkName;
         private string m_networkDescription;
         private double m_networkPrecision;
+        private double m_networkScore;
         private DateTime m_creationTime;
 
         private NetworkSavepointCollection m_savepointCollection;
@@ -47,13 +48,13 @@ namespace Sinapse.Data.Network
         private string m_lastSavePath;
 
         [NonSerialized]
-        internal EventHandler NetworkChanged;
+        public EventHandler NetworkChanged;
 
    /*     [NonSerialized]
-        internal EventHandler NetworkLoaded;
+        public EventHandler NetworkLoaded;
    */    
         [NonSerialized]
-        internal FileSystemEventHandler NetworkSaved;      
+        public FileSystemEventHandler NetworkSaved;      
 
 
         //---------------------------------------------
@@ -91,22 +92,46 @@ namespace Sinapse.Data.Network
 
 
         #region Properties
-        internal ActivationNetwork ActivationNetwork
+        public ActivationNetwork ActivationNetwork
         {
             get { return this.m_activationNetwork; }
         }
 
-        internal NetworkSchema Schema
+        public NetworkSchema Schema
         {
             get { return this.m_networkSchema; }
         }
 
-        internal NetworkSavepointCollection Savepoints
+        public NetworkSavepointCollection Savepoints
         {
             get { return this.m_savepointCollection; }
         }
 
-        internal string Name
+        public string Type
+        {
+            get { return this.m_activationNetwork[0][0].ActivationFunction.GetType().ToString(); }
+        }
+
+        public string Layout
+        {
+            get
+            {
+
+                string layout = String.Empty;
+
+                for (int i = 0; i < this.m_activationNetwork.LayersCount; ++i)
+                {
+                    layout += this.m_activationNetwork[i].NeuronsCount;
+
+                    if (i < this.m_activationNetwork.LayersCount - 1)
+                        layout += "-";
+                }
+
+                return layout;
+            }
+        }
+
+        public string Name
         {
             get { return this.m_networkName; }
             set
@@ -116,7 +141,7 @@ namespace Sinapse.Data.Network
             }
         }
 
-        internal string Description
+        public string Description
         {
             get { return m_networkDescription; }
             set
@@ -126,7 +151,7 @@ namespace Sinapse.Data.Network
             }
         }
 
-        internal double Precision
+        public double Precision
         {
             get { return m_networkPrecision; }
             set
@@ -136,19 +161,29 @@ namespace Sinapse.Data.Network
             }
         }
 
-        internal string LastSavePath
+        public double Score
         {
-            get { return m_lastSavePath; }
+            get { return this.m_networkScore; }
+            set
+            {
+                this.m_networkScore = value;
+                this.OnNetworkChanged();
+            }
         }
 
-        internal bool IsSaved
+        public string LastSavePath
         {
-            get { return (m_lastSavePath != null && m_lastSavePath.Length > 0); }
+            get { return this.m_lastSavePath; }
         }
 
-        internal DateTime CreationTime
+        public bool IsSaved
         {
-            get { return m_creationTime; }
+            get { return (this.m_lastSavePath != null && m_lastSavePath.Length > 0); }
+        }
+
+        public DateTime CreationTime
+        {
+            get { return this.m_creationTime; }
         }
         #endregion
 
@@ -157,20 +192,7 @@ namespace Sinapse.Data.Network
 
 
         #region Public Methods
-        internal string GetLayoutString()
-        {
-            string layout = String.Empty;
 
-            for (int i = 0; i < this.m_activationNetwork.LayersCount; ++i)
-            {
-                layout += this.m_activationNetwork[i].NeuronsCount;
-
-                if (i < this.m_activationNetwork.LayersCount - 1)
-                    layout += "-";
-            }
-
-            return layout;
-        }
         #endregion
 
 

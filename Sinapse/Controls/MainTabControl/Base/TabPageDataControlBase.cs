@@ -170,7 +170,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.dataGridView.DataSource = this.BindingSource;
             this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.dataGridView.SelectionChanged += new EventHandler(dataGridView_SelectionChanged);
-            this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
+            this.dataGridView.Rows.CollectionChanged += new CollectionChangeEventHandler(dataGridView_CollectionChanged);
 
         }
 
@@ -186,7 +186,7 @@ namespace Sinapse.Controls.MainTabControl.Base
 
             column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = propertyName;
-            column.HeaderText = columnName + " (network)";
+            column.HeaderText = columnName;
             column.DefaultCellStyle.Format = "G5";
             column.DefaultCellStyle.BackColor = color;
             column.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -213,24 +213,59 @@ namespace Sinapse.Controls.MainTabControl.Base
 
 
         #region Private Methods
-        private void setSelections(NetworkSet networkSet, int trainingLayer)
+        private void copySelections(NetworkSet networkSet)
         {
             if (this.dataGridView.SelectedRows.Count == 0)
             {
-                this.setCurrent(this.dataGridView.CurrentRow, networkSet, trainingLayer);
+                this.copyCurrent(this.dataGridView.CurrentRow, networkSet);
             }
             else
             {
                 foreach (DataGridViewRow viewRow in this.dataGridView.SelectedRows)
                 {
-                    this.setCurrent(viewRow, networkSet, trainingLayer);
+                    this.copyCurrent(viewRow, networkSet);
                 }
             }
 
             this.BindingSource.ResetBindings(false);
         }
 
-        private void setCurrent(DataGridViewRow viewRow, NetworkSet networkSet, int trainingLayer)
+
+        private void copyCurrent(DataGridViewRow viewRow, NetworkSet networkSet)
+        {
+            DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
+            
+            if (row != null)
+            {
+                DataRow newRow = row.Table.NewRow();
+                foreach (DataColumn col in row.Table.Columns)
+                {
+                    newRow[col] = row[col];
+                }
+
+                newRow[NetworkDatabase.ColumnRoleId] = (ushort)networkSet;
+                row.Table.Rows.Add(newRow);
+            }
+        }
+
+        private void moveSelections(NetworkSet networkSet, int trainingLayer)
+        {
+            if (this.dataGridView.SelectedRows.Count == 0)
+            {
+                this.moveCurrent(this.dataGridView.CurrentRow, networkSet, trainingLayer);
+            }
+            else
+            {
+                foreach (DataGridViewRow viewRow in this.dataGridView.SelectedRows)
+                {
+                    this.moveCurrent(viewRow, networkSet, trainingLayer);
+                }
+            }
+
+            this.BindingSource.ResetBindings(false);
+        }
+
+        private void moveCurrent(DataGridViewRow viewRow, NetworkSet networkSet, int trainingLayer)
         {
             DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
             if (row != null)
@@ -322,7 +357,7 @@ namespace Sinapse.Controls.MainTabControl.Base
         //----------------------------------------
 
 
-        #region DataGridView Menus
+        #region DataGridView Menu Move
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
 
@@ -370,25 +405,64 @@ namespace Sinapse.Controls.MainTabControl.Base
 
             if (item.Tag is int)
             {
-                this.setSelections(NetworkSet.Training, (int)item.Tag);
+                this.moveSelections(NetworkSet.Training, (int)item.Tag);
             }
         }
 
         private void MenuTraining_Click(object sender, EventArgs e)
         {
-            this.setSelections(NetworkSet.Training, 1);
+            this.moveSelections(NetworkSet.Training, 1);
         }
 
         private void MenuValidation_Click(object sender, EventArgs e)
         {
-            this.setSelections(NetworkSet.Validation, 0);
+            this.moveSelections(NetworkSet.Validation, 0);
         }
 
         private void MenuTesting_Click(object sender, EventArgs e)
         {
-            this.setSelections(NetworkSet.Testing, 0);
+            this.moveSelections(NetworkSet.Testing, 0);
         }
         #endregion
+
+
+        //----------------------------------------
+
+
+        #region DataGridView Menu Copy
+        private void MenuCopyTraining_Click(object sender, EventArgs e)
+        {
+            this.copySelections(NetworkSet.Training);
+        }
+
+        private void MenuCopyValidation_Click(object sender, EventArgs e)
+        {
+            this.copySelections(NetworkSet.Validation);
+        }
+
+        private void MenuCopyTesting_Click(object sender, EventArgs e)
+        {
+            this.copySelections(NetworkSet.Testing);
+        }
+
+        private void MenuCopyQuery_Click(object sender, EventArgs e)
+        {
+            this.copySelections(NetworkSet.Query);
+        }
+
+        private void MenuCopyClipboard_Click(object sender, EventArgs e)
+        {
+            this.dataGridView.CopyToClipboard();
+        }
+
+        private void MenuPaste_Click(object sender, EventArgs e)
+        {
+            this.dataGridView.PasteFromClipboard();
+        }
+        #endregion
+
+
+        //----------------------------------------
 
 
         #region DataGridView Events
@@ -397,49 +471,9 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.OnSelectionChanged();
         }
 
-        private void Rows_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void dataGridView_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             this.UpdateTitle();
-        }
-
-        /// <summary>
-        /// Provides paste support for the datagridview
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.C)
-            {
-                DataObject d = dataGridView.GetClipboardContent();
-                Clipboard.SetDataObject(d);
-                e.Handled = true;
-            }
-            else if (e.Control && e.KeyCode == Keys.V)
-            {
-                string s = Clipboard.GetText();
-                string[] lines = s.Split('\n');
-                int row = this.dataGridView.CurrentCell.RowIndex;
-                int col = this.dataGridView.CurrentCell.ColumnIndex;
-
-                foreach (string line in lines)
-                {
-
-                    if (row < dataGridView.RowCount && line.Length > 0)
-                    {
-                        string[] cells = line.Split('\t');
-
-                        for (int i = 0; i < cells.GetLength(0); i++)
-                        {
-                            if (col + i < this.dataGridView.ColumnCount)
-                            {
-                                this.dataGridView[col + i, row].Value = Convert.ChangeType(cells[i], dataGridView[col + i, row].ValueType);
-                            }
-                        }
-                        ++row;
-                    }
-                }
-            }
         }
 
         private void dataGridView_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
@@ -451,12 +485,17 @@ namespace Sinapse.Controls.MainTabControl.Base
                 if (row != null)
                     this.OnRowValidating(row);
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+#if DEBUG
+
+#endif
             }
         }
 
         #endregion
+
 
     }
 }

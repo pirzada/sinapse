@@ -71,7 +71,7 @@ namespace Sinapse.Controls.MainTabControl
 
             if (this.NetworkDatabase != null)
             {
-                DataGridViewColumn column;
+             //   DataGridViewColumn column;
 
                 foreach (String colName in this.NetworkDatabase.Schema.OutputColumns)
                 {
@@ -101,7 +101,7 @@ namespace Sinapse.Controls.MainTabControl
                  */
 
                     this.dataGridView.Columns.Add(this.CreateColumn(
-                        colName + " (delta",
+                        colName + " (delta)",
                         NetworkDatabase.ColumnDeltaPrefix + colName,
                         panelDeltaCaption.BackColor));
 
@@ -129,7 +129,7 @@ namespace Sinapse.Controls.MainTabControl
             this.dataGridView.CurrentCell = null;
 
             this.NetworkDatabase.ComputeTable(this.NetworkContainer, true);
-            this.lbScore = "Score: " + this.NetworkDatabase.Score();
+            this.lbScore.Text = "Deviation: " + this.NetworkDatabase.Score();
         }
 
         private void btnCompare_Click(object sender, EventArgs e)

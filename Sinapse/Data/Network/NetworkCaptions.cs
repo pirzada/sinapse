@@ -1,7 +1,8 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool - http://code.google.com/p/sinapse/       *
+ *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *  ---------------------------------------------------------------------- *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
- *   Copyright (C) 2007  Cesar Roberto de Souza <cesarsouza@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,6 +21,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
+
 namespace Sinapse.Data.Network
 {
     [Serializable]
@@ -29,7 +31,9 @@ namespace Sinapse.Data.Network
         private readonly string ID = "ID";
         private DataSet dataCaptions;
 
+
         //---------------------------------------------
+
 
         #region Constructor
         /// <summary>
@@ -47,7 +51,9 @@ namespace Sinapse.Data.Network
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Public Methods
         public void AutodetectCaptions(DataTable dataTable)
@@ -94,6 +100,7 @@ namespace Sinapse.Data.Network
             return String.Empty;
         }
         #endregion
+
 
     }
 }

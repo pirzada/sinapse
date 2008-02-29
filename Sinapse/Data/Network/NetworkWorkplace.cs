@@ -21,11 +21,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+using Sinapse.Data;
+
 
 namespace Sinapse.Data.Network
 {
+
+    [Serializable]
     internal sealed class NetworkWorkplace
     {
+
+        private List<WorkplaceEntry> m_entryList;
 
 
         #region Constructor
@@ -36,4 +42,18 @@ namespace Sinapse.Data.Network
 
 
     }
+
+    internal sealed class WorkplaceEntry
+    {
+
+        private NetworkContainer m_networkContainer;
+        private NetworkPerformance m_networkPerformance;
+        private NetworkDatabase m_networkDatabase;
+        
+        public WorkplaceEntry()
+        {
+
+        }
+    }
+
 }

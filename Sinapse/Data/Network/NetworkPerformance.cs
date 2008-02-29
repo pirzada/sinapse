@@ -20,31 +20,48 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
-namespace Sinapse.Data.Structures
+namespace Sinapse.Data.Network
 {
-    struct TrainingVectors
+    internal sealed class NetworkPerformance
     {
 
-        public double[][] Input;
-        public double[][] Output;
+        private NetworkContainer m_network;
+        private NetworkDatabase m_database;
 
-
-        public TrainingVectors(double[][] input, double[][] output)
+        #region Constructor
+        public NetworkPerformance(NetworkContainer network, NetworkDatabase database)
         {
-            this.Input = input;
-            this.Output = output;
+            this.m_network = network;
+            this.m_database = database;
+
+            this.generate();
         }
+        #endregion
+
+        
 
 
-        public bool IsEmpty
+        //---------------------------------------------
+
+
+        #region Properties
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Public Methods
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Private Methods
+        private void generate()
         {
-            get
-            {
-                return (Input == null || Output == null ||
-                    Input.Length == 0 || Output.Length == 0);
-            }
         }
-
+        #endregion
     }
 }
