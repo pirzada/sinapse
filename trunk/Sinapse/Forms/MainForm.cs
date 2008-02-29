@@ -84,7 +84,7 @@ namespace Sinapse.Forms
                     this.MenuNetworkSaveAs.Enabled = false;
                     this.MenuNetworkWeights.Enabled = true;
 
-                    this.lbNeuronCount.Text = m_networkContainer.GetLayoutString();
+                    this.lbNeuronCount.Text = m_networkContainer.Layout;
 
                     this.m_networkContainer.NetworkSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
 
@@ -389,12 +389,13 @@ namespace Sinapse.Forms
 
         private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
-            this.tabControlMain.QueryControl.Show();
+            this.tabControlMain.QueryControl.ShowTab();
             HistoryListener.Write("Ready");
         }
 
         private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
         {
+            new NetworkInspectorDialog().ShowDialog(this);
         }
         #endregion
 

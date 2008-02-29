@@ -26,6 +26,7 @@ namespace Sinapse.Data.Structures
 
     internal enum UpdateType { Statusbar, Graph, NetworkSave, Null };
 
+    [Serializable]
     internal struct TrainingStatus
     {
         internal UpdateType NextUpdateType;

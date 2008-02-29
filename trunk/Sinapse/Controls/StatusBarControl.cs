@@ -75,22 +75,45 @@ namespace Sinapse.Controls
         }
         #endregion
 
+
         //---------------------------------------------
 
 
-        private void NewActionLogged(object sender, EventArgs e)
+        #region Control Events
+        protected override void OnResize(EventArgs e)
         {
-            this.lbStatus.Text = HistoryListener.GetLastLoggedAction();
-        }
+            base.OnResize(e);
 
+            //this.progressBar.Width = this.
+        }
 
         private void StatusBarControl_Load(object sender, EventArgs e)
         {
             HistoryListener.NewActionLogged += NewActionLogged;
         }
 
+        private void NewActionLogged(object sender, EventArgs e)
+        {
+            this.lbStatus.Text = HistoryListener.LastAction.Action;
+        }
+        #endregion
 
-        private void progressBar_Click(object sender, EventArgs e)
+
+        //---------------------------------------------
+
+
+        #region Buttons
+        private void lbStatus_Click(object sender, EventArgs e)
+        {
+            new HistoryDialog().ShowDialog();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            this.UpdateNetworkState(new TrainingStatus());
+        }
+
+        private void btnOptions_Click(object sender, EventArgs e)
         {
             if (this.m_statusBarOptionsDialog == null || this.m_statusBarOptionsDialog.IsDisposed)
             {
@@ -102,6 +125,7 @@ namespace Sinapse.Controls
                 this.m_statusBarOptionsDialog.Show(this);
             }
         }
+        #endregion
 
 
     }

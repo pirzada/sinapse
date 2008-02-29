@@ -32,13 +32,22 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.panelOutputCaption = new System.Windows.Forms.Panel();
             this.panelInputCaption = new System.Windows.Forms.Panel();
             this.lbOutput = new System.Windows.Forms.Label();
+            this.dataGridView = new Sinapse.Controls.DataGridViewEx();
             this.lbInput = new System.Windows.Forms.Label();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeRowsToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTraining = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuValidation = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTesting = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuCopyTraining = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuCopyValidation = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuCopyTesting = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuCopyQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuCopyClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSetTitle = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnImport = new System.Windows.Forms.Button();
@@ -101,7 +110,6 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(582, 337);
             this.dataGridView.TabIndex = 22;
-            this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             this.dataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_RowValidating);
             // 
             // contextMenuStrip
@@ -110,9 +118,12 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.changeRowsToToolStripMenuItem,
             this.MenuTraining,
             this.MenuValidation,
-            this.MenuTesting});
+            this.MenuTesting,
+            this.toolStripSeparator1,
+            this.MenuCopy,
+            this.MenuPaste});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip.Size = new System.Drawing.Size(161, 164);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // changeRowsToToolStripMenuItem
@@ -142,6 +153,77 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.MenuTesting.Size = new System.Drawing.Size(160, 22);
             this.MenuTesting.Text = "Testing data";
             this.MenuTesting.Click += new System.EventHandler(this.MenuTesting_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // MenuCopy
+            // 
+            this.MenuCopy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuCopyTraining,
+            this.MenuCopyValidation,
+            this.MenuCopyTesting,
+            this.MenuCopyQuery,
+            this.toolStripSeparator2,
+            this.MenuCopyClipboard});
+            this.MenuCopy.Image = global::Sinapse.Properties.Resources.editcopy;
+            this.MenuCopy.Name = "MenuCopy";
+            this.MenuCopy.Size = new System.Drawing.Size(160, 22);
+            this.MenuCopy.Text = "Copy To...";
+            // 
+            // MenuCopyTraining
+            // 
+            this.MenuCopyTraining.Name = "MenuCopyTraining";
+            this.MenuCopyTraining.Size = new System.Drawing.Size(169, 22);
+            this.MenuCopyTraining.Text = "Training";
+            this.MenuCopyTraining.Click += new System.EventHandler(this.MenuCopyTraining_Click);
+            // 
+            // MenuCopyValidation
+            // 
+            this.MenuCopyValidation.Name = "MenuCopyValidation";
+            this.MenuCopyValidation.Size = new System.Drawing.Size(169, 22);
+            this.MenuCopyValidation.Text = "Validation";
+            this.MenuCopyValidation.Click += new System.EventHandler(this.MenuCopyValidation_Click);
+            // 
+            // MenuCopyTesting
+            // 
+            this.MenuCopyTesting.Name = "MenuCopyTesting";
+            this.MenuCopyTesting.Size = new System.Drawing.Size(169, 22);
+            this.MenuCopyTesting.Text = "Testing";
+            this.MenuCopyTesting.Click += new System.EventHandler(this.MenuCopyTesting_Click);
+            // 
+            // MenuCopyQuery
+            // 
+            this.MenuCopyQuery.Enabled = false;
+            this.MenuCopyQuery.Name = "MenuCopyQuery";
+            this.MenuCopyQuery.Size = new System.Drawing.Size(169, 22);
+            this.MenuCopyQuery.Text = "Query";
+            this.MenuCopyQuery.Click += new System.EventHandler(this.MenuCopyQuery_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+            // 
+            // MenuCopyClipboard
+            // 
+            this.MenuCopyClipboard.Image = global::Sinapse.Properties.Resources.editcopy;
+            this.MenuCopyClipboard.Name = "MenuCopyClipboard";
+            this.MenuCopyClipboard.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.MenuCopyClipboard.Size = new System.Drawing.Size(169, 22);
+            this.MenuCopyClipboard.Text = "Clipboard";
+            this.MenuCopyClipboard.Click += new System.EventHandler(this.MenuCopyClipboard_Click);
+            // 
+            // MenuPaste
+            // 
+            this.MenuPaste.Image = global::Sinapse.Properties.Resources.editpaste;
+            this.MenuPaste.Name = "MenuPaste";
+            this.MenuPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.MenuPaste.Size = new System.Drawing.Size(160, 22);
+            this.MenuPaste.Text = "Paste";
+            this.MenuPaste.Click += new System.EventHandler(this.MenuPaste_Click);
             // 
             // lbSetTitle
             // 
@@ -203,7 +285,7 @@ namespace Sinapse.Controls.MainTabControl.Base
         private System.Windows.Forms.Panel panelInputCaption;
         private System.Windows.Forms.Label lbOutput;
         private System.Windows.Forms.Label lbInput;
-        protected System.Windows.Forms.DataGridView dataGridView;
+        protected Sinapse.Controls.DataGridViewEx dataGridView;
         protected internal System.Windows.Forms.Label lbSetTitle;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         protected internal System.Windows.Forms.BindingSource BindingSource;
@@ -212,5 +294,14 @@ namespace Sinapse.Controls.MainTabControl.Base
         private System.Windows.Forms.ToolStripMenuItem MenuValidation;
         private System.Windows.Forms.ToolStripMenuItem MenuTesting;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem MenuCopy;
+        private System.Windows.Forms.ToolStripMenuItem MenuCopyTraining;
+        private System.Windows.Forms.ToolStripMenuItem MenuCopyValidation;
+        private System.Windows.Forms.ToolStripMenuItem MenuCopyTesting;
+        private System.Windows.Forms.ToolStripMenuItem MenuCopyQuery;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem MenuCopyClipboard;
+        private System.Windows.Forms.ToolStripMenuItem MenuPaste;
     }
 }

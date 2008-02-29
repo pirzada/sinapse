@@ -20,33 +20,35 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Sinapse.Data.Structures;
+using Sinapse.Data;
 
-namespace Sinapse.Data
+
+namespace Sinapse.Data.Structures
 {
 
-    internal enum TrainingType { ByError, ByEpoch };
+    internal enum TrainingType { ByError, ByEpoch, Manual };
 
     internal struct TrainingOptions
     {
 
-        public TrainingType TrainingType;
+        internal TrainingType TrainingType;
 
-        public int limEpoch;
-        public double limError;
+        internal int limEpoch;
+        internal double limError;
 
-        public double momentum;
-        public double firstLearningRate;
+        internal double momentum;
+        internal double firstLearningRate;
 
-        public double? secondLearningRate;
+        internal double? secondLearningRate;
 
-        public bool validateNetwork;
-
-        [NonSerialized]
-        public TrainingVectors TrainingVectors;
+        internal bool validateNetwork;
+        internal bool testNetwork;
 
         [NonSerialized]
-        public TrainingVectors ValidationVectors;
+        internal TrainingVectors TrainingVectors;
+
+        [NonSerialized]
+        internal TrainingVectors ValidationVectors;
 
     }
 }

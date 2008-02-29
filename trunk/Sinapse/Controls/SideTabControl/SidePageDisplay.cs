@@ -120,7 +120,7 @@ namespace Sinapse.Controls.SideTabControl
      //       this.SuspendLayout();
                                              
             this.lbName.Text = m_networkContainer.Name;
-            this.lbLayout.Text = m_networkContainer.GetLayoutString();
+            this.lbLayout.Text = m_networkContainer.Layout;
             this.lbDescription.Text = m_networkContainer.Description;
             this.lbErrorRate.Text = m_networkContainer.Precision.ToString("0.000000");
 

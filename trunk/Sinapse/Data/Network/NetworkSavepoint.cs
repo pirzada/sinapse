@@ -45,7 +45,7 @@ namespace Sinapse.Data.Network
 
 
         #region Constructor
-        internal NetworkSavepoint(ActivationNetwork activationNetwork, TrainingStatus networkStatus)
+        public NetworkSavepoint(ActivationNetwork activationNetwork, TrainingStatus networkStatus)
         {
             this.m_memoryStream = new MemoryStream();
             BinaryFormatter bf = new BinaryFormatter();
@@ -62,7 +62,7 @@ namespace Sinapse.Data.Network
 
 
         #region Properties
-        internal ActivationNetwork ActivationNetwork
+        public ActivationNetwork ActivationNetwork
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Sinapse.Data.Network
             }
         }
 
-        internal TrainingStatus NetworkStatus
+        public TrainingStatus NetworkStatus
         {
             get { return this.m_networkStatus; }
             set { this.m_networkStatus = value; }
@@ -132,7 +132,7 @@ namespace Sinapse.Data.Network
 
 
         #region Constructor
-        internal NetworkSavepointCollection(NetworkContainer networkContainer)
+        public NetworkSavepointCollection(NetworkContainer networkContainer)
         {
             this.m_networkContainer = networkContainer;
             this.m_currentSavepoint = null;

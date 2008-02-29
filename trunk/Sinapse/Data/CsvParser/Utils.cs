@@ -1,3 +1,10 @@
+/***************************************************************************
+ * This class was based in a work from someone else. If you are the        *
+ * author of this class, please email me so I can credit you properly      *
+ *                                                                         *
+ * http://sinapse.googlecode.com                 cesarsouza@gmail.com      *
+ ***************************************************************************/
+
 using System;
 using System.IO;
 using System.Text;

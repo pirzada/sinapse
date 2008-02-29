@@ -127,13 +127,13 @@ namespace Sinapse.Controls.MainTabControl
             // lbScore
             // 
             this.lbScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbScore.AutoSize = true;
+            this.lbScore.AutoEllipsis = true;
             this.lbScore.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbScore.Location = new System.Drawing.Point(370, 15);
+            this.lbScore.Location = new System.Drawing.Point(349, 15);
             this.lbScore.Name = "lbScore";
-            this.lbScore.Size = new System.Drawing.Size(53, 11);
+            this.lbScore.Size = new System.Drawing.Size(142, 11);
             this.lbScore.TabIndex = 33;
-            this.lbScore.Text = "Score:";
+            this.lbScore.Text = "Deviation:";
             // 
             // TabPageTesting
             // 

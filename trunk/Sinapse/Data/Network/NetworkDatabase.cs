@@ -383,6 +383,7 @@ namespace Sinapse.Data.Network
         internal void Round(bool testingOnly)
         {
             string columnName;
+            double value;
 
             foreach (DataRow row in this.m_dataTable.Rows)
             {
@@ -393,10 +394,10 @@ namespace Sinapse.Data.Network
                     else columnName = outputColumn;
 
                     //Check if field isn't a category
-                    if (this.Schema.IsCategory(columnName))
+                    if (!this.Schema.IsCategory(columnName))
                     {
-                        double value = Double.Parse((string)row[columnName]);
-                        row[columnName] = Math.Round(value).ToString();
+                        if (Double.TryParse((string)row[columnName], out value))
+                            row[columnName] = Math.Round(value).ToString();
                     }
                 }
             }

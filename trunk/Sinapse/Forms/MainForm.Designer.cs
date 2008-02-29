@@ -156,7 +156,7 @@ namespace Sinapse.Forms
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
             this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(792, 50);
+            this.panelTitle.Size = new System.Drawing.Size(892, 50);
             this.panelTitle.TabIndex = 5;
             // 
             // lbTitle
@@ -176,7 +176,7 @@ namespace Sinapse.Forms
             this.lbTitleNeurons.AutoSize = true;
             this.lbTitleNeurons.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitleNeurons.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbTitleNeurons.Location = new System.Drawing.Point(494, 31);
+            this.lbTitleNeurons.Location = new System.Drawing.Point(594, 31);
             this.lbTitleNeurons.Name = "lbTitleNeurons";
             this.lbTitleNeurons.Size = new System.Drawing.Size(58, 13);
             this.lbTitleNeurons.TabIndex = 0;
@@ -188,7 +188,7 @@ namespace Sinapse.Forms
             this.lbTitleInputs.AutoSize = true;
             this.lbTitleInputs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitleInputs.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbTitleInputs.Location = new System.Drawing.Point(605, 31);
+            this.lbTitleInputs.Location = new System.Drawing.Point(705, 31);
             this.lbTitleInputs.Name = "lbTitleInputs";
             this.lbTitleInputs.Size = new System.Drawing.Size(46, 13);
             this.lbTitleInputs.TabIndex = 0;
@@ -199,7 +199,7 @@ namespace Sinapse.Forms
             this.lbNeuronCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbNeuronCount.AutoSize = true;
             this.lbNeuronCount.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbNeuronCount.Location = new System.Drawing.Point(558, 31);
+            this.lbNeuronCount.Location = new System.Drawing.Point(658, 31);
             this.lbNeuronCount.Name = "lbNeuronCount";
             this.lbNeuronCount.Size = new System.Drawing.Size(19, 13);
             this.lbNeuronCount.TabIndex = 0;
@@ -210,7 +210,7 @@ namespace Sinapse.Forms
             this.lbInputCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbInputCount.AutoSize = true;
             this.lbInputCount.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbInputCount.Location = new System.Drawing.Point(653, 31);
+            this.lbInputCount.Location = new System.Drawing.Point(753, 31);
             this.lbInputCount.Name = "lbInputCount";
             this.lbInputCount.Size = new System.Drawing.Size(19, 13);
             this.lbInputCount.TabIndex = 0;
@@ -222,7 +222,7 @@ namespace Sinapse.Forms
             this.lbTitleOutputs.AutoSize = true;
             this.lbTitleOutputs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitleOutputs.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbTitleOutputs.Location = new System.Drawing.Point(700, 31);
+            this.lbTitleOutputs.Location = new System.Drawing.Point(800, 31);
             this.lbTitleOutputs.Name = "lbTitleOutputs";
             this.lbTitleOutputs.Size = new System.Drawing.Size(55, 13);
             this.lbTitleOutputs.TabIndex = 0;
@@ -233,7 +233,7 @@ namespace Sinapse.Forms
             this.lbOutputCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbOutputCount.AutoSize = true;
             this.lbOutputCount.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbOutputCount.Location = new System.Drawing.Point(757, 31);
+            this.lbOutputCount.Location = new System.Drawing.Point(857, 31);
             this.lbOutputCount.Name = "lbOutputCount";
             this.lbOutputCount.Size = new System.Drawing.Size(19, 13);
             this.lbOutputCount.TabIndex = 0;
@@ -249,7 +249,7 @@ namespace Sinapse.Forms
             this.MenuHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 50);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(792, 24);
+            this.menuStrip.Size = new System.Drawing.Size(892, 24);
             this.menuStrip.TabIndex = 10;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -580,11 +580,11 @@ namespace Sinapse.Forms
             // toolStripContainer.ContentPanel
             // 
             this.toolStripContainer.ContentPanel.Controls.Add(this.splitContainer);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(792, 452);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(892, 545);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 74);
             this.toolStripContainer.Name = "toolStripContainer";
-            this.toolStripContainer.Size = new System.Drawing.Size(792, 477);
+            this.toolStripContainer.Size = new System.Drawing.Size(892, 570);
             this.toolStripContainer.TabIndex = 16;
             this.toolStripContainer.Text = "toolStripContainer";
             // 
@@ -608,7 +608,7 @@ namespace Sinapse.Forms
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
-            this.splitContainer.Size = new System.Drawing.Size(792, 452);
+            this.splitContainer.Size = new System.Drawing.Size(892, 545);
             this.splitContainer.SplitterDistance = 263;
             this.splitContainer.TabIndex = 17;
             // 
@@ -617,7 +617,7 @@ namespace Sinapse.Forms
             this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlSide.Location = new System.Drawing.Point(0, 0);
             this.tabControlSide.Name = "tabControlSide";
-            this.tabControlSide.Size = new System.Drawing.Size(263, 452);
+            this.tabControlSide.Size = new System.Drawing.Size(263, 545);
             this.tabControlSide.TabIndex = 0;
             // 
             // tabControlMain
@@ -625,7 +625,7 @@ namespace Sinapse.Forms
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.Size = new System.Drawing.Size(525, 452);
+            this.tabControlMain.Size = new System.Drawing.Size(625, 545);
             this.tabControlMain.TabIndex = 0;
             // 
             // toolStripMain
@@ -645,7 +645,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(206, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
             this.toolStripMain.TabIndex = 0;
             // 
             // btnDatabaseNew
@@ -752,9 +752,9 @@ namespace Sinapse.Forms
             this.btnTrainGraph,
             this.btnTrainQuery});
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripTraining.Location = new System.Drawing.Point(209, 0);
+            this.toolStripTraining.Location = new System.Drawing.Point(211, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(237, 25);
+            this.toolStripTraining.Size = new System.Drawing.Size(208, 25);
             this.toolStripTraining.TabIndex = 1;
             // 
             // btnTrainForget
@@ -871,9 +871,9 @@ namespace Sinapse.Forms
             this.statusBarControl.AutoSize = true;
             this.statusBarControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.statusBarControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusBarControl.Location = new System.Drawing.Point(0, 551);
+            this.statusBarControl.Location = new System.Drawing.Point(0, 644);
             this.statusBarControl.Name = "statusBarControl";
-            this.statusBarControl.Size = new System.Drawing.Size(792, 22);
+            this.statusBarControl.Size = new System.Drawing.Size(892, 22);
             this.statusBarControl.TabIndex = 17;
             // 
             // mruProviderDatabase
@@ -897,7 +897,7 @@ namespace Sinapse.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 573);
+            this.ClientSize = new System.Drawing.Size(892, 666);
             this.Controls.Add(this.toolStripContainer);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelTitle);
@@ -906,7 +906,7 @@ namespace Sinapse.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(200, 200);
             this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(800, 550);
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "MainForm";
             this.Text = "Sinapse";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
