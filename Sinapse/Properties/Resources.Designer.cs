@@ -60,6 +60,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap advancedsettings {
+            get {
+                object obj = ResourceManager.GetObject("advancedsettings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap apply {
             get {
                 object obj = ResourceManager.GetObject("apply", resourceCulture);
@@ -84,6 +91,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap configure {
             get {
                 object obj = ResourceManager.GetObject("configure", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap configure1 {
+            get {
+                object obj = ResourceManager.GetObject("configure1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -119,6 +133,20 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap editclear {
             get {
                 object obj = ResourceManager.GetObject("editclear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap editcopy {
+            get {
+                object obj = ResourceManager.GetObject("editcopy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap editpaste {
+            get {
+                object obj = ResourceManager.GetObject("editpaste", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -235,6 +263,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap history {
+            get {
+                object obj = ResourceManager.GetObject("history", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap info_16 {
             get {
                 object obj = ResourceManager.GetObject("info_16", resourceCulture);
@@ -245,6 +280,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap info_flat_16 {
             get {
                 object obj = ResourceManager.GetObject("info_flat_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap kdvi {
+            get {
+                object obj = ResourceManager.GetObject("kdvi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -287,6 +329,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap oscilloscope {
             get {
                 object obj = ResourceManager.GetObject("oscilloscope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap panel_settings {
+            get {
+                object obj = ResourceManager.GetObject("panel_settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

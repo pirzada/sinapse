@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Neural Networking Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cSouza Company")]
-[assembly: AssemblyProduct("Sinapse Neural Network Tool")]
-[assembly: AssemblyCopyright("Copyright © Cesar Souza 2008")]
+[assembly: AssemblyProduct("Sinapse Neural Networking Tool")]
+[assembly: AssemblyCopyright("Copyright © 2006-2008 Cesar Roberto de Souza")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
