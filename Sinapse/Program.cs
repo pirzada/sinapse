@@ -30,13 +30,34 @@ namespace Sinapse
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+        [LoaderOptimization(LoaderOptimization.SingleDomain)]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Program.Initialize();
+
             Application.Run(new MainForm());
 
             Properties.Settings.Default.Save();
         }
+
+
+        static void Initialize()
+        {
+            Sinapse.Data.HistoryListener.Initialize();
+
+            if (Properties.Settings.Default.history_Database == null)
+                Properties.Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
+
+            if (Properties.Settings.Default.history_Networks == null)
+                Properties.Settings.Default.history_Networks = new System.Collections.Specialized.StringCollection();
+
+            if (Properties.Settings.Default.history_Workplace == null)
+                Properties.Settings.Default.history_Workplace = new System.Collections.Specialized.StringCollection();
+
+        }
+
     }
 }
