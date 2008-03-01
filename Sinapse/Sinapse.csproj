@@ -103,6 +103,12 @@
     <Compile Include="Controls\MainTabControl\TabPageQuery.Designer.cs">
       <DependentUpon>TabPageQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ReportColumnOptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReportColumnOptionControl.Designer.cs">
+      <DependentUpon>ReportColumnOptionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SideTabControl\SidePageWorplace.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -157,15 +163,19 @@
     <Compile Include="Controls\MainTabControl\TabPageValidation.Designer.cs">
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\CsvParser\Common.cs" />
-    <Compile Include="Data\CsvParser\Parser.cs" />
-    <Compile Include="Data\CsvParser\Utils.cs" />
-    <Compile Include="Data\CsvParser\Writer.cs" />
+    <Compile Include="Utils\CsvParser\Common.cs" />
+    <Compile Include="Utils\CsvParser\Parser.cs" />
+    <Compile Include="Utils\CsvParser\Utils.cs" />
+    <Compile Include="Utils\CsvParser\Writer.cs" />
     <Compile Include="Components\MruProvider.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Data\HistoryListener.cs" />
-    <Compile Include="Data\Network\NetworkPerformance.cs" />
+    <Compile Include="Utils\HtmlReport\Field.cs" />
+    <Compile Include="Utils\HtmlReport\Misc.cs" />
+    <Compile Include="Utils\HtmlReport\Report.cs" />
+    <Compile Include="Utils\HtmlReport\Section.cs" />
+    <Compile Include="Data\Reporting\NetworkPerformance.cs" />
     <Compile Include="Data\Network\NetworkSavepoint.cs" />
     <Compile Include="Data\Network\NetworkDatabase.cs" />
     <Compile Include="Data\Network\NetworkCaptions.cs" />
@@ -217,6 +227,12 @@
     <Compile Include="Forms\Dialogs\NetworkCreationDialog.Designer.cs">
       <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Dialogs\PerformanceReportOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\PerformanceReportOptions.Designer.cs">
+      <DependentUpon>PerformanceReportOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NetworkInspector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +280,10 @@
     <EmbeddedResource Include="Controls\MainTabControl\TabPageQuery.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReportColumnOptionControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReportColumnOptionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SideTabControl\SidePageDisplay.resx">
       <DependentUpon>SidePageDisplay.cs</DependentUpon>
@@ -320,6 +340,10 @@
     <EmbeddedResource Include="Forms\Dialogs\PerformanceDialog.resx">
       <DependentUpon>PerformanceDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\PerformanceReportOptions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PerformanceReportOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\StatusBarOptions.resx">
       <DependentUpon>StatusBarOptions.cs</DependentUpon>
@@ -667,9 +691,6 @@
     <None Include="Resources\quick_restart.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\NetworkReport.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\start1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -684,10 +705,14 @@
     <None Include="Resources\configure1.png" />
     <None Include="Resources\panel_settings.png" />
     <None Include="Resources\advancedsettings.png" />
+    <None Include="Resources\restart.png" />
+    <None Include="Resources\Templates\NetworkReport.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Utils\" />
+    <Folder Include="Data\Reporting\Modules\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

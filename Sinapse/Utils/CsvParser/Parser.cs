@@ -11,7 +11,7 @@ using System.Data;
 using System.Text;
 using System.IO;
 
-namespace Sinapse.Data.CsvParser
+namespace Sinapse.Utils.CsvParser
 {
 
     /*Like the CsvWriter class, all methods in the CsvParser class are static.

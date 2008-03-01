@@ -23,15 +23,17 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 using System.IO;
 
 
 using AForge.Neuro;
 
-using Sinapse.Data.Network;
 using Sinapse.Data;
+using Sinapse.Data.Network;
+using Sinapse.Utils.HtmlReport;
 
-
+                        
 namespace Sinapse.Forms.Dialogs
 {
 
@@ -73,9 +75,37 @@ namespace Sinapse.Forms.Dialogs
             this.webBrowser.ShowPrintDialog();
         }
 
+        private void btnPrintPreview_Click(object sender, EventArgs e)
+        {
+            this.webBrowser.ShowPrintPreviewDialog();
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.webBrowser.ShowSaveAsDialog();
+            this.saveFileDialog.ShowDialog(this);
+        }
+
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            TextWriter textWriter = null;
+
+            try
+            {
+                textWriter = new StreamWriter(saveFileDialog.FileName, false, Encoding.Default);
+                textWriter.Write(this.webBrowser.DocumentText);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error saving testing report: " + ex.Message);
+#if DEBUG
+                throw ex;
+#endif
+            }
+            finally
+            {
+                if (textWriter != null)
+                    textWriter.Close();
+            }
         }
         #endregion
 
@@ -86,10 +116,15 @@ namespace Sinapse.Forms.Dialogs
         #region Public Methods
         internal string CreateReport()
         {
-            DataRow[] selectedRows = m_database.DataTable.Select(NetworkDatabase.ColumnRoleId + "='" + (ushort)NetworkSet.Testing + "'");
+            
+            DataRow[] selectedRows = this.m_database.DataTable.Select(
+                String.Format("[{0}] = {1}", NetworkDatabase.ColumnRoleId, (ushort)NetworkSet.Testing));
 
             if (selectedRows.Length == 0)
                 return "No records found!";
+
+            int testingItems = selectedRows.Length * this.m_database.Schema.OutputColumns.Length;
+            
 
 
             StringBuilder strBuilder = new StringBuilder(this.getBaseReportText());
@@ -102,50 +137,106 @@ namespace Sinapse.Forms.Dialogs
             strBuilder.Replace("[setTrain]", m_database.TrainingSet.Count.ToString());
             strBuilder.Replace("[setValid]", m_database.ValidationSet.Count.ToString());
             strBuilder.Replace("[setTest]", m_database.TestingSet.Count.ToString());
+            strBuilder.Replace("[testItems]", testingItems.ToString());
             strBuilder.Replace("[TrainRMS]", m_network.Precision.ToString());
-            strBuilder.Replace("[totalScore]", m_network.Score.ToString());
-            strBuilder.Replace("[finalScore]", m_network.Score.ToString());
 
 
             strBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
             strBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
 
+            strBuilder.Replace("[testResults]", generateResults());
 
-            strBuilder.Replace("[testResults]", generateResults(selectedRows));
             strBuilder.Replace("[netWeights]", generateWeights());
 
             strBuilder.Replace("[year]", DateTime.Now.Year.ToString());
 
-
+                            
 
             #region Scores Generation
-            int hitTotal = 0;// hitPositive=0, hitNegative=0;
-            int errorTotal = 0;// errorPositive=0, errorNegative=0;
+            int hitTotal = 0, hitPositive=0, hitNegative=0;
+            int errorTotal = 0, errorPositive=0, errorNegative=0;
+            double totalScore = 0, finalScore = 0;
 
             foreach (DataRow row in selectedRows)
             {
-                foreach (String outputColumn in m_network.Schema.OutputColumns)
+                foreach (String outputColumn in this.m_network.Schema.OutputColumns)
                 {
+
+                    totalScore += Math.Abs(Double.Parse((string)row[NetworkDatabase.ColumnDeltaPrefix + outputColumn]));
+
                     if (row[outputColumn].Equals(row[NetworkDatabase.ColumnComputedPrefix + outputColumn]))
                     {
                         hitTotal++;
+                     
+                        if (row[outputColumn].Equals("1"))
+                        {
+                            hitPositive++;
+                        }
+                        else
+                        {
+                            hitNegative++;
+                        }
                     }
                     else
                     {
                         errorTotal++;
+
+                        if (row[outputColumn].Equals("1"))
+                        {
+                            errorPositive++;
+                        }
+                        else
+                        {
+                            errorNegative++;
+                        }
                     }
+
                 }
             }
 
-            strBuilder.Replace("[rHits]", hitTotal.ToString());
-            strBuilder.Replace("[rErrors]", errorTotal.ToString());
-            strBuilder.Replace("[rHitsPerc]", (hitTotal / selectedRows.Length).ToString("N3"));
-            strBuilder.Replace("[rErrorsPerc]", (errorTotal / selectedRows.Length).ToString("N3"));
+            finalScore = totalScore / testingItems;
 
+            strBuilder.Replace("[totalScore]", totalScore.ToString("N6"));
+            strBuilder.Replace("[finalScore]", finalScore.ToString("N6"));
+
+            strBuilder.Replace("[rHits]", hitTotal.ToString("D3"));
+            strBuilder.Replace("[rHitsPerc]", (hitTotal / testingItems).ToString("(000.00%)"));
+
+            strBuilder.Replace("[rErrors]", errorTotal.ToString("D3"));
+            strBuilder.Replace("[rErrorsPerc]", (errorTotal / testingItems).ToString("(000.00%)"));
+            
+            if (hitTotal != 0)
+            {
+                strBuilder.Replace("[rHitsP]", hitPositive.ToString("D3"));
+                strBuilder.Replace("[rHitsN]", hitNegative.ToString("D3"));
+                strBuilder.Replace("[rHitsPPerc]", (hitPositive / hitTotal).ToString("(000.00%)"));
+                strBuilder.Replace("[rHitsNPerc]", (hitNegative / hitTotal).ToString("(000.00%)"));
+            }
+            else
+            {
+                strBuilder.Replace("[rHitsP]", "-");
+                strBuilder.Replace("[rHitsN]", "-");
+                strBuilder.Replace("[rHitsPPerc]", String.Empty);
+                strBuilder.Replace("[rHitsNPerc]", String.Empty);
+            }
+
+            if (errorTotal != 0)
+            {
+                strBuilder.Replace("[rErrorsP]", errorPositive.ToString("D3"));
+                strBuilder.Replace("[rErrorsN]", errorNegative.ToString("D3"));
+                strBuilder.Replace("[rErrorsPPerc]", (errorPositive / errorTotal).ToString("(000.00%)"));
+                strBuilder.Replace("[rErrorsNPerc]", (errorNegative / errorTotal).ToString("(000.00%)"));
+            }
+            else
+            {
+                strBuilder.Replace("[rErrorsP]", "-");
+                strBuilder.Replace("[rErrorsN]", "-");
+                strBuilder.Replace("[rErrorsPPerc]", String.Empty);
+                strBuilder.Replace("[rErrorsNPerc]", String.Empty);
+            }
             #endregion
 
-
-
+            
             return strBuilder.ToString();
         }
         #endregion
@@ -204,59 +295,47 @@ namespace Sinapse.Forms.Dialogs
         }
 
 
-        private string generateResults(DataRow[] selectedRows)
+        private string generateResults()
         {
-            StringBuilder resultBuilder = new StringBuilder();
+            HTMLReport report = new HTMLReport();
 
-            resultBuilder.Append("<table>");
 
-            foreach (string inputCol in m_database.Schema.InputColumns)
+            report.ReportTitle = "Network Test Performance Table";
+            report.ReportFont = "Arial";
+            report.IncludeTotal = true;
+            report.ReportSource = m_database.TestingSet.ToTable();
+           
+
+           // Section section = new Section();
+
+            foreach (string inputCol in this.m_database.Schema.InputColumns)
             {
-                resultBuilder.AppendFormat("<td nowrap>{0}</td>", inputCol);
+                report.ReportFields.Add(new Field(inputCol, inputCol, 0, HtmlAlign.Center));
             }
 
-            foreach (string outputCol in m_database.Schema.OutputColumns)
+            foreach (string outputCol in this.m_database.Schema.OutputColumns)
             {
-                resultBuilder.AppendFormat("<td nowrap>{0}</td>", outputCol);
+                Field field;
+
+                field = new Field(outputCol, outputCol, HtmlAlign.Center);
+                field.HeaderBackColor = Color.LightSteelBlue;
+                //field.FormatString = "+0.0000;-0.0000";
+                report.ReportFields.Add(field);
+
+                field = new Field(NetworkDatabase.ColumnComputedPrefix + outputCol, "Network Answer", 0, HtmlAlign.Center);
+                field.HeaderBackColor = Color.LightSteelBlue;
+                field.FormatString = "+0.0000;-0.0000";
+                report.ReportFields.Add(field);
+                
+                field = new Field(NetworkDatabase.ColumnDeltaPrefix + outputCol, "Network Error", 0, HtmlAlign.Center);
+                field.HeaderBackColor = Color.LightSteelBlue;
+                field.FormatString = "+0.0000;-0.0000";
+                field.IsTotalField = true;
+                report.ReportFields.Add(field);
+                
             }
 
-            foreach (string outputCol in m_database.Schema.OutputColumns)
-            {
-                resultBuilder.AppendFormat("<td nowrap><b>{0}</b></td>", outputCol);
-                resultBuilder.Append("<td nowrap><b>Delta</b></td>");
-            }
-
-            foreach (DataRow row in selectedRows)
-            {
-                resultBuilder.Append("<tr>");
-                foreach (string inputCol in m_database.Schema.InputColumns)
-                {
-                    resultBuilder.Append("<td nowrap>");
-                    resultBuilder.Append(Double.Parse((string)row[inputCol]).ToString("G3"));
-                    resultBuilder.Append("</td>");
-                }
-                foreach (string outputCol in m_database.Schema.OutputColumns)
-                {
-                    resultBuilder.Append("<td nowrap>");
-                    resultBuilder.Append(Double.Parse((string)row[outputCol]).ToString("G3"));
-                    resultBuilder.Append("</td>");
-                }
-                foreach (string outputCol in m_database.Schema.OutputColumns)
-                {
-                    resultBuilder.Append("<td nowrap>");
-                    resultBuilder.Append(Double.Parse((string)row[NetworkDatabase.ColumnComputedPrefix + outputCol]).ToString("G3"));
-                    resultBuilder.Append("</td>");
-                    resultBuilder.Append("<td nowrap><b>");
-                    resultBuilder.Append(Double.Parse((string)row[NetworkDatabase.ColumnDeltaPrefix + outputCol]).ToString("G3"));
-                    resultBuilder.Append("</b></td>");
-                }
-                resultBuilder.Append("</tr>");
-
-            }
-
-            resultBuilder.Append("</table>");
-
-            return resultBuilder.ToString();
+            return report.GenerateReport();
         }
 
 
@@ -289,10 +368,6 @@ namespace Sinapse.Forms.Dialogs
             return baseReport; 
         }
         #endregion
-
-
-
-
 
 
     }

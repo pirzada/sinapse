@@ -124,6 +124,18 @@ namespace Sinapse.Forms
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.btnTrainGraph = new System.Windows.Forms.ToolStripButton();
             this.btnTrainQuery = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTesting = new System.Windows.Forms.ToolStrip();
+            this.btnTestCompute = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnTestReport = new System.Windows.Forms.ToolStripSplitButton();
+            this.btnTestReportOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRound = new System.Windows.Forms.ToolStripDropDownButton();
+            this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRound10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRound25 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRound50 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRound75 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRound90 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -141,6 +153,7 @@ namespace Sinapse.Forms
             this.splitContainer.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripTraining.SuspendLayout();
+            this.toolStripTesting.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -580,11 +593,11 @@ namespace Sinapse.Forms
             // toolStripContainer.ContentPanel
             // 
             this.toolStripContainer.ContentPanel.Controls.Add(this.splitContainer);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(892, 545);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(892, 552);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 74);
             this.toolStripContainer.Name = "toolStripContainer";
-            this.toolStripContainer.Size = new System.Drawing.Size(892, 570);
+            this.toolStripContainer.Size = new System.Drawing.Size(892, 577);
             this.toolStripContainer.TabIndex = 16;
             this.toolStripContainer.Text = "toolStripContainer";
             // 
@@ -592,6 +605,7 @@ namespace Sinapse.Forms
             // 
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripMain);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTraining);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTesting);
             this.toolStripContainer.TopToolStripPanel.MaximumSize = new System.Drawing.Size(0, 25);
             // 
             // splitContainer
@@ -608,7 +622,7 @@ namespace Sinapse.Forms
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
-            this.splitContainer.Size = new System.Drawing.Size(892, 545);
+            this.splitContainer.Size = new System.Drawing.Size(892, 552);
             this.splitContainer.SplitterDistance = 263;
             this.splitContainer.TabIndex = 17;
             // 
@@ -617,7 +631,7 @@ namespace Sinapse.Forms
             this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlSide.Location = new System.Drawing.Point(0, 0);
             this.tabControlSide.Name = "tabControlSide";
-            this.tabControlSide.Size = new System.Drawing.Size(263, 545);
+            this.tabControlSide.Size = new System.Drawing.Size(263, 552);
             this.tabControlSide.TabIndex = 0;
             // 
             // tabControlMain
@@ -625,7 +639,7 @@ namespace Sinapse.Forms
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.Size = new System.Drawing.Size(625, 545);
+            this.tabControlMain.Size = new System.Drawing.Size(625, 552);
             this.tabControlMain.TabIndex = 0;
             // 
             // toolStripMain
@@ -645,7 +659,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(206, 25);
             this.toolStripMain.TabIndex = 0;
             // 
             // btnDatabaseNew
@@ -752,9 +766,9 @@ namespace Sinapse.Forms
             this.btnTrainGraph,
             this.btnTrainQuery});
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripTraining.Location = new System.Drawing.Point(211, 0);
+            this.toolStripTraining.Location = new System.Drawing.Point(209, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(208, 25);
+            this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
             this.toolStripTraining.TabIndex = 1;
             // 
             // btnTrainForget
@@ -847,6 +861,116 @@ namespace Sinapse.Forms
             this.btnTrainQuery.Text = "Query Network";
             this.btnTrainQuery.Click += new System.EventHandler(this.MenuNetworkQuery_Click);
             // 
+            // toolStripTesting
+            // 
+            this.toolStripTesting.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripTesting.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnTestCompute,
+            this.toolStripSeparator2,
+            this.btnTestReport,
+            this.btnTestRound});
+            this.toolStripTesting.Location = new System.Drawing.Point(415, 0);
+            this.toolStripTesting.Name = "toolStripTesting";
+            this.toolStripTesting.Size = new System.Drawing.Size(131, 25);
+            this.toolStripTesting.TabIndex = 2;
+            // 
+            // btnTestCompute
+            // 
+            this.btnTestCompute.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTestCompute.Image = global::Sinapse.Properties.Resources.restart;
+            this.btnTestCompute.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTestCompute.Name = "btnTestCompute";
+            this.btnTestCompute.Size = new System.Drawing.Size(23, 22);
+            this.btnTestCompute.Text = "Compute Testing Set";
+            this.btnTestCompute.Click += new System.EventHandler(this.btnTestCompute_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnTestReport
+            // 
+            this.btnTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTestReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnTestReportOptions});
+            this.btnTestReport.Image = global::Sinapse.Properties.Resources.switchuser;
+            this.btnTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTestReport.Name = "btnTestReport";
+            this.btnTestReport.Size = new System.Drawing.Size(32, 22);
+            this.btnTestReport.Text = "Generate Test Performance Report";
+            this.btnTestReport.ButtonClick += new System.EventHandler(this.btnTestReport_ButtonClick);
+            // 
+            // btnTestReportOptions
+            // 
+            this.btnTestReportOptions.Name = "btnTestReportOptions";
+            this.btnTestReportOptions.Size = new System.Drawing.Size(158, 22);
+            this.btnTestReportOptions.Text = "Report Options";
+            this.btnTestReportOptions.Click += new System.EventHandler(this.btnTestReportOptions_Click);
+            // 
+            // btnTestRound
+            // 
+            this.btnTestRound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTestRound.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thresholdToolStripMenuItem,
+            this.btnTestRound10,
+            this.btnTestRound25,
+            this.btnTestRound50,
+            this.btnTestRound75,
+            this.btnTestRound90});
+            this.btnTestRound.Image = global::Sinapse.Properties.Resources.precminus;
+            this.btnTestRound.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTestRound.Name = "btnTestRound";
+            this.btnTestRound.Size = new System.Drawing.Size(29, 22);
+            this.btnTestRound.Text = "Round Results";
+            // 
+            // thresholdToolStripMenuItem
+            // 
+            this.thresholdToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.thresholdToolStripMenuItem.Text = "Threshold";
+            // 
+            // btnTestRound10
+            // 
+            this.btnTestRound10.Name = "btnTestRound10";
+            this.btnTestRound10.Size = new System.Drawing.Size(152, 22);
+            this.btnTestRound10.Tag = 0.10f;
+            this.btnTestRound10.Text = "0.10";
+            this.btnTestRound10.Click += new System.EventHandler(this.btnTestRound_Click);
+            // 
+            // btnTestRound25
+            // 
+            this.btnTestRound25.Name = "btnTestRound25";
+            this.btnTestRound25.Size = new System.Drawing.Size(152, 22);
+            this.btnTestRound25.Tag = 0.25f;
+            this.btnTestRound25.Text = "0.25";
+            this.btnTestRound25.Click += new System.EventHandler(this.btnTestRound_Click);
+            // 
+            // btnTestRound50
+            // 
+            this.btnTestRound50.Name = "btnTestRound50";
+            this.btnTestRound50.Size = new System.Drawing.Size(152, 22);
+            this.btnTestRound50.Tag = 0.50f;
+            this.btnTestRound50.Text = "0.50";
+            this.btnTestRound50.Click += new System.EventHandler(this.btnTestRound_Click);
+            // 
+            // btnTestRound75
+            // 
+            this.btnTestRound75.Name = "btnTestRound75";
+            this.btnTestRound75.Size = new System.Drawing.Size(152, 22);
+            this.btnTestRound75.Tag = 0.75f;
+            this.btnTestRound75.Text = "0.75";
+            this.btnTestRound75.Click += new System.EventHandler(this.btnTestRound_Click);
+            // 
+            // btnTestRound90
+            // 
+            this.btnTestRound90.Name = "btnTestRound90";
+            this.btnTestRound90.Size = new System.Drawing.Size(152, 22);
+            this.btnTestRound90.Tag = 0.90f;
+            this.btnTestRound90.Text = "0.90";
+            this.btnTestRound90.Click += new System.EventHandler(this.btnTestRound_Click);
+            // 
             // saveDatabaseDialog
             // 
             this.saveDatabaseDialog.DefaultExt = "sdo";
@@ -871,7 +995,7 @@ namespace Sinapse.Forms
             this.statusBarControl.AutoSize = true;
             this.statusBarControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.statusBarControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusBarControl.Location = new System.Drawing.Point(0, 644);
+            this.statusBarControl.Location = new System.Drawing.Point(0, 651);
             this.statusBarControl.Name = "statusBarControl";
             this.statusBarControl.Size = new System.Drawing.Size(892, 22);
             this.statusBarControl.TabIndex = 17;
@@ -897,7 +1021,7 @@ namespace Sinapse.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 666);
+            this.ClientSize = new System.Drawing.Size(892, 673);
             this.Controls.Add(this.toolStripContainer);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelTitle);
@@ -927,6 +1051,8 @@ namespace Sinapse.Forms
             this.toolStripMain.PerformLayout();
             this.toolStripTraining.ResumeLayout(false);
             this.toolStripTraining.PerformLayout();
+            this.toolStripTesting.ResumeLayout(false);
+            this.toolStripTesting.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1017,5 +1143,17 @@ namespace Sinapse.Forms
         private Sinapse.Components.MruProvider mruProviderDatabase;
         private Sinapse.Components.MruProvider mruProviderNetwork;
         private Sinapse.Components.MruProvider mruProviderWorkplace;
+        private System.Windows.Forms.ToolStrip toolStripTesting;
+        private System.Windows.Forms.ToolStripButton btnTestCompute;
+        private System.Windows.Forms.ToolStripSplitButton btnTestReport;
+        private System.Windows.Forms.ToolStripMenuItem btnTestReportOptions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton btnTestRound;
+        private System.Windows.Forms.ToolStripMenuItem thresholdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnTestRound10;
+        private System.Windows.Forms.ToolStripMenuItem btnTestRound25;
+        private System.Windows.Forms.ToolStripMenuItem btnTestRound50;
+        private System.Windows.Forms.ToolStripMenuItem btnTestRound75;
+        private System.Windows.Forms.ToolStripMenuItem btnTestRound90;
     }
 }

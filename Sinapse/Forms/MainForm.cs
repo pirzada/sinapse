@@ -78,7 +78,7 @@ namespace Sinapse.Forms
 
                 if (value != null)
                 {
-                    this.toolStripTraining.Enabled = true;
+                    this.updateButtons();
                     this.btnNetworkSave.Enabled = true;
                     this.MenuNetworkSave.Enabled = true;
                     this.MenuNetworkSaveAs.Enabled = false;
@@ -94,7 +94,7 @@ namespace Sinapse.Forms
                 else
                 {
                     //No active network
-                    this.toolStripTraining.Enabled = false;
+                    this.updateButtons();
                     this.btnNetworkSave.Enabled = false;
                     this.MenuNetworkSave.Enabled = false;
                     this.MenuNetworkSaveAs.Enabled = false;
@@ -119,6 +119,7 @@ namespace Sinapse.Forms
 
                 if (value != null)
                 {
+                    this.updateButtons();
                     this.btnDatabaseSave.Enabled = true;
                     this.MenuDatabaseSave.Enabled = true;
                     this.MenuDatabaseSaveAs.Enabled = false;
@@ -136,6 +137,7 @@ namespace Sinapse.Forms
                 else
                 {
                     //No active data
+                    this.updateButtons();
                     this.btnDatabaseSave.Enabled = false;
                     this.MenuDatabaseSave.Enabled = false;
                     this.MenuDatabaseSaveAs.Enabled = false;
@@ -411,7 +413,7 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
 
-        #region Menu Training
+        #region ToolStripMenu Training
         private void btnTrainStart_Click(object sender, EventArgs e)
         {
             this.tabControlSide.TrainerControl.Start();
@@ -445,6 +447,39 @@ namespace Sinapse.Forms
         private void btnTrainGraph_Click(object sender, EventArgs e)
         {
             this.tabControlMain.GraphControl.ShowTab();
+        }
+        #endregion
+
+
+        #region ToolStripMenu Testing
+        private void btnTestCompute_Click(object sender, EventArgs e)
+        {
+            this.tabControlMain.TestingSetControl.Compute();
+        }
+
+        private void btnTestReport_ButtonClick(object sender, EventArgs e)
+        {
+            this.tabControlMain.TestingSetControl.Compare();
+        }
+
+        private void btnTestReportOptions_Click(object sender, EventArgs e)
+        {
+            new PerformanceReportOptions().ShowDialog(this);
+        }
+
+        private void btnTestRound_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (sender as ToolStripMenuItem);
+            
+            if (item.Tag is Single)
+            {
+                float value = (float)item.Tag;
+
+                if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageTesting)
+                    this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
+                else if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageQuery)
+                    this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
+            }
         }
         #endregion
 
@@ -581,6 +616,22 @@ namespace Sinapse.Forms
 
         //---------------------------------------------
 
+
+        #region Private Methods
+        private void updateButtons()
+        {
+            if (this.m_networkDatabase != null && m_networkContainer != null)
+            {
+                this.toolStripTraining.Enabled = true;
+                this.toolStripTesting.Enabled = true;
+            }
+            else
+            {
+                this.toolStripTraining.Enabled = false;
+                this.toolStripTesting.Enabled = false;
+            }
+        }
+        #endregion
 
     }
 }

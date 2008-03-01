@@ -16,51 +16,37 @@
  *                                                                         *
  ***************************************************************************/
 
+/*************************************************************************** 
+ * Class originally developed by Ambalavanar Thirugnanam                   *
+ *  http://www.codeproject.com/cs/library/HTMLReportEngine.asp             *
+ *                                                                         *
+ *  This project license does not apply to this library.                   *
+ *  Please contact the class author for more licensing info                *
+ *                                                                         *
+ ***************************************************************************/
+
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Diagnostics;
+using System.Text;
+using System.Drawing;
 
-using Sinapse.Forms;
 
-namespace Sinapse
+namespace Sinapse.Utils.HtmlReport
 {
-    static class Program
+
+    public enum HtmlAlign
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        [LoaderOptimization(LoaderOptimization.SingleDomain)]
-        static void Main()
+        Left, Right, Center
+    }
+
+    internal class Util
+    {
+        public static string GetHTMLColorString(Color color)
         {
-            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            Program.Initialize();
-
-            Application.Run(new MainForm());
-
-            Properties.Settings.Default.Save();
+            if (color.IsNamedColor)
+                return color.Name;
+            else
+                return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
         }
-
-
-        static void Initialize()
-        {
-            Sinapse.Data.HistoryListener.Initialize();
-
-            if (Properties.Settings.Default.history_Database == null)
-                Properties.Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
-
-            if (Properties.Settings.Default.history_Networks == null)
-                Properties.Settings.Default.history_Networks = new System.Collections.Specialized.StringCollection();
-
-            if (Properties.Settings.Default.history_Workplace == null)
-                Properties.Settings.Default.history_Workplace = new System.Collections.Specialized.StringCollection();
-
-        }
-
     }
 }

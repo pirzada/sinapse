@@ -25,8 +25,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Dotnetrix.Controls;
+
 using Sinapse.Data.Network;
-using Sinapse.Data.CsvParser;
+using Sinapse.Utils.CsvParser;
                          
 
 namespace Sinapse.Controls.MainTabControl.Base
@@ -205,6 +206,18 @@ namespace Sinapse.Controls.MainTabControl.Base
         {
             base.OnParentChanged(e);
             this.UpdateTitle();
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Public Methods
+        public void EndEdit()
+        {
+            this.dataGridView.EndEdit();
+            this.dataGridView.CurrentCell = null;
         }
         #endregion
 

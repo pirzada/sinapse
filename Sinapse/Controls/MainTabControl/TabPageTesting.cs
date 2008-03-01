@@ -125,24 +125,35 @@ namespace Sinapse.Controls.MainTabControl
         #region Buttons
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            this.dataGridView.EndEdit();
-            this.dataGridView.CurrentCell = null;
-
-            this.NetworkDatabase.ComputeTable(this.NetworkContainer, true);
-            this.lbScore.Text = "Deviation: " + this.NetworkDatabase.Score();
+            this.Compute();
         }
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            new PerformanceDialog(this.NetworkContainer, this.NetworkDatabase).ShowDialog(this);
+            this.Compare();
         }
 
         private void btnRound_Click(object sender, EventArgs e)
         {
-            this.dataGridView.EndEdit();
-            this.dataGridView.CurrentCell = null;
-
+            this.EndEdit();
             this.NetworkDatabase.Round(true);
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Public Methods
+        public void Compute()
+        {
+            this.EndEdit();
+            this.NetworkDatabase.ComputeTable(this.NetworkContainer, true);
+        }
+
+        public void Compare()
+        {
+            new PerformanceDialog(this.NetworkContainer, this.NetworkDatabase).ShowDialog(this);
         }
         #endregion
 

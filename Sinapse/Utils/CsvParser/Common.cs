@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sinapse.Data.CsvParser
+namespace Sinapse.Utils.CsvParser
 {
 
     public sealed class CsvFileParserOptions
