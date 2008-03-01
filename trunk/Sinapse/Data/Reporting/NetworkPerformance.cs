@@ -20,13 +20,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sinapse.Data.Network
+using Sinapse.Data.Network;
+
+namespace Sinapse.Data.Reporting
 {
     internal sealed class NetworkPerformance
     {
 
         private NetworkContainer m_network;
         private NetworkDatabase m_database;
+
+
+        //---------------------------------------------
+
 
         #region Constructor
         public NetworkPerformance(NetworkContainer network, NetworkDatabase database)
@@ -37,8 +43,6 @@ namespace Sinapse.Data.Network
             this.generate();
         }
         #endregion
-
-        
 
 
         //---------------------------------------------

@@ -250,18 +250,19 @@ namespace Sinapse.Data.Network
             }
             catch (DirectoryNotFoundException e)
             {
-                Debug.WriteLine("Directory not found during network serialization");
+                Debug.WriteLine("Directory not found during network serialization " + e.Message);
                 success = false;
                 throw e;
             }
             catch (SerializationException e)
             {
-                Debug.WriteLine("Error occured during serialization");
+                Debug.WriteLine("Error occured during serialization: " + e.Message);
                 success = false;
                 throw e;
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Error saving network: " + e.Message);
                 success = false;
                 throw e;
             }

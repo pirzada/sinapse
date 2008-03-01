@@ -76,8 +76,7 @@ namespace Sinapse.Controls.MainTabControl
         #region Buttons
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            this.dataGridView.EndEdit();
-            this.dataGridView.CurrentCell = null;
+            this.EndEdit();
 
             this.NetworkDatabase.ComputeTable(this.NetworkContainer, false);
 
@@ -85,8 +84,7 @@ namespace Sinapse.Controls.MainTabControl
 
         private void btnRound_Click(object sender, EventArgs e)
         {
-            this.dataGridView.EndEdit();
-            this.dataGridView.CurrentCell = null;
+            this.EndEdit();
 
             this.NetworkDatabase.Round(false);
         }

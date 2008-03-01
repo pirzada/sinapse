@@ -1,13 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
+
 	<head>
-		<title></title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Sinapse Network Testing Performance Report</title>
 	    <style type="text/css">
 <!--
 .style1 {font-size: 24px}
 -->
         </style>
-</head>
+    </head>
+
 	<body>
         <strong><span><span style="font-family: Courier New"><span style="font-size: 16pt">Network
             Testing</span><br />
@@ -35,9 +38,9 @@
                 <br />
                 <strong>&nbsp;Training Details</strong><br />
                 --------------------------------------<br />
-                <strong><span style="font-size: 10pt">&nbsp;</span>Training Items:</strong> &nbsp;
+                <strong><span style="font-size: 10pt">&nbsp;</span>Training Entries:</strong> &nbsp;
                 [setTrain]<br />
-                <strong><span style="font-size: 10pt">&nbsp;</span>Validation Items:</strong> [setValid]<br />
+                <strong><span style="font-size: 10pt">&nbsp;</span>Validation Entries:</strong> [setValid]<br />
                 <br />
                 <strong><span style="font-size: 10pt">&nbsp;</span>Error RMS: &nbsp; &nbsp; &nbsp;</strong>&nbsp;
                 [TrainRMS]<br />
@@ -46,36 +49,43 @@
                 <br />
                 <strong><span style="font-size: 10pt">&nbsp;</span>Test Summary</strong><br />
                 --------------------------------------<br />
-                <strong><span style="font-size: 10pt">&nbsp;</span>Testing Items:</strong> &nbsp;
+                <strong><span style="font-size: 10pt">&nbsp;</span>Testing Entries:</strong> &nbsp;
                 &nbsp;[setTest]<br />
+                <span style="font-size: 10pt">&nbsp;</span><strong>Testing Items:</strong> &nbsp;
+                &nbsp;&nbsp; [testItems]<br />
                 <br />
                 <span style="font-size: 11pt"><strong><span style="font-size: 10pt">&nbsp;</span>Hits:</strong>
-                    &nbsp;&nbsp; [rHits]&nbsp; ([rHitsPerc]%)</span><br />
+                    &nbsp;&nbsp; &nbsp; [rHits]&nbsp; [rHitsPerc]</span><br />
                 <span style="font-size: 9pt"><strong><span style="font-size: 10pt">&nbsp;</span>Positives:</strong>&nbsp;
-                    [rHitsP] ([rHitsPPerc]%)<br />
+                    [rHitsP] &nbsp; [rHitsPPerc]<br />
                     <strong><span style="font-size: 10pt">&nbsp;</span>Negatives:</strong>&nbsp; [rHitsN]
-                    ([rHitsNPerc]%)</span><br />
+                    &nbsp; [rHitsNPerc]</span><br />
                 <br />
-                <span style="font-size: 11pt"><strong><span style="font-size: 10pt">&nbsp;</span>Errors:&nbsp;
-                </strong>[rErrors]&nbsp; ([rErrorsPerc]%)</span><br />
+                <span style="font-size: 11pt"><strong><span style="font-size: 10pt">&nbsp;</span>Errors:&nbsp;&nbsp;
+                </strong>[rErrors]&nbsp; [rErrorsPerc]</span><br />
                 <span style="font-size: 9pt"><strong><span style="font-size: 10pt">&nbsp;</span>Positives:</strong>&nbsp;
-                    [rErrorsP] ([rErrorsPPerc]%)<br />
+                    [rErrorsP] &nbsp; [rErrorsPPerc]<br />
                     <strong><span style="font-size: 10pt">&nbsp;</span>Negatives:</strong>&nbsp; [rErrorsN]
-                    ([rErrorsNPerc]%)</span><br />
+                    &nbsp; [rErrorsNPerc]</span><br />
                 <br />
-                <strong>&nbsp;Total Score: &nbsp; &nbsp;&nbsp; </strong>[totalScore]<br />
-                <strong>&nbsp;Final Score:</strong> &nbsp; &nbsp;&nbsp; [finalScore]<br />
+                <br />
+                <strong>&nbsp;Total Deviation: &nbsp; &nbsp;&nbsp; </strong>[totalScore]<br />
+                <strong>&nbsp;Final Deviation:</strong> &nbsp; &nbsp;&nbsp; [finalScore]<br />
+                <br />
+                <span style="font-size: 8pt">* Total Deviation means the calculated sum of deviations for<br />
+                    &nbsp; every item in the training set. Final Deviation means the<br />
+                    &nbsp; total score divided by the ammount of items in the set.</span><br />
                 <br />
                 <br />
                 <br />
                 <strong>&nbsp;Test Results</strong><br />
                 --------------------------------------<span style="font-size: 10pt"><br />
-                    [testResults]
+                    &nbsp;[testResults]
                 <br />
                 <br />
                     <br />
                 <br />
-                <strong>&nbsp;Network Weights</strong><br />
+                <strong><span style="font-size: 12pt">&nbsp;Network Weights</span></strong><br />
                 --------------------------------------<br />
                 <span>[netWeights]</span><br />
                 <br />

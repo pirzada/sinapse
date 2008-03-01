@@ -134,6 +134,7 @@ namespace Sinapse.Controls.MainTabControl
             this.lbScore.Size = new System.Drawing.Size(142, 11);
             this.lbScore.TabIndex = 33;
             this.lbScore.Text = "Deviation:";
+            this.lbScore.Visible = false;
             // 
             // TabPageTesting
             // 

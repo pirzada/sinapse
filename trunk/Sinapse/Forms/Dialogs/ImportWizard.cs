@@ -28,7 +28,7 @@ using System.IO;
 using WizardBase;
 
 using Sinapse.Data.Network;
-using Sinapse.Data.CsvParser;
+using Sinapse.Utils.CsvParser;
 
 
 namespace Sinapse.Forms.Dialogs

@@ -25,7 +25,8 @@ using System.Diagnostics;
 using System.Data;
 using System.IO;
 
-using AForge;
+using AForge;  
+
 using Sinapse.Data.Structures;
 
 
@@ -47,7 +48,9 @@ namespace Sinapse.Data.Network
         public const string ColumnDeltaPrefix = "@_delta";
         #endregion
 
+
         //----------------------------------------
+
 
         private NetworkSchema m_networkSchema;
         private DataTable m_dataTable;
@@ -380,10 +383,10 @@ namespace Sinapse.Data.Network
         /// <summary>
         /// Iterates the DataTable and rounds non-categorical output fields
         /// </summary>
-        internal void Round(bool testingOnly)
+        internal void Round(bool testingOnly, float threshold)
         {
             string columnName;
-            double value;
+            double value, absDecValue;
 
             foreach (DataRow row in this.m_dataTable.Rows)
             {
@@ -397,10 +400,26 @@ namespace Sinapse.Data.Network
                     if (!this.Schema.IsCategory(columnName))
                     {
                         if (Double.TryParse((string)row[columnName], out value))
-                            row[columnName] = Math.Round(value).ToString();
+                        {
+                            absDecValue = Math.Abs(value - Math.Truncate(value));
+                            if (value > 0 && absDecValue >= threshold ||
+                                value < 0 && absDecValue <= threshold)
+                            {
+                                row[columnName] = Math.Ceiling(value).ToString();
+                            }
+                            else
+                            {
+                                row[columnName] = Math.Floor(value).ToString();
+                            }
+                        }
                     }
                 }
             }
+        }
+
+        internal void Round(bool testingOnly)
+        {
+            this.Round(testingOnly, 0.5f);
         }
 
         internal double Score()

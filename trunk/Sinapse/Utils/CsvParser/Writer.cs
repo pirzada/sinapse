@@ -9,11 +9,12 @@ using System;
 using System.IO;
 using System.Data;
 
-namespace Sinapse.Data.CsvParser
+namespace Sinapse.Utils.CsvParser
 {
 
     public sealed class CsvWriter
     {
+
         public static string WriteToString(DataTable table, bool header, bool quoteall, char delimiter)
         {
             StringWriter writer = new StringWriter();

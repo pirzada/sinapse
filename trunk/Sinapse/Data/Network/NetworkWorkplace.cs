@@ -22,6 +22,7 @@ using System.Text;
 using System.IO;
 
 using Sinapse.Data;
+using Sinapse.Data.Reporting;
 
 
 namespace Sinapse.Data.Network
