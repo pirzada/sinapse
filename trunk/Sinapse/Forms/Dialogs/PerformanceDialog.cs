@@ -40,7 +40,7 @@ namespace Sinapse.Forms.Dialogs
     internal sealed partial class PerformanceDialog : Form
     {
 
-        private readonly string reportPath = Path.Combine(Application.StartupPath, @"Resources/NetworkReport.htm");
+        private readonly string reportPath = Path.Combine(Application.StartupPath, @"Resources/Templates/NetworkReport.htm");
 
         private NetworkContainer m_network;
         private NetworkDatabase m_database;

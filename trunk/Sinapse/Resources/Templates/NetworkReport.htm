@@ -1,2 +1,266 @@
-<p>Network Testing</p>
-<p>Performance Report  </p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Sinapse Network Testing Performance Report</title>
+	
+<style type="text/css">
+	<!--
+	body {
+		margin-left: 10px;
+		margin-top: 10px;
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
+
+	body,td,th {
+		font-family: Courier New, Courier, monospace;
+		margin-bottom: 0px;
+		font-size: 10pt;
+		color: #000000;
+	}
+	
+	.ReportBody {
+		font-size: 10pt;
+	}
+	
+	.ReportTitle {
+		font-size: 24pt;
+		font-weight: bold;
+	}
+	
+	.ReportTitleSmall {
+		font-size: 14pt;
+		font-weight: bold;
+	}
+	
+	.ReportSubtitle
+	{
+		font-size:13pt;
+		font-weight:bold;
+		margin-left:10px;
+	}
+	
+	.ReportSeparator {
+		font-size: 10pt;
+	}
+	
+	.ReportFooter{
+	font-size: 9pt;
+	margin-left: 10px;
+	font-style: italic;
+	}
+	
+	.TableTitle{
+		font-size: 12pt;
+		font-weight: bold;
+	}
+	
+	.ReportNote
+	{
+		font-size: x-small;
+	}
+	
+	.TableItem
+	{
+		font-weight: bold;
+	}
+	
+	a:link
+	{
+		text-decoration: none;
+	}
+	a:visited
+	{
+		text-decoration: none;
+	}
+	a:hover
+	{
+		text-decoration: none;
+	}
+	a:active
+	{
+		text-decoration: none;
+	}
+	
+	p
+	{
+		margin:0;
+		padding:0;
+		padding-top: 0px;
+		margin-top: 0px;
+	}
+	
+	table
+	{
+	margin-left: 10px;
+	}
+.style5 {font-weight: bold; font-size: 9pt; }
+.style6 {font-size: 9pt}
+
+	-->
+	</style>
+</head>
+
+<body>
+<p class="ReportTitleSmall">Network Testing</p>
+<p class="ReportTitle">&nbsp;&nbsp;Performance Report</p>
+<p class="ReportSeparator">---------------------------------------------------</p>
+<p>&nbsp;</p>
+<table width="400" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="19" colspan="2" valign="top" class="TableTitle">Network Details</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Name:</td>
+    <td>[netName]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Type:</td>
+    <td>[netType]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Layout:</td>
+    <td>[netLayout]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Description:</td>
+    <td>[netDescription]</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table width="400" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="19" colspan="2" valign="top" class="TableTitle">Network Schema </td>
+  </tr>
+  <tr>
+    <td width="80" class="TableItem">Inputs:</td>
+    <td width="215">[schInput]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Outputs:</td>
+    <td>[schOutput]</td>
+  </tr>
+  <tr>
+    <td height="20" colspan="2" valign="bottom" class="ReportNote">* marked fields are categorical (non number) fields</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="ReportSubtitle"> Training Details</p>
+<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<table width="400" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="174" class="TableItem">Training Entries: </td>
+    <td width="216" align="right">[schInput]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Validation Entries: </td>
+    <td align="right">[schOutput]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Training Deviation: </td>
+    <td align="right">[trainDeviation]</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="ReportSubtitle">Testing Summary</p>
+<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<table width="400" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="174" class="TableItem">Testing Entries: </td>
+    <td width="216" align="right">[setTest]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Testing Items: </td>
+    <td align="right">[setTestItems]</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="400" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="128" class="TableItem">Hits:</td>
+    <td width="117">[hits]</td>
+    <td width="141">[setTest]</td>
+  </tr>
+  <tr>
+    <td class="TableItem style6">&nbsp;Positives:</td>
+    <td><span class="style6">&nbsp;[hitsP]</span></td>
+    <td><span class="style6">&nbsp;[hitsP%]</span></td>
+  </tr>
+  <tr>
+    <td class="style5">&nbsp;Negatives:</td>
+    <td><span class="style6">&nbsp;[hitsN]</span></td>
+    <td><span class="style6">&nbsp;[hitsN%]</span></td>
+  </tr>
+  <tr>
+    <td class="TableItem">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Errors:</td>
+    <td>[errors]</td>
+    <td>[errors%]</td>
+  </tr>
+  <tr>
+    <td class="style5">&nbsp;Positives:</td>
+    <td><span class="style6">&nbsp;[errorsP]</span></td>
+    <td><span class="style6">&nbsp;[errorsP%]</span></td>
+  </tr>
+  <tr>
+    <td class="style5">&nbsp;Negatives:</td>
+    <td><span class="style6">&nbsp;[errorsN]</span></td>
+    <td><span class="style6">&nbsp;[errorsN%]</span></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table width="400" border="0" cellspacing="0">
+  <tr>
+    <td width="174" class="TableItem">Total Deviation: </td>
+    <td align="right">[totalDeviation]</td>
+  </tr>
+  <tr>
+    <td class="TableItem">Final Deviation: </td>
+    <td align="right">[finalDeviation]</td>
+  </tr>
+  <tr>
+    <td height="55" colspan="2" valign="bottom" class="ReportNote">* Total Deviation means the calculated sum of deviations for every item in the training set. Final Deviation means the total score divided by the ammount of items in the set.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="ReportSubtitle">Testing Details</p>
+<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p>[testTable]</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="ReportSubtitle">Network Weights</p>
+<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p>[netWeights]</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p class="ReportFooter">Report generated by Sinapse Neural Networking Tool</p>
+<p class="ReportFooter">http://sinapse.googlecode.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(C)[year]</p>
+<p>&nbsp;</p>
+</body>
+</html>

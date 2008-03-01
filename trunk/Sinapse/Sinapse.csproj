@@ -63,10 +63,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\TabControlEX.dll</HintPath>
     </Reference>
-    <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\WizardBase\bin\Release\WizardBase.dll</HintPath>
-    </Reference>
     <Reference Include="ZedGraph, Version=5.0.4.13542, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
@@ -406,6 +402,10 @@
       <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>
       <Name>AForge.Neuro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\lib\WizardBase\WizardBase.csproj">
+      <Project>{C742E00B-3933-4834-BC41-19848E1E3AF2}</Project>
+      <Name>WizardBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -696,9 +696,6 @@
   <ItemGroup>
     <None Include="Resources\editcopy.png" />
     <None Include="Resources\editpaste.png" />
-    <None Include="Resources\NetworkReport.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Sinapse_TemporaryKey.pfx" />
     <None Include="Resources\history.png" />
     <None Include="Resources\kdvi.png" />

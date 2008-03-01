@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{31831A6F-ECC6-4F79-92FB-F1A1A09B5576}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse", "Sinapse\Sinapse.csproj", "{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C742E00B-3933-4834-BC41-19848E1E3AF2} = {C742E00B-3933-4834-BC41-19848E1E3AF2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
