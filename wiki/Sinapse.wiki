@@ -1,5 +1,5 @@
 #summary User's guide
-#labels Information
+#labels Featured,Information
 
 = Introduction =
 
