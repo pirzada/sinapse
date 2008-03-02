@@ -42,7 +42,7 @@ namespace Sinapse.Data.Structures
         internal double? secondLearningRate;
 
         internal bool validateNetwork;
-        internal bool testNetwork;
+  //      internal bool testNetwork;
 
         [NonSerialized]
         internal TrainingVectors TrainingVectors;

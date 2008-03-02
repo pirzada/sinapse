@@ -62,6 +62,7 @@ namespace Sinapse.Utils.HtmlReport
             this.m_headerName = "Column Header";
             this.m_backColor = Color.White;
             this.m_headerBackColor = Color.White;
+            this.FormatString = String.Empty;
             this.Width = 0;
         }
 

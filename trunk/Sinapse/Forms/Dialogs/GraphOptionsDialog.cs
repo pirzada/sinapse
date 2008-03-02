@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -27,9 +27,9 @@ using System.Windows.Forms;
 namespace Sinapse.Forms.Dialogs
 {
 
-    internal sealed partial class GraphOptions : Sinapse.Forms.Base.SingleInstanceForm
+    internal sealed partial class GraphOptionsDialog : Sinapse.Forms.Base.SingleInstanceForm
     {
-        internal GraphOptions()
+        internal GraphOptionsDialog()
         {
             InitializeComponent();
         }

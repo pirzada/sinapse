@@ -75,33 +75,14 @@ namespace Sinapse.Controls.MainTabControl
 
                 foreach (String colName in this.NetworkDatabase.Schema.OutputColumns)
                 {
-                 /*
-                    column = new DataGridViewTextBoxColumn();
-                    column.DataPropertyName = NetworkDatabase.ColumnComputedPrefix + colName;
-                    column.HeaderText = colName + " (network)";
-                    column.DefaultCellStyle.Format = "D5";
-                    column.DefaultCellStyle.BackColor = panelNetworkCaption.BackColor;
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                 */
+
                     this.dataGridView.Columns.Add(this.CreateColumn(
                         colName + " (network)", 
                         NetworkDatabase.ColumnComputedPrefix + colName,
                         panelNetworkCaption.BackColor));
 
-                 /* 
-                    column = new DataGridViewTextBoxColumn();
-                    column.DataPropertyName = NetworkDatabase.ColumnDeltaPrefix + colName;
-                    column.DefaultCellStyle.Format = "D5";
-                    column.HeaderText = colName + " (delta)";
-                    column.DefaultCellStyle.BackColor = panelDeltaCaption.BackColor;
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    this.dataGridView.Columns.Add(column);
-                 */
-
                     this.dataGridView.Columns.Add(this.CreateColumn(
-                        colName + " (delta)",
+                        colName + " (deviation)",
                         NetworkDatabase.ColumnDeltaPrefix + colName,
                         panelDeltaCaption.BackColor));
 
@@ -153,7 +134,7 @@ namespace Sinapse.Controls.MainTabControl
 
         public void Compare()
         {
-            new PerformanceDialog(this.NetworkContainer, this.NetworkDatabase).ShowDialog(this);
+            new NetworkReportDialog(this.NetworkContainer, this.NetworkDatabase).ShowDialog(this);
         }
         #endregion
 

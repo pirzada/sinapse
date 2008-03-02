@@ -168,7 +168,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.MenuCopyQuery,
             this.toolStripSeparator2,
             this.MenuCopyClipboard});
-            this.MenuCopy.Image = global::Sinapse.Properties.Resources.editcopy;
+            this.MenuCopy.Image = global::Sinapse.Properties.Resources.edit_copy;
             this.MenuCopy.Name = "MenuCopy";
             this.MenuCopy.Size = new System.Drawing.Size(160, 22);
             this.MenuCopy.Text = "Copy To...";
@@ -209,7 +209,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             // 
             // MenuCopyClipboard
             // 
-            this.MenuCopyClipboard.Image = global::Sinapse.Properties.Resources.editcopy;
+            this.MenuCopyClipboard.Image = global::Sinapse.Properties.Resources.edit_copy;
             this.MenuCopyClipboard.Name = "MenuCopyClipboard";
             this.MenuCopyClipboard.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.MenuCopyClipboard.Size = new System.Drawing.Size(169, 22);
@@ -218,7 +218,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             // 
             // MenuPaste
             // 
-            this.MenuPaste.Image = global::Sinapse.Properties.Resources.editpaste;
+            this.MenuPaste.Image = global::Sinapse.Properties.Resources.edit_paste;
             this.MenuPaste.Name = "MenuPaste";
             this.MenuPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
             this.MenuPaste.Size = new System.Drawing.Size(160, 22);

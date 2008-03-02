@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -63,7 +63,7 @@ namespace Sinapse.Forms
 
 
         #region Properties
-        internal NetworkContainer CurrentNetworkContainer
+        public NetworkContainer CurrentNetworkContainer
         {
             get
             {
@@ -104,7 +104,7 @@ namespace Sinapse.Forms
             }
         }
 
-        internal NetworkDatabase CurrentNetworkDatabase
+        public NetworkDatabase CurrentNetworkDatabase
         {
             get
             {
@@ -149,7 +149,7 @@ namespace Sinapse.Forms
             }
         }
 
-        internal NetworkWorkplace CurrentNetworkWorkplace
+        public NetworkWorkplace CurrentNetworkWorkplace
         {
             get
             {
@@ -161,6 +161,7 @@ namespace Sinapse.Forms
 
                 if (value != null)
                 {
+                    this.m_networkWorkplace.WorkplaceSaved += new FileSystemEventHandler(currentWorkplace_WorkplaceSaved);
                 }
                 else
                 {
@@ -174,15 +175,19 @@ namespace Sinapse.Forms
 
 
         #region MainForm Events
-        private void MainForm_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
+
             if (!this.DesignMode)
             {
                 // Set form Sizing and Location
-                this.Size = Properties.Settings.Default.main_Size;
-                this.Location = Properties.Settings.Default.main_Location;
-                this.WindowState = Properties.Settings.Default.main_WindowState;
-
+                if (!Properties.Settings.Default.main_FirstLoad)
+                {
+                    this.Size = Properties.Settings.Default.main_Size;
+                    this.Location = Properties.Settings.Default.main_Location;
+                    this.WindowState = Properties.Settings.Default.main_WindowState;
+                }
 
                 // Wire up controls and events
                 this.tabControlMain.DataSelectionChanged += tabControlMain_SelectionChanged;
@@ -200,14 +205,17 @@ namespace Sinapse.Forms
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
+            base.OnClosing(e);
+
             HistoryListener.Write("Exiting...");
 
             if (this.tabControlSide.TrainerControl.IsTraining)
                 this.tabControlSide.TrainerControl.Stop();
 
             // Save settings before closing
+            Properties.Settings.Default.main_FirstLoad = false;
             Properties.Settings.Default.main_WindowState = this.WindowState;
             if (this.WindowState == FormWindowState.Normal)
             {
@@ -454,6 +462,9 @@ namespace Sinapse.Forms
         #region ToolStripMenu Testing
         private void btnTestCompute_Click(object sender, EventArgs e)
         {
+            if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
+                this.tabControlMain.TestingSetControl.ShowTab();
+
             this.tabControlMain.TestingSetControl.Compute();
         }
 
@@ -464,11 +475,14 @@ namespace Sinapse.Forms
 
         private void btnTestReportOptions_Click(object sender, EventArgs e)
         {
-            new PerformanceReportOptions().ShowDialog(this);
+            new NetworkReportOptionsDialog().ShowDialog(this);
         }
 
         private void btnTestRound_Click(object sender, EventArgs e)
         {
+            if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
+                this.tabControlMain.TestingSetControl.ShowTab();
+
             ToolStripMenuItem item = (sender as ToolStripMenuItem);
             
             if (item.Tag is Single)
@@ -611,6 +625,49 @@ namespace Sinapse.Forms
 
 
         #region Open & Save Workplace
+        private void workplaceSave(string path)
+        {
+            try
+            {
+                NetworkWorkplace.Serialize(this.CurrentNetworkWorkplace, path);
+                this.mruProviderWorkplace.Insert(path);
+                HistoryListener.Write("Workplace saved!");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error saving workplace");
+#if DEBUG
+                throw e;
+#endif
+            }
+
+        }
+
+        private void workplaceOpen(string path)
+        {
+            NetworkWorkplace networkWorkplace = null;
+
+            try
+            {
+                networkWorkplace = NetworkWorkplace.Deserialize(path);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error opening workplace");
+#if DEBUG
+                throw e;
+#endif
+            }
+            finally
+            {
+                if (networkWorkplace != null)
+                {
+                    this.CurrentNetworkWorkplace = networkWorkplace;
+                    this.mruProviderWorkplace.Insert(path);
+                    HistoryListener.Write("Workplace loaded!");
+                }
+            }
+        }
         #endregion
 
 

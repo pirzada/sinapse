@@ -1,6 +1,6 @@
 namespace Sinapse.Forms.Dialogs
 {
-    partial class GraphOptions
+    partial class GraphOptionsDialog
     {
         /// <summary>
         /// Required designer variable.

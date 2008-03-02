@@ -2,11 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sinapse.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="graph_Location" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">600, 500</Value>
-    </Setting>
     <Setting Name="main_Location" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">200, 200</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="main_WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
@@ -15,7 +12,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="main_Size" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">800, 600</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="graph_Launch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -25,9 +22,6 @@
     </Setting>
     <Setting Name="display_UpdateRate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
-    </Setting>
-    <Setting Name="graph_Size" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">517, 276</Value>
     </Setting>
     <Setting Name="main_AutoSwitchToTrainingTab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -53,7 +47,28 @@
     <Setting Name="history_Workplace" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="history_autoScroll" Type="System.Boolean" Scope="User">
+    <Setting Name="history_AutoScroll" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="training_LayerAutoSwitch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="training_LayerAutoSwitchEpochs" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="report_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="report_Location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="report_WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="main_FirstLoad" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="report_FirstLoad" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

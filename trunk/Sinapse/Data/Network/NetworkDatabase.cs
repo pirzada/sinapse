@@ -581,6 +581,8 @@ namespace Sinapse.Data.Network
         #region Static Methods
         public static void Serialize(NetworkDatabase networkDatabase, string path)
         {
+            //TODO: Improve/rewrite those methods.
+
             FileStream fileStream = null;
             bool success = true;
 
@@ -593,13 +595,13 @@ namespace Sinapse.Data.Network
             }
             catch (DirectoryNotFoundException e)
             {
-                Debug.WriteLine("Directory not found during network serialization");
+                Debug.WriteLine("Directory not found during database serialization");
                 success = false;
                 throw e;
             }
             catch (SerializationException e)
             {
-                Debug.WriteLine("Error occured during serialization");
+                Debug.WriteLine("Error occured during database serialization");
                 success = false;
                 throw e;
             }
@@ -632,13 +634,13 @@ namespace Sinapse.Data.Network
             }
             catch (FileNotFoundException e)
             {
-                Debug.WriteLine("File not found during network deserialization");
+                Debug.WriteLine("File not found during database deserialization");
                 success = false;
                 throw e;
             }
             catch (SerializationException e)
             {
-                Debug.WriteLine("Error occured during deserialization");
+                Debug.WriteLine("Error occured during database deserialization");
                 success = false;
                 throw e;
             }

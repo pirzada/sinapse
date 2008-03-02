@@ -1,6 +1,6 @@
 namespace Sinapse.Forms.Dialogs
 {
-    partial class PerformanceReportOptions
+    partial class NetworkReportOptionsDialog
     {
         /// <summary>
         /// Required designer variable.

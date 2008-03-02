@@ -25,19 +25,6 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600, 500")]
-        public global::System.Drawing.Point graph_Location {
-            get {
-                return ((global::System.Drawing.Point)(this["graph_Location"]));
-            }
-            set {
-                this["graph_Location"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200, 200")]
         public global::System.Drawing.Point main_Location {
             get {
                 return ((global::System.Drawing.Point)(this["main_Location"]));
@@ -73,7 +60,6 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("800, 600")]
         public global::System.Drawing.Size main_Size {
             get {
                 return ((global::System.Drawing.Size)(this["main_Size"]));
@@ -116,18 +102,6 @@ namespace Sinapse.Properties {
             }
             set {
                 this["display_UpdateRate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("517, 276")]
-        public global::System.Drawing.Size graph_Size {
-            get {
-                return ((global::System.Drawing.Size)(this["graph_Size"]));
-            }
-            set {
-                this["graph_Size"] = value;
             }
         }
         
@@ -227,12 +201,94 @@ namespace Sinapse.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool history_autoScroll {
+        public bool history_AutoScroll {
             get {
-                return ((bool)(this["history_autoScroll"]));
+                return ((bool)(this["history_AutoScroll"]));
             }
             set {
-                this["history_autoScroll"] = value;
+                this["history_AutoScroll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool training_LayerAutoSwitch {
+            get {
+                return ((bool)(this["training_LayerAutoSwitch"]));
+            }
+            set {
+                this["training_LayerAutoSwitch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int training_LayerAutoSwitchEpochs {
+            get {
+                return ((int)(this["training_LayerAutoSwitchEpochs"]));
+            }
+            set {
+                this["training_LayerAutoSwitchEpochs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Size report_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["report_Size"]));
+            }
+            set {
+                this["report_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Point report_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["report_Location"]));
+            }
+            set {
+                this["report_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState report_WindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["report_WindowState"]));
+            }
+            set {
+                this["report_WindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool main_FirstLoad {
+            get {
+                return ((bool)(this["main_FirstLoad"]));
+            }
+            set {
+                this["main_FirstLoad"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool report_FirstLoad {
+            get {
+                return ((bool)(this["report_FirstLoad"]));
+            }
+            set {
+                this["report_FirstLoad"] = value;
             }
         }
     }

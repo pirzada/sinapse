@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -29,7 +29,7 @@ using Sinapse.Data;
 
 namespace Sinapse.Forms.Dialogs
 {
-    internal sealed partial class HistoryDialog : Form
+    internal sealed partial class HistoryDialog : Sinapse.Forms.Base.SingleInstanceForm
     {
         internal HistoryDialog()
         {

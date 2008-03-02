@@ -53,10 +53,12 @@ namespace Sinapse.Utils.HtmlReport
         private string gradientStyle;
         private StringBuilder htmlContent;
         public string ReportFont;
+        public string ValuesFont;
         //    public Font ReportFont;
         private Hashtable totalList;
         public List<String> TotalFields;
         public bool IncludeTotal;
+        public bool AutoAlignTotalFields;
         //Chart fields
         public bool IncludeChart;
         public string ChartTitle;
@@ -77,6 +79,7 @@ namespace Sinapse.Utils.HtmlReport
             sections = new List<Section>();
             reportFields = new List<Field>();
             ReportFont = "Arial";
+            ValuesFont = "Arial";
             //    ReportFont = new Font(FontFamily.GenericSansSerif, 8f, GraphicsUnit.Pixel);
             gradientStyle = "FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=1,startColorStr=BackColor,endColorStr=#ffffff)";
             totalList = new Hashtable();
@@ -178,7 +181,7 @@ namespace Sinapse.Utils.HtmlReport
             htmlContent.Append(" .TitleStyle { font-family: " + ReportFont + "; font-size:14pt } " + newline);
             htmlContent.Append(" .SectionHeader {font-family: " + ReportFont + "; font-size:9pt } " + newline);
             htmlContent.Append(" .DetailHeader {font-family: " + ReportFont + "; font-size:8pt } " + newline);
-            htmlContent.Append(" .DetailData  {font-family: " + ReportFont + "; font-size:8pt } " + newline);
+            htmlContent.Append(" .DetailData  {font-family: " + ValuesFont + "; font-size:8pt } " + newline);
             htmlContent.Append(" .ColumnHeaderStyle  {font-family: " + ReportFont + "; font-size:8pt; border-style:outset; border-width:1} " + newline);
             htmlContent.Append("</STYLE>" + newline);
             htmlContent.Append("<BODY TOPMARGIN=0 LEFTMARGIN=0 RIGHTMARGIN=0 BOTTOMMARGIN=0>" + newline);
@@ -294,13 +297,13 @@ namespace Sinapse.Utils.HtmlReport
 
                         //if total field, by default set to RIGHT align.
                         //if(this.TotalFields.Contains(field.FieldName))
-                        if (field.IsTotalField)
+                        if (AutoAlignTotalFields && field.IsTotalField)
                             cellParams += " align='right' ";
                         cellParams += " ALIGN='" + field.Alignment.ToString() + "' ";
                         htmlContent.Append("  <TD " + cellParams + " VALIGN='top' class='DetailData'>");
 
                         //Add the field value to the html table
-                        if (dr[field.FieldName] is String && field.FormatString != String.Empty)
+                        if (dr[field.FieldName] is String && field.FormatString.Length > 0)
                         {
                             double value;
                             Double.TryParse((string)dr[field.FieldName], out value);
@@ -354,11 +357,11 @@ namespace Sinapse.Utils.HtmlReport
                     cellParams = "";
                     if (field.Width != 0)
                         cellParams += " WIDTH=" + field.Width + " ";
-                    cellParams += " style=\"font-family: " + ReportFont + "; font-size:";
+                    cellParams += " style=\"font-family: " + ValuesFont + "; font-size:";
                     cellParams += getFontSize(section.Level - 1/*+1*/) + "; border-style:outline; border-width:1 \" ";
                     if (totalArray.Contains(field.FieldName))
                     {
-                        htmlContent.Append("  <TD " + cellParams + " align='right'><u>" + Double.Parse(totalArray[field.FieldName].ToString()).ToString(field.FormatString) + "</u></TD> " + newline);
+                        htmlContent.Append("  <TD " + cellParams + " align='"+ field.Alignment.ToString() + "'><u>" + Double.Parse(totalArray[field.FieldName].ToString()).ToString(field.FormatString) + "</u></TD> " + newline);
                     }
                     else
                     {
