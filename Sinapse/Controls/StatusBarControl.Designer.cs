@@ -111,7 +111,7 @@ namespace Sinapse.Controls
             // btnClear
             // 
             this.btnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnClear.Image = global::Sinapse.Properties.Resources.editclear;
+            this.btnClear.Image = global::Sinapse.Properties.Resources.edit_clear;
             this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClear.IsLink = true;
             this.btnClear.Margin = new System.Windows.Forms.Padding(3);

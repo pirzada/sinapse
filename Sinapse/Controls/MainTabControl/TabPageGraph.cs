@@ -151,9 +151,9 @@ namespace Sinapse.Controls.MainTabControl
 
         private void zedGraphControl_DoubleClick(object sender, EventArgs e)
         {
-            if (!GraphOptions.HasInstance)
+            if (!GraphOptionsDialog.HasInstance)
             {
-                new GraphOptions().Show(this);
+                new GraphOptionsDialog().Show(this);
             }
         }
         #endregion

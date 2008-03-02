@@ -695,7 +695,7 @@ namespace Sinapse.Forms
             // btnSaveAll
             // 
             this.btnSaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveAll.Image = global::Sinapse.Properties.Resources.save_all;
+            this.btnSaveAll.Image = global::Sinapse.Properties.Resources.file_saveall;
             this.btnSaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(23, 22);
@@ -719,7 +719,7 @@ namespace Sinapse.Forms
             // btnNetworkOpen
             // 
             this.btnNetworkOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNetworkOpen.Image = global::Sinapse.Properties.Resources.netjaxer;
+            this.btnNetworkOpen.Image = global::Sinapse.Properties.Resources.file_import;
             this.btnNetworkOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNetworkOpen.Name = "btnNetworkOpen";
             this.btnNetworkOpen.Size = new System.Drawing.Size(23, 22);
@@ -729,7 +729,7 @@ namespace Sinapse.Forms
             // btnNetworkSave
             // 
             this.btnNetworkSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNetworkSave.Image = global::Sinapse.Properties.Resources.file_export_16;
+            this.btnNetworkSave.Image = global::Sinapse.Properties.Resources.file_export;
             this.btnNetworkSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNetworkSave.Name = "btnNetworkSave";
             this.btnNetworkSave.Size = new System.Drawing.Size(23, 22);
@@ -774,7 +774,7 @@ namespace Sinapse.Forms
             // btnTrainForget
             // 
             this.btnTrainForget.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTrainForget.Image = global::Sinapse.Properties.Resources.start;
+            this.btnTrainForget.Image = global::Sinapse.Properties.Resources.player_start_16;
             this.btnTrainForget.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTrainForget.Name = "btnTrainForget";
             this.btnTrainForget.Size = new System.Drawing.Size(23, 22);
@@ -1033,8 +1033,6 @@ namespace Sinapse.Forms
             this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "MainForm";
             this.Text = "Sinapse";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelTitle.ResumeLayout(false);
             this.panelTitle.PerformLayout();
             this.menuStrip.ResumeLayout(false);

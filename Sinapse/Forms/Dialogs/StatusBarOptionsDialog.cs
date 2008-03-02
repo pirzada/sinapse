@@ -26,13 +26,21 @@ using System.Windows.Forms;
 
 namespace Sinapse.Forms.Dialogs
 {
-
-    internal sealed partial class NetworkInspectorDialog : Form
+    internal sealed partial class StatusBarOptionsDialog : Sinapse.Forms.Base.SingleInstanceForm
     {
 
-        public NetworkInspectorDialog()
+        public StatusBarOptionsDialog()
         {
             InitializeComponent();
+            numRate.Value = Properties.Settings.Default.display_UpdateRate;
         }
+
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.display_UpdateRate = (int)numRate.Value;
+            this.Close();
+        }
+
     }
 }

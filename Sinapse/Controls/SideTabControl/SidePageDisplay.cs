@@ -117,15 +117,13 @@ namespace Sinapse.Controls.SideTabControl
             if (m_networkContainer == null)
                 return;
             
-     //       this.SuspendLayout();
-                                             
+
             this.lbName.Text = m_networkContainer.Name;
             this.lbLayout.Text = m_networkContainer.Layout;
             this.lbDescription.Text = m_networkContainer.Description;
             this.lbErrorRate.Text = m_networkContainer.Precision.ToString("0.000000");
 
             this.populateSchemaTable();
-     //       this.ResumeLayout(true);
         }
         #endregion
 
@@ -171,9 +169,6 @@ namespace Sinapse.Controls.SideTabControl
 
         private void populateSchemaTable()
         {
-            //       this.panelInputs.SuspendLayout();
-            //       this.panelOutputs.SuspendLayout();
-
             panelInputs.Controls.Clear();
             panelOutputs.Controls.Clear();
 
@@ -206,9 +201,6 @@ namespace Sinapse.Controls.SideTabControl
 
                 this.panelOutputs.Controls.Add(label);
             }
-
-      //      this.panelInputs.ResumeLayout(true);
-      //      this.panelOutputs.ResumeLayout(true);
         }
         #endregion
 
@@ -241,6 +233,7 @@ namespace Sinapse.Controls.SideTabControl
             }
         }
         #endregion
+
 
     }
 }

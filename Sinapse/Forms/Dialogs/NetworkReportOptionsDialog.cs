@@ -24,13 +24,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace Sinapse.Forms.Dialogs
 {
 
-    internal sealed partial class NetworkInspectorDialog : Form
+    internal sealed partial class NetworkReportOptionsDialog : Sinapse.Forms.Base.SingleInstanceForm
     {
 
-        public NetworkInspectorDialog()
+        public NetworkReportOptionsDialog()
         {
             InitializeComponent();
         }

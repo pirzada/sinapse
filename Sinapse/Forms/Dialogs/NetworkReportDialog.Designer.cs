@@ -1,6 +1,6 @@
 namespace Sinapse.Forms.Dialogs
 {
-    partial class PerformanceDialog
+    partial class NetworkReportDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace Sinapse.Forms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PerformanceDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkReportDialog));
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -41,7 +41,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(382, 507);
+            this.btnClose.Location = new System.Drawing.Point(400, 509);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 1;
@@ -52,7 +52,7 @@ namespace Sinapse.Forms.Dialogs
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(301, 507);
+            this.btnSave.Location = new System.Drawing.Point(319, 509);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace Sinapse.Forms.Dialogs
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrint.Location = new System.Drawing.Point(12, 507);
+            this.btnPrint.Location = new System.Drawing.Point(12, 509);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 1;
@@ -83,7 +83,7 @@ namespace Sinapse.Forms.Dialogs
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(445, 489);
+            this.webBrowser.Size = new System.Drawing.Size(463, 491);
             this.webBrowser.TabIndex = 2;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
@@ -96,7 +96,7 @@ namespace Sinapse.Forms.Dialogs
             // btnPrintPreview
             // 
             this.btnPrintPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrintPreview.Location = new System.Drawing.Point(93, 507);
+            this.btnPrintPreview.Location = new System.Drawing.Point(93, 509);
             this.btnPrintPreview.Name = "btnPrintPreview";
             this.btnPrintPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPrintPreview.TabIndex = 1;
@@ -109,7 +109,7 @@ namespace Sinapse.Forms.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(469, 536);
+            this.ClientSize = new System.Drawing.Size(487, 538);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.btnPrintPreview);
             this.Controls.Add(this.btnPrint);

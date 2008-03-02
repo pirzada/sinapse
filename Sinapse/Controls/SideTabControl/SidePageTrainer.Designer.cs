@@ -112,7 +112,7 @@ namespace Sinapse.Controls.SideTabControl
             // btnForget
             // 
             this.btnForget.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnForget.Image = global::Sinapse.Properties.Resources.start1;
+            this.btnForget.Image = global::Sinapse.Properties.Resources.player_start_32;
             this.btnForget.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnForget.Name = "btnForget";
             this.btnForget.Size = new System.Drawing.Size(36, 36);
@@ -162,7 +162,7 @@ namespace Sinapse.Controls.SideTabControl
             // btnNext
             // 
             this.btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNext.Image = global::Sinapse.Properties.Resources.player_fwd;
+            this.btnNext.Image = global::Sinapse.Properties.Resources.player_fwd_32;
             this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(36, 36);
@@ -388,9 +388,9 @@ namespace Sinapse.Controls.SideTabControl
             // cbLayerAutoSwitch
             // 
             this.cbLayerAutoSwitch.AutoSize = true;
-            this.cbLayerAutoSwitch.Checked = global::Sinapse.Properties.Settings.Default.training_Crossvalidation;
+            this.cbLayerAutoSwitch.Checked = global::Sinapse.Properties.Settings.Default.training_LayerAutoSwitch;
             this.cbLayerAutoSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "training_Crossvalidation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "training_LayerAutoSwitch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbLayerAutoSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbLayerAutoSwitch.Location = new System.Drawing.Point(9, 345);
             this.cbLayerAutoSwitch.Name = "cbLayerAutoSwitch";
@@ -447,7 +447,7 @@ namespace Sinapse.Controls.SideTabControl
             // numLayerAutoSwitch
             // 
             this.numLayerAutoSwitch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "training_AutosaveEpochs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "training_LayerAutoSwitchEpochs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.numLayerAutoSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numLayerAutoSwitch.Increment = new decimal(new int[] {
             25,
@@ -471,11 +471,7 @@ namespace Sinapse.Controls.SideTabControl
             this.numLayerAutoSwitch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numLayerAutoSwitch.ThousandsSeparator = true;
             this.numLayerAutoSwitch.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.numLayerAutoSwitch.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
+            this.numLayerAutoSwitch.Value = global::Sinapse.Properties.Settings.Default.training_LayerAutoSwitchEpochs;
             // 
             // numAutoSave
             // 

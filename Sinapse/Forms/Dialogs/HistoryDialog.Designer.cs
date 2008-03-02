@@ -56,7 +56,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             // btnAutoScroll
             // 
-            this.btnAutoScroll.Checked = global::Sinapse.Properties.Settings.Default.history_autoScroll;
+            this.btnAutoScroll.Checked = global::Sinapse.Properties.Settings.Default.history_AutoScroll;
             this.btnAutoScroll.CheckOnClick = true;
             this.btnAutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnAutoScroll.Name = "btnAutoScroll";

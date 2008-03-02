@@ -106,7 +106,7 @@
 <body>
 <p class="ReportTitleSmall">Network Testing</p>
 <p class="ReportTitle">&nbsp;&nbsp;Performance Report</p>
-<p class="ReportSeparator">---------------------------------------------------</p>
+<hr />
 <p>&nbsp;</p>
 <table width="400" border="0" cellpadding="0" cellspacing="0">
   <tr>
@@ -131,20 +131,20 @@
 </table>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<table width="400" border="0" cellpadding="0" cellspacing="0">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td height="19" colspan="2" valign="top" class="TableTitle">Network Schema </td>
   </tr>
   <tr>
-    <td width="80" class="TableItem">Inputs:</td>
-    <td width="215">[schInput]</td>
+    <td width="170" valign="top" class="TableItem">Inputs:</td>
+    <td width="699">[schInput]</td>
   </tr>
   <tr>
-    <td class="TableItem">Outputs:</td>
+    <td valign="top" class="TableItem">Outputs:</td>
     <td>[schOutput]</td>
   </tr>
   <tr>
-    <td height="20" colspan="2" valign="bottom" class="ReportNote">* marked fields are categorical (non number) fields</td>
+    <td height="20" colspan="2" valign="bottom" class="ReportNote">* Underlined fields indicates a categorical (non numeric) field</td>
   </tr>
 </table>
 <p>&nbsp;</p>
@@ -152,15 +152,15 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p class="ReportSubtitle"> Training Details</p>
-<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p><span class="ReportSeparator">----------------------------------------------------</span></p>
 <table width="400" border="0" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="174" class="TableItem">Training Entries: </td>
-    <td width="216" align="right">[schInput]</td>
+    <td width="185" class="TableItem">Training Entries: </td>
+    <td width="215" align="right">[trainEntryCount]</td>
   </tr>
   <tr>
     <td class="TableItem">Validation Entries: </td>
-    <td align="right">[schOutput]</td>
+    <td align="right">[validEntryCount]</td>
   </tr>
   <tr>
     <td class="TableItem">&nbsp;</td>
@@ -176,68 +176,68 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p class="ReportSubtitle">Testing Summary</p>
-<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p><span class="ReportSeparator">----------------------------------------------------</span></p>
 <table width="400" border="0" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="174" class="TableItem">Testing Entries: </td>
-    <td width="216" align="right">[setTest]</td>
+    <td width="185" class="TableItem">Testing Entries: </td>
+    <td width="215" align="right">[testEntryCount]</td>
   </tr>
   <tr>
     <td class="TableItem">Testing Items: </td>
-    <td align="right">[setTestItems]</td>
+    <td align="right">[testItemsCount]</td>
   </tr>
 </table>
 <p>&nbsp;</p>
 <table width="400" border="0" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="128" class="TableItem">Hits:</td>
-    <td width="117">[hits]</td>
-    <td width="141">[setTest]</td>
+    <td width="135" class="TableItem">Hits:</td>
+    <td width="119" align="right">[hits]</td>
+    <td width="146" align="right">[hits%]</td>
   </tr>
   <tr>
     <td class="TableItem style6">&nbsp;Positives:</td>
-    <td><span class="style6">&nbsp;[hitsP]</span></td>
-    <td><span class="style6">&nbsp;[hitsP%]</span></td>
+    <td align="right"><span class="style6">[hitsP]</span></td>
+    <td align="right"><span class="style6">[hitsP%]</span></td>
   </tr>
   <tr>
     <td class="style5">&nbsp;Negatives:</td>
-    <td><span class="style6">&nbsp;[hitsN]</span></td>
-    <td><span class="style6">&nbsp;[hitsN%]</span></td>
+    <td align="right"><span class="style6">[hitsN]</span></td>
+    <td align="right"><span class="style6">[hitsN%]</span></td>
   </tr>
   <tr>
     <td class="TableItem">&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
   </tr>
   <tr>
     <td class="TableItem">Errors:</td>
-    <td>[errors]</td>
-    <td>[errors%]</td>
+    <td align="right">[errors]</td>
+    <td align="right">[errors%]</td>
   </tr>
   <tr>
     <td class="style5">&nbsp;Positives:</td>
-    <td><span class="style6">&nbsp;[errorsP]</span></td>
-    <td><span class="style6">&nbsp;[errorsP%]</span></td>
+    <td align="right"><span class="style6">[errorsP]</span></td>
+    <td align="right"><span class="style6">[errorsP%]</span></td>
   </tr>
   <tr>
     <td class="style5">&nbsp;Negatives:</td>
-    <td><span class="style6">&nbsp;[errorsN]</span></td>
-    <td><span class="style6">&nbsp;[errorsN%]</span></td>
+    <td align="right"><span class="style6">[errorsN]</span></td>
+    <td align="right"><span class="style6">[errorsN%]</span></td>
   </tr>
 </table>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <table width="400" border="0" cellspacing="0">
   <tr>
-    <td width="174" class="TableItem">Total Deviation: </td>
-    <td align="right">[totalDeviation]</td>
+    <td width="181" class="TableItem">Total Deviation: </td>
+    <td width="215" align="right">[totalDeviation]</td>
   </tr>
   <tr>
     <td class="TableItem">Final Deviation: </td>
     <td align="right">[finalDeviation]</td>
   </tr>
   <tr>
-    <td height="55" colspan="2" valign="bottom" class="ReportNote">* Total Deviation means the calculated sum of deviations for every item in the training set. Final Deviation means the total score divided by the ammount of items in the set.</td>
+    <td height="55" colspan="2" valign="bottom" class="ReportNote">* Total Deviation means the calculated sum of deviations for every item in the testing set. Final Deviation means the total score divided by the ammount of testing items in this same set.</td>
   </tr>
 </table>
 <p>&nbsp;</p>
@@ -245,20 +245,20 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p class="ReportSubtitle">Testing Details</p>
-<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p><span class="ReportSeparator">----------------------------------------------------</span></p>
 <p>[testTable]</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p class="ReportSubtitle">Network Weights</p>
-<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p><span class="ReportSeparator">----------------------------------------------------</span></p>
 <p>[netWeights]</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><span class="ReportSeparator">---------------------------------------------------</span></p>
+<p><span class="ReportSeparator">----------------------------------------------------</span></p>
 <p class="ReportFooter">Report generated by Sinapse Neural Networking Tool</p>
 <p class="ReportFooter">http://sinapse.googlecode.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(C)[year]</p>
 <p>&nbsp;</p>

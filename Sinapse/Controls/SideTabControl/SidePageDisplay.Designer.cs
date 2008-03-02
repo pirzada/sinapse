@@ -59,8 +59,8 @@ namespace Sinapse.Controls.SideTabControl
             this.lbTableTitle = new System.Windows.Forms.Label();
             this.lbInput = new System.Windows.Forms.Label();
             this.lbOutput = new System.Windows.Forms.Label();
-            this.panelInputs = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelOutputs = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelInputs = new System.Windows.Forms.TableLayoutPanel();
+            this.panelOutputs = new System.Windows.Forms.TableLayoutPanel();
             this.panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel.SuspendLayout();
@@ -215,7 +215,7 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.panelInputs.AutoScroll = true;
             this.panelInputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelInputs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelInputs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panelInputs.Location = new System.Drawing.Point(12, 341);
             this.panelInputs.Name = "panelInputs";
             this.panelInputs.Size = new System.Drawing.Size(89, 149);
@@ -227,7 +227,7 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelOutputs.AutoScroll = true;
             this.panelOutputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelOutputs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelOutputs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panelOutputs.Location = new System.Drawing.Point(104, 341);
             this.panelOutputs.Name = "panelOutputs";
             this.panelOutputs.Size = new System.Drawing.Size(89, 149);
@@ -288,8 +288,8 @@ namespace Sinapse.Controls.SideTabControl
         private System.Windows.Forms.Label lbTableTitle;
         private System.Windows.Forms.Label lbInput;
         private System.Windows.Forms.Label lbOutput;
-        private System.Windows.Forms.FlowLayoutPanel panelInputs;
-        private System.Windows.Forms.FlowLayoutPanel panelOutputs;
+        private System.Windows.Forms.TableLayoutPanel panelInputs;
+        private System.Windows.Forms.TableLayoutPanel panelOutputs;
         private System.Windows.Forms.Panel panel;
 
     }
