@@ -49,8 +49,6 @@ namespace Sinapse
 
         static void Initialize()
         {
-            Sinapse.Data.HistoryListener.Initialize();
-
             if (Properties.Settings.Default.history_Database == null)
                 Properties.Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
 

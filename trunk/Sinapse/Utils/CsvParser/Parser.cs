@@ -2,6 +2,9 @@
  * This class was based in a work from someone else. If you are the        *
  * author of this class, please email me so I can credit you properly      *
  *                                                                         *
+ *  This said, this project license does not apply to this library.        *
+ *  Please contact the class author for more info about licensing          *
+ *                                                                         *
  * http://sinapse.googlecode.com                 cesarsouza@gmail.com      *
  ***************************************************************************/
 

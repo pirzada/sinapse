@@ -1,5 +1,20 @@
-Sinapse 
 
-Sinapse is a opensource program for training neural networks to perform simple tasks, like function approximation, pattern recognition, classification and more
+  Sinapse Neural Network Tool                    http://sinapse.googlecode.com
+ ------------------------------------------------------------------------
+  Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>
 
-http://code.google.com/p/sinapse/
+  An acronym for Simple Neural-Network Approximation by Sample Entries 
+
+  Sinapse is an opensource program for training neural networks to perform simple tasks, like function approximation, pattern recognition, classification and more.
+
+  This project was created to help creating a system for medical diagnosis in the Federal University of São Carlos, Brazil, but serves as an all-purpose artificial neural network tool, helper, or even toy, to start experimenting with. 
+
+  As an open-source project, everyone's invited to give opinions, suggestions, or just browse the code. 
+
+
+  This program uses the fabulous AForge.NET library created by Andrew Kirillov, which is covered by a different license.
+
+
+  Important Notice:
+ ------------------------------------------------------------------------
+  Not every piece of code included in this project is released under the GPL. Some are proprietary, such as the AForge.NET library and some other controls. Please check each file for information about licensing.

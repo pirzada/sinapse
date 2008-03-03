@@ -117,35 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>38</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AABlREzBZURM5WVETOVlREzlZURM5WVETOVlREzlZURM5WVETOVlREzlZURM5WVETOVlREzlZURM5WVE
+        TMEAAAAAZURM5f///////////////////////////////39/f///////////////////////////////
+        //9lREzlAAAAAGVETOX///////////////////////////////+/v7//////////////////////////
+        ////////ZURM5QAAAABlREzl//7+///+/v///v7///7+///+/v///v7/f39//794C/+8cgD///7+///+
+        /v///v7///7+/2VETOUAAAAAZURM5f/////9/Pz//fz8//38/P/9/Pz//fz8/8OAGf/9/Pz//fz8/7xy
+        AP/9/Pz//fz8//38/P9lREzlAAAAAGVETOX//v7//Pr6//z6+v/8+vr//Pr6//z6+v/Cfxn//Pr6//z6
+        +v+8cgD//Pr6//z6+v/8+vr/ZURM5QAAAABlREzlv4CA//v4+P/7+Pj/+/j4//v4+P/IiSr/v7+///v4
+        +P/7+Pj/+/j4/7xyAP/7+Pj/+/j4/2VETOUAAAAAZURM5b+AgP+/v7//f39//7+/v/9/f3//x4or/39/
+        f/+/v7//f39//7+/v/+8cgD/v7+//39/f/9lREzlAAAAAGVETOW/gID/+PPz//jz8//48/P/+PPz/8iJ
+        Kv+/v7//+PPz//jz8//48/P/vHIA//jz8//48/P/ZURM5QAAAABlREzl/fz8/964gP/28fH/9vHx/8yU
+        Pv/28fH/f39///bx8f/28fH/9vHx//bx8f+8cgD/9vHx/2VETOUAAAAAZURM5f37+//duX//9e7u//Xu
+        7v/MlT7/9e7u/7+/v//17u7/9e7u//Xu7v/17u7/vHIA//Xu7v9lREzlAAAAAGVETOX9+/v/9Ozs/9is
+        af/Rn1P/9Ozs//Ts7P9/f3//9Ozs//Ts7P/07Oz/9Ozs//Ts7P+8cgD/ZURM5QAAAABlREzl/Pr6//Lq
+        6v/y6ur/8urq//Lq6v/y6ur/v7+///Lq6v/y6ur/8urq//Lq6v/y6ur/8urq/2VETOUAAAAAZURM5f37
+        +//49fX/+PX1//j19f/8+vr//Pr6/7+/v//8+vr//Pr6//z6+v/8+vr//Pr6//j19f9lREzlAAAAAGVE
+        TMFlREzlZURM5WVETOVlREzlZURM5WVETOVlREzlZURM5WVETOVlREzlZURM5WVETOVlREzlZURMwQAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAGchA0BtKASjlFAV7pVRFu5uKQOjZyEDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAADAAAABWchA0BtJgXTsFkb/893Sv/XgVX/sFgb/24nBNRnIQNAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAFRUTzXBvbbBoIQSemUse//////////////////////+MQBX/ayMEowAAAAAAAAAAAAAAAAAA
-        AAAAAAABFhYWznt6ev/////dcCQK61UkC///////////////////////WCIG/2wlCu0AAAAAAAAAAAAA
-        AAAAAAAAGhoY0G9vbf/y8e/mAAAACGsgC+q8YDD//////////////////////7tcLv9sIQztAAAAAAAA
-        AAAAAAAAEBAQx19dXf/f3dzs8fHvCgAAAABmHwOdzXlV///////////////////////Jc1H/YhwEpwAA
-        AAIAAAAABQUFulBPTf/X1dTe////HwAAAAAAAAAAZyEDQGYdBNLMkHT//+bL///ly//LjXT/cTAa/4ts
-        Xv5/enrLAAAArltbWv7f3dy/9/f1EAAAAAAAAAAAAAAAAAAAAABnIQNAYB4DpGspFvx0NB//ondm/9nH
-        wP////////Tf/5WMiP9bXV2BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAi4tLZz/+ef0////8f//
-        6d7///3M////8////+7/38LkenNwygAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuHeHPJ////4v//
-        /MH//+es////nP///eH///9i////zZiFfdgwMDAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgjHhys///
-        /8T///+c////nP//+qb///+c////nP///7eAamK0NzU1KwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC1NI
-        Rab////J////jv///ZD///+c////xP///7X///+XX09IsTIyMhUAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAI4Nzd/593an////9D///+O////nP///6f///+Z////sVVQULkAAAACAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAV1JQDUJAQpf////r////7P///53///+0////szszMp5aWFc1AAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAABqZWMYWFdXghgVFYcwLSuGLSgohj8/QJlnY2I5AAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA//8AAIH/AAAA/AAAAPgAAADxAAAA4QAAAMMAAAAHAACAHwAAwB8AAIAPAACADwAAgA8AAMAf
-        AADAHwAA4D8AAA==
+        AAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAB
+        AAAAAQAA//8AAA==
 </value>
   </data>
 </root>

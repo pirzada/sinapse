@@ -88,6 +88,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap configure {
+            get {
+                object obj = ResourceManager.GetObject("configure", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap configure_16 {
             get {
                 object obj = ResourceManager.GetObject("configure_16", resourceCulture);
@@ -224,6 +231,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap file_saveas {
             get {
                 object obj = ResourceManager.GetObject("file_saveas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap fileprint {
+            get {
+                object obj = ResourceManager.GetObject("fileprint", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -497,6 +511,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap reload_page {
             get {
                 object obj = ResourceManager.GetObject("reload_page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap reminders {
+            get {
+                object obj = ResourceManager.GetObject("reminders", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

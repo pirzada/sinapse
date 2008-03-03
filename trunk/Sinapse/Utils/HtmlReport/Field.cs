@@ -24,7 +24,7 @@
  *  (added support for number format specification)                        *
  *                                                                         *
  *  This project license does not apply to this library.                   *
- *  Please contact the class author for more licensing info                *
+ *  Please contact the class author for more info about licensing          *
  *                                                                         *
  ***************************************************************************/
 

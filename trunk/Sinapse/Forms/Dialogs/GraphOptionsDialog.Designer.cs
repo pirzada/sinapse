@@ -28,9 +28,19 @@ namespace Sinapse.Forms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphOptionsDialog));
+            this.SuspendLayout();
+            // 
+            // GraphOptionsDialog
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "GraphOptions";
+            this.ClientSize = new System.Drawing.Size(388, 153);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "GraphOptionsDialog";
+            this.Text = "Graph Options";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

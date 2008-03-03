@@ -67,6 +67,7 @@ namespace Sinapse.Forms
             this.MenuFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileCloseNetwork = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileCloseDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileCloseWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuWorkplace = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,8 +128,6 @@ namespace Sinapse.Forms
             this.toolStripTesting = new System.Windows.Forms.ToolStrip();
             this.btnTestCompute = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnTestReport = new System.Windows.Forms.ToolStripSplitButton();
-            this.btnTestReportOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTestRound = new System.Windows.Forms.ToolStripDropDownButton();
             this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTestRound10 = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,6 +142,7 @@ namespace Sinapse.Forms
             this.mruProviderDatabase = new Sinapse.Components.MruProvider();
             this.mruProviderNetwork = new Sinapse.Components.MruProvider();
             this.mruProviderWorkplace = new Sinapse.Components.MruProvider();
+            this.btnTestReport = new System.Windows.Forms.ToolStripButton();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
@@ -277,6 +277,7 @@ namespace Sinapse.Forms
             this.MenuFileSeparator1,
             this.MenuFileCloseNetwork,
             this.MenuFileCloseDatabase,
+            this.MenuFileCloseWorkplace,
             this.MenuFileSeparator2,
             this.MenuFileExit});
             this.MenuFile.Name = "MenuFile";
@@ -334,6 +335,14 @@ namespace Sinapse.Forms
             this.MenuFileCloseDatabase.Size = new System.Drawing.Size(177, 22);
             this.MenuFileCloseDatabase.Text = "Close Database";
             this.MenuFileCloseDatabase.Click += new System.EventHandler(this.MenuFileCloseDatabase_Click);
+            // 
+            // MenuFileCloseWorkplace
+            // 
+            this.MenuFileCloseWorkplace.Image = global::Sinapse.Properties.Resources.file_close_round;
+            this.MenuFileCloseWorkplace.Name = "MenuFileCloseWorkplace";
+            this.MenuFileCloseWorkplace.Size = new System.Drawing.Size(177, 22);
+            this.MenuFileCloseWorkplace.Text = "Close Workplace";
+            this.MenuFileCloseWorkplace.Click += new System.EventHandler(this.MenuFileCloseWorkplace_Click);
             // 
             // MenuFileSeparator2
             // 
@@ -468,6 +477,7 @@ namespace Sinapse.Forms
             this.MenuDatabaseEdit.Name = "MenuDatabaseEdit";
             this.MenuDatabaseEdit.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseEdit.Text = "&Edit Schema";
+            this.MenuDatabaseEdit.Click += new System.EventHandler(this.MenuDatabaseEdit_Click);
             // 
             // MenuNetwork
             // 
@@ -545,6 +555,7 @@ namespace Sinapse.Forms
             this.MenuHelpContents.Name = "MenuHelpContents";
             this.MenuHelpContents.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpContents.Text = "&Contents";
+            this.MenuHelpContents.Click += new System.EventHandler(this.MenuHelpContents_Click);
             // 
             // MenuHelpIndex
             // 
@@ -641,6 +652,8 @@ namespace Sinapse.Forms
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.Size = new System.Drawing.Size(625, 552);
             this.tabControlMain.TabIndex = 0;
+            this.tabControlMain.SelectedControlChanged += new System.EventHandler(this.tabControlMain_SelectedControlChanged);
+            this.tabControlMain.DataSelectionChanged += new System.EventHandler(this.tabControlMain_SelectionChanged);
             // 
             // toolStripMain
             // 
@@ -866,12 +879,12 @@ namespace Sinapse.Forms
             this.toolStripTesting.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStripTesting.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnTestCompute,
-            this.toolStripSeparator2,
             this.btnTestReport,
+            this.toolStripSeparator2,
             this.btnTestRound});
             this.toolStripTesting.Location = new System.Drawing.Point(415, 0);
             this.toolStripTesting.Name = "toolStripTesting";
-            this.toolStripTesting.Size = new System.Drawing.Size(131, 25);
+            this.toolStripTesting.Size = new System.Drawing.Size(122, 25);
             this.toolStripTesting.TabIndex = 2;
             // 
             // btnTestCompute
@@ -888,25 +901,6 @@ namespace Sinapse.Forms
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnTestReport
-            // 
-            this.btnTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTestReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnTestReportOptions});
-            this.btnTestReport.Image = global::Sinapse.Properties.Resources.switchuser;
-            this.btnTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTestReport.Name = "btnTestReport";
-            this.btnTestReport.Size = new System.Drawing.Size(32, 22);
-            this.btnTestReport.Text = "Generate Test Performance Report";
-            this.btnTestReport.ButtonClick += new System.EventHandler(this.btnTestReport_ButtonClick);
-            // 
-            // btnTestReportOptions
-            // 
-            this.btnTestReportOptions.Name = "btnTestReportOptions";
-            this.btnTestReportOptions.Size = new System.Drawing.Size(158, 22);
-            this.btnTestReportOptions.Text = "Report Options";
-            this.btnTestReportOptions.Click += new System.EventHandler(this.btnTestReportOptions_Click);
             // 
             // btnTestRound
             // 
@@ -928,46 +922,46 @@ namespace Sinapse.Forms
             // 
             this.thresholdToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.thresholdToolStripMenuItem.Text = "Threshold";
             // 
             // btnTestRound10
             // 
             this.btnTestRound10.Name = "btnTestRound10";
-            this.btnTestRound10.Size = new System.Drawing.Size(152, 22);
-            this.btnTestRound10.Tag = 0.10f;
+            this.btnTestRound10.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound10.Tag = 0.1F;
             this.btnTestRound10.Text = "0.10";
             this.btnTestRound10.Click += new System.EventHandler(this.btnTestRound_Click);
             // 
             // btnTestRound25
             // 
             this.btnTestRound25.Name = "btnTestRound25";
-            this.btnTestRound25.Size = new System.Drawing.Size(152, 22);
-            this.btnTestRound25.Tag = 0.25f;
+            this.btnTestRound25.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound25.Tag = 0.25F;
             this.btnTestRound25.Text = "0.25";
             this.btnTestRound25.Click += new System.EventHandler(this.btnTestRound_Click);
             // 
             // btnTestRound50
             // 
             this.btnTestRound50.Name = "btnTestRound50";
-            this.btnTestRound50.Size = new System.Drawing.Size(152, 22);
-            this.btnTestRound50.Tag = 0.50f;
+            this.btnTestRound50.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound50.Tag = 0.5F;
             this.btnTestRound50.Text = "0.50";
             this.btnTestRound50.Click += new System.EventHandler(this.btnTestRound_Click);
             // 
             // btnTestRound75
             // 
             this.btnTestRound75.Name = "btnTestRound75";
-            this.btnTestRound75.Size = new System.Drawing.Size(152, 22);
-            this.btnTestRound75.Tag = 0.75f;
+            this.btnTestRound75.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound75.Tag = 0.75F;
             this.btnTestRound75.Text = "0.75";
             this.btnTestRound75.Click += new System.EventHandler(this.btnTestRound_Click);
             // 
             // btnTestRound90
             // 
             this.btnTestRound90.Name = "btnTestRound90";
-            this.btnTestRound90.Size = new System.Drawing.Size(152, 22);
-            this.btnTestRound90.Tag = 0.90f;
+            this.btnTestRound90.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound90.Tag = 0.9F;
             this.btnTestRound90.Text = "0.90";
             this.btnTestRound90.Click += new System.EventHandler(this.btnTestRound_Click);
             // 
@@ -1016,6 +1010,16 @@ namespace Sinapse.Forms
             // 
             this.mruProviderWorkplace.FilePathList = global::Sinapse.Properties.Settings.Default.history_Workplace;
             this.mruProviderWorkplace.MenuItem = this.MenuFileRecentWorkplaces;
+            // 
+            // btnTestReport
+            // 
+            this.btnTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTestReport.Image = global::Sinapse.Properties.Resources.switchuser;
+            this.btnTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTestReport.Name = "btnTestReport";
+            this.btnTestReport.Size = new System.Drawing.Size(23, 22);
+            this.btnTestReport.Text = "Generate Testing Performance Report";
+            this.btnTestReport.Click += new System.EventHandler(this.btnTestReport_Click);
             // 
             // MainForm
             // 
@@ -1143,8 +1147,6 @@ namespace Sinapse.Forms
         private Sinapse.Components.MruProvider mruProviderWorkplace;
         private System.Windows.Forms.ToolStrip toolStripTesting;
         private System.Windows.Forms.ToolStripButton btnTestCompute;
-        private System.Windows.Forms.ToolStripSplitButton btnTestReport;
-        private System.Windows.Forms.ToolStripMenuItem btnTestReportOptions;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton btnTestRound;
         private System.Windows.Forms.ToolStripMenuItem thresholdToolStripMenuItem;
@@ -1153,5 +1155,7 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem btnTestRound50;
         private System.Windows.Forms.ToolStripMenuItem btnTestRound75;
         private System.Windows.Forms.ToolStripMenuItem btnTestRound90;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileCloseWorkplace;
+        private System.Windows.Forms.ToolStripButton btnTestReport;
     }
 }
