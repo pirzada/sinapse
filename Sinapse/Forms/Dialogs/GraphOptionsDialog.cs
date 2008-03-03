@@ -27,11 +27,17 @@ using System.Windows.Forms;
 namespace Sinapse.Forms.Dialogs
 {
 
-    internal sealed partial class GraphOptionsDialog : Sinapse.Forms.Base.SingleInstanceForm
+    internal sealed partial class GraphOptionsDialog
+        : Sinapse.Forms.Base.SingleInstanceForm
     {
-        internal GraphOptionsDialog()
+
+        #region Constructor
+        public GraphOptionsDialog()
         {
             InitializeComponent();
         }
+        #endregion
+
+
     }
 }

@@ -58,6 +58,7 @@ namespace Sinapse.Controls.MainTabControl
             this.tabControl.Size = new System.Drawing.Size(558, 445);
             this.tabControl.TabIndex = 0;
             this.tabControl.UseVisualStyles = false;
+            this.tabControl.SelectedIndexChanging += new Dotnetrix.Controls.TabPageChangeEventHandler(this.tabControl_SelectedIndexChanging);
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
             // 
             // tabTraining

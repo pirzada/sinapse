@@ -29,33 +29,102 @@ using Sinapse.Data;
 
 namespace Sinapse.Forms.Dialogs
 {
-    internal sealed partial class HistoryDialog : Sinapse.Forms.Base.SingleInstanceForm
+    
+    internal sealed partial class HistoryDialog : Form
     {
-        internal HistoryDialog()
+
+
+        #region Singleton
+        private static HistoryDialog m_instance = null;
+
+        public static HistoryDialog Instance
+        {
+            get
+            {
+                if (m_instance == null || m_instance.IsDisposed)
+                    m_instance = new HistoryDialog();
+                return m_instance;
+            }
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Constructor
+        private HistoryDialog()
         {
             InitializeComponent();
-
-            HistoryListener.NewActionLogged += new EventHandler(newActionLogged);
         }
+        #endregion
 
-        private void newActionLogged(object sender, EventArgs e)
+
+        //----------------------------------------
+
+
+        #region Form Events
+        protected override void OnLoad(EventArgs e)
         {
-            this.textBox.Clear();
+            base.OnLoad(e);
 
-            foreach (HistoryEvent hEvent in HistoryListener.ActionLog)
+            if (!this.DesignMode)
             {
-                this.textBox.Text += hEvent.ToString(); 
-            }
+                // Set form Sizing and Location
+                if (!Properties.Settings.Default.history_FirstLoad)
+                {
+                    this.Size = Properties.Settings.Default.history_Size;
+                    this.Location = Properties.Settings.Default.history_Location;
+                }
 
-            if (this.btnAutoScroll.Checked)
-                this.scrollToEnd();
+                this.updateText();
+
+                // Wire up controls and events
+                HistoryListener.Log.ListChanged += new ListChangedEventHandler(history_logChanged);
+            }
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            // Save settings before closing
+            Properties.Settings.Default.history_FirstLoad = false;
+            Properties.Settings.Default.history_Size = this.Size;
+            Properties.Settings.Default.history_Location = this.Location;
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region History Events
+        private void history_logChanged(object sender, ListChangedEventArgs e)
+        {
+            this.updateText();
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Private Methods
         private void scrollToEnd()
         {
             this.textBox.Select(this.textBox.Text.Length, 0);
             this.textBox.ScrollToCaret();
         }
+
+        private void updateText()
+        {
+            this.textBox.Lines = HistoryListener.Log.ToStringArray();
+
+            if (this.btnAutoScroll.Checked)
+                this.scrollToEnd();
+        }
+        #endregion
 
     }
 }

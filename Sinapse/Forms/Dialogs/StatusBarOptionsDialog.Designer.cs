@@ -46,6 +46,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             // numRate
             // 
+            this.numRate.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "display_UpdateRate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.numRate.Location = new System.Drawing.Point(87, 5);
             this.numRate.Maximum = new decimal(new int[] {
             10000,
@@ -62,11 +63,7 @@ namespace Sinapse.Forms.Dialogs
             this.numRate.TabIndex = 1;
             this.numRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numRate.ThousandsSeparator = true;
-            this.numRate.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.numRate.Value = global::Sinapse.Properties.Settings.Default.display_UpdateRate;
             // 
             // btnApply
             // 
@@ -89,8 +86,9 @@ namespace Sinapse.Forms.Dialogs
             this.label2.TabIndex = 0;
             this.label2.Text = "passed epochs.";
             // 
-            // StatusBarOptions
+            // StatusBarOptionsDialog
             // 
+            this.AcceptButton = this.btnApply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 30);
@@ -99,7 +97,7 @@ namespace Sinapse.Forms.Dialogs
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "StatusBarOptions";
+            this.Name = "StatusBarOptionsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Status Bar Options";
             ((System.ComponentModel.ISupportInitialize)(this.numRate)).EndInit();

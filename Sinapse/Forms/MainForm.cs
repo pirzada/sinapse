@@ -65,10 +65,7 @@ namespace Sinapse.Forms
         #region Properties
         public NetworkContainer CurrentNetworkContainer
         {
-            get
-            {
-                return this.m_networkContainer;
-            }
+            get { return this.m_networkContainer; }
             set
             {
                 this.m_networkContainer = value;
@@ -76,14 +73,10 @@ namespace Sinapse.Forms
                 this.tabControlSide.NetworkContainer = value;
                 this.tabControlMain.NetworkContainer = value;
 
-                if (value != null)
-                {
-                    this.updateButtons();
-                    this.btnNetworkSave.Enabled = true;
-                    this.MenuNetworkSave.Enabled = true;
-                    this.MenuNetworkSaveAs.Enabled = false;
-                    this.MenuNetworkWeights.Enabled = true;
+                bool notNull = (value != null);
 
+                if (notNull)
+                {
                     this.lbNeuronCount.Text = m_networkContainer.Layout;
 
                     this.m_networkContainer.NetworkSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
@@ -93,23 +86,22 @@ namespace Sinapse.Forms
                 }
                 else
                 {
-                    //No active network
-                    this.updateButtons();
-                    this.btnNetworkSave.Enabled = false;
-                    this.MenuNetworkSave.Enabled = false;
-                    this.MenuNetworkSaveAs.Enabled = false;
-                    this.MenuNetworkWeights.Enabled = false;
+                    this.lbNeuronCount.Text = "00";
                 }
+
+                this.updateButtons();
+                this.btnNetworkSave.Enabled = notNull;
+                this.MenuFileCloseNetwork.Enabled = notNull;
+                this.MenuNetworkSave.Enabled = notNull;
+                this.MenuNetworkSaveAs.Enabled = notNull;
+                this.MenuNetworkWeights.Enabled = notNull;
 
             }
         }
 
         public NetworkDatabase CurrentNetworkDatabase
         {
-            get
-            {
-                return this.m_networkDatabase;
-            }
+            get { return this.m_networkDatabase; }
             set
             {
                 this.m_networkDatabase = value;
@@ -117,17 +109,12 @@ namespace Sinapse.Forms
                 this.tabControlSide.NetworkDatabase = value;
                 this.tabControlMain.NetworkDatabase = value;
 
-                if (value != null)
-                {
-                    this.updateButtons();
-                    this.btnDatabaseSave.Enabled = true;
-                    this.MenuDatabaseSave.Enabled = true;
-                    this.MenuDatabaseSaveAs.Enabled = false;
-                    this.MenuDatabaseEdit.Enabled = true;
+                bool notNull = (value != null);
 
+                if (notNull)
+                {
                     this.lbInputCount.Text = this.m_networkDatabase.Schema.InputColumns.Length.ToString();
                     this.lbOutputCount.Text = this.m_networkDatabase.Schema.OutputColumns.Length.ToString();
-
 
                     this.m_networkDatabase.DatabaseSaved += new FileSystemEventHandler(currentDatabase_DatabaseSaved);
 
@@ -136,36 +123,38 @@ namespace Sinapse.Forms
                 }
                 else
                 {
-                    //No active data
-                    this.updateButtons();
-                    this.btnDatabaseSave.Enabled = false;
-                    this.MenuDatabaseSave.Enabled = false;
-                    this.MenuDatabaseSaveAs.Enabled = false;
-                    this.MenuDatabaseEdit.Enabled = false;
-
                     this.lbInputCount.Text = "00";
                     this.lbOutputCount.Text = "00";
                 }
+
+                this.updateButtons();
+                this.btnDatabaseSave.Enabled = notNull;
+                this.MenuFileCloseDatabase.Enabled = notNull;
+                this.MenuDatabaseSave.Enabled = notNull;
+                this.MenuDatabaseSaveAs.Enabled = notNull;
+                this.MenuDatabaseEdit.Enabled = notNull;
+
             }
         }
 
         public NetworkWorkplace CurrentNetworkWorkplace
         {
-            get
-            {
-                return this.m_networkWorkplace;
-            }
+            get { return this.m_networkWorkplace; }
             set
             {
                 this.m_networkWorkplace = value;
 
-                if (value != null)
+                bool notNull = (value != null);
+
+                if (notNull)
                 {
                     this.m_networkWorkplace.WorkplaceSaved += new FileSystemEventHandler(currentWorkplace_WorkplaceSaved);
                 }
                 else
                 {
                 }
+
+                this.MenuFileCloseWorkplace.Enabled = notNull;
             }
         }
         #endregion
@@ -190,7 +179,6 @@ namespace Sinapse.Forms
                 }
 
                 // Wire up controls and events
-                this.tabControlMain.DataSelectionChanged += tabControlMain_SelectionChanged;
                 this.tabControlSide.TrainerControl.GraphControl = this.tabControlMain.GraphControl;
                 this.tabControlMain.GraphControl.NetworkTrainer = this.tabControlSide.TrainerControl;
 
@@ -238,6 +226,11 @@ namespace Sinapse.Forms
         private void tabControlMain_SelectionChanged(object sender, EventArgs e)
         {
             this.statusBarControl.UpdateSelectedItems(tabControlMain.SelectedItemCount, tabControlMain.ItemCount);
+        }
+
+        private void tabControlMain_SelectedControlChanged(object sender, EventArgs e)
+        {
+           
         }
         #endregion
 
@@ -316,11 +309,19 @@ namespace Sinapse.Forms
         private void MenuFileCloseNetwork_Click(object sender, EventArgs e)
         {
             this.CurrentNetworkContainer = null;
+            HistoryListener.Write("Network Closed");
         }
 
         private void MenuFileCloseDatabase_Click(object sender, EventArgs e)
         {
             this.CurrentNetworkDatabase = null;
+            HistoryListener.Write("Database Closed");
+        }
+
+        private void MenuFileCloseWorkplace_Click(object sender, EventArgs e)
+        {
+            this.CurrentNetworkWorkplace = null;
+            HistoryListener.Write("Workplace Closed");
         }
         #endregion
 
@@ -344,6 +345,11 @@ namespace Sinapse.Forms
         private void MenuDatabaseOpen_Click(object sender, EventArgs e)
         {
             this.openDatabaseDialog.ShowDialog(this);
+        }
+
+        private void MenuDatabaseEdit_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -400,12 +406,11 @@ namespace Sinapse.Forms
         private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
             this.tabControlMain.QueryControl.ShowTab();
-            HistoryListener.Write("Ready");
         }
 
         private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
         {
-            new NetworkInspectorDialog().ShowDialog(this);
+            new NetworkInspectorDialog(CurrentNetworkContainer).ShowDialog(this);
         }
         #endregion
 
@@ -413,7 +418,12 @@ namespace Sinapse.Forms
         #region Menu Help
         private void MenuHelpAbout_Click(object sender, EventArgs e)
         {
-            new AboutBox().Show(this);
+            new AboutBox().ShowDialog(this);
+        }
+
+        private void MenuHelpContents_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -468,14 +478,9 @@ namespace Sinapse.Forms
             this.tabControlMain.TestingSetControl.Compute();
         }
 
-        private void btnTestReport_ButtonClick(object sender, EventArgs e)
+        private void btnTestReport_Click(object sender, EventArgs e)
         {
             this.tabControlMain.TestingSetControl.Compare();
-        }
-
-        private void btnTestReportOptions_Click(object sender, EventArgs e)
-        {
-            new NetworkReportOptionsDialog().ShowDialog(this);
         }
 
         private void btnTestRound_Click(object sender, EventArgs e)
@@ -544,7 +549,7 @@ namespace Sinapse.Forms
             {
                 NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
                 this.mruProviderNetwork.Insert(path);
-                HistoryListener.Write("Network saved!");
+                HistoryListener.Write("Network Saved");
             }
             catch (Exception e)
             {
@@ -570,7 +575,7 @@ namespace Sinapse.Forms
                 {
                     this.CurrentNetworkContainer = neuralNetwork;
                     this.mruProviderNetwork.Insert(path);
-                    HistoryListener.Write("Network loaded!");
+                    HistoryListener.Write("Network Loaded");
                 }
             }
         }
@@ -584,7 +589,7 @@ namespace Sinapse.Forms
             {
                 NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
                 this.mruProviderDatabase.Insert(path);
-                HistoryListener.Write("Database saved!");
+                HistoryListener.Write("Database Saved");
             }
             catch (Exception e)
             {
@@ -617,7 +622,7 @@ namespace Sinapse.Forms
                 {
                     this.CurrentNetworkDatabase = networkDatabase;
                     this.mruProviderDatabase.Insert(path);
-                    HistoryListener.Write("Database loaded!");
+                    HistoryListener.Write("Database Loaded");
                 }
             }
         }
@@ -631,7 +636,7 @@ namespace Sinapse.Forms
             {
                 NetworkWorkplace.Serialize(this.CurrentNetworkWorkplace, path);
                 this.mruProviderWorkplace.Insert(path);
-                HistoryListener.Write("Workplace saved!");
+                HistoryListener.Write("Workplace Saved");
             }
             catch (Exception e)
             {
@@ -664,7 +669,7 @@ namespace Sinapse.Forms
                 {
                     this.CurrentNetworkWorkplace = networkWorkplace;
                     this.mruProviderWorkplace.Insert(path);
-                    HistoryListener.Write("Workplace loaded!");
+                    HistoryListener.Write("Workplace Loaded");
                 }
             }
         }
@@ -689,6 +694,7 @@ namespace Sinapse.Forms
             }
         }
         #endregion
+
 
     }
 }

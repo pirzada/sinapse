@@ -28,12 +28,16 @@ using System.Windows.Forms;
 namespace Sinapse.Forms.Dialogs
 {
 
-    internal sealed partial class NetworkReportOptionsDialog : Sinapse.Forms.Base.SingleInstanceForm
+    internal sealed partial class NetworkReportOptionsDialog
+        : Sinapse.Forms.Base.SingleInstanceForm
     {
 
+        #region Constructor
         public NetworkReportOptionsDialog()
         {
             InitializeComponent();
         }
+        #endregion
+
     }
 }

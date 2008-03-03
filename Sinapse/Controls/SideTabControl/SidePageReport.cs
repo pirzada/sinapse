@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -16,63 +16,24 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * This class is not covered by the same license (GPL) as does the rest of *
- * the project, and is scheduled to be transfered to a separate library.   *
- ***************************************************************************/
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Base
+
+namespace Sinapse.Controls.SideTabControl
 {
 
-    internal class SingleInstanceForm : System.Windows.Forms.Form
+    sealed partial class SidePageReport : UserControl
     {
 
-        #region Static
-        private static bool hasInstance = false;
-
-        public static bool HasInstance
+        public SidePageReport()
         {
-            get { return hasInstance; }
+            InitializeComponent();
         }
-        #endregion
-
-
-        //----------------------------------------
-
-
-        #region Constructor & Destructor
-        internal SingleInstanceForm()
-        {
-            hasInstance = true;
-        }
-
-        ~SingleInstanceForm()
-        {
-            hasInstance = false;
-        }
-        #endregion
-
-
-        //----------------------------------------
-
-
-        #region Events
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            hasInstance = false;
-        }
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            hasInstance = false;
-        }
-        #endregion
-
     }
 }

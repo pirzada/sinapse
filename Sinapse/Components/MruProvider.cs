@@ -17,6 +17,12 @@
  ***************************************************************************/
 
 /***************************************************************************
+ * Please note: This class is not covered by the same license (GPL) as     *
+ * does the rest of this software and will be transfered to a separate     *
+ * library to be licensed under an all permissive license (public domain)  *
+ ***************************************************************************/
+
+/***************************************************************************
  * This class was loosely based on the original work made by Joe Woodbury  *
  * - http://joewoodbury.net                                                *
  *                                                                         *
@@ -24,7 +30,7 @@
  * - http://www.codeproject.com/KB/cs/mrutoolstripmenu.aspx                *
  *                                                                         *
  ***************************************************************************/
-
+                                                                             
 using System;
 using System.Collections;
 using System.Collections.Specialized;

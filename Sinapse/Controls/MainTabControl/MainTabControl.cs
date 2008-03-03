@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -42,7 +42,8 @@ namespace Sinapse.Controls.MainTabControl
         private TabPageGraph m_tabGraph;
 
 
-        public EventHandler DataSelectionChanged;
+        public event EventHandler DataSelectionChanged;
+        public event EventHandler SelectedControlChanged;
 
 
         //----------------------------------------
@@ -79,9 +80,20 @@ namespace Sinapse.Controls.MainTabControl
                 this.DataSelectionChanged.Invoke(this, EventArgs.Empty);
         }
 
+        private void OnSelectedControlChanged()
+        {
+            if (this.SelectedControlChanged != null)
+                this.SelectedControlChanged.Invoke(this, EventArgs.Empty);
+        }
+
         private void tabControl_Selected(object sender, TabControlEventArgs e)
         {
             this.OnDataSelectionChanged();
+        }
+
+        private void tabControl_SelectedIndexChanging(object sender, TabPageChangeEventArgs e)
+        {
+            this.OnSelectedControlChanged();
         }
 
         private void tabPage_SelectionChanged(object sender, EventArgs e)
@@ -195,6 +207,8 @@ namespace Sinapse.Controls.MainTabControl
             tabPage.Controls.Add(userControl);
         }
         #endregion
+
+
 
     }
 }

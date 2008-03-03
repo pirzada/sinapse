@@ -37,6 +37,7 @@ namespace Sinapse.Controls
 
         private StatusBarOptionsDialog m_statusBarOptionsDialog;
 
+        
         //---------------------------------------------
 
 
@@ -60,6 +61,8 @@ namespace Sinapse.Controls
             this.lbEpoch.Text = String.Format("Epoch: {0}", networkState.Epoch);
             this.lbTrainingError.Text = String.Format("Error: {0:0.00000}", networkState.ErrorTraining);
             this.lbValidationError.Text = String.Format("Validation: {0:0.00000}", networkState.ErrorValidation);
+
+            this.progressBar.Visible = (progressBar.Value != 0);
         }
 
         internal void UpdateSelectedItems(int selected, int total)
@@ -84,17 +87,18 @@ namespace Sinapse.Controls
         {
             base.OnResize(e);
 
-            //this.progressBar.Width = this.
+            //TODO: Try to resize the progressbar to fit the control
+            // (simulate a ProgressBar.Spring = true)
         }
 
         private void StatusBarControl_Load(object sender, EventArgs e)
         {
-            HistoryListener.NewActionLogged += NewActionLogged;
+            HistoryListener.Log.ListChanged += history_logChanged;
         }
 
-        private void NewActionLogged(object sender, EventArgs e)
+        private void history_logChanged(object sender, ListChangedEventArgs e)
         {
-            this.lbStatus.Text = HistoryListener.LastAction.Action;
+            this.lbStatus.Text = HistoryListener.Log.LastEvent.Action;
         }
         #endregion
 
@@ -105,7 +109,8 @@ namespace Sinapse.Controls
         #region Buttons
         private void lbStatus_Click(object sender, EventArgs e)
         {
-            new HistoryDialog().ShowDialog();
+            if (!HistoryDialog.Instance.Visible)
+                HistoryDialog.Instance.Show(this.ParentForm);
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -115,15 +120,11 @@ namespace Sinapse.Controls
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
-            if (this.m_statusBarOptionsDialog == null || this.m_statusBarOptionsDialog.IsDisposed)
-            {
+            if (!StatusBarOptionsDialog.HasInstance)
                 this.m_statusBarOptionsDialog = new StatusBarOptionsDialog();
-            }
 
             if (!this.m_statusBarOptionsDialog.Visible)
-            {
-                this.m_statusBarOptionsDialog.Show(this);
-            }
+                this.m_statusBarOptionsDialog.Show(this.ParentForm);
         }
         #endregion
 

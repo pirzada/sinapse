@@ -69,7 +69,6 @@ namespace Sinapse.Forms.Dialogs
 
             this.InitializeComponent();
 
-            this.webBrowser.DocumentText = this.CreateReport();
         }
         #endregion
 
@@ -92,6 +91,8 @@ namespace Sinapse.Forms.Dialogs
                     this.WindowState = Properties.Settings.Default.report_WindowState;
                 }
             }
+
+            this.CreateReport();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -120,6 +121,16 @@ namespace Sinapse.Forms.Dialogs
 
 
         #region Form Buttons
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            this.CreateReport();
+        }
+
+        private void btnConfigure_Click(object sender, EventArgs e)
+        {
+            new NetworkReportOptionsDialog().ShowDialog(this);
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -135,11 +146,24 @@ namespace Sinapse.Forms.Dialogs
             this.webBrowser.ShowPrintPreviewDialog();
         }
 
+        private void btnPrintOptions_Click(object sender, EventArgs e)
+        {
+            this.webBrowser.ShowPageSetupDialog();
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.saveFileDialog.ShowDialog(this);
         }
 
+        
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region File Save Dialog
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             TextWriter textWriter = null;
@@ -164,135 +188,15 @@ namespace Sinapse.Forms.Dialogs
         }
         #endregion
 
-
+        
         //----------------------------------------
 
 
         #region Public Methods
-        public string CreateReport()
+        public void CreateReport()
         {
-
-            DataRow[] selectedRows = this.m_database.DataTable.Select(
-                String.Format("[{0}] = {1}", NetworkDatabase.ColumnRoleId, (ushort)NetworkSet.Testing));
-
-            if (selectedRows.Length == 0)
-                return "No records found!";
-
-            int testingItems = selectedRows.Length * this.m_database.Schema.OutputColumns.Length;
-
-
-
-            StringBuilder strBuilder = new StringBuilder(this.getBaseReportText());
-
-            strBuilder.Replace("[netName]", m_network.Name);
-            strBuilder.Replace("[netType]", m_network.Type);
-            strBuilder.Replace("[netLayout]", m_network.Layout);
-            strBuilder.Replace("[netDescription]", m_network.Description);
-
-            strBuilder.Replace("[trainEntryCount]", m_database.TrainingSet.Count.ToString());
-            strBuilder.Replace("[validEntryCount]", m_database.ValidationSet.Count.ToString());
-            strBuilder.Replace("[testEntryCount]", m_database.TestingSet.Count.ToString());
-            strBuilder.Replace("[testItemsCount]", testingItems.ToString());
-            strBuilder.Replace("[trainDeviation]", m_network.Precision.ToString());
-
-
-            strBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
-            strBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
-
-            strBuilder.Replace("[testTable]", generateResults());
-
-            strBuilder.Replace("[netWeights]", generateWeights());
-
-            strBuilder.Replace("[year]", DateTime.Now.Year.ToString());
-
-
-
-            #region Scores Generation
-            int hitTotal = 0, hitPositive = 0, hitNegative = 0;
-            int errorTotal = 0, errorPositive = 0, errorNegative = 0;
-            double totalScore = 0, finalScore = 0;
-
-            foreach (DataRow row in selectedRows)
-            {
-                foreach (String outputColumn in this.m_network.Schema.OutputColumns)
-                {
-
-                    totalScore += Math.Abs(Double.Parse((string)row[NetworkDatabase.ColumnDeltaPrefix + outputColumn]));
-
-                    if (row[outputColumn].Equals(row[NetworkDatabase.ColumnComputedPrefix + outputColumn]))
-                    {
-                        hitTotal++;
-
-                        if (row[outputColumn].Equals("1"))
-                        {
-                            hitPositive++;
-                        }
-                        else
-                        {
-                            hitNegative++;
-                        }
-                    }
-                    else
-                    {
-                        errorTotal++;
-
-                        if (row[outputColumn].Equals("1"))
-                        {
-                            errorPositive++;
-                        }
-                        else
-                        {
-                            errorNegative++;
-                        }
-                    }
-
-                }
-            }
-
-            finalScore = totalScore / testingItems;
-
-            strBuilder.Replace("[totalDeviation]", totalScore.ToString("N6"));
-            strBuilder.Replace("[finalDeviation]", finalScore.ToString("N6"));
-
-            strBuilder.Replace("[hits]", hitTotal.ToString());
-            strBuilder.Replace("[hits%]", ((float)hitTotal / testingItems).ToString("0.00%"));
-
-            strBuilder.Replace("[errors]", errorTotal.ToString());
-            strBuilder.Replace("[errors%]", ((float)errorTotal / testingItems).ToString("0.00%"));
-
-            if (hitTotal != 0)
-            {
-                strBuilder.Replace("[hitsP]", hitPositive.ToString());
-                strBuilder.Replace("[hitsN]", hitNegative.ToString());
-                strBuilder.Replace("[hitsP%]", ((float)hitPositive / hitTotal).ToString("0.00%"));
-                strBuilder.Replace("[hitsN%]", ((float)hitNegative / hitTotal).ToString("0.00%"));
-            }
-            else
-            {
-                strBuilder.Replace("[hitsP]", "-");
-                strBuilder.Replace("[hitsN]", "-");
-                strBuilder.Replace("[hitsP%]", String.Empty);
-                strBuilder.Replace("[hitsN%]", String.Empty);
-            }
-
-            if (errorTotal != 0)
-            {
-                strBuilder.Replace("[errorsP]", errorPositive.ToString());
-                strBuilder.Replace("[errorsN]", errorNegative.ToString());
-                strBuilder.Replace("[errorsP%]", ((float)errorPositive / errorTotal).ToString("0.00%"));
-                strBuilder.Replace("[errorsN%]", ((float)errorNegative / errorTotal).ToString("0.00%"));
-            }
-            else
-            {
-                strBuilder.Replace("[errorsP]", "-");
-                strBuilder.Replace("[errorsN]", "-");
-                strBuilder.Replace("[errorsP%]", String.Empty);
-                strBuilder.Replace("[errorsN%]", String.Empty);
-            }
-            #endregion
-
-
-            return strBuilder.ToString();
+            lbStatus.Text = "Generating...";
+            this.backgroundWorker.RunWorkerAsync();
         }
         #endregion
 
@@ -448,6 +352,167 @@ namespace Sinapse.Forms.Dialogs
             else index = 0;
 
             return index;
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Background Thread
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            backgroundWorker.ReportProgress(0);
+
+            DataRow[] selectedRows = this.m_database.DataTable.Select(
+                String.Format("[{0}] = {1}", NetworkDatabase.ColumnRoleId, (ushort)NetworkSet.Testing));
+
+            if (selectedRows.Length == 0)
+            {
+                e.Result = "No records found!";
+                return;
+            }
+
+            int testingItems = selectedRows.Length * this.m_database.Schema.OutputColumns.Length;
+
+            backgroundWorker.ReportProgress(10);
+
+            StringBuilder strBuilder = new StringBuilder(this.getBaseReportText());
+
+            strBuilder.Replace("[netName]", m_network.Name);
+            strBuilder.Replace("[netType]", m_network.Type);
+            strBuilder.Replace("[netLayout]", m_network.Layout);
+            strBuilder.Replace("[netDescription]", m_network.Description);
+
+            strBuilder.Replace("[trainEntryCount]", m_database.TrainingSet.Count.ToString());
+            strBuilder.Replace("[validEntryCount]", m_database.ValidationSet.Count.ToString());
+            strBuilder.Replace("[testEntryCount]", m_database.TestingSet.Count.ToString());
+            strBuilder.Replace("[testItemsCount]", testingItems.ToString());
+            strBuilder.Replace("[trainDeviation]", m_network.Precision.ToString());
+
+            strBuilder.Replace("[year]", DateTime.Now.Year.ToString());
+
+            backgroundWorker.ReportProgress(20);
+
+            strBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
+            strBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
+
+            backgroundWorker.ReportProgress(40);
+
+            strBuilder.Replace("[testTable]", generateResults());
+
+            backgroundWorker.ReportProgress(60);
+
+
+            strBuilder.Replace("[netWeights]", generateWeights());
+
+
+            backgroundWorker.ReportProgress(70);
+
+
+            #region Scores Generation
+            int hitTotal = 0, hitPositive = 0, hitNegative = 0;
+            int errorTotal = 0, errorPositive = 0, errorNegative = 0;
+            double totalScore = 0, finalScore = 0;
+
+            foreach (DataRow row in selectedRows)
+            {
+                foreach (String outputColumn in this.m_network.Schema.OutputColumns)
+                {
+
+                    totalScore += Math.Abs(Double.Parse((string)row[NetworkDatabase.ColumnDeltaPrefix + outputColumn]));
+
+                    if (row[outputColumn].Equals(row[NetworkDatabase.ColumnComputedPrefix + outputColumn]))
+                    {
+                        hitTotal++;
+
+                        if (row[outputColumn].Equals("1"))
+                        {
+                            hitPositive++;
+                        }
+                        else
+                        {
+                            hitNegative++;
+                        }
+                    }
+                    else
+                    {
+                        errorTotal++;
+
+                        if (row[outputColumn].Equals("1"))
+                        {
+                            errorPositive++;
+                        }
+                        else
+                        {
+                            errorNegative++;
+                        }
+                    }
+
+                }
+            }
+
+            finalScore = totalScore / testingItems;
+
+            strBuilder.Replace("[totalDeviation]", totalScore.ToString("N6"));
+            strBuilder.Replace("[finalDeviation]", finalScore.ToString("N6"));
+
+            strBuilder.Replace("[hits]", hitTotal.ToString());
+            strBuilder.Replace("[hits%]", ((float)hitTotal / testingItems).ToString("0.00%"));
+
+            strBuilder.Replace("[errors]", errorTotal.ToString());
+            strBuilder.Replace("[errors%]", ((float)errorTotal / testingItems).ToString("0.00%"));
+
+            if (hitTotal != 0)
+            {
+                strBuilder.Replace("[hitsP]", hitPositive.ToString());
+                strBuilder.Replace("[hitsN]", hitNegative.ToString());
+                strBuilder.Replace("[hitsP%]", ((float)hitPositive / hitTotal).ToString("0.00%"));
+                strBuilder.Replace("[hitsN%]", ((float)hitNegative / hitTotal).ToString("0.00%"));
+            }
+            else
+            {
+                strBuilder.Replace("[hitsP]", "-");
+                strBuilder.Replace("[hitsN]", "-");
+                strBuilder.Replace("[hitsP%]", String.Empty);
+                strBuilder.Replace("[hitsN%]", String.Empty);
+            }
+
+            if (errorTotal != 0)
+            {
+                strBuilder.Replace("[errorsP]", errorPositive.ToString());
+                strBuilder.Replace("[errorsN]", errorNegative.ToString());
+                strBuilder.Replace("[errorsP%]", ((float)errorPositive / errorTotal).ToString("0.00%"));
+                strBuilder.Replace("[errorsN%]", ((float)errorNegative / errorTotal).ToString("0.00%"));
+            }
+            else
+            {
+                strBuilder.Replace("[errorsP]", "-");
+                strBuilder.Replace("[errorsN]", "-");
+                strBuilder.Replace("[errorsP%]", String.Empty);
+                strBuilder.Replace("[errorsN%]", String.Empty);
+            }
+            #endregion
+
+
+            backgroundWorker.ReportProgress(80);
+
+            e.Result = strBuilder.ToString();
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (this.webBrowser.Created)
+                this.webBrowser.DocumentText = e.Result as string;
+
+            this.progressBar.Value = 100;
+            this.lbStatus.Text = "Done.";
         }
         #endregion
 

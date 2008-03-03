@@ -95,18 +95,6 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        public int display_UpdateRate {
-            get {
-                return ((int)(this["display_UpdateRate"]));
-            }
-            set {
-                this["display_UpdateRate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool main_AutoSwitchToTrainingTab {
             get {
@@ -289,6 +277,52 @@ namespace Sinapse.Properties {
             }
             set {
                 this["report_FirstLoad"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Size history_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["history_Size"]));
+            }
+            set {
+                this["history_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Point history_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["history_Location"]));
+            }
+            set {
+                this["history_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool history_FirstLoad {
+            get {
+                return ((bool)(this["history_FirstLoad"]));
+            }
+            set {
+                this["history_FirstLoad"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public decimal display_UpdateRate {
+            get {
+                return ((decimal)(this["display_UpdateRate"]));
+            }
+            set {
+                this["display_UpdateRate"] = value;
             }
         }
     }

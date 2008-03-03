@@ -106,6 +106,12 @@
     <Compile Include="Controls\ReportColumnOptionControl.Designer.cs">
       <DependentUpon>ReportColumnOptionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SideTabControl\SidePageReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SideTabControl\SidePageReport.Designer.cs">
+      <DependentUpon>SidePageReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SideTabControl\SidePageWorplace.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -319,6 +325,10 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\GraphOptionsDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GraphOptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\HistoryDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HistoryDialog.cs</DependentUpon>
@@ -354,6 +364,10 @@
     <EmbeddedResource Include="Forms\NetworkInspector.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NetworkInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SchemaEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SchemaEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -713,6 +727,9 @@
     <None Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\reminders.png" />
+    <None Include="Resources\fileprint.png" />
+    <None Include="Resources\configure2.png" />
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -726,4 +743,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

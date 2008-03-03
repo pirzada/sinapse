@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.IO;
 
@@ -28,51 +29,47 @@ namespace Sinapse.Data
     internal static class HistoryListener
     {
 
-        public static EventHandler NewActionLogged;
+        private static readonly HistoryEventCollection m_log = new HistoryEventCollection();
 
-        private static List<HistoryEvent> actionLog; 
-        private static string lastLoggedAction = String.Empty;
-
-
-        //---------------------------------------------
-
-
-        internal static void Initialize()
+        public static HistoryEventCollection Log
         {
-            if (actionLog == null)
-                actionLog = new List<HistoryEvent>();
+            get { return m_log; }
         }
 
-
-        //---------------------------------------------
-
-
-        #region Properties
-        internal static HistoryEvent LastAction
+        public static void Write(string text)
         {
-            get { return actionLog[actionLog.Count - 1]; }
-        }
-
-        internal static List<HistoryEvent> ActionLog
-        {
-            get { return actionLog; }
-        }
-        #endregion
-
-
-        //---------------------------------------------
-
-
-        internal static void Write(string text)
-        {
-            actionLog.Add(new HistoryEvent(text));
-
-            if (NewActionLogged != null)
-                NewActionLogged.Invoke(null, EventArgs.Empty);
+            m_log.Add(text);
         }
 
     }
 
+
+    internal sealed class HistoryEventCollection : BindingList<HistoryEvent>
+    {
+
+        public HistoryEvent LastEvent
+        {
+            get { return this[this.Count - 1]; }
+        }
+
+        public void Add(string text)
+        {
+            this.Add(new HistoryEvent(text));
+        }        
+
+        public string[] ToStringArray()
+        {
+            string[] lines = new string[this.Count];
+            
+            for (int i = 0; i < this.Count; ++i)
+            {
+                lines[i] = this[i].ToString();  
+            }
+
+            return lines;
+        }
+        
+    }
 
     internal sealed class HistoryEvent
     {
@@ -116,5 +113,7 @@ namespace Sinapse.Data
         {
             return String.Format("[{0}] {1}", time, action);
         }
+
     }
+
 }

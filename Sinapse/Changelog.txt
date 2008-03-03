@@ -1,5 +1,5 @@
 
-  Sinapse Neural Network Tool                    http://sinapse.googlecode.com
+  Sinapse Neural Network Tool            http://sinapse.googlecode.com
  ------------------------------------------------------------------------
   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>
 
@@ -9,7 +9,7 @@
 
  Sinapse 0.0.0.2 release notes
  ----------------------------
- 02.03.2008.
+ 03.03.2008.
 
 
  Version updates and fixes:
@@ -26,4 +26,4 @@
  ----------------------------
  05.11.2007.
 
- * First pre-alpha version released!
+ * First public beta version released!
