@@ -50,5 +50,10 @@ namespace Sinapse.Forms.Dialogs
         }
         #endregion
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

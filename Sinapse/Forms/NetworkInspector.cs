@@ -109,24 +109,59 @@ namespace Sinapse.Forms.Dialogs
                     weightNodes = new TreeNode[networkContainer.ActivationNetwork[i][j].InputsCount];
                     for (int k = 0; k < networkContainer.ActivationNetwork[i][j].InputsCount; ++k)
                     {
-                        weightNodes[k] = new TreeNode(String.Format("[{0}]: {1}", k+1,
-                            networkContainer.ActivationNetwork[i][j][k]));
-
+                        weightNodes[k] = new TreeNode(String.Format("[{0}]: {1}", k + 1,
+                            networkContainer.ActivationNetwork[i][j][k]), 3, 3);
+                        weightNodes[k].Tag = networkContainer.ActivationNetwork[i][j];
                         weightNodes[k].ForeColor = Color.Gray;
                     }
-                    neuronNodes[j] = new TreeNode(String.Format("Neuron {0}",j+1),
+                    neuronNodes[j] = new TreeNode(String.Format("Neuron {0}", j + 1), 2, 2,
                         weightNodes);
+                    neuronNodes[j].Tag = networkContainer.ActivationNetwork[i][j];
                 }
-                layerNodes[i] = new TreeNode(String.Format("Layer {0}",i+1),
+                layerNodes[i] = new TreeNode(String.Format("Layer {0}", i + 1), 1, 1,
                     neuronNodes);
+                layerNodes[i].Tag = networkContainer.ActivationNetwork[i];
             }
 
-            networkNode = new TreeNode(networkContainer.Name, layerNodes);
+            networkNode = new TreeNode(networkContainer.Name, 0, 0, layerNodes);
+            networkNode.Tag = networkContainer;
 
             treeView.Nodes.Add(networkNode);
+            treeView.SelectedNode = networkNode;
+
             treeView.EndUpdate();
         }
         #endregion
+
+
+        //----------------------------------------
+
+
+        #region Controls Events
+        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Tag != null)
+            {
+                if (e.Node.Tag is Neuron)
+                    this.inspectorNeuronDetails.ShowDetails(e.Node.Tag as Neuron);
+
+                if (e.Node.Tag is Layer)
+                    this.inspectorLayerDetails.ShowDetails(e.Node.Tag as Layer);
+
+                if (e.Node.Tag is NetworkContainer)
+                    this.inspectorNetworkDetails.ShowDetails(e.Node.Tag as NetworkContainer);
+            }
+        }
+
+        private void inspectorDetails_NetworkChanged(object sender, EventArgs e)
+        {
+            this.populateTreeView(m_networkContainer);
+        }
+        #endregion
+
+
+        //----------------------------------------
+
 
     }
 }

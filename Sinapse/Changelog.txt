@@ -5,6 +5,18 @@
 
 
 
+ Sinapse 0.0.0.3 release notes
+ ----------------------------
+ x.x.2008.
+
+
+ Version updates and fixes:
+
+  * Network Inspector (weight viewer) is now working.
+  * Minor bug fixes.
+
+
+
 
 
  Sinapse 0.0.0.2 release notes

@@ -28,6 +28,7 @@ namespace Sinapse.Controls.SideTabControl
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.label2 = new System.Windows.Forms.Label();
             this.toolStripBottom = new System.Windows.Forms.ToolStrip();
@@ -60,6 +61,7 @@ namespace Sinapse.Controls.SideTabControl
             this.numAutoSave = new System.Windows.Forms.NumericUpDown();
             this.numEpochLimit = new System.Windows.Forms.NumericUpDown();
             this.numErrorLimit = new System.Windows.Forms.NumericUpDown();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.toolStripBottom.SuspendLayout();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLearningRate)).BeginInit();
@@ -222,6 +224,7 @@ namespace Sinapse.Controls.SideTabControl
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Enabled = false;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(93, 362);
             this.label3.Name = "label3";
@@ -384,13 +387,14 @@ namespace Sinapse.Controls.SideTabControl
             this.cbAutosave.TabIndex = 46;
             this.cbAutosave.Text = "Enable network auto-saving every";
             this.cbAutosave.UseVisualStyleBackColor = true;
+            this.cbAutosave.CheckedChanged += new System.EventHandler(this.cbAutosave_CheckedChanged);
             // 
             // cbLayerAutoSwitch
             // 
             this.cbLayerAutoSwitch.AutoSize = true;
             this.cbLayerAutoSwitch.Checked = global::Sinapse.Properties.Settings.Default.training_LayerAutoSwitch;
-            this.cbLayerAutoSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "training_LayerAutoSwitch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbLayerAutoSwitch.Enabled = false;
             this.cbLayerAutoSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbLayerAutoSwitch.Location = new System.Drawing.Point(9, 345);
             this.cbLayerAutoSwitch.Name = "cbLayerAutoSwitch";
@@ -448,6 +452,7 @@ namespace Sinapse.Controls.SideTabControl
             // 
             this.numLayerAutoSwitch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "training_LayerAutoSwitchEpochs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numLayerAutoSwitch.Enabled = false;
             this.numLayerAutoSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numLayerAutoSwitch.Increment = new decimal(new int[] {
             25,
@@ -549,6 +554,12 @@ namespace Sinapse.Controls.SideTabControl
             0,
             65536});
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // SidePageTrainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -609,5 +620,6 @@ namespace Sinapse.Controls.SideTabControl
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numLayerAutoSwitch;
         private System.Windows.Forms.RadioButton rbManual;
+        private System.Windows.Forms.Timer timer;
     }
 }

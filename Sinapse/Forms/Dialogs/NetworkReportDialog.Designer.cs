@@ -59,12 +59,13 @@ namespace Sinapse.Forms.Dialogs
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(478, 469);
+            this.webBrowser.Size = new System.Drawing.Size(478, 468);
             this.webBrowser.TabIndex = 2;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
             // saveFileDialog
             // 
+            this.saveFileDialog.DefaultExt = "htm";
             this.saveFileDialog.FileName = "Sinapse Report";
             this.saveFileDialog.Title = "Save Report As";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
@@ -73,9 +74,9 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(95, 501);
+            this.progressBar.Location = new System.Drawing.Point(85, 500);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(385, 16);
+            this.progressBar.Size = new System.Drawing.Size(312, 16);
             this.progressBar.TabIndex = 3;
             // 
             // toolStrip
@@ -182,10 +183,9 @@ namespace Sinapse.Forms.Dialogs
             // lbStatus
             // 
             this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbStatus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbStatus.Location = new System.Drawing.Point(2, 501);
+            this.lbStatus.Location = new System.Drawing.Point(3, 500);
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(87, 16);
+            this.lbStatus.Size = new System.Drawing.Size(71, 16);
             this.lbStatus.TabIndex = 6;
             this.lbStatus.Text = "Status";
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -202,7 +202,6 @@ namespace Sinapse.Forms.Dialogs
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(490, 545);
             this.Name = "NetworkReportDialog";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Network Testing Performance Report";
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();

@@ -127,6 +127,7 @@ namespace Sinapse.Forms
             this.btnTrainQuery = new System.Windows.Forms.ToolStripButton();
             this.toolStripTesting = new System.Windows.Forms.ToolStrip();
             this.btnTestCompute = new System.Windows.Forms.ToolStripButton();
+            this.btnTestReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnTestRound = new System.Windows.Forms.ToolStripDropDownButton();
             this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,11 +139,11 @@ namespace Sinapse.Forms
             this.saveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.statusBarControl = new Sinapse.Controls.StatusBarControl();
             this.mruProviderDatabase = new Sinapse.Components.MruProvider();
             this.mruProviderNetwork = new Sinapse.Components.MruProvider();
             this.mruProviderWorkplace = new Sinapse.Components.MruProvider();
-            this.btnTestReport = new System.Windows.Forms.ToolStripButton();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
@@ -438,7 +439,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseNew.Image = global::Sinapse.Properties.Resources.file_new;
             this.MenuDatabaseNew.Name = "MenuDatabaseNew";
-            this.MenuDatabaseNew.Size = new System.Drawing.Size(143, 22);
+            this.MenuDatabaseNew.Size = new System.Drawing.Size(152, 22);
             this.MenuDatabaseNew.Text = "&New";
             this.MenuDatabaseNew.Click += new System.EventHandler(this.MenuFileWizard_Click);
             // 
@@ -446,7 +447,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseOpen.Image = global::Sinapse.Properties.Resources.file_open;
             this.MenuDatabaseOpen.Name = "MenuDatabaseOpen";
-            this.MenuDatabaseOpen.Size = new System.Drawing.Size(143, 22);
+            this.MenuDatabaseOpen.Size = new System.Drawing.Size(152, 22);
             this.MenuDatabaseOpen.Text = "&Open";
             this.MenuDatabaseOpen.Click += new System.EventHandler(this.MenuDatabaseOpen_Click);
             // 
@@ -454,7 +455,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSave.Image = global::Sinapse.Properties.Resources.file_save;
             this.MenuDatabaseSave.Name = "MenuDatabaseSave";
-            this.MenuDatabaseSave.Size = new System.Drawing.Size(143, 22);
+            this.MenuDatabaseSave.Size = new System.Drawing.Size(152, 22);
             this.MenuDatabaseSave.Text = "&Save";
             this.MenuDatabaseSave.Click += new System.EventHandler(this.MenuDatabaseSave_Click);
             // 
@@ -462,20 +463,20 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSaveAs.Image = global::Sinapse.Properties.Resources.file_saveas;
             this.MenuDatabaseSaveAs.Name = "MenuDatabaseSaveAs";
-            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(143, 22);
+            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(152, 22);
             this.MenuDatabaseSaveAs.Text = "Save &As";
             this.MenuDatabaseSaveAs.Click += new System.EventHandler(this.MenuDatabaseSaveAs_Click);
             // 
             // MenuDatabaseSeparator
             // 
             this.MenuDatabaseSeparator.Name = "MenuDatabaseSeparator";
-            this.MenuDatabaseSeparator.Size = new System.Drawing.Size(140, 6);
+            this.MenuDatabaseSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // MenuDatabaseEdit
             // 
             this.MenuDatabaseEdit.Image = global::Sinapse.Properties.Resources.edit;
             this.MenuDatabaseEdit.Name = "MenuDatabaseEdit";
-            this.MenuDatabaseEdit.Size = new System.Drawing.Size(143, 22);
+            this.MenuDatabaseEdit.Size = new System.Drawing.Size(152, 22);
             this.MenuDatabaseEdit.Text = "&Edit Schema";
             this.MenuDatabaseEdit.Click += new System.EventHandler(this.MenuDatabaseEdit_Click);
             // 
@@ -502,7 +503,7 @@ namespace Sinapse.Forms
             // 
             // MenuNetworkOpen
             // 
-            this.MenuNetworkOpen.Image = global::Sinapse.Properties.Resources.file_open;
+            this.MenuNetworkOpen.Image = global::Sinapse.Properties.Resources.file_import;
             this.MenuNetworkOpen.Name = "MenuNetworkOpen";
             this.MenuNetworkOpen.Size = new System.Drawing.Size(153, 22);
             this.MenuNetworkOpen.Text = "&Open";
@@ -510,7 +511,7 @@ namespace Sinapse.Forms
             // 
             // MenuNetworkSave
             // 
-            this.MenuNetworkSave.Image = global::Sinapse.Properties.Resources.file_save;
+            this.MenuNetworkSave.Image = global::Sinapse.Properties.Resources.file_export;
             this.MenuNetworkSave.Name = "MenuNetworkSave";
             this.MenuNetworkSave.Size = new System.Drawing.Size(153, 22);
             this.MenuNetworkSave.Text = "&Save";
@@ -587,7 +588,7 @@ namespace Sinapse.Forms
             // openNetworkDialog
             // 
             this.openNetworkDialog.DefaultExt = "ann";
-            this.openNetworkDialog.Filter = "Network Objects (*.ann)|*.ann|All Files (*.*)|*.*";
+            this.openNetworkDialog.Filter = "Sinapse Network Objects (*.ann)|*.ann|All Files (*.*)|*.*";
             this.openNetworkDialog.Title = "Open Network Object";
             this.openNetworkDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openNetworkDialog_FileOk);
             // 
@@ -672,7 +673,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(206, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
             this.toolStripMain.TabIndex = 0;
             // 
             // btnDatabaseNew
@@ -713,6 +714,7 @@ namespace Sinapse.Forms
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(23, 22);
             this.btnSaveAll.Text = "Save All";
+            this.btnSaveAll.Click += new System.EventHandler(this.btnSaveAll_Click);
             // 
             // toolStripSeparator8
             // 
@@ -779,10 +781,10 @@ namespace Sinapse.Forms
             this.btnTrainGraph,
             this.btnTrainQuery});
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripTraining.Location = new System.Drawing.Point(209, 0);
+            this.toolStripTraining.Location = new System.Drawing.Point(211, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
-            this.toolStripTraining.TabIndex = 1;
+            this.toolStripTraining.Size = new System.Drawing.Size(208, 25);
+            this.toolStripTraining.TabIndex = 3;
             // 
             // btnTrainForget
             // 
@@ -792,7 +794,6 @@ namespace Sinapse.Forms
             this.btnTrainForget.Name = "btnTrainForget";
             this.btnTrainForget.Size = new System.Drawing.Size(23, 22);
             this.btnTrainForget.Text = "toolStripButton1";
-            this.btnTrainForget.Click += new System.EventHandler(this.btnTrainForget_Click);
             // 
             // toolStripSeparator11
             // 
@@ -807,7 +808,6 @@ namespace Sinapse.Forms
             this.btnTrainBack.Name = "btnTrainBack";
             this.btnTrainBack.Size = new System.Drawing.Size(23, 22);
             this.btnTrainBack.Text = "Previous Savepoint";
-            this.btnTrainBack.Click += new System.EventHandler(this.btnTrainBack_Click);
             // 
             // btnTrainStart
             // 
@@ -817,7 +817,6 @@ namespace Sinapse.Forms
             this.btnTrainStart.Name = "btnTrainStart";
             this.btnTrainStart.Size = new System.Drawing.Size(23, 22);
             this.btnTrainStart.Text = "Start Training";
-            this.btnTrainStart.Click += new System.EventHandler(this.btnTrainStart_Click);
             // 
             // btnTrainPause
             // 
@@ -827,7 +826,6 @@ namespace Sinapse.Forms
             this.btnTrainPause.Name = "btnTrainPause";
             this.btnTrainPause.Size = new System.Drawing.Size(23, 22);
             this.btnTrainPause.Text = "Pause Training";
-            this.btnTrainPause.Click += new System.EventHandler(this.btnTrainPause_Click);
             // 
             // btnTrainStop
             // 
@@ -837,7 +835,6 @@ namespace Sinapse.Forms
             this.btnTrainStop.Name = "btnTrainStop";
             this.btnTrainStop.Size = new System.Drawing.Size(23, 22);
             this.btnTrainStop.Text = "Stop Training";
-            this.btnTrainStop.Click += new System.EventHandler(this.btnTrainStop_Click);
             // 
             // btnTrainNext
             // 
@@ -847,7 +844,6 @@ namespace Sinapse.Forms
             this.btnTrainNext.Name = "btnTrainNext";
             this.btnTrainNext.Size = new System.Drawing.Size(23, 22);
             this.btnTrainNext.Text = "Next Savepoint";
-            this.btnTrainNext.Click += new System.EventHandler(this.btnTrainNext_Click);
             // 
             // toolStripSeparator10
             // 
@@ -862,7 +858,6 @@ namespace Sinapse.Forms
             this.btnTrainGraph.Name = "btnTrainGraph";
             this.btnTrainGraph.Size = new System.Drawing.Size(23, 22);
             this.btnTrainGraph.Text = "Show progress graph";
-            this.btnTrainGraph.Click += new System.EventHandler(this.btnTrainGraph_Click);
             // 
             // btnTrainQuery
             // 
@@ -872,7 +867,6 @@ namespace Sinapse.Forms
             this.btnTrainQuery.Name = "btnTrainQuery";
             this.btnTrainQuery.Size = new System.Drawing.Size(23, 22);
             this.btnTrainQuery.Text = "Query Network";
-            this.btnTrainQuery.Click += new System.EventHandler(this.MenuNetworkQuery_Click);
             // 
             // toolStripTesting
             // 
@@ -882,9 +876,9 @@ namespace Sinapse.Forms
             this.btnTestReport,
             this.toolStripSeparator2,
             this.btnTestRound});
-            this.toolStripTesting.Location = new System.Drawing.Point(415, 0);
+            this.toolStripTesting.Location = new System.Drawing.Point(419, 0);
             this.toolStripTesting.Name = "toolStripTesting";
-            this.toolStripTesting.Size = new System.Drawing.Size(122, 25);
+            this.toolStripTesting.Size = new System.Drawing.Size(93, 25);
             this.toolStripTesting.TabIndex = 2;
             // 
             // btnTestCompute
@@ -896,6 +890,16 @@ namespace Sinapse.Forms
             this.btnTestCompute.Size = new System.Drawing.Size(23, 22);
             this.btnTestCompute.Text = "Compute Testing Set";
             this.btnTestCompute.Click += new System.EventHandler(this.btnTestCompute_Click);
+            // 
+            // btnTestReport
+            // 
+            this.btnTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTestReport.Image = global::Sinapse.Properties.Resources.switchuser;
+            this.btnTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTestReport.Name = "btnTestReport";
+            this.btnTestReport.Size = new System.Drawing.Size(23, 22);
+            this.btnTestReport.Text = "Generate Testing Performance Report";
+            this.btnTestReport.Click += new System.EventHandler(this.btnTestReport_Click);
             // 
             // toolStripSeparator2
             // 
@@ -984,6 +988,12 @@ namespace Sinapse.Forms
             this.browseWorkplaceDialog.Description = "Select the workplace directory";
             this.browseWorkplaceDialog.RootFolder = System.Environment.SpecialFolder.Personal;
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Sinapse Neural Networking Tool";
+            this.notifyIcon.Visible = true;
+            // 
             // statusBarControl
             // 
             this.statusBarControl.AutoSize = true;
@@ -1010,16 +1020,6 @@ namespace Sinapse.Forms
             // 
             this.mruProviderWorkplace.FilePathList = global::Sinapse.Properties.Settings.Default.history_Workplace;
             this.mruProviderWorkplace.MenuItem = this.MenuFileRecentWorkplaces;
-            // 
-            // btnTestReport
-            // 
-            this.btnTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTestReport.Image = global::Sinapse.Properties.Resources.switchuser;
-            this.btnTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTestReport.Name = "btnTestReport";
-            this.btnTestReport.Size = new System.Drawing.Size(23, 22);
-            this.btnTestReport.Text = "Generate Testing Performance Report";
-            this.btnTestReport.Click += new System.EventHandler(this.btnTestReport_Click);
             // 
             // MainForm
             // 
@@ -1091,14 +1091,8 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStrip toolStripMain;
         private System.Windows.Forms.ToolStripButton btnNetworkSave;
         private System.Windows.Forms.ToolStripButton btnDatabaseOpen;
-        private System.Windows.Forms.ToolStrip toolStripTraining;
-        private System.Windows.Forms.ToolStripButton btnTrainStart;
-        private System.Windows.Forms.ToolStripButton btnTrainPause;
-        private System.Windows.Forms.ToolStripButton btnTrainStop;
-        private System.Windows.Forms.ToolStripButton btnTrainBack;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.ToolStripButton btnDatabaseSave;
-        private System.Windows.Forms.ToolStripButton btnTrainQuery;
         private System.Windows.Forms.ToolStripButton btnNetworkNew;
         private System.Windows.Forms.ToolStripButton btnWizard;
         private Sinapse.Controls.MainTabControl.MainTabControl tabControlMain;
@@ -1136,11 +1130,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnDatabaseNew;
         private System.Windows.Forms.ToolStripButton btnNetworkOpen;
         private System.Windows.Forms.ToolStripButton btnSaveAll;
-        private System.Windows.Forms.ToolStripButton btnTrainForget;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripButton btnTrainNext;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripButton btnTrainGraph;
         private Sinapse.Controls.SideTabControl.SideTabControl tabControlSide;
         private Sinapse.Components.MruProvider mruProviderDatabase;
         private Sinapse.Components.MruProvider mruProviderNetwork;
@@ -1157,5 +1146,17 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem btnTestRound90;
         private System.Windows.Forms.ToolStripMenuItem MenuFileCloseWorkplace;
         private System.Windows.Forms.ToolStripButton btnTestReport;
+        private System.Windows.Forms.ToolStrip toolStripTraining;
+        private System.Windows.Forms.ToolStripButton btnTrainForget;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripButton btnTrainBack;
+        private System.Windows.Forms.ToolStripButton btnTrainStart;
+        private System.Windows.Forms.ToolStripButton btnTrainPause;
+        private System.Windows.Forms.ToolStripButton btnTrainStop;
+        private System.Windows.Forms.ToolStripButton btnTrainNext;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton btnTrainGraph;
+        private System.Windows.Forms.ToolStripButton btnTrainQuery;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

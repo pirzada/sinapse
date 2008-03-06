@@ -18,7 +18,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="graph_UpdateRate" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="main_AutoSwitchToTrainingTab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -33,7 +33,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="training_AutosaveEpochs" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="history_Networks" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
@@ -48,10 +48,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="training_LayerAutoSwitch" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="training_LayerAutoSwitchEpochs" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="report_Size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)" />
@@ -77,8 +77,14 @@
     <Setting Name="history_FirstLoad" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="display_UpdateRate" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">100</Value>
+    <Setting Name="display_UpdateRate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="display_UpdateTime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="display_UpdateByTime" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

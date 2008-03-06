@@ -20,10 +20,10 @@
  * Class originally developed by Ambalavanar Thirugnanam                   *
  *  http://www.codeproject.com/cs/library/HTMLReportEngine.asp             *
  *                                                                         *
- * Modifications by Cesar Roberto de Souza                                 *
+ * Little modifications by Cesar Roberto de Souza                          *
  *  (added support for number format specification)                        *
  *                                                                         *
- *  This project license does not apply to this library.                   *
+ *  This project license (GPL) does not apply to this library.             *
  *  Please contact the class author for more info about licensing          *
  *                                                                         *
  ***************************************************************************/
@@ -61,6 +61,7 @@ namespace Sinapse.Utils.HtmlReport
         private Hashtable totalList;
         public List<String> TotalFields;
         public bool IncludeTotal;
+        public bool IncludeTitle;
         public bool AutoAlignTotalFields;
         //Chart fields
         public bool IncludeChart;
@@ -79,6 +80,7 @@ namespace Sinapse.Utils.HtmlReport
         {
             htmlContent = new StringBuilder();
             newline = "\n";
+            IncludeTitle = true;
             sections = new List<Section>();
             reportFields = new List<Field>();
             ReportFont = "Arial";
@@ -188,9 +190,13 @@ namespace Sinapse.Utils.HtmlReport
             htmlContent.Append(" .ColumnHeaderStyle  {font-family: " + ReportFont + "; font-size:8pt; border-style:outset; border-width:1} " + newline);
             htmlContent.Append("</STYLE>" + newline);
             htmlContent.Append("<BODY TOPMARGIN=0 LEFTMARGIN=0 RIGHTMARGIN=0 BOTTOMMARGIN=0>" + newline);
-            htmlContent.Append("<TABLE Width='100%' style='FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=1,startColorStr=#a9d4ff,endColorStr=#ffffff)' Cellpadding=5><TR><TD>");
-            htmlContent.Append("<font face='" + ReportFont + "' size=6>" + ReportTitle + "</font>");
-            htmlContent.Append("</TD></TR></TABLE>" + newline);
+            
+            if (IncludeTitle)
+            {
+                htmlContent.Append("<TABLE Width='100%' style='FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=1,startColorStr=#a9d4ff,endColorStr=#ffffff)' Cellpadding=5><TR><TD>");
+                htmlContent.Append("<font face='" + ReportFont + "' size=6>" + ReportTitle + "</font>");
+                htmlContent.Append("</TD></TR></TABLE>" + newline);
+            }
         }
 
         /// <summary>
