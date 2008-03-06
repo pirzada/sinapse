@@ -18,8 +18,7 @@
 
 /***************************************************************************
  * Please note: This class is not covered by the same license (GPL) as     *
- * does the rest of this software and will be transfered to a separate     *
- * library to be licensed under an all permissive license (public domain)  *
+ *  the rest of this software and instead belongs to the public domain     *
  ***************************************************************************/
 
 /***************************************************************************
@@ -197,7 +196,6 @@ namespace Sinapse.Components
         #endregion
 
 
-
         //---------------------------------------------
 
 
@@ -321,6 +319,6 @@ namespace Sinapse.Components
         }
         #endregion
 
-    }
 
+    }
 }

@@ -64,6 +64,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.openFileDialog.Filter = "All Files (*.*)|*.*";
             this.openFileDialog.Title = "Select data location";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
             // wizardControl
             // 
@@ -211,10 +212,9 @@ namespace Sinapse.Forms.Dialogs
             this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 110);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(333, 56);
+            this.label3.Size = new System.Drawing.Size(333, 92);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Please select now the columns in your data which will serve as input to our Neura" +
-                "l Network.";
+            this.label3.Text = resources.GetString("label3.Text");
             // 
             // clbInput
             // 
@@ -278,7 +278,7 @@ namespace Sinapse.Forms.Dialogs
             this.label8.Size = new System.Drawing.Size(333, 56);
             this.label8.TabIndex = 3;
             this.label8.Text = "Please check any columns that contains categorical information so they can be cor" +
-                "rectly handled by the Neural Network.";
+                "rectly handled by neural networks.";
             // 
             // label7
             // 

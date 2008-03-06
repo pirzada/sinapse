@@ -83,7 +83,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int graph_UpdateRate {
             get {
                 return ((int)(this["graph_UpdateRate"]));
@@ -143,7 +143,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int training_AutosaveEpochs {
             get {
                 return ((int)(this["training_AutosaveEpochs"]));
@@ -200,7 +200,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool training_LayerAutoSwitch {
             get {
                 return ((bool)(this["training_LayerAutoSwitch"]));
@@ -212,7 +212,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int training_LayerAutoSwitchEpochs {
             get {
                 return ((int)(this["training_LayerAutoSwitchEpochs"]));
@@ -316,13 +316,37 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        public decimal display_UpdateRate {
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int display_UpdateRate {
             get {
-                return ((decimal)(this["display_UpdateRate"]));
+                return ((int)(this["display_UpdateRate"]));
             }
             set {
                 this["display_UpdateRate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int display_UpdateTime {
+            get {
+                return ((int)(this["display_UpdateTime"]));
+            }
+            set {
+                this["display_UpdateTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool display_UpdateByTime {
+            get {
+                return ((bool)(this["display_UpdateByTime"]));
+            }
+            set {
+                this["display_UpdateByTime"] = value;
             }
         }
     }

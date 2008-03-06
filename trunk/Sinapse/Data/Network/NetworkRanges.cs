@@ -1,7 +1,7 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2007 Cesar Roberto de Souza <cesarsouza@gmail.com> *
+ *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -36,10 +36,12 @@ namespace Sinapse.Data.Network
 
         //---------------------------------------------
 
+
         #region Constructor
         public NetworkRanges(string[] allColumns, string[] stringColumns, DoubleRange activationFunctionRange)
         {
             this.dataRanges = new DataTable("Data Ranges");
+            this.activationFunctionRange = activationFunctionRange;
 
             DataColumn dataColumn;
             
@@ -94,7 +96,9 @@ namespace Sinapse.Data.Network
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Properties
         public DataTable Table
@@ -109,12 +113,15 @@ namespace Sinapse.Data.Network
         }
         #endregion
 
+
         //---------------------------------------------
+
 
         #region Public Methods
         public DoubleRange GetRange(string column)
         {
             DataRow row = this.dataRanges.Rows.Find(column);
+            
             double min;
             double max;
 
@@ -150,6 +157,7 @@ namespace Sinapse.Data.Network
             }
         }
         #endregion
+
 
     }
 }

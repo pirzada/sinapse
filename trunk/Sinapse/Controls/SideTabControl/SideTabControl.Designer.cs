@@ -60,9 +60,9 @@ namespace Sinapse.Controls.SideTabControl
             // 
             // tabDisplay
             // 
-            this.tabDisplay.Location = new System.Drawing.Point(27, 4);
+            this.tabDisplay.Location = new System.Drawing.Point(50, 4);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Size = new System.Drawing.Size(234, 447);
+            this.tabDisplay.Size = new System.Drawing.Size(211, 447);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Network Status";
             // 
@@ -72,7 +72,7 @@ namespace Sinapse.Controls.SideTabControl
             this.tabTraining.Name = "tabTraining";
             this.tabTraining.Size = new System.Drawing.Size(234, 447);
             this.tabTraining.TabIndex = 0;
-            this.tabTraining.Text = "Training";
+            this.tabTraining.Text = "Network Training";
             // 
             // tabRanges
             // 
@@ -84,9 +84,9 @@ namespace Sinapse.Controls.SideTabControl
             // 
             // tabWorkplace
             // 
-            this.tabWorkplace.Location = new System.Drawing.Point(27, 4);
+            this.tabWorkplace.Location = new System.Drawing.Point(50, 4);
             this.tabWorkplace.Name = "tabWorkplace";
-            this.tabWorkplace.Size = new System.Drawing.Size(234, 447);
+            this.tabWorkplace.Size = new System.Drawing.Size(211, 447);
             this.tabWorkplace.TabIndex = 3;
             this.tabWorkplace.Text = "Workplace";
             // 

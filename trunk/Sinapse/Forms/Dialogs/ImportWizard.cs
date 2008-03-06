@@ -142,16 +142,16 @@ namespace Sinapse.Forms.Dialogs
                     removeCols.Add(col);
             }
 
-            foreach(DataColumn col in removeCols)
+            foreach (DataColumn col in removeCols)
                 m_dataTable.Columns.Remove(col);
-            
+
 
             //Create Network Schema
             this.m_networkSchema = new NetworkSchema(
                 inputColumns.ToArray(),
                 outputColumns.ToArray(),
                 stringColumns.ToArray());
-            
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -179,11 +179,11 @@ namespace Sinapse.Forms.Dialogs
         private void loadInputCombobox()
         {
             clbInput.Items.Clear();
-   //         clbString.Items.Clear();
+            //         clbString.Items.Clear();
             foreach (DataColumn col in m_dataTable.Columns)
             {
                 clbInput.Items.Add(col.ColumnName, false);
-     //           clbString.Items.Add(col.ColumnName, false);
+                //           clbString.Items.Add(col.ColumnName, false);
             }
         }
 
@@ -218,15 +218,20 @@ namespace Sinapse.Forms.Dialogs
         #region Buttons
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                tbDatapath.Text = openFileDialog.FileName;
+            openFileDialog.ShowDialog(this);
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            tbDatapath.Text = openFileDialog.FileName;
+            this.autoDetectFieldDelimiter(tbDatapath.Text);
         }
 
         private void btnAutodetect_Click(object sender, EventArgs e)
         {
             if (tbDatapath.Text.Length > 0 && File.Exists(tbDatapath.Text))
             {
-                cbDelimiter.SelectedItem = CsvUtils.DetectFieldDelimiterChar(tbDatapath.Text, Encoding.Default);
+                this.autoDetectFieldDelimiter(tbDatapath.Text);
             }
             else
             {
@@ -235,6 +240,17 @@ namespace Sinapse.Forms.Dialogs
         }
         #endregion
 
+
+        //---------------------------------------------
+
+
+
+        #region Private Methods
+        private void autoDetectFieldDelimiter(string path)
+        {
+            cbDelimiter.SelectedItem = CsvUtils.DetectFieldDelimiterChar(tbDatapath.Text, Encoding.Default);
+        }
+        #endregion
 
     }
 }

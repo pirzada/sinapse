@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -90,6 +90,9 @@ namespace Sinapse.Forms.Dialogs
                     this.Location = Properties.Settings.Default.report_Location;
                     this.WindowState = Properties.Settings.Default.report_WindowState;
                 }
+
+                // Set default report filename
+                this.saveFileDialog.FileName = m_network.Name + " Report";
             }
 
             this.CreateReport();
@@ -233,11 +236,11 @@ namespace Sinapse.Forms.Dialogs
 
             for (int i = 0; i < m_network.ActivationNetwork.LayersCount; ++i)
             {
-                weigthBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i);
+                weigthBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i+1);
 
                 for (int j = 0; j < m_network.ActivationNetwork[i].NeuronsCount; ++j)
                 {
-                    weigthBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j);
+                    weigthBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j+1);
 
                     for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; k++)
                     {
@@ -250,12 +253,33 @@ namespace Sinapse.Forms.Dialogs
             return weigthBuilder.ToString();
         }
 
-
         private string generateScores()
         {
             return String.Empty;
         }
 
+        private string generateRanges()
+        {
+            HTMLReport report = new HTMLReport();
+
+
+            report.ReportTitle = "Data Ranges";
+            report.ReportFont = "Arial";
+            report.ValuesFont = "Courier New";
+            report.IncludeTitle = false;
+
+            report.ReportSource = m_database.Schema.DataRanges.Table;
+
+
+            report.ReportFields.Add(new Field("Column", "Label", tableHdColors[0]));
+            report.ReportFields.Add(new Field("Normalize", "Normalize", tableHdColors[0]));
+            report.ReportFields.Add(new Field("Min", "Min", tableHdColors[0]));
+            report.ReportFields.Add(new Field("Max", "Max", tableHdColors[0]));
+            report.ReportFields.Add(new Field("String", "Category", tableHdColors[0]));
+
+            return report.GenerateReport();
+
+        }
 
         private string generateResults()
         {
@@ -383,6 +407,7 @@ namespace Sinapse.Forms.Dialogs
             strBuilder.Replace("[netName]", m_network.Name);
             strBuilder.Replace("[netType]", m_network.Type);
             strBuilder.Replace("[netLayout]", m_network.Layout);
+            strBuilder.Replace("[netFunction]", m_network.Function);
             strBuilder.Replace("[netDescription]", m_network.Description);
 
             strBuilder.Replace("[trainEntryCount]", m_database.TrainingSet.Count.ToString());
@@ -391,6 +416,14 @@ namespace Sinapse.Forms.Dialogs
             strBuilder.Replace("[testItemsCount]", testingItems.ToString());
             strBuilder.Replace("[trainDeviation]", m_network.Precision.ToString());
 
+            if (m_network.Schema.DataRanges.ActivationFunctionRange != null)
+            {
+                strBuilder.Replace("[funcRange]", String.Format("{0}~{1}",
+                    m_network.Schema.DataRanges.ActivationFunctionRange.Min,
+                    m_network.Schema.DataRanges.ActivationFunctionRange.Max));
+            }
+            else strBuilder.Replace("[funcRange]", "-");
+
             strBuilder.Replace("[year]", DateTime.Now.Year.ToString());
 
             backgroundWorker.ReportProgress(20);
@@ -398,16 +431,18 @@ namespace Sinapse.Forms.Dialogs
             strBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
             strBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
 
-            backgroundWorker.ReportProgress(40);
+            backgroundWorker.ReportProgress(30);
+
 
             strBuilder.Replace("[testTable]", generateResults());
+            backgroundWorker.ReportProgress(50);
 
+
+            strBuilder.Replace("[netRanges]", generateRanges());
             backgroundWorker.ReportProgress(60);
 
 
             strBuilder.Replace("[netWeights]", generateWeights());
-
-
             backgroundWorker.ReportProgress(70);
 
 

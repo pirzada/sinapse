@@ -577,6 +577,11 @@
         /GrgZf/QwODPRgY1hYyfhYBCYBt/mt6ZKuT/Ad3Q4H0WY/sDAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Please select now the columns in your data which will serve as input to our Neural Network.
+
+If the data shown looks weird, maybe the autodetection of the field delimiter character failed or you have made a wrong choice. Please click the "Back" button and try again with a different one.</value>
+  </data>
   <data name="intermediateStep3.BindingImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAhYAAAA6CAIAAABj1IfgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

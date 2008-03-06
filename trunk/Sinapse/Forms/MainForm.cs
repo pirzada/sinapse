@@ -306,6 +306,12 @@ namespace Sinapse.Forms
             }
         }
 
+        private void btnSaveAll_Click(object sender, EventArgs e)
+        {
+            MenuDatabaseSave_Click(sender, e);
+            MenuNetworkSave_Click(sender, e);
+        }
+
         private void MenuFileCloseNetwork_Click(object sender, EventArgs e)
         {
             this.CurrentNetworkContainer = null;
@@ -576,6 +582,16 @@ namespace Sinapse.Forms
                     this.CurrentNetworkContainer = neuralNetwork;
                     this.mruProviderNetwork.Insert(path);
                     HistoryListener.Write("Network Loaded");
+
+                    if (m_networkDatabase == null && File.Exists(Path.ChangeExtension(path,".sdo")))
+                    {
+                        if (MessageBox.Show("Sinapse detected a database with the same name as this network. " +
+                            "Would you like to load this database too?", "Matching database found", MessageBoxButtons.YesNo)
+                            == DialogResult.Yes)
+                        {
+                            databaseOpen(Path.ChangeExtension(path, ".sdo"));
+                        }
+                    }
                 }
             }
         }
@@ -623,6 +639,16 @@ namespace Sinapse.Forms
                     this.CurrentNetworkDatabase = networkDatabase;
                     this.mruProviderDatabase.Insert(path);
                     HistoryListener.Write("Database Loaded");
+
+                    if (m_networkContainer == null && File.Exists(Path.ChangeExtension(path, ".ann")))
+                    {
+                        if (MessageBox.Show("Sinapse detected a network with the same name as this database. " +
+                            "Would you like to load this network too?", "Matching network found", MessageBoxButtons.YesNo)
+                            == DialogResult.Yes)
+                        {
+                            networkOpen(Path.ChangeExtension(path, ".ann"));
+                        }
+                    }
                 }
             }
         }

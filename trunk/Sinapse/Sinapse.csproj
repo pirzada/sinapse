@@ -100,6 +100,30 @@
     <Compile Include="Controls\MainTabControl\TabPageQuery.Designer.cs">
       <DependentUpon>TabPageQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NetworkInspector\InspectorLayerDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\InspectorLayerDetails.Designer.cs">
+      <DependentUpon>InspectorLayerDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\InspectorNetworkDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\InspectorNetworkDetails.Designer.cs">
+      <DependentUpon>InspectorNetworkDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\Base\InspectorPanelBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\Base\InspectorPanelBase.Designer.cs">
+      <DependentUpon>InspectorPanelBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\InspectorNeuronDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkInspector\InspectorNeuronDetails.Designer.cs">
+      <DependentUpon>InspectorNeuronDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReportColumnOptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -165,6 +189,14 @@
     </Compile>
     <Compile Include="Controls\MainTabControl\TabPageValidation.Designer.cs">
       <DependentUpon>TabPageValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Network\NetworkExchanger.cs" />
+    <Compile Include="Data\Structures\StatusbarUpdate.cs" />
+    <Compile Include="Forms\Special\ExcelAnchor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Special\ExcelAnchor.Designer.cs">
+      <DependentUpon>ExcelAnchor.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utils\CsvParser\Common.cs" />
@@ -285,6 +317,22 @@
       <SubType>Designer</SubType>
       <DependentUpon>TabPageQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NetworkInspector\Base\InspectorPanelBase.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InspectorPanelBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NetworkInspector\InspectorLayerDetails.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InspectorLayerDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NetworkInspector\InspectorNetworkDetails.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InspectorNetworkDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NetworkInspector\InspectorNeuronDetails.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InspectorNeuronDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ReportColumnOptionControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ReportColumnOptionControl.cs</DependentUpon>
@@ -356,6 +404,10 @@
     <EmbeddedResource Include="Forms\Dialogs\StatusBarOptionsDialog.resx">
       <DependentUpon>StatusBarOptionsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Special\ExcelAnchor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExcelAnchor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
@@ -680,7 +732,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\redled.png" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\netjaxer.png" />
@@ -730,6 +781,10 @@
     <None Include="Resources\reminders.png" />
     <None Include="Resources\fileprint.png" />
     <None Include="Resources\configure2.png" />
+    <None Include="Resources\agt_web.png" />
+    <None Include="Resources\magic8ball.png" />
+    <None Include="Resources\folder_html.png" />
+    <None Include="Resources\kded.png" />
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <ItemGroup>

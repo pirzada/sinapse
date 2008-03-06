@@ -74,6 +74,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap agt_web {
+            get {
+                object obj = ResourceManager.GetObject("agt_web", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap clear_left {
             get {
                 object obj = ResourceManager.GetObject("clear_left", resourceCulture);
@@ -242,6 +249,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap folder_html {
+            get {
+                object obj = ResourceManager.GetObject("folder_html", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap function {
             get {
                 object obj = ResourceManager.GetObject("function", resourceCulture);
@@ -305,6 +319,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap kded {
+            get {
+                object obj = ResourceManager.GetObject("kded", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap led_green_16 {
             get {
                 object obj = ResourceManager.GetObject("led_green_16", resourceCulture);
@@ -315,6 +336,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap led_red {
             get {
                 object obj = ResourceManager.GetObject("led_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap magic8ball {
+            get {
+                object obj = ResourceManager.GetObject("magic8ball", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

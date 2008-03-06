@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -109,7 +109,12 @@ namespace Sinapse.Data.Network
 
         public string Type
         {
-            get { return this.m_activationNetwork[0][0].ActivationFunction.GetType().ToString(); }
+            get { return this.m_activationNetwork.GetType().Name; }
+        }
+
+        public string Function
+        {
+            get { return this.m_activationNetwork[0][0].ActivationFunction.GetType().Name; }
         }
 
         public string Layout
@@ -161,7 +166,7 @@ namespace Sinapse.Data.Network
             }
         }
 
-        public double Score
+        public double Score //Rename to "Deviation"
         {
             get { return this.m_networkScore; }
             set

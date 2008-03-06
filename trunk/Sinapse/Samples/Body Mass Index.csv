@@ -1,4 +1,4 @@
-Height;Weight;IMC;Classification
+Height;Weight;BMI;Classification
 184;71;21;medium
 170;82;29;high
 176;50;16;low

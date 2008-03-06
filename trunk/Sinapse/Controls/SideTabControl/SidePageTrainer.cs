@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -50,6 +50,8 @@ namespace Sinapse.Controls.SideTabControl
         private Sinapse.Controls.MainTabControl.TabPageGraph m_graphControl;
 
         private bool m_trainingPaused;
+        private double m_epochsBySecond;
+        private int m_lastTickEpoch;
 
 
 
@@ -71,7 +73,19 @@ namespace Sinapse.Controls.SideTabControl
 
 
         #region Control Events
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            m_epochsBySecond = (m_networkState.Epoch - m_lastTickEpoch)*2;
+            m_lastTickEpoch = m_networkState.Epoch;
 
+            if (Properties.Settings.Default.display_UpdateByTime)
+                this.updateStatus();
+        }
+
+        private void cbAutosave_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.training_Autosave = cbAutosave.Checked;
+        }
         #endregion
 
 
@@ -99,8 +113,8 @@ namespace Sinapse.Controls.SideTabControl
                     this.m_graphControl.ClearGraph();
                 }
 
-                this.UpdateEnabled();
-                this.UpdateStatus();
+                this.updateEnabled();
+                this.updateStatus();
             }
         }
 
@@ -120,10 +134,10 @@ namespace Sinapse.Controls.SideTabControl
                     this.m_networkState = new TrainingStatus();
                     this.m_trainingPaused = false;
                     this.m_graphControl.ClearGraph();
-                    this.UpdateStatus();
+                    this.updateStatus();
                 }
 
-                this.UpdateEnabled();
+                this.updateEnabled();
             }
         }
 
@@ -186,7 +200,7 @@ namespace Sinapse.Controls.SideTabControl
             HistoryListener.Write("Network learnings cleared");
             this.m_trainingPaused = false;
             this.m_graphControl.ClearGraph();
-            this.UpdateStatus();
+            this.updateStatus();
         }
 
         internal void Stop()
@@ -194,7 +208,7 @@ namespace Sinapse.Controls.SideTabControl
             this.m_networkState = new TrainingStatus();
             this.m_trainingPaused = false;
 
-            this.UpdateStatus();
+            this.updateStatus();
 
             if (backgroundWorker.IsBusy)
             {
@@ -287,13 +301,13 @@ namespace Sinapse.Controls.SideTabControl
 
 
         #region Private Methods
-        private void UpdateStatus()
+        private void updateStatus()
         {
             if (this.StatusChanged != null)
                 this.StatusChanged.Invoke(this, EventArgs.Empty);
         }
 
-        private void UpdateEnabled()
+        private void updateEnabled()
         {
             this.Enabled = (this.m_networkDatabase != null && this.m_networkContainer != null);
         }
@@ -301,7 +315,7 @@ namespace Sinapse.Controls.SideTabControl
         private void networkContainer_SavepointRestored(object sender, EventArgs e)
         {
             this.m_networkState = this.m_networkContainer.Savepoints.CurrentSavepoint.NetworkStatus;
-            this.UpdateStatus();
+            this.updateStatus();
         }
         #endregion
 
@@ -351,7 +365,7 @@ namespace Sinapse.Controls.SideTabControl
 
 
                 #region Mark Network Savepoint
-                if (Properties.Settings.Default.training_Autosave &&
+                if (Properties.Settings.Default.training_Autosave == true &&
                     m_networkState.Epoch >= lastSaveEpoch + Properties.Settings.Default.training_AutosaveEpochs)
                 {
                     m_networkState.NextUpdateType = UpdateType.NetworkSave;
@@ -443,12 +457,15 @@ namespace Sinapse.Controls.SideTabControl
 
                 case UpdateType.Statusbar:
 
-                    string statusText = e.UserState as string;
+                    if (Properties.Settings.Default.display_UpdateByTime == false)
+                    {
+                        string statusText = e.UserState as string;
 
-                    if (statusText != null)
-                        HistoryListener.Write(statusText);
+                        if (statusText != null)
+                            HistoryListener.Write(statusText);
 
-                    this.UpdateStatus();
+                        this.updateStatus();
+                    }
                     break;
 
 
@@ -473,7 +490,7 @@ namespace Sinapse.Controls.SideTabControl
                 HistoryListener.Write("Training Finished!");
 
                 this.m_networkState.Progress = 100;
-                this.UpdateStatus();
+                this.updateStatus();
 
                 if (this.TrainingComplete != null)
                     this.TrainingComplete.Invoke(this, EventArgs.Empty);

@@ -30,18 +30,21 @@ namespace Sinapse.Forms.Dialogs
         {
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.cbDontAsk = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(345, 12);
+            this.btnGenerate.Location = new System.Drawing.Point(328, 12);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(63, 125);
+            this.btnGenerate.Size = new System.Drawing.Size(63, 118);
             this.btnGenerate.TabIndex = 0;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -49,62 +52,80 @@ namespace Sinapse.Forms.Dialogs
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(345, 143);
+            this.btnCancel.Location = new System.Drawing.Point(328, 136);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(63, 23);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // cbDontAsk
+            // checkBox1
             // 
-            this.cbDontAsk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbDontAsk.AutoSize = true;
-            this.cbDontAsk.Location = new System.Drawing.Point(6, 150);
-            this.cbDontAsk.Name = "cbDontAsk";
-            this.cbDontAsk.Size = new System.Drawing.Size(330, 17);
-            this.cbDontAsk.TabIndex = 1;
-            this.cbDontAsk.Text = "Use those settings for now on in this session and don\'t ask again";
-            this.cbDontAsk.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(21, 91);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(105, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Network weights";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // checkBox2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Use the following report modules for this report:";
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(21, 50);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(105, 17);
+            this.checkBox2.TabIndex = 4;
+            this.checkBox2.Text = "Testing summary";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // checkBox3
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 37);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(21, 27);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(97, 17);
+            this.checkBox3.TabIndex = 4;
+            this.checkBox3.Text = "Training details";
+            this.checkBox3.UseVisualStyleBackColor = true;
             // 
-            // PerformanceReportOptions
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox3);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.checkBox4);
+            this.groupBox1.Controls.Add(this.checkBox2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(143, 125);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Include in report";
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(21, 70);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(94, 17);
+            this.checkBox4.TabIndex = 4;
+            this.checkBox4.Text = "Testing details";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // NetworkReportOptionsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 169);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbDontAsk);
+            this.ClientSize = new System.Drawing.Size(395, 162);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnGenerate);
-            this.MinimumSize = new System.Drawing.Size(420, 196);
-            this.Name = "PerformanceReportOptions";
+            this.Name = "NetworkReportOptionsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Generate New Performance Report";
+            this.Text = "Network Testing Performance Report Options";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -112,8 +133,10 @@ namespace Sinapse.Forms.Dialogs
 
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.CheckBox cbDontAsk;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }
