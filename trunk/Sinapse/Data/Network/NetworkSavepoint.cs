@@ -128,6 +128,7 @@ namespace Sinapse.Data.Network
         [NonSerialized]
         public EventHandler SavepointRestored;
 
+
         //---------------------------------------------
 
 

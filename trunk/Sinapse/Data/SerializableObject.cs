@@ -25,53 +25,44 @@ using System.Diagnostics;
 using System.Data;
 using System.IO;
 
-using Sinapse.Data;
-//using Sinapse.Data.Reporting;
 
-
-namespace Sinapse.Data.Network
+namespace Sinapse.Data
 {
 
     [Serializable]
-    internal sealed class NetworkWorkplace
+    internal class SerializableObject<T> where T : SerializableObject<T>
     {
 
-        private List<NetworkTrainingSession> m_entryList;
-
-        [NonSerialized]
-        internal FileSystemEventHandler WorkplaceSaved;
+        internal event FileSystemEventHandler ObjectSaved;
 
         [NonSerialized]
         private string m_lastSavePath;
 
-        //----------------------------------------
+
+        //---------------------------------------------
 
 
-        #region Constructor
-        internal NetworkWorkplace()
+        protected void OnObjectSaved(FileSystemEventArgs e)
         {
-            this.m_entryList = new List<NetworkTrainingSession>();
+            if (this.ObjectSaved != null)
+                this.ObjectSaved.Invoke(this, e);
         }
-        #endregion
 
 
-        //----------------------------------------
+        //---------------------------------------------
 
 
-        #region Object Events
-        private void OnWorkplaceSaved(FileSystemEventArgs e)
+        public string LastSavePath
         {
-            if (this.WorkplaceSaved != null)
-                this.WorkplaceSaved.Invoke(this, e);
+            get { return this.m_lastSavePath; }
         }
-        #endregion
 
 
-        //----------------------------------------
+        //---------------------------------------------
 
 
         #region Static Methods
-        public static void Serialize(NetworkWorkplace networkWorkplace, string path)
+        public static void Serialize(SerializableObject<T> serializableObject, string path)
         {
             FileStream fileStream = null;
             bool success = true;
@@ -81,61 +72,23 @@ namespace Sinapse.Data.Network
                 fileStream = new FileStream(path, FileMode.Create);
 
                 BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fileStream, networkWorkplace);
+                bf.Serialize(fileStream, serializableObject);
             }
             catch (DirectoryNotFoundException e)
             {
-                Debug.WriteLine("Directory not found during workplace serialization");
+                Debug.WriteLine("Directory not found during serialization " + e.Message);
                 success = false;
                 throw e;
             }
             catch (SerializationException e)
             {
-                Debug.WriteLine("Error occured during workplace serialization");
+                Debug.WriteLine("Error occured during serialization: " + e.Message);
                 success = false;
                 throw e;
             }
             catch (Exception e)
             {
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
-
-                if (success)
-                    networkWorkplace.m_lastSavePath = path;
-            }
-        }
-
-        public static NetworkWorkplace Deserialize(string path)
-        {
-            NetworkWorkplace nwp = null;
-            FileStream fileStream = null;
-            bool success = true;
-
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Open);
-                BinaryFormatter bf = new BinaryFormatter();
-                nwp = (NetworkWorkplace)bf.Deserialize(fileStream);
-            }
-            catch (FileNotFoundException e)
-            {
-                Debug.WriteLine("File not found during workplace deserialization");
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during workplace deserialization");
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
+                Debug.WriteLine("Error saving object: " + e.Message);
                 success = false;
                 throw e;
             }
@@ -146,18 +99,55 @@ namespace Sinapse.Data.Network
 
                 if (success)
                 {
-                    nwp.m_lastSavePath = path;
-                    nwp.OnWorkplaceSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
+                    serializableObject.m_lastSavePath = path;
+                    serializableObject.OnObjectSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
                 }
             }
-
-            return nwp;
         }
 
-        #endregion
+        public static T Deserialize(string path)
+        {
 
+            T serializableObject = null;
+            FileStream fileStream = null;
+            bool success = true;
+
+            try
+            {
+                fileStream = new FileStream(path, FileMode.Open);
+                BinaryFormatter bf = new BinaryFormatter();
+                serializableObject = (T)bf.Deserialize(fileStream);
+            }
+            catch (FileNotFoundException e)
+            {
+                Debug.WriteLine("File not found during deserialization");
+                success = false;
+                throw e;
+            }
+            catch (SerializationException e)
+            {
+                Debug.WriteLine("Error occured during deserialization");
+                success = false;
+                throw e;
+            }
+            catch (Exception e)
+            {
+                success = false;
+                throw e;
+            }
+            finally
+            {
+                if (fileStream != null)
+                    fileStream.Close();
+
+                if (success)
+                    serializableObject.m_lastSavePath = path;
+            }
+
+            return serializableObject;
+        }
+#endregion
 
     }
-
 
 }
