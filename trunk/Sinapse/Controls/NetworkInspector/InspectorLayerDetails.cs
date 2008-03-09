@@ -63,7 +63,7 @@ namespace Sinapse.Controls.NetworkInspector
 
             lbType.Text = "Type: " + layer.GetType().Name;
             lbInputs.Text = "Inputs: " + layer.InputsCount;
-            lbOutput.Text = "Outputs: " + layer.Output.Length;
+            lbOutput.Text = "Outputs: " + layer.NeuronsCount;
             lbNeuron.Text = "Neurons: " + layer.NeuronsCount;
             
         }

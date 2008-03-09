@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Diagnostics;
@@ -33,16 +34,11 @@ namespace Sinapse.Data.Network
 {
 
     [Serializable]
-    internal sealed class NetworkWorkplace
+    internal sealed class NetworkWorkplace : SerializableObject<NetworkWorkplace>
     {
 
-        private List<NetworkTrainingSession> m_entryList;
+        private TrainingSessionCollection m_trainingSessions;
 
-        [NonSerialized]
-        internal FileSystemEventHandler WorkplaceSaved;
-
-        [NonSerialized]
-        private string m_lastSavePath;
 
         //----------------------------------------
 
@@ -50,7 +46,7 @@ namespace Sinapse.Data.Network
         #region Constructor
         internal NetworkWorkplace()
         {
-            this.m_entryList = new List<NetworkTrainingSession>();
+            this.m_trainingSessions = new TrainingSessionCollection();
         }
         #endregion
 
@@ -58,106 +54,21 @@ namespace Sinapse.Data.Network
         //----------------------------------------
 
 
-        #region Object Events
-        private void OnWorkplaceSaved(FileSystemEventArgs e)
-        {
-            if (this.WorkplaceSaved != null)
-                this.WorkplaceSaved.Invoke(this, e);
-        }
+        #region Public Methods
         #endregion
 
 
         //----------------------------------------
 
 
-        #region Static Methods
-        public static void Serialize(NetworkWorkplace networkWorkplace, string path)
-        {
-            FileStream fileStream = null;
-            bool success = true;
-
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Create);
-
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fileStream, networkWorkplace);
-            }
-            catch (DirectoryNotFoundException e)
-            {
-                Debug.WriteLine("Directory not found during workplace serialization");
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during workplace serialization");
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
-
-                if (success)
-                    networkWorkplace.m_lastSavePath = path;
-            }
-        }
-
-        public static NetworkWorkplace Deserialize(string path)
-        {
-            NetworkWorkplace nwp = null;
-            FileStream fileStream = null;
-            bool success = true;
-
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Open);
-                BinaryFormatter bf = new BinaryFormatter();
-                nwp = (NetworkWorkplace)bf.Deserialize(fileStream);
-            }
-            catch (FileNotFoundException e)
-            {
-                Debug.WriteLine("File not found during workplace deserialization");
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during workplace deserialization");
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
-
-                if (success)
-                {
-                    nwp.m_lastSavePath = path;
-                    nwp.OnWorkplaceSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
-                }
-            }
-
-            return nwp;
-        }
-
+        #region Private Methods
         #endregion
 
 
     }
 
-
+    [Serializable]
+    internal sealed class TrainingSessionCollection : BindingList<NetworkTrainingSession>
+    {
+    }
 }
