@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Text;
+using System.Data;
 using System.IO;
                              
 using Sinapse.Data;
@@ -32,7 +33,7 @@ using Sinapse.Utils.HtmlReport;
 namespace Sinapse.Data.Reporting
 {
 
-    internal sealed class ReportGenerator : Component
+    internal sealed class ReportGenerator
     {
 
         private string reportPath = Path.Combine(Application.StartupPath, @"Resources/Templates/NetworkReport.htm");
@@ -40,47 +41,54 @@ namespace Sinapse.Data.Reporting
         private Color[] tableHeaderColors;
         private Color[] tableBodyColors;
 
-        private NetworkContainer m_networkContainer;
-        private NetworkDatabase m_networkDatabase;
+        private NetworkContainer m_network;
+        private NetworkDatabase m_database;
+
+        private DataRow[]  testingRows;
+        private int testingItems;
 
         private StringBuilder reportBuilder;
-        private BackgroundWorker backgroundWorker;
 
+      /*
         private bool includeNetworkDetails;
-        private bool includeTestingDetails;
-        private bool includeTestingSummary;
+        private bool includeSchemaDetails;
         private bool includeTrainingDetails;
+        private bool includeTestingSummary;
+        private bool includeTestingDetails;
         private bool includeNormalizationInfo;
         private bool includeNetworkWeights;
-
-
-        public event ProgressChangedEventHandler ProgressChanged;
-        public event EventHandler ReportComplete;
-
+       */
 
         //---------------------------------------------
 
 
         public ReportGenerator(NetworkContainer network, NetworkDatabase database)
         {
-            this.m_networkContainer = network;
-            this.m_networkDatabase = database;
+            
+            this.m_network = network;
+            this.m_database = database;
 
-            this.reportBuilder = new StringBuilder();
 
-            this.backgroundWorker = new BackgroundWorker();
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = false;
-            this.backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            this.testingRows = this.m_database.DataTable.Select(
+                String.Format("[{0}] = {1}", NetworkDatabase.ColumnRoleId, (ushort)NetworkSet.Testing));
+            this.testingItems = testingRows.Length * this.m_database.Schema.OutputColumns.Length;
 
-            this.tableHeaderColors = new Color[] {
+
+            this.tableHeaderColors = new Color[]
+            {
                 Color.FromArgb(227,242,255),
-                Color.AliceBlue };
+                Color.AliceBlue
+            };
 
-            this.tableBodyColors = new Color[] { 
+            this.tableBodyColors = new Color[]
+            { 
                 Color.White    
             };
 
+
+            if (testingRows.Length > 0)
+                this.reportBuilder = new StringBuilder(this.getReportTemplate());
+            else this.reportBuilder = new StringBuilder("No testing items found.");
         }
 
 
@@ -98,78 +106,35 @@ namespace Sinapse.Data.Reporting
             get { return tableBodyColors; }
             set { tableBodyColors = value; }
         }
+
+        public String Report
+        {
+            get { return this.reportBuilder.ToString(); }
+        }
         #endregion
 
 
         //---------------------------------------------
 
 
-        public string Generate()
+        public string GenerateAll()
         {
-            
+            this.GenerateHeader();
+            this.GenerateNetworkDetails();
+            this.GenerateSchemaDetails();
+            this.GenerateTrainingDetails();
+            this.GenerateTestingSummary();
+            this.GenerateTestingDetails();
+            this.GenerateNormalization();
+            this.GenerateWeights();
+            this.GenerateFooter();
+
             return this.reportBuilder.ToString();
         }
 
-        public void GenerateAsync()
+        public void Reset()
         {
-            this.backgroundWorker.RunWorkerAsync();
-        }
-
-
-        //---------------------------------------------
-
-
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            backgroundWorker.ReportProgress(0);
-
-            DataRow[] selectedRows = this.m_database.DataTable.Select(
-                String.Format("[{0}] = {1}", NetworkDatabase.ColumnRoleId, (ushort)NetworkSet.Testing));
-
-            if (selectedRows.Length == 0)
-            {
-                e.Result = "No records found!";
-                return;
-            }
-
-            int testingItems = selectedRows.Length * this.m_database.Schema.OutputColumns.Length;
-
-            backgroundWorker.ReportProgress(10);
-
-            StringBuilder strBuilder = new StringBuilder(this.getBaseReportText());
-
-            strBuilder.Replace("[netName]", m_network.Name);
-            strBuilder.Replace("[netType]", m_network.Type);
-            strBuilder.Replace("[netLayout]", m_network.Layout);
-            strBuilder.Replace("[netFunction]", m_network.Function);
-            strBuilder.Replace("[netDescription]", m_network.Description);
-
-            strBuilder.Replace("[trainEntryCount]", m_database.TrainingSet.Count.ToString());
-            strBuilder.Replace("[validEntryCount]", m_database.ValidationSet.Count.ToString());
-            strBuilder.Replace("[testEntryCount]", m_database.TestingSet.Count.ToString());
-            strBuilder.Replace("[testItemsCount]", testingItems.ToString());
-            strBuilder.Replace("[trainDeviation]", m_network.Precision.ToString());
-
-            strBuilder.Replace("[year]", DateTime.Now.Year.ToString());
-
-            backgroundWorker.ReportProgress(20);
-
-            this.generateColumns();
-            backgroundWorker.ReportProgress(30);
-
-            this.generateResultTable();
-            backgroundWorker.ReportProgress(50);
-
-            this.generateRangeTable();
-            backgroundWorker.ReportProgress(60);
-
-            this.generateWeights();
-            backgroundWorker.ReportProgress(70);
-
-            this.generateScores();
-            backgroundWorker.ReportProgress(80);
-
-            e.Result = strBuilder.ToString();
+            this.reportBuilder = new StringBuilder(this.getReportTemplate());
         }
 
 
@@ -177,64 +142,41 @@ namespace Sinapse.Data.Reporting
 
 
         #region Report Section Generation
-        private void generateColumns()
+        public void GenerateHeader()
         {
-            strBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
-            strBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
         }
 
-        private string generateColumns(String[] columnArray, bool markCaptions)
+        public void GenerateNetworkDetails()
         {
-            String columns = String.Empty;
-
-            for (int i = 0; i < columnArray.Length; ++i)
-            {
-                if (markCaptions && m_network.Schema.IsCategory(columnArray[i]))
-                    columns += "<i>";
-
-                columns += columnArray[i];
-
-                if (markCaptions && m_network.Schema.IsCategory(columnArray[i]))
-                    columns += "</i>";
-
-                if (i < columnArray.Length - 1)
-                    columns += ", ";
-            }
-
-            return columns;
+            reportBuilder.Replace("[netName]", m_network.Name);
+            reportBuilder.Replace("[netType]", m_network.Type);
+            reportBuilder.Replace("[netLayout]", m_network.Layout);
+            reportBuilder.Replace("[netFunction]", m_network.Function);
+            reportBuilder.Replace("[netDescription]", m_network.Description);
         }
 
-        private void generateWeights()
+        public void GenerateSchemaDetails()
         {
-            StringBuilder weigthBuilder = new StringBuilder();
-
-            for (int i = 0; i < m_network.ActivationNetwork.LayersCount; ++i)
-            {
-                weigthBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i + 1);
-
-                for (int j = 0; j < m_network.ActivationNetwork[i].NeuronsCount; ++j)
-                {
-                    weigthBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j + 1);
-
-                    for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; k++)
-                    {
-                        weigthBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;[{0}]: {1}<br>", k, m_network.ActivationNetwork[i][j][k]);
-                    }
-                    weigthBuilder.Append("<br>");
-                }
-                weigthBuilder.Append("<br>");
-            }
-
-            strBuilder.Replace("[netWeights]", weigthBuilder.ToString());
+            reportBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
+            reportBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
         }
 
-        private void generateScores()
+        public void GenerateTrainingDetails()
+        {
+            reportBuilder.Replace("[trainEntryCount]", m_database.TrainingSet.Count.ToString());
+            reportBuilder.Replace("[validEntryCount]", m_database.ValidationSet.Count.ToString());
+            reportBuilder.Replace("[testEntryCount]", m_database.TestingSet.Count.ToString());
+            reportBuilder.Replace("[testItemsCount]", testingItems.ToString());
+            reportBuilder.Replace("[trainDeviation]", m_network.Precision.ToString());
+        }
+
+        public void GenerateTestingSummary()
         {
             int hitTotal = 0, hitPositive = 0, hitNegative = 0;
             int errorTotal = 0, errorPositive = 0, errorNegative = 0;
             double totalScore = 0, finalScore = 0;
 
-            foreach (DataRow row in selectedRows)
+            foreach (DataRow row in this.testingRows)
             {
                 foreach (String outputColumn in this.m_network.Schema.OutputColumns)
                 {
@@ -273,81 +215,47 @@ namespace Sinapse.Data.Reporting
 
             finalScore = totalScore / testingItems;
 
-            strBuilder.Replace("[totalDeviation]", totalScore.ToString("N6"));
-            strBuilder.Replace("[finalDeviation]", finalScore.ToString("N6"));
+            reportBuilder.Replace("[totalDeviation]", totalScore.ToString("N6"));
+            reportBuilder.Replace("[finalDeviation]", finalScore.ToString("N6"));
 
-            strBuilder.Replace("[hits]", hitTotal.ToString());
-            strBuilder.Replace("[hits%]", ((float)hitTotal / testingItems).ToString("0.00%"));
+            reportBuilder.Replace("[hits]", hitTotal.ToString());
+            reportBuilder.Replace("[hits%]", ((float)hitTotal / testingItems).ToString("0.00%"));
 
-            strBuilder.Replace("[errors]", errorTotal.ToString());
-            strBuilder.Replace("[errors%]", ((float)errorTotal / testingItems).ToString("0.00%"));
+            reportBuilder.Replace("[errors]", errorTotal.ToString());
+            reportBuilder.Replace("[errors%]", ((float)errorTotal / testingItems).ToString("0.00%"));
 
             if (hitTotal != 0)
             {
-                strBuilder.Replace("[hitsP]", hitPositive.ToString());
-                strBuilder.Replace("[hitsN]", hitNegative.ToString());
-                strBuilder.Replace("[hitsP%]", ((float)hitPositive / hitTotal).ToString("0.00%"));
-                strBuilder.Replace("[hitsN%]", ((float)hitNegative / hitTotal).ToString("0.00%"));
+                reportBuilder.Replace("[hitsP]", hitPositive.ToString());
+                reportBuilder.Replace("[hitsN]", hitNegative.ToString());
+                reportBuilder.Replace("[hitsP%]", ((float)hitPositive / hitTotal).ToString("0.00%"));
+                reportBuilder.Replace("[hitsN%]", ((float)hitNegative / hitTotal).ToString("0.00%"));
             }
             else
             {
-                strBuilder.Replace("[hitsP]", "-");
-                strBuilder.Replace("[hitsN]", "-");
-                strBuilder.Replace("[hitsP%]", String.Empty);
-                strBuilder.Replace("[hitsN%]", String.Empty);
+                reportBuilder.Replace("[hitsP]", "-");
+                reportBuilder.Replace("[hitsN]", "-");
+                reportBuilder.Replace("[hitsP%]", String.Empty);
+                reportBuilder.Replace("[hitsN%]", String.Empty);
             }
 
             if (errorTotal != 0)
             {
-                strBuilder.Replace("[errorsP]", errorPositive.ToString());
-                strBuilder.Replace("[errorsN]", errorNegative.ToString());
-                strBuilder.Replace("[errorsP%]", ((float)errorPositive / errorTotal).ToString("0.00%"));
-                strBuilder.Replace("[errorsN%]", ((float)errorNegative / errorTotal).ToString("0.00%"));
+                reportBuilder.Replace("[errorsP]", errorPositive.ToString());
+                reportBuilder.Replace("[errorsN]", errorNegative.ToString());
+                reportBuilder.Replace("[errorsP%]", ((float)errorPositive / errorTotal).ToString("0.00%"));
+                reportBuilder.Replace("[errorsN%]", ((float)errorNegative / errorTotal).ToString("0.00%"));
             }
             else
             {
-                strBuilder.Replace("[errorsP]", "-");
-                strBuilder.Replace("[errorsN]", "-");
-                strBuilder.Replace("[errorsP%]", String.Empty);
-                strBuilder.Replace("[errorsN%]", String.Empty);
+                reportBuilder.Replace("[errorsP]", "-");
+                reportBuilder.Replace("[errorsN]", "-");
+                reportBuilder.Replace("[errorsP%]", String.Empty);
+                reportBuilder.Replace("[errorsN%]", String.Empty);
             }
         }
 
-        private void generateRangeTable()
-        {
-            HTMLReport htmlReport = new HTMLReport();
-
-
-            htmlReport.ReportTitle = "Data Ranges";
-            htmlReport.ReportFont = "Arial";
-            htmlReport.ValuesFont = "Courier New";
-            htmlReport.IncludeTitle = false;
-
-            htmlReport.ReportSource = m_database.Schema.DataRanges.Table;
-
-
-            htmlReport.ReportFields.Add(new Field("Column", "Label", tableHdColors[0]));
-            htmlReport.ReportFields.Add(new Field("Normalize", "Normalize", tableHdColors[0]));
-            htmlReport.ReportFields.Add(new Field("Min", "Min", tableHdColors[0]));
-            htmlReport.ReportFields.Add(new Field("Max", "Max", tableHdColors[0]));
-            htmlReport.ReportFields.Add(new Field("String", "Category", tableHdColors[0]));
-
-
-            m_reportBuilder.Replace("[netRanges]", htmlReport.GenerateReport());
-
-
-            if (m_network.Schema.DataRanges.ActivationFunctionRange != null)
-            {
-                htmlReport.Replace("[funcRange]", String.Format("{0}~{1}",
-                    m_network.Schema.DataRanges.ActivationFunctionRange.Min,
-                    m_network.Schema.DataRanges.ActivationFunctionRange.Max));
-            }
-            else htmlReport.Replace("[funcRange]", "-");
-
-
-        }
-
-        private void generateResultTable()
+        public void GenerateTestingDetails()
         {
             HTMLReport htmlReport = new HTMLReport();
 
@@ -364,43 +272,106 @@ namespace Sinapse.Data.Reporting
             foreach (string inputCol in this.m_database.Schema.InputColumns)
             {
                 Field field = new Field(inputCol, inputCol, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
+                field.HeaderBackColor = tableHeaderColors[colorHdIndex];
+                field.BackColor = tableBodyColors[colorBgIndex];
                 htmlReport.ReportFields.Add(field);
             }
 
-            colorHdIndex = getNextIndex(tableHdColors, colorHdIndex);
-            colorBgIndex = getNextIndex(tableBgColors, colorBgIndex);
+            colorHdIndex = getNextIndex(tableHeaderColors, colorHdIndex);
+            colorBgIndex = getNextIndex(tableBodyColors, colorBgIndex);
 
             foreach (string outputCol in this.m_database.Schema.OutputColumns)
             {
                 Field field;
 
                 field = new Field(outputCol, outputCol, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
+                field.HeaderBackColor = tableHeaderColors[colorHdIndex];
+                field.BackColor = tableBodyColors[colorBgIndex];
                 htmlReport.ReportFields.Add(field);
 
                 field = new Field(NetworkDatabase.ColumnComputedPrefix + outputCol, "Network Answer", 0, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
+                field.HeaderBackColor = tableHeaderColors[colorHdIndex];
+                field.BackColor = tableBodyColors[colorBgIndex];
                 if (!m_database.Schema.IsCategory(outputCol))
                     field.FormatString = "+0.0000;-0.0000";
                 htmlReport.ReportFields.Add(field);
 
                 field = new Field(NetworkDatabase.ColumnDeltaPrefix + outputCol, "Network Error", 0, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
+                field.HeaderBackColor = tableHeaderColors[colorHdIndex];
+                field.BackColor = tableBodyColors[colorBgIndex];
                 field.FormatString = "+0.0000;-0.0000";
                 field.IsTotalField = true;
                 htmlReport.ReportFields.Add(field);
 
-                colorHdIndex = getNextIndex(tableHdColors, colorHdIndex);
-                colorBgIndex = getNextIndex(tableBgColors, colorBgIndex);
+                colorHdIndex = getNextIndex(tableHeaderColors, colorHdIndex);
+                colorBgIndex = getNextIndex(tableBodyColors, colorBgIndex);
 
             }
 
             this.reportBuilder.Replace("[testTable]", htmlReport.GenerateReport());
+        }
+
+        public void GenerateNormalization()
+        {
+            HTMLReport htmlReport = new HTMLReport();
+
+
+            htmlReport.ReportTitle = "Data Ranges";
+            htmlReport.ReportFont = "Arial";
+            htmlReport.ValuesFont = "Courier New";
+            htmlReport.IncludeTitle = false;
+
+            htmlReport.ReportSource = m_database.Schema.DataRanges.Table;
+
+
+            htmlReport.ReportFields.Add(new Field("Column", "Label", tableHeaderColors[0]));
+            htmlReport.ReportFields.Add(new Field("Normalize", "Normalize", tableHeaderColors[0]));
+            htmlReport.ReportFields.Add(new Field("Min", "Min", tableHeaderColors[0]));
+            htmlReport.ReportFields.Add(new Field("Max", "Max", tableHeaderColors[0]));
+            htmlReport.ReportFields.Add(new Field("String", "Category", tableHeaderColors[0]));
+
+
+            reportBuilder.Replace("[netRanges]", htmlReport.GenerateReport());
+
+
+            if (m_network.Schema.DataRanges.ActivationFunctionRange != null)
+            {
+                reportBuilder.Replace("[funcRange]", String.Format("{0}~{1}",
+                    m_network.Schema.DataRanges.ActivationFunctionRange.Min,
+                    m_network.Schema.DataRanges.ActivationFunctionRange.Max));
+            }
+            else reportBuilder.Replace("[funcRange]", "-");
+
+
+        }
+
+        public void GenerateWeights()
+        {
+            StringBuilder weigthBuilder = new StringBuilder();
+
+            for (int i = 0; i < m_network.ActivationNetwork.LayersCount; ++i)
+            {
+                weigthBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i + 1);
+
+                for (int j = 0; j < m_network.ActivationNetwork[i].NeuronsCount; ++j)
+                {
+                    weigthBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j + 1);
+
+                    for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; k++)
+                    {
+                        weigthBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;[{0}]: {1}<br>", k, m_network.ActivationNetwork[i][j][k]);
+                    }
+                    weigthBuilder.Append("<br>");
+                }
+                weigthBuilder.Append("<br>");
+            }
+
+            reportBuilder.Replace("[netWeights]", weigthBuilder.ToString());
+        }
+
+        public void GenerateFooter()
+        {
+            reportBuilder.Replace("[year]", DateTime.Now.Year.ToString());
         }
         #endregion
 
@@ -409,6 +380,27 @@ namespace Sinapse.Data.Reporting
 
 
         #region Private Methods
+        private string generateColumns(String[] columnArray, bool markCaptions)
+        {
+            String columns = String.Empty;
+
+            for (int i = 0; i < columnArray.Length; ++i)
+            {
+                if (markCaptions && m_network.Schema.IsCategory(columnArray[i]))
+                    columns += "<i>";
+
+                columns += columnArray[i];
+
+                if (markCaptions && m_network.Schema.IsCategory(columnArray[i]))
+                    columns += "</i>";
+
+                if (i < columnArray.Length - 1)
+                    columns += ", ";
+            }
+
+            return columns;
+        }
+
         private string getReportTemplate()
         {
             TextReader textReader = null;
