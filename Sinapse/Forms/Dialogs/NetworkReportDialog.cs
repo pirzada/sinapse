@@ -31,7 +31,7 @@ using AForge.Neuro;
 
 using Sinapse.Data;
 using Sinapse.Data.Network;
-using Sinapse.Utils.HtmlReport;
+using Sinapse.Data.Reporting;
 
 
 namespace Sinapse.Forms.Dialogs
@@ -39,11 +39,6 @@ namespace Sinapse.Forms.Dialogs
 
     internal sealed partial class NetworkReportDialog : Form
     {
-
-        private readonly string reportPath = Path.Combine(Application.StartupPath, @"Resources/Templates/NetworkReport.htm");
-
-        private Color[] tableHdColors;
-        private Color[] tableBgColors;
 
         private NetworkContainer m_network;
         private NetworkDatabase m_database;
@@ -57,18 +52,7 @@ namespace Sinapse.Forms.Dialogs
             this.m_database = networkDatabase;
             this.m_network = networkContainer;
 
-            this.tableHdColors = new Color[] {
-             // Color.FromArgb(214, 236, 255),
-                Color.FromArgb(227,242,255),
-                Color.AliceBlue };
-
-            this.tableBgColors = new Color[] { 
-     //           Color.Azure, 
-                Color.White    
-            };
-
             this.InitializeComponent();
-
         }
         #endregion
 
@@ -208,175 +192,6 @@ namespace Sinapse.Forms.Dialogs
 
 
         #region Private Methods
-        private string generateColumns(String[] columnArray, bool markCaptions)
-        {
-            String columns = String.Empty;
-
-            for (int i = 0; i < columnArray.Length; ++i)
-            {
-                if (markCaptions && m_network.Schema.IsCategory(columnArray[i]))
-                    columns += "<i>";
-
-                columns += columnArray[i];
-
-                if (markCaptions && m_network.Schema.IsCategory(columnArray[i]))
-                    columns += "</i>";
-
-                if (i < columnArray.Length - 1)
-                    columns += ", ";
-            }
-
-            return columns;
-        }
-
-
-        private string generateWeights()
-        {
-            StringBuilder weigthBuilder = new StringBuilder();
-
-            for (int i = 0; i < m_network.ActivationNetwork.LayersCount; ++i)
-            {
-                weigthBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i+1);
-
-                for (int j = 0; j < m_network.ActivationNetwork[i].NeuronsCount; ++j)
-                {
-                    weigthBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j+1);
-
-                    for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; k++)
-                    {
-                        weigthBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;[{0}]: {1}<br>", k, m_network.ActivationNetwork[i][j][k]);
-                    }
-                    weigthBuilder.Append("<br>");
-                }
-                weigthBuilder.Append("<br>");
-            }
-            return weigthBuilder.ToString();
-        }
-
-        private string generateScores()
-        {
-            return String.Empty;
-        }
-
-        private string generateRanges()
-        {
-            HTMLReport report = new HTMLReport();
-
-
-            report.ReportTitle = "Data Ranges";
-            report.ReportFont = "Arial";
-            report.ValuesFont = "Courier New";
-            report.IncludeTitle = false;
-
-            report.ReportSource = m_database.Schema.DataRanges.Table;
-
-
-            report.ReportFields.Add(new Field("Column", "Label", tableHdColors[0]));
-            report.ReportFields.Add(new Field("Normalize", "Normalize", tableHdColors[0]));
-            report.ReportFields.Add(new Field("Min", "Min", tableHdColors[0]));
-            report.ReportFields.Add(new Field("Max", "Max", tableHdColors[0]));
-            report.ReportFields.Add(new Field("String", "Category", tableHdColors[0]));
-
-            return report.GenerateReport();
-
-        }
-
-        private string generateResults()
-        {
-            HTMLReport report = new HTMLReport();
-
-
-            report.ReportTitle = "Network Test Performance Table";
-            report.ReportFont = "Arial";
-            report.ValuesFont = "Courier New";
-            report.IncludeTotal = true;
-
-            report.ReportSource = m_database.TestingSet.ToTable();
-
-
-            int colorBgIndex = 0, colorHdIndex = 0;
-
-            foreach (string inputCol in this.m_database.Schema.InputColumns)
-            {
-                Field field = new Field(inputCol, inputCol, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
-                report.ReportFields.Add(field);
-            }
-
-            colorHdIndex = getNextIndex(tableHdColors, colorHdIndex);
-            colorBgIndex = getNextIndex(tableBgColors, colorBgIndex);
-
-            foreach (string outputCol in this.m_database.Schema.OutputColumns)
-            {
-                Field field;
-
-                field = new Field(outputCol, outputCol, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
-                report.ReportFields.Add(field);
-
-                field = new Field(NetworkDatabase.ColumnComputedPrefix + outputCol, "Network Answer", 0, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
-                if (!m_database.Schema.IsCategory(outputCol))
-                    field.FormatString = "+0.0000;-0.0000";
-                report.ReportFields.Add(field);
-
-                field = new Field(NetworkDatabase.ColumnDeltaPrefix + outputCol, "Network Error", 0, HtmlAlign.Center);
-                field.HeaderBackColor = tableHdColors[colorHdIndex];
-                field.BackColor = tableBgColors[colorBgIndex];
-                field.FormatString = "+0.0000;-0.0000";
-                field.IsTotalField = true;
-                report.ReportFields.Add(field);
-
-                colorHdIndex = getNextIndex(tableHdColors, colorHdIndex);
-                colorBgIndex = getNextIndex(tableBgColors, colorBgIndex);
-
-            }
-
-            return report.GenerateReport();
-        }
-
-
-        private string getBaseReportText()
-        {
-            TextReader textReader = null;
-            String baseReport = null;
-
-            try
-            {
-                textReader = new StreamReader(this.reportPath, Encoding.Default);
-            }
-            catch (Exception ex)
-            {
-                HistoryListener.Write("Error creating the report");
-                MessageBox.Show(ex.Message, "Error");
-#if DEBUG
-                throw ex;
-#endif
-            }
-            finally
-            {
-                if (textReader != null)
-                {
-                    baseReport = textReader.ReadToEnd();
-                    textReader.Close();
-                }
-            }
-
-            return baseReport;
-        }
-
-
-        private int getNextIndex(Color[] colorArray, int index)
-        {
-            if (colorArray.Length > 0)
-                index = (index + 1) % (colorArray.Length );
-            else index = 0;
-
-            return index;
-        }
         #endregion
 
 
@@ -386,154 +201,40 @@ namespace Sinapse.Forms.Dialogs
         #region Background Thread
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            ReportGenerator reportGenerator;
             backgroundWorker.ReportProgress(0);
 
-            DataRow[] selectedRows = this.m_database.DataTable.Select(
-                String.Format("[{0}] = {1}", NetworkDatabase.ColumnRoleId, (ushort)NetworkSet.Testing));
-
-            if (selectedRows.Length == 0)
-            {
-                e.Result = "No records found!";
-                return;
-            }
-
-            int testingItems = selectedRows.Length * this.m_database.Schema.OutputColumns.Length;
-
+            reportGenerator = new ReportGenerator(m_network, m_database);
             backgroundWorker.ReportProgress(10);
 
-            StringBuilder strBuilder = new StringBuilder(this.getBaseReportText());
+            reportGenerator.GenerateHeader();
+            backgroundWorker.ReportProgress(15);
 
-            strBuilder.Replace("[netName]", m_network.Name);
-            strBuilder.Replace("[netType]", m_network.Type);
-            strBuilder.Replace("[netLayout]", m_network.Layout);
-            strBuilder.Replace("[netFunction]", m_network.Function);
-            strBuilder.Replace("[netDescription]", m_network.Description);
-
-            strBuilder.Replace("[trainEntryCount]", m_database.TrainingSet.Count.ToString());
-            strBuilder.Replace("[validEntryCount]", m_database.ValidationSet.Count.ToString());
-            strBuilder.Replace("[testEntryCount]", m_database.TestingSet.Count.ToString());
-            strBuilder.Replace("[testItemsCount]", testingItems.ToString());
-            strBuilder.Replace("[trainDeviation]", m_network.Precision.ToString());
-
-            if (m_network.Schema.DataRanges.ActivationFunctionRange != null)
-            {
-                strBuilder.Replace("[funcRange]", String.Format("{0}~{1}",
-                    m_network.Schema.DataRanges.ActivationFunctionRange.Min,
-                    m_network.Schema.DataRanges.ActivationFunctionRange.Max));
-            }
-            else strBuilder.Replace("[funcRange]", "-");
-
-            strBuilder.Replace("[year]", DateTime.Now.Year.ToString());
-
+            reportGenerator.GenerateNetworkDetails();
             backgroundWorker.ReportProgress(20);
 
-            strBuilder.Replace("[schInput]", generateColumns(m_network.Schema.InputColumns, true));
-            strBuilder.Replace("[schOutput]", generateColumns(m_network.Schema.OutputColumns, true));
-
+            reportGenerator.GenerateSchemaDetails();
             backgroundWorker.ReportProgress(30);
 
+            reportGenerator.GenerateTrainingDetails();
+            backgroundWorker.ReportProgress(40);
 
-            strBuilder.Replace("[testTable]", generateResults());
+            reportGenerator.GenerateTestingSummary();
             backgroundWorker.ReportProgress(50);
 
-
-            strBuilder.Replace("[netRanges]", generateRanges());
+            reportGenerator.GenerateTestingDetails();
             backgroundWorker.ReportProgress(60);
 
-
-            strBuilder.Replace("[netWeights]", generateWeights());
+            reportGenerator.GenerateNormalization();
             backgroundWorker.ReportProgress(70);
 
-
-            #region Scores Generation
-            int hitTotal = 0, hitPositive = 0, hitNegative = 0;
-            int errorTotal = 0, errorPositive = 0, errorNegative = 0;
-            double totalScore = 0, finalScore = 0;
-
-            foreach (DataRow row in selectedRows)
-            {
-                foreach (String outputColumn in this.m_network.Schema.OutputColumns)
-                {
-
-                    totalScore += Math.Abs(Double.Parse((string)row[NetworkDatabase.ColumnDeltaPrefix + outputColumn]));
-
-                    if (row[outputColumn].Equals(row[NetworkDatabase.ColumnComputedPrefix + outputColumn]))
-                    {
-                        hitTotal++;
-
-                        if (row[outputColumn].Equals("1"))
-                        {
-                            hitPositive++;
-                        }
-                        else
-                        {
-                            hitNegative++;
-                        }
-                    }
-                    else
-                    {
-                        errorTotal++;
-
-                        if (row[outputColumn].Equals("1"))
-                        {
-                            errorPositive++;
-                        }
-                        else
-                        {
-                            errorNegative++;
-                        }
-                    }
-
-                }
-            }
-
-            finalScore = totalScore / testingItems;
-
-            strBuilder.Replace("[totalDeviation]", totalScore.ToString("N6"));
-            strBuilder.Replace("[finalDeviation]", finalScore.ToString("N6"));
-
-            strBuilder.Replace("[hits]", hitTotal.ToString());
-            strBuilder.Replace("[hits%]", ((float)hitTotal / testingItems).ToString("0.00%"));
-
-            strBuilder.Replace("[errors]", errorTotal.ToString());
-            strBuilder.Replace("[errors%]", ((float)errorTotal / testingItems).ToString("0.00%"));
-
-            if (hitTotal != 0)
-            {
-                strBuilder.Replace("[hitsP]", hitPositive.ToString());
-                strBuilder.Replace("[hitsN]", hitNegative.ToString());
-                strBuilder.Replace("[hitsP%]", ((float)hitPositive / hitTotal).ToString("0.00%"));
-                strBuilder.Replace("[hitsN%]", ((float)hitNegative / hitTotal).ToString("0.00%"));
-            }
-            else
-            {
-                strBuilder.Replace("[hitsP]", "-");
-                strBuilder.Replace("[hitsN]", "-");
-                strBuilder.Replace("[hitsP%]", String.Empty);
-                strBuilder.Replace("[hitsN%]", String.Empty);
-            }
-
-            if (errorTotal != 0)
-            {
-                strBuilder.Replace("[errorsP]", errorPositive.ToString());
-                strBuilder.Replace("[errorsN]", errorNegative.ToString());
-                strBuilder.Replace("[errorsP%]", ((float)errorPositive / errorTotal).ToString("0.00%"));
-                strBuilder.Replace("[errorsN%]", ((float)errorNegative / errorTotal).ToString("0.00%"));
-            }
-            else
-            {
-                strBuilder.Replace("[errorsP]", "-");
-                strBuilder.Replace("[errorsN]", "-");
-                strBuilder.Replace("[errorsP%]", String.Empty);
-                strBuilder.Replace("[errorsN%]", String.Empty);
-            }
-            #endregion
-
-
+            reportGenerator.GenerateWeights();
             backgroundWorker.ReportProgress(80);
 
-            e.Result = strBuilder.ToString();
+            reportGenerator.GenerateFooter();
+            backgroundWorker.ReportProgress(90);
+
+            e.Result = reportGenerator.Report;
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

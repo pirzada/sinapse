@@ -191,6 +191,8 @@
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Network\NetworkExchanger.cs" />
+    <Compile Include="Data\Reporting\ReportGenerator.cs">
+    </Compile>
     <Compile Include="Data\SerializableObject.cs" />
     <Compile Include="Data\Structures\StatusbarUpdate.cs" />
     <Compile Include="Forms\Special\ExcelAnchor.cs">
@@ -367,6 +369,10 @@
     <EmbeddedResource Include="Controls\MainTabControl\TabPageTraining.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageTraining.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Reporting\ReportGenerator.resx">
+      <DependentUpon>ReportGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
