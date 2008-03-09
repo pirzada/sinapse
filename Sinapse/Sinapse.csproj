@@ -191,6 +191,8 @@
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Network\NetworkExchanger.cs" />
+    <Compile Include="Data\Network\NetworkTrainingSession.cs" />
+    <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Reporting\ReportGenerator.cs">
     </Compile>
     <Compile Include="Data\SerializableObject.cs" />

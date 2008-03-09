@@ -49,6 +49,7 @@ namespace Sinapse.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelTitle = new System.Windows.Forms.Panel();
+            this.lbVersion = new System.Windows.Forms.Label();
             this.lbTitle = new System.Windows.Forms.Label();
             this.lbTitleNeurons = new System.Windows.Forms.Label();
             this.lbTitleInputs = new System.Windows.Forms.Label();
@@ -160,6 +161,7 @@ namespace Sinapse.Forms
             // panelTitle
             // 
             this.panelTitle.BackColor = System.Drawing.Color.DarkBlue;
+            this.panelTitle.Controls.Add(this.lbVersion);
             this.panelTitle.Controls.Add(this.lbTitle);
             this.panelTitle.Controls.Add(this.lbTitleNeurons);
             this.panelTitle.Controls.Add(this.lbTitleInputs);
@@ -172,6 +174,17 @@ namespace Sinapse.Forms
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(892, 50);
             this.panelTitle.TabIndex = 5;
+            // 
+            // lbVersion
+            // 
+            this.lbVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVersion.ForeColor = System.Drawing.Color.AliceBlue;
+            this.lbVersion.Location = new System.Drawing.Point(358, 35);
+            this.lbVersion.Name = "lbVersion";
+            this.lbVersion.Size = new System.Drawing.Size(55, 13);
+            this.lbVersion.TabIndex = 0;
+            this.lbVersion.Text = "v0.0.0.0";
+            this.lbVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbTitle
             // 
@@ -439,7 +452,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseNew.Image = global::Sinapse.Properties.Resources.file_new;
             this.MenuDatabaseNew.Name = "MenuDatabaseNew";
-            this.MenuDatabaseNew.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseNew.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseNew.Text = "&New";
             this.MenuDatabaseNew.Click += new System.EventHandler(this.MenuFileWizard_Click);
             // 
@@ -447,7 +460,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseOpen.Image = global::Sinapse.Properties.Resources.file_open;
             this.MenuDatabaseOpen.Name = "MenuDatabaseOpen";
-            this.MenuDatabaseOpen.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseOpen.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseOpen.Text = "&Open";
             this.MenuDatabaseOpen.Click += new System.EventHandler(this.MenuDatabaseOpen_Click);
             // 
@@ -455,7 +468,7 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSave.Image = global::Sinapse.Properties.Resources.file_save;
             this.MenuDatabaseSave.Name = "MenuDatabaseSave";
-            this.MenuDatabaseSave.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseSave.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseSave.Text = "&Save";
             this.MenuDatabaseSave.Click += new System.EventHandler(this.MenuDatabaseSave_Click);
             // 
@@ -463,20 +476,20 @@ namespace Sinapse.Forms
             // 
             this.MenuDatabaseSaveAs.Image = global::Sinapse.Properties.Resources.file_saveas;
             this.MenuDatabaseSaveAs.Name = "MenuDatabaseSaveAs";
-            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseSaveAs.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseSaveAs.Text = "Save &As";
             this.MenuDatabaseSaveAs.Click += new System.EventHandler(this.MenuDatabaseSaveAs_Click);
             // 
             // MenuDatabaseSeparator
             // 
             this.MenuDatabaseSeparator.Name = "MenuDatabaseSeparator";
-            this.MenuDatabaseSeparator.Size = new System.Drawing.Size(149, 6);
+            this.MenuDatabaseSeparator.Size = new System.Drawing.Size(140, 6);
             // 
             // MenuDatabaseEdit
             // 
             this.MenuDatabaseEdit.Image = global::Sinapse.Properties.Resources.edit;
             this.MenuDatabaseEdit.Name = "MenuDatabaseEdit";
-            this.MenuDatabaseEdit.Size = new System.Drawing.Size(152, 22);
+            this.MenuDatabaseEdit.Size = new System.Drawing.Size(143, 22);
             this.MenuDatabaseEdit.Text = "&Edit Schema";
             this.MenuDatabaseEdit.Click += new System.EventHandler(this.MenuDatabaseEdit_Click);
             // 
@@ -673,7 +686,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(206, 25);
             this.toolStripMain.TabIndex = 0;
             // 
             // btnDatabaseNew
@@ -783,7 +796,7 @@ namespace Sinapse.Forms
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripTraining.Location = new System.Drawing.Point(211, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(208, 25);
+            this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
             this.toolStripTraining.TabIndex = 3;
             // 
             // btnTrainForget
@@ -878,7 +891,7 @@ namespace Sinapse.Forms
             this.btnTestRound});
             this.toolStripTesting.Location = new System.Drawing.Point(419, 0);
             this.toolStripTesting.Name = "toolStripTesting";
-            this.toolStripTesting.Size = new System.Drawing.Size(93, 25);
+            this.toolStripTesting.Size = new System.Drawing.Size(91, 25);
             this.toolStripTesting.TabIndex = 2;
             // 
             // btnTestCompute
@@ -1158,5 +1171,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnTrainGraph;
         private System.Windows.Forms.ToolStripButton btnTrainQuery;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.Label lbVersion;
     }
 }

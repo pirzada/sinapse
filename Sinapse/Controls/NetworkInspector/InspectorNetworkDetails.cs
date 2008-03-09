@@ -48,7 +48,7 @@ namespace Sinapse.Controls.NetworkInspector
             this.lbType.Text = "Type: " + network.ActivationNetwork.GetType().Name;
             this.lbFunction.Text = "Function: " + m_networkContainer.Function;
             this.lbInputs.Text = "Inputs: " + network.ActivationNetwork.InputsCount;
-            this.lbOutputs.Text = "Outputs: " + network.ActivationNetwork.Output.Length;
+            this.lbOutputs.Text = "Outputs: " + network.ActivationNetwork[network.ActivationNetwork.LayersCount - 1].NeuronsCount;
         }
         #endregion
 
