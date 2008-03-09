@@ -191,6 +191,7 @@
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Network\NetworkExchanger.cs" />
+    <Compile Include="Data\SerializableObject.cs" />
     <Compile Include="Data\Structures\StatusbarUpdate.cs" />
     <Compile Include="Forms\Special\ExcelAnchor.cs">
       <SubType>Form</SubType>
@@ -211,7 +212,6 @@
     <Compile Include="Utils\HtmlReport\Misc.cs" />
     <Compile Include="Utils\HtmlReport\Report.cs" />
     <Compile Include="Utils\HtmlReport\Section.cs" />
-    <Compile Include="Data\Reporting\NetworkPerformance.cs" />
     <Compile Include="Data\Network\NetworkSavepoint.cs" />
     <Compile Include="Data\Network\NetworkDatabase.cs" />
     <Compile Include="Data\Network\NetworkCaptions.cs" />
@@ -219,7 +219,6 @@
     <Compile Include="Data\Network\NetworkSchema.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Structures\TrainingOptions.cs" />
     <Compile Include="Data\Structures\TrainingStatus.cs" />
     <Compile Include="Data\Network\NetworkContainer.cs" />

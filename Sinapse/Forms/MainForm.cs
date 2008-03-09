@@ -39,7 +39,7 @@ namespace Sinapse.Forms
 
         private NetworkContainer m_networkContainer;
         private NetworkDatabase m_networkDatabase;
-        private NetworkWorkplace m_networkWorkplace;
+   //     private NetworkWorkplace m_networkWorkplace;
 
 
         //---------------------------------------------
@@ -137,7 +137,7 @@ namespace Sinapse.Forms
             }
         }
 
-        public NetworkWorkplace CurrentNetworkWorkplace
+     /*   public NetworkWorkplace CurrentNetworkWorkplace
         {
             get { return this.m_networkWorkplace; }
             set
@@ -157,6 +157,7 @@ namespace Sinapse.Forms
                 this.MenuFileCloseWorkplace.Enabled = notNull;
             }
         }
+      */ 
         #endregion
 
 
@@ -187,7 +188,7 @@ namespace Sinapse.Forms
 
                 this.CurrentNetworkContainer = null;
                 this.CurrentNetworkDatabase = null;
-                this.CurrentNetworkWorkplace = null;
+     //           this.CurrentNetworkWorkplace = null;
 
                 HistoryListener.Write("Waiting data");
             }
@@ -326,7 +327,7 @@ namespace Sinapse.Forms
 
         private void MenuFileCloseWorkplace_Click(object sender, EventArgs e)
         {
-            this.CurrentNetworkWorkplace = null;
+     //       this.CurrentNetworkWorkplace = null;
             HistoryListener.Write("Workplace Closed");
         }
         #endregion
@@ -656,7 +657,7 @@ namespace Sinapse.Forms
 
 
         #region Open & Save Workplace
-        private void workplaceSave(string path)
+   /*     private void workplaceSave(string path)
         {
             try
             {
@@ -699,6 +700,7 @@ namespace Sinapse.Forms
                 }
             }
         }
+    */ 
         #endregion
 
 

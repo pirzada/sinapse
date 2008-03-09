@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 using Sinapse.Data.Network;
@@ -30,6 +31,8 @@ namespace Sinapse.Data.Reporting
         private NetworkContainer m_network;
         private NetworkDatabase m_database;
 
+        private DataTable m_scoreTable;
+
 
         //---------------------------------------------
 
@@ -40,6 +43,7 @@ namespace Sinapse.Data.Reporting
             this.m_network = network;
             this.m_database = database;
 
+            this.createTable();
             this.generate();
         }
         #endregion
@@ -63,9 +67,93 @@ namespace Sinapse.Data.Reporting
 
 
         #region Private Methods
+        private void createTable()
+        {
+            m_scoreTable = new DataTable("Network Performance");
+
+            DataColumn col;
+            col = new DataColumn("Name", typeof(String));
+            col.AllowDBNull = false;
+            col.DefaultValue = String.Empty;
+            m_scoreTable.Columns.Add(col);
+            m_scoreTable.PrimaryKey = new DataColumn[] { col };
+
+            col = new DataColumn("Category", typeof(Boolean));
+            col.AllowDBNull = false;
+            col.DefaultValue = false;
+            m_scoreTable.Columns.Add(col);
+
+            col = new DataColumn("Hits", typeof(Int32));
+            col.AllowDBNull = false;
+            col.DefaultValue = 0;
+            m_scoreTable.Columns.Add(col);
+
+            col = new DataColumn("Errors", typeof(Int32));
+            col.AllowDBNull = false;
+            col.DefaultValue = 0;
+            m_scoreTable.Columns.Add(col);
+
+        }
+
         private void generate()
         {
+
+            foreach (string inputColumn in this.m_database.Schema.InputColumns)
+            {
+                
+            }
+            
+            
+            int hitTotal = 0, hitPositive = 0, hitNegative = 0;
+            int errorTotal = 0, errorPositive = 0, errorNegative = 0;
+            double totalScore = 0, finalScore = 0;
+
+            foreach (DataRow row in selectedRows)
+            {
+                foreach (String outputColumn in this.m_network.Schema.OutputColumns)
+                {
+
+                    totalScore += Math.Abs(Double.Parse((string)row[NetworkDatabase.ColumnDeltaPrefix + outputColumn]));
+
+                    if (row[outputColumn].Equals(row[NetworkDatabase.ColumnComputedPrefix + outputColumn]))
+                    {
+                        hitTotal++;
+
+                        if (row[outputColumn].Equals("1"))
+                        {
+                            hitPositive++;
+                        }
+                        else
+                        {
+                            hitNegative++;
+                        }
+                    }
+                    else
+                    {
+                        errorTotal++;
+
+                        if (row[outputColumn].Equals("1"))
+                        {
+                            errorPositive++;
+                        }
+                        else
+                        {
+                            errorNegative++;
+                        }
+                    }
+
+                }
+            }
         }
         #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Report Generation
+
+        #endregion
+
     }
 }
