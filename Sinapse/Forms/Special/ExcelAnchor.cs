@@ -32,5 +32,15 @@ namespace Sinapse.Forms
         {
             InitializeComponent();
         }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            // Anchor on the bottom-right corner of the screen.
+            Screen currentScreen = Screen.FromHandle(this.Handle);
+            this.Location = new Point(currentScreen.Bounds.Width - this.Width,
+                                      currentScreen.Bounds.Height - this.Height);
+        }
     }
 }

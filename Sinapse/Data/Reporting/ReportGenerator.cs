@@ -347,26 +347,32 @@ namespace Sinapse.Data.Reporting
 
         public void GenerateWeights()
         {
-            StringBuilder weigthBuilder = new StringBuilder();
+            StringBuilder weightBuilder = new StringBuilder();
 
             for (int i = 0; i < m_network.ActivationNetwork.LayersCount; ++i)
             {
-                weigthBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i + 1);
+                weightBuilder.AppendFormat("&nbsp;<b><i>Layer #{0}</i></b><br>", i + 1);
 
                 for (int j = 0; j < m_network.ActivationNetwork[i].NeuronsCount; ++j)
                 {
-                    weigthBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j + 1);
+                    
+                    weightBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j + 1);
+                    //weightBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;<i>Function: {0}</i>", (m_network.ActivationNetwork[i][j] as AForge.Neuro.ActivationNeuron).ActivationFunction.GetType().Name);
+                    weightBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;<i>Threshold: {0}</i><br>",(m_network.ActivationNetwork[i][j] as AForge.Neuro.ActivationNeuron).Threshold);
 
-                    for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; k++)
+
+                    for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; ++k)
                     {
-                        weigthBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;[{0}]: {1}<br>", k, m_network.ActivationNetwork[i][j][k]);
+                        weightBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;[{0}]: {1}<br>", k, m_network.ActivationNetwork[i][j][k]);
                     }
-                    weigthBuilder.Append("<br>");
+
+                    weightBuilder.Append("<br>");
                 }
-                weigthBuilder.Append("<br>");
+
+                weightBuilder.Append("<br>");
             }
 
-            reportBuilder.Replace("[netWeights]", weigthBuilder.ToString());
+            reportBuilder.Replace("[netWeights]", weightBuilder.ToString());
         }
 
         public void GenerateFooter()

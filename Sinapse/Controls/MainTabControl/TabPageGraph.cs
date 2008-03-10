@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -79,16 +79,16 @@ namespace Sinapse.Controls.MainTabControl
 
                 if (value != null && this.NetworkTrainer.NetworkDatabase != null)
                 {
-                    this.setTabPageEnabled(true);
                     this.dataGridView.DataSource = this.m_networkContainer.Savepoints;
                     this.m_networkContainer.Savepoints.SavepointRegistered += networkContainer_savepointRegistered;
                     this.m_networkContainer.Savepoints.SavepointRestored += networkContainer_savepointRestored;
                 }
                 else
                 {
-                    this.setTabPageEnabled(false);
                     this.dataGridView.DataSource = null;
                 }
+
+                this.UpdateEnabled();
             }
         }
 
@@ -96,7 +96,7 @@ namespace Sinapse.Controls.MainTabControl
         internal SideTabControl.SidePageTrainer NetworkTrainer
         {
             get { return this.m_networkTrainer; }
-            set { this.m_networkTrainer = value; }
+            set { this.m_networkTrainer = value;}
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -200,19 +200,26 @@ namespace Sinapse.Controls.MainTabControl
 
 
         #region Public Methods
-        internal void UpdateGraph()
+        public void UpdateGraph()
         {
             this.zedGraphControl.AxisChange();
             this.zedGraphControl.Invalidate();
             this.Invalidate();
         }
 
-        internal void ClearGraph()
+        public void ClearGraph()
         {
             this.TrainingPoints.Clear();
             this.ValidationPoints.Clear();
             this.SavePoints.Clear();
             this.UpdateGraph();
+        }
+
+        public void UpdateEnabled()
+        {
+            if (m_networkContainer != null && this.NetworkTrainer.NetworkDatabase != null)
+                this.setTabPageEnabled(true);
+            else this.setTabPageEnabled(false);
         }
         #endregion
 

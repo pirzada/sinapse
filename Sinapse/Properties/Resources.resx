@@ -121,8 +121,8 @@
   <data name="player_fwd_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_fwd1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="file_saveall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_all.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="file_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\webexport.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player_finish_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\finish.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +202,8 @@
   <data name="player_play_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player_play2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_stop_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\player_stop2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="player_start_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\start1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="view_choose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\view_choose.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,11 +277,11 @@
   <data name="star5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star5.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="player_stop_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\player_stop2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="magic8ball" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\magic8ball.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="file_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\webexport.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="star4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star4.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -355,6 +355,9 @@
   <data name="configure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\configure2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder_html" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_html.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="network_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\network.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -370,8 +373,8 @@
   <data name="file_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filenew.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player_start_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\start1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="file_saveall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save_all.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="history" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\history.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -388,6 +391,9 @@
   <data name="action_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="html" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\html.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gear_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\software-development.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -400,10 +406,10 @@
   <data name="info_flat_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documentinfo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_html" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_html.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="kded" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\kded.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="txt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\txt.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -37,7 +37,7 @@ namespace Sinapse.Data.Network
 
 
     [Serializable]
-    internal sealed class NetworkDatabase
+    internal sealed class NetworkDatabase : SerializableObject<NetworkDatabase>
     {
 
 
@@ -55,13 +55,6 @@ namespace Sinapse.Data.Network
         private NetworkSchema m_networkSchema;
         private DataTable m_dataTable;
 
-        [NonSerialized]
-        internal FileSystemEventHandler DatabaseSaved;
-
-        [NonSerialized]
-        private string m_lastSavePath;
-
-
         //----------------------------------------
 
 
@@ -75,8 +68,6 @@ namespace Sinapse.Data.Network
 
             this.m_networkSchema.DataCategories.AutodetectCaptions(dataTable);
             this.m_networkSchema.DataRanges.AutodetectRanges(dataTable);
-
-            this.Initialize();
         }
 
         public NetworkDatabase(NetworkSchema schema)
@@ -85,13 +76,6 @@ namespace Sinapse.Data.Network
             this.m_dataTable = new DataTable();
 
             this.createColumns(m_dataTable, schema);
-
-            this.Initialize();
-        }
-
-        public void Initialize()
-        {
-            this.m_lastSavePath = String.Empty;
         }
         #endregion
 
@@ -128,17 +112,7 @@ namespace Sinapse.Data.Network
         internal DataView ValidationSet
         {
             get { return this.createDataView(NetworkSet.Validation); }
-        }
-                   
-        internal string LastSavePath
-        {
-            get { return this.m_lastSavePath; }
-        }
-
-        internal bool IsSaved
-        {
-            get { return (this.m_lastSavePath != null && this.m_lastSavePath.Length > 0); }
-        }
+        }       
         #endregion
 
 
@@ -564,107 +538,6 @@ namespace Sinapse.Data.Network
 
 
         //----------------------------------------
-
-
-        #region Object Events
-        private void OnDatabaseSaved(FileSystemEventArgs e)
-        {
-            if (this.DatabaseSaved != null)
-                this.DatabaseSaved.Invoke(this, e);
-        }      
-        #endregion
-
-
-        //----------------------------------------
-
-
-        #region Static Methods
-        public static void Serialize(NetworkDatabase networkDatabase, string path)
-        {
-            //TODO: Improve/rewrite those methods.
-
-            FileStream fileStream = null;
-            bool success = true;
-
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Create);
-
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fileStream, networkDatabase);
-            }
-            catch (DirectoryNotFoundException e)
-            {
-                Debug.WriteLine("Directory not found during database serialization");
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during database serialization");
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
-
-                if (success)
-                    networkDatabase.m_lastSavePath = path;
-            }
-        }
-
-        public static NetworkDatabase Deserialize(string path)
-        {
-            NetworkDatabase ndb = null;
-            FileStream fileStream = null;
-            bool success = true;
-
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Open);
-                BinaryFormatter bf = new BinaryFormatter();
-                ndb = (NetworkDatabase)bf.Deserialize(fileStream);
-            }
-            catch (FileNotFoundException e)
-            {
-                Debug.WriteLine("File not found during database deserialization");
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during database deserialization");
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
-
-                if (success)
-                {
-                    ndb.m_lastSavePath = path;
-                    ndb.OnDatabaseSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
-                }
-            }
-
-            return ndb;
-        }
-
-        #endregion
 
 
     }

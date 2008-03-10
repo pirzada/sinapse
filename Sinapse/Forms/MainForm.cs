@@ -80,7 +80,7 @@ namespace Sinapse.Forms
                 {
                     this.lbNeuronCount.Text = m_networkContainer.Layout;
 
-                    this.m_networkContainer.NetworkSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
+                    this.m_networkContainer.ObjectSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
 
                     if (this.m_networkContainer.IsSaved)
                         this.MenuNetworkSaveAs.Enabled = true;
@@ -117,7 +117,7 @@ namespace Sinapse.Forms
                     this.lbInputCount.Text = this.m_networkDatabase.Schema.InputColumns.Length.ToString();
                     this.lbOutputCount.Text = this.m_networkDatabase.Schema.OutputColumns.Length.ToString();
 
-                    this.m_networkDatabase.DatabaseSaved += new FileSystemEventHandler(currentDatabase_DatabaseSaved);
+                    this.m_networkDatabase.ObjectSaved += new FileSystemEventHandler(currentDatabase_DatabaseSaved);
 
                     if (this.m_networkDatabase.IsSaved)
                         this.MenuDatabaseSaveAs.Enabled = true;

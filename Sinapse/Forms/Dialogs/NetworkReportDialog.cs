@@ -191,7 +191,11 @@ namespace Sinapse.Forms.Dialogs
         //----------------------------------------
 
 
-        #region Private Methods
+        #region WebBrowser Events
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            this.progressBar.Value = 0;
+        }
         #endregion
 
 
@@ -251,7 +255,6 @@ namespace Sinapse.Forms.Dialogs
             this.lbStatus.Text = "Done.";
         }
         #endregion
-
 
     }
 }

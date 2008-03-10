@@ -310,6 +310,7 @@ namespace Sinapse.Controls.SideTabControl
         private void updateEnabled()
         {
             this.Enabled = (this.m_networkDatabase != null && this.m_networkContainer != null);
+            this.m_graphControl.UpdateEnabled();
         }
 
         private void networkContainer_SavepointRestored(object sender, EventArgs e)

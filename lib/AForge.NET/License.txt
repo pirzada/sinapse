@@ -5,4 +5,4 @@ Modified source code is and will ever be distributed together with this applicat
 Original project copyright Andrew Kirillov
 http://code.google.com/p/aforge/
 
-Minor changes by Cesar Souza
+Minor changes by Cesar Roberto de Souza

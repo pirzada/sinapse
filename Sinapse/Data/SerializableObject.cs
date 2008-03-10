@@ -20,8 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization;
 using System.Diagnostics;
+using System.Reflection;
 using System.Data;
 using System.IO;
 
@@ -33,29 +35,47 @@ namespace Sinapse.Data
     internal class SerializableObject<T> where T : SerializableObject<T>
     {
 
-        internal event FileSystemEventHandler ObjectSaved;
-
-        [NonSerialized]
         private string m_lastSavePath;
+
+        internal event FileSystemEventHandler ObjectSaved;
 
 
         //---------------------------------------------
 
 
+        #region Constructor
+        protected SerializableObject()
+        {
+            this.m_lastSavePath = String.Empty;
+        }
+        #endregion
+
+        //---------------------------------------------
+
+
+        #region Properties
+        public string LastSavePath
+        {
+            get { return this.m_lastSavePath; }
+        }
+
+        public bool IsSaved
+        {
+            get { return (this.m_lastSavePath != null && this.m_lastSavePath.Length > 0); }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Events
         protected void OnObjectSaved(FileSystemEventArgs e)
         {
             if (this.ObjectSaved != null)
                 this.ObjectSaved.Invoke(this, e);
         }
-
-
-        //---------------------------------------------
-
-
-        public string LastSavePath
-        {
-            get { return this.m_lastSavePath; }
-        }
+        #endregion
 
 
         //---------------------------------------------
@@ -72,6 +92,8 @@ namespace Sinapse.Data
                 fileStream = new FileStream(path, FileMode.Create);
 
                 BinaryFormatter bf = new BinaryFormatter();
+                bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
+          //      bf.Binder = new AnyVersionObjectBinder();
                 bf.Serialize(fileStream, serializableObject);
             }
             catch (DirectoryNotFoundException e)
@@ -116,6 +138,8 @@ namespace Sinapse.Data
             {
                 fileStream = new FileStream(path, FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
+                bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
+         //       bf.Binder = new AnyVersionObjectBinder();
                 serializableObject = (T)bf.Deserialize(fileStream);
             }
             catch (FileNotFoundException e)
@@ -146,8 +170,20 @@ namespace Sinapse.Data
 
             return serializableObject;
         }
-#endregion
+        #endregion
 
     }
 
+
+  /*  internal sealed class AnyVersionObjectBinder : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName)
+        {
+            Debug.WriteLine("Typename: " + typeName);
+            Debug.WriteLine("Assembly: " + assemblyName);
+
+            return System.Type.GetType(typeName + ", " + Assembly.GetExecutingAssembly().FullName);
+        }
+    }
+   */
 }
