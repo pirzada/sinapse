@@ -93,7 +93,6 @@ namespace Sinapse.Data
 
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
-          //      bf.Binder = new AnyVersionObjectBinder();
                 bf.Serialize(fileStream, serializableObject);
             }
             catch (DirectoryNotFoundException e)
@@ -139,7 +138,7 @@ namespace Sinapse.Data
                 fileStream = new FileStream(path, FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
-         //       bf.Binder = new AnyVersionObjectBinder();
+                bf.Binder = new AnyVersionObjectBinder();
                 serializableObject = (T)bf.Deserialize(fileStream);
             }
             catch (FileNotFoundException e)
@@ -175,15 +174,21 @@ namespace Sinapse.Data
     }
 
 
-  /*  internal sealed class AnyVersionObjectBinder : SerializationBinder
+    internal sealed class AnyVersionObjectBinder : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName)
         {
-            Debug.WriteLine("Typename: " + typeName);
-            Debug.WriteLine("Assembly: " + assemblyName);
+            Type type = null;
+            
+            if (assemblyName.Contains("Sinapse") || typeName.Contains("Sinapse"))
+            {
+                type = System.Type.GetType(typeName.Replace("0.0.0.2","0.0.0.3"));
 
-            return System.Type.GetType(typeName + ", " + Assembly.GetExecutingAssembly().FullName);
+                Debug.WriteLine("Match type: " + type.Name);
+            }
+
+            return type;
         }
     }
-   */
+   
 }
