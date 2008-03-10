@@ -40,7 +40,6 @@ namespace Sinapse.Data.Network
 
         private NetworkDatabase m_networkDatabase;
         private NetworkContainer m_networkContainer;
-       // private NetworkPerformance m_networkPerformance;
 
         private NetworkSavepointCollection m_savepointCollection;
 
@@ -57,7 +56,6 @@ namespace Sinapse.Data.Network
             this.m_networkContainer = networkContainer;
 
             this.m_savepointCollection = new NetworkSavepointCollection(networkContainer);
-       //     this.m_networkPerformance = new NetworkPerformance(networkContainer, networkDatabase);
             //this.m_trainingStatus = new TrainingStatus();
 
         }

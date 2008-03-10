@@ -20,8 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
+//using System.Xml.Serialization;
+//using System.Xml;
+using System.Runtime.Serialization.Formatters.Soap;
 using System.Diagnostics;
 
 using AForge.Neuro;
@@ -31,31 +32,23 @@ namespace Sinapse.Data.Network
 {
 
     [Serializable]
-    internal sealed class NetworkContainer
+    internal sealed class NetworkContainer : SerializableObject<NetworkContainer>
     {
 
         private NetworkSchema m_networkSchema;
         private ActivationNetwork m_activationNetwork;
         private string m_networkName;
         private string m_networkDescription;
+        private string m_networkInformation;
         private double m_networkPrecision;
-        private double m_networkScore;
+        private double m_networkDeviation;
         private DateTime m_creationTime;
 
         private NetworkSavepointCollection m_savepointCollection;
 
-        [NonSerialized]
-        private string m_lastSavePath;
-
-        [NonSerialized]
-        public EventHandler NetworkChanged;
-
-   /*     [NonSerialized]
-        public EventHandler NetworkLoaded;
-   */    
-        [NonSerialized]
-        public FileSystemEventHandler NetworkSaved;      
-
+        
+        public event EventHandler NetworkChanged;
+ 
 
         //---------------------------------------------
 
@@ -74,7 +67,6 @@ namespace Sinapse.Data.Network
             this.m_activationNetwork = new ActivationNetwork(function, schema.InputColumns.Length, neuronsCount);
 
             this.m_creationTime = DateTime.Now;
-            this.m_lastSavePath = String.Empty;
             
             this.m_savepointCollection = new NetworkSavepointCollection(this);
             this.m_savepointCollection.SavepointRestored += savepointCollection_SavepointRestored;
@@ -148,12 +140,18 @@ namespace Sinapse.Data.Network
 
         public string Description
         {
-            get { return m_networkDescription; }
+            get { return this.m_networkDescription; }
             set
             {
                 this.m_networkDescription = value;
                 this.OnNetworkChanged();
             }
+        }
+
+        public string Information
+        {
+            get { return this.m_networkInformation; }
+            set { this.m_networkInformation = value; }
         }
 
         public double Precision
@@ -166,24 +164,14 @@ namespace Sinapse.Data.Network
             }
         }
 
-        public double Score //Rename to "Deviation"
+        public double Deviation
         {
-            get { return this.m_networkScore; }
+            get { return this.m_networkDeviation; }
             set
             {
-                this.m_networkScore = value;
+                this.m_networkDeviation = value;
                 this.OnNetworkChanged();
             }
-        }
-
-        public string LastSavePath
-        {
-            get { return this.m_lastSavePath; }
-        }
-
-        public bool IsSaved
-        {
-            get { return (this.m_lastSavePath != null && m_lastSavePath.Length > 0); }
         }
 
         public DateTime CreationTime
@@ -205,18 +193,6 @@ namespace Sinapse.Data.Network
 
 
         #region Object Events
-        private void OnNetworkSaved(FileSystemEventArgs e)
-        {
-            if (this.NetworkSaved != null)
-                this.NetworkSaved.Invoke(this, e);
-        }
-
-   /*     private void OnNetworkLoaded()
-        {
-            if (this.NetworkLoaded != null)
-                this.NetworkLoaded.Invoke(this, EventArgs.Empty);
-        }
-   */
         private void OnNetworkChanged()
         {
             if (this.NetworkChanged != null)
@@ -240,93 +216,60 @@ namespace Sinapse.Data.Network
         //---------------------------------------------
 
 
-        #region Static Methods
-        public static void Serialize(NetworkContainer network, string path)
+        #region Import & Export
+        public void XmlImport(string path)
         {
-            FileStream fileStream = null;
-            bool success = true;
+          /*  XmlTextReader xmlReader = new XmlTextReader(path);
+            XmlSerializer xs = new XmlSerializer(typeof(AForge.Neuro.ActivationNetwork));
+            this.m_activationNetwork = (AForge.Neuro.ActivationNetwork)xs.Deserialize(xmlReader);
+            xmlReader.Close();
+           */
 
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Create);
+            FileStream fileStream = new FileStream(path, FileMode.Open);
+            SoapFormatter sf = new SoapFormatter();
+            this.m_activationNetwork = (ActivationNetwork)sf.Deserialize(fileStream);
+            fileStream.Close();
+        }
 
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fileStream, network);
-            }
-            catch (DirectoryNotFoundException e)
-            {
-                Debug.WriteLine("Directory not found during network serialization " + e.Message);
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during serialization: " + e.Message);
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error saving network: " + e.Message);
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
+        public void XmlExport(string path)
+        {
+            /*
+            XmlTextWriter xmlWriter = new XmlTextWriter(path, Encoding.UTF8);
+            XmlSerializer xs = new XmlSerializer(typeof(AForge.Neuro.ActivationNetwork));
+            xs.Serialize(xmlWriter, this.ActivationNetwork);
+            xmlWriter.Close();
+            */
 
-                if (success)
+            FileStream fileStream = new FileStream(path, FileMode.Create);
+            SoapFormatter sf = new SoapFormatter();
+            sf.Serialize(fileStream, this.m_activationNetwork);
+            fileStream.Close();
+        }
+
+        public void TxtExport(string path)
+        {
+            TextWriter textWriter = new StreamWriter(path, false, Encoding.UTF8);
+
+            textWriter.WriteLine("FUNCTION {0}", this.Function);
+
+            for (int i = 0; i < this.ActivationNetwork.LayersCount; ++i)
+            {
+                textWriter.WriteLine("LAYER {0} {1}", i, this.ActivationNetwork[i].NeuronsCount);
+
+                for (int j = 0; j < this.ActivationNetwork[i].NeuronsCount; ++j)
                 {
-                    network.m_lastSavePath = path;
-                    network.OnNetworkSaved(new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(path), Path.GetFileName(path)));
+                    textWriter.WriteLine(" NEURON {0} {1} {2}", i, this.ActivationNetwork[i].InputsCount, this.ActivationNetwork[i][j].Threshold);
+
+                    for (int k = 0; k < this.ActivationNetwork[i][j].InputsCount; ++k)
+                    {
+                        textWriter.WriteLine("  WEIGHT {0} {1}", i, this.ActivationNetwork[i][j][k]);
+                    }
                 }
             }
-        }
 
-        public static NetworkContainer Deserialize(string path)
-        {
-
-            NetworkContainer nn = null;
-            FileStream fileStream = null;
-            bool success = true;
-
-            try
-            {
-                fileStream = new FileStream(path, FileMode.Open);
-                BinaryFormatter bf = new BinaryFormatter();
-                nn = (NetworkContainer)bf.Deserialize(fileStream);
-            }
-            catch (FileNotFoundException e)
-            {
-                Debug.WriteLine("File not found during network deserialization");
-                success = false;
-                throw e;
-            }
-            catch (SerializationException e)
-            {
-                Debug.WriteLine("Error occured during deserialization");
-                success = false;
-                throw e;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                throw e;
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Close();
-
-                if (success)
-                    nn.m_lastSavePath = path;
-            }
-
-            return nn;
+            textWriter.Close();
         }
         #endregion
-
 
     }
 }

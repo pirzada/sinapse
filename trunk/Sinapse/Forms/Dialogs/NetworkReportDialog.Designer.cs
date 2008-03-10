@@ -62,6 +62,7 @@ namespace Sinapse.Forms.Dialogs
             this.webBrowser.Size = new System.Drawing.Size(478, 468);
             this.webBrowser.TabIndex = 2;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
             // 
             // saveFileDialog
             // 

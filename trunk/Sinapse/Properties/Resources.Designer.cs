@@ -305,6 +305,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap html {
+            get {
+                object obj = ResourceManager.GetObject("html", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap info_16 {
             get {
                 object obj = ResourceManager.GetObject("info_16", resourceCulture);
@@ -679,6 +686,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap tab_remove {
             get {
                 object obj = ResourceManager.GetObject("tab_remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap txt {
+            get {
+                object obj = ResourceManager.GetObject("txt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 
 using AForge.Neuro;
@@ -70,17 +71,38 @@ namespace Sinapse.Forms.Dialogs
         #region Form Buttons
         private void btnImport_Click(object sender, EventArgs e)
         {
-
+            this.openFileDialog.ShowDialog(this);
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            this.saveFileDialog.FilterIndex = 1;
+            this.saveFileDialog.DefaultExt = "xml";
+            this.saveFileDialog.ShowDialog(this);
+        }
 
+        private void btnTextExport_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FilterIndex = 2;
+            this.saveFileDialog.DefaultExt = "txt";
+            this.saveFileDialog.ShowDialog(this);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             this.populateTreeView(m_networkContainer);
+        }
+
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            if (saveFileDialog.DefaultExt == "txt")
+                this.m_networkContainer.TxtExport(saveFileDialog.FileName);
+            else this.m_networkContainer.XmlExport(saveFileDialog.FileName);
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            this.m_networkContainer.XmlImport(openFileDialog.FileName);
         }
         #endregion
 
