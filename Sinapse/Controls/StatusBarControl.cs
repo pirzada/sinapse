@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -57,12 +57,14 @@ namespace Sinapse.Controls
         #region Public Methods
         internal void UpdateNetworkState(TrainingStatus networkState)
         {
+            this.progressBar.Visible = (networkState.Progress > 0);
+
             this.progressBar.Value = networkState.Progress;
             this.lbEpoch.Text = String.Format("Epoch: {0}", networkState.Epoch);
             this.lbTrainingError.Text = String.Format("Error: {0:0.00000}", networkState.ErrorTraining);
             this.lbValidationError.Text = String.Format("Validation: {0:0.00000}", networkState.ErrorValidation);
+            this.lbSpeed.Text = String.Format("{0:0.00} e/s", networkState.EpochsBySecond);
 
-            this.progressBar.Visible = (progressBar.Value != 0);
         }
 
         internal void UpdateSelectedItems(int selected, int total)
@@ -75,6 +77,8 @@ namespace Sinapse.Controls
             this.UpdateNetworkState(new TrainingStatus());
             this.UpdateSelectedItems(0, 0);
             this.lbStatus.Text = String.Empty;
+
+            HistoryListener.Write("Statusbar Reset");
         }
         #endregion
 
@@ -120,7 +124,7 @@ namespace Sinapse.Controls
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
-            if (!StatusBarOptionsDialog.HasInstance)
+            if (this.m_statusBarOptionsDialog == null || this.m_statusBarOptionsDialog.IsDisposed)
                 this.m_statusBarOptionsDialog = new StatusBarOptionsDialog();
 
             if (!this.m_statusBarOptionsDialog.Visible)

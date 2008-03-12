@@ -29,13 +29,14 @@ namespace Sinapse.Controls
         private void InitializeComponent()
         {
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.btnViewLog = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.lbEpoch = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbTrainingError = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbValidationError = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbItems = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnViewLog = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnClear = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnOptions = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip.SuspendLayout();
@@ -51,21 +52,31 @@ namespace Sinapse.Controls
             this.lbEpoch,
             this.lbTrainingError,
             this.lbValidationError,
+            this.lbSpeed,
             this.lbItems,
             this.btnClear,
             this.btnOptions});
             this.statusStrip.Location = new System.Drawing.Point(0, 0);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1347, 22);
+            this.statusStrip.Size = new System.Drawing.Size(905, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip";
+            // 
+            // btnViewLog
+            // 
+            this.btnViewLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnViewLog.Image = global::Sinapse.Properties.Resources.reminders;
+            this.btnViewLog.Name = "btnViewLog";
+            this.btnViewLog.Size = new System.Drawing.Size(16, 17);
+            this.btnViewLog.Text = "History Log";
+            this.btnViewLog.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // lbStatus
             // 
             this.lbStatus.AutoSize = false;
             this.lbStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(553, 17);
+            this.lbStatus.Size = new System.Drawing.Size(118, 17);
             this.lbStatus.Spring = true;
             this.lbStatus.Text = "lbStatus";
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -102,6 +113,12 @@ namespace Sinapse.Controls
             this.lbValidationError.Size = new System.Drawing.Size(95, 17);
             this.lbValidationError.Text = "lbValidationError";
             // 
+            // lbSpeed
+            // 
+            this.lbSpeed.Name = "lbSpeed";
+            this.lbSpeed.Size = new System.Drawing.Size(45, 17);
+            this.lbSpeed.Text = "lbSpeed";
+            // 
             // lbItems
             // 
             this.lbItems.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
@@ -109,15 +126,6 @@ namespace Sinapse.Controls
             this.lbItems.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbItems.Size = new System.Drawing.Size(68, 17);
             this.lbItems.Text = "lbSelection";
-            // 
-            // btnViewLog
-            // 
-            this.btnViewLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnViewLog.Image = global::Sinapse.Properties.Resources.reminders;
-            this.btnViewLog.Name = "btnViewLog";
-            this.btnViewLog.Size = new System.Drawing.Size(16, 17);
-            this.btnViewLog.Text = "History Log";
-            this.btnViewLog.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // btnClear
             // 
@@ -150,7 +158,7 @@ namespace Sinapse.Controls
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.statusStrip);
             this.Name = "StatusBarControl";
-            this.Size = new System.Drawing.Size(1347, 22);
+            this.Size = new System.Drawing.Size(905, 22);
             this.Load += new System.EventHandler(this.StatusBarControl_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -171,5 +179,6 @@ namespace Sinapse.Controls
         private System.Windows.Forms.ToolStripStatusLabel btnClear;
         private System.Windows.Forms.ToolStripStatusLabel btnOptions;
         private System.Windows.Forms.ToolStripStatusLabel btnViewLog;
+        private System.Windows.Forms.ToolStripStatusLabel lbSpeed;
     }
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -34,10 +34,16 @@ namespace Sinapse.Forms.Base
 
         #region Static
         private static bool hasInstance = false;
+        private static Form instance = null;
 
         public static bool HasInstance
         {
             get { return hasInstance; }
+        }
+
+        public Form Instance
+        {
+            get { return instance; }
         }
         #endregion
 
@@ -49,11 +55,13 @@ namespace Sinapse.Forms.Base
         internal SingleInstanceForm()
         {
             hasInstance = true;
+            instance = this;
         }
 
         ~SingleInstanceForm()
         {
             hasInstance = false;
+            instance = null;
         }
         #endregion
 
@@ -66,11 +74,13 @@ namespace Sinapse.Forms.Base
         {
             base.OnClosed(e);
             hasInstance = false;
+            instance = null;
         }
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
             hasInstance = false;
+            instance = null;
         }
         #endregion
 

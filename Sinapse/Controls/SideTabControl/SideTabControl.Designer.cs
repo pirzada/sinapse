@@ -80,7 +80,7 @@ namespace Sinapse.Controls.SideTabControl
             this.tabRanges.Name = "tabRanges";
             this.tabRanges.Size = new System.Drawing.Size(234, 447);
             this.tabRanges.TabIndex = 2;
-            this.tabRanges.Text = "Data Transformation";
+            this.tabRanges.Text = "Database Schema";
             // 
             // tabWorkplace
             // 

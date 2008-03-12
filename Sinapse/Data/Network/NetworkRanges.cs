@@ -108,8 +108,20 @@ namespace Sinapse.Data.Network
 
         public DoubleRange ActivationFunctionRange
         {
-            get { return activationFunctionRange; }
-            set { activationFunctionRange = value; }
+            get
+            {
+                if (this.activationFunctionRange == null)
+                    this.activationFunctionRange = new DoubleRange(0, 1);
+
+                return this.activationFunctionRange;
+            }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException();
+
+                this.activationFunctionRange = value;
+            }
         }
         #endregion
 
@@ -136,6 +148,22 @@ namespace Sinapse.Data.Network
                 max = Double.MaxValue;
             }
             return new DoubleRange(min, max);
+        }
+
+        public double Normalize(double rawData, string column)
+        {
+            DoubleRange rawRange = this.GetRange(column);
+            DoubleRange norRange = this.ActivationFunctionRange;
+
+            return ((rawData - rawRange.Min) * (norRange.Length) / (rawRange.Length)) + norRange.Min;
+        }
+
+        public double Revert(double normalizedData, string column)
+        {
+            DoubleRange rawRange = this.GetRange(column);
+            DoubleRange norRange = this.ActivationFunctionRange;
+
+            return ((normalizedData - norRange.Min) * (rawRange.Length) / norRange.Length) + rawRange.Min;
         }
 
         public void AutodetectRanges(DataTable dataTable)

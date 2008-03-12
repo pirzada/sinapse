@@ -359,8 +359,8 @@ namespace Sinapse.Controls.MainTabControl.Base
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error opening file");
-                throw ex;
+                MessageBox.Show(ex.Message, "Error opening file");
+                throw;
             }
 
         }

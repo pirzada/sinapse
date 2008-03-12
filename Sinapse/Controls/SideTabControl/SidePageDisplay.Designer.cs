@@ -72,7 +72,7 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbIntro.Location = new System.Drawing.Point(17, 185);
             this.lbIntro.Name = "lbIntro";
-            this.lbIntro.Size = new System.Drawing.Size(172, 44);
+            this.lbIntro.Size = new System.Drawing.Size(181, 44);
             this.lbIntro.TabIndex = 27;
             this.lbIntro.Text = "Please create or load a network to start working with.";
             this.lbIntro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -87,7 +87,7 @@ namespace Sinapse.Controls.SideTabControl
             this.lbDescription.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lbDescription.Location = new System.Drawing.Point(15, 233);
             this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(186, 48);
+            this.lbDescription.Size = new System.Drawing.Size(195, 48);
             this.lbDescription.TabIndex = 24;
             // 
             // lbDescriptionChange
@@ -97,7 +97,7 @@ namespace Sinapse.Controls.SideTabControl
             this.lbDescriptionChange.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbDescriptionChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDescriptionChange.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lbDescriptionChange.Location = new System.Drawing.Point(160, 215);
+            this.lbDescriptionChange.Location = new System.Drawing.Point(169, 215);
             this.lbDescriptionChange.Name = "lbDescriptionChange";
             this.lbDescriptionChange.Size = new System.Drawing.Size(41, 12);
             this.lbDescriptionChange.TabIndex = 23;
@@ -137,7 +137,7 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbErrorRate.Location = new System.Drawing.Point(96, 190);
             this.lbErrorRate.Name = "lbErrorRate";
-            this.lbErrorRate.Size = new System.Drawing.Size(105, 13);
+            this.lbErrorRate.Size = new System.Drawing.Size(114, 13);
             this.lbErrorRate.TabIndex = 19;
             // 
             // lbLayout
@@ -146,7 +146,7 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbLayout.Location = new System.Drawing.Point(96, 175);
             this.lbLayout.Name = "lbLayout";
-            this.lbLayout.Size = new System.Drawing.Size(105, 13);
+            this.lbLayout.Size = new System.Drawing.Size(114, 13);
             this.lbLayout.TabIndex = 22;
             // 
             // lbName
@@ -159,7 +159,7 @@ namespace Sinapse.Controls.SideTabControl
             this.lbName.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lbName.Location = new System.Drawing.Point(8, 138);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(193, 37);
+            this.lbName.Size = new System.Drawing.Size(202, 37);
             this.lbName.TabIndex = 21;
             this.lbName.Text = "Network Not Created";
             this.lbName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -172,7 +172,7 @@ namespace Sinapse.Controls.SideTabControl
             this.pictureBox.Image = global::Sinapse.Properties.Resources.globe_128;
             this.pictureBox.Location = new System.Drawing.Point(8, 7);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(193, 128);
+            this.pictureBox.Size = new System.Drawing.Size(202, 128);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox.TabIndex = 18;
             this.pictureBox.TabStop = false;
@@ -184,7 +184,7 @@ namespace Sinapse.Controls.SideTabControl
             this.lbTableTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTableTitle.Location = new System.Drawing.Point(10, 293);
             this.lbTableTitle.Name = "lbTableTitle";
-            this.lbTableTitle.Size = new System.Drawing.Size(187, 27);
+            this.lbTableTitle.Size = new System.Drawing.Size(196, 27);
             this.lbTableTitle.TabIndex = 28;
             this.lbTableTitle.Text = "This network has been designed to work with the following data:";
             // 
@@ -203,7 +203,7 @@ namespace Sinapse.Controls.SideTabControl
             this.lbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbOutput.AutoSize = true;
             this.lbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbOutput.Location = new System.Drawing.Point(102, 326);
+            this.lbOutput.Location = new System.Drawing.Point(111, 326);
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.Size = new System.Drawing.Size(45, 12);
             this.lbOutput.TabIndex = 28;
@@ -215,10 +215,10 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.panelInputs.AutoScroll = true;
             this.panelInputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelInputs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelInputs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.panelInputs.Location = new System.Drawing.Point(12, 341);
             this.panelInputs.Name = "panelInputs";
-            this.panelInputs.Size = new System.Drawing.Size(89, 149);
+            this.panelInputs.Size = new System.Drawing.Size(89, 147);
             this.panelInputs.TabIndex = 30;
             // 
             // panelOutputs
@@ -227,10 +227,10 @@ namespace Sinapse.Controls.SideTabControl
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelOutputs.AutoScroll = true;
             this.panelOutputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelOutputs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelOutputs.Location = new System.Drawing.Point(104, 341);
+            this.panelOutputs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.panelOutputs.Location = new System.Drawing.Point(113, 341);
             this.panelOutputs.Name = "panelOutputs";
-            this.panelOutputs.Size = new System.Drawing.Size(89, 149);
+            this.panelOutputs.Size = new System.Drawing.Size(89, 147);
             this.panelOutputs.TabIndex = 30;
             // 
             // panel
@@ -255,7 +255,7 @@ namespace Sinapse.Controls.SideTabControl
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Location = new System.Drawing.Point(3, 3);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(210, 496);
+            this.panel.Size = new System.Drawing.Size(219, 494);
             this.panel.TabIndex = 31;
             // 
             // SidePageDisplay
@@ -265,7 +265,7 @@ namespace Sinapse.Controls.SideTabControl
             this.Controls.Add(this.panel);
             this.Name = "SidePageDisplay";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.Size = new System.Drawing.Size(216, 502);
+            this.Size = new System.Drawing.Size(225, 500);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();

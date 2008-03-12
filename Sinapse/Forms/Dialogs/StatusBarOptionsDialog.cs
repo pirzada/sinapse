@@ -43,17 +43,48 @@ namespace Sinapse.Forms.Dialogs
         //---------------------------------------------
 
 
+        #region Form Events
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            rbEpoch.Checked = !Properties.Settings.Default.display_UpdateByTime;
+            rbTime.Checked = Properties.Settings.Default.display_UpdateByTime;
+
+            numRate.Value = (decimal)Properties.Settings.Default.display_UpdateRate;
+            numTime.Value = (decimal)Properties.Settings.Default.display_UpdateTime;
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
         #region Buttons
         private void btnApply_Click(object sender, EventArgs e)
         {
+            this.apply();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            this.apply();
             this.Close();
         }
         #endregion
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
+        //---------------------------------------------
+
+
+        #region Private Methods
+        private void apply()
+        {
+            Properties.Settings.Default.display_UpdateByTime = this.rbTime.Checked;
+            Properties.Settings.Default.display_UpdateRate = (int)numRate.Value;
+            Properties.Settings.Default.display_UpdateTime = (int)numTime.Value;
         }
+        #endregion
 
     }
 }

@@ -35,7 +35,8 @@ namespace Sinapse.Utils.CsvParser
             }
             catch (Exception e)
             {
-                throw e;
+                System.Diagnostics.Debug.WriteLine("Exception ocurred: " + e.Message);
+                throw;
             }
             finally
             {

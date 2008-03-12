@@ -55,6 +55,13 @@ namespace Sinapse.Data.Network
         private NetworkSchema m_networkSchema;
         private DataTable m_dataTable;
 
+
+        [NonSerialized]
+        private bool m_hasUnsavedChanges;
+
+        [NonSerialized]
+        public EventHandler DatabaseChanged;
+
         //----------------------------------------
 
 
@@ -112,10 +119,29 @@ namespace Sinapse.Data.Network
         internal DataView ValidationSet
         {
             get { return this.createDataView(NetworkSet.Validation); }
-        }       
+        }
+
+        public bool HasUnsavedChanges
+        {
+            get { return this.m_hasUnsavedChanges; }
+        }
         #endregion
 
 
+        //----------------------------------------
+        
+
+        #region Object Events
+        private void OnDatabaseChanged()
+        {
+            if (this.DatabaseChanged != null)
+                this.DatabaseChanged.Invoke(this, EventArgs.Empty);
+
+            this.m_hasUnsavedChanges = true;
+        }
+        #endregion
+        
+        
         //----------------------------------------
 
 
@@ -203,26 +229,6 @@ namespace Sinapse.Data.Network
             for (int i = 0; i < columnList.Length; i++)
             {
                 doubleData[i] = this.NormalizeData(sourceRow, columnList[i]);
-            /*  string columnName = columnList[i];
-
-                DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
-                bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
-
-                double data;
-
-                if (hasCaption)
-                    data = this.m_networkSchema.DataCategories.GetID(columnName, (string)sourceRow[columnName]);
-                else
-                {
-                    string strData = (string)sourceRow[columnName];
-                    if (strData.Length > 0)
-                        data = Double.Parse(strData);
-                    else
-                        data = 0;
-                }
-
-                doubleData[i] = (data - range.Min) / (range.Max - range.Min);
-             */ 
             }
 
             return doubleData;
@@ -230,13 +236,12 @@ namespace Sinapse.Data.Network
 
         internal double NormalizeData(DataRow sourceRow, string columnName)
         {
-            DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
-            bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
-
             double data = 0;
 
-            if (hasCaption)
+            if (this.m_networkSchema.IsCategory(columnName))
+            {
                 data = this.m_networkSchema.DataCategories.GetID(columnName, (string)sourceRow[columnName]);
+            }
             else
             {
                 if (sourceRow[columnName] != DBNull.Value)
@@ -248,7 +253,9 @@ namespace Sinapse.Data.Network
                 }
             }
 
-            return (data - range.Min) / (range.Max - range.Min);
+
+            //return (data - range.Min) / (range.Max - range.Min);
+            return this.m_networkSchema.DataRanges.Normalize(data, columnName);
         }
 
         /// <summary>
@@ -262,18 +269,6 @@ namespace Sinapse.Data.Network
             for (int i = 0; i < columnList.Length; i++)
             {
                 dataRow[columnList[i]] = this.RevertData(columnList[i], normalizedData[i]);
-    /*          string columnName = columnList[i];
-
-                DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
-                bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
-
-                double data = normalizedData[i] * (range.Max - range.Min) + range.Min;
-
-                if (hasCaption)
-                    dataRow[columnName] = this.m_networkSchema.DataCategories.GetCaption(columnName, (int)Math.Round(data));
-                else
-                    dataRow[columnName] = data.ToString();
-     */ 
             }
         }
 
@@ -281,12 +276,11 @@ namespace Sinapse.Data.Network
         {
             string output;
 
-            DoubleRange range = this.m_networkSchema.DataRanges.GetRange(columnName);
-            bool hasCaption = (Array.IndexOf(this.m_networkSchema.StringColumns, columnName) >= 0);
+            //double data = normalizedData * (range.Max - range.Min) + range.Min;
 
-            double data = normalizedData * (range.Max - range.Min) + range.Min;
+            double data = this.m_networkSchema.DataRanges.Revert(normalizedData, columnName);
 
-            if (hasCaption)
+            if (this.m_networkSchema.IsCategory(columnName))
                 output = this.m_networkSchema.DataCategories.GetCaption(columnName, (int)Math.Round(data));
             else
                 output = data.ToString();

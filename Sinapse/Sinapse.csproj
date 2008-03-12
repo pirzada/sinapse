@@ -16,9 +16,9 @@
     <GenerateManifests>true</GenerateManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Sinapse.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>62F582CBE65649E8680FAF39707A11DB12E53E02</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Sinapse_TemporaryKey.pfx</ManifestKeyFile>
-    <SignManifests>false</SignManifests>
+    <ManifestCertificateThumbprint>7B21BDBC79252A27F7DEF1C7B0CBE7881F2AFFC2</ManifestCertificateThumbprint>
+    <ManifestKeyFile>cSouza Company SecurityCode.pfx</ManifestKeyFile>
+    <SignManifests>true</SignManifests>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -149,11 +149,11 @@
     <Compile Include="Controls\SideTabControl\SidePageDisplay.Designer.cs">
       <DependentUpon>SidePageDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageRanges.cs">
+    <Compile Include="Controls\SideTabControl\SidePageSchema.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageRanges.Designer.cs">
-      <DependentUpon>SidePageRanges.cs</DependentUpon>
+    <Compile Include="Controls\SideTabControl\SidePageSchema.Designer.cs">
+      <DependentUpon>SidePageSchema.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SideTabControl\SideTabControl.cs">
       <SubType>Component</SubType>
@@ -191,12 +191,18 @@
     <Compile Include="Controls\MainTabControl\TabPageValidation.Designer.cs">
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Network\NetworkColumn.cs" />
     <Compile Include="Data\Network\NetworkTrainingSession.cs" />
     <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Reporting\ReportGenerator.cs">
     </Compile>
     <Compile Include="Data\SerializableObject.cs" />
-    <Compile Include="Data\Structures\StatusbarUpdate.cs" />
+    <Compile Include="Forms\SchemaMapper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SchemaMapper.Designer.cs">
+      <DependentUpon>SchemaMapper.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Special\ExcelAnchor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,9 +350,9 @@
       <DependentUpon>SidePageDisplay.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidePageRanges.resx">
+    <EmbeddedResource Include="Controls\SideTabControl\SidePageSchema.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SidePageRanges.cs</DependentUpon>
+      <DependentUpon>SidePageSchema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SideTabControl\SidePageTrainer.resx">
       <SubType>Designer</SubType>

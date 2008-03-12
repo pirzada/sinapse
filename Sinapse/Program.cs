@@ -21,10 +21,12 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using Sinapse.Properties;
 using Sinapse.Forms;
 
 namespace Sinapse
 {
+
     static class Program
     {
         /// <summary>
@@ -41,22 +43,25 @@ namespace Sinapse
 
             Program.Initialize();
 
+
             Application.Run(new MainForm());
 
-            Properties.Settings.Default.Save();
+
+            Settings.Default.Save();
+            Debug.Listeners.Clear();
         }
 
 
         static void Initialize()
         {
-            if (Properties.Settings.Default.history_Database == null)
-                Properties.Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.history_Database == null)
+                Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
 
-            if (Properties.Settings.Default.history_Networks == null)
-                Properties.Settings.Default.history_Networks = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.history_Networks == null)
+                Settings.Default.history_Networks = new System.Collections.Specialized.StringCollection();
 
-            if (Properties.Settings.Default.history_Workplace == null)
-                Properties.Settings.Default.history_Workplace = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.history_Workplace == null)
+                Settings.Default.history_Workplace = new System.Collections.Specialized.StringCollection();
 
         }
 

@@ -349,5 +349,17 @@ namespace Sinapse.Properties {
                 this["display_UpdateByTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool graph_autoScrollSavepoints {
+            get {
+                return ((bool)(this["graph_autoScrollSavepoints"]));
+            }
+            set {
+                this["graph_autoScrollSavepoints"] = value;
+            }
+        }
     }
 }

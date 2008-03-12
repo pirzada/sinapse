@@ -421,7 +421,7 @@ namespace Sinapse.Data.Reporting
                 HistoryListener.Write("Error creating the report");
                 MessageBox.Show(ex.Message, "Error");
 #if DEBUG
-                throw ex;
+                throw;
 #endif
             }
             finally

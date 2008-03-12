@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -25,9 +25,11 @@ using Sinapse.Data;
 
 namespace Sinapse.Data.Structures
 {
+    //TODO: Make this salvable together with training session
 
     internal enum TrainingType { ByError, ByEpoch, Manual };
 
+    [Serializable]
     internal struct TrainingOptions
     {
 
@@ -42,12 +44,9 @@ namespace Sinapse.Data.Structures
         internal double? secondLearningRate;
 
         internal bool validateNetwork;
-  //      internal bool testNetwork;
+  //    internal bool testNetwork;
 
-        [NonSerialized]
         internal TrainingVectors TrainingVectors;
-
-        [NonSerialized]
         internal TrainingVectors ValidationVectors;
 
     }

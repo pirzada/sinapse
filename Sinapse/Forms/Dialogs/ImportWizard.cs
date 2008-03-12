@@ -171,6 +171,9 @@ namespace Sinapse.Forms.Dialogs
             catch (IOException e)
             {
                 MessageBox.Show(e.Message, "Error opening file. Please ensure no other process is using that file and try again.");
+#if DEBUG
+                throw;
+#endif
                 return false;
             }
             return true;

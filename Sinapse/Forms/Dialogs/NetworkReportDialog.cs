@@ -164,7 +164,7 @@ namespace Sinapse.Forms.Dialogs
             {
                 Debug.WriteLine("Error saving testing report: " + ex.Message);
 #if DEBUG
-                throw ex;
+                throw;
 #endif
             }
             finally
