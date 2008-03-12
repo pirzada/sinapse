@@ -24,28 +24,32 @@ using System.Text;
 namespace Sinapse.Data.Structures
 {
 
-    internal enum UpdateType { Statusbar, Graph, NetworkSave, Null };
+    internal enum UpdateType { } // Ugly ghost to mantain backward compatibility
 
     [Serializable]
     internal struct TrainingStatus
     {
 
-        internal UpdateType NextUpdateType;
         internal int Epoch;
         internal int Progress;
         internal double ErrorTraining;
         internal double ErrorValidation;
 
+        [NonSerialized]
+        internal double EpochsBySecond;
+
+        [NonSerialized]
+        internal int TrainingRound;
 
         internal void Reset()
         {
-            NextUpdateType = UpdateType.Statusbar;
             Epoch = 0;
             Progress = 0;
             ErrorTraining = 0;
             ErrorValidation = 0;
+            EpochsBySecond = 0;
+            TrainingRound = 0;
         }
     }
 
-    
 }

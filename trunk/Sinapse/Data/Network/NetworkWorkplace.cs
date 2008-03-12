@@ -33,6 +33,7 @@ using Sinapse.Data;
 namespace Sinapse.Data.Network
 {
 
+
     [Serializable]
     internal sealed class NetworkWorkplace : SerializableObject<NetworkWorkplace>
     {
@@ -71,4 +72,5 @@ namespace Sinapse.Data.Network
     internal sealed class TrainingSessionCollection : BindingList<NetworkTrainingSession>
     {
     }
+
 }

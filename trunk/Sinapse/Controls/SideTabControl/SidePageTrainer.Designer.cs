@@ -105,7 +105,7 @@ namespace Sinapse.Controls.SideTabControl
             this.btnPause,
             this.btnStop,
             this.btnNext});
-            this.toolStripBottom.Location = new System.Drawing.Point(3, 457);
+            this.toolStripBottom.Location = new System.Drawing.Point(3, 458);
             this.toolStripBottom.Name = "toolStripBottom";
             this.toolStripBottom.Size = new System.Drawing.Size(219, 39);
             this.toolStripBottom.TabIndex = 41;
@@ -129,7 +129,7 @@ namespace Sinapse.Controls.SideTabControl
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(36, 36);
             this.btnPrev.Text = "Previous Savepoint";
-            this.btnPrev.Click += new System.EventHandler(this.btnForget_Click);
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // btnStart
             // 
@@ -169,6 +169,7 @@ namespace Sinapse.Controls.SideTabControl
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(36, 36);
             this.btnNext.Text = "Next Savepoint";
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // panel
             // 
@@ -200,7 +201,7 @@ namespace Sinapse.Controls.SideTabControl
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Location = new System.Drawing.Point(3, 3);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(219, 454);
+            this.panel.Size = new System.Drawing.Size(219, 455);
             this.panel.TabIndex = 39;
             // 
             // cbTrainingLayer
@@ -308,7 +309,7 @@ namespace Sinapse.Controls.SideTabControl
             this.cbGraphDisable.Checked = global::Sinapse.Properties.Settings.Default.graph_Disable;
             this.cbGraphDisable.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Disable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbGraphDisable.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbGraphDisable.Location = new System.Drawing.Point(9, 409);
+            this.cbGraphDisable.Location = new System.Drawing.Point(9, 410);
             this.cbGraphDisable.Name = "cbGraphDisable";
             this.cbGraphDisable.Size = new System.Drawing.Size(181, 16);
             this.cbGraphDisable.TabIndex = 43;
@@ -350,7 +351,7 @@ namespace Sinapse.Controls.SideTabControl
             this.cbSwitchGraph.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSwitchGraph.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Launch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbSwitchGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSwitchGraph.Location = new System.Drawing.Point(9, 431);
+            this.cbSwitchGraph.Location = new System.Drawing.Point(9, 432);
             this.cbSwitchGraph.Name = "cbSwitchGraph";
             this.cbSwitchGraph.Size = new System.Drawing.Size(162, 16);
             this.cbSwitchGraph.TabIndex = 44;
@@ -387,7 +388,6 @@ namespace Sinapse.Controls.SideTabControl
             this.cbAutosave.TabIndex = 46;
             this.cbAutosave.Text = "Enable network auto-saving every";
             this.cbAutosave.UseVisualStyleBackColor = true;
-            this.cbAutosave.CheckedChanged += new System.EventHandler(this.cbAutosave_CheckedChanged);
             // 
             // cbLayerAutoSwitch
             // 
@@ -461,7 +461,7 @@ namespace Sinapse.Controls.SideTabControl
             0});
             this.numLayerAutoSwitch.Location = new System.Drawing.Point(30, 363);
             this.numLayerAutoSwitch.Maximum = new decimal(new int[] {
-            10000000,
+            10000,
             0,
             0,
             0});
@@ -490,7 +490,7 @@ namespace Sinapse.Controls.SideTabControl
             0});
             this.numAutoSave.Location = new System.Drawing.Point(32, 320);
             this.numAutoSave.Maximum = new decimal(new int[] {
-            10000000,
+            10000,
             0,
             0,
             0});
@@ -556,8 +556,7 @@ namespace Sinapse.Controls.SideTabControl
             // 
             // timer
             // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 500;
+            this.timer.Interval = global::Sinapse.Properties.Settings.Default.display_UpdateTime;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // SidePageTrainer
@@ -569,7 +568,7 @@ namespace Sinapse.Controls.SideTabControl
             this.Controls.Add(this.toolStripBottom);
             this.Name = "SidePageTrainer";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.Size = new System.Drawing.Size(225, 499);
+            this.Size = new System.Drawing.Size(225, 500);
             this.toolStripBottom.ResumeLayout(false);
             this.toolStripBottom.PerformLayout();
             this.panel.ResumeLayout(false);

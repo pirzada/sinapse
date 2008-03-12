@@ -28,6 +28,7 @@ namespace Sinapse.Forms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnOptimal = new System.Windows.Forms.Button();
             this.rbThreshold = new System.Windows.Forms.RadioButton();
             this.rbBipolarSigmoid = new System.Windows.Forms.RadioButton();
@@ -51,6 +52,12 @@ namespace Sinapse.Forms.Dialogs
             this.lbHidden4 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbSwitchTraining = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numRangeLow = new System.Windows.Forms.NumericUpDown();
+            this.numRangeHigh = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numSigmoidAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nHidden1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -58,14 +65,17 @@ namespace Sinapse.Forms.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.nHidden3)).BeginInit();
             this.gbHiddenLayers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nHidden4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRangeLow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRangeHigh)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOptimal
             // 
-            this.btnOptimal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOptimal.Location = new System.Drawing.Point(285, 123);
+            this.btnOptimal.Location = new System.Drawing.Point(362, 186);
             this.btnOptimal.Name = "btnOptimal";
-            this.btnOptimal.Size = new System.Drawing.Size(129, 29);
+            this.btnOptimal.Size = new System.Drawing.Size(97, 49);
             this.btnOptimal.TabIndex = 20;
             this.btnOptimal.Text = "Optimal Settings";
             this.btnOptimal.UseVisualStyleBackColor = true;
@@ -74,7 +84,8 @@ namespace Sinapse.Forms.Dialogs
             // rbThreshold
             // 
             this.rbThreshold.AutoSize = true;
-            this.rbThreshold.Location = new System.Drawing.Point(15, 65);
+            this.rbThreshold.Enabled = false;
+            this.rbThreshold.Location = new System.Drawing.Point(188, 26);
             this.rbThreshold.Name = "rbThreshold";
             this.rbThreshold.Size = new System.Drawing.Size(72, 17);
             this.rbThreshold.TabIndex = 17;
@@ -84,24 +95,26 @@ namespace Sinapse.Forms.Dialogs
             // rbBipolarSigmoid
             // 
             this.rbBipolarSigmoid.AutoSize = true;
-            this.rbBipolarSigmoid.Location = new System.Drawing.Point(15, 42);
+            this.rbBipolarSigmoid.Location = new System.Drawing.Point(85, 26);
             this.rbBipolarSigmoid.Name = "rbBipolarSigmoid";
             this.rbBipolarSigmoid.Size = new System.Drawing.Size(97, 17);
             this.rbBipolarSigmoid.TabIndex = 18;
             this.rbBipolarSigmoid.Text = "Bipolar Sigmoid";
             this.rbBipolarSigmoid.UseVisualStyleBackColor = true;
+            this.rbBipolarSigmoid.CheckedChanged += new System.EventHandler(this.rbBipolarSigmoid_CheckedChanged);
             // 
             // rbSigmoid
             // 
             this.rbSigmoid.AutoSize = true;
             this.rbSigmoid.Checked = true;
-            this.rbSigmoid.Location = new System.Drawing.Point(15, 19);
+            this.rbSigmoid.Location = new System.Drawing.Point(17, 26);
             this.rbSigmoid.Name = "rbSigmoid";
             this.rbSigmoid.Size = new System.Drawing.Size(62, 17);
             this.rbSigmoid.TabIndex = 19;
             this.rbSigmoid.TabStop = true;
             this.rbSigmoid.Text = "Sigmoid";
             this.rbSigmoid.UseVisualStyleBackColor = true;
+            this.rbSigmoid.CheckedChanged += new System.EventHandler(this.rbSigmoid_CheckedChanged);
             // 
             // tbNetworkName
             // 
@@ -113,14 +126,13 @@ namespace Sinapse.Forms.Dialogs
             // 
             // btnCreate
             // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCreate.Location = new System.Drawing.Point(285, 158);
+            this.btnCreate.Location = new System.Drawing.Point(465, 186);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(129, 62);
+            this.btnCreate.Size = new System.Drawing.Size(105, 49);
             this.btnCreate.TabIndex = 15;
             this.btnCreate.Text = "Create!";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // lbHidden1
             // 
@@ -136,7 +148,7 @@ namespace Sinapse.Forms.Dialogs
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 49);
+            this.label3.Location = new System.Drawing.Point(12, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 13);
             this.label3.TabIndex = 12;
@@ -144,20 +156,20 @@ namespace Sinapse.Forms.Dialogs
             // 
             // numSigmoidAlpha
             // 
-            this.numSigmoidAlpha.DecimalPlaces = 3;
+            this.numSigmoidAlpha.DecimalPlaces = 5;
             this.numSigmoidAlpha.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numSigmoidAlpha.Location = new System.Drawing.Point(177, 46);
+            this.numSigmoidAlpha.Location = new System.Drawing.Point(130, 31);
             this.numSigmoidAlpha.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numSigmoidAlpha.Name = "numSigmoidAlpha";
-            this.numSigmoidAlpha.Size = new System.Drawing.Size(77, 20);
+            this.numSigmoidAlpha.Size = new System.Drawing.Size(130, 20);
             this.numSigmoidAlpha.TabIndex = 13;
             // 
             // nHidden1
@@ -194,21 +206,20 @@ namespace Sinapse.Forms.Dialogs
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.rbSigmoid);
             this.groupBox1.Controls.Add(this.rbBipolarSigmoid);
             this.groupBox1.Controls.Add(this.rbThreshold);
-            this.groupBox1.Location = new System.Drawing.Point(285, 15);
+            this.groupBox1.Location = new System.Drawing.Point(277, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(130, 100);
+            this.groupBox1.Size = new System.Drawing.Size(293, 56);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Activation Function";
+            this.groupBox1.Text = "Activation function";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 76);
+            this.label4.Location = new System.Drawing.Point(36, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 23;
@@ -218,7 +229,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.cbHiddenLayerNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbHiddenLayerNumber.FormattingEnabled = true;
-            this.cbHiddenLayerNumber.Location = new System.Drawing.Point(177, 73);
+            this.cbHiddenLayerNumber.Location = new System.Drawing.Point(177, 47);
             this.cbHiddenLayerNumber.Name = "cbHiddenLayerNumber";
             this.cbHiddenLayerNumber.Size = new System.Drawing.Size(77, 21);
             this.cbHiddenLayerNumber.Sorted = true;
@@ -281,7 +292,7 @@ namespace Sinapse.Forms.Dialogs
             this.gbHiddenLayers.Controls.Add(this.lbHidden2);
             this.gbHiddenLayers.Controls.Add(this.lbHidden3);
             this.gbHiddenLayers.Controls.Add(this.lbHidden4);
-            this.gbHiddenLayers.Location = new System.Drawing.Point(39, 108);
+            this.gbHiddenLayers.Location = new System.Drawing.Point(39, 82);
             this.gbHiddenLayers.Name = "gbHiddenLayers";
             this.gbHiddenLayers.Size = new System.Drawing.Size(226, 133);
             this.gbHiddenLayers.TabIndex = 25;
@@ -346,11 +357,10 @@ namespace Sinapse.Forms.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(285, 239);
+            this.btnCancel.Location = new System.Drawing.Point(277, 186);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(129, 23);
+            this.btnCancel.Size = new System.Drawing.Size(79, 49);
             this.btnCancel.TabIndex = 15;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -364,18 +374,109 @@ namespace Sinapse.Forms.Dialogs
             this.cbSwitchTraining.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSwitchTraining.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "main_AutoSwitchToTrainingTab", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbSwitchTraining.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSwitchTraining.Location = new System.Drawing.Point(7, 246);
+            this.cbSwitchTraining.Location = new System.Drawing.Point(7, 219);
             this.cbSwitchTraining.Name = "cbSwitchTraining";
             this.cbSwitchTraining.Size = new System.Drawing.Size(266, 16);
             this.cbSwitchTraining.TabIndex = 26;
             this.cbSwitchTraining.Text = "Switch to training tab automatically after network is created";
             this.cbSwitchTraining.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Default output range:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numRangeLow
+            // 
+            this.numRangeLow.DecimalPlaces = 3;
+            this.numRangeLow.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numRangeLow.Location = new System.Drawing.Point(130, 63);
+            this.numRangeLow.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numRangeLow.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numRangeLow.Name = "numRangeLow";
+            this.numRangeLow.Size = new System.Drawing.Size(51, 20);
+            this.numRangeLow.TabIndex = 13;
+            // 
+            // numRangeHigh
+            // 
+            this.numRangeHigh.DecimalPlaces = 3;
+            this.numRangeHigh.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numRangeHigh.Location = new System.Drawing.Point(209, 63);
+            this.numRangeHigh.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numRangeHigh.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numRangeHigh.Name = "numRangeHigh";
+            this.numRangeHigh.Size = new System.Drawing.Size(51, 20);
+            this.numRangeHigh.TabIndex = 13;
+            this.numRangeHigh.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(187, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "to";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.numSigmoidAlpha);
+            this.groupBox2.Controls.Add(this.numRangeLow);
+            this.groupBox2.Controls.Add(this.numRangeHigh);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(277, 82);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(293, 96);
+            this.groupBox2.TabIndex = 27;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Activation Function Options";
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // NetworkCreationDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 267);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(580, 240);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.cbSwitchTraining);
             this.Controls.Add(this.gbHiddenLayers);
             this.Controls.Add(this.cbHiddenLayerNumber);
@@ -386,8 +487,6 @@ namespace Sinapse.Forms.Dialogs
             this.Controls.Add(this.tbNetworkName);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.numSigmoidAlpha);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "NetworkCreationDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -401,6 +500,11 @@ namespace Sinapse.Forms.Dialogs
             this.gbHiddenLayers.ResumeLayout(false);
             this.gbHiddenLayers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nHidden4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRangeLow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRangeHigh)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,5 +535,11 @@ namespace Sinapse.Forms.Dialogs
         private System.Windows.Forms.Label lbHidden4;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox cbSwitchTraining;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numRangeLow;
+        private System.Windows.Forms.NumericUpDown numRangeHigh;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

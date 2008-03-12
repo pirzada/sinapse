@@ -48,6 +48,7 @@ namespace Sinapse.Data.Network
         public NetworkSavepoint(ActivationNetwork activationNetwork, TrainingStatus networkStatus)
         {
             this.m_memoryStream = new MemoryStream();
+
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(m_memoryStream, activationNetwork);
             this.m_memoryStream.Seek(0, SeekOrigin.Begin);
@@ -67,6 +68,7 @@ namespace Sinapse.Data.Network
             get
             {
                 BinaryFormatter bf = new BinaryFormatter();
+                m_memoryStream.Seek(0, SeekOrigin.Begin);
                 ActivationNetwork network = bf.Deserialize(m_memoryStream) as ActivationNetwork;
                 return network;
             }
@@ -148,6 +150,22 @@ namespace Sinapse.Data.Network
         public NetworkSavepoint CurrentSavepoint
         {
             get { return this.m_currentSavepoint; }
+        }
+
+        public NetworkSavepoint BestSavepoint
+        {
+            get
+            {
+                NetworkSavepoint bestSavepoint = null;
+
+                foreach (NetworkSavepoint sp in this)
+                {
+                    if (bestSavepoint == null || sp.ErrorValidation <= bestSavepoint.ErrorValidation)
+                        bestSavepoint = sp;
+                }
+
+                return bestSavepoint;
+            }
         }
         #endregion
 

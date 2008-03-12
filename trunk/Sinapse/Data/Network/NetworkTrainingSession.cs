@@ -25,6 +25,8 @@ using System.Diagnostics;
 using System.Data;
 using System.IO;
 
+using ZedGraph;
+
 using Sinapse.Data;
 using Sinapse.Data.Reporting;
 using Sinapse.Data.Structures;
@@ -36,15 +38,22 @@ namespace Sinapse.Data.Network
     [Serializable]
     internal sealed class NetworkTrainingSession : SerializableObject<NetworkTrainingSession>
     {
+        //TODO: Properly use this class.
 
+        private NetworkDatabase networkDatabase;
+        private NetworkContainer networkContainer;
 
-        private NetworkDatabase m_networkDatabase;
-        private NetworkContainer m_networkContainer;
+        private NetworkSavepointCollection savepointCollection;
+        private TrainingStatus trainingStatus;
+        private TrainingOptions trainingOptions;
 
-        private NetworkSavepointCollection m_savepointCollection;
+        private bool trainingPaused;
 
-        //    private TrainingStatus m_trainingStatus;
-
+/*
+        private IPointListEdit m_trainingPoints;
+        private IPointListEdit m_validationPoints;
+        private IPointListEdit m_savePoints;
+*/
 
         //---------------------------------------------
 
@@ -52,12 +61,13 @@ namespace Sinapse.Data.Network
         #region Constructor
         public NetworkTrainingSession(NetworkDatabase networkDatabase, NetworkContainer networkContainer)
         {
-            this.m_networkDatabase = networkDatabase;
-            this.m_networkContainer = networkContainer;
+            this.networkDatabase = networkDatabase;
+            this.networkContainer = networkContainer;
 
-            this.m_savepointCollection = new NetworkSavepointCollection(networkContainer);
-            //this.m_trainingStatus = new TrainingStatus();
-
+            this.savepointCollection = new NetworkSavepointCollection(networkContainer);
+            this.trainingStatus = new TrainingStatus();
+            this.trainingPaused = false;
+            
         }
         #endregion
 
@@ -68,19 +78,36 @@ namespace Sinapse.Data.Network
         #region Properties
         public NetworkDatabase Database
         {
-            get { return this.m_networkDatabase; }
+            get { return this.networkDatabase; }
         }
 
         public NetworkContainer Network
         {
-            get { return this.m_networkContainer; }
+            get { return this.networkContainer; }
         }
 
         public NetworkSavepointCollection NetworkSavepoints
         {
-            get { return this.m_savepointCollection; }
+            get { return this.savepointCollection; }
+        }
+
+        public TrainingStatus Status
+        {
+            get { return this.trainingStatus; }
+        }
+
+        public TrainingOptions Options
+        {
+            get { return this.trainingOptions; }
+            set { this.trainingOptions = value; }
+        }
+
+        public bool IsPaused
+        {
+            get { return this.trainingPaused; }
         }
         #endregion
 
     }
+
 }

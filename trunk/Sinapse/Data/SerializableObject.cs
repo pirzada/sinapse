@@ -35,9 +35,11 @@ namespace Sinapse.Data
     internal class SerializableObject<T> where T : SerializableObject<T>
     {
 
+        [NonSerialized]
         private string m_lastSavePath;
 
-        internal event FileSystemEventHandler ObjectSaved;
+        [NonSerialized]
+        internal FileSystemEventHandler ObjectSaved;
 
 
         //---------------------------------------------
@@ -99,19 +101,19 @@ namespace Sinapse.Data
             {
                 Debug.WriteLine("Directory not found during serialization " + e.Message);
                 success = false;
-                throw e;
+                throw;
             }
             catch (SerializationException e)
             {
                 Debug.WriteLine("Error occured during serialization: " + e.Message);
                 success = false;
-                throw e;
+                throw;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error saving object: " + e.Message);
                 success = false;
-                throw e;
+                throw;
             }
             finally
             {
@@ -143,20 +145,21 @@ namespace Sinapse.Data
             }
             catch (FileNotFoundException e)
             {
-                Debug.WriteLine("File not found during deserialization");
+                Debug.WriteLine("File not found during deserialization "+ e.Message);
                 success = false;
-                throw e;
+                throw;
             }
             catch (SerializationException e)
             {
-                Debug.WriteLine("Error occured during deserialization");
+                Debug.WriteLine("Error occured during deserialization: "+ e.Message);
                 success = false;
-                throw e;
+                throw;
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Error occured during deserialization: " + e.Message);
                 success = false;
-                throw e;
+                throw;
             }
             finally
             {
@@ -184,7 +187,9 @@ namespace Sinapse.Data
             {
                 type = System.Type.GetType(typeName.Replace("0.0.0.2","0.0.0.3"));
 
-                Debug.WriteLine("Match type: " + type.Name);
+                Debug.WriteLine("Loading Assembly: " + assemblyName);
+                Debug.WriteLine("Loading Type: " + typeName);
+                //Debug.WriteLine("Match type: " + type.Name);
             }
 
             return type;

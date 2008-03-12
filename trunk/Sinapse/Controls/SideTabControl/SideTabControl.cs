@@ -36,7 +36,7 @@ namespace Sinapse.Controls.SideTabControl
 
         
         private SidePageDisplay sidePageDisplay;
-        private SidePageRanges sidePageRanges;
+        private SidePageSchema sidePageRanges;
         private SidePageTrainer sidePageTrainer;
         private SidePageWorkplace sidePageWorkplace;            
         
@@ -50,7 +50,7 @@ namespace Sinapse.Controls.SideTabControl
             InitializeComponent();
 
             sidePageDisplay = new SidePageDisplay();
-            sidePageRanges = new SidePageRanges();
+            sidePageRanges = new SidePageSchema();
             sidePageTrainer = new SidePageTrainer();
             sidePageWorkplace = new SidePageWorkplace();
 
@@ -103,7 +103,7 @@ namespace Sinapse.Controls.SideTabControl
             get { return this.sidePageDisplay; }
         }
 
-        internal SidePageRanges RangesControl
+        internal SidePageSchema RangesControl
         {
             get { return this.sidePageRanges; }
         }

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -60,13 +60,38 @@ namespace Sinapse.Forms.Dialogs
         //---------------------------------------------
 
 
-        #region Control Events
+        #region Form Events
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             this.setOptimal();
         }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Control Events
+        private void rbSigmoid_CheckedChanged(object sender, EventArgs e)
+        {
+            numRangeHigh.Minimum = 0;
+            numRangeHigh.Maximum = 1;
+
+            numRangeLow.Minimum = 0;
+            numRangeLow.Maximum = 1;
+        }
+
+        private void rbBipolarSigmoid_CheckedChanged(object sender, EventArgs e)
+        {
+            numRangeHigh.Minimum = -1;
+            numRangeHigh.Maximum = 1;
+
+            numRangeLow.Minimum = -1;
+            numRangeLow.Maximum = 1;
+        }
+
         #endregion
 
 
@@ -81,7 +106,11 @@ namespace Sinapse.Forms.Dialogs
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (this.validateInput())
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }        
 
         private void btnOptimal_Click(object sender, EventArgs e)
@@ -121,26 +150,30 @@ namespace Sinapse.Forms.Dialogs
                     break;
             }
 
+            IActivationFunction activationFunction = null;
 
-            if (rbBipolarSigmoid.Checked)
+            if (this.rbBipolarSigmoid.Checked)
             {
-                neuralNetwork = new NetworkContainer(tbNetworkName.Text, m_networkSchema,
-                   new BipolarSigmoidFunction((double)numSigmoidAlpha.Value),
-                   hiddenLayers);
+                activationFunction = new BipolarSigmoidFunction((double)numSigmoidAlpha.Value);
             }
-            else if (rbSigmoid.Checked)
+            else if (this.rbSigmoid.Checked)
             {
-                neuralNetwork = new NetworkContainer(tbNetworkName.Text, m_networkSchema,
-                     new SigmoidFunction((double)numSigmoidAlpha.Value),
-                     hiddenLayers);
+                activationFunction = new SigmoidFunction((double)numSigmoidAlpha.Value);
             }
-            else if (rbThreshold.Checked)
+            else if (this.rbThreshold.Checked)
             {
-                neuralNetwork = new NetworkContainer(tbNetworkName.Text,
+                activationFunction = new ThresholdFunction();
+            }
+
+            neuralNetwork = new NetworkContainer(
+                    tbNetworkName.Text,
                     m_networkSchema,
-                     new ThresholdFunction(),
-                     hiddenLayers);
-            }
+                    activationFunction,
+                    hiddenLayers);
+
+
+            neuralNetwork.Schema.DataRanges.ActivationFunctionRange = new AForge.DoubleRange((double)numRangeLow.Value, (double)numRangeHigh.Value);
+
 
             return neuralNetwork;
         }
@@ -157,43 +190,57 @@ namespace Sinapse.Forms.Dialogs
             this.cbHiddenLayerNumber.SelectedIndex = 1;
             this.nHidden1.Value = Math.Ceiling((decimal)(m_networkSchema.InputColumns.Length + m_networkSchema.OutputColumns.Length) / 2);
             this.numSigmoidAlpha.Value = 0.5M;
+            this.numRangeHigh.Value = 0.85M;
+            this.numRangeLow.Value = -0.85M;
         }
 
         private void cbHiddenLayerNumber_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbHidden1.Enabled = false;
-            nHidden1.Enabled = false;
-            lbHidden2.Enabled = false;
-            nHidden2.Enabled = false;
-            lbHidden2.Enabled = false;
-            nHidden2.Enabled = false;
-            lbHidden3.Enabled = false;
-            nHidden3.Enabled = false;
-            lbHidden4.Enabled = false;
-            nHidden4.Enabled = false;
+            this.lbHidden1.Enabled = false;
+            this.nHidden1.Enabled = false;
+            this.lbHidden2.Enabled = false;
+            this.nHidden2.Enabled = false;
+            this.lbHidden2.Enabled = false;
+            this.nHidden2.Enabled = false;
+            this.lbHidden3.Enabled = false;
+            this.nHidden3.Enabled = false;
+            this.lbHidden4.Enabled = false;
+            this.nHidden4.Enabled = false;
 
             switch (cbHiddenLayerNumber.SelectedIndex)
             {
                 case 1:
-                    lbHidden1.Enabled = true;
-                    nHidden1.Enabled = true;
+                    this.lbHidden1.Enabled = true;
+                    this.nHidden1.Enabled = true;
                     break;
                 case 2:
-                    lbHidden2.Enabled = true;
-                    nHidden2.Enabled = true;
+                    this.lbHidden2.Enabled = true;
+                    this.nHidden2.Enabled = true;
                     goto case 1;
                 case 3:
-                    lbHidden3.Enabled = true;
-                    nHidden3.Enabled = true;
+                    this.lbHidden3.Enabled = true;
+                    this.nHidden3.Enabled = true;
                     goto case 2;
                 case 4:
-                    lbHidden4.Enabled = true;
-                    nHidden4.Enabled = true;
+                    this.lbHidden4.Enabled = true;
+                    this.nHidden4.Enabled = true;
                     goto case 3;
                 default:
                     break;
             }
         }
+
+        private bool validateInput()
+        {
+            if (numRangeLow.Value >= numRangeHigh.Value)
+            {
+                errorProvider.SetError(numRangeHigh, "The maximum output value should be greather than the minimum choosen value");
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
 
             

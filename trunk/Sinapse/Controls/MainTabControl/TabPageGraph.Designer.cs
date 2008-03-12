@@ -29,9 +29,9 @@ namespace Sinapse.Controls.MainTabControl
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.zedGraphControl = new ZedGraph.ZedGraphControl();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -42,10 +42,11 @@ namespace Sinapse.Controls.MainTabControl
             this.numRate = new System.Windows.Forms.NumericUpDown();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.cbAutoupdate = new System.Windows.Forms.CheckBox();
             this.btnSavepointClear = new System.Windows.Forms.Button();
             this.btnSavepointLoad = new System.Windows.Forms.Button();
             this.btnSavepointMark = new System.Windows.Forms.Button();
+            this.cbAutoscroll = new System.Windows.Forms.CheckBox();
+            this.cbAutoupdate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRate)).BeginInit();
@@ -75,12 +76,13 @@ namespace Sinapse.Controls.MainTabControl
             // 
             this.trackBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.trackBar.Enabled = false;
-            this.trackBar.Location = new System.Drawing.Point(0, 407);
+            this.trackBar.Location = new System.Drawing.Point(0, 404);
             this.trackBar.Maximum = 50;
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(690, 42);
+            this.trackBar.Size = new System.Drawing.Size(690, 45);
             this.trackBar.TabIndex = 4;
             this.trackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // dataGridView
             // 
@@ -98,17 +100,18 @@ namespace Sinapse.Controls.MainTabControl
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(198, 368);
+            this.dataGridView.Size = new System.Drawing.Size(198, 349);
             this.dataGridView.TabIndex = 5;
+            this.dataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
             this.dataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
             // 
             // colEpoch
             // 
             this.colEpoch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colEpoch.DataPropertyName = "Epoch";
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colEpoch.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colEpoch.DefaultCellStyle = dataGridViewCellStyle4;
             this.colEpoch.HeaderText = "Epoch";
             this.colEpoch.Name = "colEpoch";
             // 
@@ -116,30 +119,31 @@ namespace Sinapse.Controls.MainTabControl
             // 
             this.colTraining.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colTraining.DataPropertyName = "ErrorTraining";
-            dataGridViewCellStyle2.Format = "N4";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colTraining.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "N4";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colTraining.DefaultCellStyle = dataGridViewCellStyle5;
             this.colTraining.HeaderText = "Training";
             this.colTraining.Name = "colTraining";
-            this.colTraining.Width = 70;
+            this.colTraining.Width = 68;
             // 
             // colValidation
             // 
             this.colValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colValidation.DataPropertyName = "ErrorValidation";
-            dataGridViewCellStyle3.Format = "N4";
-            this.colValidation.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "N4";
+            this.colValidation.DefaultCellStyle = dataGridViewCellStyle6;
             this.colValidation.HeaderText = "Validation";
             this.colValidation.Name = "colValidation";
-            this.colValidation.Width = 78;
+            this.colValidation.Width = 76;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(199, 382);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(187, 382);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 8;
             this.label1.Text = "epochs";
             // 
@@ -147,7 +151,8 @@ namespace Sinapse.Controls.MainTabControl
             // 
             this.numRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.numRate.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "graph_updateRate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numRate.Location = new System.Drawing.Point(131, 378);
+            this.numRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numRate.Location = new System.Drawing.Point(119, 379);
             this.numRate.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -160,7 +165,7 @@ namespace Sinapse.Controls.MainTabControl
             0});
             this.numRate.Name = "numRate";
             this.numRate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.numRate.Size = new System.Drawing.Size(62, 20);
+            this.numRate.Size = new System.Drawing.Size(62, 18);
             this.numRate.TabIndex = 7;
             this.numRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numRate.ThousandsSeparator = true;
@@ -173,7 +178,7 @@ namespace Sinapse.Controls.MainTabControl
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(405, 377);
+            this.btnUpdate.Location = new System.Drawing.Point(405, 378);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 9;
@@ -184,7 +189,7 @@ namespace Sinapse.Controls.MainTabControl
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(324, 377);
+            this.btnClear.Location = new System.Drawing.Point(324, 378);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 9;
@@ -192,24 +197,10 @@ namespace Sinapse.Controls.MainTabControl
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // cbAutoupdate
-            // 
-            this.cbAutoupdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbAutoupdate.AutoSize = true;
-            this.cbAutoupdate.Checked = global::Sinapse.Properties.Settings.Default.graph_Autoupdate;
-            this.cbAutoupdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoupdate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Autoupdate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbAutoupdate.Location = new System.Drawing.Point(12, 380);
-            this.cbAutoupdate.Name = "cbAutoupdate";
-            this.cbAutoupdate.Size = new System.Drawing.Size(113, 17);
-            this.cbAutoupdate.TabIndex = 6;
-            this.cbAutoupdate.Text = "Auto-update every";
-            this.cbAutoupdate.UseVisualStyleBackColor = true;
-            // 
             // btnSavepointClear
             // 
             this.btnSavepointClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSavepointClear.Location = new System.Drawing.Point(628, 377);
+            this.btnSavepointClear.Location = new System.Drawing.Point(628, 378);
             this.btnSavepointClear.Name = "btnSavepointClear";
             this.btnSavepointClear.Size = new System.Drawing.Size(59, 23);
             this.btnSavepointClear.TabIndex = 10;
@@ -220,7 +211,7 @@ namespace Sinapse.Controls.MainTabControl
             // btnSavepointLoad
             // 
             this.btnSavepointLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSavepointLoad.Location = new System.Drawing.Point(565, 377);
+            this.btnSavepointLoad.Location = new System.Drawing.Point(565, 378);
             this.btnSavepointLoad.Name = "btnSavepointLoad";
             this.btnSavepointLoad.Size = new System.Drawing.Size(59, 23);
             this.btnSavepointLoad.TabIndex = 10;
@@ -239,11 +230,42 @@ namespace Sinapse.Controls.MainTabControl
             this.btnSavepointMark.UseVisualStyleBackColor = true;
             this.btnSavepointMark.Click += new System.EventHandler(this.btnSavepointMark_Click);
             // 
+            // cbAutoscroll
+            // 
+            this.cbAutoscroll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbAutoscroll.AutoSize = true;
+            this.cbAutoscroll.Checked = global::Sinapse.Properties.Settings.Default.graph_autoScrollSavepoints;
+            this.cbAutoscroll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoscroll.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_autoScrollSavepoints", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbAutoscroll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAutoscroll.Location = new System.Drawing.Point(625, 356);
+            this.cbAutoscroll.Name = "cbAutoscroll";
+            this.cbAutoscroll.Size = new System.Drawing.Size(66, 16);
+            this.cbAutoscroll.TabIndex = 11;
+            this.cbAutoscroll.Text = "Autoscroll";
+            this.cbAutoscroll.UseVisualStyleBackColor = true;
+            // 
+            // cbAutoupdate
+            // 
+            this.cbAutoupdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbAutoupdate.AutoSize = true;
+            this.cbAutoupdate.Checked = global::Sinapse.Properties.Settings.Default.graph_Autoupdate;
+            this.cbAutoupdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoupdate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "graph_Autoupdate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbAutoupdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAutoupdate.Location = new System.Drawing.Point(12, 381);
+            this.cbAutoupdate.Name = "cbAutoupdate";
+            this.cbAutoupdate.Size = new System.Drawing.Size(101, 16);
+            this.cbAutoupdate.TabIndex = 6;
+            this.cbAutoupdate.Text = "Auto-update every";
+            this.cbAutoupdate.UseVisualStyleBackColor = true;
+            // 
             // TabPageGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.Controls.Add(this.cbAutoscroll);
             this.Controls.Add(this.btnSavepointMark);
             this.Controls.Add(this.btnSavepointLoad);
             this.Controls.Add(this.btnSavepointClear);
@@ -282,5 +304,6 @@ namespace Sinapse.Controls.MainTabControl
         private System.Windows.Forms.Button btnSavepointClear;
         private System.Windows.Forms.Button btnSavepointLoad;
         private System.Windows.Forms.Button btnSavepointMark;
+        private System.Windows.Forms.CheckBox cbAutoscroll;
     }
 }

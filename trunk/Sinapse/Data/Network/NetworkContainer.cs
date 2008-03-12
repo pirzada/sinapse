@@ -20,8 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-//using System.Xml.Serialization;
-//using System.Xml;
 using System.Runtime.Serialization.Formatters.Soap;
 using System.Diagnostics;
 
@@ -44,10 +42,14 @@ namespace Sinapse.Data.Network
         private double m_networkDeviation;
         private DateTime m_creationTime;
 
-        private NetworkSavepointCollection m_savepointCollection;
 
-        
-        public event EventHandler NetworkChanged;
+        private NetworkSavepointCollection m_savepointCollection;
+       
+        [NonSerialized]
+        private bool m_hasUnsavedChanges;
+
+        [NonSerialized]
+        public EventHandler NetworkChanged;
  
 
         //---------------------------------------------
@@ -174,6 +176,11 @@ namespace Sinapse.Data.Network
             }
         }
 
+        public bool HasUnsavedChanges
+        {
+            get { return this.m_hasUnsavedChanges; }
+        }
+
         public DateTime CreationTime
         {
             get { return this.m_creationTime; }
@@ -197,6 +204,8 @@ namespace Sinapse.Data.Network
         {
             if (this.NetworkChanged != null)
                 this.NetworkChanged.Invoke(this, EventArgs.Empty);
+
+            this.m_hasUnsavedChanges = true;
         }
 
         private void savepointCollection_SavepointRestored(object sender, EventArgs e)

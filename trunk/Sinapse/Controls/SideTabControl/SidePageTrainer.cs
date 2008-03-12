@@ -37,22 +37,26 @@ using Sinapse.Forms.Dialogs;
 namespace Sinapse.Controls.SideTabControl
 {
 
+
     internal sealed partial class SidePageTrainer : Sinapse.Controls.Base.TabPageControlBase
     {
 
-        internal EventHandler TrainingComplete;
-        internal EventHandler StatusChanged;
+        enum UpdateType { None, Statusbar, Graph, NetworkSave };
 
+    //    private NetworkTrainingSession m_trainingSession; 
         private NetworkContainer m_networkContainer;
         private NetworkDatabase m_networkDatabase;
 
         private TrainingStatus m_networkState;
         private Sinapse.Controls.MainTabControl.TabPageGraph m_graphControl;
 
-        private bool m_trainingPaused;
-        private double m_epochsBySecond;
         private int m_lastTickEpoch;
+        private bool m_trainingPaused;
+   //     private UpdateType nextUpdateType = UpdateType.Statusbar;
 
+
+        internal event EventHandler TrainingComplete;
+        internal event EventHandler StatusChanged;       
 
 
         //---------------------------------------------
@@ -75,16 +79,16 @@ namespace Sinapse.Controls.SideTabControl
         #region Control Events
         private void timer_Tick(object sender, EventArgs e)
         {
-            m_epochsBySecond = (m_networkState.Epoch - m_lastTickEpoch)*2;
-            m_lastTickEpoch = m_networkState.Epoch;
+            this.m_networkState.EpochsBySecond = (this.m_networkState.Epoch - this.m_lastTickEpoch) / (timer.Interval / 1000);
+            this.m_lastTickEpoch = m_networkState.Epoch;
 
             if (Properties.Settings.Default.display_UpdateByTime)
+            {
                 this.updateStatus();
-        }
+            }
 
-        private void cbAutosave_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.training_Autosave = cbAutosave.Checked;
+            // Update timer interval
+            this.timer.Interval = Properties.Settings.Default.display_UpdateTime;
         }
         #endregion
 
@@ -185,6 +189,16 @@ namespace Sinapse.Controls.SideTabControl
         {
             this.Forget();
         }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            this.m_graphControl.SavepointNext();
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            this.m_graphControl.SavepointPrev();
+        }
         #endregion
 
 
@@ -192,7 +206,7 @@ namespace Sinapse.Controls.SideTabControl
 
 
         #region Public Methods
-        internal void Forget()
+        public void Forget()
         {
             this.m_networkContainer.ActivationNetwork.Randomize();
             this.m_networkContainer.Precision = 0;
@@ -203,7 +217,7 @@ namespace Sinapse.Controls.SideTabControl
             this.updateStatus();
         }
 
-        internal void Stop()
+        public void Stop()
         {
             this.m_networkState = new TrainingStatus();
             this.m_trainingPaused = false;
@@ -214,6 +228,9 @@ namespace Sinapse.Controls.SideTabControl
             {
                 HistoryListener.Write("Stopping Thread");
                 this.backgroundWorker.CancelAsync();
+
+                this.timer.Stop();
+                this.m_trainingPaused = false;
             }
             else
             {
@@ -221,13 +238,14 @@ namespace Sinapse.Controls.SideTabControl
             }
         }
 
-        internal void Pause()
+        public void Pause()
         {
             if (backgroundWorker.IsBusy)
             {
                 HistoryListener.Write("Pausing Thread");
                 this.backgroundWorker.CancelAsync();
 
+                this.timer.Stop();
                 this.m_trainingPaused = true;
             }
             else
@@ -236,7 +254,7 @@ namespace Sinapse.Controls.SideTabControl
             }
         }
 
-        internal void Start()
+        public void Start()
         {
             if (this.backgroundWorker.IsBusy)
             {
@@ -251,7 +269,8 @@ namespace Sinapse.Controls.SideTabControl
                 options.firstLearningRate = (double)numLearningRate.Value;
                 options.limError = (double)numErrorLimit.Value;
                 options.limEpoch = (int)numEpochLimit.Value;
-
+                options.validateNetwork = cbValidate.Checked;
+                options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : options.secondLearningRate = null;
 
                 if (cbTrainingLayer.SelectedIndex == 0)
                 {
@@ -264,9 +283,6 @@ namespace Sinapse.Controls.SideTabControl
 
 
                 options.ValidationVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Validation);
-                options.validateNetwork = cbValidate.Checked;
-
-                options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : options.secondLearningRate = null;
 
                 if (rbEpochLimit.Checked)
                 options.TrainingType = TrainingType.ByEpoch;
@@ -274,6 +290,7 @@ namespace Sinapse.Controls.SideTabControl
                     options.TrainingType = TrainingType.ByError;
                 else if (rbManual.Checked)
                     options.TrainingType = TrainingType.Manual;
+
 
                 if (this.m_trainingPaused)
                 {   // Network is paused, then
@@ -289,6 +306,8 @@ namespace Sinapse.Controls.SideTabControl
                     this.m_graphControl.ShowTab();
                 }
 
+                // Start timer
+                this.timer.Start();
 
                 HistoryListener.Write("Starting thread");
                 this.backgroundWorker.RunWorkerAsync(options);
@@ -369,24 +388,25 @@ namespace Sinapse.Controls.SideTabControl
                 if (Properties.Settings.Default.training_Autosave == true &&
                     m_networkState.Epoch >= lastSaveEpoch + Properties.Settings.Default.training_AutosaveEpochs)
                 {
-                    m_networkState.NextUpdateType = UpdateType.NetworkSave;
-                    backgroundWorker.ReportProgress(0);
+               //     nextUpdateType = UpdateType.NetworkSave;
+                    backgroundWorker.ReportProgress(0,UpdateType.NetworkSave);
                     lastSaveEpoch = m_networkState.Epoch;
                 }
                 #endregion
 
-                #region Graph Update
+                #region Graph Update                
                 if (Properties.Settings.Default.graph_Disable == false &&
                     m_networkState.Epoch >= lastGraphEpoch + Properties.Settings.Default.graph_UpdateRate)
                 {
-                    m_networkState.NextUpdateType = UpdateType.Graph;
-                    backgroundWorker.ReportProgress(0);
+                //    nextUpdateType = UpdateType.Graph;
+                    backgroundWorker.ReportProgress(0,UpdateType.Graph);
                     lastGraphEpoch = m_networkState.Epoch;
                 }
                 #endregion
 
                 #region Statusbar Update
-                if (m_networkState.Epoch >= lastStatusEpoch + Properties.Settings.Default.display_UpdateRate)
+                if (Properties.Settings.Default.display_UpdateByTime == false &&
+                    m_networkState.Epoch >= lastStatusEpoch + Properties.Settings.Default.display_UpdateRate)
                 {
                     if (options.TrainingType == TrainingType.ByError)
                     {
@@ -399,13 +419,14 @@ namespace Sinapse.Controls.SideTabControl
                             m_networkState.Progress = Math.Max(Math.Min((int)((m_networkState.Epoch * 100) / options.limEpoch), 100), 0);
                     }
 
+                 //   nextUpdateType = UpdateType.Statusbar;
                     backgroundWorker.ReportProgress(0, "Training...");
                     lastStatusEpoch = m_networkState.Epoch;
                 }
                 #endregion
 
 
-                m_networkState.Epoch++;
+                ++m_networkState.Epoch;
 
 
                 #region Stop Conditions
@@ -429,19 +450,53 @@ namespace Sinapse.Controls.SideTabControl
                 #endregion
 
             }
+
             backgroundWorker.ReportProgress(0);
         }
+
 
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 
-            switch (m_networkState.NextUpdateType)
+            if (e.UserState is string)
+            {
+                string str = (string)e.UserState;
+
+                HistoryListener.Write(str);
+                this.updateStatus();
+            }
+            else if (e.UserState is UpdateType)
+            {
+                UpdateType updateType = (UpdateType)e.UserState;
+
+
+                switch (updateType)
+                {
+
+                    case UpdateType.NetworkSave:
+                        this.m_networkContainer.Savepoints.Register(this.m_networkState);
+                        break;
+
+
+                    case UpdateType.Graph:
+                        this.m_graphControl.TrainingPoints.Add(m_networkState.Epoch, m_networkState.ErrorTraining);
+                        this.m_graphControl.ValidationPoints.Add(m_networkState.Epoch, m_networkState.ErrorValidation);
+
+                        if (Properties.Settings.Default.graph_Autoupdate)
+                        {
+                            this.m_graphControl.UpdateGraph();
+                        }
+                        break;
+                }
+            }
+
+     /*       
+            switch (this.nextUpdateType)
             {
 
                 case UpdateType.NetworkSave:
-                    m_networkContainer.Savepoints.Register(m_networkState);
-      //              HistoryListener.Write("Savepoint Marked");
+                    this.m_networkContainer.Savepoints.Register(this.m_networkState);
                     break;
 
 
@@ -474,7 +529,8 @@ namespace Sinapse.Controls.SideTabControl
                     goto case UpdateType.Statusbar;
             }
 
-            m_networkState.NextUpdateType = UpdateType.Statusbar;
+            nextUpdateType = UpdateType.Statusbar;
+      */ 
         }
 
 
@@ -498,7 +554,6 @@ namespace Sinapse.Controls.SideTabControl
             }
         }
         #endregion
-
-
+ 
     }
 }

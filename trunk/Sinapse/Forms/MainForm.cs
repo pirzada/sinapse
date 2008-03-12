@@ -201,8 +201,40 @@ namespace Sinapse.Forms
 
             HistoryListener.Write("Exiting...");
 
+            // Stops any thread that could be running before exiting
             if (this.tabControlSide.TrainerControl.IsTraining)
                 this.tabControlSide.TrainerControl.Stop();
+
+            
+            // Asks user if unsaved changes should be saved on exiting
+            if (this.m_networkContainer != null && this.m_networkContainer.HasUnsavedChanges)
+            {
+                DialogResult r = MessageBox.Show("The current network has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
+                if (r == DialogResult.Yes)
+                {
+                    this.MenuNetworkSave_Click(this, EventArgs.Empty);
+                }
+                else if (r == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }                   
+            }
+
+            if (this.m_networkDatabase != null && this.m_networkDatabase.HasUnsavedChanges)
+            {
+                DialogResult r = MessageBox.Show("The current database has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
+                if (r == DialogResult.Yes)
+                {
+                    this.MenuDatabaseSave_Click(this, EventArgs.Empty);
+                }
+                else if (r == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            
 
             // Save settings before closing
             Properties.Settings.Default.main_FirstLoad = false;
@@ -562,6 +594,9 @@ namespace Sinapse.Forms
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error saving network");
+#if DEBUG
+                throw;
+#endif
             }
         }
 
@@ -576,6 +611,9 @@ namespace Sinapse.Forms
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error opening network");
+#if DEBUG
+                throw;
+#endif
             }
             finally
             {
@@ -591,7 +629,7 @@ namespace Sinapse.Forms
                             "Would you like to load this database too?", "Matching database found", MessageBoxButtons.YesNo)
                             == DialogResult.Yes)
                         {
-                            databaseOpen(Path.ChangeExtension(path, ".sdo"));
+                            this.databaseOpen(Path.ChangeExtension(path, ".sdo"));
                         }
                     }
                 }
@@ -613,7 +651,7 @@ namespace Sinapse.Forms
             {
                 MessageBox.Show(e.Message, "Error saving database");
 #if DEBUG
-                throw e;
+                throw;
 #endif
             }
          
@@ -631,7 +669,7 @@ namespace Sinapse.Forms
             {
                 MessageBox.Show(e.Message, "Error opening database");
 #if DEBUG
-                throw e;
+                throw;
 #endif
             }
             finally
@@ -648,7 +686,7 @@ namespace Sinapse.Forms
                             "Would you like to load this network too?", "Matching network found", MessageBoxButtons.YesNo)
                             == DialogResult.Yes)
                         {
-                            networkOpen(Path.ChangeExtension(path, ".ann"));
+                            this.networkOpen(Path.ChangeExtension(path, ".ann"));
                         }
                     }
                 }
@@ -670,7 +708,7 @@ namespace Sinapse.Forms
             {
                 MessageBox.Show(e.Message, "Error saving workplace");
 #if DEBUG
-                throw e;
+                throw;
 #endif
             }
 
@@ -688,7 +726,7 @@ namespace Sinapse.Forms
             {
                 MessageBox.Show(e.Message, "Error opening workplace");
 #if DEBUG
-                throw e;
+                throw;
 #endif
             }
             finally

@@ -30,7 +30,7 @@ using Sinapse.Data.Network;
 
 namespace Sinapse.Controls.SideTabControl
 {
-    internal sealed partial class SidePageRanges : Sinapse.Controls.Base.TabPageControlBase
+    internal sealed partial class SidePageSchema : Sinapse.Controls.Base.TabPageControlBase
     {
 
         private NetworkDatabase networkDatabase;
@@ -41,7 +41,7 @@ namespace Sinapse.Controls.SideTabControl
 
 
         #region Constructor
-        public SidePageRanges()
+        public SidePageSchema()
         {
             InitializeComponent();
         }
@@ -62,6 +62,10 @@ namespace Sinapse.Controls.SideTabControl
                     this.Enabled = true;
                     this.networkDatabase = value;
                     this.dataGridView.DataSource = this.networkDatabase.Schema.DataRanges.Table;
+                    this.networkDatabase.DatabaseChanged += new EventHandler(database_DatabaseChanged);
+
+                    this.numRangeLow.Value = (decimal)this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Min;
+                    this.numRangeHigh.Value = (decimal)this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Max;
                 }
                 else
                 {
@@ -88,10 +92,51 @@ namespace Sinapse.Controls.SideTabControl
         //---------------------------------------------
 
 
+        #region Object Events
+        private void database_DatabaseChanged(object sender, EventArgs e)
+        {
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Control Events
         private void btnAutodetect_Click(object sender, EventArgs e)
         {
             this.networkDatabase.Schema.DataRanges.AutodetectRanges(this.networkDatabase.DataTable);
         }
+
+        private void numRangeLow_Validating(object sender, CancelEventArgs e)
+        {
+            if (numRangeLow.Value >= numRangeHigh.Value)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void numRangeHigh_Validating(object sender, CancelEventArgs e)
+        {
+            if (numRangeHigh.Value <= numRangeLow.Value)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void numRangeLow_ValueChanged(object sender, EventArgs e)
+        {
+            this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Min = (double)numRangeLow.Value;
+        }
+
+        private void numRangeHigh_ValueChanged(object sender, EventArgs e)
+        {
+            this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Max = (double)numRangeHigh.Value;
+        }
+        #endregion
+
+
+
 
     }
 }

@@ -31,8 +31,9 @@ namespace Sinapse.Utils.CsvParser
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("Exception occured in field delimiter detection routine: " + e.Message);
                 delimiter = CsvDelimiter.Comma;
-                throw e;
+                throw;
             }
             finally
             {
@@ -82,8 +83,9 @@ namespace Sinapse.Utils.CsvParser
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 textHeader = String.Empty;
-                throw e;
+                throw;
             }
             finally
             {

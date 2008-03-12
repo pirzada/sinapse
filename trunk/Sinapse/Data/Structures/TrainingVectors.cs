@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -23,7 +23,7 @@ using System.Text;
 
 namespace Sinapse.Data.Structures
 {
-    struct TrainingVectors
+    internal struct TrainingVectors
     {
 
         public double[][] Input;
