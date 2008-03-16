@@ -20,34 +20,63 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Sinapse.Data.Network;
 
-namespace Sinapse.Data.Structures
+namespace Sinapse.Data.CodeGeneration
 {
-    /// <summary>
-    /// Holds both input and output vectors to be fed to a neural network.
-    /// </summary>
-    internal struct TrainingVectors
+    internal abstract class CodeGenerator
     {
 
-        public double[][] Input;
-        public double[][] Output;
+        private NetworkContainer m_network;
 
 
-        public TrainingVectors(double[][] input, double[][] output)
+        //---------------------------------------------
+
+
+        #region Constructor
+        protected CodeGenerator(NetworkContainer network)
+	    {
+            this.m_network = network;
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Properties
+        public NetworkContainer Network
         {
-            this.Input = input;
-            this.Output = output;
+            get { return m_network; }
+            set { m_network = value; }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Abstract Methods
+        protected abstract void build(StringBuilder codeBuilder);
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Public Methods
+        public string Generate()
+        {
+            StringBuilder codeBuilder = new StringBuilder();
+            this.build(codeBuilder);
+            return codeBuilder.ToString();
         }
 
-
-        public bool IsEmpty
+        public void Save(string path)
         {
-            get
-            {
-                return (Input == null || Output == null ||
-                    Input.Length == 0 || Output.Length == 0);
-            }
         }
+        #endregion
+
 
     }
 }

@@ -191,8 +191,15 @@
     <Compile Include="Controls\MainTabControl\TabPageValidation.Designer.cs">
       <DependentUpon>TabPageValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\CodeGeneration\CANSI.cs" />
+    <Compile Include="Data\CodeGeneration\CPlusPlus.cs" />
+    <Compile Include="Data\CodeGeneration\CSharp.cs" />
+    <Compile Include="Data\CodeGeneration\CodeGenerator.cs" />
+    <Compile Include="Data\CodeGeneration\Java.cs" />
+    <Compile Include="Data\CodeGeneration\Matlab.cs" />
+    <Compile Include="Data\Logging\HistoryEvent.cs" />
     <Compile Include="Data\Network\NetworkColumn.cs" />
-    <Compile Include="Data\Network\NetworkTrainingSession.cs" />
+    <Compile Include="Data\Network\TrainingSession.cs" />
     <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Reporting\ReportGenerator.cs">
     </Compile>

@@ -29,6 +29,9 @@ using AForge.Neuro;
 namespace Sinapse.Data.Network
 {
 
+    /// <summary>
+    /// Wraps additional information around a classic Neural Network
+    /// </summary>
     [Serializable]
     internal sealed class NetworkContainer : SerializableObject<NetworkContainer>
     {
@@ -86,11 +89,17 @@ namespace Sinapse.Data.Network
 
 
         #region Properties
+        /// <summary>
+        /// The neural network held by this Network Container
+        /// </summary>
         public ActivationNetwork ActivationNetwork
         {
             get { return this.m_activationNetwork; }
         }
 
+        /// <summary>
+        /// The data schema attached to the inner neural network
+        /// </summary>
         public NetworkSchema Schema
         {
             get { return this.m_networkSchema; }
@@ -111,6 +120,9 @@ namespace Sinapse.Data.Network
             get { return this.m_activationNetwork[0][0].ActivationFunction.GetType().Name; }
         }
 
+        /// <summary>
+        /// Gives the layout of the network (layer organization) as a hifen seperated string
+        /// </summary>
         public string Layout
         {
             get
@@ -130,6 +142,9 @@ namespace Sinapse.Data.Network
             }
         }
 
+        /// <summary>
+        /// The associated name of the neural network
+        /// </summary>
         public string Name
         {
             get { return this.m_networkName; }
@@ -140,6 +155,9 @@ namespace Sinapse.Data.Network
             }
         }
 
+        /// <summary>
+        /// Network description
+        /// </summary>
         public string Description
         {
             get { return this.m_networkDescription; }
@@ -150,12 +168,18 @@ namespace Sinapse.Data.Network
             }
         }
 
+        /// <summary>
+        /// Network usage and additional information
+        /// </summary>
         public string Information
         {
             get { return this.m_networkInformation; }
             set { this.m_networkInformation = value; }
         }
 
+        /// <summary>
+        /// Training precision
+        /// </summary>
         public double Precision
         {
             get { return m_networkPrecision; }
@@ -166,6 +190,9 @@ namespace Sinapse.Data.Network
             }
         }
 
+        /// <summary>
+        /// Deviation of the last performance measurement on a testing set
+        /// </summary>
         public double Deviation
         {
             get { return this.m_networkDeviation; }
@@ -181,6 +208,9 @@ namespace Sinapse.Data.Network
             get { return this.m_hasUnsavedChanges; }
         }
 
+        /// <summary>
+        /// The date of creation for this neural network
+        /// </summary>
         public DateTime CreationTime
         {
             get { return this.m_creationTime; }
@@ -226,6 +256,10 @@ namespace Sinapse.Data.Network
 
 
         #region Import & Export
+        /// <summary>
+        /// Imports a network saved in .xml format using Soap formatter
+        /// </summary>
+        /// <param name="path">The full path of the file to be open</param>
         public void XmlImport(string path)
         {
           /*  XmlTextReader xmlReader = new XmlTextReader(path);
@@ -240,6 +274,10 @@ namespace Sinapse.Data.Network
             fileStream.Close();
         }
 
+        /// <summary>
+        /// Exports the network as a .xml file using Soap formatter
+        /// </summary>
+        /// <param name="path">The full path of the file to be written</param>
         public void XmlExport(string path)
         {
             /*
@@ -255,6 +293,10 @@ namespace Sinapse.Data.Network
             fileStream.Close();
         }
 
+        /// <summary>
+        /// Exports the network as a human friendly text file 
+        /// </summary>
+        /// <param name="path"></param>
         public void TxtExport(string path)
         {
             TextWriter textWriter = new StreamWriter(path, false, Encoding.UTF8);

@@ -69,7 +69,7 @@ namespace Sinapse.Data.Network
     }
 
     [Serializable]
-    internal sealed class TrainingSessionCollection : BindingList<NetworkTrainingSession>
+    internal sealed class TrainingSessionCollection : BindingList<TrainingSession>
     {
     }
 

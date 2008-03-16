@@ -32,6 +32,9 @@ using Sinapse.Data.Structures;
 namespace Sinapse.Data.Network
 {
 
+    /// <summary>
+    /// Stores a network state
+    /// </summary>
     [Serializable]
     internal sealed class NetworkSavepoint
     {

@@ -480,7 +480,7 @@
 </value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>The Network training is accomplished by giving the neural network a set of sample data along with the anticipated outputs from each of these samples. During training, the neural network will be taken through several iterations, or epochs, until the actual output of the neural network matches the anticipated output, with a reasonably small error.</value>
+    <value>The Network training is accomplished by giving the neural network a set of sample data along with the anticipated outputs from each of these samples. During training, the neural network will be taken through several iterations, or epochs, until the actual output of the neural network matches the antecipated output, with a reasonably small error.</value>
   </data>
   <data name="intermediateStep2.BindingImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

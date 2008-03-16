@@ -20,34 +20,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Sinapse.Data.Network;
 
-namespace Sinapse.Data.Structures
+
+namespace Sinapse.Data.CodeGeneration
 {
-    /// <summary>
-    /// Holds both input and output vectors to be fed to a neural network.
-    /// </summary>
-    internal struct TrainingVectors
+    internal sealed class CPlusPlus : CodeGenerator
     {
 
-        public double[][] Input;
-        public double[][] Output;
-
-
-        public TrainingVectors(double[][] input, double[][] output)
+        public CPlusPlus(NetworkContainer network)
+            : base(network)
         {
-            this.Input = input;
-            this.Output = output;
+
         }
 
-
-        public bool IsEmpty
+        protected override void build(StringBuilder codeBuilder)
         {
-            get
-            {
-                return (Input == null || Output == null ||
-                    Input.Length == 0 || Output.Length == 0);
-            }
+            throw new Exception("The method or operation is not implemented.");
         }
-
     }
 }

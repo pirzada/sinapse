@@ -28,6 +28,7 @@ using System.IO;
 using ZedGraph;
 
 using Sinapse.Data;
+using Sinapse.Data.Logging;
 using Sinapse.Data.Reporting;
 using Sinapse.Data.Structures;
 
@@ -35,8 +36,11 @@ using Sinapse.Data.Structures;
 namespace Sinapse.Data.Network
 {
 
+    /// <summary>
+    /// Holds information about the training process of a neural network
+    /// </summary>
     [Serializable]
-    internal sealed class NetworkTrainingSession : SerializableObject<NetworkTrainingSession>
+    internal sealed class TrainingSession : SerializableObject<TrainingSession>
     {
         //TODO: Properly use this class.
 
@@ -46,6 +50,8 @@ namespace Sinapse.Data.Network
         private NetworkSavepointCollection savepointCollection;
         private TrainingStatus trainingStatus;
         private TrainingOptions trainingOptions;
+
+        private HistoryEventCollection actionHistory;
 
         private bool trainingPaused;
 
@@ -59,12 +65,13 @@ namespace Sinapse.Data.Network
 
 
         #region Constructor
-        public NetworkTrainingSession(NetworkDatabase networkDatabase, NetworkContainer networkContainer)
+        public TrainingSession(NetworkDatabase networkDatabase, NetworkContainer networkContainer)
         {
             this.networkDatabase = networkDatabase;
             this.networkContainer = networkContainer;
 
             this.savepointCollection = new NetworkSavepointCollection(networkContainer);
+            this.actionHistory = new HistoryEventCollection();
             this.trainingStatus = new TrainingStatus();
             this.trainingPaused = false;
             
@@ -106,6 +113,25 @@ namespace Sinapse.Data.Network
         {
             get { return this.trainingPaused; }
         }
+
+        public HistoryEventCollection History
+        {
+            get { return this.actionHistory; }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+        
+        #region Public Methods
+        #endregion
+
+        
+        //---------------------------------------------
+
+
+        #region Private Methods
         #endregion
 
     }
