@@ -173,8 +173,9 @@ namespace Sinapse.Forms.Dialogs
                 MessageBox.Show(e.Message, "Error opening file. Please ensure no other process is using that file and try again.");
 #if DEBUG
                 throw;
-#endif
+#else
                 return false;
+#endif
             }
             return true;
         }

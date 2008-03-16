@@ -26,13 +26,23 @@ using AForge;
 
 namespace Sinapse.Data.Network
 {
+
+    /// <summary>
+    /// Holds information about the maximum and minimum ranges of columns
+    /// in a given network of database
+    /// </summary>
     [Serializable]
     internal sealed class NetworkRanges
     {
-
+        
         private DataTable dataRanges;
         private DoubleRange activationFunctionRange;
-     
+
+        [NonSerialized]
+        public EventHandler DataRangesChanged;
+
+        [NonSerialized]
+        public EventHandler FunctionRangeChanged;
 
         //---------------------------------------------
 
@@ -88,6 +98,9 @@ namespace Sinapse.Data.Network
                 if (!this.dataRanges.Rows.Contains(columnName))
                     this.dataRanges.Rows.Add(columnName, true, 0, 100, false);
             }
+
+            this.dataRanges.RowChanged +=new DataRowChangeEventHandler(dataRanges_RowChanged);
+            this.dataRanges.RowDeleted +=new DataRowChangeEventHandler(dataRanges_RowChanged);
         }
 
         public NetworkRanges(string[] allColumns, string[] stringColumns)
@@ -121,6 +134,8 @@ namespace Sinapse.Data.Network
                     throw new ArgumentNullException();
 
                 this.activationFunctionRange = value;
+
+                this.OnFunctionRangeChanged();
             }
         }
         #endregion
@@ -186,6 +201,28 @@ namespace Sinapse.Data.Network
         }
         #endregion
 
+        
+        //---------------------------------------------
+
+
+        #region Private Methods
+        private void dataRanges_RowChanged(object sender, DataRowChangeEventArgs e)
+        {
+            this.OnDataRangesChanged(); 
+        }
+
+        private void OnFunctionRangeChanged()
+        {
+            if (this.FunctionRangeChanged != null)
+                this.FunctionRangeChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnDataRangesChanged()
+        {
+            if (this.DataRangesChanged != null)
+                this.DataRangesChanged.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
 
     }
 }

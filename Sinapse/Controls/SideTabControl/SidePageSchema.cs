@@ -63,9 +63,9 @@ namespace Sinapse.Controls.SideTabControl
                     this.networkDatabase = value;
                     this.dataGridView.DataSource = this.networkDatabase.Schema.DataRanges.Table;
                     this.networkDatabase.DatabaseChanged += new EventHandler(database_DatabaseChanged);
+                    this.networkDatabase.Schema.DataRanges.FunctionRangeChanged += new EventHandler(database_FunctionRangeChanged);
 
-                    this.numRangeLow.Value = (decimal)this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Min;
-                    this.numRangeHigh.Value = (decimal)this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Max;
+                    this.database_FunctionRangeChanged(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -83,6 +83,8 @@ namespace Sinapse.Controls.SideTabControl
             {
                 this.readOnly = value;
                 this.dataGridView.ReadOnly = value;
+                this.numRangeHigh.Enabled = !value;
+                this.numRangeLow.Enabled = !value;
                 this.btnAutodetect.Enabled = !value;
             }
         }
@@ -95,6 +97,12 @@ namespace Sinapse.Controls.SideTabControl
         #region Object Events
         private void database_DatabaseChanged(object sender, EventArgs e)
         {
+        }
+
+        private void database_FunctionRangeChanged(object sender, EventArgs e)
+        {
+            this.numRangeLow.Value = (decimal)this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Min;
+            this.numRangeHigh.Value = (decimal)this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Max;
         }
         #endregion
 
@@ -134,8 +142,6 @@ namespace Sinapse.Controls.SideTabControl
             this.networkDatabase.Schema.DataRanges.ActivationFunctionRange.Max = (double)numRangeHigh.Value;
         }
         #endregion
-
-
 
 
     }

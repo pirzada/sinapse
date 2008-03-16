@@ -12,6 +12,9 @@
 
  Version updates and fixes:
 
+  * Export to code (C, C++, C#, Java and Matlab),
+  * Training Session saving implemented,
+  * Report Generation upgraded,
   * Network Inspector (weight viewer) is now working.
   * Minor bug fixes.
 

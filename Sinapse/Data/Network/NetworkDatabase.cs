@@ -36,6 +36,9 @@ namespace Sinapse.Data.Network
     internal enum NetworkSet : ushort { Training = 0, Validation = 1, Testing = 2, Query = 3 };
 
 
+    /// <summary>
+    /// Represents a database to be fed to a Neural Network
+    /// </summary>
     [Serializable]
     internal sealed class NetworkDatabase : SerializableObject<NetworkDatabase>
     {
@@ -91,6 +94,9 @@ namespace Sinapse.Data.Network
 
 
         #region Properties
+        /// <summary>
+        /// The data schema attached to this database
+        /// </summary>
         internal NetworkSchema Schema
         {
             get { return this.m_networkSchema; }
@@ -146,7 +152,12 @@ namespace Sinapse.Data.Network
 
 
         #region Public Methods
-
+        /// <summary>
+        /// Imports data from a given table and stores in the specified location sets 
+        /// </summary>
+        /// <param name="dataTable">The import data source</param>
+        /// <param name="networkSet">The destination set</param>
+        /// <param name="trainingSet">The destination training set</param>
         internal void ImportData(DataTable dataTable, NetworkSet networkSet, int trainingSet)
         {
             this.createColumns(dataTable, m_networkSchema, networkSet, trainingSet);
@@ -217,7 +228,8 @@ namespace Sinapse.Data.Network
         }
 
         /// <summary>
-        /// Normalizes the given datarow so the data can be interpreted by a neural network. Use the RevertRow method to revert the row back to its original state
+        /// Normalizes the given datarow so the data can be interpreted by a neural network.
+        /// Use the RevertRow method to revert the row back to its original state
         /// </summary>
         /// <param name="sourceRow">The source datarow</param>
         /// <param name="columnList">The list of column names</param>
