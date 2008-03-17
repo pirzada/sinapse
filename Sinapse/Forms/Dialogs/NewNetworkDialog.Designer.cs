@@ -1,6 +1,6 @@
 namespace Sinapse.Forms.Dialogs
 {
-    partial class NetworkCreationDialog
+    partial class NewNetworkDialog
     {
         /// <summary>
         /// Required designer variable.

@@ -36,6 +36,8 @@ using Sinapse.Data.Structures;
 namespace Sinapse.Data.Network
 {
 
+    internal enum TrainingState { Stopped, Paused, Running }
+
     /// <summary>
     /// Holds information about the training process of a neural network
     /// </summary>
@@ -44,37 +46,56 @@ namespace Sinapse.Data.Network
     {
         //TODO: Properly use this class.
 
-        private NetworkDatabase networkDatabase;
-        private NetworkContainer networkContainer;
+        private String name;
+        private String description;
+
+        private String networkDatabasePath;
+        private String networkContainerPath;
 
         private NetworkSavepointCollection savepointCollection;
-        private TrainingStatus trainingStatus;
+        private TrainingStatus networkState;
         private TrainingOptions trainingOptions;
+        private TrainingState trainingState;
 
         private HistoryEventCollection actionHistory;
 
-        private bool trainingPaused;
+        private IPointListEdit listTrainingPoints;
+        private IPointListEdit listValidationPoints;
+        private IPointListEdit listCurrentSavepoint;
+        private IPointListEdit listSavepoints;
 
-/*
-        private IPointListEdit m_trainingPoints;
-        private IPointListEdit m_validationPoints;
-        private IPointListEdit m_savePoints;
-*/
+
+        [NonSerialized]
+        private NetworkDatabase networkDatabase;
+
+        [NonSerialized]
+        private NetworkContainer networkContainer;
 
         //---------------------------------------------
 
 
         #region Constructor
-        public TrainingSession(NetworkDatabase networkDatabase, NetworkContainer networkContainer)
+        public TrainingSession(string name, NetworkDatabase networkDatabase, NetworkContainer networkContainer)
         {
+            this.name = name;
+
             this.networkDatabase = networkDatabase;
             this.networkContainer = networkContainer;
 
+            this.networkContainerPath = String.Empty;
+            this.networkDatabasePath = String.Empty;
+
             this.savepointCollection = new NetworkSavepointCollection(networkContainer);
             this.actionHistory = new HistoryEventCollection();
-            this.trainingStatus = new TrainingStatus();
-            this.trainingPaused = false;
-            
+            this.networkState = new TrainingStatus();
+            this.trainingState = TrainingState.Stopped;
+
+            this.networkDatabase.ObjectSaved += networkDatabase_ObjectSaved;
+            this.networkContainer.ObjectSaved += networkContainer_ObjectSaved;
+
+            this.savepointCollection.CurrentSavepointChanged += savepointCollection_CurrentSavepointChanged;
+            this.savepointCollection.SavepointRegistered += savepointCollection_SavepointRegistered;
+            this.savepointCollection.SavepointRestored += savepointCollection_SavepointRestored;
         }
         #endregion
 
@@ -83,6 +104,30 @@ namespace Sinapse.Data.Network
 
 
         #region Properties
+        public String Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+
+        public String Description
+        {
+            get { return this.description; }
+            set { this.description = value; }
+        }
+
+        public String DatabasePath
+        {
+            get { return this.networkDatabasePath; }
+            set { this.networkDatabasePath = value; }
+        }
+
+        public String NetworkPath
+        {
+            get { return this.networkContainerPath; }
+            set { this.networkContainerPath = value; }
+        }
+
         public NetworkDatabase Database
         {
             get { return this.networkDatabase; }
@@ -98,20 +143,21 @@ namespace Sinapse.Data.Network
             get { return this.savepointCollection; }
         }
 
-        public TrainingStatus Status
+        public TrainingState Status
         {
-            get { return this.trainingStatus; }
+            get { return this.trainingState; }
+        }
+
+        public TrainingStatus NetworkState
+        {
+            get { return this.networkState; }
+            set { this.networkState = value; }
         }
 
         public TrainingOptions Options
         {
             get { return this.trainingOptions; }
             set { this.trainingOptions = value; }
-        }
-
-        public bool IsPaused
-        {
-            get { return this.trainingPaused; }
         }
 
         public HistoryEventCollection History
@@ -123,17 +169,91 @@ namespace Sinapse.Data.Network
 
         //---------------------------------------------
 
-        
+
         #region Public Methods
+        public void ResetStatus()
+        {
+            this.networkState = new TrainingStatus();
+        }
+
+        public NetworkDatabase OpenDatabase()
+        {
+            return NetworkDatabase.Deserialize(networkDatabasePath);
+        }
+
+        public NetworkContainer OpenNetwork()
+        {
+            return NetworkContainer.Deserialize(networkContainerPath);
+        }
+
+        public void ReloadNetwork()
+        {
+            this.networkContainer = OpenNetwork();
+        }
+
+        public void ReloadDatabase()
+        {
+            this.networkDatabase = OpenDatabase();
+        }
+
+        public void ReloadAll()
+        {
+            this.ReloadDatabase();
+            this.ReloadNetwork();
+        }
         #endregion
 
-        
+
         //---------------------------------------------
 
 
         #region Private Methods
+        protected override void OnObjectSaved(FileSystemEventArgs e)
+        {
+            base.OnObjectSaved(e);
+            
+            this.networkDatabasePath = Sinapse.Utils.Misc.GetRelativePath(this.LastSavePath, e.FullPath);
+            this.networkContainerPath = Sinapse.Utils.Misc.GetRelativePath(this.LastSavePath, e.FullPath);
+        }
+
+        protected override void OnObjectOpened()
+        {
+            base.OnObjectOpened();
+
+            //this.ReloadAll();
+        }
+
+        private void networkDatabase_ObjectSaved(object sender, FileSystemEventArgs e)
+        {
+            this.networkDatabasePath = Sinapse.Utils.Misc.GetRelativePath(this.LastSavePath, e.FullPath);
+        }
+
+        private void networkContainer_ObjectSaved(object sender, FileSystemEventArgs e)
+        {
+            this.networkContainerPath = Sinapse.Utils.Misc.GetRelativePath(this.LastSavePath, e.FullPath);
+        }
+
+        private void savepointCollection_CurrentSavepointChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void savepointCollection_SavepointRegistered(object sender, EventArgs e)
+        {
+            this.actionHistory.Add("Savepoint marked",
+                String.Format("Saved epoch was {0}, training error was {1}, validation error was {2}",
+                this.networkState.Epoch, this.networkState.ErrorTraining, this.networkState.ErrorValidation));
+
+        }
+
+        private void savepointCollection_SavepointRestored(object sender, EventArgs e)
+        {
+            this.actionHistory.Add("Savepoint restored",
+                String.Format("Current epoch is now {0}, training error is {1}, validation error is {2}",
+                this.networkState.Epoch, this.networkState.ErrorTraining, this.networkState.ErrorValidation));
+
+        }
         #endregion
 
-    }
 
+    }
 }

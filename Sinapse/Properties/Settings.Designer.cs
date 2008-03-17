@@ -340,7 +340,7 @@ namespace Sinapse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool display_UpdateByTime {
             get {
                 return ((bool)(this["display_UpdateByTime"]));
@@ -359,6 +359,29 @@ namespace Sinapse.Properties {
             }
             set {
                 this["graph_autoScrollSavepoints"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int training_delay {
+            get {
+                return ((int)(this["training_delay"]));
+            }
+            set {
+                this["training_delay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection history_Sessions {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["history_Sessions"]));
+            }
+            set {
+                this["history_Sessions"] = value;
             }
         }
     }

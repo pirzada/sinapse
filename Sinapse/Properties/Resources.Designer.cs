@@ -81,6 +81,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap build {
+            get {
+                object obj = ResourceManager.GetObject("build", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap clear_left {
             get {
                 object obj = ResourceManager.GetObject("clear_left", resourceCulture);
@@ -326,9 +333,23 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap kdb_form {
+            get {
+                object obj = ResourceManager.GetObject("kdb_form", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap kded {
             get {
                 object obj = ResourceManager.GetObject("kded", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap kformula_kfo {
+            get {
+                object obj = ResourceManager.GetObject("kformula_kfo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -371,6 +392,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap oscilloscope {
             get {
                 object obj = ResourceManager.GetObject("oscilloscope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap page_white_csharp {
+            get {
+                object obj = ResourceManager.GetObject("page_white_csharp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -574,6 +602,27 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap shutdown {
             get {
                 object obj = ResourceManager.GetObject("shutdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap source_c {
+            get {
+                object obj = ResourceManager.GetObject("source_c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap source_cpp {
+            get {
+                object obj = ResourceManager.GetObject("source_cpp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap source_java {
+            get {
+                object obj = ResourceManager.GetObject("source_java", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

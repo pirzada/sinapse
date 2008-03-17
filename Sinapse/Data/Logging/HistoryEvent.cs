@@ -25,6 +25,15 @@ using System.IO;
 namespace Sinapse.Data.Logging
 {
 
+    [Flags]
+    internal enum EventVisibility
+    {
+        None = 0,
+        User = 2,
+        Report = 4,
+        Debug = 8,
+    }
+
     /// <summary>
     /// A history event to hold information about a given action
     /// </summary>
@@ -35,6 +44,7 @@ namespace Sinapse.Data.Logging
         private DateTime m_time;
         private string m_action;
         private string m_detail;
+        private bool m_visible;
 
 
         //---------------------------------------------
@@ -42,15 +52,16 @@ namespace Sinapse.Data.Logging
 
         #region Constructor
         internal HistoryEvent(string text)
-            : this(text, String.Empty)
+            : this(text, String.Empty, true)
         {
         }
 
-        internal HistoryEvent(string text, string detail)
+        internal HistoryEvent(string text, string detail, bool visible)
         {
             this.m_time = DateTime.Now;
             this.m_action = text;
             this.m_detail = detail;
+            this.m_visible = visible;
         }
         #endregion
 
@@ -73,6 +84,12 @@ namespace Sinapse.Data.Logging
         internal string Action
         {
             get { return this.m_action; }
+        }
+
+        internal bool Visible
+        {
+            get { return this.m_visible; }
+            set { this.m_visible = value; }
         }
 
         /// <summary>
@@ -113,6 +130,8 @@ namespace Sinapse.Data.Logging
             get { return this[this.Count - 1]; }
         }
 
+        //---------------------------------------------
+
 
         public void Add(string text)
         {
@@ -121,8 +140,16 @@ namespace Sinapse.Data.Logging
 
         public void Add(string text, string detail)
         {
-            this.Add(new HistoryEvent(text, detail));
+            this.Add(new HistoryEvent(text, detail, true));
         }
+
+        public void Add(string text, string detail, bool visible)
+        {
+            this.Add(new HistoryEvent(text, detail, visible));
+        }
+
+
+        //---------------------------------------------
 
 
         public string[] ToStringArray()

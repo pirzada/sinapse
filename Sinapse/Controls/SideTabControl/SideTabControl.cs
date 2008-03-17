@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Sinapse Neural Network Tool         http://code.google.com/p/sinapse/ *
+ *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
  *  ---------------------------------------------------------------------- *
  *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
  *                                                                         *
@@ -38,7 +38,8 @@ namespace Sinapse.Controls.SideTabControl
         private SidePageDisplay sidePageDisplay;
         private SidePageSchema sidePageRanges;
         private SidePageTrainer sidePageTrainer;
-        private SidePageWorkplace sidePageWorkplace;            
+        private SidePageWorkplace sidePageWorkplace;
+        private SidePageSolutionExplorer sidePageExplorer;
         
 
         //---------------------------------------------
@@ -53,11 +54,12 @@ namespace Sinapse.Controls.SideTabControl
             sidePageRanges = new SidePageSchema();
             sidePageTrainer = new SidePageTrainer();
             sidePageWorkplace = new SidePageWorkplace();
+            sidePageExplorer = new SidePageSolutionExplorer();
 
             this.setTab(sidePageDisplay, tabDisplay);
             this.setTab(sidePageRanges, tabRanges);
             this.setTab(sidePageTrainer, tabTraining);
-            this.setTab(sidePageWorkplace, tabWorkplace);
+            this.setTab(sidePageExplorer, tabExplorer);
 
         }
         #endregion
@@ -91,6 +93,22 @@ namespace Sinapse.Controls.SideTabControl
                 this.sidePageRanges.NetworkDatabase = value;
             }
         }
+
+        internal TrainingSession TrainingSession
+        {
+            set
+            {
+                this.sidePageTrainer.TrainingSession = value;
+            }
+        }
+
+        internal NetworkWorkplace Workplace
+        {
+            set
+            {
+                this.sidePageExplorer.Workplace = value;
+            }
+        }
         #endregion
 
 
@@ -117,6 +135,11 @@ namespace Sinapse.Controls.SideTabControl
         {
             get { return this.sidePageWorkplace; }
         }
+
+        internal SidePageSolutionExplorer ExplorerControl
+        {
+            get { return this.sidePageExplorer; }
+        }
         #endregion
 
 
@@ -130,6 +153,7 @@ namespace Sinapse.Controls.SideTabControl
             tabPage.Controls.Add(userControl);
         }
         #endregion
+
 
     }
 }

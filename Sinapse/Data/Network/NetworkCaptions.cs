@@ -99,6 +99,19 @@ namespace Sinapse.Data.Network
             }
             return String.Empty;
         }
+
+        public DataCategory[] GetCaptionList(string columnName)
+        {
+            DataTable captionTable = this.dataCaptions.Tables[columnName];
+            DataCategory[] captionList = new DataCategory[captionTable.Rows.Count];
+         
+            for (int i = 0; i < captionList.Length; ++i)
+            {
+                captionList[i] = new DataCategory(columnName, (int)captionTable.Rows[i][ID] ,(string)captionTable.Rows[i][columnName]);
+            }
+
+            return captionList;
+        }
         #endregion
 
 

@@ -43,7 +43,7 @@ namespace Sinapse.Controls.SideTabControl
 
         enum UpdateType { None, Statusbar, Graph, NetworkSave };
 
-    //    private NetworkTrainingSession m_trainingSession; 
+        private TrainingSession m_trainingSession; 
         private NetworkContainer m_networkContainer;
         private NetworkDatabase m_networkDatabase;
 
@@ -52,7 +52,6 @@ namespace Sinapse.Controls.SideTabControl
 
         private int m_lastTickEpoch;
         private bool m_trainingPaused;
-   //     private UpdateType nextUpdateType = UpdateType.Statusbar;
 
 
         internal event EventHandler TrainingComplete;
@@ -79,9 +78,13 @@ namespace Sinapse.Controls.SideTabControl
         #region Control Events
         private void timer_Tick(object sender, EventArgs e)
         {
+            
             this.m_networkState.EpochsBySecond = (this.m_networkState.Epoch - this.m_lastTickEpoch) / (timer.Interval / 1000);
             this.m_lastTickEpoch = m_networkState.Epoch;
-
+            
+            //this.m_trainingSession.NetworkState.EpochsBySecond = (this.m_trainingSession.NetworkState.Epoch - this.m_lastTickEpoch) / (timer.Interval / 1000);
+            //this.m_lastTickEpoch = m_trainingSession.NetworkState.Epoch;
+            
             if (Properties.Settings.Default.display_UpdateByTime)
             {
                 this.updateStatus();
@@ -120,6 +123,7 @@ namespace Sinapse.Controls.SideTabControl
                 this.updateEnabled();
                 this.updateStatus();
             }
+           
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -143,13 +147,36 @@ namespace Sinapse.Controls.SideTabControl
 
                 this.updateEnabled();
             }
+            
+        }
+    
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal TrainingSession TrainingSession
+        {
+            get { return this.m_trainingSession; }
+            set
+            {
+                this.m_trainingSession = value;
+
+                if (value != null)
+                {
+                }
+                else
+                {
+                    this.updateStatus();
+                }
+
+                this.updateEnabled();
+            }
         }
 
+    
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal TrainingStatus NetworkState
         {
             get { return this.m_networkState; }
         }
+    
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal bool IsTraining
@@ -210,15 +237,20 @@ namespace Sinapse.Controls.SideTabControl
         {
             this.m_networkContainer.ActivationNetwork.Randomize();
             this.m_networkContainer.Precision = 0;
+            //this.m_trainingSession.ResetStatus();
+
+         //   this.m_trainingSession.IsPaused = false;
             this.m_networkState = new TrainingStatus();
-            HistoryListener.Write("Network learnings cleared");
             this.m_trainingPaused = false;
             this.m_graphControl.ClearGraph();
             this.updateStatus();
+
+            HistoryListener.Write("Network learnings cleared");
         }
 
         public void Stop()
         {
+           // this.m_trainingSession.ResetStatus();
             this.m_networkState = new TrainingStatus();
             this.m_trainingPaused = false;
 
@@ -331,9 +363,11 @@ namespace Sinapse.Controls.SideTabControl
             this.Enabled = (this.m_networkDatabase != null && this.m_networkContainer != null);
             this.m_graphControl.UpdateEnabled();
         }
+     
 
         private void networkContainer_SavepointRestored(object sender, EventArgs e)
         {
+    //        this.m_trainingSession.NetworkState = this.m_networkContainer.Savepoints.CurrentSavepoint.NetworkStatus;
             this.m_networkState = this.m_networkContainer.Savepoints.CurrentSavepoint.NetworkStatus;
             this.updateStatus();
         }
@@ -388,7 +422,6 @@ namespace Sinapse.Controls.SideTabControl
                 if (Properties.Settings.Default.training_Autosave == true &&
                     m_networkState.Epoch >= lastSaveEpoch + Properties.Settings.Default.training_AutosaveEpochs)
                 {
-               //     nextUpdateType = UpdateType.NetworkSave;
                     backgroundWorker.ReportProgress(0,UpdateType.NetworkSave);
                     lastSaveEpoch = m_networkState.Epoch;
                 }
@@ -398,7 +431,6 @@ namespace Sinapse.Controls.SideTabControl
                 if (Properties.Settings.Default.graph_Disable == false &&
                     m_networkState.Epoch >= lastGraphEpoch + Properties.Settings.Default.graph_UpdateRate)
                 {
-                //    nextUpdateType = UpdateType.Graph;
                     backgroundWorker.ReportProgress(0,UpdateType.Graph);
                     lastGraphEpoch = m_networkState.Epoch;
                 }
@@ -419,8 +451,7 @@ namespace Sinapse.Controls.SideTabControl
                             m_networkState.Progress = Math.Max(Math.Min((int)((m_networkState.Epoch * 100) / options.limEpoch), 100), 0);
                     }
 
-                 //   nextUpdateType = UpdateType.Statusbar;
-                    backgroundWorker.ReportProgress(0, "Training...");
+                    backgroundWorker.ReportProgress(0, UpdateType.Statusbar);
                     lastStatusEpoch = m_networkState.Epoch;
                 }
                 #endregion
@@ -428,6 +459,8 @@ namespace Sinapse.Controls.SideTabControl
 
                 ++m_networkState.Epoch;
 
+                // Sleep thread according to specified delay
+                System.Threading.Thread.Sleep(Properties.Settings.Default.training_delay);
 
                 #region Stop Conditions
                 if (options.TrainingType == TrainingType.ByError)
@@ -459,14 +492,7 @@ namespace Sinapse.Controls.SideTabControl
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 
-            if (e.UserState is string)
-            {
-                string str = (string)e.UserState;
-
-                HistoryListener.Write(str);
-                this.updateStatus();
-            }
-            else if (e.UserState is UpdateType)
+            if (e.UserState is UpdateType)
             {
                 UpdateType updateType = (UpdateType)e.UserState;
 
@@ -488,49 +514,22 @@ namespace Sinapse.Controls.SideTabControl
                             this.m_graphControl.UpdateGraph();
                         }
                         break;
+
+                    case UpdateType.Statusbar:
+                        HistoryListener.Write("Training...");
+                        this.updateStatus();
+                        break;
                 }
             }
-
-     /*       
-            switch (this.nextUpdateType)
+            else
             {
-
-                case UpdateType.NetworkSave:
-                    this.m_networkContainer.Savepoints.Register(this.m_networkState);
-                    break;
-
-
-                case UpdateType.Graph:
-                    this.m_graphControl.TrainingPoints.Add(m_networkState.Epoch, m_networkState.ErrorTraining);
-                    this.m_graphControl.ValidationPoints.Add(m_networkState.Epoch, m_networkState.ErrorValidation);
-
-                    if (Properties.Settings.Default.graph_Autoupdate)
-                    {
-                        this.m_graphControl.UpdateGraph();
-                    }
-                    break;
-
-
-                case UpdateType.Statusbar:
-
-                    if (Properties.Settings.Default.display_UpdateByTime == false)
-                    {
-                        string statusText = e.UserState as string;
-
-                        if (statusText != null)
-                            HistoryListener.Write(statusText);
-
-                        this.updateStatus();
-                    }
-                    break;
-
-
-                default:
-                    goto case UpdateType.Statusbar;
+                string str = e.UserState as String;
+                if (str != null)
+                {
+                    HistoryListener.Write(str);
+                    this.updateStatus();
+                }
             }
-
-            nextUpdateType = UpdateType.Statusbar;
-      */ 
         }
 
 

@@ -41,6 +41,9 @@ namespace Sinapse.Data
         [NonSerialized]
         internal FileSystemEventHandler ObjectSaved;
 
+        [NonSerialized]
+        internal EventHandler ObjectOpened;
+
 
         //---------------------------------------------
 
@@ -52,6 +55,7 @@ namespace Sinapse.Data
         }
         #endregion
 
+
         //---------------------------------------------
 
 
@@ -59,6 +63,11 @@ namespace Sinapse.Data
         public string LastSavePath
         {
             get { return this.m_lastSavePath; }
+        }
+
+        public string Filename
+        {
+            get { return Path.GetFileName(this.m_lastSavePath); }
         }
 
         public bool IsSaved
@@ -72,10 +81,16 @@ namespace Sinapse.Data
 
 
         #region Events
-        protected void OnObjectSaved(FileSystemEventArgs e)
+        protected virtual void OnObjectSaved(FileSystemEventArgs e)
         {
             if (this.ObjectSaved != null)
                 this.ObjectSaved.Invoke(this, e);
+        }
+
+        protected virtual void OnObjectOpened()
+        {
+            if (this.ObjectOpened != null)
+                this.ObjectOpened.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -167,7 +182,10 @@ namespace Sinapse.Data
                     fileStream.Close();
 
                 if (success)
+                {
                     serializableObject.m_lastSavePath = path;
+                    serializableObject.OnObjectOpened();
+                }
             }
 
             return serializableObject;
