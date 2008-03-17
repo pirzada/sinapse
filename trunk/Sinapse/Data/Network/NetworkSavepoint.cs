@@ -124,8 +124,8 @@ namespace Sinapse.Data.Network
         private NetworkSavepoint m_currentSavepoint;
         private NetworkContainer m_networkContainer;
 
-   //     [NonSerialized]
-   //     public EventHandler CurrentSavepointChanged;
+        [NonSerialized]
+        public EventHandler CurrentSavepointChanged;
 
         [NonSerialized]
         public EventHandler SavepointRegistered;
@@ -181,7 +181,7 @@ namespace Sinapse.Data.Network
         {
             this.m_currentSavepoint = networkSavepoint;
 
-   //         this.OnCurrentSavepointChanged();
+            this.OnCurrentSavepointChanged();
             this.OnSavepointRestored();
         }
 
@@ -190,7 +190,7 @@ namespace Sinapse.Data.Network
             this.m_currentSavepoint = new NetworkSavepoint(m_networkContainer.ActivationNetwork, trainingStatus);
             this.Add(m_currentSavepoint);
 
-   //         this.OnCurrentSavepointChanged();
+            this.OnCurrentSavepointChanged();
             this.OnSavepointRegistered();
         }
         #endregion
@@ -199,12 +199,13 @@ namespace Sinapse.Data.Network
         //---------------------------------------------
 
 
-    /*    private void OnCurrentSavepointChanged()
+        #region Private Methods
+        private void OnCurrentSavepointChanged()
         {
             if (this.CurrentSavepointChanged != null)
                 this.CurrentSavepointChanged.Invoke(this, EventArgs.Empty);
         }
-    */
+    
         private void OnSavepointRegistered()
         {
             if (this.SavepointRegistered != null)
@@ -216,7 +217,8 @@ namespace Sinapse.Data.Network
             if (this.SavepointRestored != null)
                 this.SavepointRestored.Invoke(this, EventArgs.Empty);
         }
-    }
-  
-     
+        #endregion
+
+
+    }    
 }

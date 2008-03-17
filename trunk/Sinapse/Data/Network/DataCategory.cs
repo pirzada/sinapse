@@ -17,56 +17,75 @@
  ***************************************************************************/
 
 using System;
+using System.ComponentModel;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Diagnostics;
+using System.Text;
 
-using Sinapse.Properties;
-using Sinapse.Forms;
-
-namespace Sinapse
+namespace Sinapse.Data.Network
 {
 
-    static class Program
+    internal sealed class DataCategory
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        [LoaderOptimization(LoaderOptimization.SingleDomain)]
-        static void Main()
+
+        private int id;
+        private string columnName;
+        private string value;
+
+
+        //----------------------------------------
+
+
+        #region Constructor
+        public DataCategory(string columnName, int id, string value)
         {
-            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            Program.Initialize();
-
-
-            Application.Run(new MainForm());
+            this.columnName = columnName;
+            this.value = value;
+            this.id = id;
+        }
+        #endregion
 
 
-            Settings.Default.Save();
-            Debug.Listeners.Clear();
+        //----------------------------------------
+
+
+        #region Properties
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
         }
 
-
-        static void Initialize()
+        public String ColumnName
         {
-            if (Settings.Default.history_Database == null)
-                Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
-
-            if (Settings.Default.history_Networks == null)
-                Settings.Default.history_Networks = new System.Collections.Specialized.StringCollection();
-
-            if (Settings.Default.history_Workplace == null)
-                Settings.Default.history_Workplace = new System.Collections.Specialized.StringCollection();
-
-            if (Settings.Default.history_Sessions == null)
-                Settings.Default.history_Sessions = new System.Collections.Specialized.StringCollection();
-
+            get { return this.columnName; }
+            set { this.columnName = value; }
         }
 
+        public String Value
+        {
+            get { return this.value; }
+            set { this.value = value; }
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+    }
+
+    internal sealed class DataCategoryCollection : BindingList<DataCategory>
+    {
+
+        private string columnName;
+
+        public DataCategoryCollection(string columnName)
+        {
+            this.columnName = columnName;
+        }
+
+        public void Add(int id, string value)
+        {
+            this.Add(new DataCategory(this.columnName, id, value));
+        }
     }
 }

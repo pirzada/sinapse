@@ -39,6 +39,7 @@ namespace Sinapse.Controls.MainTabControl
         private NetworkContainer m_networkContainer;
         private IPointListEdit m_trainingPoints;
         private IPointListEdit m_validationPoints;
+        private IPointListEdit m_currentSavepoint;
         private IPointListEdit m_savePoints;
 
         private SideTabControl.SidePageTrainer m_networkTrainer;
@@ -82,6 +83,7 @@ namespace Sinapse.Controls.MainTabControl
                     this.dataGridView.DataSource = this.m_networkContainer.Savepoints;
                     this.m_networkContainer.Savepoints.SavepointRegistered += networkContainer_savepointRegistered;
                     this.m_networkContainer.Savepoints.SavepointRestored += networkContainer_savepointRestored;
+                    this.m_networkContainer.Savepoints.CurrentSavepointChanged += networkContainer_savepointChanged;
                 }
                 else
                 {
@@ -115,7 +117,7 @@ namespace Sinapse.Controls.MainTabControl
         internal IPointListEdit SavePoints
         {
             get { return this.m_savePoints; }
-        }
+        } 
         #endregion
 
 
@@ -130,7 +132,7 @@ namespace Sinapse.Controls.MainTabControl
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
-
+            Properties.Settings.Default.training_delay = this.trackBar.Value*10;
         }
         #endregion
 
@@ -160,7 +162,37 @@ namespace Sinapse.Controls.MainTabControl
 
         private void networkContainer_savepointRestored(object sender, EventArgs e)
         {
+      /*      int i;
+            
+            i = 0;
+            while (i < this.m_trainingPoints.Count)
+            {
+                if (this.m_trainingPoints[i].X > this.m_networkContainer.Savepoints.CurrentSavepoint.Epoch)
+                {
+                    this.m_trainingPoints.RemoveAt(i);
+                    this.m_validationPoints.RemoveAt(i);
+                }
+                else ++i;
+            }
+
+            i = 0;
+            while (i < this.m_savePoints.Count)
+            {
+                if (this.m_savePoints[i].X > this.m_networkContainer.Savepoints.CurrentSavepoint.Epoch)
+                {
+                    this.m_savePoints.RemoveAt(i);
+                }
+                else ++i;
+            }
+
+            this.UpdateGraph();
+       */ 
+
             HistoryListener.Write("Savepoint Restored!");
+        }
+
+        private void networkContainer_savepointChanged(object sender, EventArgs e)
+        {
         }
         #endregion
 
@@ -175,6 +207,21 @@ namespace Sinapse.Controls.MainTabControl
                 if (save != null)
                     this.m_networkContainer.Savepoints.Restore(save);
             }
+        }
+
+        private void dataGridView_CurrentCellChanged(object sender, EventArgs e)
+        {
+            this.m_currentSavepoint.Clear();
+
+            NetworkSavepoint sp = dataGridView.CurrentRow.DataBoundItem as NetworkSavepoint;
+
+            if (sp != null)
+            {
+                this.m_currentSavepoint.Add(sp.Epoch, sp.ErrorTraining);
+                this.m_currentSavepoint.Add(sp.Epoch, sp.ErrorValidation);
+            }
+
+            this.UpdateGraph();
         }
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -300,6 +347,7 @@ namespace Sinapse.Controls.MainTabControl
             RollingPointPairList trainingList = new RollingPointPairList(1200);
             RollingPointPairList validationList = new RollingPointPairList(1200);
             RollingPointPairList savepointList = new RollingPointPairList(1200);
+            RollingPointPairList currentSavepointList = new RollingPointPairList(1200);
 
             // Add a curve
             LineItem curve;
@@ -312,7 +360,7 @@ namespace Sinapse.Controls.MainTabControl
             // trainingCurve.Line.SmoothTension = 0.5F;
 
 
-            curve = myPane.AddCurve("Validation Set", validationList, Color.Blue, SymbolType.Circle);
+            curve = myPane.AddCurve("Validation Set", validationList, Color.Blue, SymbolType.Diamond);
             curve.Symbol.Fill = new Fill(Color.White);
             curve.Symbol.Size = 4;
             this.m_validationPoints = curve.Points as IPointListEdit;
@@ -320,14 +368,21 @@ namespace Sinapse.Controls.MainTabControl
             // validationCurve.Line.SmoothTension = 0.5F;
 
 
-            curve = myPane.AddCurve("Savepoints Mark", savepointList, Color.DarkGreen, SymbolType.Star);
+            curve = myPane.AddCurve("Savepoints Mark", savepointList, Color.DarkGreen, SymbolType.Circle);
             curve.Symbol.Fill = new Fill(Color.DarkGreen);
-            curve.Symbol.Size = 8;
+            curve.Symbol.Size = 4;
             curve.Line.IsVisible = false;
             this.m_savePoints = curve.Points as IPointListEdit;
             // validationCurve.Line.IsSmooth = true;
             // validationCurve.Line.SmoothTension = 0.5F;
 
+            curve = myPane.AddCurve(String.Empty, currentSavepointList, Color.LimeGreen, SymbolType.Circle);
+            curve.Symbol.Fill = new Fill(Color.LimeGreen);
+            curve.Symbol.Size = 8;
+            curve.Line.IsVisible = false;
+            this.m_currentSavepoint = curve.Points as IPointListEdit;
+            // validationCurve.Line.IsSmooth = true;
+            // validationCurve.Line.SmoothTension = 0.5F;
 
             myPane.XAxis.Scale.MinAuto = true;
             myPane.XAxis.Scale.MaxAuto = true;

@@ -27,17 +27,18 @@ using System.Data;
 using System.IO;
 
 using Sinapse.Data;
-//using Sinapse.Data.Reporting;
 
 
 namespace Sinapse.Data.Network
 {
 
-
     [Serializable]
     internal sealed class NetworkWorkplace : SerializableObject<NetworkWorkplace>
     {
 
+        private String m_name;
+        private String m_description;
+        private DateTime m_creationTime;
         private TrainingSessionCollection m_trainingSessions;
 
 
@@ -45,10 +46,37 @@ namespace Sinapse.Data.Network
 
 
         #region Constructor
-        internal NetworkWorkplace()
+        public NetworkWorkplace()
         {
+            this.m_name = "New Workplace";
+            this.m_description = String.Empty;
+            this.m_creationTime = DateTime.Now;
             this.m_trainingSessions = new TrainingSessionCollection();
         }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Properties
+        public String Name
+        {
+            get { return this.m_name; }
+            set { this.m_name = value; }
+        }
+
+        public TrainingSessionCollection Sessions
+        {
+            get { return this.m_trainingSessions;    }
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Object Events
         #endregion
 
 
@@ -71,6 +99,7 @@ namespace Sinapse.Data.Network
     [Serializable]
     internal sealed class TrainingSessionCollection : BindingList<TrainingSession>
     {
+
     }
 
 }

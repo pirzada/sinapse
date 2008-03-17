@@ -39,6 +39,7 @@ namespace Sinapse.Forms
 
         private NetworkContainer m_networkContainer;
         private NetworkDatabase m_networkDatabase;
+        private TrainingSession m_trainingSession;
         private NetworkWorkplace m_networkWorkplace;
 
 
@@ -80,10 +81,11 @@ namespace Sinapse.Forms
                 {
                     this.lbNeuronCount.Text = m_networkContainer.Layout;
 
-                    this.m_networkContainer.ObjectSaved += new FileSystemEventHandler(currentNetwork_NetworkSaved);
+                    this.m_networkContainer.ObjectSaved += new FileSystemEventHandler(currentNetwork_ObjectSaved);
 
                     if (this.m_networkContainer.IsSaved)
                         this.MenuNetworkSaveAs.Enabled = true;
+                    
                 }
                 else
                 {
@@ -91,11 +93,13 @@ namespace Sinapse.Forms
                 }
 
                 this.updateButtons();
+                this.createSession();
                 this.btnNetworkSave.Enabled = notNull;
-                this.MenuFileCloseNetwork.Enabled = notNull;
+                this.MenuNetworkClose.Enabled = notNull;
                 this.MenuNetworkSave.Enabled = notNull;
                 this.MenuNetworkSaveAs.Enabled = notNull;
                 this.MenuNetworkWeights.Enabled = notNull;
+                this.MenuNetworkCodeGenerator.Enabled = notNull;
 
             }
         }
@@ -117,7 +121,7 @@ namespace Sinapse.Forms
                     this.lbInputCount.Text = this.m_networkDatabase.Schema.InputColumns.Length.ToString();
                     this.lbOutputCount.Text = this.m_networkDatabase.Schema.OutputColumns.Length.ToString();
 
-                    this.m_networkDatabase.ObjectSaved += new FileSystemEventHandler(currentDatabase_DatabaseSaved);
+                    this.m_networkDatabase.ObjectSaved += new FileSystemEventHandler(currentDatabase_ObjectSaved);
 
                     if (this.m_networkDatabase.IsSaved)
                         this.MenuDatabaseSaveAs.Enabled = true;
@@ -129,8 +133,9 @@ namespace Sinapse.Forms
                 }
 
                 this.updateButtons();
+                this.createSession();
                 this.btnDatabaseSave.Enabled = notNull;
-                this.MenuFileCloseDatabase.Enabled = notNull;
+                this.MenuFileDatabaseClose.Enabled = notNull;
                 this.MenuDatabaseSave.Enabled = notNull;
                 this.MenuDatabaseSaveAs.Enabled = notNull;
                 this.MenuDatabaseEdit.Enabled = notNull;
@@ -149,15 +154,42 @@ namespace Sinapse.Forms
 
                 if (notNull)
                 {
-                    this.m_networkWorkplace.ObjectSaved += new FileSystemEventHandler(currentWorkplace_WorkplaceSaved);
+                    this.m_networkWorkplace.ObjectSaved += new FileSystemEventHandler(currentWorkplace_ObjectSaved);
                 }
                 else
                 {
                 }
 
-                this.MenuFileCloseWorkplace.Enabled = notNull;
+                this.updateButtons();
+                this.MenuWorkplaceClose.Enabled = notNull;
             }
         }
+
+        public TrainingSession CurrentTrainingSession
+        {
+            get { return this.m_trainingSession; }
+            set
+            {
+                this.m_trainingSession = value;
+
+                bool notNull = (value != null);
+
+                if (notNull)
+                {
+                    this.m_trainingSession.ObjectSaved += new FileSystemEventHandler(currentSession_ObjectSaved);
+                }
+                else
+                {
+                  //  this.CurrentNetworkDatabase = m_trainingSession.Database;
+                  //  this.CurrentNetworkContainer = m_trainingSession.Network;
+                }
+
+                this.updateButtons();
+                this.MenuSessionClose.Enabled = notNull;
+            }
+        }
+
+        
        
         #endregion
 
@@ -190,6 +222,7 @@ namespace Sinapse.Forms
                 this.CurrentNetworkContainer = null;
                 this.CurrentNetworkDatabase = null;
                 this.CurrentNetworkWorkplace = null;
+                this.CurrentTrainingSession = null;
 
                 HistoryListener.Write("Waiting data");
             }
@@ -275,6 +308,7 @@ namespace Sinapse.Forms
         #region Network Trainer Control Events
         private void sideTrainerControl_StatusChanged(object sender, EventArgs e)
         {
+            //this.statusBarControl.UpdateNetworkState(this.CurrentTrainingSession.NetworkState);
             this.statusBarControl.UpdateNetworkState(this.tabControlSide.TrainerControl.NetworkState);
         }
 
@@ -294,7 +328,7 @@ namespace Sinapse.Forms
 
 
         #region Object Events
-        private void currentNetwork_NetworkSaved(object sender, FileSystemEventArgs e)
+        private void currentNetwork_ObjectSaved(object sender, FileSystemEventArgs e)
         {
             this.openNetworkDialog.FileName = e.FullPath;
             this.saveNetworkDialog.FileName = e.FullPath;
@@ -302,7 +336,7 @@ namespace Sinapse.Forms
             this.MenuNetworkSaveAs.Enabled = true;
         }
 
-        private void currentDatabase_DatabaseSaved(object sender, FileSystemEventArgs e)
+        private void currentDatabase_ObjectSaved(object sender, FileSystemEventArgs e)
         {
             this.openDatabaseDialog.FileName = e.FullPath;
             this.saveDatabaseDialog.FileName = e.FullPath;
@@ -310,7 +344,11 @@ namespace Sinapse.Forms
             this.MenuDatabaseSaveAs.Enabled = true;
         }
 
-        private void currentWorkplace_WorkplaceSaved(object sender, FileSystemEventArgs e)
+        private void currentWorkplace_ObjectSaved(object sender, FileSystemEventArgs e)
+        {
+        }
+
+        private void currentSession_ObjectSaved(object sender, EventArgs e)
         {
         }
         #endregion
@@ -363,6 +401,46 @@ namespace Sinapse.Forms
             this.CurrentNetworkWorkplace = null;
             HistoryListener.Write("Workplace Closed");
         }
+
+        private void MenuFileCloseSession_Click(object sender, EventArgs e)
+        {
+            this.CurrentTrainingSession = null;
+            HistoryListener.Write("Training Session Closed");
+        }
+        #endregion
+
+        
+        #region Menu Workplace
+        #endregion
+
+
+        #region Menu Session
+        private void MenuSessionNew_Click(object sender, EventArgs e)
+        {
+            if (this.m_networkContainer == null || this.m_networkDatabase == null)
+            {
+                MessageBox.Show("Before creating new training session, please first create (or open) a database and a network. A new Training Session will then be created automatically.");
+            }
+            else
+            {
+                this.CurrentTrainingSession = new TrainingSession("New session", this.CurrentNetworkDatabase, this.CurrentNetworkContainer);
+            }
+        }
+
+        private void MenuSessionOpen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuSessionSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuSessionSaveAs_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
 
@@ -409,7 +487,7 @@ namespace Sinapse.Forms
                                 "\nAny unsaved training sessions will be lost",
                                 "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes))
             {
-                NetworkCreationDialog creationDlg = new NetworkCreationDialog(m_networkDatabase.Schema);
+                NewNetworkDialog creationDlg = new NewNetworkDialog(m_networkDatabase.Schema);
                 if (creationDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     this.CurrentNetworkContainer = creationDlg.CreateNetworkContainer();
@@ -575,6 +653,16 @@ namespace Sinapse.Forms
         private void mruProviderNetwork_MenuItemClicked(string filename)
         {
             this.networkOpen(filename);
+        }
+
+        private void mruProviderWorkplace_MenuItemClicked(string filename)
+        {
+            this.workplaceOpen(filename);
+        }
+
+        private void mruProviderSession_MenuItemClicked(string filename)
+        {
+            this.sessionOpen(filename);
         }
         #endregion
 
@@ -743,10 +831,66 @@ namespace Sinapse.Forms
         #endregion
 
 
+        #region Open & Save Session
+        private void sessionSave(string path)
+        {
+            try
+            {
+                TrainingSession.Serialize(this.CurrentTrainingSession, path);
+                this.mruProviderSession.Insert(path);
+                HistoryListener.Write("Training Session Saved");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error saving trainng session");
+#if DEBUG
+                throw;
+#endif
+            }
+
+        }
+
+        private void sessionOpen(string path)
+        {
+            TrainingSession trainingSession = null;
+
+            try
+            {
+                trainingSession = TrainingSession.Deserialize(path);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error opening training session");
+#if DEBUG
+                throw;
+#endif
+            }
+            finally
+            {
+                if (trainingSession != null)
+                {
+                    this.CurrentTrainingSession = trainingSession;
+                    this.mruProviderSession.Insert(path);
+                    HistoryListener.Write("Training Session Loaded");
+                }
+            }
+        }
+
+        #endregion
+
+
         //---------------------------------------------
 
 
         #region Private Methods
+        private void createSession()
+        {
+            if (this.m_networkDatabase != null && m_networkContainer != null)
+            {
+                this.CurrentTrainingSession = new TrainingSession("New session", this.m_networkDatabase, this.m_networkContainer);
+            }
+        }
+
         private void updateButtons()
         {
             if (this.m_networkDatabase != null && m_networkContainer != null)
@@ -761,7 +905,6 @@ namespace Sinapse.Forms
             }
         }
         #endregion
-
 
     }
 }

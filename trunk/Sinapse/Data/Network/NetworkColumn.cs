@@ -25,6 +25,7 @@ using System.Text;
 
 using AForge;
 
+
 namespace Sinapse.Data.Network
 {
 

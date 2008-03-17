@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse", "Sinapse\Sinapse.
 		{C742E00B-3933-4834-BC41-19848E1E3AF2} = {C742E00B-3933-4834-BC41-19848E1E3AF2}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinapseExcel", "SinapseExcel\SinapseExcel.csproj", "{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,12 @@ Global
 		{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

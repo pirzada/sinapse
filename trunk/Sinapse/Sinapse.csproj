@@ -137,6 +137,12 @@
     <Compile Include="Controls\SideTabControl\SidePageReport.Designer.cs">
       <DependentUpon>SidePageReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SideTabControl\SidePageSolutionExplorer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SideTabControl\SidePageSolutionExplorer.Designer.cs">
+      <DependentUpon>SidePageSolutionExplorer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SideTabControl\SidePageWorplace.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,12 +204,31 @@
     <Compile Include="Data\CodeGeneration\Java.cs" />
     <Compile Include="Data\CodeGeneration\Matlab.cs" />
     <Compile Include="Data\Logging\HistoryEvent.cs" />
+    <Compile Include="Data\Network\DataCategory.cs" />
     <Compile Include="Data\Network\NetworkColumn.cs" />
     <Compile Include="Data\Network\TrainingSession.cs" />
     <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Reporting\ReportGenerator.cs">
     </Compile>
     <Compile Include="Data\SerializableObject.cs" />
+    <Compile Include="Forms\Dialogs\NewDatabaseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\NewDatabaseDialog.Designer.cs">
+      <DependentUpon>NewDatabaseDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dialogs\NewWorkplaceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\NewWorkplaceDialog.Designer.cs">
+      <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dialogs\PreferencesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\PreferencesDialog.Designer.cs">
+      <DependentUpon>PreferencesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SchemaMapper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,11 +298,11 @@
     <Compile Include="Forms\Dialogs\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dialogs\NetworkCreationDialog.cs">
+    <Compile Include="Forms\Dialogs\NewNetworkDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Dialogs\NetworkCreationDialog.Designer.cs">
-      <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
+    <Compile Include="Forms\Dialogs\NewNetworkDialog.Designer.cs">
+      <DependentUpon>NewNetworkDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\NetworkReportOptionsDialog.cs">
       <SubType>Form</SubType>
@@ -361,6 +386,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>SidePageSchema.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SideTabControl\SidePageSolutionExplorer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SidePageSolutionExplorer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SideTabControl\SidePageTrainer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SidePageTrainer.cs</DependentUpon>
@@ -405,8 +434,8 @@
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\NetworkCreationDialog.resx">
-      <DependentUpon>NetworkCreationDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Dialogs\NewNetworkDialog.resx">
+      <DependentUpon>NewNetworkDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\NetworkReportDialog.resx">
@@ -456,6 +485,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utils\Misc.cs" />
+    <Compile Include="Utils\Patterns\FormSingleton.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\Patterns\Singleton.cs">
+    </Compile>
+    <Compile Include="Utils\Statistic\PrimaryComponentAnalysis.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -799,6 +835,13 @@
     <None Include="Resources\kded.png" />
     <None Include="Resources\html.png" />
     <None Include="Resources\txt.png" />
+    <None Include="Resources\build.png" />
+    <None Include="Resources\source_c.png" />
+    <None Include="Resources\source_cpp.png" />
+    <None Include="Resources\source_java.png" />
+    <None Include="Resources\kformula_kfo.png" />
+    <None Include="Resources\page_white_csharp.png" />
+    <None Include="Resources\kdb_form.png" />
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <ItemGroup>

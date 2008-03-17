@@ -33,7 +33,7 @@ namespace Sinapse.Controls.SideTabControl
             this.tabDisplay = new Dotnetrix.Controls.TabPageEX();
             this.tabTraining = new Dotnetrix.Controls.TabPageEX();
             this.tabRanges = new Dotnetrix.Controls.TabPageEX();
-            this.tabWorkplace = new Dotnetrix.Controls.TabPageEX();
+            this.tabExplorer = new Dotnetrix.Controls.TabPageEX();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +46,7 @@ namespace Sinapse.Controls.SideTabControl
             this.tabControl.Controls.Add(this.tabDisplay);
             this.tabControl.Controls.Add(this.tabTraining);
             this.tabControl.Controls.Add(this.tabRanges);
-            this.tabControl.Controls.Add(this.tabWorkplace);
+            this.tabControl.Controls.Add(this.tabExplorer);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.tabControl.HotTrack = true;
@@ -82,13 +82,13 @@ namespace Sinapse.Controls.SideTabControl
             this.tabRanges.TabIndex = 2;
             this.tabRanges.Text = "Database Schema";
             // 
-            // tabWorkplace
+            // tabExplorer
             // 
-            this.tabWorkplace.Location = new System.Drawing.Point(50, 4);
-            this.tabWorkplace.Name = "tabWorkplace";
-            this.tabWorkplace.Size = new System.Drawing.Size(211, 447);
-            this.tabWorkplace.TabIndex = 3;
-            this.tabWorkplace.Text = "Workplace";
+            this.tabExplorer.Location = new System.Drawing.Point(50, 4);
+            this.tabExplorer.Name = "tabExplorer";
+            this.tabExplorer.Size = new System.Drawing.Size(211, 447);
+            this.tabExplorer.TabIndex = 3;
+            this.tabExplorer.Text = "Solution Explorer";
             // 
             // imageList
             // 
@@ -111,7 +111,7 @@ namespace Sinapse.Controls.SideTabControl
         private Dotnetrix.Controls.TabPageEX tabDisplay;
         private Dotnetrix.Controls.TabPageEX tabTraining;
         private Dotnetrix.Controls.TabPageEX tabRanges;
-        private Dotnetrix.Controls.TabPageEX tabWorkplace;
+        private Dotnetrix.Controls.TabPageEX tabExplorer;
         private System.Windows.Forms.ImageList imageList;
     }
 }

@@ -30,7 +30,7 @@ using Sinapse.Data.Network;
 
 namespace Sinapse.Forms.Dialogs
 {
-    internal sealed partial class NetworkCreationDialog : Form
+    internal sealed partial class NewNetworkDialog : Form
     {
 
         private NetworkSchema m_networkSchema;
@@ -39,7 +39,7 @@ namespace Sinapse.Forms.Dialogs
 
 
         #region Constructor
-        public NetworkCreationDialog(NetworkSchema schema)
+        public NewNetworkDialog(NetworkSchema schema)
         {
             InitializeComponent();
 
