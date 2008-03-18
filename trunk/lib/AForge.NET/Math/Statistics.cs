@@ -18,6 +18,114 @@ namespace AForge.Math
     /// 
 	public class Statistics
 	{
+
+        /// <summary>
+        /// Calculate mean value
+        /// </summary>
+        /// 
+        /// <param name="values">Histogram array</param>
+        /// 
+        /// <returns>Returns mean value</returns>
+        /// 
+        /// <remarks>The input array is treated as histogram, i.e. its
+        /// indexes are treated as values of stochastic function, but
+        /// array values are treated as "probabilities" (total amount of
+        /// hits).</remarks>
+        /// 
+        public static double Mean(double[] values)
+        {
+            double hits;
+            double mean = 0;
+            double total = 0;
+
+            // for all values
+            for (int i = 0, n = values.Length; i < n; i++)
+            {
+                hits = values[i];
+                // accumulate mean
+                mean += i * hits;
+                // accumalate total
+                total += hits;
+            }
+            return mean / total;
+        }
+
+        /// <summary>
+        /// Calculate standard deviation
+        /// </summary>
+        /// 
+        /// <param name="values">Histogram array</param>
+        /// 
+        /// <returns>Returns value of standard deviation</returns>
+        /// 
+        /// <remarks>The input array is treated as histogram, i.e. its
+        /// indexes are treated as values of stochastic function, but
+        /// array values are treated as "probabilities" (total amount of
+        /// hits).</remarks>
+        /// 
+        public static double StdDev(double[] values)
+        {
+            double mean = Mean(values);
+            double stddev = 0;
+            double centeredValue;
+            double hits;
+            double total = 0;
+
+            // for all values
+            for (int i = 0, n = values.Length; i < n; i++)
+            {
+                hits = values[i];
+                centeredValue = (double)i - mean;
+
+                // accumulate mean
+                stddev += centeredValue * centeredValue * hits;
+                // accumalate total
+                total += hits;
+            }
+
+            return System.Math.Sqrt(stddev / total);
+        }
+
+        /// <summary>
+        /// Calculate median value
+        /// </summary>
+        /// 
+        /// <param name="values">Histogram array</param>
+        /// 
+        /// <returns>Returns value of median</returns>
+        /// 
+        /// <remarks>The input array is treated as histogram, i.e. its
+        /// indexes are treated as values of stochastic function, but
+        /// array values are treated as "probabilities" (total amount of
+        /// hits).</remarks>
+        /// 
+        public static double Median(double[] values)
+        {
+            double total = 0;
+            double n = values.Length;
+
+            // for all values
+            for (int i = 0; i < n; i++)
+            {
+                // accumalate total
+                total += values[i];
+            }
+
+            double halfTotal = total / 2;
+            int median = 0;
+            double v = 0;
+
+            // find median value
+            for (; median < n; median++)
+            {
+                v += values[median];
+                if (v >= halfTotal)
+                    break;
+            }
+
+            return median;
+        }
+
         /// <summary>
         /// Calculate mean value
         /// </summary>

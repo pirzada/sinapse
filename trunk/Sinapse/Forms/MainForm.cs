@@ -509,12 +509,10 @@ namespace Sinapse.Forms
             else this.saveNetworkDialog.ShowDialog(this);
         }
 
-
         private void MenuNetworkSaveAs_Click(object sender, EventArgs e)
         {
             this.saveNetworkDialog.ShowDialog(this);
         }
-
 
         private void MenuNetworkOpen_Click(object sender, EventArgs e)
         {
@@ -529,6 +527,31 @@ namespace Sinapse.Forms
         private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
         {
             new NetworkInspectorDialog(CurrentNetworkContainer).ShowDialog(this);
+        }
+
+
+        #region Menu Network CodeGenerator
+        private void MenuNetworkCodeGeneratorANSIC_Click(object sender, EventArgs e)
+        {
+            new Sinapse.Data.CodeGeneration.CANSI(this.CurrentNetworkContainer).Save("output.c");
+            System.Diagnostics.Process.Start("output.c");
+        }
+
+        private void MenuNetworkCodeGeneratorCSharp_Click(object sender, EventArgs e)
+        {
+            new Sinapse.Data.CodeGeneration.CSharp(this.CurrentNetworkContainer).Save("output.cs");
+            System.Diagnostics.Process.Start("output.cs");
+        }
+        #endregion
+
+
+        #endregion
+
+
+        #region Menu Extensions
+        private void MenuExtensionsExcel_Click(object sender, EventArgs e)
+        {
+            
         }
         #endregion
 
@@ -905,6 +928,7 @@ namespace Sinapse.Forms
             }
         }
         #endregion
+
 
     }
 }

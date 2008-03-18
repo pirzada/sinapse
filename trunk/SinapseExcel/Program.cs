@@ -18,19 +18,35 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Windows.Forms;
+using System.Diagnostics;
 
-using Microsoft.Office.Core;
+using Sinapse.Excel.Forms;
 
 
-namespace SinapseExcel
+namespace Sinapse.Excel
 {
-    public sealed class ExcelExtractor
+
+    static class Program
     {
-        
-        public ExcelExtractor()
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        [LoaderOptimization(LoaderOptimization.SingleDomain)]
+        static void Main()
         {
-               
+            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+
+            Application.Run(new ExcelAnchor());
+
+
+            //Settings.Default.Save();
+            Debug.Listeners.Clear();
         }
     }
 }

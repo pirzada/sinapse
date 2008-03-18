@@ -41,7 +41,7 @@ namespace Sinapse.Utils
             string[] secondPathParts = absoluteFilePath.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
 
             int sameCounter = 0;
-            for (int i = 0; i < Math.Min(firstPathParts.Length,
+            for (int i = 0; i < System.Math.Min(firstPathParts.Length,
             secondPathParts.Length); i++)
             {
                 if (!firstPathParts[i].ToLower().Equals(secondPathParts[i].ToLower()))
