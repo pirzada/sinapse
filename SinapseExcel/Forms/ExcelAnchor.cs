@@ -24,10 +24,16 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop;
+
+namespace Sinapse.Excel.Forms
 {
     internal sealed partial class ExcelAnchor : Form
     {
+
+        Microsoft.Office.Interop.Excel.Application excelObj;
+
         public ExcelAnchor()
         {
             InitializeComponent();
@@ -39,8 +45,15 @@ namespace Sinapse.Forms
 
             // Anchor on the bottom-right corner of the screen.
             Screen currentScreen = Screen.FromHandle(this.Handle);
-            this.Location = new Point(currentScreen.Bounds.Width - this.Width,
-                                      currentScreen.Bounds.Height - this.Height);
+            this.Location = new Point(currentScreen.WorkingArea.Width - this.Width,
+                                      currentScreen.WorkingArea.Height - this.Height);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            excelObj = new Microsoft.Office.Interop.Excel.Application();
+            excelObj.Visible = true;
+            
         }
     }
 }

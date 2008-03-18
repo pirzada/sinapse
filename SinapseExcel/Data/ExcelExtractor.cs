@@ -20,38 +20,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Microsoft.Office.Core;
 
-namespace Sinapse.Data.Structures
+
+namespace Sinapse.Excel.Data
 {
 
-    internal enum UpdateType { } // Ugly ghost to mantain backward compatibility
-
-    //TODO: Promote this struct to class.
-
-    [Serializable]
-    internal struct TrainingStatus
+    public sealed class ExcelExtractor
     {
-
-        internal int Epoch;
-        internal int Progress;
-        internal double ErrorTraining;
-        internal double ErrorValidation;
-
-        [NonSerialized]
-        internal double EpochsBySecond;
-
-        [NonSerialized]
-        internal int TrainingRound;
-
-        internal void Reset()
+        
+        public ExcelExtractor()
         {
-            Epoch = 0;
-            Progress = 0;
-            ErrorTraining = 0;
-            ErrorValidation = 0;
-            EpochsBySecond = 0;
-            TrainingRound = 0;
         }
     }
-
 }
