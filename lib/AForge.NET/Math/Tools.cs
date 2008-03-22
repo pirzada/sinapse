@@ -151,5 +151,29 @@ namespace AForge.Math
 			}
 			return 31;
 		}
+
+        /// <summary>
+        /// Hypotenuse calculus without overflow/underflow
+        /// </summary>
+        /// <param name="a">first value</param>
+        /// <param name="b">second value</param>
+        /// <returns>The hypotenuse Sqrt(a^2 + b^2)</returns>
+        public static double Hypotenuse(double a, double b)
+        {
+            double r = 0.0;
+
+            if (System.Math.Abs(a) > System.Math.Abs(b))
+            {
+                r = b / a;
+                r = System.Math.Abs(a) * System.Math.Sqrt(1 + r * r);
+            }
+            else if (b != 0)
+            {
+                r = a / b;
+                r = System.Math.Abs(b) * System.Math.Sqrt(1 + r * r);
+            }
+
+            return r;
+        }
 	}
 }

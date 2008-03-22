@@ -42,6 +42,8 @@ namespace Sinapse.Controls.MainTabControl
         private IPointListEdit m_currentSavepoint;
         private IPointListEdit m_savePoints;
 
+        private bool newSavepoint;
+
         private SideTabControl.SidePageTrainer m_networkTrainer;
 
 
@@ -98,7 +100,15 @@ namespace Sinapse.Controls.MainTabControl
         internal SideTabControl.SidePageTrainer NetworkTrainer
         {
             get { return this.m_networkTrainer; }
-            set { this.m_networkTrainer = value;}
+            set
+            {
+                this.m_networkTrainer = value;
+
+                if (value != null)
+                {
+                //    this.m_networkTrainer.TrainingStarted += networkTrainer_TrainingStarted;
+                }
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -162,31 +172,7 @@ namespace Sinapse.Controls.MainTabControl
 
         private void networkContainer_savepointRestored(object sender, EventArgs e)
         {
-      /*      int i;
-            
-            i = 0;
-            while (i < this.m_trainingPoints.Count)
-            {
-                if (this.m_trainingPoints[i].X > this.m_networkContainer.Savepoints.CurrentSavepoint.Epoch)
-                {
-                    this.m_trainingPoints.RemoveAt(i);
-                    this.m_validationPoints.RemoveAt(i);
-                }
-                else ++i;
-            }
-
-            i = 0;
-            while (i < this.m_savePoints.Count)
-            {
-                if (this.m_savePoints[i].X > this.m_networkContainer.Savepoints.CurrentSavepoint.Epoch)
-                {
-                    this.m_savePoints.RemoveAt(i);
-                }
-                else ++i;
-            }
-
-            this.UpdateGraph();
-       */ 
+            this.newSavepoint = true;
 
             HistoryListener.Write("Savepoint Restored!");
         }
@@ -213,15 +199,18 @@ namespace Sinapse.Controls.MainTabControl
         {
             this.m_currentSavepoint.Clear();
 
-            NetworkSavepoint sp = dataGridView.CurrentRow.DataBoundItem as NetworkSavepoint;
-
-            if (sp != null)
+            if (dataGridView.CurrentRow != null)
             {
-                this.m_currentSavepoint.Add(sp.Epoch, sp.ErrorTraining);
-                this.m_currentSavepoint.Add(sp.Epoch, sp.ErrorValidation);
-            }
+                NetworkSavepoint sp = dataGridView.CurrentRow.DataBoundItem as NetworkSavepoint;
 
-            this.UpdateGraph();
+                if (sp != null)
+                {
+                    this.m_currentSavepoint.Add(sp.Epoch, sp.ErrorTraining);
+                    this.m_currentSavepoint.Add(sp.Epoch, sp.ErrorValidation);
+                }
+
+                this.UpdateGraph();
+            }
         }
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -311,6 +300,25 @@ namespace Sinapse.Controls.MainTabControl
             this.ValidationPoints.Clear();
             this.SavePoints.Clear();
             this.UpdateGraph();
+        }
+
+
+        public void TrimGraph(int startEpoch)
+        {
+            while (this.m_trainingPoints.Count > startEpoch)
+            {
+                this.m_trainingPoints.RemoveAt(this.m_trainingPoints.Count-1);
+            }
+
+            while (this.m_validationPoints.Count > startEpoch)
+            {
+                this.m_validationPoints.RemoveAt(this.m_validationPoints.Count - 1);
+            }
+
+            while (this.m_savePoints.Count > startEpoch)
+            {
+                this.m_savePoints.RemoveAt(this.m_savePoints.Count - 1);
+            }
         }
 
         public void UpdateEnabled()

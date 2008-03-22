@@ -380,7 +380,9 @@ namespace Sinapse.Forms
 
         private void btnSaveAll_Click(object sender, EventArgs e)
         {
+            if (this.CurrentNetworkDatabase != null)
             MenuDatabaseSave_Click(sender, e);
+            if (this.CurrentNetworkContainer != null)
             MenuNetworkSave_Click(sender, e);
         }
 

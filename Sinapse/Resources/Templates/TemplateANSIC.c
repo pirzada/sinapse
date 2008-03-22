@@ -1,10 +1,12 @@
+#if DEBUG
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sinapse.Utils.Statistic
+namespace Sinapse.Resources.Templates
 {
-    internal sealed class Vector
+    class TemplateCSharp
     {
     }
 }
+#endif

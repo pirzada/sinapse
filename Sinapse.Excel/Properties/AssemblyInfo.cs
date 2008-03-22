@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sinapse.Excel")]
+[assembly: AssemblyTitle("Sinapse.ExcelExtension")]
 [assembly: AssemblyDescription("Sinapse Neural Networking Tool extension for Excel")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cSouza Company")]
-[assembly: AssemblyProduct("SinapseExcel Sinapse Neural Network Extension")]
+[assembly: AssemblyProduct("Sinapse Neural Networking Tool extension for Excel")]
 [assembly: AssemblyCopyright("Copyright © 2006-2008 Cesar Roberto de Souza")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

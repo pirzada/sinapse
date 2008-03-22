@@ -45,7 +45,7 @@ namespace Sinapse
 
 
             Application.Run(new MainForm());
-
+           
 
             Settings.Default.Save();
             Debug.Listeners.Clear();

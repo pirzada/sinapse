@@ -55,6 +55,8 @@ namespace Sinapse.Controls.SideTabControl
 
 
         internal event EventHandler TrainingComplete;
+        internal event EventHandler TrainingCancelled;
+        internal event EventHandler TrainingStarted;
         internal event EventHandler StatusChanged;       
 
 
@@ -305,13 +307,9 @@ namespace Sinapse.Controls.SideTabControl
                 options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : options.secondLearningRate = null;
 
                 if (cbTrainingLayer.SelectedIndex == 0)
-                {
                     options.TrainingVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Training);
-                }
                 else
-                {
                     options.TrainingVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Training, (ushort)cbTrainingLayer.SelectedIndex);
-                }
 
 
                 options.ValidationVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Validation);
@@ -333,10 +331,13 @@ namespace Sinapse.Controls.SideTabControl
                     this.m_graphControl.ClearGraph();
                 }
 
+                this.m_graphControl.TrimGraph(m_networkState.Epoch);
+
                 if (this.cbSwitchGraph.Checked)
-                {
                     this.m_graphControl.ShowTab();
-                }
+
+                if (this.TrainingStarted != null)
+                    this.TrainingStarted.Invoke(this, EventArgs.Empty);
 
                 // Start timer
                 this.timer.Start();
