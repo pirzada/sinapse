@@ -211,6 +211,12 @@
     <Compile Include="Data\Reporting\ReportGenerator.cs">
     </Compile>
     <Compile Include="Data\SerializableObject.cs" />
+    <Compile Include="Forms\DataAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataAnalyzer.Designer.cs">
+      <DependentUpon>DataAnalyzer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Dialogs\NewDatabaseDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +241,15 @@
     <Compile Include="Forms\SchemaMapper.Designer.cs">
       <DependentUpon>SchemaMapper.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\Templates\TemplateCpp.cpp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\TemplateANSIC.c">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\TemplateCSharp.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Settings.cs" />
     <Compile Include="Utils\CsvParser\Common.cs" />
     <Compile Include="Utils\CsvParser\Parser.cs" />
@@ -408,6 +423,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>TabPageTraining.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataAnalyzer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -481,9 +500,6 @@
     </Compile>
     <Compile Include="Utils\Patterns\Singleton.cs">
     </Compile>
-    <Compile Include="Utils\Statistic\Matrix.cs" />
-    <Compile Include="Utils\Statistic\Vector.cs" />
-    <Compile Include="Utils\Statistic\PrimaryComponentAnalysis.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -838,6 +854,9 @@
     <None Include="Resources\kformula_kfo.png" />
     <None Include="Resources\page_white_csharp.png" />
     <None Include="Resources\kdb_form.png" />
+    <None Include="Resources\Templates\TemplateJava.java">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <ItemGroup>

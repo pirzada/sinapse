@@ -153,16 +153,16 @@ namespace AForge.Math
 		/// 
 		/// <returns>Result complex number</returns>
 		/// 
-		public static Complex operator/( Complex a, Complex b )
-		{
-			double divider = b.Re * b.Re + b.Im * b.Im;
-			
-			if ( divider == 0 )
-				throw new DivideByZeroException( );
-		
-			return new Complex(
-				( a.Re * b.Re + a.Im * b.Im ) / divider,
-				( a.Im * b.Re - a.Re * b.Im ) / divider );
-		}
+        public static Complex operator /(Complex a, Complex b)
+        {
+            double divider = b.Re * b.Re + b.Im * b.Im;
+
+            if (divider == 0)
+                throw new DivideByZeroException();
+
+            return new Complex(
+                (a.Re * b.Re + a.Im * b.Im) / divider,
+                (a.Im * b.Re - a.Re * b.Im) / divider);
+        }
 	}
 }

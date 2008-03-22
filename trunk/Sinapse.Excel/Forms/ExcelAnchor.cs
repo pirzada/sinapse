@@ -25,19 +25,23 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Office.Core;
-using Microsoft.Office.Interop;
 
-namespace Sinapse.Excel.Forms
+using Sinapse.ExcelExtension.Forms.Dialogs;
+
+
+namespace Sinapse.ExcelExtension.Forms
 {
-    internal sealed partial class ExcelAnchor : Form
+
+    partial class ExcelAnchor : Form
     {
 
-        Microsoft.Office.Interop.Excel.Application excelObj;
-
+        
         public ExcelAnchor()
         {
             InitializeComponent();
+            InitializeHook();
         }
+
 
         protected override void OnLoad(EventArgs e)
         {
@@ -49,11 +53,15 @@ namespace Sinapse.Excel.Forms
                                       currentScreen.WorkingArea.Height - this.Height);
         }
 
+
+        private void MenuSinapseAbout_Click(CommandBarButton sender, ref bool cancel)
+        {
+            new AboutBox().ShowDialog(this);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            excelObj = new Microsoft.Office.Interop.Excel.Application();
-            excelObj.Visible = true;
-            
+            new AboutBox().ShowDialog(this);
         }
     }
 }

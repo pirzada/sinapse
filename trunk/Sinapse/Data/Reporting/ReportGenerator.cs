@@ -358,7 +358,7 @@ namespace Sinapse.Data.Reporting
                     
                     weightBuilder.AppendFormat("&nbsp;&nbsp;<b>Neuron #{0}:</b><br>", j + 1);
                     //weightBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;<i>Function: {0}</i>", (m_network.ActivationNetwork[i][j] as AForge.Neuro.ActivationNeuron).ActivationFunction.GetType().Name);
-                    weightBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;<i>Threshold: {0}</i><br>",(m_network.ActivationNetwork[i][j] as AForge.Neuro.ActivationNeuron).Threshold);
+                    weightBuilder.AppendFormat("&nbsp;&nbsp;&nbsp;<i>Threshold (Bias): {0}</i><br>",(m_network.ActivationNetwork[i][j] as AForge.Neuro.ActivationNeuron).Threshold);
 
 
                     for (int k = 0; k < m_network.ActivationNetwork[i][j].InputsCount; ++k)

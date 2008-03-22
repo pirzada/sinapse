@@ -18,19 +18,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 
-using Microsoft.Office.Core;
-
-
-namespace Sinapse.Excel.Data
+namespace Sinapse.Forms
 {
-
-    public sealed class ExcelExtractor
+    public partial class DataAnalyzer : Form
     {
-        
-        public ExcelExtractor()
+        public DataAnalyzer()
         {
+            InitializeComponent();
         }
     }
 }

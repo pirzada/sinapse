@@ -18,35 +18,29 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Windows.Forms;
+using System.Text;
 
-using Sinapse.ExcelExtension.Forms;
+using Microsoft.Office.Core;
+
+using Sinapse.ExcelExtension.Forms.Dialogs;
 
 
-namespace Sinapse.ExcelExtension
+namespace Sinapse.ExcelExtension.Data
 {
 
-    static class Program
+    public sealed partial class ExcelHook
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        [LoaderOptimization(LoaderOptimization.SingleDomain)]
-        static void Main()
+
+
+        public ExcelHook()
         {
-            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-
-            Application.Run(new ExcelAnchor());
-
-
-            //Settings.Default.Save();
-            Debug.Listeners.Clear();
+            this.InitializeComponent();
         }
+
+
+
+        
     }
 }
