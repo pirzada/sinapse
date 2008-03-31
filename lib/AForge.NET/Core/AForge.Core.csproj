@@ -59,8 +59,7 @@
     </ConfigurationOverrideFile>
     <DefineConstants>
     </DefineConstants>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>..\bin\Release\AForge.Core.XML</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
@@ -75,14 +74,15 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Final Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Final Release\</OutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>..\bin\Final Release\</OutputPath>
     <BaseAddress>285212672</BaseAddress>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>..\bin\Final Release\AForge.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
