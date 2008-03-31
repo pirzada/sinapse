@@ -40,11 +40,14 @@ namespace Sinapse.Data.Structures
 
         internal double momentum;
         internal double firstLearningRate;
-
         internal double? secondLearningRate;
 
         internal bool validateNetwork;
-  //    internal bool testNetwork;
+        internal bool autosaveNetwork;
+//        internal bool testNetwork;
+
+        internal int validateEpochs;
+        internal int autosaveEpochs;
 
         internal TrainingVectors TrainingVectors;
         internal TrainingVectors ValidationVectors;

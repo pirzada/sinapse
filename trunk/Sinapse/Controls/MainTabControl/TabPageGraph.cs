@@ -42,7 +42,7 @@ namespace Sinapse.Controls.MainTabControl
         private IPointListEdit m_currentSavepoint;
         private IPointListEdit m_savePoints;
 
-        private bool newSavepoint;
+ //       private bool newSavepoint;
 
         private SideTabControl.SidePageTrainer m_networkTrainer;
 
@@ -172,7 +172,7 @@ namespace Sinapse.Controls.MainTabControl
 
         private void networkContainer_savepointRestored(object sender, EventArgs e)
         {
-            this.newSavepoint = true;
+      //      this.newSavepoint = true;
 
             HistoryListener.Write("Savepoint Restored!");
         }
@@ -250,6 +250,11 @@ namespace Sinapse.Controls.MainTabControl
 
 
         #region Buttons
+        private void btnGraphSave_Click(object sender, EventArgs e)
+        {
+            this.zedGraphControl.SaveAs();
+        }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             this.UpdateGraph();
@@ -259,6 +264,18 @@ namespace Sinapse.Controls.MainTabControl
         {
             this.ClearGraph();
         }
+
+        private void btnTrim_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView.CurrentRow != null)
+            {
+                NetworkSavepoint save = (this.dataGridView.CurrentRow.DataBoundItem as NetworkSavepoint);
+
+                if (save != null)
+                    this.TrimGraph(save.Epoch);
+            }
+        }
+
 
         private void btnSavepointLoad_Click(object sender, EventArgs e)
         {
@@ -305,19 +322,33 @@ namespace Sinapse.Controls.MainTabControl
 
         public void TrimGraph(int startEpoch)
         {
-            while (this.m_trainingPoints.Count > startEpoch)
+            lock (this)
             {
-                this.m_trainingPoints.RemoveAt(this.m_trainingPoints.Count-1);
-            }
+                if (this.m_trainingPoints.Count > 0)
+                {
+                    while (this.m_trainingPoints[this.m_trainingPoints.Count - 1].X > startEpoch)
+                    {
+                        this.m_trainingPoints.RemoveAt(this.m_trainingPoints.Count - 1);
+                    }
+                }
 
-            while (this.m_validationPoints.Count > startEpoch)
-            {
-                this.m_validationPoints.RemoveAt(this.m_validationPoints.Count - 1);
-            }
+                if (this.m_validationPoints.Count > 0)
+                {
+                    while (this.m_validationPoints[this.m_validationPoints.Count - 1].X > startEpoch)
+                    {
+                        this.m_validationPoints.RemoveAt(this.m_validationPoints.Count - 1);
+                    }
+                }
 
-            while (this.m_savePoints.Count > startEpoch)
-            {
-                this.m_savePoints.RemoveAt(this.m_savePoints.Count - 1);
+                if (this.m_savePoints.Count > 0)
+                {
+                    while (this.m_savePoints[this.m_savePoints.Count - 1].X > startEpoch)
+                    {
+                        this.m_savePoints.RemoveAt(this.m_savePoints.Count - 1);
+                    }
+                }
+
+                this.UpdateGraph();
             }
         }
 

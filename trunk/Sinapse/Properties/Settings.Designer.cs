@@ -384,5 +384,17 @@ namespace Sinapse.Properties {
                 this["history_Sessions"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int training_CrossvalidationEpochs {
+            get {
+                return ((int)(this["training_CrossvalidationEpochs"]));
+            }
+            set {
+                this["training_CrossvalidationEpochs"] = value;
+            }
+        }
     }
 }

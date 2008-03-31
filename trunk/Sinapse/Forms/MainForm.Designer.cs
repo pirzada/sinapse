@@ -157,6 +157,7 @@ namespace Sinapse.Forms
             this.btnTestRound50 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTestRound75 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTestRound90 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestRoundCustom = new System.Windows.Forms.ToolStripTextBox();
             this.saveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -438,6 +439,7 @@ namespace Sinapse.Forms
             this.MenuWorkplaceClose.Name = "MenuWorkplaceClose";
             this.MenuWorkplaceClose.Size = new System.Drawing.Size(171, 22);
             this.MenuWorkplaceClose.Text = "&Close";
+            this.MenuWorkplaceClose.Click += new System.EventHandler(this.MenuWorkplaceClose_Click);
             // 
             // MenuWorkplaceSeparator
             // 
@@ -503,6 +505,7 @@ namespace Sinapse.Forms
             this.MenuSessionClose.Name = "MenuSessionClose";
             this.MenuSessionClose.Size = new System.Drawing.Size(134, 22);
             this.MenuSessionClose.Text = "&Close";
+            this.MenuSessionClose.Click += new System.EventHandler(this.MenuSessionClose_Click);
             // 
             // toolStripSeparator1
             // 
@@ -568,6 +571,7 @@ namespace Sinapse.Forms
             this.MenuFileDatabaseClose.Name = "MenuFileDatabaseClose";
             this.MenuFileDatabaseClose.Size = new System.Drawing.Size(143, 22);
             this.MenuFileDatabaseClose.Text = "&Close";
+            this.MenuFileDatabaseClose.Click += new System.EventHandler(this.MenuDatabaseClose_Click);
             // 
             // MenuDatabaseSeparator
             // 
@@ -635,6 +639,7 @@ namespace Sinapse.Forms
             this.MenuNetworkClose.Name = "MenuNetworkClose";
             this.MenuNetworkClose.Size = new System.Drawing.Size(162, 22);
             this.MenuNetworkClose.Text = "&Close";
+            this.MenuNetworkClose.Click += new System.EventHandler(this.MenuNetworkClose_Click);
             // 
             // MenuNetworkSeparator
             // 
@@ -668,7 +673,7 @@ namespace Sinapse.Forms
             // 
             this.MenuNetworkCodeGeneratorANSIC.Image = global::Sinapse.Properties.Resources.source_c;
             this.MenuNetworkCodeGeneratorANSIC.Name = "MenuNetworkCodeGeneratorANSIC";
-            this.MenuNetworkCodeGeneratorANSIC.Size = new System.Drawing.Size(152, 22);
+            this.MenuNetworkCodeGeneratorANSIC.Size = new System.Drawing.Size(122, 22);
             this.MenuNetworkCodeGeneratorANSIC.Text = "ANSI C";
             this.MenuNetworkCodeGeneratorANSIC.Click += new System.EventHandler(this.MenuNetworkCodeGeneratorANSIC_Click);
             // 
@@ -676,14 +681,14 @@ namespace Sinapse.Forms
             // 
             this.MenuNetworkCodeGeneratorCpp.Image = global::Sinapse.Properties.Resources.source_cpp;
             this.MenuNetworkCodeGeneratorCpp.Name = "MenuNetworkCodeGeneratorCpp";
-            this.MenuNetworkCodeGeneratorCpp.Size = new System.Drawing.Size(152, 22);
+            this.MenuNetworkCodeGeneratorCpp.Size = new System.Drawing.Size(122, 22);
             this.MenuNetworkCodeGeneratorCpp.Text = "C++";
             // 
             // MenuNetworkCodeGeneratorCSharp
             // 
             this.MenuNetworkCodeGeneratorCSharp.Image = global::Sinapse.Properties.Resources.page_white_csharp;
             this.MenuNetworkCodeGeneratorCSharp.Name = "MenuNetworkCodeGeneratorCSharp";
-            this.MenuNetworkCodeGeneratorCSharp.Size = new System.Drawing.Size(152, 22);
+            this.MenuNetworkCodeGeneratorCSharp.Size = new System.Drawing.Size(122, 22);
             this.MenuNetworkCodeGeneratorCSharp.Text = "C#";
             this.MenuNetworkCodeGeneratorCSharp.Click += new System.EventHandler(this.MenuNetworkCodeGeneratorCSharp_Click);
             // 
@@ -691,25 +696,25 @@ namespace Sinapse.Forms
             // 
             this.MenuNetworkCodeGeneratorJava.Image = global::Sinapse.Properties.Resources.source_java;
             this.MenuNetworkCodeGeneratorJava.Name = "MenuNetworkCodeGeneratorJava";
-            this.MenuNetworkCodeGeneratorJava.Size = new System.Drawing.Size(152, 22);
+            this.MenuNetworkCodeGeneratorJava.Size = new System.Drawing.Size(122, 22);
             this.MenuNetworkCodeGeneratorJava.Text = "Java";
             // 
             // MenuNetworkCodeGeneratorMatlab
             // 
             this.MenuNetworkCodeGeneratorMatlab.Image = global::Sinapse.Properties.Resources.kformula_kfo;
             this.MenuNetworkCodeGeneratorMatlab.Name = "MenuNetworkCodeGeneratorMatlab";
-            this.MenuNetworkCodeGeneratorMatlab.Size = new System.Drawing.Size(152, 22);
+            this.MenuNetworkCodeGeneratorMatlab.Size = new System.Drawing.Size(122, 22);
             this.MenuNetworkCodeGeneratorMatlab.Text = "Matlab";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(119, 6);
             // 
             // MenuNetworkCodeGeneratorOptions
             // 
             this.MenuNetworkCodeGeneratorOptions.Name = "MenuNetworkCodeGeneratorOptions";
-            this.MenuNetworkCodeGeneratorOptions.Size = new System.Drawing.Size(152, 22);
+            this.MenuNetworkCodeGeneratorOptions.Size = new System.Drawing.Size(122, 22);
             this.MenuNetworkCodeGeneratorOptions.Text = "Options";
             // 
             // MenuExtensionsExcel
@@ -863,7 +868,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(206, 25);
             this.toolStripMain.TabIndex = 0;
             // 
             // btnDatabaseNew
@@ -973,7 +978,7 @@ namespace Sinapse.Forms
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripTraining.Location = new System.Drawing.Point(211, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(208, 25);
+            this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
             this.toolStripTraining.TabIndex = 3;
             // 
             // btnTrainForget
@@ -1068,7 +1073,7 @@ namespace Sinapse.Forms
             this.btnTestRound});
             this.toolStripTesting.Location = new System.Drawing.Point(419, 0);
             this.toolStripTesting.Name = "toolStripTesting";
-            this.toolStripTesting.Size = new System.Drawing.Size(93, 25);
+            this.toolStripTesting.Size = new System.Drawing.Size(122, 25);
             this.toolStripTesting.TabIndex = 2;
             // 
             // btnTestCompute
@@ -1105,7 +1110,8 @@ namespace Sinapse.Forms
             this.btnTestRound25,
             this.btnTestRound50,
             this.btnTestRound75,
-            this.btnTestRound90});
+            this.btnTestRound90,
+            this.btnTestRoundCustom});
             this.btnTestRound.Image = global::Sinapse.Properties.Resources.precminus;
             this.btnTestRound.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTestRound.Name = "btnTestRound";
@@ -1116,13 +1122,13 @@ namespace Sinapse.Forms
             // 
             this.thresholdToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.thresholdToolStripMenuItem.Text = "Threshold";
             // 
             // btnTestRound10
             // 
             this.btnTestRound10.Name = "btnTestRound10";
-            this.btnTestRound10.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound10.Size = new System.Drawing.Size(160, 22);
             this.btnTestRound10.Tag = 0.1F;
             this.btnTestRound10.Text = "0.10";
             this.btnTestRound10.Click += new System.EventHandler(this.btnTestRound_Click);
@@ -1130,7 +1136,7 @@ namespace Sinapse.Forms
             // btnTestRound25
             // 
             this.btnTestRound25.Name = "btnTestRound25";
-            this.btnTestRound25.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound25.Size = new System.Drawing.Size(160, 22);
             this.btnTestRound25.Tag = 0.25F;
             this.btnTestRound25.Text = "0.25";
             this.btnTestRound25.Click += new System.EventHandler(this.btnTestRound_Click);
@@ -1138,7 +1144,7 @@ namespace Sinapse.Forms
             // btnTestRound50
             // 
             this.btnTestRound50.Name = "btnTestRound50";
-            this.btnTestRound50.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound50.Size = new System.Drawing.Size(160, 22);
             this.btnTestRound50.Tag = 0.5F;
             this.btnTestRound50.Text = "0.50";
             this.btnTestRound50.Click += new System.EventHandler(this.btnTestRound_Click);
@@ -1146,7 +1152,7 @@ namespace Sinapse.Forms
             // btnTestRound75
             // 
             this.btnTestRound75.Name = "btnTestRound75";
-            this.btnTestRound75.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound75.Size = new System.Drawing.Size(160, 22);
             this.btnTestRound75.Tag = 0.75F;
             this.btnTestRound75.Text = "0.75";
             this.btnTestRound75.Click += new System.EventHandler(this.btnTestRound_Click);
@@ -1154,10 +1160,17 @@ namespace Sinapse.Forms
             // btnTestRound90
             // 
             this.btnTestRound90.Name = "btnTestRound90";
-            this.btnTestRound90.Size = new System.Drawing.Size(141, 22);
+            this.btnTestRound90.Size = new System.Drawing.Size(160, 22);
             this.btnTestRound90.Tag = 0.9F;
             this.btnTestRound90.Text = "0.90";
             this.btnTestRound90.Click += new System.EventHandler(this.btnTestRound_Click);
+            // 
+            // btnTestRoundCustom
+            // 
+            this.btnTestRoundCustom.Name = "btnTestRoundCustom";
+            this.btnTestRoundCustom.Size = new System.Drawing.Size(100, 21);
+            this.btnTestRoundCustom.Validated += new System.EventHandler(this.btnTestRoundCustom_Validated);
+            this.btnTestRoundCustom.Validating += new System.ComponentModel.CancelEventHandler(this.btnTestRoundCustom_Validating);
             // 
             // saveDatabaseDialog
             // 
@@ -1377,5 +1390,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuWorkplaceClose;
         private System.Windows.Forms.ToolStripMenuItem MenuExtensionsExcel;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox btnTestRoundCustom;
     }
 }

@@ -51,9 +51,21 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Final Release|AnyCPU' ">
+    <OutputPath>bin\Final Release\</OutputPath>
+    <Optimize>true</Optimize>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RichTextBoxExtended, Version=1.1.3011.41103, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RichTextBoxExtended\bin\Release\RichTextBoxExtended.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -94,6 +106,12 @@
     </Compile>
     <Compile Include="Controls\MainTabControl\TabPageGraph.Designer.cs">
       <DependentUpon>TabPageGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainTabControl\TabPageNotes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainTabControl\TabPageNotes.Designer.cs">
+      <DependentUpon>TabPageNotes.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MainTabControl\TabPageQuery.cs">
       <SubType>UserControl</SubType>
@@ -362,6 +380,10 @@
     <EmbeddedResource Include="Controls\MainTabControl\TabPageGraph.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageNotes.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabPageNotes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainTabControl\TabPageQuery.resx">
       <SubType>Designer</SubType>

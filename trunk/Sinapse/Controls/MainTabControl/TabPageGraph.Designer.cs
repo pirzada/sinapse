@@ -29,12 +29,15 @@ namespace Sinapse.Controls.MainTabControl
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.zedGraphControl = new ZedGraph.ZedGraphControl();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.colEpoch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTraining = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValidation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.numRate = new System.Windows.Forms.NumericUpDown();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -45,9 +48,7 @@ namespace Sinapse.Controls.MainTabControl
             this.cbAutoscroll = new System.Windows.Forms.CheckBox();
             this.cbAutoupdate = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.colEpoch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTraining = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValidation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTrim = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRate)).BeginInit();
@@ -110,6 +111,32 @@ namespace Sinapse.Controls.MainTabControl
             this.dataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
             this.dataGridView.CurrentCellChanged += new System.EventHandler(this.dataGridView_CurrentCellChanged);
             // 
+            // colEpoch
+            // 
+            this.colEpoch.DataPropertyName = "Epoch";
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colEpoch.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colEpoch.HeaderText = "Epoch";
+            this.colEpoch.Name = "colEpoch";
+            // 
+            // colTraining
+            // 
+            this.colTraining.DataPropertyName = "ErrorTraining";
+            dataGridViewCellStyle2.Format = "N4";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colTraining.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colTraining.HeaderText = "Training";
+            this.colTraining.Name = "colTraining";
+            // 
+            // colValidation
+            // 
+            this.colValidation.DataPropertyName = "ErrorValidation";
+            dataGridViewCellStyle3.Format = "N4";
+            this.colValidation.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colValidation.HeaderText = "Validation";
+            this.colValidation.Name = "colValidation";
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -170,7 +197,7 @@ namespace Sinapse.Controls.MainTabControl
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(314, 378);
+            this.btnClear.Location = new System.Drawing.Point(233, 378);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 21);
             this.btnClear.TabIndex = 9;
@@ -244,31 +271,17 @@ namespace Sinapse.Controls.MainTabControl
             this.cbAutoupdate.Text = "Auto-update every";
             this.cbAutoupdate.UseVisualStyleBackColor = true;
             // 
-            // colEpoch
+            // btnTrim
             // 
-            this.colEpoch.DataPropertyName = "Epoch";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colEpoch.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colEpoch.HeaderText = "Epoch";
-            this.colEpoch.Name = "colEpoch";
-            // 
-            // colTraining
-            // 
-            this.colTraining.DataPropertyName = "ErrorTraining";
-            dataGridViewCellStyle5.Format = "N4";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colTraining.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colTraining.HeaderText = "Training";
-            this.colTraining.Name = "colTraining";
-            // 
-            // colValidation
-            // 
-            this.colValidation.DataPropertyName = "ErrorValidation";
-            dataGridViewCellStyle6.Format = "N4";
-            this.colValidation.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colValidation.HeaderText = "Validation";
-            this.colValidation.Name = "colValidation";
+            this.btnTrim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTrim.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrim.Location = new System.Drawing.Point(314, 378);
+            this.btnTrim.Name = "btnTrim";
+            this.btnTrim.Size = new System.Drawing.Size(75, 21);
+            this.btnTrim.TabIndex = 9;
+            this.btnTrim.Text = "Trim";
+            this.btnTrim.UseVisualStyleBackColor = true;
+            this.btnTrim.Click += new System.EventHandler(this.btnTrim_Click);
             // 
             // TabPageGraph
             // 
@@ -279,6 +292,7 @@ namespace Sinapse.Controls.MainTabControl
             this.Controls.Add(this.btnSavepointMark);
             this.Controls.Add(this.btnSavepointLoad);
             this.Controls.Add(this.btnSavepointClear);
+            this.Controls.Add(this.btnTrim);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.label1);
@@ -316,5 +330,6 @@ namespace Sinapse.Controls.MainTabControl
         private System.Windows.Forms.DataGridViewTextBoxColumn colEpoch;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTraining;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValidation;
+        private System.Windows.Forms.Button btnTrim;
     }
 }

@@ -117,10 +117,12 @@ namespace Sinapse.Controls.SideTabControl
                 }
                 else
                 {
-                    this.m_networkState = new TrainingStatus();
-                    this.m_trainingPaused = false;
-                    this.m_graphControl.ClearGraph();
+
                 }
+
+                this.m_networkState = new TrainingStatus();
+                this.m_trainingPaused = false;
+                this.m_graphControl.ClearGraph();
 
                 this.updateEnabled();
                 this.updateStatus();
@@ -304,7 +306,7 @@ namespace Sinapse.Controls.SideTabControl
                 options.limError = (double)numErrorLimit.Value;
                 options.limEpoch = (int)numEpochLimit.Value;
                 options.validateNetwork = cbValidate.Checked;
-                options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : options.secondLearningRate = null;
+                options.secondLearningRate = cbChangeRate.Checked ? (double?)numChangeRate.Value : null;
 
                 if (cbTrainingLayer.SelectedIndex == 0)
                     options.TrainingVectors = this.NetworkDatabase.CreateVectors(NetworkSet.Training);
@@ -321,14 +323,29 @@ namespace Sinapse.Controls.SideTabControl
                 else if (rbManual.Checked)
                     options.TrainingType = TrainingType.Manual;
 
-
+               /* //foreach (Double[] inputs in options.TrainingVectors.Input)
+                //{
+                    String str = String.Empty;
+                    foreach (Double input in options.TrainingVectors.Input[0])
+                    {
+                        str += input + " ";
+                    }
+                    MessageBox.Show(str);
+                    str = String.Empty;
+                    foreach (Double input in options.TrainingVectors.Output[0])
+                    {
+                        str += input + " ";
+                    }
+                    MessageBox.Show(str);
+                //}
+              */
                 if (this.m_trainingPaused)
                 {   // Network is paused, then
                     this.m_trainingPaused = false;
                 }
                 else
                 {   // Network is stopped, then
-                    this.m_graphControl.ClearGraph();
+           //         this.m_graphControl.ClearGraph();
                 }
 
                 this.m_graphControl.TrimGraph(m_networkState.Epoch);
