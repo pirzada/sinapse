@@ -385,34 +385,15 @@ namespace Sinapse.Forms
             if (this.CurrentNetworkContainer != null)
             MenuNetworkSave_Click(sender, e);
         }
-
-        private void MenuFileCloseNetwork_Click(object sender, EventArgs e)
-        {
-            this.CurrentNetworkContainer = null;
-            HistoryListener.Write("Network Closed");
-        }
-
-        private void MenuFileCloseDatabase_Click(object sender, EventArgs e)
-        {
-            this.CurrentNetworkDatabase = null;
-            HistoryListener.Write("Database Closed");
-        }
-
-        private void MenuFileCloseWorkplace_Click(object sender, EventArgs e)
-        {
-            this.CurrentNetworkWorkplace = null;
-            HistoryListener.Write("Workplace Closed");
-        }
-
-        private void MenuFileCloseSession_Click(object sender, EventArgs e)
-        {
-            this.CurrentTrainingSession = null;
-            HistoryListener.Write("Training Session Closed");
-        }
         #endregion
 
         
         #region Menu Workplace
+        private void MenuWorkplaceClose_Click(object sender, EventArgs e)
+        {
+            this.CurrentNetworkWorkplace = null;
+            HistoryListener.Write("Workplace Closed");
+        }
         #endregion
 
 
@@ -443,6 +424,12 @@ namespace Sinapse.Forms
         {
 
         }
+
+        private void MenuSessionClose_Click(object sender, EventArgs e)
+        {
+            this.CurrentTrainingSession = null;
+            HistoryListener.Write("Training Session Closed");
+        }
         #endregion
 
 
@@ -470,6 +457,12 @@ namespace Sinapse.Forms
         private void MenuDatabaseEdit_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MenuDatabaseClose_Click(object sender, EventArgs e)
+        {
+            this.CurrentNetworkDatabase = null;
+            HistoryListener.Write("Database Closed");
         }
         #endregion
 
@@ -529,6 +522,12 @@ namespace Sinapse.Forms
         private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
         {
             new NetworkInspectorDialog(CurrentNetworkContainer).ShowDialog(this);
+        }
+
+        private void MenuNetworkClose_Click(object sender, EventArgs e)
+        {
+            this.CurrentNetworkContainer = null;
+            HistoryListener.Write("Network Closed");
         }
 
 
@@ -628,9 +627,9 @@ namespace Sinapse.Forms
 
         private void btnTestRound_Click(object sender, EventArgs e)
         {
-            if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
+            /*if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
                 this.tabControlMain.TestingSetControl.ShowTab();
-
+            */
             ToolStripMenuItem item = (sender as ToolStripMenuItem);
             
             if (item.Tag is Single)
@@ -642,6 +641,30 @@ namespace Sinapse.Forms
                 else if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageQuery)
                     this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
             }
+        }
+
+        private void btnTestRoundCustom_Validating(object sender, CancelEventArgs e)
+        {
+            if (this.btnTestRoundCustom.Text.Length > 0)
+            {
+                Single v;
+                e.Cancel = Single.TryParse(this.btnTestRoundCustom.Text, out v);
+            }
+        }
+
+        private void btnTestRoundCustom_Validated(object sender, EventArgs e)
+        {
+            /*if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
+                this.tabControlMain.TestingSetControl.ShowTab();
+            */
+
+            Single value = Single.Parse(btnTestRoundCustom.Text);
+
+            if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageTesting)
+                this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
+            else if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageQuery)
+                this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
+
         }
         #endregion
 

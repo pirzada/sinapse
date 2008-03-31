@@ -66,8 +66,9 @@ namespace Sinapse.Forms.Dialogs
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.DefaultExt = "htm";
+            this.saveFileDialog.DefaultExt = "html";
             this.saveFileDialog.FileName = "Sinapse Report";
+            this.saveFileDialog.Filter = "HTML Files (*.html)|*.html|All Files (*.*)|*.*";
             this.saveFileDialog.Title = "Save Report As";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 

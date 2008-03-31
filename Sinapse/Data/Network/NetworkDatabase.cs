@@ -135,7 +135,7 @@ namespace Sinapse.Data.Network
 
 
         //----------------------------------------
-        
+
 
         #region Object Events
         private void OnDatabaseChanged()
@@ -146,8 +146,8 @@ namespace Sinapse.Data.Network
             this.m_hasUnsavedChanges = true;
         }
         #endregion
-        
-        
+
+
         //----------------------------------------
 
 
@@ -193,7 +193,7 @@ namespace Sinapse.Data.Network
                         ColumnRoleId, (ushort)NetworkSet.Testing);
                     break;
 
-                
+
                 case NetworkSet.Training:
                     strQuery = String.Format("[{0}] = {1}",
                     ColumnRoleId, (ushort)NetworkSet.Training);
@@ -205,7 +205,7 @@ namespace Sinapse.Data.Network
                     }
                     break;
 
-             
+
                 case NetworkSet.Validation:
                     strQuery = String.Format("[{0}] = {1}",
                         ColumnRoleId, (ushort)NetworkSet.Validation);
@@ -218,7 +218,7 @@ namespace Sinapse.Data.Network
             vectors.Input = new double[query.Length][];
             vectors.Output = new double[query.Length][];
 
-            for (int i = 0; i < query.Length; ++i)
+            for (int i = 0; i < query.Length; i++)
             {
                 vectors.Input[i] = this.NormalizeRow(query[i], m_networkSchema.InputColumns);
                 vectors.Output[i] = this.NormalizeRow(query[i], m_networkSchema.OutputColumns);
@@ -265,8 +265,6 @@ namespace Sinapse.Data.Network
                 }
             }
 
-
-            //return (data - range.Min) / (range.Max - range.Min);
             return this.m_networkSchema.DataRanges.Normalize(data, columnName);
         }
 
@@ -420,9 +418,9 @@ namespace Sinapse.Data.Network
 
         internal double Score(string column)
         {
-            DataRow[] selectedRows = m_dataTable.Select(String.Format("[{0}] = {1}",ColumnRoleId, (ushort)NetworkSet.Testing));
+            DataRow[] selectedRows = m_dataTable.Select(String.Format("[{0}] = {1}", ColumnRoleId, (ushort)NetworkSet.Testing));
 
-            double sum=0;
+            double sum = 0;
             foreach (DataRow row in selectedRows)
             {
                 sum += Double.Parse((string)row[column]);

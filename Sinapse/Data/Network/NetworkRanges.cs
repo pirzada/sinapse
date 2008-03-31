@@ -167,18 +167,36 @@ namespace Sinapse.Data.Network
 
         public double Normalize(double rawData, string column)
         {
-            DoubleRange rawRange = this.GetRange(column);
-            DoubleRange norRange = this.ActivationFunctionRange;
+            DataRow row = this.dataRanges.Rows.Find(column);
+            if (row["Normalize"].Equals(true))
+            {
 
-            return ((rawData - rawRange.Min) * (norRange.Length) / (rawRange.Length)) + norRange.Min;
+                DoubleRange rawRange = this.GetRange(column);
+                DoubleRange norRange = this.ActivationFunctionRange;
+
+                return ((rawData - rawRange.Min) * (norRange.Length) / (rawRange.Length)) + norRange.Min;
+            }
+            else
+            {
+                return rawData;
+            }
         }
 
         public double Revert(double normalizedData, string column)
         {
-            DoubleRange rawRange = this.GetRange(column);
-            DoubleRange norRange = this.ActivationFunctionRange;
+            DataRow row = this.dataRanges.Rows.Find(column);
+            if (row["Normalize"].Equals(true))
+            {
 
-            return ((normalizedData - norRange.Min) * (rawRange.Length) / norRange.Length) + rawRange.Min;
+                DoubleRange rawRange = this.GetRange(column);
+                DoubleRange norRange = this.ActivationFunctionRange;
+
+                return ((normalizedData - norRange.Min) * (rawRange.Length) / norRange.Length) + rawRange.Min;
+            }
+            else
+            {
+                return normalizedData;
+            }
         }
 
         public void AutodetectRanges(DataTable dataTable)
@@ -194,8 +212,29 @@ namespace Sinapse.Data.Network
                 }
                 else
                 {
-                    row["Max"] = dataTable.Compute(String.Format("MAX([{0}])", columnName), "");
-                    row["Min"] = dataTable.Compute(String.Format("MIN([{0}])", columnName), "");
+                  // This does not work with the current string column implementation.
+                  // TODO: implement proper typing ASAP
+                  // This implementation cannot be changed now because it would imply
+                  // in a loss of work for the current research.
+                  //   row["Max"] = dataTable.Compute(String.Format("MAX([{0}])", columnName), String.Empty);
+                  //   row["Min"] = dataTable.Compute(String.Format("MIN([{0}])", columnName), String.Empty);
+
+                  // Workaround:
+                    Double max = Double.MinValue;
+                    Double min = Double.MaxValue;
+                    Double value = 0;
+                    
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        value = Double.Parse((string)dataTable.Rows[i][columnName]);
+                        if (value > max)
+                            max = value;
+                        if (value < min)
+                            min = value;
+                    }
+
+                    row["Max"] = max;
+                    row["Min"] = min;
                 }
             }
         }

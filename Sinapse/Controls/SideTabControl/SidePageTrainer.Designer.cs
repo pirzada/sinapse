@@ -42,6 +42,7 @@ namespace Sinapse.Controls.SideTabControl
             this.cbTrainingLayer = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.rbManual = new System.Windows.Forms.RadioButton();
             this.rbErrorLimit = new System.Windows.Forms.RadioButton();
@@ -58,6 +59,7 @@ namespace Sinapse.Controls.SideTabControl
             this.numMomentum = new System.Windows.Forms.NumericUpDown();
             this.cbChangeRate = new System.Windows.Forms.CheckBox();
             this.numLayerAutoSwitch = new System.Windows.Forms.NumericUpDown();
+            this.numCrossvalidate = new System.Windows.Forms.NumericUpDown();
             this.numAutoSave = new System.Windows.Forms.NumericUpDown();
             this.numEpochLimit = new System.Windows.Forms.NumericUpDown();
             this.numErrorLimit = new System.Windows.Forms.NumericUpDown();
@@ -68,6 +70,7 @@ namespace Sinapse.Controls.SideTabControl
             ((System.ComponentModel.ISupportInitialize)(this.numChangeRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMomentum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLayerAutoSwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCrossvalidate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).BeginInit();
@@ -178,6 +181,7 @@ namespace Sinapse.Controls.SideTabControl
             this.panel.Controls.Add(this.cbTrainingLayer);
             this.panel.Controls.Add(this.label6);
             this.panel.Controls.Add(this.label3);
+            this.panel.Controls.Add(this.label7);
             this.panel.Controls.Add(this.label1);
             this.panel.Controls.Add(this.label2);
             this.panel.Controls.Add(this.rbManual);
@@ -195,6 +199,7 @@ namespace Sinapse.Controls.SideTabControl
             this.panel.Controls.Add(this.numMomentum);
             this.panel.Controls.Add(this.cbChangeRate);
             this.panel.Controls.Add(this.numLayerAutoSwitch);
+            this.panel.Controls.Add(this.numCrossvalidate);
             this.panel.Controls.Add(this.numAutoSave);
             this.panel.Controls.Add(this.numEpochLimit);
             this.panel.Controls.Add(this.numErrorLimit);
@@ -227,17 +232,27 @@ namespace Sinapse.Controls.SideTabControl
             this.label3.AutoSize = true;
             this.label3.Enabled = false;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(93, 362);
+            this.label3.Location = new System.Drawing.Point(93, 377);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 50;
             this.label3.Text = "epochs";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(95, 292);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 12);
+            this.label7.TabIndex = 50;
+            this.label7.Text = "epochs";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(95, 319);
+            this.label1.Location = new System.Drawing.Point(95, 334);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 50;
@@ -279,18 +294,13 @@ namespace Sinapse.Controls.SideTabControl
             // 
             this.numLearningRate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.numLearningRate.DecimalPlaces = 3;
+            this.numLearningRate.DecimalPlaces = 5;
             this.numLearningRate.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
             this.numLearningRate.Location = new System.Drawing.Point(126, 134);
-            this.numLearningRate.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
             this.numLearningRate.Name = "numLearningRate";
             this.numLearningRate.Size = new System.Drawing.Size(78, 20);
             this.numLearningRate.TabIndex = 37;
@@ -319,7 +329,7 @@ namespace Sinapse.Controls.SideTabControl
             // 
             this.numChangeRate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.numChangeRate.DecimalPlaces = 3;
+            this.numChangeRate.DecimalPlaces = 5;
             this.numChangeRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numChangeRate.Increment = new decimal(new int[] {
             1,
@@ -327,11 +337,6 @@ namespace Sinapse.Controls.SideTabControl
             0,
             65536});
             this.numChangeRate.Location = new System.Drawing.Point(126, 157);
-            this.numChangeRate.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
             this.numChangeRate.Name = "numChangeRate";
             this.numChangeRate.Size = new System.Drawing.Size(78, 18);
             this.numChangeRate.TabIndex = 38;
@@ -382,7 +387,7 @@ namespace Sinapse.Controls.SideTabControl
             this.cbAutosave.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAutosave.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "training_Autosave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbAutosave.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbAutosave.Location = new System.Drawing.Point(11, 302);
+            this.cbAutosave.Location = new System.Drawing.Point(11, 317);
             this.cbAutosave.Name = "cbAutosave";
             this.cbAutosave.Size = new System.Drawing.Size(165, 16);
             this.cbAutosave.TabIndex = 46;
@@ -396,7 +401,7 @@ namespace Sinapse.Controls.SideTabControl
             this.cbLayerAutoSwitch.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "training_LayerAutoSwitch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbLayerAutoSwitch.Enabled = false;
             this.cbLayerAutoSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbLayerAutoSwitch.Location = new System.Drawing.Point(9, 345);
+            this.cbLayerAutoSwitch.Location = new System.Drawing.Point(9, 360);
             this.cbLayerAutoSwitch.Name = "cbLayerAutoSwitch";
             this.cbLayerAutoSwitch.Size = new System.Drawing.Size(183, 16);
             this.cbLayerAutoSwitch.TabIndex = 46;
@@ -413,14 +418,14 @@ namespace Sinapse.Controls.SideTabControl
             this.cbValidate.Name = "cbValidate";
             this.cbValidate.Size = new System.Drawing.Size(169, 36);
             this.cbValidate.TabIndex = 46;
-            this.cbValidate.Text = "Enable network cross-validation (needs validation data)";
+            this.cbValidate.Text = "Enable network cross-validation (needs validation data) every";
             this.cbValidate.UseVisualStyleBackColor = true;
             // 
             // numMomentum
             // 
             this.numMomentum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.numMomentum.DecimalPlaces = 3;
+            this.numMomentum.DecimalPlaces = 5;
             this.numMomentum.Increment = new decimal(new int[] {
             1,
             0,
@@ -428,7 +433,7 @@ namespace Sinapse.Controls.SideTabControl
             65536});
             this.numMomentum.Location = new System.Drawing.Point(126, 181);
             this.numMomentum.Maximum = new decimal(new int[] {
-            1000,
+            1,
             0,
             0,
             0});
@@ -459,7 +464,7 @@ namespace Sinapse.Controls.SideTabControl
             0,
             0,
             0});
-            this.numLayerAutoSwitch.Location = new System.Drawing.Point(30, 363);
+            this.numLayerAutoSwitch.Location = new System.Drawing.Point(30, 378);
             this.numLayerAutoSwitch.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -478,6 +483,35 @@ namespace Sinapse.Controls.SideTabControl
             this.numLayerAutoSwitch.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.numLayerAutoSwitch.Value = global::Sinapse.Properties.Settings.Default.training_LayerAutoSwitchEpochs;
             // 
+            // numCrossvalidate
+            // 
+            this.numCrossvalidate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numCrossvalidate.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sinapse.Properties.Settings.Default, "training_CrossvalidationEpochs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numCrossvalidate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numCrossvalidate.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.numCrossvalidate.Location = new System.Drawing.Point(32, 293);
+            this.numCrossvalidate.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numCrossvalidate.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCrossvalidate.Name = "numCrossvalidate";
+            this.numCrossvalidate.Size = new System.Drawing.Size(57, 14);
+            this.numCrossvalidate.TabIndex = 41;
+            this.numCrossvalidate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCrossvalidate.ThousandsSeparator = true;
+            this.numCrossvalidate.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.numCrossvalidate.Value = global::Sinapse.Properties.Settings.Default.training_CrossvalidationEpochs;
+            // 
             // numAutoSave
             // 
             this.numAutoSave.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -488,7 +522,7 @@ namespace Sinapse.Controls.SideTabControl
             0,
             0,
             0});
-            this.numAutoSave.Location = new System.Drawing.Point(32, 320);
+            this.numAutoSave.Location = new System.Drawing.Point(32, 335);
             this.numAutoSave.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -537,7 +571,7 @@ namespace Sinapse.Controls.SideTabControl
             // 
             this.numErrorLimit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.numErrorLimit.DecimalPlaces = 4;
+            this.numErrorLimit.DecimalPlaces = 5;
             this.numErrorLimit.Location = new System.Drawing.Point(126, 74);
             this.numErrorLimit.Maximum = new decimal(new int[] {
             10000,
@@ -577,6 +611,7 @@ namespace Sinapse.Controls.SideTabControl
             ((System.ComponentModel.ISupportInitialize)(this.numChangeRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMomentum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLayerAutoSwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCrossvalidate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEpochLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numErrorLimit)).EndInit();
@@ -620,5 +655,7 @@ namespace Sinapse.Controls.SideTabControl
         private System.Windows.Forms.NumericUpDown numLayerAutoSwitch;
         private System.Windows.Forms.RadioButton rbManual;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numCrossvalidate;
     }
 }
