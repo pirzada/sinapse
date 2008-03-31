@@ -1,8 +1,0 @@
-bin\Debug\AForge.Math.dll
-bin\Debug\AForge.Math.pdb
-bin\Debug\AForge.Math.xml
-bin\Debug\AForge.dll
-bin\Debug\AForge.pdb
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\AForge.Math.dll
-obj\Debug\AForge.Math.pdb
