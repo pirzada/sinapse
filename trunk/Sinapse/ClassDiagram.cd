@@ -1,0 +1,718 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Sinapse.Controls.Base.TabPageControlBase" Collapsed="true">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\Base\TabPageControlBase.cs</FileName>
+      <HashCode>AQACAAAAAAAAAAAAAAAAAIgAAEAABAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.ReportColumnOptionControl" Collapsed="true">
+    <Position X="45.25" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Controls\ReportColumnOptionControl.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAQAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.StatusBarControl" Collapsed="true">
+    <Position X="31" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\StatusBarControl.cs</FileName>
+      <HashCode>gMEACQAQACAAIAAAwACAAAACAEgAIQACCAABIQAAAEE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.Base.TabPageDataControlBase" Collapsed="true">
+    <Position X="16" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\Base\TabPageDataControlBase.cs</FileName>
+      <HashCode>ANEUBImCEzwAEEgQCRaR4gBKQJEQBJFAMAQABIAigkI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.MainTabControl" Collapsed="true">
+    <Position X="17.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\MainTabControl.cs</FileName>
+      <HashCode>BBCBRAGAASAwAEARBICAgAACAAYIAEAiAAAAAAAAAFA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_tabGraph" />
+      <Field Name="m_tabQuery" />
+      <Field Name="m_tabTesting" />
+      <Field Name="m_tabTraining" />
+      <Field Name="m_tabValidation" />
+    </ShowAsAssociation>
+    <AssociationLine Name="m_tabGraph" Type="Sinapse.Controls.MainTabControl.TabPageGraph" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="18.75" Y="6.812" />
+        <Point X="22" Y="6.812" />
+        <Point X="22" Y="5.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_tabQuery" Type="Sinapse.Controls.MainTabControl.TabPageQuery" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.25" Y="6.75" />
+        <Point X="14.156" Y="6.75" />
+        <Point X="14.156" Y="5.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_tabTesting" Type="Sinapse.Controls.MainTabControl.TabPageTesting" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.562" Y="6.75" />
+        <Point X="17.562" Y="5.966" />
+        <Point X="16" Y="5.966" />
+        <Point X="16" Y="5.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_tabValidation" Type="Sinapse.Controls.MainTabControl.TabPageValidation" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="18.438" Y="6.75" />
+        <Point X="18.438" Y="5.966" />
+        <Point X="20" Y="5.966" />
+        <Point X="20" Y="5.38" />
+      </Path>
+    </AssociationLine>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.TabPageGraph" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\TabPageGraph.cs</FileName>
+      <HashCode>AEAMgAI0RSAAIFgYGATAABAKgBBAJBJgIAADAkihKAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.TabPageNotes" Collapsed="true">
+    <Position X="23.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\TabPageNotes.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAACACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.TabPageQuery" Collapsed="true">
+    <Position X="13.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\TabPageQuery.cs</FileName>
+      <HashCode>ABAAAEAAACAAAAAAAACBAAACAAAAAAAAAAAAIAAIAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.TabPageTesting" Collapsed="true">
+    <Position X="15.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\TabPageTesting.cs</FileName>
+      <HashCode>AFAAAFAAECAAEAAgAACBEAACgAAAAACAAABAIAAIAAE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.TabPageTraining" Collapsed="true">
+    <Position X="17.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\TabPageTraining.cs</FileName>
+      <HashCode>AAAAAAAAADAAEAABAACBQAACABAAAAAiAMAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.MainTabControl.TabPageValidation" Collapsed="true">
+    <Position X="19.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\MainTabControl\TabPageValidation.cs</FileName>
+      <HashCode>AAAAAAAAACAAEAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.NetworkInspector.Base.InspectorPanelBase" Collapsed="true">
+    <Position X="14.25" Y="12.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Controls\NetworkInspector\Base\InspectorPanelBase.cs</FileName>
+      <HashCode>AAAAABAgACAAAAAAAICAAAACACIAgAAAAAAAAAABAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.NetworkInspector.InspectorLayerDetails" Collapsed="true">
+    <Position X="12.25" Y="14.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\NetworkInspector\InspectorLayerDetails.cs</FileName>
+      <HashCode>AAAAAAAEACABgAAAABCAAoACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.NetworkInspector.InspectorNetworkDetails" Collapsed="true">
+    <Position X="14.25" Y="14.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Controls\NetworkInspector\InspectorNetworkDetails.cs</FileName>
+      <HashCode>AAAEAAAAACABAAAAABCABoACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.NetworkInspector.InspectorNeuronDetails" Collapsed="true">
+    <Position X="16.5" Y="14.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Controls\NetworkInspector\InspectorNeuronDetails.cs</FileName>
+      <HashCode>AAAAAAAAACIBAAAAABCABoACAAAAAAAAAAAAACAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SidePageDisplay" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SidePageDisplay.cs</FileName>
+      <HashCode>AAQEBAgAASSCAQAAkBKAAMCCACAAAQoQAAAJAQAhAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SidePageReport" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SidePageReport.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SidePageSchema" Collapsed="true">
+    <Position X="0.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SidePageSchema.cs</FileName>
+      <HashCode>AAAAAAAAACAAAFGAAASAgEAiAAAAAQBAAQAYAQCACAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SidePageSolutionExplorer" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SidePageSolutionExplorer.cs</FileName>
+      <HashCode>AgAAAAAAACAQCAABQgCAAAACCACAAQQAAAEAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SidePageTrainer" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SidePageTrainer.cs</FileName>
+      <HashCode>IASmgAIICWAgURoAEATA6JACwcHEApnAJiQAQQSAAAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SidePageWorkplace" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SidePageWorplace.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Controls.SideTabControl.SideTabControl" Collapsed="true">
+    <Position X="5.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\SideTabControl\SideTabControl.cs</FileName>
+      <HashCode>AEIAAAABISAACAADEACgkAACAAIIAACSAAAAAIQAgAE=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="sidePageDisplay" />
+      <Field Name="sidePageExplorer" />
+      <Field Name="sidePageRanges" />
+      <Field Name="sidePageTrainer" />
+      <Field Name="sidePageWorkplace" />
+      <Field Name="tabReport" />
+    </ShowAsAssociation>
+    <AssociationLine Name="sidePageDisplay" Type="Sinapse.Controls.SideTabControl.SidePageDisplay" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="5.812" />
+        <Point X="9.25" Y="5.812" />
+        <Point X="9.25" Y="4.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="sidePageExplorer" Type="Sinapse.Controls.SideTabControl.SidePageSolutionExplorer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.812" Y="5.812" />
+        <Point X="3.5" Y="5.812" />
+        <Point X="3.5" Y="4.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="sidePageRanges" Type="Sinapse.Controls.SideTabControl.SidePageSchema" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="6.187" />
+        <Point X="1.5" Y="6.187" />
+        <Point X="1.5" Y="4.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="sidePageTrainer" Type="Sinapse.Controls.SideTabControl.SidePageTrainer" FixedFromPoint="true">
+      <Path>
+        <Point X="6.312" Y="5.75" />
+        <Point X="6.312" Y="5.375" />
+        <Point X="5.5" Y="5.375" />
+        <Point X="5.5" Y="4.38" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="sidePageWorkplace" Type="Sinapse.Controls.SideTabControl.SidePageWorkplace" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.625" Y="5.75" />
+        <Point X="6.625" Y="5.375" />
+        <Point X="7.375" Y="5.375" />
+        <Point X="7.375" Y="4.38" />
+      </Path>
+    </AssociationLine>
+  </Class>
+  <Class Name="Sinapse.Data.CodeGeneration.CGenerator" Collapsed="true">
+    <Position X="3.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\CodeGeneration\CANSI.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Sinapse.Data.CodeGeneration.CodeGenerator" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="8.509" />
+        <Point X="6.75" Y="9.125" />
+        <Point X="4.438" Y="9.125" />
+        <Point X="4.438" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Sinapse.Data.CodeGeneration.CodeGenerator" Collapsed="true">
+    <Position X="6" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\CodeGeneration\CodeGenerator.cs</FileName>
+      <HashCode>AEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAEQIAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.CodeGeneration.CppGenerator" Collapsed="true">
+    <Position X="6" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\CodeGeneration\CPlusPlus.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Sinapse.Data.CodeGeneration.CodeGenerator" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="8.509" />
+        <Point X="6.75" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Sinapse.Data.CodeGeneration.CSharpGenerator" Collapsed="true">
+    <Position X="8.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\CodeGeneration\CSharp.cs</FileName>
+      <HashCode>AAAAogAAAAggAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Sinapse.Data.CodeGeneration.CodeGenerator" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="8.509" />
+        <Point X="6.75" Y="9.125" />
+        <Point X="9" Y="9.125" />
+        <Point X="9" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Sinapse.Data.CodeGeneration.JavaGenerator" Collapsed="true">
+    <Position X="10.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\CodeGeneration\Java.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Sinapse.Data.CodeGeneration.CodeGenerator" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="8.509" />
+        <Point X="6.75" Y="9.125" />
+        <Point X="11.188" Y="9.125" />
+        <Point X="11.188" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Sinapse.Data.CodeGeneration.MatlabGenerator" Collapsed="true">
+    <Position X="1.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\CodeGeneration\Matlab.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Sinapse.Data.CodeGeneration.CodeGenerator" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="8.509" />
+        <Point X="6.75" Y="9.125" />
+        <Point X="2.188" Y="9.125" />
+        <Point X="2.188" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Sinapse.Data.Logging.HistoryEvent" Collapsed="true">
+    <Position X="36.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Logging\HistoryEvent.cs</FileName>
+      <HashCode>ABAAAAAABAARAAAEEAAAAAAAAAAAAAAIAAAAAAAAAQQ=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Visible" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sinapse.Data.Logging.HistoryEventCollection" Collapsed="true">
+    <Position X="36.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Logging\HistoryEvent.cs</FileName>
+      <HashCode>AAIAAAAAAAACAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.HistoryListener" Collapsed="true">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Logging\HistoryListener.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.SerializableObject&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\SerializableObject.cs</FileName>
+      <HashCode>AAAAACABAAAEQAAAAAAAAAgAACBAAAAACACAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.DataCategory" Collapsed="true">
+    <Position X="25.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\DataCategory.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAABAAAAAAAAAACAAAABgAAAAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.DataCategoryCollection" Collapsed="true">
+    <Position X="25.5" Y="12" Width="2" />
+    <TypeIdentifier>
+      <FileName>Data\Network\DataCategory.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkCaptions" Collapsed="true">
+    <Position X="29.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkCaptions.cs</FileName>
+      <HashCode>AAAAABAAAAAIgAAAAAAAgAABAQAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkColumn" Collapsed="true">
+    <Position X="23.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkColumn.cs</FileName>
+      <HashCode>BAAAAAQIAAAACBAAAAAAAAQAAAAEAAAAAAAIAAAAGAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ColumnRole" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkColumnCollection" Collapsed="true">
+    <Position X="23" Y="12" Width="2" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkContainer" Collapsed="true">
+    <Position X="4.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkContainer.cs</FileName>
+      <HashCode>AgAgEAghAAIiQRECAAACCAZEAQABgAAMAQAAgIBAEAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkDatabase" Collapsed="true">
+    <Position X="8.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkDatabase.cs</FileName>
+      <HashCode>JpBEAAgACAAgQAgAAEBMAAAEAgNAAEAIAACIAAoAEIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkRanges" Collapsed="true">
+    <Position X="29.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkRanges.cs</FileName>
+      <HashCode>AAEBAAAAAAAAAAAAEAAAQCAAAgAAAEQAAEgAAAARAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkSavepoint" Collapsed="true">
+    <Position X="32" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkSavepoint.cs</FileName>
+      <HashCode>ABAAAAIBAAAAAAgAAAAAAAAAAQAAAAAAAAAggEAAQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkSavepointCollection" Collapsed="true">
+    <Position X="32" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkSavepoint.cs</FileName>
+      <HashCode>AAAEAAABAEAAgAAAAAACIAAAABABAACCAABAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkSchema" Collapsed="true">
+    <Position X="29.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAACQAAAAAAAAAABEAAGARAABAYAAAACAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.NetworkWorkplace" Collapsed="true">
+    <Position X="2" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkWorkplace.cs</FileName>
+      <HashCode>EAAAAAAAAAAAAAAAACAACAQAAQAAAAAAAAAAAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.TrainingSessionCollection" Collapsed="true">
+    <Position X="28" Y="12" Width="2" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkWorkplace.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Network.TrainingSession" Collapsed="true">
+    <Position X="6.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\TrainingSession.cs</FileName>
+      <HashCode>AAAFAAIEAEQkAIGIMAAUKATAQEAEACBACQACAAbACQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Data.Reporting.ReportGenerator" Collapsed="true">
+    <Position X="45.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Reporting\ReportGenerator.cs</FileName>
+      <HashCode>AUADAAAAgAICBEACCgQAIEAEAAFAgAACACAAgAAAJAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Base.SingleInstanceForm" Collapsed="true">
+    <Position X="4.5" Y="15.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Forms\Base\SingleInstanceForm.cs</FileName>
+      <HashCode>AAAAAAAAACIAAAAAAAAAAAgAAABAAAAAQAAAAgAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.DataAnalyzer" Collapsed="true">
+    <Position X="41.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\DataAnalyzer.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.MainForm" Collapsed="true">
+    <Position X="30.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\MainForm.cs</FileName>
+      <HashCode>Xbysa93e26wMSGFTKqeUjE1KU6aiX8fLWs6dCA5G2as=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.SchemaEditor" Collapsed="true">
+    <Position X="38.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\SchemaEditor.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAECAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.SchemaMapper" Collapsed="true">
+    <Position X="40" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\SchemaMapper.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.AboutBox" Collapsed="true">
+    <Position X="36.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\AboutBox.cs</FileName>
+      <HashCode>kIACAAgAACAgCAUAAACAAAADAAAAEIAAAAAAAQBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.GraphOptionsDialog" Collapsed="true">
+    <Position X="4.5" Y="17.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\GraphOptionsDialog.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.HistoryDialog" Collapsed="true">
+    <Position X="38.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\HistoryDialog.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAACAACAgAACAAkAAAIIYAAACAAAAAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.ImportWizard" Collapsed="true">
+    <Position X="41.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\ImportWizard.cs</FileName>
+      <HashCode>QBIQCCAAAGiARBEAFACAQgAigADAAQJAJQAACAwACAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.InputBox" Collapsed="true">
+    <Position X="40" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\InputBox.cs</FileName>
+      <HashCode>AAAACIQAACAAAAEAAACAAkACAAAEBAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.NetworkReportDialog" Collapsed="true">
+    <Position X="40.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\NetworkReportDialog.cs</FileName>
+      <HashCode>RMAAAAkUgCIEAAIEAgCAgIgGAAAAQBAAAAAAQgKIgQI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.NetworkReportOptionsDialog" Collapsed="true">
+    <Position X="2" Y="17.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\NetworkReportOptionsDialog.cs</FileName>
+      <HashCode>AAAAAAAAACABAAEAAACAAAACAAAAAAAAACAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.NewDatabaseDialog" Collapsed="true">
+    <Position X="34.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\NewDatabaseDialog.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.NewNetworkDialog" Collapsed="true">
+    <Position X="36.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\NewNetworkDialog.cs</FileName>
+      <HashCode>AAAAAEggACAIQBUAFAWAAUgSAACAAIIEASARAARAIEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.NewWorkplaceDialog" Collapsed="true">
+    <Position X="38.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\NewWorkplaceDialog.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.PreferencesDialog" Collapsed="true">
+    <Position X="34.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\PreferencesDialog.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.StatusBarOptionsDialog" Collapsed="true">
+    <Position X="6.5" Y="17.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Forms\Dialogs\StatusBarOptionsDialog.cs</FileName>
+      <HashCode>AAAAEAAAgCAAABAAAACACIACAQAAAMAAAAACAAAAAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Dialogs.NetworkInspectorDialog" Collapsed="true">
+    <Position X="14.25" Y="15.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Forms\NetworkInspector.cs</FileName>
+      <HashCode>BgAEAIEABCgEEAgZEgCQYAgCAAAAASQAAAAAAAgAAAI=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="inspectorNeuronDetails" />
+      <Field Name="inspectorNetworkDetails" />
+      <Field Name="inspectorLayerDetails" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sinapse.Program" Collapsed="true">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Program.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Properties.Resources" Collapsed="true">
+    <Position X="29" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>n4IAsjmghisEuqCRGoAJMgY8VSEhdTIJgJSgUqmCx6A=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Properties.Settings" Collapsed="true">
+    <Position X="30.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Settings.cs</FileName>
+      <HashCode>AABQiIOAAoAIAAgEQEAQIAgAALgDEAigACAAiSgACAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Utils.HtmlReport.Field" Collapsed="true">
+    <Position X="45.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Utils\HtmlReport\Field.cs</FileName>
+      <HashCode>ABIAAAAAAAAAAAAiACBAAEAAkECAAICBAEAAAAABAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Utils.HtmlReport.HTMLReport" Collapsed="true">
+    <Position X="47.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Utils\HtmlReport\Report.cs</FileName>
+      <HashCode>AQALIAyEBAD0gEACGCMIYAAAABEA0MAAAMAQAYAAiAw=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sections" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sinapse.Utils.HtmlReport.Section" Collapsed="true">
+    <Position X="48.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Utils\HtmlReport\Section.cs</FileName>
+      <HashCode>AQABAAiIAAhAAAAACAEAIAAAABAAAAABEJUAAYABAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Utils.Patterns.FormSingleton&lt;T&gt;" Collapsed="true">
+    <Position X="26.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Utils\Patterns\FormSingleton.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Utils.Patterns.Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="26.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Utils\Patterns\Singleton.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Sinapse.Data.Structures.TrainingOptions" Collapsed="true">
+    <Position X="29.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Structures\TrainingOptions.cs</FileName>
+      <HashCode>ACKAAIAIAAAgACAAAAAAAgIAAAAAAAAAACBAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Sinapse.Data.Structures.TrainingStatus" Collapsed="true">
+    <Position X="31.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Structures\TrainingStatus.cs</FileName>
+      <HashCode>ABAAAAAAAAAABAACAAAAAAAAAAAAABAAAAAgAECAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Sinapse.Data.Structures.TrainingVectors" Collapsed="true">
+    <Position X="33" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Structures\TrainingVectors.cs</FileName>
+      <HashCode>AABAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Sinapse.Data.Logging.EventVisibility" Collapsed="true">
+    <Position X="38.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Logging\HistoryEvent.cs</FileName>
+      <HashCode>AAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAEABAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sinapse.Data.Network.NetworkColumnRole" Collapsed="true">
+    <Position X="23" Y="14" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sinapse.Data.Network.NetworkSet" Collapsed="true">
+    <Position X="38.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\NetworkDatabase.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAEAAAAAgAAAAAAAAAAgA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sinapse.Data.Network.TrainingState" Collapsed="true">
+    <Position X="40" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Network\TrainingSession.cs</FileName>
+      <HashCode>AAAgAAAAAAIAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sinapse.Data.Structures.TrainingType" Collapsed="true">
+    <Position X="41.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Structures\TrainingOptions.cs</FileName>
+      <HashCode>AAAAQAAAQAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sinapse.Data.Structures.UpdateType" Collapsed="true">
+    <Position X="29.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Data\Structures\TrainingStatus.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sinapse.Utils.HtmlReport.HtmlAlign" Collapsed="true">
+    <Position X="47" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Utils\HtmlReport\Misc.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAIAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>
