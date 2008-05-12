@@ -28,7 +28,7 @@ using System.Windows.Forms;
 namespace Sinapse.Controls.SideTabControl
 {
 
-    sealed partial class SidePageReport : UserControl
+    sealed partial class SidePageReport : Sinapse.Controls.Base.TabPageControlBase
     {
 
         public SidePageReport()

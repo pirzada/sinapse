@@ -83,8 +83,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DataGridViewEx.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Controls\DataAnalyzer\BdmControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataAnalyzer\BdmControl.Designer.cs">
+      <DependentUpon>BdmControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataAnalyzer\IcaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataAnalyzer\IcaControl.Designer.cs">
+      <DependentUpon>IcaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataAnalyzer\PcaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataAnalyzer\PcaControl.Designer.cs">
+      <DependentUpon>PcaControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MainTabControl\Base\TabPageDataControlBase.cs">
       <SubType>UserControl</SubType>
@@ -101,11 +116,17 @@
     <Compile Include="Controls\MainTabControl\MainTabControl.Designer.cs">
       <DependentUpon>MainTabControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageGraph.cs">
+    <Compile Include="Controls\MainTabControl\TabPageFunctionGraph.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageGraph.Designer.cs">
-      <DependentUpon>TabPageGraph.cs</DependentUpon>
+    <Compile Include="Controls\MainTabControl\TabPageFunctionGraph.Designer.cs">
+      <DependentUpon>TabPageFunctionGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainTabControl\TabPageLearningGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainTabControl\TabPageLearningGraph.Designer.cs">
+      <DependentUpon>TabPageLearningGraph.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MainTabControl\TabPageNotes.cs">
       <SubType>UserControl</SubType>
@@ -143,6 +164,13 @@
     <Compile Include="Controls\NetworkInspector\InspectorNeuronDetails.Designer.cs">
       <DependentUpon>InspectorNeuronDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NetworkViewer\NetworkViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NetworkViewer\NetworkViewerControl.Designer.cs">
+      <DependentUpon>NetworkViewerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NetworkViewer\Neuron.cs" />
     <Compile Include="Controls\ReportColumnOptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -253,6 +281,12 @@
     <Compile Include="Forms\Dialogs\PreferencesDialog.Designer.cs">
       <DependentUpon>PreferencesDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NetworkViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NetworkViewer.Designer.cs">
+      <DependentUpon>NetworkViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SchemaMapper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,13 +303,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="Settings.cs" />
-    <Compile Include="Utils\CsvParser\Common.cs" />
-    <Compile Include="Utils\CsvParser\Parser.cs" />
-    <Compile Include="Utils\CsvParser\Utils.cs" />
-    <Compile Include="Utils\CsvParser\Writer.cs" />
-    <Compile Include="Components\MruProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Data\Logging\HistoryListener.cs" />
     <Compile Include="Utils\HtmlReport\Field.cs" />
     <Compile Include="Utils\HtmlReport\Misc.cs" />
@@ -369,6 +396,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\DataAnalyzer\PcaControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PcaControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainTabControl\Base\TabPageDataControlBase.resx">
       <DependentUpon>TabPageDataControlBase.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -377,9 +408,13 @@
       <DependentUpon>MainTabControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageGraph.resx">
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageFunctionGraph.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabPageGraph.cs</DependentUpon>
+      <DependentUpon>TabPageFunctionGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainTabControl\TabPageLearningGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabPageLearningGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainTabControl\TabPageNotes.resx">
       <SubType>Designer</SubType>
@@ -555,6 +590,14 @@
     <ProjectReference Include="..\lib\WizardBase\WizardBase.csproj">
       <Project>{C742E00B-3933-4834-BC41-19848E1E3AF2}</Project>
       <Name>WizardBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Databases\Sinapse.Databases.csproj">
+      <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
+      <Name>Sinapse.Databases</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Forms.Controls\Sinapse.Forms.Controls.csproj">
+      <Project>{81CA91DE-585F-4ED7-A086-24F1F2C95A6B}</Project>
+      <Name>Sinapse.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -843,6 +886,7 @@
     <None Include="Resources\start1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\editcopy.png" />
     <None Include="Resources\editpaste.png" />
     <None Include="Resources\history.png" />

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Sinapse.Controls.MainTabControl
 {
-    public partial class TabPageNotes : UserControl
+    internal sealed partial class TabPageNotes : Sinapse.Controls.Base.TabPageControlBase
     {
         public TabPageNotes()
         {

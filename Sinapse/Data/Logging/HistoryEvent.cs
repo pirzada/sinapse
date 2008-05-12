@@ -41,10 +41,10 @@ namespace Sinapse.Data.Logging
     internal sealed class HistoryEvent
     {
 
-        private DateTime m_time;
         private string m_action;
         private string m_detail;
-        private bool m_visible;
+        private EventVisibility m_visible;
+        private DateTime m_time;
 
 
         //---------------------------------------------
@@ -52,11 +52,11 @@ namespace Sinapse.Data.Logging
 
         #region Constructor
         internal HistoryEvent(string text)
-            : this(text, String.Empty, true)
+            : this(text, String.Empty, EventVisibility.User)
         {
         }
 
-        internal HistoryEvent(string text, string detail, bool visible)
+        internal HistoryEvent(string text, string detail, EventVisibility visible)
         {
             this.m_time = DateTime.Now;
             this.m_action = text;
@@ -86,7 +86,7 @@ namespace Sinapse.Data.Logging
             get { return this.m_action; }
         }
 
-        internal bool Visible
+        internal EventVisibility Visible
         {
             get { return this.m_visible; }
             set { this.m_visible = value; }
@@ -140,10 +140,10 @@ namespace Sinapse.Data.Logging
 
         public void Add(string text, string detail)
         {
-            this.Add(new HistoryEvent(text, detail, true));
+            this.Add(new HistoryEvent(text, detail, EventVisibility.User));
         }
 
-        public void Add(string text, string detail, bool visible)
+        public void Add(string text, string detail, EventVisibility visible)
         {
             this.Add(new HistoryEvent(text, detail, visible));
         }

@@ -48,7 +48,7 @@ namespace Sinapse.Controls.SideTabControl
         private NetworkDatabase m_networkDatabase;
 
         private TrainingStatus m_networkState;
-        private Sinapse.Controls.MainTabControl.TabPageGraph m_graphControl;
+        private Sinapse.Controls.MainTabControl.TabPageLearningGraph m_graphControl;
 
         private int m_lastTickEpoch;
         private bool m_trainingPaused;
@@ -189,7 +189,7 @@ namespace Sinapse.Controls.SideTabControl
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        internal Sinapse.Controls.MainTabControl.TabPageGraph GraphControl
+        internal Sinapse.Controls.MainTabControl.TabPageLearningGraph GraphControl
         {
             get { return this.m_graphControl; }
             set { this.m_graphControl = value; }

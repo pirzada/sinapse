@@ -4,7 +4,7 @@
 // andrew.kirillov@gmail.com
 //
 
-namespace AForge.Math
+namespace AForge.Statistics
 {
 	using System;
     using AForge;
@@ -16,7 +16,7 @@ namespace AForge.Math
     /// <remarks>The class represents collection of functions used
     /// in statistics</remarks>
     /// 
-	public class Statistics
+	public static class Tools
 	{
 
         /// <summary>

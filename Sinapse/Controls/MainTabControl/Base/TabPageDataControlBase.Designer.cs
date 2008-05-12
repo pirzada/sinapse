@@ -32,7 +32,7 @@ namespace Sinapse.Controls.MainTabControl.Base
             this.panelOutputCaption = new System.Windows.Forms.Panel();
             this.panelInputCaption = new System.Windows.Forms.Panel();
             this.lbOutput = new System.Windows.Forms.Label();
-            this.dataGridView = new Sinapse.Controls.DataGridViewEx();
+            this.dataGridView = new Sinapse.Forms.Controls.DataGridViewEx();
             this.lbInput = new System.Windows.Forms.Label();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeRowsToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -285,7 +285,7 @@ namespace Sinapse.Controls.MainTabControl.Base
         private System.Windows.Forms.Panel panelInputCaption;
         private System.Windows.Forms.Label lbOutput;
         private System.Windows.Forms.Label lbInput;
-        protected Sinapse.Controls.DataGridViewEx dataGridView;
+        protected Sinapse.Forms.Controls.DataGridViewEx dataGridView;
         protected internal System.Windows.Forms.Label lbSetTitle;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         protected internal System.Windows.Forms.BindingSource BindingSource;

@@ -28,10 +28,10 @@ using Sinapse.Data.Network;
 
 namespace Sinapse.Data.CodeGeneration
 {
-    internal sealed class CSharp : CodeGenerator
+    internal sealed class CSharpGenerator : CodeGenerator
     {
 
-        public CSharp(NetworkContainer network)
+        public CSharpGenerator(NetworkContainer network)
             : base(network)
         {
         }

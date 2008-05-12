@@ -534,13 +534,13 @@ namespace Sinapse.Forms
         #region Menu Network CodeGenerator
         private void MenuNetworkCodeGeneratorANSIC_Click(object sender, EventArgs e)
         {
-            new Sinapse.Data.CodeGeneration.CANSI(this.CurrentNetworkContainer).Save("output.c");
+            new Sinapse.Data.CodeGeneration.CGenerator(this.CurrentNetworkContainer).Save("output.c");
             System.Diagnostics.Process.Start("output.c");
         }
 
         private void MenuNetworkCodeGeneratorCSharp_Click(object sender, EventArgs e)
         {
-            new Sinapse.Data.CodeGeneration.CSharp(this.CurrentNetworkContainer).Save("output.cs");
+            new Sinapse.Data.CodeGeneration.CSharpGenerator(this.CurrentNetworkContainer).Save("output.cs");
             System.Diagnostics.Process.Start("output.cs");
         }
         #endregion
@@ -636,9 +636,9 @@ namespace Sinapse.Forms
             {
                 float value = (float)item.Tag;
 
-                if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageTesting)
+                if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
                     this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
-                else if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageQuery)
+                else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
                     this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
             }
         }
@@ -660,9 +660,9 @@ namespace Sinapse.Forms
 
             Single value = Single.Parse(btnTestRoundCustom.Text);
 
-            if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageTesting)
+            if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
                 this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
-            else if (this.tabControlMain.SelectedControl is Controls.MainTabControl.TabPageQuery)
+            else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
                 this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
 
         }

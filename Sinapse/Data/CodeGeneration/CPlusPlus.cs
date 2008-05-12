@@ -25,10 +25,10 @@ using Sinapse.Data.Network;
 
 namespace Sinapse.Data.CodeGeneration
 {
-    internal sealed class CPlusPlus : CodeGenerator
+    internal sealed class CppGenerator : CodeGenerator
     {
 
-        public CPlusPlus(NetworkContainer network)
+        public CppGenerator(NetworkContainer network)
             : base(network)
         {
 
