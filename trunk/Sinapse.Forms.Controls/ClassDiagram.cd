@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Sinapse.Forms.Controls.DataGridViewEx" Collapsed="true">
+    <Position X="2" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\DataGridViewEx.cs</FileName>
+      <HashCode>AAgIAAAAAAAAAAAIBIAAAAAAAAIAAAAAAACAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Forms.Controls.MostRecentlyProvider" Collapsed="true">
+    <Position X="4.75" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Providers\MostRecentlyUsedProvider.cs</FileName>
+      <HashCode>gAAAAMgAAAgAABACAQAACAQAAAgAAAAAgQAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MenuItemClicked" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Windows.Forms.DataGridView" Collapsed="true">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.ComponentModel.Component" Collapsed="true">
+    <Position X="4.75" Y="0.75" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Delegate Name="Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler" Collapsed="true">
+    <Position X="8.25" Y="2" Width="3.25" />
+    <TypeIdentifier>
+      <FileName>Providers\MostRecentlyUsedProvider.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+</ClassDiagram>
