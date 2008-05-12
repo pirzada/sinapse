@@ -40,6 +40,7 @@ namespace Sinapse.Controls.SideTabControl
         private SidePageTrainer sidePageTrainer;
         private SidePageWorkplace sidePageWorkplace;
         private SidePageSolutionExplorer sidePageExplorer;
+        private SidePageReport tabReport;
         
 
         //---------------------------------------------

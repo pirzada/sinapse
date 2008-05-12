@@ -7,6 +7,7 @@
 namespace AForge.Neuro
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Base neural network class
@@ -16,7 +17,7 @@ namespace AForge.Neuro
     /// collection of neuron's layers.</remarks>
     /// 
     [Serializable]
-    public abstract class Network
+    public abstract class DynamicNetwork
     {
         /// <summary>
         /// Network's inputs count
@@ -31,7 +32,7 @@ namespace AForge.Neuro
         /// <summary>
         /// Network's layers
         /// </summary>
-        protected Layer[] layers;
+        protected List<Layer> layers;
 
         /// <summary>
         /// Network's output vector
@@ -90,7 +91,7 @@ namespace AForge.Neuro
         /// <remarks>Protected constructor, which initializes <see cref="inputsCount"/>,
         /// <see cref="layersCount"/> and <see cref="layers"/> members.</remarks>
         /// 
-        protected Network(int inputsCount, int layersCount)
+        protected DynamicNetwork(int inputsCount, int layersCount)
         {
             this.inputsCount = Math.Max(1, inputsCount);
             this.layersCount = Math.Max(1, layersCount);
@@ -122,6 +123,7 @@ namespace AForge.Neuro
 
             return output;
         }
+
 
         /// <summary>
         /// Randomize layers of the network

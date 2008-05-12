@@ -25,10 +25,10 @@ using Sinapse.Data.Network;
 namespace Sinapse.Data.CodeGeneration
 {
 
-    internal sealed class Matlab : CodeGenerator
+    internal sealed class MatlabGenerator : CodeGenerator
     {
 
-        public Matlab(NetworkContainer network)
+        public MatlabGenerator(NetworkContainer network)
             : base(network)
         {
 

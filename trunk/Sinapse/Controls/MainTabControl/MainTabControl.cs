@@ -39,7 +39,7 @@ namespace Sinapse.Controls.MainTabControl
         private TabPageTesting m_tabTesting;
         private TabPageValidation m_tabValidation;
         private TabPageQuery m_tabQuery;
-        private TabPageGraph m_tabGraph;
+        private TabPageLearningGraph m_tabGraph;
 
 
         public event EventHandler DataSelectionChanged;
@@ -58,7 +58,7 @@ namespace Sinapse.Controls.MainTabControl
             this.m_tabValidation = new TabPageValidation();
             this.m_tabTesting = new TabPageTesting();
             this.m_tabQuery = new TabPageQuery();
-            this.m_tabGraph = new TabPageGraph();
+            this.m_tabGraph = new TabPageLearningGraph();
 
             this.setTab(m_tabTraining, tabTraining);
             this.setTab(m_tabValidation, tabValidation);
@@ -178,7 +178,7 @@ namespace Sinapse.Controls.MainTabControl
             get { return this.m_tabQuery; }
         }
 
-        internal TabPageGraph GraphControl
+        internal TabPageLearningGraph GraphControl
         {
             get { return this.m_tabGraph; }
         }

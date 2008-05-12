@@ -25,10 +25,10 @@ using Sinapse.Data.Network;
 
 namespace Sinapse.Data.CodeGeneration
 {
-    internal sealed class Java : CodeGenerator
+    internal sealed class JavaGenerator : CodeGenerator
     {
 
-        public Java(NetworkContainer network)
+        public JavaGenerator(NetworkContainer network)
             : base(network)
         {
         }

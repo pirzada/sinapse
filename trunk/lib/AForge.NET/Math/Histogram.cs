@@ -112,9 +112,9 @@ namespace AForge.Math
 				}
 			}
 
-			mean	= Statistics.Mean( values );
-			stdDev	= Statistics.StdDev( values );
-			median	= Statistics.Median( values );
+			mean	= Statistics.Tools.Mean( values );
+            stdDev = Statistics.Tools.StdDev(values);
+            median = Statistics.Tools.Median(values);
 		}
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace AForge.Math
         /// 
 		public IntRange GetRange( double percent )
 		{
-			return Statistics.GetRange( values, percent );
+            return Statistics.Tools.GetRange(values, percent);
 		}
     }
 }

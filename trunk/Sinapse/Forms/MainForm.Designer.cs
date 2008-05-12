@@ -163,10 +163,10 @@ namespace Sinapse.Forms
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.statusBarControl = new Sinapse.Controls.StatusBarControl();
-            this.mruProviderDatabase = new Sinapse.Components.MruProvider();
-            this.mruProviderNetwork = new Sinapse.Components.MruProvider();
-            this.mruProviderWorkplace = new Sinapse.Components.MruProvider();
-            this.mruProviderSession = new Sinapse.Components.MruProvider();
+            this.mruProviderDatabase = new Sinapse.Forms.Controls.MostRecentlyProvider();
+            this.mruProviderNetwork = new Sinapse.Forms.Controls.MostRecentlyProvider();
+            this.mruProviderWorkplace = new Sinapse.Forms.Controls.MostRecentlyProvider();
+            this.mruProviderSession = new Sinapse.Forms.Controls.MostRecentlyProvider();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
@@ -1211,25 +1211,25 @@ namespace Sinapse.Forms
             // 
             this.mruProviderDatabase.FilePathList = global::Sinapse.Properties.Settings.Default.history_Database;
             this.mruProviderDatabase.MenuItem = this.MenuFileRecentDatabases;
-            this.mruProviderDatabase.MenuItemClicked += new Sinapse.Components.MruMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
+            this.mruProviderDatabase.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
             // 
             // mruProviderNetwork
             // 
             this.mruProviderNetwork.FilePathList = global::Sinapse.Properties.Settings.Default.history_Networks;
             this.mruProviderNetwork.MenuItem = this.MenuFileRecentNetworks;
-            this.mruProviderNetwork.MenuItemClicked += new Sinapse.Components.MruMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
+            this.mruProviderNetwork.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
             // 
             // mruProviderWorkplace
             // 
             this.mruProviderWorkplace.FilePathList = global::Sinapse.Properties.Settings.Default.history_Workplace;
             this.mruProviderWorkplace.MenuItem = this.MenuFileRecentWorkplaces;
-            this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Components.MruMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
+            this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
             // 
             // mruProviderSession
             // 
             this.mruProviderSession.FilePathList = global::Sinapse.Properties.Settings.Default.history_Sessions;
             this.mruProviderSession.MenuItem = this.MenuFileRecentSessions;
-            this.mruProviderSession.MenuItemClicked += new Sinapse.Components.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
+            this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
             // 
             // MainForm
             // 
@@ -1339,9 +1339,10 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnNetworkOpen;
         private System.Windows.Forms.ToolStripButton btnSaveAll;
         private Sinapse.Controls.SideTabControl.SideTabControl tabControlSide;
-        private Sinapse.Components.MruProvider mruProviderDatabase;
-        private Sinapse.Components.MruProvider mruProviderNetwork;
-        private Sinapse.Components.MruProvider mruProviderWorkplace;
+        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderDatabase;
+        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderNetwork;
+        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderWorkplace;
+        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderSession;
         private System.Windows.Forms.ToolStrip toolStripTesting;
         private System.Windows.Forms.ToolStripButton btnTestCompute;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -1382,7 +1383,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuNetworkCodeGeneratorOptions;
         private System.Windows.Forms.ToolStripMenuItem MenuSessionProperties;
         private System.Windows.Forms.ToolStripMenuItem MenuFileRecentSessions;
-        private Sinapse.Components.MruProvider mruProviderSession;
         private System.Windows.Forms.ToolStripMenuItem MenuSessionClose;
         private System.Windows.Forms.ToolStripMenuItem MenuFileDatabaseClose;
         private System.Windows.Forms.ToolStripMenuItem MenuNetworkClose;

@@ -24,7 +24,7 @@ using System.Diagnostics;
 using Sinapse.ExcelExtension.Forms;
 
 
-namespace Sinapse.ExcelExtension
+namespace Sinapse.Extensions.MsExcel
 {
 
     static class Program

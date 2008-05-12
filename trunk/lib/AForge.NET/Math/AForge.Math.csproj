@@ -110,13 +110,17 @@
     </Compile>
     <Compile Include="Geometry\AffineTransformation2D.cs" />
     <Compile Include="Histogram.cs" />
-    <Compile Include="LinearAlgebra\Algorithms.cs" />
-    <Compile Include="LinearAlgebra\CholeskyDecomposition.cs" />
-    <Compile Include="LinearAlgebra\EigenValueDecomposition.cs" />
-    <Compile Include="LinearAlgebra\Applications\PrincipalComponentAnalysis.cs" />
-    <Compile Include="LinearAlgebra\LUDecomposition.cs" />
-    <Compile Include="LinearAlgebra\SingularValueDecomposition.cs" />
+    <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
+    <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
+    <Compile Include="Statistics\SampleAnalysis\FactorAnalysis.cs" />
+    <Compile Include="Statistics\SampleAnalysis\IndependentComponentAnalysis.cs" />
+    <Compile Include="Statistics\SampleAnalysis\PrincipalComponentAnalysis.cs" />
+    <Compile Include="LinearAlgebra\Decompositions\CholeskyDecomposition.cs" />
+    <Compile Include="LinearAlgebra\Decompositions\EigenvalueDecomposition.cs" />
+    <Compile Include="LinearAlgebra\Decompositions\LuDecomposition.cs" />
     <Compile Include="Matrix.cs" />
+    <Compile Include="LinearAlgebra\Decompositions\QrDecomposition.cs" />
+    <Compile Include="LinearAlgebra\Decompositions\SingularValueDecomposition.cs" />
     <Compile Include="PerlinNoise.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,8 +130,8 @@
     <Compile Include="Random\StandardGenerator.cs" />
     <Compile Include="Random\UniformGenerator.cs" />
     <Compile Include="Random\UniformOneGenerator.cs" />
-    <Compile Include="SampleMatrix.cs" />
-    <Compile Include="Statistics.cs" />
+    <Compile Include="Statistics\SampleMatrix.cs" />
+    <Compile Include="Statistics\Tools.cs" />
     <Compile Include="Tools.cs">
       <SubType>Code</SubType>
     </Compile>
