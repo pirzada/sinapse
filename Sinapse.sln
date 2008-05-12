@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse", "Sinapse\Sinapse.
 		{C742E00B-3933-4834-BC41-19848E1E3AF2} = {C742E00B-3933-4834-BC41-19848E1E3AF2}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Extensions.MsExcel", "Sinapse.Excel\Sinapse.Extensions.MsExcel.csproj", "{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Extensions.MsExcel", "Sinapse.Extensions.MsExcel\Sinapse.Extensions.MsExcel.csproj", "{F75FD442-FED2-47CA-AAA1-520EFF0BE7E8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{53B51230-2CD7-435B-8677-A3E24D134CD8} = {53B51230-2CD7-435B-8677-A3E24D134CD8}
 		{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1} = {38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}
