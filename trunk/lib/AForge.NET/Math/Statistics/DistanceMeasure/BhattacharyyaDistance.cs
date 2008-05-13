@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AForge.Math.Statistic
+namespace AForge.Statistics.DistanceMeasure
 {
     /// <summary>
     /// 

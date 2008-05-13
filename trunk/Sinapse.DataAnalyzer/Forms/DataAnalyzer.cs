@@ -23,14 +23,61 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
-namespace Sinapse.Forms
+using AForge.Statistics.SampleAnalysis;
+using AForge.Statistics;
+
+
+namespace Sinapse.DataAnalyzer.Forms
 {
     public partial class DataAnalyzer : Form
     {
+
+        DataTable dataTable;
+        PrincipalComponentAnalysis pca;
+
+
         public DataAnalyzer()
         {
             InitializeComponent();
         }
+
+        private void DataAnalyzer_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRunAnalysis_Click(object sender, EventArgs e)
+        {
+
+            SampleMatrix smatrix = new SampleMatrix(dataTable);
+            pca = new PrincipalComponentAnalysis(smatrix);
+            
+            pca.Compute();
+
+            dgvPrincipalComponents.DataSource = pca.Components;
+            dgvComponentList.DataSource = pca.Components;
+            dgvVectors.DataSource = pca.ComponentMatrix;
+            
+            
+        }
+
+        private void MenuFileOpen_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog(this);
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            string filename = openFileDialog.FileName;
+            string extension = Path.GetExtension(filename);
+            if (extension == ".xls")
+                MessageBox.Show("Bla");
+
+            Sinapse.Databases.Excel db = new Sinapse.Databases.Excel(filename, true, false);
+            MessageBox.Show(db.GetWorksheetList()[0]);
+        }
+
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AForge.Math.Statistic.SampleAnalysis
+namespace AForge.Statistics.SampleAnalysis
 {
     /// <summary>
     /// 

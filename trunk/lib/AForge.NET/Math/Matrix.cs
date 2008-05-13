@@ -850,6 +850,33 @@ namespace AForge.Math
         {
             return new Matrix(value);
         }
+
+        public static explicit operator Matrix(System.Data.DataTable dataTable)
+        {
+            Matrix m = new Matrix(dataTable.Rows.Count, dataTable.Columns.Count);
+
+            for (int i = 0; i < m.Rows; i++)
+            {
+                for (int j = 0; j < m.Columns; j++)
+                {
+                    if (dataTable.Columns[j].DataType == typeof(System.String))
+                    {
+                        m[i, j] = Double.Parse((string)dataTable.Rows[i][j]);
+                    }
+                    else
+                    {
+                        m[i, j] = (Double)dataTable.Rows[i][j];
+                    }
+                }
+            }
+
+            return m;
+        }
+
+        public static explicit operator System.Data.DataTable(Matrix m)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
 
@@ -914,4 +941,11 @@ namespace AForge.Math
         #endregion
 
     }
+
+  /*
+    public class BindableMatrix : Matrix, System.ComponentModel.IListSource
+    {
+        
+    }
+   */ 
 }
