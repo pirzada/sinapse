@@ -257,12 +257,6 @@
     <Compile Include="Data\Reporting\ReportGenerator.cs">
     </Compile>
     <Compile Include="Data\SerializableObject.cs" />
-    <Compile Include="Forms\DataAnalyzer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\DataAnalyzer.Designer.cs">
-      <DependentUpon>DataAnalyzer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Dialogs\NewDatabaseDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -479,10 +473,6 @@
     <EmbeddedResource Include="Controls\MainTabControl\TabPageTraining.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TabPageTraining.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataAnalyzer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DataAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>

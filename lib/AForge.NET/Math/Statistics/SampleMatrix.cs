@@ -31,6 +31,7 @@ namespace AForge.Statistics
         public enum DataModel { RowsAsObservations, ColumnsAsObservations };
 
         private string[] m_colNames;
+        private string m_title;
 
 
         //---------------------------------------------
@@ -50,6 +51,31 @@ namespace AForge.Statistics
                 this.Array = (double[][])this.Transpose();
 
             this.generateDefaultNames();
+        }
+
+        public SampleMatrix(int rows, int columns)
+            : base(rows, columns)
+        {
+            this.generateDefaultNames();
+        }
+
+        public SampleMatrix(System.Data.DataTable dataTable) : base (dataTable.Rows.Count, dataTable.Columns.Count)
+        {
+            for (int i = 0; i < this.Rows; i++)
+            {
+                for (int j = 0; j < this.Columns; j++)
+                {
+                    if (dataTable.Columns[j].DataType == typeof(System.String))
+                    {
+                        this.Array[i][j] = Double.Parse((string)dataTable.Rows[i][j]);
+                    }
+                    else
+                    {
+                        this.Array[i][j] = (Double)dataTable.Rows[i][j];
+                    }
+                    this.ColumnNames[i] = dataTable.Columns[i].Caption;
+                }
+            }
         }
 
         /// <summary>
@@ -355,12 +381,25 @@ namespace AForge.Statistics
 
 
         #region Operators
-   /*
-        public explicit operator SampleMatrix(Matrix m)
+        public static explicit operator System.Data.DataTable(SampleMatrix m)
         {
-            
+            System.Data.DataTable dataTable = new System.Data.DataTable(m.m_title);
+
+            foreach (string colName in m.ColumnNames)
+            {
+                dataTable.Columns.Add(colName, typeof(double));
+            }
+
+            for (int i = 0; i < m.Rows; i++)
+            {
+                for (int j = 0; j < m.Columns; j++)
+                {
+                    dataTable.Rows[i][j] = m.Array[i][j];
+                }
+            }
+
+            return dataTable;
         }
-   */ 
         #endregion
 
 
@@ -379,4 +418,11 @@ namespace AForge.Statistics
 
 
     }
+
+/*
+    public class BindableSampleMatrix : BindableMatrix
+    {
+    }
+*/ 
+
 }

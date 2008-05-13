@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Forms.Controls", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Databases", "Sinapse.Databases\Sinapse.Databases.csproj", "{9BAD8288-7170-467E-B82C-EC64EBCD64B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.DataAnalyzer", "Sinapse.DataAnalyzer\Sinapse.DataAnalyzer.csproj", "{8FCC8A47-88A9-4145-BC45-97354AF1402D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,15 @@ Global
 		{9BAD8288-7170-467E-B82C-EC64EBCD64B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BAD8288-7170-467E-B82C-EC64EBCD64B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BAD8288-7170-467E-B82C-EC64EBCD64B3}.Release|x86.ActiveCfg = Release|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Final Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Final Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Final Release|x86.ActiveCfg = Release|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
