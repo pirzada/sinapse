@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Forms.Controls", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Databases", "Sinapse.Databases\Sinapse.Databases.csproj", "{9BAD8288-7170-467E-B82C-EC64EBCD64B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Extensions.Simplifier", "Sinapse.DataAnalyzer\Sinapse.Extensions.Simplifier.csproj", "{8FCC8A47-88A9-4145-BC45-97354AF1402D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Extensions.Simplifier", "Sinapse.Extensions.Simplifier\Sinapse.Extensions.Simplifier.csproj", "{8FCC8A47-88A9-4145-BC45-97354AF1402D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
