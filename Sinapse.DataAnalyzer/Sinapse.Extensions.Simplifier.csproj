@@ -7,8 +7,10 @@
     <ProjectGuid>{8FCC8A47-88A9-4145-BC45-97354AF1402D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sinapse.DataAnalyzer</RootNamespace>
-    <AssemblyName>Sinapse.DataAnalyzer</AssemblyName>
+    <RootNamespace>Sinapse.Extensions.Simplifier</RootNamespace>
+    <AssemblyName>Sinapse.Extensions.Simplifier</AssemblyName>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,11 +44,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\DataAnalyzer.cs">
+    <Compile Include="Forms\Simplifier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DataAnalyzer.Designer.cs">
-      <DependentUpon>DataAnalyzer.cs</DependentUpon>
+    <Compile Include="Forms\Simplifier.Designer.cs">
+      <DependentUpon>Simplifier.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TableSelectDialog.cs">
       <SubType>Form</SubType>
@@ -56,8 +58,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\DataAnalyzer.resx">
-      <DependentUpon>DataAnalyzer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Simplifier.resx">
+      <DependentUpon>Simplifier.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TableSelectDialog.resx">
@@ -106,6 +108,15 @@
       <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
       <Name>Sinapse.Databases</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_system.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_web.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

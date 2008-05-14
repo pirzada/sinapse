@@ -49,7 +49,7 @@ namespace AForge.Math
 
         public Vector(Vector vector)
         {
-            this.m_data = vector.m_data;
+            this.m_data = (double[])vector.m_data.Clone();
             this.m_length = vector.m_length;
         }
         #endregion
@@ -142,7 +142,7 @@ namespace AForge.Math
         /// <summary>Determines weather two instances are equal.</summary>
         public override bool Equals(object obj)
         {
-            return Equals(this, (Vector)obj);
+            return Equals(this, obj as Vector);
         }
 
         /// <summary>Determines weather two instances are equal.</summary>
@@ -320,7 +320,7 @@ namespace AForge.Math
         /// <summary>Returns the vector in a double[] form.</summary>
         public static explicit operator double[](Vector vector)
         {
-            return (double[])vector.m_data.Clone();
+            return (double[])vector.m_data;
         }
 
         public static explicit operator Vector(double[] vector)

@@ -5,7 +5,6 @@ using System.Text;
 using System.Data;
 using System.Data.OleDb;
 
-using System.Windows.Forms;
 
 
 namespace Sinapse.Databases
@@ -33,8 +32,6 @@ namespace Sinapse.Databases
 
             
             strConnection = strBuilder.ToString();
-
-            MessageBox.Show(strConnection);
         }
 
         public string[] GetWorksheetList()
@@ -107,7 +104,7 @@ namespace Sinapse.Databases
             DataTable ws;
 
             OleDbConnection connection = new OleDbConnection(strConnection);
-            OleDbDataAdapter adaptor = new OleDbDataAdapter(String.Format("SELECT * FROM [{0)]", worksheet), connection);
+            OleDbDataAdapter adaptor = new OleDbDataAdapter(String.Format("SELECT * FROM [{0}$]", worksheet), connection);
             ws = new DataTable(worksheet);
             adaptor.FillSchema(ws, SchemaType.Source);
             adaptor.Fill(ws);

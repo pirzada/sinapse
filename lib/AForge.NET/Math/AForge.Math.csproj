@@ -112,6 +112,8 @@
     <Compile Include="Histogram.cs" />
     <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
     <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
+    <Compile Include="Statistics\RangeConversion.cs">
+    </Compile>
     <Compile Include="Statistics\SampleAnalysis\FactorAnalysis.cs" />
     <Compile Include="Statistics\SampleAnalysis\IndependentComponentAnalysis.cs" />
     <Compile Include="Statistics\SampleAnalysis\PrincipalComponentAnalysis.cs" />
