@@ -6,13 +6,21 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.DataAnalyzer.Forms
+namespace Sinapse.Extensions.Simplifier.Forms
 {
     public partial class TableSelectDialog : Form
     {
-        public TableSelectDialog()
+
+        public TableSelectDialog(string[] tables)
         {
             InitializeComponent();
+
+            this.listBox1.DataSource = tables;
+        }
+
+        public string Selection
+        {
+            get { return this.listBox1.SelectedItem as string; }
         }
     }
 }

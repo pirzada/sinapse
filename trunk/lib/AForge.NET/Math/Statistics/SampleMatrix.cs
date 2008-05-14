@@ -61,6 +61,10 @@ namespace AForge.Statistics
 
         public SampleMatrix(System.Data.DataTable dataTable) : base (dataTable.Rows.Count, dataTable.Columns.Count)
         {
+            dataTable.AcceptChanges();
+
+            this.m_colNames = new string[dataTable.Columns.Count];
+            
             for (int i = 0; i < this.Rows; i++)
             {
                 for (int j = 0; j < this.Columns; j++)
@@ -73,7 +77,7 @@ namespace AForge.Statistics
                     {
                         this.Array[i][j] = (Double)dataTable.Rows[i][j];
                     }
-                    this.ColumnNames[i] = dataTable.Columns[i].Caption;
+                    this.ColumnNames[j] = dataTable.Columns[j].Caption;
                 }
             }
         }
@@ -205,6 +209,28 @@ namespace AForge.Statistics
             else return m.Transpose();
         }
 
+        public System.Data.DataTable ToDataTable()
+        {
+            System.Data.DataTable dataTable = new System.Data.DataTable(this.m_title);
+
+            foreach (string colName in this.ColumnNames)
+            {
+                dataTable.Columns.Add(colName, typeof(double));
+            }
+
+            for (int i = 0; i < this.Rows; i++)
+            {
+                System.Data.DataRow row = dataTable.NewRow();
+                for (int j = 0; j < this.Columns; j++)
+                {
+                    row[j] = this.Array[i][j];
+                }
+                dataTable.Rows.Add(row);
+            }
+
+            return dataTable;
+        }
+
         /// <summary>Converts this sample matrix to a string representation</summary>
         public string ToString(bool includeHeaders)
         {
@@ -245,93 +271,95 @@ namespace AForge.Statistics
         /// <summary>Finds the empirical mean along each dimension of the matrix</summary>
         public static Vector Mean(SampleMatrix m)
         {
-            Vector mean = new Vector(m.Variables);
-            for (int i = 0; i < m.Variables; i++)
-            {
-                for (int j = 0; j < m.Observations; j++)
-                {
-                    mean[i] += m[i, j];
-                }
-
-                mean[i] /= (double)m.Observations;
-            }
-            return mean;
+            return SampleMatrix.Mean((Matrix)m);
         }
 
+        /// <summary>Finds the empirical mean along each column of the matrix</summary>
         public static Vector Mean(Matrix m)
         {
-            throw new NotImplementedException();
+            Vector mean = new Vector(m.Columns);
+            for (int j = 0; j < m.Columns; j++)
+            {
+                for (int i = 0; i < m.Rows; i++)
+                {
+                    mean[j] += m[i, j];
+                }
+
+                mean[j] /= (double)m.Columns;
+            }
+            return mean;
         }
 
         /// <summary>Calculates the empirical standard deviation along each dimension of the matrix</summary>
         public static Vector StandardDeviation(SampleMatrix m)
         {
-            Vector mean = SampleMatrix.Mean(m);
-            Vector std = new Vector(m.Variables);
-            for (int i = 0; i < m.Variables; ++i)
-            {
-                for (int j = 0; j < m.Observations; ++j)
-                {
-                    std[i] += System.Math.Pow((m[i, j] - mean[i]), 2);
-                }
-
-                std[i] /= (double)m.Observations;
-                std[i] = System.Math.Sqrt(std[i]);
-
-                // The following in an inelegant but usual way to handle
-                //   near-zero std. dev. values, which below would cause a zero-divide.
-
-                if (std[i] <= Double.Epsilon)
-                    std[i] = 1.0;
-            }
-            return std;
+            return SampleMatrix.StandardDeviation((Matrix)m);
         }
 
         public static Vector StandardDeviation(Matrix m)
         {
-            throw new NotImplementedException();
+            Vector mean = SampleMatrix.Mean(m);
+            Vector std = new Vector(m.Columns);
+
+            for (int j = 0; j < m.Columns; j++)
+            {
+                for (int i = 0; i < m.Rows;i++)
+                {
+                    std[j] += System.Math.Pow((m[i, j] - mean[j]), 2);
+                }
+
+                std[j] /= (double)m.Rows;
+                std[j] = System.Math.Sqrt(std[j]);
+
+                // The following in an inelegant but usual way to handle
+                //   near-zero std. dev. values, which below would cause a zero-divide.
+
+                if (std[j] <= Double.Epsilon)
+                    std[j] = 1.0;
+            }
+            return std;
         }
 
         /// <summary>Centers column data, subtracting the empirical mean from each variable.</summary>
         public static void Center(SampleMatrix m)
         {
-            Vector mean = SampleMatrix.Mean(m);
-
-            for (int i = 0; i < m.Variables; ++i)
-            {
-                for (int j = 0; j < m.Observations; ++j)
-                {
-                    m[i, j] -= mean[i];
-                }
-            }
+            SampleMatrix.Center((Matrix)m);
         }
 
         /// <summary>Centers column data, subtracting the empirical mean from each variable.</summary>
         /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
         public static void Center(Matrix m)
         {
-            Center((SampleMatrix)m);
+            Vector mean = SampleMatrix.Mean(m);
+
+            for (int i = 0; i < m.Rows; i++)
+            {
+                for (int j = 0; j < m.Columns; j++)
+                {
+                    m[i, j] -= mean[j];
+                }
+            }
         }
 
         /// <summary>Standardizes column data, removing the empirical standard deviation from each variable.</summary>
         public static void Standardize(SampleMatrix m)
         {
-            Vector std = SampleMatrix.StandardDeviation(m);
-
-            for (int i = 0; i < m.Variables; ++i)
-            {
-                for (int j = 0; j < m.Observations; ++j)
-                {
-                    m[i, j] /= System.Math.Sqrt(m.Observations) * std[i];
-                }
-            }
+            SampleMatrix.Standardize((Matrix)m);
         }
 
         /// <summary>Standardizes column data, removing the empirical standard deviation from each variable.</summary>
         /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
         public static void Standardize(Matrix m)
         {
-            Standardize((SampleMatrix)m);
+            Vector std = SampleMatrix.StandardDeviation(m);
+
+            for (int i = 0; i < m.Rows; i++)
+            {
+                for (int j = 0; j < m.Columns; j++)
+                {
+                    m[i, j] /= System.Math.Sqrt(m.Rows) * std[j];
+                }
+            }
         }
 
         /// <summary>Calculates the covariance matrix of a sample matrix, returning a new matrix object</summary>
@@ -381,25 +409,7 @@ namespace AForge.Statistics
 
 
         #region Operators
-        public static explicit operator System.Data.DataTable(SampleMatrix m)
-        {
-            System.Data.DataTable dataTable = new System.Data.DataTable(m.m_title);
 
-            foreach (string colName in m.ColumnNames)
-            {
-                dataTable.Columns.Add(colName, typeof(double));
-            }
-
-            for (int i = 0; i < m.Rows; i++)
-            {
-                for (int j = 0; j < m.Columns; j++)
-                {
-                    dataTable.Rows[i][j] = m.Array[i][j];
-                }
-            }
-
-            return dataTable;
-        }
         #endregion
 
 
@@ -418,11 +428,5 @@ namespace AForge.Statistics
 
 
     }
-
-/*
-    public class BindableSampleMatrix : BindableMatrix
-    {
-    }
-*/ 
 
 }

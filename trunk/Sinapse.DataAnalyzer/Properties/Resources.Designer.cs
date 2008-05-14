@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sinapse.DataAnalyzer.Properties {
+namespace Sinapse.Extensions.Simplifier.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Sinapse.DataAnalyzer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sinapse.DataAnalyzer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sinapse.Extensions.Simplifier.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -67,9 +67,30 @@ namespace Sinapse.DataAnalyzer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap agt_web {
+            get {
+                object obj = ResourceManager.GetObject("agt_web", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap cal {
+            get {
+                object obj = ResourceManager.GetObject("cal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap kcalc {
             get {
                 object obj = ResourceManager.GetObject("kcalc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap package_system {
+            get {
+                object obj = ResourceManager.GetObject("package_system", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

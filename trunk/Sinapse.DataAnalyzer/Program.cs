@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Sinapse.DataAnalyzer
+namespace Sinapse.Extensions.Simplifier
 {
     static class Program
     {
@@ -14,7 +14,7 @@ namespace Sinapse.DataAnalyzer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.DataAnalyzer());
+            Application.Run(new Forms.Simplifier());
         }
     }
 }

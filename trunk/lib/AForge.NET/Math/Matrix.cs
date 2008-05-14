@@ -930,7 +930,7 @@ namespace AForge.Math
             Matrix r = m.Clone();
             for (int i = 0; i < r.m_rows; i++)
             {
-                for (int j = 0; j < r.m_rows; j++)
+                for (int j = 0; j < r.m_columns; j++)
                 {
                     r.m_data[i][j] = System.Math.Pow(r.m_data[i][j], power);
                 }
@@ -941,11 +941,5 @@ namespace AForge.Math
         #endregion
 
     }
-
-  /*
-    public class BindableMatrix : Matrix, System.ComponentModel.IListSource
-    {
-        
-    }
-   */ 
+    
 }
