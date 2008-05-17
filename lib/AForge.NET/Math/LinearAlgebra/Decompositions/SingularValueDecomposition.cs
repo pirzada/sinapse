@@ -43,6 +43,11 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 
         /// <summary>Construct singular value decomposition.</summary>
         public SingularValueDecomposition(Matrix value)
+            : this(value, true, true)
+        {
+        }
+
+        public SingularValueDecomposition(Matrix value, bool computeLeftSingularVectors, bool computeRightSingularVectors)
         {
             if (value == null)
             {
@@ -61,8 +66,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
             double[][] v = V.Array;
             double[] e = new double[n];
             double[] work = new double[m];
-            bool wantu = true;
-            bool wantv = true;
+            bool wantu = computeLeftSingularVectors;
+            bool wantv = computeRightSingularVectors;
 
             // Reduce A to bidiagonal form, storing the diagonal elements in s and the super-diagonal elements in e.
             int nct = System.Math.Min(m - 1, n);

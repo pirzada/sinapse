@@ -132,6 +132,7 @@
     <Compile Include="Random\StandardGenerator.cs" />
     <Compile Include="Random\UniformGenerator.cs" />
     <Compile Include="Random\UniformOneGenerator.cs" />
+    <Compile Include="Statistics\SampleAnalysis\DescriptiveAnalysis.cs" />
     <Compile Include="Statistics\SampleMatrix.cs" />
     <Compile Include="Statistics\Tools.cs" />
     <Compile Include="Tools.cs">

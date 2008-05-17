@@ -43,13 +43,15 @@ namespace AForge.Math
 
         public Vector(params double[] vector)
         {
-            this.m_data = (double[])vector.Clone();
+            this.m_data = new double[vector.Length];
+            vector.CopyTo(this.m_data, 0);
             this.m_length = vector.GetLength(0);
         }
 
         public Vector(Vector vector)
         {
-            this.m_data = (double[])vector.m_data.Clone();
+            this.m_data = new double[vector.m_length];
+            vector.m_data.CopyTo(m_data, 0);
             this.m_length = vector.m_length;
         }
         #endregion
@@ -114,6 +116,7 @@ namespace AForge.Math
             this[j] = aux;
         }
 
+        /// <summary>Creates a deep copy of the AForge.Math.Vector.</summary>
         public Vector Clone()
         {
             return new Vector(this);
@@ -130,6 +133,11 @@ namespace AForge.Math
                     sb.Append( "\t");
             }
             return sb.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return this.m_data.GetHashCode() ^ this.m_length.GetHashCode();
         }
         #endregion
 
@@ -317,18 +325,25 @@ namespace AForge.Math
             return Divide(right, left);
         }
 
-        /// <summary>Returns the vector in a double[] form.</summary>
+   /*
         public static explicit operator double[](Vector vector)
         {
             return (double[])vector.m_data;
         }
+   */ 
 
-        public static explicit operator Vector(double[] vector)
+        public static implicit operator Vector(double[] vector)
         {
             Vector r = new Vector();
             r.m_data = vector;
             r.m_length = vector.Length;
             return r;
+        }
+
+        /// <summary>Returns the vector in a double[] form.</summary>
+        public static implicit operator double[](Vector vector)
+        {
+            return (double[])vector.m_data;
         }
         #endregion
 

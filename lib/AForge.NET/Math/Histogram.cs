@@ -113,7 +113,7 @@ namespace AForge.Math
 			}
 
 			mean	= Statistics.Tools.Mean( values );
-            stdDev = Statistics.Tools.StdDev(values);
+            stdDev = Statistics.Tools.StandardDeviation(values);
             median = Statistics.Tools.Median(values);
 		}
 
