@@ -209,23 +209,13 @@ namespace AForge.Statistics
             else return m.Transpose();
         }
 
-        public System.Data.DataTable ToDataTable()
+        public override System.Data.DataTable ToDataTable()
         {
-            System.Data.DataTable dataTable = new System.Data.DataTable(this.m_title);
-
-            foreach (string colName in this.ColumnNames)
-            {
-                dataTable.Columns.Add(colName, typeof(double));
-            }
-
-            for (int i = 0; i < this.Rows; i++)
-            {
-                System.Data.DataRow row = dataTable.NewRow();
-                for (int j = 0; j < this.Columns; j++)
-                {
-                    row[j] = this.Array[i][j];
-                }
-                dataTable.Rows.Add(row);
+            System.Data.DataTable dataTable = base.ToDataTable(this.m_title);
+                        
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+			{
+                dataTable.Columns[i].ColumnName = m_colNames[i];
             }
 
             return dataTable;
@@ -260,156 +250,6 @@ namespace AForge.Statistics
         {
             return new SampleMatrix(this);
         }
-        #endregion
-
-
-        //---------------------------------------------
-
-
-        #region Static Methods
-
-        /// <summary>Finds the empirical mean along each dimension of the matrix</summary>
-        public static Vector Mean(SampleMatrix m)
-        {
-            return SampleMatrix.Mean((Matrix)m);
-        }
-
-        /// <summary>Finds the empirical mean along each column of the matrix</summary>
-        public static Vector Mean(Matrix m)
-        {
-            Vector mean = new Vector(m.Columns);
-            for (int j = 0; j < m.Columns; j++)
-            {
-                for (int i = 0; i < m.Rows; i++)
-                {
-                    mean[j] += m[i, j];
-                }
-
-                mean[j] /= (double)m.Columns;
-            }
-            return mean;
-        }
-
-        /// <summary>Calculates the empirical standard deviation along each dimension of the matrix</summary>
-        public static Vector StandardDeviation(SampleMatrix m)
-        {
-            return SampleMatrix.StandardDeviation((Matrix)m);
-        }
-
-        public static Vector StandardDeviation(Matrix m)
-        {
-            Vector mean = SampleMatrix.Mean(m);
-            Vector std = new Vector(m.Columns);
-
-            for (int j = 0; j < m.Columns; j++)
-            {
-                for (int i = 0; i < m.Rows;i++)
-                {
-                    std[j] += System.Math.Pow((m[i, j] - mean[j]), 2);
-                }
-
-                std[j] /= (double)m.Rows;
-                std[j] = System.Math.Sqrt(std[j]);
-
-                // The following in an inelegant but usual way to handle
-                //   near-zero std. dev. values, which below would cause a zero-divide.
-
-                if (std[j] <= Double.Epsilon)
-                    std[j] = 1.0;
-            }
-            return std;
-        }
-
-        /// <summary>Centers column data, subtracting the empirical mean from each variable.</summary>
-        public static void Center(SampleMatrix m)
-        {
-            SampleMatrix.Center((Matrix)m);
-        }
-
-        /// <summary>Centers column data, subtracting the empirical mean from each variable.</summary>
-        /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
-        public static void Center(Matrix m)
-        {
-            Vector mean = SampleMatrix.Mean(m);
-
-            for (int i = 0; i < m.Rows; i++)
-            {
-                for (int j = 0; j < m.Columns; j++)
-                {
-                    m[i, j] -= mean[j];
-                }
-            }
-        }
-
-        /// <summary>Standardizes column data, removing the empirical standard deviation from each variable.</summary>
-        public static void Standardize(SampleMatrix m)
-        {
-            SampleMatrix.Standardize((Matrix)m);
-        }
-
-        /// <summary>Standardizes column data, removing the empirical standard deviation from each variable.</summary>
-        /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
-        public static void Standardize(Matrix m)
-        {
-            Vector std = SampleMatrix.StandardDeviation(m);
-
-            for (int i = 0; i < m.Rows; i++)
-            {
-                for (int j = 0; j < m.Columns; j++)
-                {
-                    m[i, j] /= System.Math.Sqrt(m.Rows) * std[j];
-                }
-            }
-        }
-
-        /// <summary>Calculates the covariance matrix of a sample matrix, returning a new matrix object</summary>
-        /// <remarks>
-        ///   In statistics and probability theory, the covariance matrix is a matrix of
-        ///   covariances between elements of a vector. It is the natural generalization
-        ///   to higher dimensions of the concept of the variance of a scalar-valued
-        ///   random variable.
-        /// </remarks>
-        /// <returns>The covariance matrix.</returns>
-        public static Matrix Covariance(SampleMatrix m)
-        {
-            SampleMatrix r = m.Clone();
-            SampleMatrix.Center(r);
-            return (1.0 / (r.Observations - 1)) * r.Transpose() * (Matrix)r;
-        }
-
-        /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
-        public static Matrix Covariance(Matrix m)
-        {
-            return Covariance((SampleMatrix)m);
-        }     
-        
-        /// <summary>Calculates the correlation matrix of this samples, returning a new matrix object</summary>
-        /// <remarks>
-        /// In statistics and probability theory, the correlation matrix is the same
-        /// as the covariance matrix of the standardized random variables.
-        /// </remarks>
-        /// <returns>The correlation matrix</returns>
-        public static Matrix Correlation(SampleMatrix m)
-        {
-            SampleMatrix r = m.Clone();
-            SampleMatrix.Center(r);
-            SampleMatrix.Standardize(r);
-            return (1.0 / (r.Observations - 1)) * r.Transpose() * (Matrix)r;
-        }
-
-        /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
-        public static Matrix Correlation(Matrix m)
-        {
-            return Correlation((SampleMatrix)m);
-        }
-        #endregion
-
-
-        //---------------------------------------------
-
-
-        #region Operators
-
         #endregion
 
 

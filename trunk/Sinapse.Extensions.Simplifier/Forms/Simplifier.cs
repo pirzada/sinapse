@@ -29,6 +29,7 @@ using ZedGraph;
 
 using AForge.Statistics.SampleAnalysis;
 using AForge.Statistics;
+using AForge.Math;
 
 
 namespace Sinapse.Extensions.Simplifier.Forms
@@ -55,10 +56,10 @@ namespace Sinapse.Extensions.Simplifier.Forms
             InitializeComponent();
 
             dgvSample.AutoGenerateColumns = true;
-            dgvProjection.AutoGenerateColumns = true;
-            dgvVectors.AutoGenerateColumns = true;
-            dgvPrincipalComponents.AutoGenerateColumns = false;
-            dgvComponentList.AutoGenerateColumns = false;
+            dgvShiftProjection.AutoGenerateColumns = true;
+            dgvOverviewVectors.AutoGenerateColumns = true;
+            dgvOverviewComponents.AutoGenerateColumns = false;
+            dgvShiftComponents.AutoGenerateColumns = false;
         }
         #endregion
 
@@ -74,20 +75,31 @@ namespace Sinapse.Extensions.Simplifier.Forms
 
             dgvSample.EndEdit();
             tableAnalysisSource.AcceptChanges();
-            SampleMatrix smatrix = new SampleMatrix(tableAnalysisSource);
+
+            Matrix smatrix = new Matrix(tableAnalysisSource);
+
+            DescriptiveAnalysis sda = new DescriptiveAnalysis(smatrix);
             pca = new PrincipalComponentAnalysis(smatrix);
             pca.Center = cbCenter.Checked;
             pca.Standardize = cbStandardize.Checked;
             
+            // populate statistics overview tab
+            dgvStatisticCenter.DataSource = sda.DeviationScores.ToDataTable();
+            dgvStatisticStandard.DataSource = sda.StandardScores.ToDataTable();
+
+            dgvStatisticCovariance.DataSource = sda.CovarianceMatrix.ToDataTable();
+            dgvStatisticCorrelation.DataSource = sda.CorrelationMatrix.ToDataTable();
+            dgvStatisticMeasures.DataSource = sda.Measures;
+
             pca.Compute();
 
-            tableShiftSource = new SampleMatrix(pca.SourceMatrix).ToDataTable();
+            tableShiftSource = pca.SourceMatrix.ToDataTable();
 
-            dgvPrincipalComponents.DataSource = pca.Components;
-            dgvComponentList.DataSource = pca.Components;
+            dgvOverviewComponents.DataSource = pca.Components;
+            dgvShiftComponents.DataSource = pca.Components;
             
-            dgvVectors.DataSource = new SampleMatrix(pca.ComponentMatrix).ToDataTable();
-            dataGridView1.DataSource = tableShiftSource;
+            dgvOverviewVectors.DataSource = pca.ComponentMatrix.ToDataTable();
+            dgvShiftSample.DataSource = tableShiftSource;
 
             numComponents.Maximum = pca.Components.Count;
 
@@ -100,9 +112,9 @@ namespace Sinapse.Extensions.Simplifier.Forms
 
         private void btnShift_Click(object sender, EventArgs e)
         {
-            SampleMatrix shiftSource = new SampleMatrix(tableShiftSource);
-            SampleMatrix shiftResult = new SampleMatrix(pca.Apply(shiftSource.ToMatrix(), (int)numComponents.Value));
-            dgvProjection.DataSource = shiftResult.ToDataTable();
+            Matrix shiftSource = new Matrix(tableShiftSource);
+            Matrix m = pca.Apply(shiftSource, (int)numComponents.Value);
+            dgvShiftProjection.DataSource = m.ToDataTable();
         }
         #endregion
 
@@ -216,10 +228,10 @@ namespace Sinapse.Extensions.Simplifier.Forms
 
         private void numComponents_ValueChanged(object sender, EventArgs e)
         {
-            dgvComponentList.ClearSelection();
-            for (int i = 0; i < numComponents.Value && i < dgvComponentList.Rows.Count; i++)
+            dgvShiftComponents.ClearSelection();
+            for (int i = 0; i < numComponents.Value && i < dgvShiftComponents.Rows.Count; i++)
             {
-                dgvComponentList.Rows[i].Selected = true;
+                dgvShiftComponents.Rows[i].Selected = true;
             }
         }
 

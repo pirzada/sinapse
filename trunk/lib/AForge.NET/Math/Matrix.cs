@@ -36,9 +36,18 @@ namespace AForge.Math
 	public class Matrix
 	{
 
+        /// <summary>
+        /// Optimizes Matrix operations with rows and columns. If columns are accessed 
+        /// more often than rows, pass the ColumnMajor organization model as a parameter.
+        /// when creating a new Matrix. Otherwise, use RowMajor as it is the C default.
+        /// </summary>
+        public enum OrganizationModel { RowMajor, ColumnMajor };
+
+
 		private double[][] m_data;
 		private int m_rows;
 		private int m_columns;
+        private OrganizationModel m_model;
 
 		private static System.Random random = new System.Random();
 
@@ -83,26 +92,23 @@ namespace AForge.Math
 	
 		/// <summary>Constructs a matrix from the given array.</summary>
 		/// <param name="value">The array the matrix gets constructed from.</param>
-		[CLSCompliant(false)]
 		public Matrix(double[][] value)
 		{
 			this.m_rows = value.Length;
 			this.m_columns = value[0].Length;
-	
-			for (int i = 0; i < m_rows; i++)
-			{
-				if (value[i].Length != m_columns)
-				{
-					throw new ArgumentException("Argument out of range."); 
-				}
-			}
-	
-			this.m_data = value;
+
+            for (int i = 0; i < this.m_rows; i++)
+            {
+                this.m_data[i] = new double[this.m_columns];
+                for (int j = 0; j < this.m_columns; j++)
+                {
+                    this.m_data[i][j] = value[i][j];
+                }
+            }
         }
 
         /// <summary> Constructs a matrix from the given matrix.</summary>
         /// <param name="value">The array the matrix gets constructed from.</param>
-        [CLSCompliant(false)]
         public Matrix(double[,] value)
         {
             this.m_rows = value.GetLength(0);
@@ -118,18 +124,55 @@ namespace AForge.Math
             }
         }
 
+        /// <summary>Constructs a new Matrix object by reading values from a data table.</summary>
+        /// <param name="dataTable">The source DataTable. It must have nummeric, boolean or string type values only.</param>
+        public Matrix(System.Data.DataTable dataTable)
+            : this(dataTable.Rows.Count, dataTable.Columns.Count)
+        {
+            for (int i = 0; i < this.Rows; i++)
+            {
+                for (int j = 0; j < this.Columns; j++)
+                {
+                    if (dataTable.Columns[j].DataType == typeof(System.String))
+                    {
+                        this.Array[i][j] = Double.Parse((String)dataTable.Rows[i][j]);
+                    }
+                    else if (dataTable.Columns[j].DataType == typeof(System.Boolean))
+                    {
+                        this.Array[i][j] = (Boolean)dataTable.Rows[i][j] ? 1.0 : 0.0;
+                    }
+                    else
+                    {
+                        this.Array[i][j] = (Double)dataTable.Rows[i][j];
+                    }
+                }
+            }
+        }
+
         /// <summary>Creates a new copy of a matrix object</summary>
         /// <param name="matrix">The matrix to be copied.</param>
         public Matrix(Matrix matrix)
         {
-            this.m_data = matrix.m_data;
+            this.m_data = new double[matrix.Rows][];
+            for (int i = 0; i < matrix.Rows; i++)
+            {
+                this.m_data[i] = new double[matrix.Columns];
+                for (int j = 0; j < matrix.Columns; j++)
+                {
+                    this.m_data[i][j] = matrix.m_data[i][j];
+                }
+            }
+        //    this.m_data = (double[][])matrix.m_data.Clone();
             this.m_columns = matrix.m_columns;
             this.m_rows = matrix.m_rows;
         }
 
-        /// <summary></summary>
+
         private Matrix()
         {
+            // A private constructor is only used when creating special instances
+            // of the matrix class during conversion operations. Should not be used
+            // otherwise.
         }
         #endregion
 
@@ -138,7 +181,8 @@ namespace AForge.Math
 
 
         #region Properties
-        internal double[][] Array
+        /// <summary></summary>
+        internal protected double[][] Array
         {
             get { return this.m_data; }
             set { this.m_data = value; }
@@ -179,10 +223,8 @@ namespace AForge.Math
 							}
 						}
 					}
-
 					return true;
 				}
-
 				return false;
 			}
 		}
@@ -195,7 +237,7 @@ namespace AForge.Math
         }
 
         /// <summary>Access a matrix row</summary>
-        public double[] this[int row]
+        public Vector this[int row]
         {
             get { return this.GetRow(row); }
         }
@@ -204,12 +246,6 @@ namespace AForge.Math
         public double Determinant
         {
             get { return new LuDecomposition(this).Determinant; }
-        }
-
-        /// <summary>Inverse of the matrix if matrix is square, pseudoinverse otherwise.</summary>
-        public Matrix Inverse
-        {
-            get { return this.Solve(Matrix.Diagonal(m_rows, 1.0)); }
         }
 
         /// <summary>Returns the trace of the matrix.</summary>
@@ -227,6 +263,76 @@ namespace AForge.Math
             }
         }
 
+        /// <summary>Returns the One Norm for the matrix.</summary>
+        /// <value>The maximum column sum.</value>
+        public double OneNorm
+        {
+            get
+            {
+                double f = 0;
+                for (int j = 0; j < m_columns; j++)
+                {
+                    double s = 0;
+                    for (int i = 0; i < m_rows; i++)
+                    {
+                        s += System.Math.Abs(m_data[i][j]);
+                    }
+
+                    f = System.Math.Max(f, s);
+                }
+                return f;
+            }
+        }
+
+        /// <summary>Return the Two Norm for the matrix</summary>
+        public double TwoNorm
+        {
+            get
+            {
+                if ((this.m_rows != 0) && (this.m_columns != 0))
+                    return new SingularValueDecomposition(this).TwoNorm;
+
+                else return 0.0;
+            }
+        }
+
+        /// <summary>Returns the Infinity Norm for the matrix.</summary>
+        /// <value>The maximum row sum.</value>
+        public double InfinityNorm
+        {
+            get
+            {
+                double f = 0;
+                for (int i = 0; i < m_rows; i++)
+                {
+                    double s = 0;
+                    for (int j = 0; j < m_columns; j++)
+                        s += System.Math.Abs(m_data[i][j]);
+                    f = System.Math.Max(f, s);
+                }
+                return f;
+            }
+        }
+
+        /// <summary>Returns the Frobenius Norm for the matrix.</summary>
+        /// <value>The square root of sum of squares of all elements.</value>
+        public double FrobeniusNorm
+        {
+            get
+            {
+                double f = 0;
+                for (int i = 0; i < m_rows; i++)
+                {
+                    for (int j = 0; j < m_columns; j++)
+                    {
+                        f = AForge.Math.Tools.Hypotenuse(f, m_data[i][j]);
+                    }
+                }
+
+                return f;
+            }
+        }
+
         #endregion
 
 
@@ -240,7 +346,7 @@ namespace AForge.Math
         /// <param name="column2">The second column index to be swapped</param>
         public void SwapColumns(int column1, int column2)
         {
-            double[] aux = this.GetColumn(column1);
+            Vector aux = this.GetColumn(column1);
             this.SetColumn(column1, this.GetColumn(column2));
             this.SetColumn(column2, aux);
         }
@@ -250,7 +356,7 @@ namespace AForge.Math
         /// <param name="row2">The second row index to be swapped</param>
         public void SwapRows(int row1, int row2)
         {
-            double[] aux = this.GetRow(row1);
+            Vector aux = this.GetRow(row1);
             this.SetRow(row1, this.GetRow(row2));
             this.SetRow(row2, aux);
         }
@@ -258,7 +364,7 @@ namespace AForge.Math
         /// <summary>Gets a entire row of the matrix as a double array</summary>
         /// <param name="index">The row's index</param>
         /// <returns>The row double array</returns>
-        public double[] GetRow(int index)
+        public Vector GetRow(int index)
         {
             return this.m_data[index];
         }
@@ -266,9 +372,9 @@ namespace AForge.Math
         /// <summary>Gets a entire row of the matrix as a double array</summary>
         /// <param name="index">The row's index</param>
         /// <returns>The row double array</returns>
-        public double[] GetColumn(int index)
+        public Vector GetColumn(int index)
         {
-            double[] col = new double[this.Rows];
+            double[] col = new double[this.m_rows];
 
             for (int i = 0; i < col.Length; i++)
             {
@@ -449,65 +555,9 @@ namespace AForge.Math
 			return X;
 		}
 
-		/// <summary>Returns the One Norm for the matrix.</summary>
-		/// <value>The maximum column sum.</value>
-		public double OneNorm
-		{
-			get
-			{
-				double f = 0;
-				for (int j = 0; j < m_columns; j++)
-				{
-					double s = 0;
-					for (int i = 0; i < m_rows; i++)
-					{
-						s += System.Math.Abs(m_data[i][j]);
-					}
 
-                    f = System.Math.Max(f, s);
-				}
-				return f;
-			}		
-		}
 
-		/// <summary>Returns the Infinity Norm for the matrix.</summary>
-		/// <value>The maximum row sum.</value>
-		public double InfinityNorm
-		{
-			get
-			{
-				double f = 0;
-				for (int i = 0; i < m_rows; i++)
-				{
-					double s = 0;
-					for (int j = 0; j < m_columns; j++)
-                        s += System.Math.Abs(m_data[i][j]);
-                    f = System.Math.Max(f, s);
-				}
-				return f;
-			}
-		}
-
-		/// <summary>Returns the Frobenius Norm for the matrix.</summary>
-		/// <value>The square root of sum of squares of all elements.</value>
-		public double FrobeniusNorm
-		{
-			get
-			{
-				double f = 0;
-				for (int i = 0; i < m_rows; i++)
-				{
-					for (int j = 0; j < m_columns; j++)
-					{
-						f = AForge.Math.Tools.Hypotenuse(f, m_data[i][j]);
-					}
-				}
-
-				return f;
-			}
-        }
-
-        /// <summary>Creates a copy of the matrix.</summary>
+        /// <summary>Creates a deep copy of the AForge.Math.Matrix.</summary>
         public Matrix Clone()
         {
             return new Matrix(this);
@@ -516,17 +566,23 @@ namespace AForge.Math
         /// <summary> Returns the transposed matrix.</summary>
         public Matrix Transpose()
         {
-            Matrix X = new Matrix(m_columns, m_rows);
-            double[][] x = X.Array;
-            for (int i = 0; i < m_rows; i++)
+            Matrix t = new Matrix(m_columns, m_rows);
+
+            for (int i = 0; i < this.m_rows; i++)
             {
-                for (int j = 0; j < m_columns; j++)
+                for (int j = 0; j < this.m_columns; j++)
                 {
-                    x[j][i] = m_data[i][j];
+                    t.m_data[j][i] = this.m_data[i][j];
                 }
             }
 
-            return X;
+            return t;
+        }
+
+        /// <summary>Inverse of the matrix if matrix is square, pseudoinverse otherwise.</summary>
+        public Matrix Inverse()
+        {
+            return this.Solve(Matrix.Diagonal(m_rows, 1.0));
         }
 
         /// <summary>Returns the LHS solution vetor if the matrix is square or the least squares solution otherwise.</summary>
@@ -538,7 +594,7 @@ namespace AForge.Math
         /// <summary> Serves as a hash function for a particular type, suitable for use in hashing algorithms and data structures like a hash table.</summary>
         public override int GetHashCode()
         {
-            return (this.Rows + this.Columns);
+            return this.m_rows.GetHashCode() ^ this.m_columns.GetHashCode() ^ this.m_data.GetHashCode();
         }
 
         /// <summary>Returns the matrix in a textual form.</summary>
@@ -560,6 +616,52 @@ namespace AForge.Math
             }
         }
 
+        /// <summary>Converts the given Matrix into a DataTable representation.</summary>
+        public virtual System.Data.DataTable ToDataTable(string name)
+        {
+            System.Data.DataTable dataTable = new System.Data.DataTable();
+
+            for (int i = 0; i < this.m_columns; i++)
+            {
+                dataTable.Columns.Add(i.ToString(), typeof(System.Double));
+            }
+
+            for (int i = 0; i < this.m_rows; i++)
+            {
+                System.Data.DataRow row = dataTable.NewRow();
+                for (int j = 0; j < this.Columns; j++)
+                {
+                    row[j] = this.m_data[i][j];
+                }
+                dataTable.Rows.Add(row);
+            }
+
+            return dataTable;
+        }
+
+        public virtual System.Data.DataTable ToDataTable()
+        {
+            return this.ToDataTable("Matrix");
+        }
+
+        public double[][] ToArray()
+        {
+            return (double[][])this.m_data.Clone();
+        }
+
+        public double[,] ToMultidimensionalArray()
+        {
+            double[,] array = new double[this.m_rows, this.m_columns];
+
+            for (int i = 0; i < m_rows; i++)
+            {
+                for (int j = 0; j < m_columns; j++)
+                {
+                    array[i,j] = this.m_data[i][j];
+                }
+            }
+            return array;
+        }
         #endregion
 
 
@@ -577,6 +679,11 @@ namespace AForge.Math
         /// <summary>Determines weather two instances are equal.</summary>
         public static bool Equals(Matrix left, Matrix right)
         {
+            if (ReferenceEquals(left, right))
+            {
+                return true;
+            }
+
             if (((object)left) == ((object)right))
             {
                 return true;
@@ -817,65 +924,26 @@ namespace AForge.Math
         }
 
         /// <summary>Returns the matrix in a double[][] form. </summary>
-        public static explicit operator double[][](Matrix m)
+        public static implicit operator double[][](Matrix matrix)
         {
-            return (double[][])m.m_data.Clone();
-        }
-
-        /// <summary>Returns the matrix in a double[,] form. </summary>
-        public static explicit operator double[,](Matrix m)
-        {
-            double[,] r = new double[m.m_rows, m.m_columns];
-
-            for (int i = 0; i < m.m_rows; ++i)
-            {
-                for (int j = 0; j < m.m_columns; ++j)
-                {
-                    r[i, j] = m.m_data[i][j];
-                }
-            }
-            return r;
+            return matrix.m_data;
         }
         
-        public static explicit operator Matrix(double[][] value)
+        public static explicit operator Matrix(double[][] matrix)
         {
             Matrix r = new Matrix();
-            r.m_rows = value.Length;
-            r.m_columns = value[0].Length;
-            r.m_data = value;
-            return r;
-        }
+            r.m_rows = matrix.Length;
+            r.m_columns = matrix[0].Length;
 
-        public static explicit operator Matrix(double[,] value)
-        {
-            return new Matrix(value);
-        }
-
-        public static explicit operator Matrix(System.Data.DataTable dataTable)
-        {
-            Matrix m = new Matrix(dataTable.Rows.Count, dataTable.Columns.Count);
-
-            for (int i = 0; i < m.Rows; i++)
+            for (int i = 0; i < r.m_rows; i++)
             {
-                for (int j = 0; j < m.Columns; j++)
-                {
-                    if (dataTable.Columns[j].DataType == typeof(System.String))
-                    {
-                        m[i, j] = Double.Parse((string)dataTable.Rows[i][j]);
-                    }
-                    else
-                    {
-                        m[i, j] = (Double)dataTable.Rows[i][j];
-                    }
-                }
+                if (matrix[i].Length != r.m_columns)
+                    throw new ArgumentException("The given array has rows of different dimensions", "matrix");
             }
 
-            return m;
-        }
+            r.m_data = matrix;
 
-        public static explicit operator System.Data.DataTable(Matrix m)
-        {
-            throw new NotImplementedException();
+            return r;
         }
         #endregion
 
@@ -924,7 +992,7 @@ namespace AForge.Math
             return Matrix.Diagonal(dimension, dimension, value);
         }
 
-
+        /// <summary>Raise every member of the matrix to the given power.</summary>
         public static Matrix Pow(Matrix m, double power)
         {
             Matrix r = m.Clone();
@@ -937,6 +1005,7 @@ namespace AForge.Math
             }
             return r;
         }
+
 
         #endregion
 
