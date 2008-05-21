@@ -97,6 +97,11 @@ namespace AForge.Math
         {
             get { return this.m_length; }
         }
+
+        public DoubleRange Range
+        {
+            get { return GetRange(this); }
+        }
         #endregion
 
 
@@ -380,6 +385,49 @@ namespace AForge.Math
                 vector[i] = vector[i] / norm;
             }
          }
+
+        public static double Max(Vector vector)
+        {
+            double max = vector[0];
+
+            for (int i = 0; i < vector.Length; i++)
+            {
+                if (vector[i] > max)
+                    max = vector[i];
+            }
+
+            return max;
+        }
+
+        public static double Min(Vector vector)
+        {
+            double min = vector[0];
+
+            for (int i = 0; i < vector.Length; i++)
+            {
+                if (vector[i] < min)
+                    min = vector[i];
+            }
+
+            return min;
+        }
+
+        public static DoubleRange GetRange(Vector vector)
+        {
+            double max = vector[0];
+            double min = vector[0];
+
+            for (int i = 0; i < vector.Length; i++)
+            {
+                if (vector[i] > max)
+                    max = vector[i];
+
+                if (vector[i] > max)
+                    max = vector[i];
+            }
+
+            return new DoubleRange(min, max);
+        }
         #endregion
 
     }
