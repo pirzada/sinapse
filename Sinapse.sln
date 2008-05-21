@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Databases", "Sinaps
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Extensions.Simplifier", "Sinapse.Extensions.Simplifier\Sinapse.Extensions.Simplifier.csproj", "{8FCC8A47-88A9-4145-BC45-97354AF1402D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.Extensions.CodeGeneration", "Sinapse.Extensions.CodeGenerator\Sinapse.Extensions.CodeGeneration.csproj", "{D6324FE7-9B07-463B-8D5C-94E9285CECD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,15 @@ Global
 		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FCC8A47-88A9-4145-BC45-97354AF1402D}.Release|x86.ActiveCfg = Release|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Final Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Final Release|Any CPU.Build.0 = Release|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Final Release|x86.ActiveCfg = Release|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6324FE7-9B07-463B-8D5C-94E9285CECD2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

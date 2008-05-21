@@ -91,12 +91,12 @@ namespace Sinapse.Core.Networks.DataSources
     public class NetworkTableColumn
     {
 
-        public enum NetworkTableColumnRole { None, Input, Output };
+        public enum ColumnRole { None, Input, Output };
 
         private string name;
         private string header;
         private bool isNummeric;
-        private NetworkTableColumnRole columnRole;
+        private ColumnRole columnRole;
         private Hashtable categoryTable;
   //      private DoubleRange range;
 
@@ -105,7 +105,7 @@ namespace Sinapse.Core.Networks.DataSources
 
 
         #region Constructor
-        public NetworkTableColumn(string name, string header, bool isNummeric, NetworkTableColumnRole role)
+        public NetworkTableColumn(string name, string header, bool isNummeric, ColumnRole role)
         {
             this.name = name;
             this.header = header;
@@ -139,7 +139,7 @@ namespace Sinapse.Core.Networks.DataSources
             set { this.isNummeric = value; }
         }
 
-        public NetworkTableColumnRole ColumnRole
+        public ColumnRole Role
         {
             get { return this.columnRole; }
             set { this.columnRole = value; }
@@ -169,13 +169,13 @@ namespace Sinapse.Core.Networks.DataSources
 
 
         #region Public Methods
-        public NetworkTableColumn[] Select(NetworkTableColumnRole columnRole)
+        public NetworkTableColumn[] Select(NetworkTableColumn.ColumnRole columnRole)
         {
             List<NetworkTableColumn> search = new List<NetworkTableColumn>(this.Count);
 
             foreach (NetworkTableColumn col in this)
             {
-                if (col.ColumnRole == columnRole)
+                if (col.Role == columnRole)
                     search.Add(col);
             }
 

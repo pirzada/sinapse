@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using AForge.Math;
+using AForge;
 
 namespace AForge.Statistics.SampleAnalysis
 {
@@ -27,6 +28,7 @@ namespace AForge.Statistics.SampleAnalysis
         private Vector m_variance;
         private Vector m_median;
         private Vector m_mode;
+        private DoubleRange[] m_ranges;
 
         private Matrix m_covMatrix;
         private Matrix m_corMatrix;
@@ -63,6 +65,11 @@ namespace AForge.Statistics.SampleAnalysis
             this.m_covMatrix = Statistics.Tools.Covariance(data, m_mean);
             this.m_corMatrix = Statistics.Tools.Covariance(m_zScores);
 
+            this.m_ranges = new DoubleRange[this.m_sourceData.Columns];
+            for (int i = 0; i < m_ranges.Length; i++)
+            {
+                this.m_ranges[i] = m_sourceData.GetColumn(i).Range;
+            }
             
             // Create object-oriented structure to access data
             DescriptiveMeasures[] measures = new DescriptiveMeasures[m_sourceData.Columns];
@@ -156,6 +163,14 @@ namespace AForge.Statistics.SampleAnalysis
         }
 
         /// <summary>
+        /// Gets an array containing the Ranges of each column of data.
+        /// </summary>
+        public DoubleRange[] Ranges
+        {
+            get { return m_ranges; }
+        }
+
+        /// <summary>
         /// Gets a collection of DescriptiveMeasures objects that can be bound to a DataGridView.
         /// </summary>
         public DescriptiveMeasureCollection Measures
@@ -208,6 +223,11 @@ namespace AForge.Statistics.SampleAnalysis
         public double Variance
         {
             get { return m_analysis.Variances[m_index]; }
+        }
+
+        public DoubleRange Range
+        {
+            get { return m_analysis.Ranges[m_index]; }
         }
 
     }

@@ -115,6 +115,7 @@
     <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
     <Compile Include="Statistics\RangeConversion.cs">
     </Compile>
+    <Compile Include="Statistics\SampleAnalysis\DistributionAnalysis.cs" />
     <Compile Include="Statistics\SampleAnalysis\FactorAnalysis.cs" />
     <Compile Include="Statistics\SampleAnalysis\IndependentComponentAnalysis.cs" />
     <Compile Include="Statistics\SampleAnalysis\PrincipalComponentAnalysis.cs" />

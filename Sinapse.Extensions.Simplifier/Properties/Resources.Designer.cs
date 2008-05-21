@@ -88,6 +88,20 @@ namespace Sinapse.Extensions.Simplifier.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap kded {
+            get {
+                object obj = ResourceManager.GetObject("kded", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap kservices {
+            get {
+                object obj = ResourceManager.GetObject("kservices", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap package_system {
             get {
                 object obj = ResourceManager.GetObject("package_system", resourceCulture);
@@ -98,6 +112,13 @@ namespace Sinapse.Extensions.Simplifier.Properties {
         internal static System.Drawing.Bitmap restart {
             get {
                 object obj = ResourceManager.GetObject("restart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap restart1 {
+            get {
+                object obj = ResourceManager.GetObject("restart1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
