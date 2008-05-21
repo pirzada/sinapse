@@ -19,55 +19,30 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
-using AForge.Math;
-using AForge.Statistics.SampleAnalysis;
-
-
-namespace Sinapse.Core
+namespace Sinapse.Core.Networks.DataSources
 {
-    public class PrincipalComponentTransform : Sinapse.Core.Transformations.ITransformation
+    public class NetworkVideoSource : Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase
     {
-        
-        private PrincipalComponentAnalysis pca;
-
-        
-        // -------------------------------------------------
-
-
-        #region Constructor
-        public PrincipalComponentTransform()
-        {
-            throw new System.NotImplementedException();
-        }
-        #endregion
-
-        // -------------------------------------------------
-
-
-        #region Properties
-        public int Inputs
-        {
-            get { return 0; }
-        }
-
-        public int Outputs
-        {
-            get { return 0; }
-        }
-        #endregion
-
-
-        // -------------------------------------------------
-
-
-        #region Public Members
-        public void Apply(Matrix m)
+        public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
         {
             throw new Exception("The method or operation is not implemented.");
         }
-        #endregion
 
+        public override DataView CreateDataView(NetworkDataSet set)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
+        public override int InputCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public override int OutputCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
     }
 }

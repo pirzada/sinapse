@@ -17,41 +17,71 @@
  ***************************************************************************/
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-
-using AForge.Math;
-
-namespace Sinapse.Core.Transformations
+namespace Sinapse.Core.Training
 {
-    public interface ITransformation
-    {
-        Matrix Apply(Matrix source);
-
-        int Inputs { get; }
-        int Outputs { get; }
-
-      //  bool IsDimensionConservative { get; }
-    }
-
-    public class ITransformationCollection : System.ComponentModel.BindingList<ITransformation>
+    public sealed class TrainingStatus
     {
 
-        public ITransformationCollection()
+        internal int epoch;
+        internal int progress;
+
+        internal double trainingError;
+        internal double validationError;
+
+        internal double epochsPerSecond;
+        internal int trainingRound;
+
+
+        //----------------------------------------
+
+
+        #region Constructor
+        public TrainingStatus()
         {
 
         }
+        #endregion
 
-        public Matrix Apply(Matrix source)
+
+        //----------------------------------------
+
+
+        #region Properties
+        public int Epoch
         {
-            foreach (ITransformation transform in this)
-            {
-                source = transform.Apply(source);
-            }
-
-            return source;
+            get { return this.epoch; }
         }
 
-    }
+        public double ValidationError
+        {
+            get { return this.validationError; }
 
-    
+        }
+
+        public double TrainingError
+        {
+            get { return this.trainingError; }
+        }
+        #endregion
+
+
+        //----------------------------------------
+
+
+        #region Public Methods
+        public void Reset()
+        {
+            this.epoch = 0;
+            this.progress = 0;
+            this.trainingError = 0.0;
+            this.validationError = 0.0;
+            this.epochsPerSecond = 0;
+            this.trainingRound = 0;
+        }
+        #endregion
+
+    }
 }

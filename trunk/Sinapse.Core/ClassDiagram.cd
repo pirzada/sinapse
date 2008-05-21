@@ -1,55 +1,208 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Font Name="Tahoma" Size="8.25" />
-  <Class Name="Sinapse.Core.PrincipalComponentFilter">
-    <Position X="2.25" Y="3.75" Width="2.5" />
+  <Class Name="Sinapse.Core.Transformations.ITransformationCollection" Collapsed="true">
+    <Position X="18.25" Y="8.25" Width="2" />
     <TypeIdentifier>
-      <FileName>Filters\PrincipalComponentFilter.cs</FileName>
-      <HashCode>ACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Transformations\Base\ITransformation.cs</FileName>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.DataSources.NetworkTableSource" Collapsed="true">
+    <Position X="17.5" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Networks\DataSources\NetworkTableSource.cs</FileName>
+      <HashCode>AAAAAAAAAAAEAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_columns" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.DataSources.NetworkImageSource" Collapsed="true">
+    <Position X="19.5" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Networks\DataSources\NetworkImageSource.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.NetworkContainer" Collapsed="true">
+    <Position X="18.25" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Networks\NetworkContainer.cs</FileName>
+      <HashCode>EEAAAAAAAAAAIAAAABAAAAAAiAAYAAAAAAAAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="InputTransformation" />
+      <Property Name="OutputTransformation" />
+    </ShowAsAssociation>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="InputTransformation" Type="Sinapse.Core.Transformations.ITransformationCollection" FixedFromPoint="true">
+      <Path>
+        <Point X="18.812" Y="7.259" />
+        <Point X="18.812" Y="8.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.06" Y="0.11" Height="0.16" Width="1.438" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="OutputTransformation" Type="Sinapse.Core.Transformations.ITransformationCollection">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.588" Y="0.126" />
+      </MemberNameLabel>
+    </AssociationLine>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase" Collapsed="true">
+    <Position X="18.25" Y="11" Width="2" />
+    <TypeIdentifier>
+      <FileName>Networks\DataSources\Base\NetworkDataSourceBase.cs</FileName>
+      <HashCode>AAAAAACAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Transformations.PrincipalComponent" Collapsed="true">
+    <Position X="14.75" Y="19.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Transformations\PrincipalComponent.cs</FileName>
+      <HashCode>BCAAAAAAABAAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Filters.EigenImageFilter">
-    <Position X="5.5" Y="3.75" Width="1.5" />
+  <Class Name="Sinapse.Core.Transformations.RangeConversion" Collapsed="true">
+    <Position X="12.75" Y="19.25" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Filters\EigenImageFilter.cs</FileName>
-      <HashCode>AgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Transformations\RangeConversion.cs</FileName>
+      <HashCode>BAAAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Filters.FilterCollection">
-    <Position X="8" Y="0.5" Width="1.5" />
+  <Class Name="Sinapse.Core.Networks.DataSources.NetworkSoundSource" Collapsed="true">
+    <Position X="15.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Filters\Base\FilterCollection.cs</FileName>
-      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Networks\DataSources\NetworkSoundSource.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Sinapse.Core.Filters.IImageFilter" Collapsed="true">
-    <Position X="0.5" Y="2" Width="1.5" />
+  <Class Name="Sinapse.Core.Networks.DataSources.NetworkVideoSource" Collapsed="true">
+    <Position X="21.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Filters\Base\IImageFilter.cs</FileName>
+      <FileName>Networks\DataSources\NetworkVideoSource.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.NetworkMappings" Collapsed="true">
+    <Position X="19" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Networks\NetworkMappings.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-  </Interface>
-  <Interface Name="Sinapse.Core.Filters.ITextFilter" Collapsed="true">
-    <Position X="2.75" Y="2" Width="1.5" />
+  </Class>
+  <Class Name="Sinapse.Core.Training.TrainingSession">
+    <Position X="23.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Filters\Base\ITextFilter.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Training\TrainingSession.cs</FileName>
+      <HashCode>AEAkQAAAAiIAQEAAAACAAAgAAFIAAIAAIAAgAAAAAIA=</HashCode>
     </TypeIdentifier>
-  </Interface>
-  <Interface Name="Sinapse.Core.Filters.IVideoFilter" Collapsed="true">
-    <Position X="5" Y="2" Width="1.5" />
+    <ShowAsAssociation>
+      <Field Name="m_networkDataSource" />
+      <Field Name="m_options" />
+      <Field Name="m_status" />
+      <Field Name="m_savepoints" />
+      <Field Name="m_networkContainer" />
+    </ShowAsAssociation>
+    <NestedTypes>
+      <Enum Name="Sinapse.Core.Training.TrainingSession.SessionState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Training\TrainingSession.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="m_networkDataSource" Type="Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="23.25" Y="10.01" />
+        <Point X="22.432" Y="10.01" />
+        <Point X="22.432" Y="11.159" />
+        <Point X="20.25" Y="11.159" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_options" Type="Sinapse.Core.Training.TrainingOptions" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="24.75" Y="9.17" />
+        <Point X="25.125" Y="9.17" />
+        <Point X="25.125" Y="9.255" />
+        <Point X="26" Y="9.255" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_status" Type="Sinapse.Core.Training.TrainingStatus" FixedToPoint="true">
+      <Path>
+        <Point X="24.75" Y="10.375" />
+        <Point X="26" Y="10.375" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_savepoints" Type="Sinapse.Core.Training.TrainingSavepointCollection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="24.75" Y="7.79" />
+        <Point X="25.125" Y="7.79" />
+        <Point X="25.125" Y="7.815" />
+        <Point X="26" Y="7.815" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_networkContainer" Type="Sinapse.Core.Networks.NetworkContainer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="23.25" Y="8.812" />
+        <Point X="22.48" Y="8.812" />
+        <Point X="22.48" Y="7" />
+        <Point X="20.25" Y="7" />
+      </Path>
+    </AssociationLine>
+  </Class>
+  <Class Name="Sinapse.Core.Training.TrainingStatus" Collapsed="true">
+    <Position X="26" Y="10" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Filters\Base\IVideoFilter.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Training\TrainingStatus.cs</FileName>
+      <HashCode>ABAAAAAAAIAARACAAEAAAAAAEAAAQAAAAIAAAAAQAAA=</HashCode>
     </TypeIdentifier>
-  </Interface>
-  <Interface Name="Sinapse.Core.Filters.IDataFilter">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+  </Class>
+  <Class Name="Sinapse.Core.Training.TrainingOptions" Collapsed="true">
+    <Position X="26" Y="9" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Filters\Base\IDataFilter.cs</FileName>
-      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Training\TrainingOptions.cs</FileName>
+      <HashCode>QDAEAAAAgAAgAAAAAAYAAAAAAAAAAAAAAAAAAgAACAA=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Enum Name="Sinapse.Core.Training.TrainingOptions.TrainingMethod" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Training\TrainingOptions.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+  </Class>
+  <Class Name="Sinapse.Core.Training.TrainingSavepointCollection" Collapsed="true">
+    <Position X="26" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Training\TrainingSavepoint.cs</FileName>
+      <HashCode>AAIEAAAAAUAAgAAAAACCIAAAABAAAAACAABAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.DataSources.NetworkTableColumn" Collapsed="true">
+    <Position X="17.25" Y="14.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Networks\DataSources\NetworkTableSource.cs</FileName>
+      <HashCode>BBAAAAQAAAAAABAAAAAAAAQAAAAEAAAAAAAAAAAAGAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Networks.DataSources.NetworkTableColumnCollection" Collapsed="true">
+    <Position X="17.25" Y="13.75" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Networks\DataSources\NetworkTableSource.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Sinapse.Core.Transformations.ITransformation" Collapsed="true">
+    <Position X="13.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Transformations\Base\ITransformation.cs</FileName>
+      <HashCode>BAAAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
 </ClassDiagram>

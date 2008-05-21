@@ -17,41 +17,39 @@
  ***************************************************************************/
 
 using System;
-
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
 
 using AForge.Math;
 
-namespace Sinapse.Core.Transformations
+using Sinapse.Core.Transformations;
+
+
+namespace Sinapse.Core.Networks.DataSources
 {
-    public interface ITransformation
-    {
-        Matrix Apply(Matrix source);
+    public enum NetworkDataSet { Training, Testing, Validation };
+}
 
-        int Inputs { get; }
-        int Outputs { get; }
+namespace Sinapse.Core.Networks.DataSources.Base
+{
 
-      //  bool IsDimensionConservative { get; }
-    }
-
-    public class ITransformationCollection : System.ComponentModel.BindingList<ITransformation>
+    [Serializable]
+    public abstract class NetworkDataSourceBase
     {
 
-        public ITransformationCollection()
+        public abstract Matrix CreateVectors(NetworkDataSet set);
+
+        public abstract DataView CreateDataView(NetworkDataSet set);
+
+        public abstract int InputCount { get; }
+        public abstract int OutputCount { get; }
+
+
+        public bool IsCompatible(NetworkContainer network)
         {
-
-        }
-
-        public Matrix Apply(Matrix source)
-        {
-            foreach (ITransformation transform in this)
-            {
-                source = transform.Apply(source);
-            }
-
-            return source;
+            return (network.InputCount == this.InputCount && network.OutputCount == this.OutputCount);
         }
 
     }
-
-    
 }

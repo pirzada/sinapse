@@ -250,8 +250,9 @@
     <Compile Include="Data\CodeGeneration\Java.cs" />
     <Compile Include="Data\CodeGeneration\Matlab.cs" />
     <Compile Include="Data\Logging\HistoryEvent.cs" />
-    <Compile Include="Data\Network\DataCategory.cs" />
-    <Compile Include="Data\Network\NetworkColumn.cs" />
+    <Compile Include="Data\Network\DataCategory.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Data\Network\TrainingSession.cs" />
     <Compile Include="Data\Network\NetworkWorkplace.cs" />
     <Compile Include="Data\Reporting\ReportGenerator.cs">

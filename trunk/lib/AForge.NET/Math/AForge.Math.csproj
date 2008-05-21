@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Geometry\AffineTransformation2D.cs" />
     <Compile Include="Histogram.cs" />
+    <Compile Include="Statistics\HistogramTools.cs" />
     <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
     <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
     <Compile Include="Statistics\RangeConversion.cs">

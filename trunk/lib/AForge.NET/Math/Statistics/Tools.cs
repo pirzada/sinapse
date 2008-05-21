@@ -1,435 +1,211 @@
-// AForge Math Library
-//
-// Copyright © Andrew Kirillov, 2005-2007
-// andrew.kirillov@gmail.com
-//
-// Modifications by Cesar Roberto de Souza, 2008
-// cesarsouza@gmail.com
+/***************************************************************************
+ *                                                                         *
+ *  Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>  *
+ *                                                                         *
+ *  Please note that this code is not part of the original AForge.NET      *
+ *  library. This extension was created to support new features needed by  *
+ *  Sinapse, a neural networking tool software. Unless otherwise advised,  *
+ *  this code relies under protection of the GNU General Public License v3 *
+ *                                                                         *
+ ***************************************************************************/
+
+using System;
+using AForge;
+using AForge.Math;
+
 
 namespace AForge.Statistics
 {
-    using System;
-    using AForge;
-    using AForge.Math;
-
-    /*
-        /// <summary>
-        /// Determines how a Matrix should be read during a Statistical operation.
-        /// ObservationModel.Rows means each row of the matrix represents an observation
-        /// of variables, while ObservationModel.Columns means each column of the matrix
-        /// represents an observation of those variables. The most tipical usage, the
-        /// table-model organization of data utilizes rows as observations of variables
-        /// referenced by its columns.
-        /// </summary>
-        public enum ObservationModel { Rows, Columns };
-     
-    */
 
     public enum MeasureType { Sample, Population };
 
 
 
     /// <summary>
-    /// Set of statistics functions
+    ///     Set of statistics functions
     /// </summary>
     /// 
-    /// <remarks>The class represents collection of functions used
-    /// in statistics. Every Matrix function assumes data is organized
-    /// in a table-like model, where Columns represents variables and
-    /// Rows represents a observation of each variable.</remarks>
+    /// <remarks>
+    ///     The class represents collection of functions used
+    ///     in statistics. Every Matrix function assumes data is organized
+    ///     in a table-like model, where Columns represents variables and
+    ///     Rows represents a observation of each variable.
+    /// </remarks>
     /// 
     public static class Tools
     {
 
-        #region Common Statistics
-        /// <summary>
-        /// Calculate mean value
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns mean value</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static double Mean(double[] values)
+        #region Vector Statistics
+        /// <summary>Computes the Mean of the given values.</summary>
+        /// <param name="vector">A double array containing the vector members.</param>
+        /// <returns>The mean of the given data.</returns>
+        public static double Mean(params double[] values)
         {
-            double hits;
-            double mean = 0;
-            double total = 0;
-
-            // for all values
-            for (int i = 0, n = values.Length; i < n; i++)
+            double sum = 0.0;
+            for (int i = 0; i < values.Length; i++)
             {
-                hits = values[i];
-                // accumulate mean
-                mean += i * hits;
-                // accumalate total
-                total += hits;
+                sum += values[i];
             }
-            return mean / total;
+            return sum / ((double)values.Length);
         }
 
-        /// <summary>
-        /// Calculate standard deviation
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns value of standard deviation</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static double StandardDeviation(double[] values)
+        /// <summary>Computes the Mean of the given values.</summary>
+        /// <param name="vector">An integer array containing the vector members.</param>
+        /// <returns>The mean of the given data.</returns>
+        public static double Mean(params int[] values)
+        {
+            int sum = 0;
+            for (int i = 0; i < values.Length; i++)
+            {
+                sum += values[i];
+            }
+            return sum / ((double)values.Length);
+        }
+
+
+        /// <summary>Computes the Standard Deviation of the given values.</summary>
+        /// <param name="vector">A double array containing the vector members.</param>
+        /// <returns>The standard deviation of the given data.</returns>
+        public static double StandardDeviation(params double[] values)
         {
             return StandardDeviation(values, Mean(values));
         }
 
-        /// <summary>
-        /// Calculate standard deviation
-        /// </summary>
-        /// <param name="values"></param>
-        /// <param name="mean">A previously computed mean vector for the data. Avoids duplicating computations.</param>
-        /// <returns></returns>
         internal static double StandardDeviation(double[] values, double mean)
         {
-            double stddev = 0;
-            double centeredValue;
-            double hits;
-            double total = 0;
-
-            // for all values
-            for (int i = 0, n = values.Length; i < n; i++)
-            {
-                hits = values[i];
-                centeredValue = (double)i - mean;
-
-                // accumulate mean
-                stddev += centeredValue * centeredValue * hits;
-                // accumalate total
-                total += hits;
-            }
-
-            return System.Math.Sqrt(stddev / total);
+            return System.Math.Sqrt(Variance(values, mean));
         }
 
-        /// <summary>
-        /// Calculate median value
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns value of median</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static double Median(double[] values)
+        /// <summary>Computes the Standard Deviation of the given values.</summary>
+        /// <param name="vector">An integer array containing the vector members.</param>
+        /// <returns>The standard deviation of the given data.</returns>
+        public static double StandardDeviation(params int[] values)
         {
-
-            double total = 0;
-            double n = values.Length;
-
-            // for all values
-            for (int i = 0; i < n; i++)
-            {
-                // accumalate total
-                total += values[i];
-            }
-
-            double halfTotal = total / 2;
-            int median = 0;
-            double v = 0;
-
-            // find median value
-            for (; median < n; median++)
-            {
-                v += values[median];
-                if (v >= halfTotal)
-                    break;
-            }
-
-            return median;
-            
+            return StandardDeviation(values,Mean(values));
         }
 
-        /// <summary>
-        /// Calculate mean value
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns mean value</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static double Mean(int[] values)
+        internal static double StandardDeviation(int[] values, double mean)
         {
-            int hits;
-            int mean = 0;
-            int total = 0;
-
-            // for all values
-            for (int i = 0, n = values.Length; i < n; i++)
-            {
-                hits = values[i];
-                // accumulate mean
-                mean += i * hits;
-                // accumalate total
-                total += hits;
-            }
-            return (double)mean / total;
+            return System.Math.Pow(Variance(values, mean), 2);
         }
 
-        /// <summary>
-        /// Calculate standard deviation
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns value of standard deviation</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static double StandardDeviation(int[] values)
+
+        /// <summary>Computes the Median of the given values.</summary>
+        /// <param name="vector">A double array containing the vector members.</param>
+        /// <returns>The median of the given data.</returns>
+        public static double Median(params double[] values)
         {
-            double mean = Mean(values);
-            double stddev = 0;
-            double centeredValue;
-            int hits;
-            int total = 0;
-
-            // for all values
-            for (int i = 0, n = values.Length; i < n; i++)
-            {
-                hits = values[i];
-                centeredValue = (double)i - mean;
-
-                // accumulate mean
-                stddev += centeredValue * centeredValue * hits;
-                // accumalate total
-                total += hits;
-            }
-
-            return Math.Sqrt(stddev / total);
+            return Median(false, values);
         }
 
-        /// <summary>
-        /// Calculate median value
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns value of median</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static int Median(int[] values)
-        {
-            int total = 0, n = values.Length;
-
-            // for all values
-            for (int i = 0; i < n; i++)
-            {
-                // accumalate total
-                total += values[i];
-            }
-
-            int halfTotal = total / 2;
-            int median = 0, v = 0;
-
-            // find median value
-            for (; median < n; median++)
-            {
-                v += values[median];
-                if (v >= halfTotal)
-                    break;
-            }
-
-            return median;
-        }
-
-        public static double Median(double[] values, bool sorted)
+        /// <summary>Computes the Median of the given values.</summary>
+        /// <param name="values">An integer array containing the vector members.</param>
+        /// <param name="alreadySorted">A boolean parameter informing if the given values have already been sorted."/></param>
+        /// <returns>The median of the given data.</returns>
+        public static double Median(bool alreadySorted, params double[] values)
         {
             double[] data = new double[values.Length];
-            values.CopyTo(data, 0); // Creates a copy of the given vector,
+            values.CopyTo(data, 0); // Creates a copy of the given values,
 
-            if (!sorted) // So we can sort it without modifying the original array.
-                Array.Sort(data); 
+            if (!alreadySorted) // So we can sort it without modifying the original array.
+                Array.Sort(data);
 
             int N = data.Length;
 
             if ((N % 2) == 0)
-            {
-                // N is even 
-                return (data[N / 2] + data[(N / 2) + 1]) * 0.5;
-            }
-            else
-            {
-                // N is odd
-                return data[(N + 1) / 2];
-            }
+                return (data[N / 2] + data[(N / 2) + 1]) * 0.5; // N is even 
+            else return data[(N + 1) / 2];                      // N is odd
         }
 
-        /// <summary>
-        /// Get range around median containing specified percentage of values
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// <param name="percent">Values percentage around median</param>
-        /// 
-        /// <returns>Returns the range which containes specifies percentage
-        /// of values.</returns>
-        /// 
-        public static IntRange GetRange(int[] values, double percent)
+        /// <summary>Computes the Median of the given values.</summary>
+        /// <param name="vector">An integer array containing the vector members.</param>
+        /// <returns>The median of the given data.</returns>
+        public static double Median(params int[] values)
         {
-            int total = 0, n = values.Length;
-
-            // for all values
-            for (int i = 0; i < n; i++)
-            {
-                // accumalate total
-                total += values[i];
-            }
-
-            int min, max, hits;
-            int h = (int)(total * (percent + (1 - percent) / 2));
-
-            // get range min value
-            for (min = 0, hits = total; min < n; min++)
-            {
-                hits -= values[min];
-                if (hits < h)
-                    break;
-            }
-            // get range max value
-            for (max = n - 1, hits = total; max >= 0; max--)
-            {
-                hits -= values[max];
-                if (hits < h)
-                    break;
-            }
-            return new IntRange(min, max);
+            return Median(false, values);
         }
 
-        /// <summary>
-        /// Calculates an entropy.
-        /// </summary>
-        /// 
-        /// <param name="values">Histogram array</param>
-        /// 
-        /// <returns>Returns entropy value</returns>
-        /// 
-        /// <remarks>The input array is treated as histogram, i.e. its
-        /// indexes are treated as values of stochastic function, but
-        /// array values are treated as "probabilities" (total amount of
-        /// hits).</remarks>
-        /// 
-        public static double Entropy(int[] values)
+        /// <summary>Computes the Median of the given values.</summary>
+        /// <param name="values">An integer array containing the vector members.</param>
+        /// <param name="alreadySorted">A boolean parameter informing if the given values have already been sorted."/></param>
+        /// <returns>The median of the given data.</returns>
+        public static double Median(bool alreadySorted, params int[] values)
         {
-            int n = values.Length;
-            int total = 0;
-            double entropy = 0;
-            double p;
+            int[] data = new int[values.Length];
+            values.CopyTo(data, 0); // Creates a copy of the given values,
 
-            // calculate total amount of hits
-            for (int i = 0; i < n; i++)
-            {
-                total += values[i];
-            }
+            if (!alreadySorted) // So we can sort it without modifying the original array.
+                Array.Sort(data);
 
-            // for all values
-            for (int i = 0; i < n; i++)
-            {
-                // get item's probability
-                p = (double)values[i] / total;
-                // calculate entropy
-                if (p != 0)
-                    entropy += (-p * Math.Log(p, 2));
-            }
-            return entropy;
+            int N = data.Length;
+
+            if ((N % 2) == 0)
+                return (data[N / 2] + data[(N / 2) + 1]) * 0.5; // N is even 
+            else return data[(N + 1) / 2];                      // N is odd
         }
 
 
-        public static double Covariance(double[] u, double[] v)
-        {
-            if (u.Length != v.Length)
-            {
-                throw new ArgumentException();
-            }
-            if (u.Length == 0)
-            {
-                throw new ArgumentException();
-            }
-
-            double usum = 0.0;
-            double vsum = 0.0;
-
-            // Calculate Sums for each vector
-            for (int i = 0; i < u.Length; i++)
-            {
-                usum += u[i];
-                vsum += v[i];
-            }
-            // We are not calling the Mean method directly in order to use only one loop.
-            double umean = usum / ((double)u.Length);
-            double vmean = vsum / ((double)v.Length);
-            
-            double covariance = 0.0;
-            for (int i = 0; i < u.Length; i++)
-            {
-                covariance += (u[i] - umean) * (v[i] - vmean);
-            }
-
-            // Return the Sample variance
-            return (covariance / ((double)(u.Length - 1)));
-
-            // TODO: return also the population variance
-        }
-
-        public static double Variance(double[] values)
+        /// <summary>Computes the Variance of the given values.</summary>
+        /// <param name="vector">A double precision number array containing the vector members.</param>
+        /// <returns>The variance of the given data.</returns>
+        public static double Variance(params double[] values)
         {
             return Variance(values, Mean(values));
         }
 
         internal static double Variance(double[] values, double mean)
         {
-            double variance = 0.0;
+            double sum1 = 0.0;
+            double sum2 = 0.0;
+            double x = 0.0;
+                        
+            for (int i = 0; i < values.Length; i++)
+            {
+                x = values[i] - mean;
+                sum1 += (x);
+                sum2 += System.Math.Pow(x, 2);
+            }
+
+            return (sum2 - System.Math.Pow(sum1, 2) / values.Length) / (values.Length - 1);
+        }
+
+        /// <summary>Computes the Variance of the given values.</summary>
+        /// <param name="vector">An integer number array containing the vector members.</param>
+        /// <returns>The variance of the given data.</returns>
+        public static double Variance(params int[] values)
+        {
+            return Variance(values, Mean(values));
+        }
+
+        internal static double Variance(int[] values, double mean)
+        {
+            double sum1 = 0.0;
+            double sum2 = 0.0;
+            double x = 0.0;
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                x = values[i] - mean;
+                sum1 += (x);
+                sum2 += System.Math.Pow(x, 2);
+            }
+
+            return (sum2 - System.Math.Pow(sum1, 2) / values.Length) / (values.Length - 1);
+        }
+
+
+        /// <summary>Computes the Mode of the given values.</summary>
+        /// <param name="values">A double precision number array containing the vector values.</param>
+        /// <returns>The variance of the given data.</returns>
+        public static double Mode(params double[] values)
+        {
+            int[] itemCount = new int[values.Length];
+            double[] itemArray = new double[values.Length];
+            int count = 0;
             
             for (int i = 0; i < values.Length; i++)
             {
-                variance += Math.Pow(values[i] - mean, 2.0);
-            }
-
-            return (variance / ((double)(values.Length - 1)));
-        }
-
-        public static double Mode(double[] value)
-        {
-            int[] itemCount = new int[value.Length];
-            double[] itemArray = new double[value.Length];
-            int count = 0;
-            
-            for (int i = 0; i < value.Length; i++)
-            {
-                int index = Array.IndexOf<double>(itemArray, value[i], 0, count);
+                int index = Array.IndexOf<double>(itemArray, values[i], 0, count);
 
                 if (index >= 0)
                 {
@@ -437,7 +213,47 @@ namespace AForge.Statistics
                 }
                 else
                 {
-                    itemArray[count] = value[i];
+                    itemArray[count] = values[i];
+                    itemCount[count] = 1;
+                    count++;
+                }
+            }
+
+            int maxValue = 0;
+            int maxIndex = 0;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (itemCount[i] > maxValue)
+                {
+                    maxValue = itemCount[i];
+                    maxIndex = i;
+                }
+            }
+
+            return itemArray[maxIndex];
+        }
+
+        /// <summary>Computes the Mode of the given values.</summary>
+        /// <param name="values">An integer number array containing the vector values.</param>
+        /// <returns>The mode of the given data.</returns>
+        public static double Mode(params int[] values)
+        {
+            int[] itemCount = new int[values.Length];
+            int[] itemArray = new int[values.Length];
+            int count = 0;
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                int index = Array.IndexOf<int>(itemArray, values[i], 0, count);
+
+                if (index >= 0)
+                {
+                    itemCount[index]++;
+                }
+                else
+                {
+                    itemArray[count] = values[i];
                     itemCount[count] = 1;
                     count++;
                 }
@@ -459,6 +275,45 @@ namespace AForge.Statistics
         }
 
 
+        /// <summary>Computes the Covariance between two values arrays.</summary>
+        /// <param name="u">A double precision number array containing the first vector members.</param>
+        /// <param name="v">A double precision number array containing the second vector members.</param>
+        /// <returns>The variance of the given data.</returns>
+        public static double Covariance(double[] u, double[] v)
+        {
+            if (u.Length != v.Length)
+            {
+                throw new ArgumentException("Vector sizes must be equal.", "u");
+            }
+            if (u.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
+            double usum = 0.0;
+            double vsum = 0.0;
+
+            // Calculate Sums for each vector
+            for (int i = 0; i < u.Length; i++)
+            {
+                usum += u[i];  // We are not calling the Mean method
+                vsum += v[i];  // directly in order to use only one loop.
+            }
+
+            double umean = usum / ((double)u.Length);
+            double vmean = vsum / ((double)v.Length);
+
+            double covariance = 0.0;
+            for (int i = 0; i < u.Length; i++)
+            {
+                covariance += (u[i] - umean) * (v[i] - vmean);
+            }
+
+            // Return the Sample variance
+            return (covariance / ((double)(u.Length - 1)));
+
+            // TODO: return also the population variance
+        }
         #endregion
 
 
@@ -467,13 +322,9 @@ namespace AForge.Statistics
 
         #region Matrix Statistics
 
-        /// <summary>
-        /// Calculate the matrix means' vector.
-        /// </summary>
-        /// 
+        /// <summary>Calculates the matrix Mean vector.</summary>
         /// <param name="m">A matrix whose means will be calculated.</param>
         /// <returns>Returns a vector containing the means of the given matrix.</returns>
-        /// <remarks></remarks>
         public static Vector Mean(Matrix value)
         {
             Vector mean;
@@ -492,13 +343,10 @@ namespace AForge.Statistics
             return mean;
         }
 
-        /// <summary>
-        /// Calculate the matrix standard deviations vector.
-        /// </summary>
-        /// 
+
+        /// <summary>Calculates the matrix Standard Deviations vector.</summary>
         /// <param name="m">A matrix whose deviations will be calculated.</param>
-        /// <returns>Returns a vector containing the means of the given matrix.</returns>
-        /// <remarks></remarks>
+        /// <returns>Returns a vector containing the standard deviations of the given matrix.</returns>
         public static Vector StandardDeviation(Matrix value)
         {
             return StandardDeviation(value, Mean(value));
@@ -506,28 +354,13 @@ namespace AForge.Statistics
 
         internal static Vector StandardDeviation(Matrix value, double[] mean)
         {
-
-            Vector std = new Vector(value.Columns); // Creates a new vector with the matrix column's count size
-
-                for (int j = 0; j < value.Columns; j++)
-                {
-                    for (int i = 0; i < value.Rows; i++)
-                    {
-                        std[j] += System.Math.Pow((value[i, j] - mean[j]), 2);
-                    }
-
-                    std[j] = System.Math.Sqrt(std[j] / (double)(value.Columns - 1));
-
-                    // The following is an inelegant but usual way to handle
-                    //   near-zero std. dev. values, which below would cause a zero-divide.
-
-                    if (std[j] <= Double.Epsilon)
-                        std[j] = 1.0;
-            }
-
-            return std;
+            return Vector.Sqrt(Variance(value, mean));
         }
 
+
+        /// <summary>Calculates the matrix Medians vector.</summary>
+        /// <param name="m">A matrix whose deviations will be calculated.</param>
+        /// <returns>Returns a vector containing the medians of the given matrix.</returns>
         public static Vector Median(Matrix value)
         {
             Vector medians = new Vector(value.Columns);
@@ -540,23 +373,10 @@ namespace AForge.Statistics
             return medians;
         }
 
-        public static Vector Variance(Matrix value)
-        {
-            return Variance(value, Mean(value));
-        }
 
-        internal static Vector Variance(Matrix value, double[] means)
-        {
-            Vector variance = new Vector(value.Columns);
-
-            for (int i = 0; i < value.Columns; i++)
-            {
-                variance[i] = Variance(value.GetColumn(i), means[i]);
-            }
-            
-            return variance;
-        }
-
+        /// <summary>Calculates the matrix Modes vector.</summary>
+        /// <param name="m">A matrix whose modes will be calculated.</param>
+        /// <returns>Returns a vector containing the modes of the given matrix.</returns>
         public static Vector Mode(Matrix matrix)
         {
             Vector mode = new Vector(matrix.Columns);
@@ -568,6 +388,99 @@ namespace AForge.Statistics
 
             return mode;
         }
+
+
+        /// <summary>Calculates the matrix Medians vector.</summary>
+        /// <param name="m">A matrix whose deviations will be calculated.</param>
+        /// <returns>Returns a vector containing the means of the given matrix.</returns>
+        public static Vector Variance(Matrix value)
+        {
+            return Variance(value, Mean(value));
+        }
+
+        internal static Vector Variance(Matrix value, double[] means)
+        {
+            Vector variance = new Vector(value.Columns);
+
+            for (int i = 0; i < value.Columns; i++)
+            {
+                //TODO: Substitute this with the complete matrix variance algorithm
+                variance[i] = Variance(value.GetColumn(i), means[i]);
+            }
+            
+            return variance;
+        }
+
+
+        /// <summary>Calculates the covariance matrix of a sample matrix, returning a new matrix object</summary>
+        /// <remarks>
+        ///   In statistics and probability theory, the covariance matrix is a matrix of
+        ///   covariances between elements of a vector. It is the natural generalization
+        ///   to higher dimensions of the concept of the variance of a scalar-valued
+        ///   random variable.
+        /// </remarks>
+        /// <returns>The covariance matrix.</returns>
+        public static Matrix Covariance(Matrix matrix)
+        {
+            return Covariance(matrix, Mean(matrix));
+        }
+
+        internal static Matrix Covariance(Matrix matrix, double[] mean)
+        {
+              if (matrix.Rows == 1)
+              {
+                  throw new ArgumentException("Sample has only one observation.","matrix");
+              }
+
+              Matrix cov = new Matrix(matrix.Columns);
+
+              for (int i = 0; i < cov.Columns; i++)
+              {
+                  Vector column = matrix.GetColumn(i);
+                  cov[i, i] = Variance(column, mean[i]); // diagonal has the variances
+
+                  for (int j = i + 1; j < cov.Columns; j++)
+                  {
+                      cov[i, j] = Covariance(column, matrix.GetColumn(j));
+                      cov[j, i] = cov[i, j]; // Matrix is symmetric
+                  }
+              }
+              return cov;
+        }
+
+
+        /// <summary>Calculates the correlation matrix of this samples, returning a new matrix object</summary>
+        /// <remarks>
+        /// In statistics and probability theory, the correlation matrix is the same
+        /// as the covariance matrix of the standardized random variables.
+        /// </remarks>
+        /// <returns>The correlation matrix</returns>
+        public static Matrix Correlation(Matrix matrix)
+        {
+            Matrix scores = ZScores(matrix);
+            return Covariance(scores);
+        }
+
+
+        /// <summary>Generates the Standard Scores, also known as Z-Scores, the core from the given data.</summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Matrix ZScores(Matrix value)
+        {
+            double[] mean = Mean(value);
+            return ZScores(value, mean, StandardDeviation(value, mean));
+        }
+
+        internal static Matrix ZScores(Matrix value, double[] mean, double[] stdDev)
+        {
+            Matrix m = value.Clone();
+
+            Center(m, mean);
+            Standardize(m, stdDev);
+
+            return m;
+        }
+
 
         /// <summary>Centers column data, subtracting the empirical mean from each variable.</summary>
         /// <param name="m">A matrix where each column represent a variable and each row represent a observation.</param>
@@ -606,74 +519,10 @@ namespace AForge.Statistics
                 }
             }
         }
-
-        /// <summary>Generates the Standard Scores, also known as Z-Scores, the core from the given data.</summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static Matrix ZScores(Matrix value)
-        {
-            double[] mean = Mean(value);
-            return ZScores(value, mean, StandardDeviation(value, mean));
-        }
-
-        internal static Matrix ZScores(Matrix value, double[] mean, double[] stdDev)
-        {
-            Matrix m = value.Clone();
-
-            Center(m, mean);
-            Standardize(m, stdDev);
-
-            return m;
-        }
-
-        /// <summary>Calculates the covariance matrix of a sample matrix, returning a new matrix object</summary>
-        /// <remarks>
-        ///   In statistics and probability theory, the covariance matrix is a matrix of
-        ///   covariances between elements of a vector. It is the natural generalization
-        ///   to higher dimensions of the concept of the variance of a scalar-valued
-        ///   random variable.
-        /// </remarks>
-        /// <returns>The covariance matrix.</returns>
-        public static Matrix Covariance(Matrix matrix)
-        {
-            return Covariance(matrix, Mean(matrix));
-        }
-
-        internal static Matrix Covariance(Matrix matrix, double[] mean)
-        {
-              if (matrix.Rows == 1)
-              {
-                  throw new ArgumentException("Sample has only one observation.","matrix");
-              }
-
-              Matrix cov = new Matrix(matrix.Columns);
-
-              for (int i = 0; i < cov.Columns; i++)
-              {
-                  Vector column = matrix.GetColumn(i);
-                  cov[i, i] = Variance(column, mean[i]); // diagonal has the variances
-
-                  for (int j = i + 1; j < cov.Columns; j++)
-                  {
-                      cov[i, j] = Covariance(column, matrix.GetColumn(j));
-                      cov[j, i] = cov[i, j]; // Matrix is symmetric
-                  }
-              }
-              return cov;
-        }
-
-        /// <summary>Calculates the correlation matrix of this samples, returning a new matrix object</summary>
-        /// <remarks>
-        /// In statistics and probability theory, the correlation matrix is the same
-        /// as the covariance matrix of the standardized random variables.
-        /// </remarks>
-        /// <returns>The correlation matrix</returns>
-        public static Matrix Correlation(Matrix matrix)
-        {
-            Matrix scores = ZScores(matrix);
-            return Covariance(scores);
-        }
         #endregion
+
+
+        // ------------------------------------------------------------
 
 
     }
