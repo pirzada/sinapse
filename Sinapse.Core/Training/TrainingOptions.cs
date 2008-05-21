@@ -17,41 +17,35 @@
  ***************************************************************************/
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-
-using AForge.Math;
-
-namespace Sinapse.Core.Transformations
+namespace Sinapse.Core.Training
 {
-    public interface ITransformation
+
+    [Serializable]
+    public class TrainingOptions
     {
-        Matrix Apply(Matrix source);
+        public enum TrainingMethod { ByError, ByEpoch, Manual };
 
-        int Inputs { get; }
-        int Outputs { get; }
+        private TrainingMethod m_method;
+        private int    epochLimit;
+        private double errorLimit;
 
-      //  bool IsDimensionConservative { get; }
-    }
+        private double momentum;
+        private double learningRate1;
+        private double learningRate2;
+        private bool changeLearningRate;
 
-    public class ITransformationCollection : System.ComponentModel.BindingList<ITransformation>
-    {
+        private int? saveEpochs;
+        private int? validateEpochs;
+        private int? testingEpochs;
 
-        public ITransformationCollection()
+        public TrainingOptions()
         {
-
+            this.m_method = TrainingMethod.ByError;
         }
 
-        public Matrix Apply(Matrix source)
-        {
-            foreach (ITransformation transform in this)
-            {
-                source = transform.Apply(source);
-            }
-
-            return source;
-        }
 
     }
-
-    
 }

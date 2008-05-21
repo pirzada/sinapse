@@ -352,9 +352,9 @@ namespace AForge.Math
 
 
         #region Static Methods
-        public static Vector Pow(Vector vector, double power)
+        public static Vector Pow(Vector value, double power)
         {
-            Vector r = vector.Clone();
+            Vector r = value.Clone();
             for (int i = 0; i < r.m_data.Length; i++)
             {
                 r.m_data[i] = System.Math.Pow(r.m_data[i], power);
@@ -362,6 +362,15 @@ namespace AForge.Math
             return r;
         }
 
+        public static Vector Sqrt(Vector value)
+        {
+            Vector r = value.Clone();
+            for (int i = 0; i < r.m_data.Length; i++)
+            {
+                r.m_data[i] = System.Math.Sqrt(r.m_data[i]);
+            }
+            return r;
+        }
         public static void Normalize(Vector vector)
         {
             double norm = vector.Norm;

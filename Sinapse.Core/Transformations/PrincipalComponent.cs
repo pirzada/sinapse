@@ -17,41 +17,59 @@
  ***************************************************************************/
 
 using System;
-
+using System.Collections.Generic;
+using System.Text;
 
 using AForge.Math;
+using AForge.Statistics.SampleAnalysis;
+
 
 namespace Sinapse.Core.Transformations
 {
-    public interface ITransformation
+
+    public class PrincipalComponent : Sinapse.Core.Transformations.ITransformation
     {
-        Matrix Apply(Matrix source);
+        
+        private PrincipalComponentAnalysis pca;
+        private int m_components;
+        
 
-        int Inputs { get; }
-        int Outputs { get; }
+        // -------------------------------------------------
 
-      //  bool IsDimensionConservative { get; }
-    }
 
-    public class ITransformationCollection : System.ComponentModel.BindingList<ITransformation>
-    {
-
-        public ITransformationCollection()
+        #region Constructor
+        public PrincipalComponent()
         {
+            throw new System.NotImplementedException();
+        }
+        #endregion
 
+        // -------------------------------------------------
+
+
+        #region Properties
+        public int Inputs
+        {
+            get { return pca.SingularValues.Length; }
         }
 
+        public int Outputs
+        {
+            get { return m_components; }
+        }
+        #endregion
+
+
+        // -------------------------------------------------
+
+
+        #region Public Members
         public Matrix Apply(Matrix source)
         {
-            foreach (ITransformation transform in this)
-            {
-                source = transform.Apply(source);
-            }
-
-            return source;
+            return pca.Apply(source);
         }
+        #endregion
+
 
     }
-
-    
 }

@@ -36,9 +36,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Networks\NetworkMappings.cs" />
+    <Compile Include="Networks\DataSources\NetworkImageSource.cs" />
+    <Compile Include="Networks\NetworkContainer.cs" />
+    <Compile Include="Networks\DataSources\Base\NetworkDataSourceBase.cs" />
+    <Compile Include="Networks\DataSources\NetworkSoundSource.cs" />
+    <Compile Include="Networks\DataSources\NetworkTableSource.cs" />
+    <Compile Include="Networks\DataSources\NetworkVideoSource.cs" />
+    <Compile Include="Training\TrainingOptions.cs" />
+    <Compile Include="Training\TrainingSavepoint.cs" />
+    <Compile Include="Training\TrainingSession.cs" />
+    <Compile Include="Training\TrainingStatus.cs" />
     <Compile Include="Transformations\Base\ITransformation.cs" />
-    <Compile Include="Transformations\PrincipalComponentTransform.cs" />
+    <Compile Include="Transformations\PrincipalComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformations\RangeConversion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -49,9 +61,10 @@
       <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
       <Name>AForge.Math</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Transformations\Image\" />
+    <ProjectReference Include="..\lib\AForge.NET\Neuro\AForge.Neuro.csproj">
+      <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>
+      <Name>AForge.Neuro</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

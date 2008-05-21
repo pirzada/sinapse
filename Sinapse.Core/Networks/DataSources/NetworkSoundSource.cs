@@ -17,41 +17,33 @@
  ***************************************************************************/
 
 using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
 
 
-using AForge.Math;
-
-namespace Sinapse.Core.Transformations
+namespace Sinapse.Core.Networks.DataSources
 {
-    public interface ITransformation
+    class NetworkSoundSource : Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase
     {
-        Matrix Apply(Matrix source);
-
-        int Inputs { get; }
-        int Outputs { get; }
-
-      //  bool IsDimensionConservative { get; }
-    }
-
-    public class ITransformationCollection : System.ComponentModel.BindingList<ITransformation>
-    {
-
-        public ITransformationCollection()
+        public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
         {
-
+            throw new Exception("The method or operation is not implemented.");
         }
 
-        public Matrix Apply(Matrix source)
+        public override DataView CreateDataView(NetworkDataSet set)
         {
-            foreach (ITransformation transform in this)
-            {
-                source = transform.Apply(source);
-            }
-
-            return source;
+            throw new Exception("The method or operation is not implemented.");
         }
 
-    }
+        public override int InputCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
 
-    
+        public override int OutputCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+    }
 }
