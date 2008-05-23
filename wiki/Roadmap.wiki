@@ -7,7 +7,7 @@ Sinapse aims to be a data-centric neural network software rather than network-ce
 Further development will include features like Image, video and sound based input training, input data transformations and other techniques that directly improve performance of neural networks. At the end, the user should be able to export his created, trained and well-tested network directly to code, readly to be inserted into his own software without much effort.
 
 
-= Project Roadmap =
+== Roadmap ==
 
 === Sinapse v0.1.0.0 ===
 
@@ -47,9 +47,8 @@ Further development will include features like Image, video and sound based inpu
   * Extented integration with Microsoft Excel for network creation
   * Support for Transformation code generation in C#, C, C++ and Java
 
- .
- .
- .
+
+   ...
 
 === Sinapse v1.0.0.0 ===
   
