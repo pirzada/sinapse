@@ -8,20 +8,27 @@
       <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.NetworkTableSource" Collapsed="true">
-    <Position X="17.5" Y="12.25" Width="1.75" />
+  <Class Name="Sinapse.Core.Sources.NetworkTableSource">
+    <Position X="15.25" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Networks\DataSources\NetworkTableSource.cs</FileName>
-      <HashCode>AAAAAAAAAAAEAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
+      <FileName>Sources\NetworkTableSource.cs</FileName>
+      <HashCode>AAAAQAAAAAAEAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="m_columns" />
     </ShowAsAssociation>
+    <AssociationLine Name="m_columns" Type="Sinapse.Core.Sources.NetworkTableColumnCollection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="12.812" />
+        <Point X="13.25" Y="12.812" />
+        <Point X="13.25" Y="13.25" />
+      </Path>
+    </AssociationLine>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.NetworkImageSource" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.NetworkImageSource" Collapsed="true">
     <Position X="19.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Networks\DataSources\NetworkImageSource.cs</FileName>
+      <FileName>Sources\NetworkImageSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
@@ -29,7 +36,7 @@
     <Position X="18.25" Y="6.75" Width="2" />
     <TypeIdentifier>
       <FileName>Networks\NetworkContainer.cs</FileName>
-      <HashCode>EEAAAAAAAAAAIAAAABAAAAAAiAAYAAAAAAAAAAQAAAA=</HashCode>
+      <HashCode>EEAAAAAAAAAAIAAAABAAAAAAiAAIAAAAAAAAAAQAAAA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="InputTransformation" />
@@ -53,13 +60,6 @@
       </MemberNameLabel>
     </AssociationLine>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase" Collapsed="true">
-    <Position X="18.25" Y="11" Width="2" />
-    <TypeIdentifier>
-      <FileName>Networks\DataSources\Base\NetworkDataSourceBase.cs</FileName>
-      <HashCode>AAAAAACAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Sinapse.Core.Transformations.PrincipalComponent" Collapsed="true">
     <Position X="14.75" Y="19.25" Width="1.75" />
     <TypeIdentifier>
@@ -76,25 +76,18 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.NetworkSoundSource" Collapsed="true">
-    <Position X="15.5" Y="12.25" Width="1.75" />
+  <Class Name="Sinapse.Core.Sources.NetworkSoundSource" Collapsed="true">
+    <Position X="17.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Networks\DataSources\NetworkSoundSource.cs</FileName>
+      <FileName>Sources\NetworkSoundSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.NetworkVideoSource" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.NetworkVideoSource" Collapsed="true">
     <Position X="21.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Networks\DataSources\NetworkVideoSource.cs</FileName>
+      <FileName>Sources\NetworkVideoSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Sinapse.Core.Networks.NetworkMappings" Collapsed="true">
-    <Position X="19" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <FileName>Networks\NetworkMappings.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Sinapse.Core.Training.TrainingSession">
@@ -104,11 +97,10 @@
       <HashCode>AEAkQAAAAiIAQEAAAACAAAgAAFIAAIAAIAAgAAAAAIA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_networkDataSource" />
+      <Field Name="m_networkContainer" />
       <Field Name="m_options" />
       <Field Name="m_status" />
       <Field Name="m_savepoints" />
-      <Field Name="m_networkContainer" />
     </ShowAsAssociation>
     <NestedTypes>
       <Enum Name="Sinapse.Core.Training.TrainingSession.SessionState" Collapsed="true">
@@ -117,18 +109,18 @@
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
-    <AssociationLine Name="m_networkDataSource" Type="Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="m_networkContainer" Type="Sinapse.Core.Networks.NetworkContainer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="23.25" Y="10.01" />
-        <Point X="22.432" Y="10.01" />
-        <Point X="22.432" Y="11.159" />
-        <Point X="20.25" Y="11.159" />
+        <Point X="23.25" Y="8.877" />
+        <Point X="22.48" Y="8.877" />
+        <Point X="22.48" Y="7" />
+        <Point X="20.25" Y="7" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="m_options" Type="Sinapse.Core.Training.TrainingOptions" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="24.75" Y="9.17" />
-        <Point X="25.125" Y="9.17" />
+        <Point X="24.75" Y="9.25" />
+        <Point X="25.125" Y="9.25" />
         <Point X="25.125" Y="9.255" />
         <Point X="26" Y="9.255" />
       </Path>
@@ -141,18 +133,10 @@
     </AssociationLine>
     <AssociationLine Name="m_savepoints" Type="Sinapse.Core.Training.TrainingSavepointCollection" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="24.75" Y="7.79" />
-        <Point X="25.125" Y="7.79" />
+        <Point X="24.75" Y="7.813" />
+        <Point X="25.125" Y="7.813" />
         <Point X="25.125" Y="7.815" />
         <Point X="26" Y="7.815" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="m_networkContainer" Type="Sinapse.Core.Networks.NetworkContainer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="23.25" Y="8.812" />
-        <Point X="22.48" Y="8.812" />
-        <Point X="22.48" Y="7" />
-        <Point X="20.25" Y="7" />
       </Path>
     </AssociationLine>
   </Class>
@@ -169,13 +153,6 @@
       <FileName>Training\TrainingOptions.cs</FileName>
       <HashCode>QDAEAAAAgAAgAAAAAAYAAAAAAAAAAAAAAAAAAgAACAA=</HashCode>
     </TypeIdentifier>
-    <NestedTypes>
-      <Enum Name="Sinapse.Core.Training.TrainingOptions.TrainingMethod" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Training\TrainingOptions.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
   </Class>
   <Class Name="Sinapse.Core.Training.TrainingSavepointCollection" Collapsed="true">
     <Position X="26" Y="7.5" Width="2.25" />
@@ -184,18 +161,30 @@
       <HashCode>AAIEAAAAAUAAgAAAAACCIAAAABAAAAACAABAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.NetworkTableColumn" Collapsed="true">
-    <Position X="17.25" Y="14.5" Width="2.5" />
+  <Class Name="Sinapse.Core.Sources.NetworkTableColumn" Collapsed="true">
+    <Position X="12" Y="14" Width="2.5" />
     <TypeIdentifier>
-      <FileName>Networks\DataSources\NetworkTableSource.cs</FileName>
-      <HashCode>BBAAAAQAAAAAABAAAAAAAAQAAAAEAAAAAAAAAAAAGAA=</HashCode>
+      <FileName>Sources\NetworkTableSource.cs</FileName>
+      <HashCode>DAAEAABCAAAAAAAAMBAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DataSources.NetworkTableColumnCollection" Collapsed="true">
-    <Position X="17.25" Y="13.75" Width="2.5" />
+  <Class Name="Sinapse.Core.Sources.NetworkTableColumnCollection" Collapsed="true">
+    <Position X="12" Y="13.25" Width="2.5" />
     <TypeIdentifier>
-      <FileName>Networks\DataSources\NetworkTableSource.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Sources\NetworkTableSource.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Data.DataTable" Collapsed="true">
+    <Position X="12" Y="11.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sinapse.Core.Sources.NetworkDataSourceBase" Collapsed="true">
+    <Position X="18.25" Y="11" Width="2" />
+    <TypeIdentifier>
+      <FileName>Sources\NetworkDataSourceBase.cs</FileName>
+      <HashCode>AAAAAACAAAAAAAAAABAAAAAACAAAAAAAAABAAAgAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Interface Name="Sinapse.Core.Transformations.ITransformation" Collapsed="true">

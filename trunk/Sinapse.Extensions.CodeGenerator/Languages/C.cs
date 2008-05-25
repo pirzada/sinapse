@@ -25,7 +25,7 @@ using Sinapse.Core.Networks;
 
 namespace Sinapse.Extensions.CodeGeneration
 {
-    internal sealed class CGenerator : CodeGenerator
+    public sealed class CGenerator : CodeGenerator
     {
 
         public CGenerator(NetworkContainer network)

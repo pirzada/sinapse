@@ -19,33 +19,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Data;
 
-using AForge.Math;
-
-
-namespace Sinapse.Core.Networks.DataSources
+namespace Sinapse.Extensions.CodeGeneration.Languages
 {
-    public class NetworkImageSource : Base.NetworkDataSourceBase
+    public sealed class Polynomial
     {
-        public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override DataView CreateDataView(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override int InputCount
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
-
-        public override int OutputCount
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
     }
 }

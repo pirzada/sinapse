@@ -19,30 +19,25 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Data;
 
-namespace Sinapse.Core.Networks.DataSources
+using Sinapse.Core.Networks;
+using Sinapse.Core.Sources;
+using Sinapse.Core.Training;
+
+namespace Sinapse.Core
 {
-    public class NetworkVideoSource : Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase
+    public class Workbench
     {
-        public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
+        List<Sinapse.Core.Networks.NetworkContainer> m_networks;
+        List<Sinapse.Core.Sources.NetworkDataSourceBase> m_dataSources;
+        List<Sinapse.Core.Training.TrainingSession> m_trainingSessions;
+
+        //List<NetworkReports> m_reports;
+
+        public Workbench()
         {
-            throw new Exception("The method or operation is not implemented.");
+
         }
 
-        public override DataView CreateDataView(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override int InputCount
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
-
-        public override int OutputCount
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
     }
 }

@@ -19,72 +19,36 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
-using AForge.Neuro;
 using AForge.Math;
 
 using Sinapse.Core.Transformations;
+using Sinapse.Core.Networks;
 
-namespace Sinapse.Core.Networks
+
+namespace Sinapse.Core.Sources
 {
-    public abstract class NetworkContainer
+
+    public enum NetworkDataSet { Training, Testing, Validation };
+
+
+    [Serializable]
+    public abstract class NetworkDataSourceBase
     {
 
-        private Network m_network;
+        public abstract Matrix CreateVectors(NetworkDataSet set);
 
-        private ITransformationCollection m_inputTransformations;
-        private ITransformationCollection m_outputTransformations;
+        public abstract DataView CreateDataView(NetworkDataSet set);
 
-        //----------------------------------------
+        public abstract int InputCount { get; }
+        public abstract int OutputCount { get; }
 
-        #region Constructor
-        public NetworkContainer()
+
+        public bool IsCompatible(NetworkContainer network)
         {
+            return (network.InputCount == this.InputCount && network.OutputCount == this.OutputCount);
         }
-
-        public NetworkContainer(Network network)
-        {
-            this.m_network = network;
-        }
-        #endregion
-
-        //----------------------------------------
-
-        #region Properties
-        public ITransformationCollection InputTransformation
-        {
-            get { return m_inputTransformations; }
-        }
-
-        public ITransformationCollection OutputTransformation
-        {
-            get { return m_outputTransformations; }
-        }
-
-        public int InputCount
-        {
-            get { return m_network.InputsCount; }
-        }
-
-        public int OutputCount
-        {
-            get { return m_network.Output.Length; }
-        }
-
-        public Network Network
-        {
-            get { return m_network; }
-        }
-        #endregion
-
-        //----------------------------------------
-
-        #region Public Methods
-        public Matrix Compute(Matrix inputs)
-        {
-            return default(Matrix);
-        }
-        #endregion
 
     }
 }

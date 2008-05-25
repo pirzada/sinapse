@@ -39,6 +39,7 @@
     <Compile Include="Languages\CSharp.cs" />
     <Compile Include="Languages\Java.cs" />
     <Compile Include="Languages\Matlab.cs" />
+    <Compile Include="Languages\Polynomial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

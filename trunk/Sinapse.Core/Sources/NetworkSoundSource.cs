@@ -22,9 +22,9 @@ using System.Text;
 using System.Data;
 
 
-namespace Sinapse.Core.Networks.DataSources
+namespace Sinapse.Core.Sources
 {
-    class NetworkSoundSource : Sinapse.Core.Networks.DataSources.Base.NetworkDataSourceBase
+    class NetworkSoundSource : NetworkDataSourceBase
     {
         public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
         {
