@@ -25,7 +25,7 @@ using Sinapse.Core.Networks;
 
 namespace Sinapse.Extensions.CodeGeneration
 {
-    internal abstract class CodeGenerator
+    public abstract class CodeGenerator
     {
 
         private NetworkContainer m_network;

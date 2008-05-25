@@ -28,7 +28,7 @@ using Sinapse.Core.Networks;
 
 namespace Sinapse.Extensions.CodeGeneration
 {
-    internal sealed class CSharpGenerator : CodeGenerator
+    public sealed class CSharpGenerator : CodeGenerator
     {
 
         public CSharpGenerator(NetworkContainer network)

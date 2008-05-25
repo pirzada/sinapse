@@ -23,8 +23,8 @@ using System.Text;
 using AForge.Neuro;
 
 using Sinapse.Core.Networks;
-using Sinapse.Core.Networks.DataSources;
-using Sinapse.Core.Networks.DataSources.Base;
+using Sinapse.Core.Sources;
+
 
 namespace Sinapse.Core.Training
 {

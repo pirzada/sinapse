@@ -21,35 +21,28 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-using AForge.Math;
-
-using Sinapse.Core.Transformations;
-
-
-namespace Sinapse.Core.Networks.DataSources
+namespace Sinapse.Core.Sources
 {
-    public enum NetworkDataSet { Training, Testing, Validation };
-}
-
-namespace Sinapse.Core.Networks.DataSources.Base
-{
-
-    [Serializable]
-    public abstract class NetworkDataSourceBase
+    public class NetworkVideoSource : NetworkDataSourceBase
     {
-
-        public abstract Matrix CreateVectors(NetworkDataSet set);
-
-        public abstract DataView CreateDataView(NetworkDataSet set);
-
-        public abstract int InputCount { get; }
-        public abstract int OutputCount { get; }
-
-
-        public bool IsCompatible(NetworkContainer network)
+        public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
         {
-            return (network.InputCount == this.InputCount && network.OutputCount == this.OutputCount);
+            throw new Exception("The method or operation is not implemented.");
         }
 
+        public override DataView CreateDataView(NetworkDataSet set)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override int InputCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public override int OutputCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
     }
 }

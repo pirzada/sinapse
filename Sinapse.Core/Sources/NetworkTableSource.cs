@@ -23,37 +23,34 @@ using System.Data;
 using System.Collections;
 
 using AForge.Math;
+using AForge;
 
-namespace Sinapse.Core.Networks.DataSources
+namespace Sinapse.Core.Sources
 {
 
     [Serializable]
-    public class NetworkTableSource : Base.NetworkDataSourceBase
+    public class NetworkTableSource : NetworkDataSourceBase
     {
         
-        private DataTable m_dataTable;
+        private DataTable m_baseDataTable;
         private NetworkTableColumnCollection m_columns;
 
-
         //----------------------------------------
-
 
         #region Constructor
         public NetworkTableSource(DataTable dataTable)
         {
-
+            this.m_baseDataTable = dataTable;
+            this.m_columns = new NetworkTableColumnCollection(dataTable);
         }
         #endregion
 
-
         //----------------------------------------
-
 
         #region Properties
         public NetworkTableColumnCollection Columns
         {
             get { return this.m_columns; }
-            set { this.m_columns = value; }
         }
 
         public override Matrix CreateVectors(NetworkDataSet set)
@@ -77,13 +74,10 @@ namespace Sinapse.Core.Networks.DataSources
         }
         #endregion
 
-
         //----------------------------------------
-
 
         #region Public Methods
         #endregion
-
 
     }
 
@@ -91,62 +85,67 @@ namespace Sinapse.Core.Networks.DataSources
     public class NetworkTableColumn
     {
 
-        public enum ColumnRole { None, Input, Output };
+        public enum ColumnRole { NotUsed=0, Input=1, Output=1 };
+        public enum ColumnData { Nummeric, Categoric, Boolean, Time };
 
-        private string name;
-        private string header;
-        private bool isNummeric;
-        private ColumnRole columnRole;
-        private Hashtable categoryTable;
-  //      private DoubleRange range;
+        private string m_columnName;
+        private string m_columnCaption;
+        private DataColumn m_relatedDataColumn;
+        private ColumnRole m_columnRole;
+        private Hashtable m_categoryMap;
+        private DoubleRange m_dataRange;
 
 
         // --------------------------------------
 
-
         #region Constructor
-        public NetworkTableColumn(string name, string header, bool isNummeric, ColumnRole role)
+        public NetworkTableColumn(string name, string header, ColumnRole role, DataColumn relatedColumn)
         {
-            this.name = name;
-            this.header = header;
-            this.isNummeric = isNummeric;
-            this.columnRole = role;
+            this.m_relatedDataColumn = relatedColumn;
 
-            this.categoryTable = new Hashtable();
+            this.m_columnName = name;
+            this.m_columnCaption = header;
+            this.m_columnRole = role;
+
+            this.m_categoryMap = new Hashtable();
+        }
+
+        public NetworkTableColumn(DataColumn relatedColumn)
+        {
+            this.m_relatedDataColumn = relatedColumn;
+            this.m_columnName = relatedColumn.ColumnName;
+            this.m_columnCaption = relatedColumn.Caption;
+
+            this.m_categoryMap = new Hashtable();
         }
         #endregion
 
-
         // --------------------------------------
-
 
         #region Properties
         public string Name
         {
-            get { return this.name; }
-            set { this.name = value; }
+            get { return this.m_columnName; }
+            set { this.m_columnName = value; }
         }
 
         public string Header
         {
-            get { return this.header; }
-            set { this.header = value; }
-        }
-
-        public bool Category
-        {
-            get { return this.isNummeric; }
-            set { this.isNummeric = value; }
+            get { return this.m_columnCaption; }
+            set { this.m_columnCaption = value; }
         }
 
         public ColumnRole Role
         {
-            get { return this.columnRole; }
-            set { this.columnRole = value; }
+            get { return this.m_columnRole; }
+            set { this.m_columnRole = value; }
         }
 
+        public DataColumn TableColumn
+        {
+            get { return this.m_relatedDataColumn; }
+        }
         #endregion
-
 
         // --------------------------------------
 
@@ -155,18 +154,30 @@ namespace Sinapse.Core.Networks.DataSources
     [Serializable]
     public sealed class NetworkTableColumnCollection : System.ComponentModel.BindingList<NetworkTableColumn>
     {
-
+        //TODO: Evaluate changing to ReadOnlyCollection or similar
 
         #region Constructor
-        public NetworkTableColumnCollection()
+        internal NetworkTableColumnCollection()
         {
 
         }
-        #endregion
 
+        internal NetworkTableColumnCollection(DataTable dataTable)
+        {
+            foreach (DataColumn column in dataTable.Columns)
+            {
+                this.Add(column); 
+            }
+        }
+        #endregion
 
         // --------------------------------------
 
+        #region Properties
+
+        #endregion
+
+        // --------------------------------------
 
         #region Public Methods
         public NetworkTableColumn[] Select(NetworkTableColumn.ColumnRole columnRole)
@@ -181,14 +192,18 @@ namespace Sinapse.Core.Networks.DataSources
 
             return search.ToArray();
         }
+
+        public void Add(DataColumn col)
+        {
+            this.Add(new NetworkTableColumn(col));
+        }
         #endregion
 
-
         // --------------------------------------
-
 
         #region Private Methods
         #endregion
 
     }
+
 }
