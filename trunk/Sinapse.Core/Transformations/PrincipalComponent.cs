@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using AForge.Math;
-using AForge.Statistics.SampleAnalysis;
+using AForge.Statistics.DataAnalysis;
 
 
 namespace Sinapse.Core.Transformations
@@ -50,7 +50,7 @@ namespace Sinapse.Core.Transformations
         #region Properties
         public int Inputs
         {
-            get { return pca.SingularValues.Length; }
+            get { return pca.EigenValues.Length; }
         }
 
         public int Outputs
@@ -66,7 +66,7 @@ namespace Sinapse.Core.Transformations
         #region Public Members
         public Matrix Apply(Matrix source)
         {
-            return pca.Apply(source);
+            return pca.Transform(source);
         }
         #endregion
 

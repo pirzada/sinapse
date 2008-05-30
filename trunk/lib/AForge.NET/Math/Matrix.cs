@@ -240,6 +240,7 @@ namespace AForge.Math
         public Vector this[int row]
         {
             get { return this.GetRow(row); }
+            set { this.SetRow(row, value); }
         }
 
         /// <summary>Determinant if matrix is square.</summary>
@@ -361,6 +362,21 @@ namespace AForge.Math
             this.SetRow(row2, aux);
         }
 
+        public void ReverseRows()
+        {
+            for (int i = 0; i < (this.Rows / 2); i++)
+            {
+                this.SwapRows(i, this.Rows - 1 - i);
+            }
+        }
+
+        public void ReverseColumns()
+        {
+            for (int i = 0; i < (this.Columns / 2); i++)
+            {
+                this.SwapColumns(i, this.Columns - 1 - i);
+            }
+        }
         /// <summary>Gets a entire row of the matrix as a double array</summary>
         /// <param name="index">The row's index</param>
         /// <returns>The row double array</returns>
@@ -944,6 +960,22 @@ namespace AForge.Math
             r.m_data = matrix;
 
             return r;
+        }
+
+        public static explicit operator Matrix(Vector vector)
+        {
+            return (Matrix)vector.Array;
+        }
+
+        public static explicit operator Matrix(double[] vector)
+        {
+            Matrix m = new Matrix();
+            m.m_rows = 1;
+            m.m_columns = vector.Length;
+            m.m_data = new double[1][];
+            m.m_data[0] = vector;
+
+            return m;
         }
         #endregion
 

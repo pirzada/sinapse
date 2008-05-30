@@ -94,5 +94,27 @@ namespace AForge
 		{
 			return ( ( IsInside( range.min ) ) || ( IsInside( range.max ) ) );
 		}
+
+        public override string ToString()
+        {
+            return String.Concat(max, '-', min);
+        }
+
+        public static IntRange GetRange(int[] values)
+        {
+            int max = values[0];
+            int min = values[0];
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] > max)
+                    max = values[i];
+
+                if (values[i] < min)
+                    min = values[i];
+            }
+
+            return new IntRange(min, max);
+        }
 	}
 }

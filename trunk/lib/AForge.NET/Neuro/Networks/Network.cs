@@ -46,6 +46,11 @@ namespace AForge.Neuro
             get { return inputsCount; }
         }
 
+        public int OutputsCount
+        {
+            get { return output.Length; }
+        }
+
         /// <summary>
         /// Network's layers count
         /// </summary>

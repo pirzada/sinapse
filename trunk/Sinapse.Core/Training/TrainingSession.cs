@@ -44,21 +44,25 @@ namespace Sinapse.Core.Training
         private SessionState m_currentState;
         
         private NetworkDataSourceBase m_networkDataSource;
-        private NetworkContainer m_networkContainer;
+        private ActivationNetworkContainer m_networkContainer;
 
         private TrainingOptions m_options;
         private TrainingStatus m_status;
 
         private TrainingSavepointCollection m_savepoints;
+        private TrainingStepCollection m_trainingSteps;
 
-        private String m_message;
 
         public event EventHandler Started;
         public event EventHandler Stopped;
         public event EventHandler Paused;
+        public event EventHandler Completed;
 
         public event EventHandler StatusChanged;
         public event EventHandler MessageChanged;
+        
+
+        private String m_statusMessage;
 
 
         //----------------------------------------
@@ -81,6 +85,15 @@ namespace Sinapse.Core.Training
 
 
         #region Properties
+        public TrainingStatus Status
+        {
+            get { return this.m_status; }
+        }
+
+        public String StatusMessage
+        {
+            get { return this.m_statusMessage; }
+        }
         #endregion
 
 
@@ -94,8 +107,9 @@ namespace Sinapse.Core.Training
         }
         public void Start(TrainingOptions options)
         {
-            if (options != null)
-                this.m_options = options;
+            this.m_options = options;
+
+            this.m_trainingSteps.Add(new TrainingStep("Training Started", "Training session started with the following options"));
 
         }
 
@@ -137,5 +151,50 @@ namespace Sinapse.Core.Training
         }
         #endregion
 
+    }
+
+    public class TrainingSessionCollection : System.ComponentModel.BindingList<TrainingSession>
+    {
+
+        public event EventHandler AllSessionsCompleted;
+        
+
+        public TrainingSessionCollection()
+        {
+        }
+
+
+        #region Events
+        protected override void OnAddingNew(System.ComponentModel.AddingNewEventArgs e)
+        {
+            base.OnAddingNew(e);
+
+            TrainingSession newSession = e.NewObject as TrainingSession;
+            newSession.Completed += new EventHandler(sessionCompleted);
+        }
+
+        private void sessionCompleted(object sender, EventArgs e)
+        {
+            
+          /*Array.TrueForAll<TrainingSession>(this as Array,
+                new Predicate<TrainingSession>(
+          */
+ 
+            foreach (TrainingSession session in this)
+            {
+                if (session.Status.Progress != 100)
+                    return;
+            }
+            
+            // If all sessions are complete, call
+            OnAllSessionsCompleted();
+        }
+
+        private void OnAllSessionsCompleted()
+        {
+            if (this.AllSessionsCompleted != null)
+                this.AllSessionsCompleted.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
     }
 }

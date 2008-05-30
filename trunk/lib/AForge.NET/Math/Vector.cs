@@ -12,13 +12,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
 namespace AForge.Math
 {
 
     /// <summary>
-    /// A spatial vector, or simply vector, is a geometric
-    /// object which has both a magnitude and a direction.
+    ///   A spatial vector, or simply vector, is a geometric
+    ///   object which has both a magnitude and a direction.
     /// </summary>
     public class Vector
     {
@@ -41,11 +42,31 @@ namespace AForge.Math
             this.m_length = size;
         }
 
-        public Vector(params double[] vector)
+        public Vector(params double[] values)
         {
-            this.m_data = new double[vector.Length];
-            vector.CopyTo(this.m_data, 0);
-            this.m_length = vector.GetLength(0);
+            this.m_data = new double[values.Length];
+            values.CopyTo(this.m_data, 0);
+            this.m_length = values.GetLength(0);
+        }
+
+        public Vector(DataColumn dataColumn)
+            : this(dataColumn.Table.Rows.Count)
+        {
+            for (int i = 0; i < this.Length; i++)
+            {
+                if (dataColumn.DataType == typeof(System.String))
+                {
+                    this.Array[i] = Double.Parse((String)dataColumn.Table.Rows[i][dataColumn]);
+                }
+                else if (dataColumn.DataType == typeof(System.Boolean))
+                {
+                    this.Array[i] = (Boolean)dataColumn.Table.Rows[i][dataColumn] ? 1.0 : 0.0;
+                }
+                else
+                {
+                    this.Array[i] = (Double)dataColumn.Table.Rows[i][dataColumn];
+                }
+            }
         }
 
         public Vector(Vector vector)
@@ -61,6 +82,11 @@ namespace AForge.Math
 
 
         #region Properties
+        internal double[] Array
+        {
+            get { return m_data; }
+        }
+
         public double this[int index]
         {
             get { return this.m_data[index]; }
@@ -119,6 +145,21 @@ namespace AForge.Math
             double aux = this[i];
             this[i] = this[j];
             this[j] = aux;
+        }
+
+        public void Reverse()
+        {
+            for (int i = 0; i < (this.Length / 2); i++)
+            {
+                this.Swap(i, this.Length - 1 - i);
+            }
+        }
+
+        public Matrix Transpose()
+        {
+            Matrix m = new Matrix(this.Length, 1);
+            m.SetColumn(1, this.m_data);
+            return m;
         }
 
         /// <summary>Creates a deep copy of the AForge.Math.Vector.</summary>
@@ -335,7 +376,7 @@ namespace AForge.Math
         {
             return (double[])vector.m_data;
         }
-   */ 
+   */
 
         public static implicit operator Vector(double[] vector)
         {
@@ -414,19 +455,7 @@ namespace AForge.Math
 
         public static DoubleRange GetRange(Vector vector)
         {
-            double max = vector[0];
-            double min = vector[0];
-
-            for (int i = 0; i < vector.Length; i++)
-            {
-                if (vector[i] > max)
-                    max = vector[i];
-
-                if (vector[i] > max)
-                    max = vector[i];
-            }
-
-            return new DoubleRange(min, max);
+            return DoubleRange.GetRange(vector.m_data);
         }
         #endregion
 

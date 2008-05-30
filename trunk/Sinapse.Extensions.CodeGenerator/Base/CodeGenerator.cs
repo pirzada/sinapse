@@ -28,14 +28,14 @@ namespace Sinapse.Extensions.CodeGeneration
     public abstract class CodeGenerator
     {
 
-        private NetworkContainer m_network;
+        private NetworkContainerBase m_network;
 
 
         //---------------------------------------------
 
 
         #region Constructor
-        protected CodeGenerator(NetworkContainer network)
+        protected CodeGenerator(NetworkContainerBase network)
 	    {
             this.m_network = network;
         }
@@ -46,7 +46,7 @@ namespace Sinapse.Extensions.CodeGeneration
 
 
         #region Properties
-        public NetworkContainer Network
+        public NetworkContainerBase Network
         {
             get { return m_network; }
             set { m_network = value; }

@@ -21,12 +21,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
+using AForge.Math;
 
 namespace Sinapse.Core.Sources
 {
-    class NetworkSoundSource : NetworkDataSourceBase
+    public class NetworkSoundSource : NetworkDataSourceBase
     {
-        public override AForge.Math.Matrix CreateVectors(NetworkDataSet set)
+
+        public NetworkSoundSource(string title) : base(title)
+        {
+
+        }
+        
+        public override Matrix CreateVectors(NetworkDataSet set)
         {
             throw new Exception("The method or operation is not implemented.");
         }
@@ -36,12 +43,12 @@ namespace Sinapse.Core.Sources
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override int InputCount
+        public override int InputsCount
         {
             get { throw new Exception("The method or operation is not implemented."); }
         }
 
-        public override int OutputCount
+        public override int OutputsCount
         {
             get { throw new Exception("The method or operation is not implemented."); }
         }

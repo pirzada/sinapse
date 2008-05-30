@@ -50,7 +50,7 @@ namespace AForge.Neuro
         ///			new SigmoidFunction( ), // sigmoid activation function
         ///			3,                      // 3 inputs
         ///			4, 1 );                 // 2 layers:
-        ///                                 // 4 neurons in the firs layer
+        ///                                 // 4 neurons in the first layer
         ///                                 // 1 neuron in the second layer
         ///	</code>
         /// </example>

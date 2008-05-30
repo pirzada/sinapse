@@ -25,14 +25,14 @@ namespace Sinapse.Core.Training
     public sealed class TrainingStatus
     {
 
-        internal int epoch;
-        internal int progress;
+        private int epoch;
+        private int progress;
 
-        internal double trainingError;
-        internal double validationError;
+        private double trainingError;
+        private double validationError;
 
-        internal double epochsPerSecond;
-        internal int trainingRound;
+        private double epochsPerSecond;
+        private int trainingRound;
 
 
         //----------------------------------------
@@ -53,17 +53,37 @@ namespace Sinapse.Core.Training
         public int Epoch
         {
             get { return this.epoch; }
+            internal set { this.epoch = value; }
         }
 
         public double ValidationError
         {
             get { return this.validationError; }
-
+            internal set { this.validationError = value; }
         }
 
         public double TrainingError
         {
             get { return this.trainingError; }
+            internal set { this.trainingError = value; }
+        }
+
+        public int Progress
+        {
+            get { return this.progress; }
+            internal set { this.progress = value; }
+        }
+
+        public double EpochsPerSecond
+        {
+            get { return this.epochsPerSecond; }
+            internal set { this.epochsPerSecond = value; }
+        }
+
+        public int Round
+        {
+            get { return this.trainingRound; }
+            internal set { this.trainingRound = value; }
         }
         #endregion
 

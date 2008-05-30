@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
 using AForge.Math;
 
@@ -20,7 +21,7 @@ namespace AForge.Statistics
 {
 
     /// <summary>
-    ///     SampleMatrix provides operations of sample statistics
+    ///     SampleMatrix provides operations of sample statistics.
     /// </summary>
     /// <remarks>
     ///     In statistics, a sample is a subset of a population.
@@ -31,40 +32,100 @@ namespace AForge.Statistics
         public enum DataModel { RowsAsObservations, ColumnsAsObservations };
 
         private string[] m_colNames;
-        private string m_title;
+        private string m_name;
 
 
         //---------------------------------------------
 
 
         #region Constructors
+
+
         /// <summary>
-        /// Creates a new SampleMatrix object, where each columns corresponds
+        /// Creates a new SampleMatrix object, where each column corresponds
         /// to a variable and each row to an observation of those variables.
         /// </summary>
         /// <param name="matrix">The base matrix</param>
         /// <param name="model">The matrix model</param>
-        public SampleMatrix(double[][] matrix, DataModel model)
+        public SampleMatrix(double[][] matrix, string name, DataModel model)
             : base(matrix)
         {
             if (model == DataModel.ColumnsAsObservations)
                 this.Array = (double[][])this.Transpose();
 
+            this.m_name = name;
+            this.generateDefaultNames();
+        }
+
+        public SampleMatrix(double[][] matrix, string name)
+            : this(matrix, name, DataModel.RowsAsObservations)
+        {
+        }
+
+        public SampleMatrix(double[][] matrix, DataModel model)
+            : this(matrix, String.Empty, model)
+        {
+        }
+
+
+
+        /// <summary>
+        /// Creates a new SampleMatrix object, where each column corresponds
+        /// to a variable and each row to an observation of those variables.
+        /// </summary>
+        /// <param name="matrix">The base matrix</param>
+        /// <param name="model">The matrix model</param>
+        public SampleMatrix(double[,] data, string name, DataModel model)
+            : base(data)
+        {
+            if (model == DataModel.ColumnsAsObservations)
+                this.Array = (double[][])this.Transpose();
+
+            this.m_name = name;
+            this.generateDefaultNames();
+        }
+
+        public SampleMatrix(double[,] data, string name)
+            : this(data, String.Empty, DataModel.RowsAsObservations)
+        {
+        }
+
+        public SampleMatrix(double[,] data, DataModel model)
+            : this(data, String.Empty, model)
+        {
+        }
+        
+
+
+        /// <summary>
+        /// Creates a new SampleMatrix object, where each column corresponds
+        /// to a variable and each row to an observation of those variables.
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <param name="columns"></param>
+        /// <param name="name"></param>
+        public SampleMatrix(int rows, int columns, string name)
+            : base(rows, columns)
+        {
+            this.m_name = name;
             this.generateDefaultNames();
         }
 
         public SampleMatrix(int rows, int columns)
-            : base(rows, columns)
+            : this(rows, columns, String.Empty)
         {
-            this.generateDefaultNames();
         }
 
-        public SampleMatrix(System.Data.DataTable dataTable) : base (dataTable.Rows.Count, dataTable.Columns.Count)
-        {
-            dataTable.AcceptChanges();
 
+
+        /// <summary>Creates a new SampleMatrix object using a System.DataTable.</summary>
+        /// <param name="dataTable"></param>
+        public SampleMatrix(DataTable dataTable)
+            : base(dataTable.Rows.Count, dataTable.Columns.Count)
+        {
+            this.m_name = dataTable.TableName;
             this.m_colNames = new string[dataTable.Columns.Count];
-            
+
             for (int i = 0; i < this.Rows; i++)
             {
                 for (int j = 0; j < this.Columns; j++)
@@ -82,50 +143,15 @@ namespace AForge.Statistics
             }
         }
 
-        /// <summary>
-        /// Creates a new SampleMatrix object, where each columns corresponds
-        /// to a variable and each row to an observation of those variables.
-        /// </summary>
-        /// <param name="matrix">The base matrix</param>
-        /// <param name="model">The matrix model</param>
-        public SampleMatrix(double[,] matrix, DataModel model)
-            : base(matrix)
-        {
-            if (model == DataModel.ColumnsAsObservations)
-                this.Array = (double[][])this.Transpose();
 
-            this.generateDefaultNames();
-        }
 
-        /// <summary>
-        /// Creates a new SampleMatrix object, where each columns corresponds
-        /// to a variable and each row to an observation of those variables.
-        /// </summary>
-        /// <param name="matrix">The base matrix</param>
-        /// <param name="model">The matrix model</param>
-        public SampleMatrix(Matrix matrix, DataModel model)
-            : base(matrix)
-        {
-            if (model == DataModel.ColumnsAsObservations)
-                this.Array = (double[][])this.Transpose();
-
-            this.generateDefaultNames();
-        }
-
-        public SampleMatrix(Matrix matrix)
-            : this(matrix, DataModel.RowsAsObservations)
-        {
-        }
-
-        /// <summary>
-        /// Creates a new SampleMatrix object, where each columns corresponds
-        /// to a variable and each row to an observation of those variables.
-        /// </summary>
+        /// <summary>Copy constructor for SampleMatrix.</summary>
         /// <param name="matrix">The matrix to be copied.</param>
-        public SampleMatrix(SampleMatrix matrix)
-            : base((Matrix)matrix)
+        public SampleMatrix(SampleMatrix data)
+            : base((Matrix)data)
         {
-            this.m_colNames = matrix.m_colNames;
+            this.m_colNames = data.m_colNames;
+            this.m_name = data.m_name;
         }
         #endregion
 
@@ -134,6 +160,12 @@ namespace AForge.Statistics
 
 
         #region Properties
+        public String Name
+        {
+            get { return this.m_name; }
+            set { this.m_name = value; }
+        }
+
         /// <summary>The number of observations contained on this sample</summary>
         public int Observations
         {
@@ -211,7 +243,7 @@ namespace AForge.Statistics
 
         public override System.Data.DataTable ToDataTable()
         {
-            System.Data.DataTable dataTable = base.ToDataTable(this.m_title);
+            System.Data.DataTable dataTable = base.ToDataTable(this.m_name);
                         
             for (int i = 0; i < dataTable.Columns.Count; i++)
 			{

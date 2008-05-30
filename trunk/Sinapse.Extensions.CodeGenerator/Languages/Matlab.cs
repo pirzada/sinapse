@@ -28,7 +28,7 @@ namespace Sinapse.Extensions.CodeGeneration
     internal sealed class MatlabGenerator : CodeGenerator
     {
 
-        public MatlabGenerator(NetworkContainer network)
+        public MatlabGenerator(NetworkContainerBase network)
             : base(network)
         {
 

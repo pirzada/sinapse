@@ -37,7 +37,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 	///     The matrix V may be badly conditioned, or even singular, so the validity of the equation
 	///     <c>A=V*D*inverse(V)</c> depends upon the condition of <c>V</c>.
 	/// </remarks>
-	public class EigenvalueDecomposition
+	public class EigenValueDecomposition
 	{
 		private int n;           	// matrix dimension
 		private double[] d, e; 		// storage of eigenvalues.
@@ -51,10 +51,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
         //---------------------------------------------
 
 
-		/// <summary>
-        /// Construct an eigenvalue decomposition.
-        /// </summary>
-		public EigenvalueDecomposition(Matrix value)
+		/// <summary>Construct an eigenvalue decomposition.</summary>
+		public EigenValueDecomposition(Matrix value)
 		{
 			if (value == null)
 			{
@@ -111,10 +109,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			}
 		}
 		
-		/// <summary>
-        /// Returns the real parts of the eigenvalues.
-        /// </summary>
-		public double[] RealEigenvalues
+		/// <summary>Returns the real parts of the eigenvalues.</summary>
+		public double[] RealEigenValues
 		{
 			get 
 			{ 
@@ -122,10 +118,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			}
 		}
 	
-		/// <summary>
-        /// Returns the imaginary parts of the eigenvalues.
-        /// </summary>	
-		public double[] ImaginaryEigenvalues
+		/// <summary>Returns the imaginary parts of the eigenvalues.</summary>	
+		public double[] ImagEigenValues
 		{
 			get 
 			{ 
@@ -133,10 +127,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			}
 		}
 
-		/// <summary>
-        /// Returns the eigenvector matrix.
-        /// </summary>
-		public Matrix EigenvectorMatrix
+		/// <summary>Returns the eigenvector matrix.</summary>
+		public Matrix EigenVectors
 		{
 			get 
 			{ 
@@ -144,9 +136,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			}
 		}
 	
-		/// <summary>
-        /// Returns the block diagonal eigenvalue matrix.
-        /// </summary>
+		/// <summary>Returns the block diagonal eigenvalue matrix.</summary>
 		public Matrix DiagonalMatrix
 		{
 			get

@@ -28,7 +28,7 @@ namespace Sinapse.Extensions.CodeGeneration
     internal sealed class JavaGenerator : CodeGenerator
     {
 
-        public JavaGenerator(NetworkContainer network)
+        public JavaGenerator(NetworkContainerBase network)
             : base(network)
         {
         }
