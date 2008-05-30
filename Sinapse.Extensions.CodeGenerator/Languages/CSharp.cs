@@ -31,7 +31,7 @@ namespace Sinapse.Extensions.CodeGeneration
     public sealed class CSharpGenerator : CodeGenerator
     {
 
-        public CSharpGenerator(NetworkContainer network)
+        public CSharpGenerator(NetworkContainerBase network)
             : base(network)
         {
         }

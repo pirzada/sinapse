@@ -41,6 +41,9 @@
     <Compile Include="Controls\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DataHistogramView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Providers\MostRecentlyUsedProvider.cs">
       <SubType>Component</SubType>
     </Compile>

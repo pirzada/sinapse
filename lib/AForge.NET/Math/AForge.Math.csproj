@@ -110,17 +110,20 @@
     </Compile>
     <Compile Include="Geometry\AffineTransformation2D.cs" />
     <Compile Include="Histogram.cs" />
+    <Compile Include="Statistics\SampleVector.cs" />
+    <Compile Include="Statistics\Visualizations\Boxplot.cs" />
+    <Compile Include="Statistics\Visualizations\Histogram.cs" />
     <Compile Include="Statistics\HistogramTools.cs" />
     <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
     <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
-    <Compile Include="Statistics\RangeConversion.cs">
+    <Compile Include="RangeConversion.cs">
     </Compile>
-    <Compile Include="Statistics\SampleAnalysis\DistributionAnalysis.cs" />
-    <Compile Include="Statistics\SampleAnalysis\FactorAnalysis.cs" />
-    <Compile Include="Statistics\SampleAnalysis\IndependentComponentAnalysis.cs" />
-    <Compile Include="Statistics\SampleAnalysis\PrincipalComponentAnalysis.cs" />
+    <Compile Include="Statistics\DataAnalysis\DistributionAnalysis.cs" />
+    <Compile Include="Statistics\DataAnalysis\FactorAnalysis.cs" />
+    <Compile Include="Statistics\DataAnalysis\IndependentComponentAnalysis.cs" />
+    <Compile Include="Statistics\DataAnalysis\PrincipalComponentAnalysis.cs" />
     <Compile Include="LinearAlgebra\Decompositions\CholeskyDecomposition.cs" />
-    <Compile Include="LinearAlgebra\Decompositions\EigenvalueDecomposition.cs" />
+    <Compile Include="LinearAlgebra\Decompositions\EigenValueDecomposition.cs" />
     <Compile Include="LinearAlgebra\Decompositions\LuDecomposition.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="LinearAlgebra\Decompositions\QrDecomposition.cs" />
@@ -134,9 +137,10 @@
     <Compile Include="Random\StandardGenerator.cs" />
     <Compile Include="Random\UniformGenerator.cs" />
     <Compile Include="Random\UniformOneGenerator.cs" />
-    <Compile Include="Statistics\SampleAnalysis\DescriptiveAnalysis.cs" />
+    <Compile Include="Statistics\DataAnalysis\DescriptiveAnalysis.cs" />
     <Compile Include="Statistics\SampleMatrix.cs" />
     <Compile Include="Statistics\Tools.cs" />
+    <Compile Include="Statistics\Visualizations\Slices.cs" />
     <Compile Include="Tools.cs">
       <SubType>Code</SubType>
     </Compile>

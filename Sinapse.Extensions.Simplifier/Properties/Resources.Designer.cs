@@ -122,5 +122,12 @@ namespace Sinapse.Extensions.Simplifier.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap restart2 {
+            get {
+                object obj = ResourceManager.GetObject("restart2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

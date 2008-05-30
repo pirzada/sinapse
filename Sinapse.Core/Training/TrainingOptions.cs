@@ -24,7 +24,7 @@ namespace Sinapse.Core.Training
 {
 
     [Serializable]
-    public class TrainingOptions
+    public sealed class TrainingOptions
     {
         public enum TrainingMethod { ByError, ByEpoch, Manual };
 

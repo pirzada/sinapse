@@ -4,6 +4,8 @@
 // andrew.kirillov@gmail.com
 //
 
+using AForge.Statistics;
+
 namespace AForge.Math
 {
     using System;
@@ -113,9 +115,9 @@ namespace AForge.Math
                 }
             }
 
-            mean = Statistics.HistogramTools.Mean(values);
-            stdDev = Statistics.HistogramTools.StdDev(values);
-            median = Statistics.HistogramTools.Median(values);
+            mean = HistogramTools.Mean(values);
+            stdDev = HistogramTools.StdDev(values);
+            median = HistogramTools.Median(values);
         }
 
         /// <summary>

@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 using Sinapse.Core.Networks;
@@ -28,15 +29,20 @@ namespace Sinapse.Core
 {
     public class Workbench
     {
-        List<Sinapse.Core.Networks.NetworkContainer> m_networks;
-        List<Sinapse.Core.Sources.NetworkDataSourceBase> m_dataSources;
-        List<Sinapse.Core.Training.TrainingSession> m_trainingSessions;
+
+        private String m_name;
+        private String m_description;
+        private DateTime m_creationTime;
+
+        private BindingList<NetworkContainerBase> m_networks;
+        private BindingList<NetworkDataSourceBase> m_dataSources;
+        private BindingList<TrainingSession> m_trainingSessions;
 
         //List<NetworkReports> m_reports;
 
         public Workbench()
         {
-
+            this.m_creationTime = DateTime.Now;
         }
 
     }

@@ -12,7 +12,7 @@ namespace AForge
 	/// Represents a double range with minimum and maximum values
 	/// </summary>
     [Serializable]
-	public class DoubleRange
+	public class DoubleRange 
 	{
 		private double min, max;
 
@@ -96,5 +96,27 @@ namespace AForge
 		{
 			return ( ( IsInside( range.min ) ) || ( IsInside( range.max ) ) );
 		}
+
+        public override string ToString()
+        {
+            return String.Concat(max, '-', min);
+        }
+
+        public static DoubleRange GetRange(double[] values)
+        {
+            double max = values[0];
+            double min = values[0];
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] > max)
+                    max = values[i];
+
+                if (values[i] < min)
+                    min = values[i];
+            }
+
+            return new DoubleRange(min, max);
+        }
 	}
 }

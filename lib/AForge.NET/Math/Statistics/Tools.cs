@@ -100,7 +100,7 @@ namespace AForge.Statistics
 
         /// <summary>Computes the Median of the given values.</summary>
         /// <param name="values">An integer array containing the vector members.</param>
-        /// <param name="alreadySorted">A boolean parameter informing if the given values have already been sorted."/></param>
+        /// <param name="alreadySorted">A boolean parameter informing if the given values have already been sorted.</param>
         /// <returns>The median of the given data.</returns>
         public static double Median(bool alreadySorted, params double[] values)
         {
@@ -127,7 +127,7 @@ namespace AForge.Statistics
 
         /// <summary>Computes the Median of the given values.</summary>
         /// <param name="values">An integer array containing the vector members.</param>
-        /// <param name="alreadySorted">A boolean parameter informing if the given values have already been sorted."/></param>
+        /// <param name="alreadySorted">A boolean parameter informing if the given values have already been sorted.</param>
         /// <returns>The median of the given data.</returns>
         public static double Median(bool alreadySorted, params int[] values)
         {
@@ -471,9 +471,28 @@ namespace AForge.Statistics
             return ZScores(value, mean, StandardDeviation(value, mean));
         }
 
+        /// <summary>Generates the Standard Scores, also known as Z-Scores, the core from the given data.</summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static SampleMatrix ZScores(SampleMatrix value)
+        {
+            double[] mean = Mean(value);
+            return ZScores(value, mean, StandardDeviation(value, mean));
+        }
+
         internal static Matrix ZScores(Matrix value, double[] mean, double[] stdDev)
         {
             Matrix m = value.Clone();
+
+            Center(m, mean);
+            Standardize(m, stdDev);
+
+            return m;
+        }
+
+        internal static SampleMatrix ZScores(SampleMatrix value, double[] mean, double[] stdDev)
+        {
+            SampleMatrix m = value.Clone();
 
             Center(m, mean);
             Standardize(m, stdDev);

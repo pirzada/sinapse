@@ -28,7 +28,7 @@ namespace Sinapse.Extensions.CodeGeneration
     internal sealed class CppGenerator : CodeGenerator
     {
 
-        public CppGenerator(NetworkContainer network)
+        public CppGenerator(NetworkContainerBase network)
             : base(network)
         {
 

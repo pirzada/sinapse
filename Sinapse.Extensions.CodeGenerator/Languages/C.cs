@@ -28,7 +28,7 @@ namespace Sinapse.Extensions.CodeGeneration
     public sealed class CGenerator : CodeGenerator
     {
 
-        public CGenerator(NetworkContainer network)
+        public CGenerator(NetworkContainerBase network)
             : base(network)
         {
 
