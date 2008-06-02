@@ -19,7 +19,7 @@
 using System;
 
 
-using AForge.Math;
+using AForge.Mathematics;
 
 namespace Sinapse.Core.Transformations
 {

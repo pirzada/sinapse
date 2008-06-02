@@ -4,7 +4,7 @@
 // andrew.kirillov@gmail.com
 //
 
-namespace AForge.Math.Geometry
+namespace AForge.Mathematics.Geometry
 {
     using System;
 

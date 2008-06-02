@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-using AForge.Math;
+using AForge.Mathematics;
 
 
 namespace AForge.Statistics
@@ -26,7 +26,7 @@ namespace AForge.Statistics
     /// <remarks>
     ///     In statistics, a sample is a subset of a population.
     /// </remarks>
-    public class SampleMatrix : AForge.Math.Matrix
+    public class SampleMatrix : AForge.Mathematics.Matrix
     {
 
         public enum DataModel { RowsAsObservations, ColumnsAsObservations };
@@ -39,8 +39,6 @@ namespace AForge.Statistics
 
 
         #region Constructors
-
-
         /// <summary>
         /// Creates a new SampleMatrix object, where each column corresponds
         /// to a variable and each row to an observation of those variables.
@@ -51,7 +49,7 @@ namespace AForge.Statistics
             : base(matrix)
         {
             if (model == DataModel.ColumnsAsObservations)
-                this.Array = (double[][])this.Transpose();
+                this.baseArray = (double[][])this.Transpose();
 
             this.m_name = name;
             this.generateDefaultNames();
@@ -79,7 +77,7 @@ namespace AForge.Statistics
             : base(data)
         {
             if (model == DataModel.ColumnsAsObservations)
-                this.Array = (double[][])this.Transpose();
+                this.baseArray = (double[][])this.Transpose();
 
             this.m_name = name;
             this.generateDefaultNames();
@@ -132,11 +130,11 @@ namespace AForge.Statistics
                 {
                     if (dataTable.Columns[j].DataType == typeof(System.String))
                     {
-                        this.Array[i][j] = Double.Parse((string)dataTable.Rows[i][j]);
+                        this.baseArray[i][j] = Double.Parse((string)dataTable.Rows[i][j]);
                     }
                     else
                     {
-                        this.Array[i][j] = (Double)dataTable.Rows[i][j];
+                        this.baseArray[i][j] = (Double)dataTable.Rows[i][j];
                     }
                     this.ColumnNames[j] = dataTable.Columns[j].Caption;
                 }
@@ -200,6 +198,21 @@ namespace AForge.Statistics
             }
         }
 
+        public new SampleVector this[int variable]
+        {
+            //get { return new SampleVector(m_colNames[variable], base.GetColumn(variable)); }
+            get { return this.GetColumn(variable); }
+        }
+
+        public SampleVector this[string variable]
+        {
+            get
+            {
+                int index = System.Array.IndexOf(this.m_colNames, variable);
+                return this[index];
+            }
+        }
+
         /// <summary>Retrieves a item from the sample</summary>
         /// <param name="variable">The variable label of the requested item</param>
         /// <param name="observation">The observation index of the requested item</param>
@@ -223,6 +236,21 @@ namespace AForge.Statistics
 
 
         #region Public Methods
+        public new SampleVector GetColumn(int index)
+        {
+            return new SampleVector(m_colNames[index], base.GetColumn(index));
+        }
+
+        public new SampleMatrix GetRow(int index)
+        {
+            SampleMatrix r = new SampleMatrix(1, this.Columns);
+            r.m_name = this.m_name;
+            r.m_colNames = this.m_colNames;
+            r.baseArray[0] = this.baseArray[index];
+            return r;
+        }
+
+
         /// <summary>Converts this sample matrix to an ordinary matrix</summary>
         public Matrix ToMatrix()
         {

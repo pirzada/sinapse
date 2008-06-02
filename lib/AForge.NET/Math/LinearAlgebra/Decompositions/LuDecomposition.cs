@@ -14,9 +14,9 @@
  ***************************************************************************/
 
 using System;
-using AForge.Math;
+using AForge.Mathematics;
 
-namespace AForge.Math.LinearAlgebra.Decompositions
+namespace AForge.Mathematics.LinearAlgebra.Decompositions
 {
 
 	/// <summary>
@@ -55,7 +55,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			}
 			
 			this.LU = (Matrix) value.Clone();
-			double[][] lu = LU.Array;
+			double[][] lu = LU.baseArray;
 			int rows = value.Rows;
 			int columns = value.Columns;
 			pivotVector = new int[rows];
@@ -246,7 +246,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 	
 			int rows = LU.Rows;
 			int columns = LU.Columns;
-			double[][] lu = LU.Array;
+			double[][] lu = LU.baseArray;
 	
 			// Solve L*Y = B(piv,:)
 			for (int k = 0; k < columns; k++)

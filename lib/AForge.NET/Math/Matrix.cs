@@ -19,10 +19,14 @@
 
 using System;
 using System.IO;
-using AForge.Math.LinearAlgebra.Decompositions;
+using System.ComponentModel;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using AForge.Mathematics.LinearAlgebra.Decompositions;
 
 
-namespace AForge.Math
+namespace AForge.Mathematics
 {
 
 	/// <summary>
@@ -33,23 +37,24 @@ namespace AForge.Math
     ///     table of elements (or entries), which may be numbers or, more
     ///     generally, any abstract quantities that can be added and multiplied.
     /// </remarks>
-	public class Matrix
-	{
+	public class Matrix : System.ComponentModel.IListSource
+	{                  // Consider switching to List<Vector>
 
         /// <summary>
-        /// Optimizes Matrix operations with rows and columns. If columns are accessed 
-        /// more often than rows, pass the ColumnMajor organization model as a parameter.
-        /// when creating a new Matrix. Otherwise, use RowMajor as it is the C default.
+        ///   Optimizes Matrix operations with rows and columns. If columns are accessed 
+        ///   more often than rows, pass the ColumnMajor organization model as a parameter.
+        ///   when creating a new Matrix object. Otherwise, use RowMajor as it is the C
+        ///   language default.
         /// </summary>
         public enum OrganizationModel { RowMajor, ColumnMajor };
 
 
-		private double[][] m_data;
 		private int m_rows;
 		private int m_columns;
+        private double[][] m_data;
         private OrganizationModel m_model;
 
-		private static System.Random random = new System.Random();
+		private static readonly System.Random random = new System.Random();
 
 
         //---------------------------------------------
@@ -135,15 +140,15 @@ namespace AForge.Math
                 {
                     if (dataTable.Columns[j].DataType == typeof(System.String))
                     {
-                        this.Array[i][j] = Double.Parse((String)dataTable.Rows[i][j]);
+                        this.baseArray[i][j] = Double.Parse((String)dataTable.Rows[i][j]);
                     }
                     else if (dataTable.Columns[j].DataType == typeof(System.Boolean))
                     {
-                        this.Array[i][j] = (Boolean)dataTable.Rows[i][j] ? 1.0 : 0.0;
+                        this.baseArray[i][j] = (Boolean)dataTable.Rows[i][j] ? 1.0 : 0.0;
                     }
                     else
                     {
-                        this.Array[i][j] = (Double)dataTable.Rows[i][j];
+                        this.baseArray[i][j] = (Double)dataTable.Rows[i][j];
                     }
                 }
             }
@@ -182,7 +187,7 @@ namespace AForge.Math
 
         #region Properties
         /// <summary></summary>
-        internal protected double[][] Array
+        internal protected double[][] baseArray
         {
             get { return this.m_data; }
             set { this.m_data = value; }
@@ -326,7 +331,7 @@ namespace AForge.Math
                 {
                     for (int j = 0; j < m_columns; j++)
                     {
-                        f = AForge.Math.Tools.Hypotenuse(f, m_data[i][j]);
+                        f = AForge.Mathematics.Tools.Hypotenuse(f, m_data[i][j]);
                     }
                 }
 
@@ -478,7 +483,7 @@ namespace AForge.Math
 			} 
 			
 			Matrix X = new Matrix(endRow - startRow + 1, endColumn - startColumn + 1);
-			double[][] x = X.Array;
+			double[][] x = X.baseArray;
 			for (int i = startRow; i <= endRow; i++)
 			{
 				for (int j = startColumn; j <= endColumn; j++)
@@ -496,7 +501,7 @@ namespace AForge.Math
 		public Matrix Submatrix(int[] rowIndexes, int[] columnIndexes)
 		{
 			Matrix X = new Matrix(rowIndexes.Length, columnIndexes.Length);
-			double[][] x = X.Array;
+			double[][] x = X.baseArray;
 			for (int i = 0; i < rowIndexes.Length; i++)
 			{
 				for (int j = 0; j < columnIndexes.Length; j++)
@@ -525,7 +530,7 @@ namespace AForge.Math
 			} 
 			
 			Matrix X = new Matrix(i1 - i0 + 1, c.Length);
-			double[][] x = X.Array;
+			double[][] x = X.baseArray;
 			for (int i = i0; i <= i1; i++)
 			{
 				for (int j = 0; j < c.Length; j++)
@@ -554,7 +559,7 @@ namespace AForge.Math
 			} 
 			
 			Matrix X = new Matrix(r.Length, j1-j0+1);
-			double[][] x = X.Array;
+			double[][] x = X.baseArray;
 			for (int i = 0; i < r.Length; i++)
 			{
 				for (int j = j0; j <= j1; j++) 
@@ -684,6 +689,22 @@ namespace AForge.Math
         //---------------------------------------------
 
 
+        #region Interfaces & Bindings
+        IList IListSource.GetList()
+        {
+            return this.baseArray;
+        }
+
+        bool IListSource.ContainsListCollection
+        {
+            get { return true; }
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
         #region Operators
 
         /// <summary>Determines weather two instances are equal.</summary>
@@ -751,10 +772,10 @@ namespace AForge.Math
 
 			int rows = value.Rows;
 			int columns = value.Columns;
-			double[][] data = value.Array;
+			double[][] data = value.baseArray;
 
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+			double[][] x = X.baseArray;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -899,7 +920,7 @@ namespace AForge.Math
 			}
 
 			int rows = left.Rows;
-			double[][] data = left.Array;
+			double[][] data = left.baseArray;
 
 			if (right.Rows != left.m_columns)
 			{
@@ -908,7 +929,7 @@ namespace AForge.Math
 
 			int columns = right.Columns;
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+			double[][] x = X.baseArray;
 
 			int size = left.m_columns;
 			double[] column = new double[size];
@@ -964,7 +985,7 @@ namespace AForge.Math
 
         public static explicit operator Matrix(Vector vector)
         {
-            return (Matrix)vector.Array;
+            return (Matrix)vector.baseArray;
         }
 
         public static explicit operator Matrix(double[] vector)
@@ -989,7 +1010,7 @@ namespace AForge.Math
         public static Matrix Random(int rows, int columns)
         {
             Matrix X = new Matrix(rows, columns);
-            double[][] x = X.Array;
+            double[][] x = X.baseArray;
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)

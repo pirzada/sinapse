@@ -16,7 +16,7 @@
 using System;
 
 
-namespace AForge.Math.LinearAlgebra.Decompositions
+namespace AForge.Mathematics.LinearAlgebra.Decompositions
 {
 
 	/// <summary>
@@ -142,7 +142,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			get
 			{
 				Matrix X = new Matrix(n, n);
-				double[][] x = X.Array;
+				double[][] x = X.baseArray;
 	
 				for (int i = 0; i < n; i++) 
 				{

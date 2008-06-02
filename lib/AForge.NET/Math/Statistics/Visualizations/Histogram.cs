@@ -1,10 +1,24 @@
+/***************************************************************************
+ *                                                                         *
+ *  Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>  *
+ *                                                                         *
+ *  Please note that this code is not part of the original AForge.NET      *
+ *  library. This extension was created to support new features needed by  *
+ *  Sinapse, a neural networking tool software. Unless otherwise advised,  *
+ *  this code relies under protection of the GNU General Public License v3 *
+ *                                                                         *
+ ***************************************************************************/
+
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections;
+using System.ComponentModel;
 using System.Text;
 using System.Data;
 
 
-using AForge.Math;
+using AForge.Mathematics;
 using AForge.Statistics;
 
 namespace AForge.Statistics.Visualizations
@@ -17,62 +31,52 @@ namespace AForge.Statistics.Visualizations
     public class Histogram
     {
 
-        public enum ViewMode { Standard, Cumulative };
-        public enum IntervalSelectionMethod { Manual, Sturges, Scotts, FreedmanDiaconis };
+        public enum SelectionRule { Scotts, Wand, FreedmanDiaconis };
 
-        private string m_name;
+
         private int[] m_binValues;
-        private double m_intervalSize;
-        private SampleVector m_sourceData;
+        private double m_segmentSize;
+        private int    m_segmentCount;
         private HistogramBinCollection m_binCollection;
+        private DoubleRange m_range;
+        private String m_title;
+
+        //---------------------------------------------
 
         #region Constructors
-        /// <summary>
-        ///   
-        /// </summary>
-        /// <param name="data">Observations of a random variable.</param>
-        public Histogram(double[] data)
+        public Histogram()
+            : this(String.Empty)
         {
-            this.m_sourceData = new SampleVector(data);
         }
 
-        public Histogram(SampleVector data)
+        public Histogram(String title)
         {
-            this.m_sourceData = data;
-        }
-
-        public Histogram(DataColumn data)
-            : this(new SampleVector(data))
-        {
+            this.m_title = title;
         }
         #endregion
 
+        //---------------------------------------------
 
         #region Properties
+        public int this[int index]
+        {
+            get { return m_binValues[index]; }
+        }
+
         public String Title
         {
-            get { return this.m_name; }
-            set { this.m_name = value; }
+            get { return this.m_title; }
+            set { this.m_title = value; }
         }
 
-        public double Interval
+        public Double SegmentSize
         {
-            get { return this.m_intervalSize; }
-            set
-            {
-                this.m_intervalSize = value;
-                this.Update();
-            }
+            get { return this.m_segmentSize; }
         }
 
-        public SampleVector Source
+        public int SegmentCount
         {
-            get { return this.m_sourceData; }
-            set
-            {
-                this.m_sourceData = value;
-                this.Update();
-            }
+            get { return this.m_segmentCount; }
         }
 
         public int[] Values
@@ -82,31 +86,79 @@ namespace AForge.Statistics.Visualizations
 
         public DoubleRange Range
         {
-            get { return this.m_sourceData.Range; }
+            get { return m_range; }
+        }
+
+        public HistogramBinCollection Bins
+        {
+            get { return m_binCollection; }
         }
         #endregion
 
+        //---------------------------------------------
 
         #region Public Methods
-        public void Update()
+        public void Compute(Double[] data, SelectionRule rule)
         {
-            int segments = (int)System.Math.Ceiling(this.Range.Length / m_intervalSize);
-            this.m_binValues = new int[segments];
+            //TODO: use a more object oriented approach other than enumerating rules
 
-            for (int i = 0; i < this.m_sourceData.Length; i++)
+            double width = 1.0;
+
+            switch (rule)
             {
-                int index = (int)System.Math.Ceiling(this.m_sourceData[i] / segments);
-                this.m_binValues[index]++;
+                case SelectionRule.Scotts:
+                    width = (3.5 * Tools.StandardDeviation(data)) / Math.Pow(data.Length, 1.0 / 3.0);
+                    
+                    break;
+
+                case SelectionRule.FreedmanDiaconis:
+                    //double width = 2.0 * Quartile.Range / Math.Pow(data.Length, 1.0 / 3.0);
+                    break;
+
+                default:
+                    goto case SelectionRule.Scotts;
             }
 
-            HistogramBin[] bins = new HistogramBin[this.m_binValues.Length];
-            for (int i = 0; i < this.m_binValues.Length; i++)
+            Compute(data, width);
+        }
+
+        public void Compute(Double[] data, double segmentSize)
+        {
+            this.m_range = DoubleRange.GetRange(data);
+            this.m_segmentSize = segmentSize;
+            this.m_segmentCount = (int)Math.Ceiling(m_range.Length / segmentSize);
+            this.Compute(data);
+        }
+
+        public void Compute(Double[] data, int segmentCount)
+        {
+            this.m_range = DoubleRange.GetRange(data);
+            this.m_segmentCount = segmentCount;
+            this.m_segmentSize = this.m_range.Length / segmentCount;
+            this.Compute(data);
+        }
+
+        public void Compute(Double[] data)
+        {
+            // Create Bins
+            this.m_binValues = new int[this.m_segmentCount];
+            HistogramBin[] bins = new HistogramBin[this.m_segmentCount];
+            for (int i = 0; i < this.m_segmentCount; i++)
             {
                 bins[i] = new HistogramBin(this, i);
             }
             this.m_binCollection = new HistogramBinCollection(bins);
+
+            // Populate Bins
+            for (int i = 0; i < data.Length; i++)
+            {
+                int index = (int)Math.Floor(RangeConversion.Convert(data[i], m_range, new DoubleRange(0, m_segmentCount)));
+                index = Math.Min(Math.Max(0, index), m_segmentCount-1);
+                this.m_binValues[index]++;
+            }
         }
         #endregion
+
     }
 
     public class HistogramBinCollection : System.Collections.ObjectModel.ReadOnlyCollection<HistogramBin>
@@ -115,6 +167,17 @@ namespace AForge.Statistics.Visualizations
             : base(objects)
         {
 
+        }
+
+        public HistogramBin Search(double value)
+        {
+            // This method is buggy due to the finite precision of double numbers.
+            foreach (HistogramBin bin in this)
+            {
+                if (bin.Range.IsInside(Math.Round(value,14)))
+                    return bin;
+            }
+            return null;
         }
     }
 
@@ -135,15 +198,17 @@ namespace AForge.Statistics.Visualizations
         {
             get
             {
-                double min = this.m_histogram.Interval * this.m_index;
-                double max = min + this.m_histogram.Interval;
+                double min = this.m_histogram.Range.Min + this.m_histogram.SegmentSize * this.m_index;
+                double max = min + this.m_histogram.SegmentSize;
                 return new DoubleRange(min, max);
             }
         }
 
         public int Value
         {
-            get { return m_histogram.Values[m_index]; }
+            get { return this.m_histogram.Values[m_index]; }
+            internal set { this.m_histogram.Values[m_index] = value; }
         }
+
     }
 }

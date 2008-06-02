@@ -36,13 +36,23 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DataGraphView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DataHistogramView.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataHistogramView.Designer.cs">
+      <DependentUpon>DataHistogramView.cs</DependentUpon>
     </Compile>
     <Compile Include="Providers\MostRecentlyUsedProvider.cs">
       <SubType>Component</SubType>
@@ -53,6 +63,25 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="cSouza Company SecurityCode.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lib\AForge.NET\Core\AForge.Core.csproj">
+      <Project>{BFAF50DC-4942-46B8-8615-2A0B4CF08AD2}</Project>
+      <Name>AForge.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\AForge.NET\Math\AForge.Mathematics.csproj">
+      <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
+      <Name>AForge.Mathematics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\DataHistogramView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataHistogramView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\Wizard\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

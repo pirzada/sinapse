@@ -70,9 +70,9 @@
       <Project>{BFAF50DC-4942-46B8-8615-2A0B4CF08AD2}</Project>
       <Name>AForge.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\lib\AForge.NET\Math\AForge.Math.csproj">
+    <ProjectReference Include="..\lib\AForge.NET\Math\AForge.Mathematics.csproj">
       <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
-      <Name>AForge.Math</Name>
+      <Name>AForge.Mathematics</Name>
     </ProjectReference>
     <ProjectReference Include="..\lib\AForge.NET\Neuro\AForge.Neuro.csproj">
       <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>

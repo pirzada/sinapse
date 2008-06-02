@@ -29,7 +29,7 @@ using ZedGraph;
 
 using AForge.Statistics.DataAnalysis;
 using AForge.Statistics;
-using AForge.Math;
+using AForge.Mathematics;
 
 
 namespace Sinapse.Extensions.Simplifier.Forms
@@ -88,6 +88,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             tableAnalysisSource.AcceptChanges();
 
 
+
             // Creates the Simple Descriptive Analysis of the given source
             sda = new DescriptiveAnalysis(tableAnalysisSource);
 
@@ -98,14 +99,13 @@ namespace Sinapse.Extensions.Simplifier.Forms
             dgvStatisticCovariance.DataSource = sda.CovarianceMatrix.ToDataTable();
             dgvStatisticCorrelation.DataSource = sda.CorrelationMatrix.ToDataTable();
             dgvDistributionMeasures.DataSource = sda.Measures;
-
+            
+            
 
             // Creates the Principal Component Analysis of the given source
             pca = new PrincipalComponentAnalysis(sda.Source,
                 (PrincipalComponentAnalysis.AnalysisMethod)cbMethod.SelectedValue);
-                //(PrincipalComponentAnalysis.AnalysisMethod)Enum.Parse(typeof(PrincipalComponentAnalysis.AnalysisMethod), cbMethod.SelectedValue));
     
-           // pca.Standardize = cbStandardize.Checked;
 
             // Compute the Principal Component Analysis
             pca.Compute();
@@ -166,47 +166,6 @@ namespace Sinapse.Extensions.Simplifier.Forms
 
 
         #region Graphs
-        public void CreateVariableDistributionGraph(ZedGraphControl zgc)
-        {
-            GraphPane myPane = zgc.GraphPane;
-
-            myPane.CurveList.Clear();
-
-            // Set the titles and axis labels
-            myPane.Title.Text = "Variable Distribution";
-            myPane.Title.FontSpec.Size = 24f;
-            myPane.Title.FontSpec.Family = "Tahoma";
-            myPane.XAxis.Title.Text = "Components";
-            myPane.YAxis.Title.Text = "Percentage";
-
-            PointPairList list = new PointPairList();
-            for (int i = 0; i < pca.Components.Count; i++)
-            {
-                list.Add(pca.Components[i].Index, pca.Components[i].CumulativeProportion);
-            }
-
-            // Hide the legend
-            myPane.Legend.IsVisible = false;
-
-            // Add a curve
-            LineItem curve = myPane.AddCurve("label", list, Color.Red, SymbolType.Circle);
-            curve.Line.Width = 2.0F;
-            curve.Line.IsAntiAlias = true;
-            curve.Symbol.Fill = new Fill(Color.White);
-            curve.Symbol.Size = 7;
-
-            myPane.XAxis.Scale.MinAuto = true;
-            myPane.XAxis.Scale.MaxAuto = true;
-            myPane.YAxis.Scale.MinAuto = true;
-            myPane.YAxis.Scale.MaxAuto = true;
-            myPane.XAxis.Scale.MagAuto = true;
-            myPane.YAxis.Scale.MagAuto = true;
-
-
-            // Calculate the Axis Scale Ranges
-            zgc.AxisChange();
-        }
-
         public void CreateComponentCumulativeDistributionGraph(ZedGraphControl zgc)
         {
             GraphPane myPane = zgc.GraphPane;
@@ -291,6 +250,16 @@ namespace Sinapse.Extensions.Simplifier.Forms
             for (int i = 0; i < numComponents.Value && i < dgvShiftComponents.Rows.Count; i++)
             {
                 dgvShiftComponents.Rows[i].Selected = true;
+            }
+        }
+
+        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+            if (dgvDistributionMeasures.CurrentRow != null)
+            {
+                DataGridViewRow row = (DataGridViewRow)dgvDistributionMeasures.CurrentRow;
+                dataHistogramView2.DataSource =
+                    ((DescriptiveMeasures)row.DataBoundItem).SourceVariable;
             }
         }
 

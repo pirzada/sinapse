@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using AForge.Neuro;
-using AForge.Math;
+using AForge.Mathematics;
 
 using Sinapse.Core.Transformations;
 

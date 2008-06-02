@@ -17,7 +17,7 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>Library</OutputType>
-    <RootNamespace>AForge.Math</RootNamespace>
+    <RootNamespace>AForge.Mathematics</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
@@ -111,7 +111,6 @@
     <Compile Include="Geometry\AffineTransformation2D.cs" />
     <Compile Include="Histogram.cs" />
     <Compile Include="Statistics\SampleVector.cs" />
-    <Compile Include="Statistics\Visualizations\Boxplot.cs" />
     <Compile Include="Statistics\Visualizations\Histogram.cs" />
     <Compile Include="Statistics\HistogramTools.cs" />
     <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
@@ -140,7 +139,6 @@
     <Compile Include="Statistics\DataAnalysis\DescriptiveAnalysis.cs" />
     <Compile Include="Statistics\SampleMatrix.cs" />
     <Compile Include="Statistics\Tools.cs" />
-    <Compile Include="Statistics\Visualizations\Slices.cs" />
     <Compile Include="Tools.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AForge.Math.snk" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\AForge.Core.csproj">

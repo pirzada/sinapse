@@ -32,7 +32,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -40,10 +39,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TabControlEX, Version=0.0.2808.39891, Culture=neutral, PublicKeyToken=1db242dc828e4b4e">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Development\lib\TabControlEX.dll</HintPath>
-    </Reference>
     <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
@@ -102,9 +97,9 @@
     <None Include="Resources\agt_desktop_enhancements.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\lib\AForge.NET\Math\AForge.Math.csproj">
+    <ProjectReference Include="..\lib\AForge.NET\Math\AForge.Mathematics.csproj">
       <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
-      <Name>AForge.Math</Name>
+      <Name>AForge.Mathematics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sinapse.Core\Sinapse.Core.csproj">
       <Project>{CE75E853-93A7-4690-9EE3-6AFB684E48C1}</Project>
@@ -113,6 +108,10 @@
     <ProjectReference Include="..\Sinapse.Databases\Sinapse.Databases.csproj">
       <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
       <Name>Sinapse.Databases</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Forms.Controls\Sinapse.Forms.Controls.csproj">
+      <Project>{81CA91DE-585F-4ED7-A086-24F1F2C95A6B}</Project>
+      <Name>Sinapse.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

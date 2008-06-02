@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using AForge.Math;
+using AForge.Mathematics;
 using AForge.Statistics.DataAnalysis;
 
 

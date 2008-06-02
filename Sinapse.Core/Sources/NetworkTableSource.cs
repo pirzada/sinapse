@@ -22,7 +22,7 @@ using System.Text;
 using System.Data;
 using System.Collections;
 
-using AForge.Math;
+using AForge.Mathematics;
 using AForge;
 
 namespace Sinapse.Core.Sources

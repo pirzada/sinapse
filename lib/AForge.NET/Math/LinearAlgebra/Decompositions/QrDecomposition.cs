@@ -14,9 +14,9 @@
  ***************************************************************************/
 
 using System;
-using AForge.Math;
+using AForge.Mathematics;
 
-namespace AForge.Math.LinearAlgebra.Decompositions
+namespace AForge.Mathematics.LinearAlgebra.Decompositions
 {
 
 	/// <summary>
@@ -46,7 +46,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			}
 
 			this.QR = (Matrix) value.Clone();
-			double[][] qr = this.QR.Array;
+			double[][] qr = this.QR.baseArray;
 			int m = value.Rows;
 			int n = value.Columns;
 			this.Rdiag = new double[n];
@@ -57,7 +57,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 				double nrm = 0;
 				for (int i = k; i < m; i++)
 				{
-					nrm = AForge.Math.Tools.Hypotenuse(nrm,qr[i][k]);
+					nrm = AForge.Mathematics.Tools.Hypotenuse(nrm,qr[i][k]);
 				}
 				 
 				if (nrm != 0.0) 
@@ -125,7 +125,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			Matrix X = value.Clone();
 			int m = QR.Rows;
 			int n = QR.Columns;
-			double[][] qr = QR.Array;
+			double[][] qr = QR.baseArray;
 			
 			// Compute Y = transpose(Q)*B
 			for (int k = 0; k < n; k++) 
@@ -194,8 +194,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			{
 				int n = this.QR.Columns;
 				Matrix X = new Matrix(n, n);
-				double[][] x = X.Array;
-				double[][] qr = QR.Array;
+				double[][] x = X.baseArray;
+				double[][] qr = QR.baseArray;
 				for (int i = 0; i < n; i++) 
 				{
 					for (int j = 0; j < n; j++) 
@@ -225,8 +225,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
 			get
 			{
 				Matrix X = new Matrix(QR.Rows, QR.Columns);
-				double[][] x = X.Array;
-				double[][] qr = QR.Array;
+				double[][] x = X.baseArray;
+				double[][] qr = QR.baseArray;
 				for (int k = QR.Columns - 1; k >= 0; k--) 
 				{
 					for (int i = 0; i < QR.Rows; i++)

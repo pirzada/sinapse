@@ -11,7 +11,7 @@
 
 using System;
 using AForge;
-using AForge.Math;
+using AForge.Mathematics;
 
 
 namespace AForge.Statistics
