@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using AForge.Math;
+using AForge.Mathematics;
 
 namespace Sinapse.Core.Transformations
 {

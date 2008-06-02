@@ -7,7 +7,7 @@
 // http://www.exocortex.org/dsp/
 //
 
-namespace AForge.Math
+namespace AForge.Mathematics
 {
 	using System;
 

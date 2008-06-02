@@ -18,7 +18,7 @@ using System.Data;
 
 
 
-namespace AForge.Math
+namespace AForge.Mathematics
 {
     /// <summary>
     ///   This class provides methods for performing range conversions
@@ -56,9 +56,7 @@ namespace AForge.Math
             {
                 for (int i = 0; i < matrix.Rows; i++)
                 {
-                    result[i][j] = ((matrix[i][j] - m_originalRanges[j].Min) *
-                        (m_destinationRanges[j].Length) / (m_originalRanges[j].Length)) +
-                        m_destinationRanges[j].Min;
+                    result[i][j] = Convert(result[i][j], m_originalRanges[j], m_destinationRanges[j]);
                 }
             }
 
@@ -78,13 +76,16 @@ namespace AForge.Math
             {
                 for (int i = 0; i < matrix.Rows; i++)
                 {
-                    result[i][j] = ((matrix[i][j] - m_destinationRanges[j].Min) *
-                        (m_originalRanges[j].Length) / m_destinationRanges[j].Length) +
-                        m_originalRanges[j].Min; 
+                    result[i][j] = Convert(result[i][j], m_destinationRanges[j], m_originalRanges[j]);
                 }
             }
 
             return result;
+        }
+
+        public static double Convert(double x, DoubleRange original, DoubleRange destination)
+        {
+            return ((x - original.Min) * destination.Length / original.Length) + destination.Min;
         }
 
 

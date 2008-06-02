@@ -4,7 +4,7 @@
 // andrew.kirillov@gmail.com
 //
 
-namespace AForge.Math.Random
+namespace AForge.Mathematics.Random
 {
     using System;
     using AForge;

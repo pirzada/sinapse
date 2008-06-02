@@ -16,7 +16,7 @@
 
 using System;
 
-namespace AForge.Math.LinearAlgebra.Decompositions
+namespace AForge.Mathematics.LinearAlgebra.Decompositions
 {
 
     /// <summary>
@@ -62,8 +62,8 @@ namespace AForge.Math.LinearAlgebra.Decompositions
             int dimension = value.Rows;
             L = new Matrix(dimension, dimension);
 
-            double[][] a = value.Array;
-            double[][] l = L.Array;
+            double[][] a = value.baseArray;
+            double[][] l = L.baseArray;
 
             this.positiveDefinite = true;
             this.symmetric = true;
@@ -155,7 +155,7 @@ namespace AForge.Math.LinearAlgebra.Decompositions
             int count = value.Columns;
 
             Matrix B = (Matrix)value.Clone();
-            double[][] l = L.Array;
+            double[][] l = L.baseArray;
 
             // Solve L*Y = B;
             for (int k = 0; k < L.Rows; k++)

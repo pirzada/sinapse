@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="AForge.Math.ContinuousHistogram" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ContinuousHistogram.cs</FileName>
+      <HashCode>AAAAEAAIABAQCAAAEAAAAAAAAAQABCAEAEwgBAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.FourierTransform" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>FourierTransform.cs</FileName>
+      <HashCode>AQAAAAAAAAAAAAQBAAAVAEAAABAAABAABIEgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.Gaussian" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Gaussian.cs</FileName>
+      <HashCode>AIAAAAAAgAAAAIAACAAAAAIAABAAAAAQABAAAgAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.Histogram" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Histogram.cs</FileName>
+      <HashCode>AAAAEAAAABAQAAAAEAAAAAAAAAQABCAEAAwgBAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.Matrix" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Matrix.cs</FileName>
+      <HashCode>ggcCxAAAAgAMCkAk6MMDACAIAACIBPAAgkRkAAjgAzA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AForge.Math.PerlinNoise" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>PerlinNoise.cs</FileName>
+      <HashCode>CAAAAAAAAAAAAAAAKAEAADJBAAAAQAABAAAAAAAAKAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.RangeConversion" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>RangeConversion.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAQAAAAEAAAAAAAAAQAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.Tools" Collapsed="true">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tools.cs</FileName>
+      <HashCode>AAAAAAAAgAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.Vector" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Vector.cs</FileName>
+      <HashCode>gAIAAAAggxAASgAE+IUDAABAAA6BAIAAEAhGAQgAAjQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AForge.Math.Geometry.AffineTransformation2D" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Geometry\AffineTransformation2D.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAC2AQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.LinearAlgebra.Decompositions.CholeskyDecomposition" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LinearAlgebra\Decompositions\CholeskyDecomposition.cs</FileName>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAIAAAAACAAgAEAAIQAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.LinearAlgebra.Decompositions.EigenValueDecomposition" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LinearAlgebra\Decompositions\EigenValueDecomposition.cs</FileName>
+      <HashCode>AAAiAAAgAAAAAAAAAAEAAAQAACIAAAAGEAgAAMBQBCA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.LinearAlgebra.Decompositions.LuDecomposition" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LinearAlgebra\Decompositions\LuDecomposition.cs</FileName>
+      <HashCode>AAgAAABAAAAAAAAAAABAAAAIIAIAQCAgAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.LinearAlgebra.Decompositions.QrDecomposition" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LinearAlgebra\Decompositions\QrDecomposition.cs</FileName>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAIMAIQAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.LinearAlgebra.Decompositions.SingularValueDecomposition" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LinearAlgebra\Decompositions\SingularValueDecomposition.cs</FileName>
+      <HashCode>AAABAAAAAACAAAAgAECAAAAAAAAAAgAAEoAAAAASAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Math.Random.ExponentialGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Random\ExponentialGenerator.cs</FileName>
+      <HashCode>QgAAAMAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AForge.Math.Random.GaussianGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Random\GaussianGenerator.cs</FileName>
+      <HashCode>AgAAAIAAAAAAAAAAAAAAAAAAAAQABAAEgAQAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AForge.Math.Random.StandardGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Random\StandardGenerator.cs</FileName>
+      <HashCode>AgAAAIAAEAAAAAAACAAAAAAAAAAAAAAEgAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AForge.Math.Random.UniformGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Random\UniformGenerator.cs</FileName>
+      <HashCode>AgAAAIAAAAAQCAAAAEAAAAAAAAAAAAAEgAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AForge.Math.Random.UniformOneGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Random\UniformOneGenerator.cs</FileName>
+      <HashCode>AgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.DescriptiveAnalysis" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\DescriptiveAnalysis.cs</FileName>
+      <HashCode>ACAAACAAAggCCAAAAAgCEACAFJAQA0IggAoAIAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.DescriptiveMeasures" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\DescriptiveAnalysis.cs</FileName>
+      <HashCode>AAAAAAAAEIAACAAAAAAAAARQBAAAAAAEgAEAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.DescriptiveMeasureCollection" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\DescriptiveAnalysis.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.DistributionAnalysis" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\DistributionAnalysis.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.FactorAnalysis" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\FactorAnalysis.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.IndependentComponentAnalysis" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\IndependentComponentAnalysis.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.PrincipalComponentAnalysis" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\PrincipalComponentAnalysis.cs</FileName>
+      <HashCode>AFBCBCACBAAggIAMAAAgDAQRlIAAAAAAAQEAAAAYEAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.PrincipalComponent" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\PrincipalComponentAnalysis.cs</FileName>
+      <HashCode>AAAAAIAAEAAgAAAAAAIAAAAQAAAAEAAAABEgBAAAAAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DataAnalysis.PrincipalComponentCollection" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DataAnalysis\PrincipalComponentAnalysis.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DistanceMeasure.BhattacharyyaDistance" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DistanceMeasure\BhattacharyyaDistance.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.DistanceMeasure.MahalanobisDistance" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\DistanceMeasure\MahalanobisDistance.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.HistogramTools" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\HistogramTools.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAABAAEAAgAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.SampleMatrix" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\SampleMatrix.cs</FileName>
+      <HashCode>EAAAAAAACAACAAAECAAQAAQAAAAQAMAAAAQAAAAAABA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.SampleVector" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\SampleVector.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.Tools" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\Tools.cs</FileName>
+      <HashCode>AACAAAAAAIAAAAAAAIAAAAAQBCAAAAAEgAAAAAAIAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.Visualizations.Histogram" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\Visualizations\Histogram.cs</FileName>
+      <HashCode>EAQAAAAAAggACEAAAIEAAAAAAAAAAAAAAAAgFAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.Visualizations.HistogramBinCollection" Collapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\Visualizations\Histogram.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AForge.Statistics.Visualizations.HistogramBin" Collapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\Visualizations\Histogram.cs</FileName>
+      <HashCode>AAAAAAAAEAAACAAAAAAAAAAAAAAEAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="AForge.Math.Complex" Collapsed="true">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Complex.cs</FileName>
+      <HashCode>AAgAAAAQAAAAAgAEYAUAAAAAAQAAAAAAAAAAAAEABAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="AForge.Math.Random.IRandomNumberGenerator" Collapsed="true">
+    <Position X="6" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Random\IRandomNumberGenerator.cs</FileName>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AForge.Math.Statistics.IRandomVariable" Collapsed="true">
+    <Position X="7.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\IRandomVariable.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AForge.Statistics.MeasureType" Collapsed="true">
+    <Position X="6" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Statistics\Tools.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

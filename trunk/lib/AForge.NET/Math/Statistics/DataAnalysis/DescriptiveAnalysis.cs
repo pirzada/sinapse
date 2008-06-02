@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-using AForge.Math;
+using AForge.Mathematics;
 using AForge;
 
 namespace AForge.Statistics.DataAnalysis
@@ -249,6 +249,14 @@ namespace AForge.Statistics.DataAnalysis
         public double Length
         {
             get { return m_analysis.Ranges[m_index].Length; }
+        }
+
+        public SampleVector SourceVariable
+        {
+            get
+            {
+                return m_analysis.Source.GetColumn(m_index);
+            }
         }
 
     }

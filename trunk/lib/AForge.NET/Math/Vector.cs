@@ -11,18 +11,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
 using System.Text;
 using System.Data;
 
-namespace AForge.Math
+namespace AForge.Mathematics
 {
 
-    /// <summary>
-    ///   A spatial vector, or simply vector, is a geometric
-    ///   object which has both a magnitude and a direction.
-    /// </summary>
-    public class Vector
-    {
+    public class Vector  : System.ComponentModel.IListSource
+    {               // Consider switching to IList<Double>
 
         private double[] m_data;
         private int m_length; // cache vector size for performance
@@ -44,35 +42,52 @@ namespace AForge.Math
 
         public Vector(params double[] values)
         {
-            this.m_data = new double[values.Length];
-            values.CopyTo(this.m_data, 0);
+            this.m_data = (Double[])values.Clone();
             this.m_length = values.GetLength(0);
         }
 
         public Vector(DataColumn dataColumn)
             : this(dataColumn.Table.Rows.Count)
         {
-            for (int i = 0; i < this.Length; i++)
+
+            if (dataColumn.DataType == typeof(System.String))
             {
-                if (dataColumn.DataType == typeof(System.String))
-                {
-                    this.Array[i] = Double.Parse((String)dataColumn.Table.Rows[i][dataColumn]);
-                }
-                else if (dataColumn.DataType == typeof(System.Boolean))
-                {
-                    this.Array[i] = (Boolean)dataColumn.Table.Rows[i][dataColumn] ? 1.0 : 0.0;
-                }
-                else
-                {
-                    this.Array[i] = (Double)dataColumn.Table.Rows[i][dataColumn];
-                }
+                for (int i = 0; i < this.Length; i++)
+                    this.baseArray[i] = Double.Parse((String)dataColumn.Table.Rows[i][dataColumn]);
             }
+            else if (dataColumn.DataType == typeof(System.Boolean))
+            {
+                for (int i = 0; i < this.Length; i++)
+                    this.baseArray[i] = (Boolean)dataColumn.Table.Rows[i][dataColumn] ? 1.0 : 0.0;
+            }
+            else
+            {
+                for (int i = 0; i < this.Length; i++)
+                    this.baseArray[i] = (Double)dataColumn.Table.Rows[i][dataColumn];
+            }
+        }
+
+        public Vector(List<Double> values)
+        {
+            this.m_data = values.ToArray();
+            this.m_length = this.m_data.Length;
+        }
+
+        public Vector(IList values)
+        {
+            this.m_data = new double[values.Count];
+            values.CopyTo(m_data, 0);
+            this.m_length = m_data.Length;
+        }
+
+        public Vector(IListSource values)
+            : this(values.GetList())
+        {
         }
 
         public Vector(Vector vector)
         {
-            this.m_data = new double[vector.m_length];
-            vector.m_data.CopyTo(m_data, 0);
+            this.m_data = (Double[])vector.m_data.Clone();
             this.m_length = vector.m_length;
         }
         #endregion
@@ -82,7 +97,7 @@ namespace AForge.Math
 
 
         #region Properties
-        internal double[] Array
+        internal double[] baseArray
         {
             get { return m_data; }
         }
@@ -135,9 +150,9 @@ namespace AForge.Math
 
 
         #region Public Methods
-        public void IsOrthogonal(Vector vector)
+        public bool IsOrthogonal(Vector vector)
         {
-            throw new NotImplementedException();
+            return (this * vector) == 0;
         }
 
         public void Swap(int i, int j)
@@ -149,10 +164,7 @@ namespace AForge.Math
 
         public void Reverse()
         {
-            for (int i = 0; i < (this.Length / 2); i++)
-            {
-                this.Swap(i, this.Length - 1 - i);
-            }
+            Array.Reverse(this.m_data);
         }
 
         public Matrix Transpose()
@@ -184,6 +196,22 @@ namespace AForge.Math
         public override int GetHashCode()
         {
             return this.m_data.GetHashCode() ^ this.m_length.GetHashCode();
+        }
+        #endregion
+
+
+        //---------------------------------------------
+
+
+        #region Interfaces & Bindings
+        IList IListSource.GetList()
+        {
+            return this.baseArray;
+        }
+
+        bool IListSource.ContainsListCollection
+        {
+            get { return false; }
         }
         #endregion
 
@@ -344,16 +372,48 @@ namespace AForge.Math
 			return r;
 		}
 
-		/// <summary>Matrix-scalar multiplication.</summary>
+        /// <summary>Vector-scalar multiplication.</summary>
         public static Vector operator *(Vector left, double right)
 		{
 			return Multiply(left, right);
 		}
 
-        /// <summary>Matrix-scalar multiplication.</summary>
+        /// <summary>Vector-scalar multiplication.</summary>
         public static Vector operator *(double left, Vector right)
         {
             return Multiply(right,left);
+        }
+
+        public static double InnerProduct(Vector left, Vector right)
+        {
+            if (!Vector.DimensionEquals(left, right))
+                throw new ArgumentException("Vector lengths does not match");
+
+            double sum = 0.0;
+            for (int i = 0; i < left.m_length; i++)
+            {
+                sum += left[i] * right[i];
+            }
+            return sum;
+        }
+
+        public static Vector OuterProduct(Vector left, Vector right)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>Vector cross product.</summary>
+        /// <remarks>This is the standard inner product of the orthonormal Euclidean space</remarks>
+        public static Vector operator ^(Vector left, Vector right)
+        {
+            return OuterProduct(left, right); 
+        }
+
+        /// <summary>Vector dot product.</summary>
+        /// <remarks>This is the standard inner product of the orthonormal Euclidean space</remarks>
+        public static Double operator *(Vector left, Vector right)
+        {
+            return InnerProduct(left, right);
         }
 
         public static Vector Divide(Vector left, double right)

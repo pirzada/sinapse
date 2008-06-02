@@ -12,7 +12,7 @@ namespace AForge
 	/// Represents a double range with minimum and maximum values
 	/// </summary>
     [Serializable]
-	public class DoubleRange 
+	public class DoubleRange : IFormattable 
 	{
 		private double min, max;
 
@@ -35,7 +35,7 @@ namespace AForge
 		}
 
 		/// <summary>
-		/// Length of the range (deffirence between maximum and minimum values)
+		/// Length of the range (difference between maximum and minimum values)
 		/// </summary>
 		public double Length
 		{
@@ -99,9 +99,20 @@ namespace AForge
 
         public override string ToString()
         {
-            return String.Concat(max, '-', min);
+            return ToString(String.Empty, null);
         }
 
+        public string ToString(string format)
+        {
+            return ToString(format, null);
+        }
+
+        public string ToString(string format, IFormatProvider provider)
+        {
+            return String.Concat(min.ToString(format), '-', max.ToString(format));
+        }
+
+        
         public static DoubleRange GetRange(double[] values)
         {
             double max = values[0];

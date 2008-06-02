@@ -16,7 +16,7 @@
 using System;
 
 
-namespace AForge.Math.LinearAlgebra.Decompositions
+namespace AForge.Mathematics.LinearAlgebra.Decompositions
 {
 
     /// <summary>
@@ -55,15 +55,15 @@ namespace AForge.Math.LinearAlgebra.Decompositions
             }
 
             Matrix copy = (Matrix)value.Clone();
-            double[][] a = copy.Array;
+            double[][] a = copy.baseArray;
             m = value.Rows;
             n = value.Columns;
             int nu = System.Math.Min(m, n);
             s = new double[System.Math.Min(m + 1, n)];
             U = new Matrix(m, nu);
             V = new Matrix(n, n);
-            double[][] u = U.Array;
-            double[][] v = V.Array;
+            double[][] u = U.baseArray;
+            double[][] v = V.baseArray;
             double[] e = new double[n];
             double[] work = new double[m];
             bool wantu = computeLeftSingularVectors;

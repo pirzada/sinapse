@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using AForge.Math;
+using AForge.Mathematics;
 
 
 namespace Sinapse.Core.Transformations
@@ -18,7 +18,7 @@ namespace Sinapse.Core.Transformations
     public class RangeConversion : ITransformation
     {
 
-        AForge.Math.RangeConversion rangeConversion;
+        AForge.Mathematics.RangeConversion rangeConversion;
 
 
         public RangeConversion()

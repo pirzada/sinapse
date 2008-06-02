@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using AForge.Math;
+using AForge.Mathematics;
 
 namespace AForge.Statistics.DataAnalysis
 {

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
 using System.Text;
 using System.Data;
 
@@ -7,9 +9,9 @@ namespace AForge.Statistics
 {
 
     /// <summary>
-    /// Sample Variable
+    ///   Sample Variable
     /// </summary>
-    public class SampleVector : AForge.Math.Vector
+    public class SampleVector : AForge.Mathematics.Vector 
     {
 
         string m_colName;
@@ -39,6 +41,18 @@ namespace AForge.Statistics
             : base(dataColumn)
         {
             this.m_colName = dataColumn.ColumnName;
+        }
+
+        public SampleVector(IListSource values)
+            : base(values)
+        {
+        }
+
+
+        public String Name
+        {
+            get { return m_colName; }
+            set { this.m_colName = value; }
         }
 
     }

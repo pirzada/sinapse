@@ -6,7 +6,7 @@
 
 using AForge.Statistics;
 
-namespace AForge.Math
+namespace AForge.Mathematics
 {
     using System;
 
