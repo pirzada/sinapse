@@ -21,7 +21,9 @@ namespace AForge.Statistics
 {
 
     /// <summary>
-    ///     SampleMatrix provides operations of sample statistics.
+    ///     SampleMatrix provides operations of sample statistics. It is the same
+    ///     as a sample of a population, containing observations (rows) of given
+    ///     variables (columns).
     /// </summary>
     /// <remarks>
     ///     In statistics, a sample is a subset of a population.

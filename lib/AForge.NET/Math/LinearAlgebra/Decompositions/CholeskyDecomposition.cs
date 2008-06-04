@@ -1,5 +1,7 @@
 /***************************************************************************
  *                                                                         *
+ *  Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>  *
+ *                                                                         *
  *  Please note that this code is not part of the original AForge.NET      *
  *  library. This extension was created to support new features needed by  *
  *  Sinapse, a neural networking tool software. Unless otherwise advised,  *
@@ -39,7 +41,7 @@ namespace AForge.Mathematics.LinearAlgebra.Decompositions
     ///     When it is applicable, the Cholesky decomposition is twice as efficient
     ///     as the LU decomposition.
     ///	</remarks>
-    public class CholeskyDecomposition
+    public sealed class CholeskyDecomposition
     {
 
         private Matrix L;

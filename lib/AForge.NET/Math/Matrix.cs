@@ -30,7 +30,7 @@ namespace AForge.Mathematics
 {
 
 	/// <summary>
-    ///     Matrix provides the fundamental operations of numerical linear algebra.
+    ///     The Matrix class provides the fundamental operations of nummerical linear algebra.
     /// </summary>
     /// <remarks>
     ///     In mathematics, a matrix (plural matrices) is a rectangular
@@ -38,7 +38,8 @@ namespace AForge.Mathematics
     ///     generally, any abstract quantities that can be added and multiplied.
     /// </remarks>
 	public class Matrix : System.ComponentModel.IListSource
-	{                  // Consider switching to List<Vector>
+	{                  
+        //TODO: Consider switching to Matrix : List<Vector>
 
         /// <summary>
         ///   Optimizes Matrix operations with rows and columns. If columns are accessed 
@@ -46,7 +47,20 @@ namespace AForge.Mathematics
         ///   when creating a new Matrix object. Otherwise, use RowMajor as it is the C
         ///   language default.
         /// </summary>
-        public enum OrganizationModel { RowMajor, ColumnMajor };
+        public enum OrganizationModel
+        { 
+            /// <summary>
+            /// When using RowMajor, the matrix will be organized as an array of rows each one
+            /// containing a array of column values. This is the default for C, C++ and C# matrices.
+            /// </summary>
+            RowMajor,
+            
+            /// <summary>
+            /// When using ColumnMajor, the matrix will be organized as an array of columns each one
+            /// containing a array of row values.
+            /// </summary>
+            ColumnMajor
+        };
 
 
 		private int m_rows;
@@ -186,7 +200,6 @@ namespace AForge.Mathematics
 
 
         #region Properties
-        /// <summary></summary>
         internal protected double[][] baseArray
         {
             get { return this.m_data; }
@@ -450,6 +463,10 @@ namespace AForge.Mathematics
             }
         }
 
+        public void ScaleColumns(DoubleRange[] from, DoubleRange[] to)
+        {
+        }
+
         public void ScaleRows(double[] factor)
         {
             if (factor == null)
@@ -468,6 +485,10 @@ namespace AForge.Mathematics
                     this.m_data[i][j] = this.m_data[i][j] * factor[i];
                 }
             }
+        }
+
+        public void ScaleRows(DoubleRange[] from, DoubleRange[] to)
+        {
         }
 
 		/// <summary>Returns a sub matrix extracted from the current matrix.</summary>

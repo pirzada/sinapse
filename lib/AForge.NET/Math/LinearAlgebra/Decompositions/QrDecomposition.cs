@@ -1,5 +1,7 @@
 /***************************************************************************
  *                                                                         *
+ *  Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>  *
+ *                                                                         *
  *  Please note that this code is not part of the original AForge.NET      *
  *  library. This extension was created to support new features needed by  *
  *  Sinapse, a neural networking tool software. Unless otherwise advised,  *
@@ -32,7 +34,7 @@ namespace AForge.Mathematics.LinearAlgebra.Decompositions
 	///   of simultaneous linear equations.
 	///   This will fail if <see cref="FullRank"/> returns <see langword="false"/>.
 	/// </remarks>
-	public class QrDecomposition
+	public sealed class QrDecomposition
 	{
 		private Matrix QR;
 		private double[] Rdiag;

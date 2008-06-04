@@ -1,5 +1,7 @@
 /***************************************************************************
  *                                                                         *
+ *  Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com>  *
+ *                                                                         *
  *  Please note that this code is not part of the original AForge.NET      *
  *  library. This extension was created to support new features needed by  *
  *  Sinapse, a neural networking tool software. Unless otherwise advised,  *
@@ -37,7 +39,7 @@ namespace AForge.Mathematics.LinearAlgebra.Decompositions
 	///     The matrix V may be badly conditioned, or even singular, so the validity of the equation
 	///     <c>A=V*D*inverse(V)</c> depends upon the condition of <c>V</c>.
 	/// </remarks>
-	public class EigenValueDecomposition
+    public sealed class EigenValueDecomposition
 	{
 		private int n;           	// matrix dimension
 		private double[] d, e; 		// storage of eigenvalues.
