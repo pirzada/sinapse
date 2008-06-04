@@ -19,8 +19,19 @@ using System.Data;
 namespace AForge.Mathematics
 {
 
+    /// <summary>
+    ///   The Vector class provides the fundamental operations of nummerical linear algebra.
+    /// </summary>
+    /// <remarks>
+    ///   In linear algebra, a coordinate vector is an explicit representation of a vector
+    ///   in an abstract vector space as an ordered list of numbers or, equivalently, as an
+    ///   element of the coordinate space Fn. Coordinate vectors allow calculations with
+    ///   abstract objects to be transformed into calculations with blocks of numbers (matrices
+    ///   and column vectors), which we know how to do explicitly.
+    /// </remarks>
     public class Vector  : System.ComponentModel.IListSource
-    {               // Consider switching to IList<Double>
+    {              
+        //TODO: Consider switching to Vector : IList<Double>
 
         private double[] m_data;
         private int m_length; // cache vector size for performance
@@ -431,13 +442,6 @@ namespace AForge.Mathematics
             return Divide(right, left);
         }
 
-   /*
-        public static explicit operator double[](Vector vector)
-        {
-            return (double[])vector.m_data;
-        }
-   */
-
         public static implicit operator Vector(double[] vector)
         {
             Vector r = new Vector();
@@ -477,6 +481,7 @@ namespace AForge.Mathematics
             }
             return r;
         }
+
         public static void Normalize(Vector vector)
         {
             double norm = vector.Norm;

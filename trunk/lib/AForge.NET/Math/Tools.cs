@@ -3,6 +3,9 @@
 // Copyright © Andrew Kirillov, 2005-2007
 // andrew.kirillov@gmail.com
 //
+// Modificiations by César Roberto de Souza, 2008
+// cesarsouza@gmail.com
+//
 
 namespace AForge.Mathematics
 {
@@ -173,6 +176,37 @@ namespace AForge.Mathematics
                 r = System.Math.Abs(b) * System.Math.Sqrt(1 + r * r);
             }
 
+            return r;
+        }
+
+        /// <summary>
+        ///   Scales a variable from a scale into another, effectively
+        ///   performing a rule of three on scales bundaries.
+        /// </summary>
+        /// <param name="x">The variable to be scaled.</param>
+        /// <param name="from">The original scale of the variable.</param>
+        /// <param name="to">The destination scale of the variable.</param>
+        /// <returns>The scaled variable.</returns>
+        public static double Scale(double x, DoubleRange from, DoubleRange to)
+        {
+            return ((x - from.Min) * to.Length / from.Length) + to.Min;
+        }
+
+        /// <summary>
+        ///   Scales variables from a scale into another, effectively
+        ///   performing a rule of three on scales bundaries.
+        /// </summary>
+        /// <param name="x">The variables to be scaled.</param>
+        /// <param name="from">The original scale of the variables.</param>
+        /// <param name="to">The destination scale of the variables.</param>
+        /// <returns>The scaled variables.</returns>
+        public double[] Scale(double[] x, DoubleRange from, DoubleRange to)
+        {
+            double[] r = new double[x.Length];
+            for (int i = 0; i < x.Length; i++)
+            {
+                r[i] = Scale(x[i], from, to);
+            }
             return r;
         }
 	}

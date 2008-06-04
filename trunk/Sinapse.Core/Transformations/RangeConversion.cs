@@ -18,7 +18,7 @@ namespace Sinapse.Core.Transformations
     public class RangeConversion : ITransformation
     {
 
-        AForge.Mathematics.RangeConversion rangeConversion;
+      //  AForge.Mathematics.RangeConversion rangeConversion;
 
 
         public RangeConversion()

@@ -215,7 +215,7 @@ namespace Sinapse.Forms.Controls.Controls
             this.UpdateTrackbar();
             this.UpdateGraph();
 
-            this.trackBar1.Value = m_histogram.SegmentCount;
+            this.trackBar1.Value = m_histogram.Count;
             
         }
         #endregion

@@ -101,22 +101,18 @@
     <Compile Include="Complex.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ContinuousHistogram.cs" />
-    <Compile Include="FourierTransform.cs">
+    <Compile Include="Statistics\Visualizations\BoxPlot.cs" />
+    <Compile Include="Transformations\FourierTransform.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Gaussian.cs">
+    <Compile Include="Functions\Gaussian.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Geometry\AffineTransformation2D.cs" />
-    <Compile Include="Histogram.cs" />
     <Compile Include="Statistics\SampleVector.cs" />
     <Compile Include="Statistics\Visualizations\Histogram.cs" />
-    <Compile Include="Statistics\HistogramTools.cs" />
     <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
     <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
-    <Compile Include="RangeConversion.cs">
-    </Compile>
     <Compile Include="Statistics\DataAnalysis\DistributionAnalysis.cs" />
     <Compile Include="Statistics\DataAnalysis\FactorAnalysis.cs" />
     <Compile Include="Statistics\DataAnalysis\IndependentComponentAnalysis.cs" />
@@ -127,7 +123,7 @@
     <Compile Include="Matrix.cs" />
     <Compile Include="LinearAlgebra\Decompositions\QrDecomposition.cs" />
     <Compile Include="LinearAlgebra\Decompositions\SingularValueDecomposition.cs" />
-    <Compile Include="PerlinNoise.cs">
+    <Compile Include="Functions\PerlinNoise.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Random\ExponentialGenerator.cs" />
@@ -153,6 +149,9 @@
       <Project>{BFAF50DC-4942-46B8-8615-2A0B4CF08AD2}</Project>
       <Name>AForge.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Statistics\Distributions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
