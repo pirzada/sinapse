@@ -101,6 +101,10 @@
     <Compile Include="Complex.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Statistics\SignalAnalysis\Markov\Learning\BaumWelch.cs" />
+    <Compile Include="Statistics\SignalAnalysis\Markov\Learning\ForwardBackward.cs" />
+    <Compile Include="Statistics\SignalAnalysis\Markov\Learning\Viterbi.cs" />
+    <Compile Include="Statistics\SignalAnalysis\Markov\HiddenMarkovModel.cs" />
     <Compile Include="Statistics\Visualizations\BoxPlot.cs" />
     <Compile Include="Transformations\FourierTransform.cs">
       <SubType>Code</SubType>
@@ -151,6 +155,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Harmonics\Wavelets\" />
     <Folder Include="Statistics\Distributions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
