@@ -145,6 +145,7 @@
     <Compile Include="Networks\DistanceNetwork.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Networks\LstmNetwork.cs" />
     <Compile Include="Networks\Network.cs">
       <SubType>Code</SubType>
     </Compile>
