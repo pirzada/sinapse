@@ -209,5 +209,26 @@ namespace AForge.Mathematics
             }
             return r;
         }
+
+        public static int Sum(params int[] values)
+        {
+            int sum = 0;
+            for (int i = 0; i < values.Length; i++)
+            {
+                sum += values[i];
+            }
+            return sum;
+        }
+
+        public static double Sum(params double[] values)
+        {
+            double sum = 0.0;
+            for (int i = 0; i < values.Length; i++)
+            {
+                sum += values[i];
+            }
+            return sum;
+        }
+
 	}
 }

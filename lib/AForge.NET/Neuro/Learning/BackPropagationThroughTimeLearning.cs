@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AForge.Neuro.Networks
+namespace AForge.Neuro.Learning
 {
-    //LongShortTermMemoryNetwork
-    class LstmNetwork
+    class BackPropagationThroughTimeLearning
     {
     }
 }

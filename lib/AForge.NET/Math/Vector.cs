@@ -32,6 +32,7 @@ namespace AForge.Mathematics
     public class Vector  : System.ComponentModel.IListSource
     {              
         //TODO: Consider switching to Vector : IList<Double>
+        //      or to a Matrix whose column or row count is 1.
 
         private double[] m_data;
         private int m_length; // cache vector size for performance
@@ -119,6 +120,13 @@ namespace AForge.Mathematics
             set { this.m_data[index] = value; }
         }
 
+        /// <summary>
+        ///  Gets the vector's norm.
+        /// </summary>
+        /// <remarks>
+        ///  The norm of a vector is the value defined by the
+        ///  Square root of the sum of the squared members of the vector.
+        /// </remarks>
         public double Norm
         {
             get
@@ -132,24 +140,25 @@ namespace AForge.Mathematics
             }
         }
 
+        /// <summary>
+        ///  Gets the sum of every member on this vector. Also known as vector length.
+        /// </summary>
         public double Sum
         {
-            get
-            {
-                double sum = 0;
-                for (int i = 0; i < this.m_length; i++)
-                {
-                    sum += this.m_data[i];
-                }
-                return sum;
-            }
+            get { return Tools.Sum(this.m_data); }
         }
 
+        /// <summary>
+        ///  Gets the dimension for this vector.
+        /// </summary>
         public int Length
         {
             get { return this.m_length; }
         }
 
+        /// <summary>
+        ///  Gets the vector's range.
+        /// </summary>
         public DoubleRange Range
         {
             get { return GetRange(this); }
@@ -462,57 +471,130 @@ namespace AForge.Mathematics
 
 
         #region Static Methods
+
+        #region Power
+        public static Double[] Pow(Double[] values, double power)
+        {
+            Double[] r = new Double[values.Length];
+            for (int i = 0; i < r.Length; i++)
+            {
+                r[i] = System.Math.Pow(values[i], power);
+            }
+            return r;
+        }
+
+        public static Double[] Pow(int[] values, double power)
+        {
+            Double[] r = new Double[values.Length];
+            for (int i = 0; i < r.Length; i++)
+            {
+                r[i] = System.Math.Pow(values[i], power);
+            }
+            return r;
+        }
+
+        public static int[] Pow(int[] values, int power)
+        {
+            int[] r = new int[values.Length];
+            for (int i = 0; i < r.Length; i++)
+            {
+                r[i] = (int)System.Math.Pow(values[i], power);
+            }
+            return r;
+        }
+
         public static Vector Pow(Vector value, double power)
         {
-            Vector r = value.Clone();
-            for (int i = 0; i < r.m_data.Length; i++)
-            {
-                r.m_data[i] = System.Math.Pow(r.m_data[i], power);
-            }
-            return r;
+            return new Vector(Pow(value.baseArray, power));
         }
+        #endregion
 
+        #region Square Root
         public static Vector Sqrt(Vector value)
         {
-            Vector r = value.Clone();
-            for (int i = 0; i < r.m_data.Length; i++)
+            return new Vector(Sqrt(value.baseArray));
+        }
+
+        public static double[] Sqrt(params double[] values)
+        {
+            double[] r = new double[values.Length];
+            for (int i = 0; i < values.Length; i++)
             {
-                r.m_data[i] = System.Math.Sqrt(r.m_data[i]);
+                r[i] = System.Math.Sqrt(values[i]);
             }
             return r;
         }
 
-        public static void Normalize(Vector vector)
+        public static double[] Sqrt(params int[] values)
         {
-            double norm = vector.Norm;
-
-            for (int i = 0; i < vector.m_length; i++)
+            double[] r = new double[values.Length];
+            for (int i = 0; i < values.Length; i++)
             {
-                vector[i] = vector[i] / norm;
+                r[i] = System.Math.Sqrt(values[i]);
             }
-         }
+            return r;
+        }
+        #endregion
 
+        #region Range detection
         public static double Max(Vector vector)
         {
-            double max = vector[0];
+            return Max(vector.baseArray);
+        }
 
-            for (int i = 0; i < vector.Length; i++)
+        public static double Min(Vector vector)
+        {
+            return Min(vector.baseArray);
+        }
+
+        public static int Max(params int[] values)
+        {
+            int max = values[0];
+
+            for (int i = 1; i < values.Length; i++)
             {
-                if (vector[i] > max)
-                    max = vector[i];
+                if (values[i] > max)
+                    max = values[i];
             }
 
             return max;
         }
 
-        public static double Min(Vector vector)
+        public static int Min(params int[] values)
         {
-            double min = vector[0];
+            int min = values[0];
 
-            for (int i = 0; i < vector.Length; i++)
+            for (int i = 1; i < values.Length; i++)
             {
-                if (vector[i] < min)
-                    min = vector[i];
+                if (values[i] < min)
+                    min = values[i];
+            }
+
+            return min;
+        }
+
+        public static double Max(params double[] values)
+        {
+            double max = values[0];
+
+            for (int i = 1; i < values.Length; i++)
+            {
+                if (values[i] > max)
+                    max = values[i];
+            }
+
+            return max;
+        }
+
+        
+        public static double Min(params double[] values)
+        {
+            double min = values[0];
+
+            for (int i = 1; i < values.Length; i++)
+            {
+                if (values[i] < min)
+                    min = values[i];
             }
 
             return min;
@@ -523,6 +605,19 @@ namespace AForge.Mathematics
             return DoubleRange.GetRange(vector.m_data);
         }
         #endregion
+
+        public static void Normalize(Vector vector)
+        {
+            double norm = vector.Norm;
+
+            for (int i = 0; i < vector.m_length; i++)
+            {
+                vector[i] = vector[i] / norm;
+            }
+        }
+
+        #endregion
+
 
     }
 }

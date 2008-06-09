@@ -13,9 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AForge.Statistics.DistanceMeasure
+namespace AForge.Mathematics.Statistics.Visualizations
 {
-    class MahalanobisDistance
+    public class BoxPlot
     {
     }
 }

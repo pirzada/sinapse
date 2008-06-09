@@ -78,6 +78,10 @@
       <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>
       <Name>AForge.Neuro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\lib\AForge.NET\Statistics\AForge.Statistics.csproj">
+      <Project>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</Project>
+      <Name>AForge.Statistics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reporting\" />

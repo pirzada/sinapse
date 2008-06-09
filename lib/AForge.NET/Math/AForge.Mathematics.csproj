@@ -101,11 +101,6 @@
     <Compile Include="Complex.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Statistics\SignalAnalysis\Markov\Learning\BaumWelch.cs" />
-    <Compile Include="Statistics\SignalAnalysis\Markov\Learning\ForwardBackward.cs" />
-    <Compile Include="Statistics\SignalAnalysis\Markov\Learning\Viterbi.cs" />
-    <Compile Include="Statistics\SignalAnalysis\Markov\HiddenMarkovModel.cs" />
-    <Compile Include="Statistics\Visualizations\BoxPlot.cs" />
     <Compile Include="Transformations\FourierTransform.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -113,14 +108,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Geometry\AffineTransformation2D.cs" />
-    <Compile Include="Statistics\SampleVector.cs" />
-    <Compile Include="Statistics\Visualizations\Histogram.cs" />
-    <Compile Include="Statistics\DistanceMeasure\BhattacharyyaDistance.cs" />
-    <Compile Include="Statistics\DistanceMeasure\MahalanobisDistance.cs" />
-    <Compile Include="Statistics\DataAnalysis\DistributionAnalysis.cs" />
-    <Compile Include="Statistics\DataAnalysis\FactorAnalysis.cs" />
-    <Compile Include="Statistics\DataAnalysis\IndependentComponentAnalysis.cs" />
-    <Compile Include="Statistics\DataAnalysis\PrincipalComponentAnalysis.cs" />
     <Compile Include="LinearAlgebra\Decompositions\CholeskyDecomposition.cs" />
     <Compile Include="LinearAlgebra\Decompositions\EigenValueDecomposition.cs" />
     <Compile Include="LinearAlgebra\Decompositions\LuDecomposition.cs" />
@@ -136,9 +123,6 @@
     <Compile Include="Random\StandardGenerator.cs" />
     <Compile Include="Random\UniformGenerator.cs" />
     <Compile Include="Random\UniformOneGenerator.cs" />
-    <Compile Include="Statistics\DataAnalysis\DescriptiveAnalysis.cs" />
-    <Compile Include="Statistics\SampleMatrix.cs" />
-    <Compile Include="Statistics\Tools.cs" />
     <Compile Include="Tools.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -156,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Harmonics\Wavelets\" />
-    <Folder Include="Statistics\Distributions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

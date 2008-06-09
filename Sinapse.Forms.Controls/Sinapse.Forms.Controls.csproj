@@ -73,6 +73,10 @@
       <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
       <Name>AForge.Mathematics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\lib\AForge.NET\Statistics\AForge.Statistics.csproj">
+      <Project>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</Project>
+      <Name>AForge.Statistics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\DataHistogramView.resx">
