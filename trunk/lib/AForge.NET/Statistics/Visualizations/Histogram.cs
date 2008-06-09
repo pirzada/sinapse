@@ -29,9 +29,9 @@ namespace AForge.Statistics.Visualizations
     ///   the number of observations that fall into various disjoint categories (known as bins).
     /// </summary>
     /// <remarks>
-    ///   This class represents a Discrete or Continuous Histogram mapping. To use it as a
-    ///   discrete histogram, pass a bin size (length) of 1. To use it as a continuous mapping,
-    ///   pass any real number instead.
+    ///   This class represents a Histogram mapping of Discrete or Continuous data. To use it as a
+    ///   discrete mapping, pass a bin size (length) of 1. To use it as a continuous mapping,
+    ///   pass any real number instead. Currently, only a constant bin width is supported.
     /// </remarks>
     public class Histogram
     {
@@ -46,13 +46,18 @@ namespace AForge.Statistics.Visualizations
             /// </summary>
             Scotts,
             /// <summary>
+            ///   Use the Sturge's rule to select the best width for histogram bins.
+            ///   Please note that this method can perform poorly with less than 30 observations.
+            /// </summary>
+            Sturges,
+            /// <summary>
             ///   Use the Wand's rule to select the best width for histogram bins. 
             /// </summary>
             Wand,
             /// <summary>
             ///   Use the FreedmanDiacones rule to select the best width for histogram bins.
             /// </summary>
-            FreedmanDiaconis
+            FreedmanDiaconis,
         };
 
 
@@ -104,8 +109,8 @@ namespace AForge.Statistics.Visualizations
             m_binValues = histogram;
             m_binCount = histogram.Length;
             m_binWidth = binSize;
-            m_range = Histogram.Tools.GetRange(histogram, m_binWidth, 1.0f);
-            m_total = Histogram.Tools.Sum(histogram, binSize);
+            m_range = Histogram.Measures.GetRange(histogram, m_binWidth, 1.0f);
+            m_total = Histogram.Measures.Sum(histogram, binSize);
         }
 
 
@@ -116,6 +121,15 @@ namespace AForge.Statistics.Visualizations
         public Histogram(double[] data)
         {
             this.Compute(data, SelectionRule.Scotts);
+        }
+
+        /// <summary>
+        ///   Constructs an histogram computing the given data in double[] form using the selected selection rule.
+        /// </summary>
+        /// <param name="data"></param>
+        public Histogram(double[] data, SelectionRule rule)
+        {
+            this.Compute(data, rule);
         }
         #endregion
 
@@ -175,45 +189,47 @@ namespace AForge.Statistics.Visualizations
         ///   Computes (populates) an Histogram mapping with values from a sample. A selection rule
         ///   can be (optionally) chosen to better organize the histogram.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="rule"></param>
+        /// <param name="data">A range of real values.</param>
+        /// <param name="rule">The selection rule to be used.</param>
         public void Compute(Double[] data, SelectionRule rule)
         {
-            //TODO: use a more object oriented approach other than enumerating rules
+            this.Compute(data, calculateBinWidth(data, rule));
+        }
 
-            double width = 1.0;
-
-            switch (rule)
-            {
-                case SelectionRule.Scotts:
-                    width = (3.5 * Statistics.Tools.StandardDeviation(data)) / Math.Pow(data.Length, 1.0 / 3.0);
-                    break;
-
-                case SelectionRule.FreedmanDiaconis:
-                    throw new NotImplementedException();
-                    //double width = 2.0 * Quartile.Range / Math.Pow(data.Length, 1.0 / 3.0);
-                    break;
-
-                case SelectionRule.Wand:
-                    throw new NotImplementedException();
-                    break;
-
-                default:
-                    goto case SelectionRule.Scotts;
-            }
-
-            this.Compute(data, width);
+        /// <summary>
+        ///   Computes (populates) an Histogram mapping with values from a sample. A selection rule
+        ///   can be (optionally) chosen to better organize the histogram.
+        /// </summary>
+        /// <param name="data">A range of discrete values.</param>
+        /// <param name="rule">The selection rule to be used.</param>
+        public void Compute(int[] data, SelectionRule rule)
+        {
+            this.Compute(data, calculateBinWidth(data, rule));
         }
 
         /// <summary>
         ///   Computes (populates) an Histogram mapping with values from a sample. A selection rule
         ///   can be (optionally) chosen to optimize the histogram visualization.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">A range of real values.</param>
         /// <param name="segmentSize"></param>
         public void Compute(Double[] data, double segmentSize)
         {
             this.m_range = DoubleRange.GetRange(data);
+            this.m_binWidth = segmentSize;
+            this.m_binCount = (int)Math.Ceiling(m_range.Length / segmentSize);
+            this.Compute(data);
+        }
+
+        /// <summary>
+        ///   Computes (populates) an Histogram mapping with values from a sample. A selection rule
+        ///   can be (optionally) chosen to optimize the histogram visualization.
+        /// </summary>
+        /// <param name="data">A range of discrete values.</param>
+        /// <param name="segmentSize"></param>
+        public void Compute(int[] data, double segmentSize)
+        {
+            this.m_range = (DoubleRange)IntRange.GetRange(data);
             this.m_binWidth = segmentSize;
             this.m_binCount = (int)Math.Ceiling(m_range.Length / segmentSize);
             this.Compute(data);
@@ -238,10 +254,24 @@ namespace AForge.Statistics.Visualizations
         ///   can be (optionally) chosen to better organize the histogram.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="segmentCount"></param>
+        public void Compute(int[] data, int segmentCount)
+        {
+            this.m_range = (DoubleRange)IntRange.GetRange(data);
+            this.m_binCount = segmentCount;
+            this.m_binWidth = this.m_range.Length / segmentCount;
+            this.Compute(data);
+        }
+
+        /// <summary>
+        ///   Computes (populates) an Histogram mapping with values from a sample. A selection rule
+        ///   can be (optionally) chosen to better organize the histogram.
+        /// </summary>
+        /// <param name="data"></param>
         public void Compute(Double[] data)
         {
             // Create additional information
-            this.m_total = ((Vector)data).Sum;
+            this.m_total = Mathematics.Tools.Sum(data);
 
             // Create Bins
             this.m_binValues = new int[this.m_binCount];
@@ -255,15 +285,84 @@ namespace AForge.Statistics.Visualizations
             // Populate Bins
             for (int i = 0; i < data.Length; i++)
             {
-                int index = (int)Math.Floor(Mathematics.Tools.Scale(data[i], m_range, new DoubleRange(0, m_binCount)));
-                index = Math.Min(Math.Max(0, index), m_binCount - 1);
+                // Convert the value to the range of histogram bins to dected to which bin the value belongs.
+                int index = (int)Math.Floor(Mathematics.Tools.Scale(data[i], m_range, new DoubleRange(0, this.m_binCount - 1)));
                 this.m_binValues[index]++;
             }
         }
 
+        /// <summary>
+        ///   Computes (populates) an Histogram mapping with values from a sample. A selection rule
+        ///   can be (optionally) chosen to better organize the histogram.
+        /// </summary>
+        /// <param name="data"></param>
+        public void Compute(int[] data)
+        {
+            // Create additional information
+            this.m_total = Mathematics.Tools.Sum(data);
+
+            // Create Bins
+            this.m_binValues = new int[this.m_binCount];
+            HistogramBin[] bins = new HistogramBin[this.m_binCount];
+            for (int i = 0; i < this.m_binCount; i++)
+            {
+                bins[i] = new HistogramBin(this, i);
+            }
+            this.m_binCollection = new HistogramBinCollection(bins);
+
+            // Populate Bins
+            for (int i = 0; i < data.Length; i++)
+            {
+                // Convert the value to the range of histogram bins to dected to which bin the value belongs.
+                int index = (int)Math.Floor(Mathematics.Tools.Scale(data[i], m_range, new DoubleRange(0, this.m_binCount - 1)));
+                this.m_binValues[index]++;
+            }
+        }
+
+
         public void GetGoodnessOfFitTest()
         {
             throw new NotImplementedException();
+        }
+        #endregion
+
+        //---------------------------------------------
+
+        #region Private Methods
+        private double calculateBinWidth(Array data, SelectionRule rule)
+        {
+            //TODO: use a more object oriented approach other than enumerating rules
+
+            double width = 1.0;
+
+
+            switch (rule)
+            {
+                case SelectionRule.Scotts:
+                    if (data is int[])
+                    {
+                        width = (3.5 * Statistics.Tools.StandardDeviation((int[])data)) / Math.Pow(data.Length, 1.0 / 3.0);
+                    }
+                    else if (data is double[])
+                    {
+                        width = (3.5 * Statistics.Tools.StandardDeviation((double[])data)) / Math.Pow(data.Length, 1.0 / 3.0);
+                    }
+                    break;
+
+                case SelectionRule.FreedmanDiaconis:
+                    throw new NotImplementedException();
+                    //double width = 2.0 * Quartile.Range / Math.Pow(data.Length, 1.0 / 3.0);
+                    break;
+
+                case SelectionRule.Wand:
+                    throw new NotImplementedException();
+                    break;
+
+                default:
+                    goto case SelectionRule.Scotts;
+            }
+
+            return width;
         }
         #endregion
 
@@ -282,19 +381,8 @@ namespace AForge.Statistics.Visualizations
         /// <summary>
         ///   This static class provides statistical tools to work with Histograms.
         /// </summary>
-        public static class Tools
+        public static class Measures
         {
-
-            /// <summary>
-            ///   Reconstructs the original data that originated the given Histogram.
-            /// </summary>
-            /// <param name="values"></param>
-            /// <param name="binSize"></param>
-            /// <returns></returns>
-            public static Double[] Reconstruct(int[] values, double binSize)
-            {
-                throw new NotImplementedException();
-            }
 
             /// <summary>
             ///   Estimates a Histogram mean value.
@@ -306,7 +394,7 @@ namespace AForge.Statistics.Visualizations
             ///   are treated as values of stochastic function, but array
             ///   values are treated as "probabilities" (total amount of hits).
             /// </remarks>
-            public static double Mean(int[] values, double binSize)
+            public static double Mean(int[] values, double binWidth)
             {
                 /*
                      For the "best" estimate, we shall assume that the data is uniformly spread
@@ -323,7 +411,7 @@ namespace AForge.Statistics.Visualizations
                 for (int i = 0; i < values.Length; i++)
                 {
                     // accumulate mean
-                    sum += i * binSize * values[i];
+                    sum += i * binWidth * values[i];
 
                     // accumulate total
                     hitsCount += values[i];
@@ -357,9 +445,9 @@ namespace AForge.Statistics.Visualizations
             ///   are treated as values of stochastic function, but array
             ///   values are treated as "probabilities" (total amount of hits).
             /// </remarks>
-            public static double StandardDeviation(int[] values, double binSize)
+            public static double StandardDeviation(int[] values, double binWidth)
             {
-                double mean = Mean(values, binSize);
+                double mean = Mean(values, binWidth);
                 double stddev = 0.0;
                 double centeredValue = 0.0;
                 int hitsCount = 0;
@@ -367,7 +455,7 @@ namespace AForge.Statistics.Visualizations
                 // for all values
                 for (int i = 0; i < values.Length; i++)
                 {
-                    centeredValue = (i * binSize) - mean;
+                    centeredValue = (i * binWidth) - mean;
 
                     // accumulate mean
                     stddev += centeredValue * centeredValue * values[i];
@@ -407,7 +495,7 @@ namespace AForge.Statistics.Visualizations
             ///   are treated as values of stochastic function, but array
             ///   values are treated as "probabilities" (total amount of hits).
             /// </remarks>
-            public static double Median(int[] values, double binSize)
+            public static double Median(int[] values, double binWidth)
             {
                 /*               
              
@@ -430,7 +518,7 @@ namespace AForge.Statistics.Visualizations
               
                  */
 
-                double total = Sum(values, binSize);
+                double total = Sum(values, binWidth);
 
                 double halfTotal = total / 2;
                 double lastCumulative = 0.0;
@@ -461,13 +549,13 @@ namespace AForge.Statistics.Visualizations
                 return (int)Median(values, 1.0);
             }
 
-            public static double Sum(int[] values, double binSize)
+            public static double Sum(int[] values, double binWidth)
             {
                 double sum = 0.0;
 
                 for (int i = 0; i < values.Length; i++)
                 {
-                    sum += values[i] * i * binSize;
+                    sum += values[i] * i * binWidth;
                 }
 
                 return sum;
@@ -491,7 +579,7 @@ namespace AForge.Statistics.Visualizations
             ///   are treated as values of stochastic function, but array
             ///   values are treated as "probabilities" (total amount of hits).
             /// </remarks>
-            public static double Entropy(int[] values, double binSize)
+            public static double Entropy(int[] values, double binWidth)
             {
                 /*  
                       The histogram entropy is defined to be the negation of the sum of
@@ -505,7 +593,7 @@ namespace AForge.Statistics.Visualizations
                 double entropy = 0.0;
                 double p = 0.0;
 
-                sum = Sum(values, binSize);
+                sum = Sum(values, binWidth);
 
                 // for all values
                 for (int i = 0; i < n; i++)
@@ -524,6 +612,7 @@ namespace AForge.Statistics.Visualizations
             {
                 return Entropy(values, 1.0);
             }
+
 
             /// <summary>
             ///   Get range around median containing specified percentage of values.
@@ -650,5 +739,12 @@ namespace AForge.Statistics.Visualizations
             internal set { this.m_histogram.Values[m_index] = value; }
         }
 
+        /// <summary>
+        ///   Geths the Probability of occurance for this histogram bin.
+        /// </summary>
+        public double Probability
+        {
+            get { return this.m_histogram.Values[m_index] / this.m_histogram.Total; }
+        }
     }
 }

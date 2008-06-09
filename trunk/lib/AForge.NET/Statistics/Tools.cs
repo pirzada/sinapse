@@ -274,6 +274,13 @@ namespace AForge.Statistics
             return itemArray[maxIndex];
         }
 
+        public static double Entropy(params int[] values)
+        {
+            Visualizations.Histogram histogram;
+            histogram = new Visualizations.Histogram();
+            histogram.Compute(values, 1.0);
+            return Visualizations.Histogram.Measures.Entropy(histogram.Values);
+        }
 
         /// <summary>Computes the Covariance between two values arrays.</summary>
         /// <param name="u">A double precision number array containing the first vector members.</param>

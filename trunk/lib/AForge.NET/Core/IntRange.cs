@@ -153,7 +153,7 @@ namespace AForge
             int max = values[0];
             int min = values[0];
 
-            for (int i = 0; i < values.Length; i++)
+            for (int i = 1; i < values.Length; i++)
             {
                 if (values[i] > max)
                     max = values[i];

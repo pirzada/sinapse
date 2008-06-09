@@ -121,12 +121,14 @@
     <Compile Include="Learning\BackPropagationLearning.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Learning\BackPropagationThroughTimeLearning.cs" />
     <Compile Include="Learning\DeltaRuleLearning.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Learning\ElasticNetworkLearning.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Learning\GeneticLearning.cs" />
     <Compile Include="Learning\ISupervisedLearning.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +138,7 @@
     <Compile Include="Learning\PerceptronLearning.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Learning\RealTimeRecurrentLearning.cs" />
     <Compile Include="Learning\SOMLearning.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -145,7 +148,7 @@
     <Compile Include="Networks\DistanceNetwork.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Networks\LstmNetwork.cs" />
+    <Compile Include="Networks\ActivationRecurrentNetwork.cs" />
     <Compile Include="Networks\Network.cs">
       <SubType>Code</SubType>
     </Compile>

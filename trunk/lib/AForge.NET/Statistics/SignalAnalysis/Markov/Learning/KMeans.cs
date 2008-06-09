@@ -13,17 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AForge.Statistics.DistanceMeasure
+namespace AForge.Statistics.SignalAnalysis.Markov.Learning
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>
-    ///   In statistics, the Bhattacharyya distance measures the similarity
-    ///   of two discrete probability distributions. It is usually used to
-    ///   measure the separability of classes in classification.
-    /// </remarks>
-    class BhattacharyyaDistance
+    public class KMeans : MarkovLearningAlgorithm
     {
     }
 }
