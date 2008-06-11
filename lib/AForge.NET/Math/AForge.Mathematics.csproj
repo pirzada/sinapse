@@ -101,6 +101,7 @@
     <Compile Include="Complex.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="Transformations\FourierTransform.cs">
       <SubType>Code</SubType>
     </Compile>

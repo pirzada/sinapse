@@ -46,13 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleMatrix.cs" />
     <Compile Include="SampleVector.cs" />
-    <Compile Include="SignalAnalysis\Markov\HiddenMarkovModel.cs" />
-    <Compile Include="SignalAnalysis\Markov\Learning\Backward.cs" />
-    <Compile Include="SignalAnalysis\Markov\Learning\BaumWelch.cs" />
-    <Compile Include="SignalAnalysis\Markov\Learning\Forward.cs" />
-    <Compile Include="SignalAnalysis\Markov\Learning\KMeans.cs" />
-    <Compile Include="SignalAnalysis\Markov\Learning\MarkovLearningAlgorithm.cs" />
-    <Compile Include="SignalAnalysis\Markov\Learning\Viterbi.cs" />
+    <Compile Include="SignalAnalysis\HiddenMarkovModel.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Visualizations\BoxPlot.cs" />
     <Compile Include="Visualizations\Histogram.cs" />

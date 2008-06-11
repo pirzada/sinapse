@@ -58,7 +58,23 @@ namespace AForge.Statistics.Visualizations
             ///   Use the FreedmanDiacones rule to select the best width for histogram bins.
             /// </summary>
             FreedmanDiaconis,
-        };
+        }
+
+        /// <summary>
+        ///   Specifies if the Histogram should show standard or a cumulative data.
+        /// </summary>
+        public enum Mode
+        {
+            /// <summary>
+            ///   Shows standard data.
+            /// </summary>
+            Standard,
+
+            /// <summary>
+            ///   Shows cumulative data.
+            /// </summary>
+            Cumulative,
+        }
 
 
         private int[] m_binValues;
@@ -67,7 +83,8 @@ namespace AForge.Statistics.Visualizations
         private double  m_total;
         private HistogramBinCollection m_binCollection;
         private DoubleRange m_range;
-
+        
+        private Mode m_mode;
         private String m_title;
 
 
