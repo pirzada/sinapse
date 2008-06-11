@@ -10,12 +10,29 @@
  ***************************************************************************/
 
 using System;
+using System.IO;
+using System.ComponentModel;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
+using AForge.Mathematics.LinearAlgebra.Decompositions;
 
-namespace AForge.Statistics.SignalAnalysis.Markov.Learning
+
+namespace AForge.Mathematics
 {
-    public class KMeans : MarkovLearningAlgorithm
-    {
+
+	/// <summary>
+    ///     The Matrix class provides the fundamental operations of nummerical linear algebra.
+    /// </summary>
+    /// <remarks>
+    ///     In mathematics, a matrix (plural matrices) is a rectangular
+    ///     table of elements (or entries), which may be numbers or, more
+    ///     generally, any abstract quantities that can be added and multiplied.
+    /// </remarks>
+	public class IntegerMatrix : GenericMatrix<Int32>
+	{                  
+
+      
     }
+    
 }

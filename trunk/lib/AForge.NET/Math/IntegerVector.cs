@@ -11,33 +11,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
 using System.Text;
+using System.Data;
 
-namespace AForge.Statistics.SignalAnalysis.Markov.Learning
+namespace AForge.Mathematics
 {
-    public abstract class MarkovLearningAlgorithm
-    {
 
-        private HiddenMarkovModel model;
-
-
-
-        public MarkovLearningAlgorithm(HiddenMarkovModel model)
-        {
-            this.model = model;
-        }
-
-
-
-        public HiddenMarkovModel Model
-        {
-            get { return model; }
-        }
-          
-
-
-
-        public void Run(int[] observation);
-
+    /// <summary>
+    ///   The Vector class provides the fundamental operations of nummerical linear algebra.
+    /// </summary>
+    /// <remarks>
+    ///   In linear algebra, a coordinate vector is an explicit representation of a vector
+    ///   in an abstract vector space as an ordered list of numbers or, equivalently, as an
+    ///   element of the coordinate space Fn. Coordinate vectors allow calculations with
+    ///   abstract objects to be transformed into calculations with blocks of numbers (matrices
+    ///   and column vectors), which we know how to do explicitly.
+    /// </remarks>
+    public class IntegerVector  : GenericVector<int>
+    {              
+  
     }
 }

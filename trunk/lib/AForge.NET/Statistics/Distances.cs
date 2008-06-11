@@ -32,7 +32,7 @@ namespace AForge.Statistics
         /// </remarks>
         public static double Bhattacharyya(int[] values)
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -49,16 +49,19 @@ namespace AForge.Statistics
         public static double Bhattacharyya(double[] x, double[] y, int partitions)
         {
 
+            throw new NotImplementedException();
 
         }
 
         public static double Bhattacharyya(Histogram h1, Histogram h2)
         {
+            throw new NotImplementedException();
 
         }
 
         public static double Mahalanobis(double[] x, double[] y)
         {
+            throw new NotImplementedException();
 
         }
 
@@ -93,6 +96,7 @@ namespace AForge.Statistics
         /// <returns></returns>
         public static double RelativeEntropy(double[] x, double[] y)
         {
+            throw new NotImplementedException();
 
         }
 
