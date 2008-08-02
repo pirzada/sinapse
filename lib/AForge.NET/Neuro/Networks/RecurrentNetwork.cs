@@ -15,8 +15,8 @@ using System.Text;
 
 namespace AForge.Neuro.Networks
 {
-    //LongShortTermMemoryNetwork
-    class ActivationRecurrentNetwork
+    
+    class RecurrentNetwork
     {
     }
 }

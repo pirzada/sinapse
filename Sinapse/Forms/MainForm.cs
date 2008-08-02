@@ -79,6 +79,10 @@ namespace Sinapse.Forms
 
                 if (notNull)
                 {
+
+                    if (this.m_networkDatabase != null)
+                        this.m_networkDatabase.Schema = this.m_networkContainer.Schema;
+
                     this.lbNeuronCount.Text = m_networkContainer.Layout;
 
                     this.m_networkContainer.ObjectSaved += new FileSystemEventHandler(currentNetwork_ObjectSaved);
@@ -755,6 +759,7 @@ namespace Sinapse.Forms
             {
                 if (neuralNetwork != null)
                 {
+                    neuralNetwork.WireUpEvents();
                     this.CurrentNetworkContainer = neuralNetwork;
                     this.mruProviderNetwork.Insert(path);
                     HistoryListener.Write("Network Loaded");

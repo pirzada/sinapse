@@ -64,18 +64,22 @@ namespace Sinapse.Data.Network
             this.m_networkSchema = schema;
             this.m_networkName = networkName;
 
+            /*
             int[] neuronsCount = new int[hiddenLayersNeuronCount.Length + 2];
             neuronsCount[0] = schema.InputColumns.Length;
             neuronsCount[hiddenLayersNeuronCount.Length + 1] = schema.OutputColumns.Length;
             hiddenLayersNeuronCount.CopyTo(neuronsCount, 1); 
+             */
 
+            int[] neuronsCount = new int[hiddenLayersNeuronCount.Length + 1];
+            neuronsCount[hiddenLayersNeuronCount.Length] = schema.OutputColumns.Length;
+            hiddenLayersNeuronCount.CopyTo(neuronsCount, 0);
             this.m_activationNetwork = new ActivationNetwork(function, schema.InputColumns.Length, neuronsCount);
 
             this.m_creationTime = DateTime.Now;
             
             this.m_savepointCollection = new NetworkSavepointCollection(this);
-            this.m_savepointCollection.SavepointRestored += savepointCollection_SavepointRestored;
-
+            this.WireUpEvents();
         }
 
         public NetworkContainer(NetworkSchema schema, IActivationFunction function, params int[] hiddenLayersNeuronCount)
@@ -222,7 +226,10 @@ namespace Sinapse.Data.Network
 
 
         #region Public Methods
-
+        public void WireUpEvents()
+        {
+            this.m_savepointCollection.SavepointRestored += savepointCollection_SavepointRestored;
+        }
         #endregion
 
 

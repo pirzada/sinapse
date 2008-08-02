@@ -1226,10 +1226,12 @@ namespace AForge.Mathematics
 
         public static bool IsEqualWithinLimits(double a, double b, double limit)
         {
+            throw new NotImplementedException();
         }
 
         public static bool IsEqualWithinPercent(double a, double b, double percent)
         {
+            throw new NotImplementedException();
         }
 
 

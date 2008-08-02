@@ -381,7 +381,7 @@ namespace Sinapse.Controls.MainTabControl
             // Set the title and axis labels
             myPane.Title.Text = "Training Graph";
             myPane.XAxis.Title.Text = "Epochs";
-            myPane.YAxis.Title.Text = "Root-Mean-Square Error";
+            myPane.YAxis.Title.Text = "Least-Mean-Square Error";
 
             RollingPointPairList trainingList = new RollingPointPairList(1200);
             RollingPointPairList validationList = new RollingPointPairList(1200);

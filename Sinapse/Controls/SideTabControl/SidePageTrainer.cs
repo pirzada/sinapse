@@ -427,8 +427,8 @@ namespace Sinapse.Controls.SideTabControl
             {
 
                 #region Training Epoch
-                this.m_networkState.ErrorTraining = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output);
-                this.m_networkState.ErrorValidation = networkTeacher.MeasureEpochError(options.ValidationVectors.Input, options.ValidationVectors.Output);
+                this.m_networkState.ErrorTraining = networkTeacher.RunEpoch(options.TrainingVectors.Input, options.TrainingVectors.Output) /* / options.TrainingVectors.Input.Length */;
+                this.m_networkState.ErrorValidation = networkTeacher.MeasureEpochError(options.ValidationVectors.Input, options.ValidationVectors.Output) /* / options.ValidationVectors.Input.Length */;
 
                 // Adjust Training Rate
                 if (options.secondLearningRate.HasValue)

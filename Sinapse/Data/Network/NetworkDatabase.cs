@@ -100,6 +100,11 @@ namespace Sinapse.Data.Network
         internal NetworkSchema Schema
         {
             get { return this.m_networkSchema; }
+            set
+            {
+                this.m_networkSchema = value;
+                this.OnDatabaseChanged();
+            }
         }
 
         internal DataTable DataTable
