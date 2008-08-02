@@ -306,7 +306,7 @@ namespace AForge.Statistics.SignalAnalysis.Markov
                 // re-estimation of initial state probabilities
                 for (int i = 0; i < numStates; i++)
                 {
-                    this.pi[i] = gamma(i, 0, observation, fwd, bwd);
+            //        this.pi[i] = gamma(i, 0, observation, fwd, bwd);
                 }
 
                 // re-estimation of transition probabilities
@@ -319,8 +319,8 @@ namespace AForge.Statistics.SignalAnalysis.Markov
 
                         for (int t = 0; t <= (observation.Length - 1); t++)
                         {
-                            num += xi(t, i, j, observation, fwd, bwd);
-                            denom += gamma(i, t, observation, fwd, bwd);
+             //               num += xi(t, i, j, observation, fwd, bwd);
+             //               denom += gamma(i, t, observation, fwd, bwd);
                         }
 
                         A[i][j] = num / denom;
@@ -337,9 +337,9 @@ namespace AForge.Statistics.SignalAnalysis.Markov
 
                         for (int t = 0; t <= (observation.Length - 1); t++)
                         {
-                            double g = gamma(i, t, observation, fwd, bwd);
-                            num += (g * ((k == observation[t]) ? 1 : 0));
-                            denom += g;
+               //             double g = gamma(i, t, observation, fwd, bwd);
+               //             num += (g * ((k == observation[t]) ? 1 : 0));
+               //             denom += g;
                         }
 
                         B[i][k] = num / denom;

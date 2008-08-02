@@ -148,7 +148,7 @@
     <Compile Include="Networks\DistanceNetwork.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Networks\ActivationRecurrentNetwork.cs" />
+    <Compile Include="Networks\RecurrentNetwork.cs" />
     <Compile Include="Networks\Network.cs">
       <SubType>Code</SubType>
     </Compile>
