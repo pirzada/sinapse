@@ -59,5 +59,15 @@ namespace AForge.Neuro
 		/// calculations using this method to calculate derivative)</i></remarks>
 		/// 
 		double Derivative2( double y );
+
+
+        /// <summary>
+        /// In mathematics, the range of a function is the set of all "output" values
+        /// produced by that function. Sometimes it is called the image, or more precisely,
+        /// the image of the domain of the function. Range is also occasionally used to
+        /// indicate the difference between the largest and smallest numbers in a set of
+        /// real-valued data. If f is a surjection then its range is equal to its codomain.
+        /// </summary>
+        DoubleRange Range { get; }
 	}
 }

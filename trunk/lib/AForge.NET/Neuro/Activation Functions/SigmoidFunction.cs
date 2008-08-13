@@ -112,6 +112,12 @@ namespace AForge.Neuro
 		public double Derivative2( double y )
 		{
 			return ( alpha * y * ( 1 - y ) );
-		}	
+		}
+
+
+        public DoubleRange Range
+        {
+            get { return new DoubleRange(0, 1); }
+        }
 	}
 }
