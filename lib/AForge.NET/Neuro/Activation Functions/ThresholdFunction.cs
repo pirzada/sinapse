@@ -77,5 +77,10 @@ namespace AForge.Neuro
 		{
 			return 0;
 		}
+
+        public DoubleRange Range
+        {
+            get { return new DoubleRange(0, 1); }
+        }
 	}
 }
