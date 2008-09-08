@@ -43,10 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ActivationFunctionView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ActivationFunctionView.Designer.cs">
-      <DependentUpon>ActivationFunctionView.cs</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DataGraphView.cs">
       <SubType>Component</SubType>
@@ -89,10 +86,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\ActivationFunctionView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ActivationFunctionView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataHistogramView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DataHistogramView.cs</DependentUpon>
