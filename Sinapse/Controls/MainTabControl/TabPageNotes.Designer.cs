@@ -100,6 +100,6 @@ namespace Sinapse.Controls.MainTabControl
 
         #endregion
 
-        private RichTextBoxExtended.RichTextBoxExtended richTextBoxExtended1;
+       // private RichTextBoxExtended.RichTextBoxExtended richTextBoxExtended1;
     }
 }

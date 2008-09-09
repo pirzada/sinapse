@@ -121,9 +121,6 @@ namespace Sinapse.Forms
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.tabControlSide = new Sinapse.Controls.SideTabControl.SideTabControl();
-            this.tabControlMain = new Sinapse.Controls.MainTabControl.MainTabControl();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.btnDatabaseNew = new System.Windows.Forms.ToolStripButton();
             this.btnDatabaseOpen = new System.Windows.Forms.ToolStripButton();
@@ -162,22 +159,25 @@ namespace Sinapse.Forms
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.tabControlSide = new Sinapse.Controls.SideTabControl.SideTabControl();
+            this.tabControlMain = new Sinapse.Controls.MainTabControl.MainTabControl();
             this.statusBarControl = new Sinapse.Controls.StatusBarControl();
-            this.mruProviderDatabase = new Sinapse.Forms.Controls.MostRecentlyProvider();
-            this.mruProviderNetwork = new Sinapse.Forms.Controls.MostRecentlyProvider();
-            this.mruProviderWorkplace = new Sinapse.Forms.Controls.MostRecentlyProvider();
-            this.mruProviderSession = new Sinapse.Forms.Controls.MostRecentlyProvider();
+            this.mruProviderDatabase = new Sinapse.Forms.Controls.MruProvider();
+            this.mruProviderNetwork = new Sinapse.Forms.Controls.MruProvider();
+            this.mruProviderWorkplace = new Sinapse.Forms.Controls.MruProvider();
+            this.mruProviderSession = new Sinapse.Forms.Controls.MruProvider();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
-            this.splitContainer.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripTraining.SuspendLayout();
             this.toolStripTesting.SuspendLayout();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -815,42 +815,6 @@ namespace Sinapse.Forms
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTesting);
             this.toolStripContainer.TopToolStripPanel.MaximumSize = new System.Drawing.Size(0, 25);
             // 
-            // splitContainer
-            // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer.Name = "splitContainer";
-            // 
-            // splitContainer.Panel1
-            // 
-            this.splitContainer.Panel1.Controls.Add(this.tabControlSide);
-            // 
-            // splitContainer.Panel2
-            // 
-            this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
-            this.splitContainer.Size = new System.Drawing.Size(892, 552);
-            this.splitContainer.SplitterDistance = 263;
-            this.splitContainer.TabIndex = 17;
-            // 
-            // tabControlSide
-            // 
-            this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlSide.Location = new System.Drawing.Point(0, 0);
-            this.tabControlSide.Name = "tabControlSide";
-            this.tabControlSide.Size = new System.Drawing.Size(263, 552);
-            this.tabControlSide.TabIndex = 0;
-            // 
-            // tabControlMain
-            // 
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.Size = new System.Drawing.Size(625, 552);
-            this.tabControlMain.TabIndex = 0;
-            this.tabControlMain.SelectedControlChanged += new System.EventHandler(this.tabControlMain_SelectedControlChanged);
-            this.tabControlMain.DataSelectionChanged += new System.EventHandler(this.tabControlMain_SelectionChanged);
-            // 
             // toolStripMain
             // 
             this.toolStripMain.Dock = System.Windows.Forms.DockStyle.None;
@@ -868,7 +832,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(206, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
             this.toolStripMain.TabIndex = 0;
             // 
             // btnDatabaseNew
@@ -978,7 +942,7 @@ namespace Sinapse.Forms
             this.toolStripTraining.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripTraining.Location = new System.Drawing.Point(211, 0);
             this.toolStripTraining.Name = "toolStripTraining";
-            this.toolStripTraining.Size = new System.Drawing.Size(206, 25);
+            this.toolStripTraining.Size = new System.Drawing.Size(208, 25);
             this.toolStripTraining.TabIndex = 3;
             // 
             // btnTrainForget
@@ -1073,7 +1037,7 @@ namespace Sinapse.Forms
             this.btnTestRound});
             this.toolStripTesting.Location = new System.Drawing.Point(419, 0);
             this.toolStripTesting.Name = "toolStripTesting";
-            this.toolStripTesting.Size = new System.Drawing.Size(122, 25);
+            this.toolStripTesting.Size = new System.Drawing.Size(93, 25);
             this.toolStripTesting.TabIndex = 2;
             // 
             // btnTestCompute
@@ -1169,8 +1133,8 @@ namespace Sinapse.Forms
             // 
             this.btnTestRoundCustom.Name = "btnTestRoundCustom";
             this.btnTestRoundCustom.Size = new System.Drawing.Size(100, 21);
-            this.btnTestRoundCustom.Validated += new System.EventHandler(this.btnTestRoundCustom_Validated);
             this.btnTestRoundCustom.Validating += new System.ComponentModel.CancelEventHandler(this.btnTestRoundCustom_Validating);
+            this.btnTestRoundCustom.Validated += new System.EventHandler(this.btnTestRoundCustom_Validated);
             // 
             // saveDatabaseDialog
             // 
@@ -1197,6 +1161,42 @@ namespace Sinapse.Forms
             this.notifyIcon.Text = "Sinapse Neural Networking Tool";
             this.notifyIcon.Visible = true;
             // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.tabControlSide);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
+            this.splitContainer.Size = new System.Drawing.Size(892, 552);
+            this.splitContainer.SplitterDistance = 263;
+            this.splitContainer.TabIndex = 17;
+            // 
+            // tabControlSide
+            // 
+            this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlSide.Location = new System.Drawing.Point(0, 0);
+            this.tabControlSide.Name = "tabControlSide";
+            this.tabControlSide.Size = new System.Drawing.Size(263, 552);
+            this.tabControlSide.TabIndex = 0;
+            // 
+            // tabControlMain
+            // 
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.Size = new System.Drawing.Size(625, 552);
+            this.tabControlMain.TabIndex = 0;
+            this.tabControlMain.DataSelectionChanged += new System.EventHandler(this.tabControlMain_SelectionChanged);
+            this.tabControlMain.SelectedControlChanged += new System.EventHandler(this.tabControlMain_SelectedControlChanged);
+            // 
             // statusBarControl
             // 
             this.statusBarControl.AutoSize = true;
@@ -1209,27 +1209,27 @@ namespace Sinapse.Forms
             // 
             // mruProviderDatabase
             // 
-            this.mruProviderDatabase.FilePathList = global::Sinapse.Properties.Settings.Default.history_Database;
-            this.mruProviderDatabase.MenuItem = this.MenuFileRecentDatabases;
-            this.mruProviderDatabase.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
+            this.mruProviderDatabase.FileList = global::Sinapse.Properties.Settings.Default.history_Database;
+            this.mruProviderDatabase.KeyMenuItem = this.MenuFileRecentDatabases;
+            this.mruProviderDatabase.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
             // 
             // mruProviderNetwork
             // 
-            this.mruProviderNetwork.FilePathList = global::Sinapse.Properties.Settings.Default.history_Networks;
-            this.mruProviderNetwork.MenuItem = this.MenuFileRecentNetworks;
-            this.mruProviderNetwork.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
+            this.mruProviderNetwork.FileList = global::Sinapse.Properties.Settings.Default.history_Networks;
+            this.mruProviderNetwork.KeyMenuItem = this.MenuFileRecentNetworks;
+            this.mruProviderNetwork.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
             // 
             // mruProviderWorkplace
             // 
-            this.mruProviderWorkplace.FilePathList = global::Sinapse.Properties.Settings.Default.history_Workplace;
-            this.mruProviderWorkplace.MenuItem = this.MenuFileRecentWorkplaces;
-            this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
+            this.mruProviderWorkplace.FileList = global::Sinapse.Properties.Settings.Default.history_Workplace;
+            this.mruProviderWorkplace.KeyMenuItem = this.MenuFileRecentWorkplaces;
+            this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
             // 
             // mruProviderSession
             // 
-            this.mruProviderSession.FilePathList = global::Sinapse.Properties.Settings.Default.history_Sessions;
-            this.mruProviderSession.MenuItem = this.MenuFileRecentSessions;
-            this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MostRecentlyMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
+            this.mruProviderSession.FileList = global::Sinapse.Properties.Settings.Default.history_Sessions;
+            this.mruProviderSession.KeyMenuItem = this.MenuFileRecentSessions;
+            this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
             // 
             // MainForm
             // 
@@ -1256,15 +1256,15 @@ namespace Sinapse.Forms
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
-            this.splitContainer.ResumeLayout(false);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.toolStripTraining.ResumeLayout(false);
             this.toolStripTraining.PerformLayout();
             this.toolStripTesting.ResumeLayout(false);
             this.toolStripTesting.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1339,10 +1339,10 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnNetworkOpen;
         private System.Windows.Forms.ToolStripButton btnSaveAll;
         private Sinapse.Controls.SideTabControl.SideTabControl tabControlSide;
-        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderDatabase;
-        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderNetwork;
-        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderWorkplace;
-        private Sinapse.Forms.Controls.MostRecentlyProvider mruProviderSession;
+        private Sinapse.Forms.Controls.MruProvider mruProviderDatabase;
+        private Sinapse.Forms.Controls.MruProvider mruProviderNetwork;
+        private Sinapse.Forms.Controls.MruProvider mruProviderWorkplace;
+        private Sinapse.Forms.Controls.MruProvider mruProviderSession;
         private System.Windows.Forms.ToolStrip toolStripTesting;
         private System.Windows.Forms.ToolStripButton btnTestCompute;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
