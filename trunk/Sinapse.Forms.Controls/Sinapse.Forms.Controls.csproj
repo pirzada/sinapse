@@ -57,7 +57,7 @@
     <Compile Include="Controls\DataHistogramView.Designer.cs">
       <DependentUpon>DataHistogramView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Providers\MostRecentlyUsedProvider.cs">
+    <Compile Include="Providers\MruProvider.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
