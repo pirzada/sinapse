@@ -1,31 +1,38 @@
-/***************************************************************************
- *   Sinapse Neural Networking Tool         http://sinapse.googlecode.com  *
- *  ---------------------------------------------------------------------- *
- *   Copyright (C) 2006-2008 Cesar Roberto de Souza <cesarsouza@gmail.com> *
- *                                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 3 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- ***************************************************************************/
+/*******************************************************************************
+ *  The MIT License                                                            *
+ *                                                                             *
+ *  Copyright (c) 2008 César Roberto de Souza <cesarsouza@gmail.com>           *
+ *                                                                             *
+ *  Permission is hereby granted, free of charge, to any person obtaining a    *
+ *  copy of this software and associated documentation files (the "Software"), *
+ *  to deal in the Software without restriction, including without limitation  *
+ *  the rights to use, copy, modify, merge, publish, distribute, sublicense,   *
+ *  and/or sell copies of the Software, and to permit persons to whom the      *
+ *  Software is furnished to do so, subject to the following conditions:       *
+ *                                                                             *
+ *   The above copyright notice and this permission notice shall be included   *
+ *   in all copies or substantial portions of the Software.                    *
+ *                                                                             *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,   *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL    *
+ *  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING    *
+ *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER        *
+ *  DEALINGS IN THE SOFTWARE.                                                  *
+ *                                                                             * 
+ *******************************************************************************/
 
-/***************************************************************************
- * This class was loosely based on the original work made by Joe Woodbury  *
- * - http://joewoodbury.net                                                *
- *                                                                         *
- * Original CodeProject Article may be found at                            *
- * - http://www.codeproject.com/KB/cs/mrutoolstripmenu.aspx                *
- *                                                                         *
- ***************************************************************************/
-                                    
-                                         
+/*******************************************************************************
+ *  This class was loosely based on the original work made by Joe Woodbury     *
+ *   - http://joewoodbury.net                                                  *
+ *                                                                             *
+ *  Original CodeProject Article may be found at                               *
+ *   - http://www.codeproject.com/KB/cs/mrutoolstripmenu.aspx                  *
+ *                                                                             *
+ *******************************************************************************/
+
+
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -39,6 +46,11 @@ using System.Windows.Forms;
 namespace Sinapse.Forms.Controls
 {
 
+    /// <summary>
+    ///   Represents the method that will handle the MenuItemClicked of a
+    ///   Most Recently Used menu list.
+    /// </summary>
+    /// <param name="filename">The full path for the clicked item filename.</param>
     public delegate void MruMenuItemClickedEventHandler(string filename);
 
     /// <summary>
@@ -50,7 +62,7 @@ namespace Sinapse.Forms.Controls
         private int maxEntries = 6;
         private int maxShortenPathLength = 96;
         private bool inline;
-
+  
         private ToolStripMenuItem  keyMenuItem;
         private List<ToolStripMenuItem> menuItemCollection;
         private StringCollection        filePathCollection;
@@ -77,7 +89,7 @@ namespace Sinapse.Forms.Controls
 
         #region Properties
         /// <summary>
-        ///   Gets a list of menu items currently created by this component.
+        ///   Gets a list of menu items currently handled by this component.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -118,7 +130,7 @@ namespace Sinapse.Forms.Controls
         ///  first, or the property binding will not work.
         /// </summary>
         [SettingsBindable(true)]
-        public StringCollection FileList
+        public StringCollection Files
         {
             get { return this.filePathCollection; }
             set
@@ -201,12 +213,11 @@ namespace Sinapse.Forms.Controls
 
 
 
-
+        #region Public Methods
         /// <summary>
         ///   Inserts a new file on the top of the Most Recently Used list.
         /// </summary>
         /// <param name="filename"></param>
-        #region Public Methods
         public void Insert(string filename)
         {
             if (this.filePathCollection.Count > this.maxEntries)
@@ -292,6 +303,7 @@ namespace Sinapse.Forms.Controls
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
 
+            // The tag property holds the full path of the recently used file.
             if (this.MenuItemClicked != null)
                 this.MenuItemClicked.Invoke(menuItem.Tag as String);
         }
