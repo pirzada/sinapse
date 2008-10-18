@@ -10,7 +10,7 @@
     <RootNamespace>WeifenLuo.WinFormsUI</RootNamespace>
     <AssemblyName>WeifenLuo.WinFormsUI.Docking</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\..\Main\ICSharpCode.SharpDevelop.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>cSouza Company SecurityCode.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
     <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
     <OutputPath>..\..\..\..\bin\</OutputPath>
@@ -189,6 +189,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="cSouza Company SecurityCode.pfx" />
     <None Include="Docking\Resources\DockPane_AutoHide.bmp" />
     <None Include="Docking\Resources\DockPane_Close.bmp" />
     <None Include="Docking\Resources\DockPane_Dock.bmp" />

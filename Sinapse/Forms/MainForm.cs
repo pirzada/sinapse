@@ -72,8 +72,8 @@ namespace Sinapse.Forms
             {
                 this.m_networkContainer = value;
 
-                this.tabControlSide.NetworkContainer = value;
-                this.tabControlMain.NetworkContainer = value;
+             //   this.tabControlSide.NetworkContainer = value;
+             //   this.tabControlMain.NetworkContainer = value;
 
                 bool notNull = (value != null);
 
@@ -115,8 +115,8 @@ namespace Sinapse.Forms
             {
                 this.m_networkDatabase = value;
 
-                this.tabControlSide.NetworkDatabase = value;
-                this.tabControlMain.NetworkDatabase = value;
+           //     this.tabControlSide.NetworkDatabase = value;
+           //     this.tabControlMain.NetworkDatabase = value;
 
                 bool notNull = (value != null);
 
@@ -217,11 +217,11 @@ namespace Sinapse.Forms
                 }
 
                 // Wire up controls and events
-                this.tabControlSide.TrainerControl.GraphControl = this.tabControlMain.GraphControl;
-                this.tabControlMain.GraphControl.NetworkTrainer = this.tabControlSide.TrainerControl;
+            //    this..TrainerControl.GraphControl = this.tabControlMain.GraphControl;
+            //    this.tabControlMain.GraphControl.NetworkTrainer = this.tabControlSide.TrainerControl;
 
-                this.tabControlSide.TrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
-                this.tabControlSide.TrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
+             //   this.tabControlSide.TrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
+             //   this.tabControlSide.TrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
 
                 this.CurrentNetworkContainer = null;
                 this.CurrentNetworkDatabase = null;
@@ -239,8 +239,8 @@ namespace Sinapse.Forms
             HistoryListener.Write("Exiting...");
 
             // Stops any thread that could be running before exiting
-            if (this.tabControlSide.TrainerControl.IsTraining)
-                this.tabControlSide.TrainerControl.Stop();
+      //      if (this.tabControlSide.TrainerControl.IsTraining)
+      //          this.tabControlSide.TrainerControl.Stop();
 
             
             // Asks user if unsaved changes should be saved on exiting
@@ -296,7 +296,7 @@ namespace Sinapse.Forms
         #region Main Tab Control Events
         private void tabControlMain_SelectionChanged(object sender, EventArgs e)
         {
-            this.statusBarControl.UpdateSelectedItems(tabControlMain.SelectedItemCount, tabControlMain.ItemCount);
+   //         this.statusBarControl.UpdateSelectedItems(tabControlMain.SelectedItemCount, tabControlMain.ItemCount);
         }
 
         private void tabControlMain_SelectedControlChanged(object sender, EventArgs e)
@@ -313,7 +313,7 @@ namespace Sinapse.Forms
         private void sideTrainerControl_StatusChanged(object sender, EventArgs e)
         {
             //this.statusBarControl.UpdateNetworkState(this.CurrentTrainingSession.NetworkState);
-            this.statusBarControl.UpdateNetworkState(this.tabControlSide.TrainerControl.NetworkState);
+    //        this.statusBarControl.UpdateNetworkState(this.tabControlSide.TrainerControl.NetworkState);
         }
 
         private void sideTrainerControl_TrainingComplete(object sender, EventArgs e)
@@ -494,7 +494,7 @@ namespace Sinapse.Forms
 
                     if (Properties.Settings.Default.main_AutoSwitchToTrainingTab)
                     {
-                        this.tabControlSide.TrainerControl.ShowTab();
+ //                       this.tabControlSide.TrainerControl.ShowTab();
                     }
                 }
             }
@@ -520,7 +520,7 @@ namespace Sinapse.Forms
 
         private void MenuNetworkQuery_Click(object sender, EventArgs e)
         {
-            this.tabControlMain.QueryControl.ShowTab();
+  //          this.tabControlMain.QueryControl.ShowTab();
         }
 
         private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
@@ -580,22 +580,22 @@ namespace Sinapse.Forms
         #region ToolStripMenu Training
         private void btnTrainStart_Click(object sender, EventArgs e)
         {
-            this.tabControlSide.TrainerControl.Start();
+  //          this.tabControlSide.TrainerControl.Start();
         }
 
         private void btnTrainStop_Click(object sender, EventArgs e)
         {
-            this.tabControlSide.TrainerControl.Stop();
+  //          this.tabControlSide.TrainerControl.Stop();
         }
 
         private void btnTrainPause_Click(object sender, EventArgs e)
         {
-            this.tabControlSide.TrainerControl.Pause();
+  //          this.tabControlSide.TrainerControl.Pause();
         }
 
         private void btnTrainForget_Click(object sender, EventArgs e)
         {
-            this.tabControlSide.TrainerControl.Forget();
+   //         this.tabControlSide.TrainerControl.Forget();
         }
 
         private void btnTrainNext_Click(object sender, EventArgs e)
@@ -610,7 +610,7 @@ namespace Sinapse.Forms
 
         private void btnTrainGraph_Click(object sender, EventArgs e)
         {
-            this.tabControlMain.GraphControl.ShowTab();
+  //          this.tabControlMain.GraphControl.ShowTab();
         }
         #endregion
 
@@ -618,15 +618,15 @@ namespace Sinapse.Forms
         #region ToolStripMenu Testing
         private void btnTestCompute_Click(object sender, EventArgs e)
         {
-            if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
-                this.tabControlMain.TestingSetControl.ShowTab();
+  //          if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
+  //              this.tabControlMain.TestingSetControl.ShowTab();
 
-            this.tabControlMain.TestingSetControl.Compute();
+  //          this.tabControlMain.TestingSetControl.Compute();
         }
 
         private void btnTestReport_Click(object sender, EventArgs e)
         {
-            this.tabControlMain.TestingSetControl.Compare();
+  //          this.tabControlMain.TestingSetControl.Compare();
         }
 
         private void btnTestRound_Click(object sender, EventArgs e)
@@ -640,10 +640,10 @@ namespace Sinapse.Forms
             {
                 float value = (float)item.Tag;
 
-                if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
-                    this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
-                else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
-                    this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
+  //              if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
+  //                  this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
+  //              else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
+  //                  this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
             }
         }
 
@@ -664,10 +664,10 @@ namespace Sinapse.Forms
 
             Single value = Single.Parse(btnTestRoundCustom.Text);
 
-            if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
-                this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
-            else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
-                this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
+   //         if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
+   //             this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
+   //         else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
+   //             this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
 
         }
         #endregion
