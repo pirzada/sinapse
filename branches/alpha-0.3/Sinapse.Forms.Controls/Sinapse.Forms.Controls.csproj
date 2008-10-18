@@ -1,0 +1,105 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81CA91DE-585F-4ED7-A086-24F1F2C95A6B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sinapse.Forms.Controls</RootNamespace>
+    <AssemblyName>Sinapse.Forms.Controls</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>cSouza Company SecurityCode.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Sinapse.Forms.Controls.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\ActivationFunctionView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGraphView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataHistogramView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataHistogramView.Designer.cs">
+      <DependentUpon>DataHistogramView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Providers\MruProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="cSouza Company SecurityCode.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lib\AForge.NET\Core\AForge.Core.csproj">
+      <Project>{BFAF50DC-4942-46B8-8615-2A0B4CF08AD2}</Project>
+      <Name>AForge.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\AForge.NET\Math\AForge.Mathematics.csproj">
+      <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
+      <Name>AForge.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\AForge.NET\Neuro\AForge.Neuro.csproj">
+      <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>
+      <Name>AForge.Neuro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\AForge.NET\Statistics\AForge.Statistics.csproj">
+      <Project>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</Project>
+      <Name>AForge.Statistics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\DataHistogramView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataHistogramView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\Wizard\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

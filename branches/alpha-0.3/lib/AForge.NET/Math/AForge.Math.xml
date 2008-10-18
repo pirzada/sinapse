@@ -1,0 +1,1550 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AForge.Math</name>
+    </assembly>
+    <members>
+        <member name="T:AForge.Math.Random.StandardGenerator">
+            <summary>
+            Standard random numbers generator
+            </summary>
+            
+            <remarks><para>The random number generator generates gaussian
+            random numbers with zero mean and standard deviation of one. The generator
+            implements polar form of the Box-Muller transformation.</para>
+            <para>The generator uses <see cref="T:AForge.Math.Random.UniformOneGenerator"/> generator
+            to generate random numbers.</para></remarks>
+            
+        </member>
+        <member name="T:AForge.Math.Random.IRandomNumberGenerator">
+            <summary>
+            Interface for random numbers generators
+            </summary>
+            
+        </member>
+        <member name="M:AForge.Math.Random.IRandomNumberGenerator.Next">
+            <summary>
+            Generate next random number
+            </summary>
+            
+            <returns>Returns next random number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Random.IRandomNumberGenerator.SetSeed(System.Int32)">
+            <summary>
+            Set seed of the random numbers generator
+            </summary>
+            
+            <param name="seed">Seed value</param>
+            
+        </member>
+        <member name="P:AForge.Math.Random.IRandomNumberGenerator.Mean">
+            <summary>
+            Mean value of generator
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.IRandomNumberGenerator.Variance">
+            <summary>
+            Variance value of generator
+            </summary>
+            
+        </member>
+        <member name="M:AForge.Math.Random.StandardGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.StandardGenerator"/> class
+            </summary>
+            
+        </member>
+        <member name="M:AForge.Math.Random.StandardGenerator.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.StandardGenerator"/> class
+            </summary>
+            
+            <param name="seed">Seed value to initialize random numbers generator</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.StandardGenerator.Next">
+            <summary>
+            Generate next random number
+            </summary>
+            
+            <returns>Returns next random number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Random.StandardGenerator.SetSeed(System.Int32)">
+            <summary>
+            Set seed of the random numbers generator
+            </summary>
+            
+            <param name="seed">Seed value</param>
+            
+            <remarks>Resets random numbers generator initializing it with
+            specified seed value.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Random.StandardGenerator.Mean">
+            <summary>
+            Mean value of generator
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.StandardGenerator.Variance">
+             <summary>
+             Variance value of generator
+             </summary>
+            
+        </member>
+        <member name="T:AForge.Math.LinearAlgebra.SingularValueDecomposition">
+            <summary>
+            In linear algebra, the singular value decomposition (SVD) is an
+            important factorization of a rectangular real or complex matrix,
+            with several applications in signal processing and statistics.
+            </summary>
+            <remarks>
+            Applications which employ the SVD include computing the pseudoinverse,
+            matrix approximation, and determining the rank, range and null space
+            of a matrix.
+            </remarks>
+        </member>
+        <member name="T:AForge.Math.Geometry.AffineTransformation2D">
+             <summary>
+             2D affine transformation
+             </summary>
+             
+             <remarks>The class performs 2D affine transformation.</remarks>
+             
+            
+        </member>
+        <member name="M:AForge.Math.Geometry.AffineTransformation2D.#ctor(System.Double[0:,0:],System.Double[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Geometry.AffineTransformation2D"/> class
+            </summary>
+            
+            <param name="transformationMatrix">Transformation matrix</param>
+            <param name="moveVector">Move vector</param>
+            
+        </member>
+        <member name="M:AForge.Math.Geometry.AffineTransformation2D.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Geometry.AffineTransformation2D"/> class
+            </summary>
+            
+            <param name="a">[0, 0] element of transformation matrix</param>
+            <param name="b">[0, 1] element of transformation matrix</param>
+            <param name="c">[1, 0] element of transformation matrix</param>
+            <param name="d">[1, 1] element of transformation matrix</param>
+            <param name="e">[0] element of move vector</param>
+            <param name="f">[1] element of move vector</param>
+            
+        </member>
+        <member name="M:AForge.Math.Geometry.AffineTransformation2D.Transform(System.Double@,System.Double@)">
+            <summary>
+            Transform point
+            </summary>
+            
+            <param name="x">X coordinate of the point</param>
+            <param name="y">Y coordinate of the point</param>
+            
+        </member>
+        <member name="T:AForge.Math.Complex">
+            <summary>
+            Complex number
+            </summary>
+            
+            <remarks>The class encapsulate complex number and provides
+            basic complex operators.</remarks>
+            
+        </member>
+        <member name="F:AForge.Math.Complex.Re">
+            <summary>
+            Real part of the complex number
+            </summary>
+        </member>
+        <member name="F:AForge.Math.Complex.Im">
+            <summary>
+            Imaginary part of the complex number
+            </summary>
+        </member>
+        <member name="M:AForge.Math.Complex.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Complex"/> class
+            </summary>
+            
+            <param name="re">Real part</param>
+            <param name="im">Imaginary part</param>
+            
+        </member>
+        <member name="M:AForge.Math.Complex.#ctor(AForge.Math.Complex)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Complex"/> class
+            </summary>
+            
+            <param name="c">Source complex number</param>
+            
+        </member>
+        <member name="M:AForge.Math.Complex.ToString">
+            <summary>
+            Returns string representation of the complex number
+            </summary>
+            
+            <returns>String representation of the complex number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Complex.op_Addition(AForge.Math.Complex,AForge.Math.Complex)">
+            <summary>
+            Addition operator
+            </summary>
+            
+            <param name="a">Left complex operand</param>
+            <param name="b">Right complex operand</param>
+            
+            <returns>Result complex number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Complex.op_Subtraction(AForge.Math.Complex,AForge.Math.Complex)">
+            <summary>
+            Subtraction operator
+            </summary>
+            
+            <param name="a">Left complex operand</param>
+            <param name="b">Right complex operand</param>
+            
+            <returns>Result complex number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Complex.op_Multiply(AForge.Math.Complex,AForge.Math.Complex)">
+            <summary>
+            Multiplication operator
+            </summary>
+            
+            <param name="a">Left complex operand</param>
+            <param name="b">Right complex operand</param>
+            
+            <returns>Result complex number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Complex.op_Division(AForge.Math.Complex,AForge.Math.Complex)">
+            <summary>
+            Division operator
+            </summary>
+            
+            <param name="a">Left complex operand</param>
+            <param name="b">Right complex operand</param>
+            
+            <returns>Result complex number</returns>
+            
+        </member>
+        <member name="P:AForge.Math.Complex.Zero">
+            <summary>
+            Represents complex zero
+            </summary>
+            
+            <remarks>Represents complex number with both real and imaginary
+            parts equal to zero.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Complex.Magnitude">
+            <summary>
+            Magnitude value of the complex number
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Complex.Phase">
+            <summary>
+            Phase value of the complex number
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Complex.SquaredMagnitude">
+            <summary>
+            Squared magnitude value of the complex number
+            </summary>
+        </member>
+        <member name="T:AForge.Math.Random.UniformOneGenerator">
+            <summary>
+            Uniform random numbers generator in the range of [0, 1]
+            </summary>
+            
+            <remarks><para>The random number generator generates unformaly
+            distributed numbers in the range of [0, 1].</para>
+            <para><b>Note</b>: At this point the generator is based on the
+            internal .NET generator, but is going to be rewriten to
+            use faster generation algorithm.</para></remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformOneGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.UniformOneGenerator"/> class
+            </summary>
+            
+            <remarks>Initializes random numbers generator with zero seed.</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformOneGenerator.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.UniformOneGenerator"/> class
+            </summary>
+            
+            <param name="seed">Seed value to initialize random numbers generator</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformOneGenerator.Next">
+            <summary>
+            Generate next random number
+            </summary>
+            
+            <returns>Returns next random number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformOneGenerator.SetSeed(System.Int32)">
+            <summary>
+            Set seed of the random numbers generator
+            </summary>
+            
+            <param name="seed">Seed value</param>
+            
+            <remarks>Resets random numbers generator initializing it with
+            specified seed value.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Random.UniformOneGenerator.Mean">
+             <summary>
+             Mean value of generator
+             </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.UniformOneGenerator.Variance">
+             <summary>
+             Variance value of generator
+             </summary>
+            
+        </member>
+        <member name="T:AForge.Math.LinearAlgebra.CholeskyDecomposition">
+            <summary>
+            In mathematics, the Cholesky decomposition is a matrix decomposition
+            similar to LU decomposition, but applies only to symmetric and positive
+            definite matrices.
+            </summary>
+            <remarks>
+            Any square matrix A with non-zero pivots can be written as the product of a
+            lower triangular matrix L and an upper triangular matrix U; this is called
+            the LU decomposition. However, if A is symmetric and positive definite, we
+            can choose the factors such that U is the transpose of L, and this is called
+            the Cholesky decomposition. Both the LU and the Cholesky decomposition are
+            used to solve systems of linear equations.
+            
+            When it is applicable, the Cholesky decomposition is twice as efficient
+            as the LU decomposition.
+            
+            </remarks>
+        </member>
+        <member name="T:AForge.Math.ContinuousHistogram">
+            <summary>
+            Histogram for continuous random values
+            </summary>
+            
+            <remarks>The class also works with integer arrays as <see cref="T:AForge.Math.Histogram"/> class.
+            But it also takes as parameter a range of random values. ... </remarks>
+            
+        </member>
+        <member name="M:AForge.Math.ContinuousHistogram.#ctor(System.Int32[],AForge.DoubleRange)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.ContinuousHistogram"/> class
+            </summary>
+            
+            <param name="values">Values of the histogram</param>
+            <param name="range">Range of random values</param>
+            
+        </member>
+        <member name="M:AForge.Math.ContinuousHistogram.GetRange(System.Double)">
+            <summary>
+            Get range around median containing specified percentage of values
+            </summary>
+            
+            <param name="percent">Values percentage around median</param>
+            
+            <returns>Returns the range which containes specifies percentage
+            of values.</returns>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.Values">
+            <summary>
+            Values of the histogram
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.Range">
+            <summary>
+            Range of random values
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.Mean">
+            <summary>
+            Mean value
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.StdDev">
+            <summary>
+            Standard deviation
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.Median">
+            <summary>
+            Median value
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.Min">
+            <summary>
+            Minimum value
+            </summary>
+            
+            <remarks>Minimum value of the histogram with non zero
+            hits count.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.ContinuousHistogram.Max">
+            <summary>
+            Maximum value
+            </summary>
+            
+            <remarks>Maximum value of the histogram with non zero
+            hits count.</remarks>
+            
+        </member>
+        <member name="T:AForge.Math.Random.UniformGenerator">
+            <summary>
+            Uniform random numbers generator
+            </summary>
+            
+            <remarks><para>The random number generator generates unformaly
+            distributed numbers in the specified range.</para>
+            <para>The generator uses <see cref="T:AForge.Math.Random.UniformOneGenerator"/> generator
+            to generate random numbers.</para></remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformGenerator.#ctor(AForge.DoubleRange)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.UniformGenerator"/> class
+            </summary>
+            
+            <param name="range">Random numbers range</param>
+            
+            <remarks>Initializes random numbers generator with zero seed.</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformGenerator.#ctor(AForge.DoubleRange,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.UniformGenerator"/> class
+            </summary>
+            
+            <param name="range">Random numbers range</param>
+            <param name="seed">Seed value to initialize random numbers generator</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformGenerator.Next">
+            <summary>
+            Generate next random number
+            </summary>
+            
+            <returns>Returns next random number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Random.UniformGenerator.SetSeed(System.Int32)">
+            <summary>
+            Set seed of the random numbers generator
+            </summary>
+            
+            <param name="seed">Seed value</param>
+            
+            <remarks>Resets random numbers generator initializing it with
+            specified seed value.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Random.UniformGenerator.Mean">
+             <summary>
+             Mean value of generator
+             </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.UniformGenerator.Variance">
+             <summary>
+             Variance value of generator
+             </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.UniformGenerator.Range">
+            <summary>
+            Random numbers range
+            </summary>
+            
+        </member>
+        <member name="T:AForge.Math.FourierTransform">
+            <summary>
+            Fourier transformation
+            </summary>
+            
+            <remarks>The class implements one dimensional and two dimensional
+            Discrete and Fast Fourier Transformation.</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.FourierTransform.DFT(AForge.Math.Complex[],AForge.Math.FourierTransform.Direction)">
+            <summary>
+            One dimensional Discrete Fourier Transform
+            </summary>
+            
+            <param name="data">Data to transform</param>
+            <param name="direction">Transformation direction</param>
+            
+        </member>
+        <member name="M:AForge.Math.FourierTransform.DFT2(AForge.Math.Complex[0:,0:],AForge.Math.FourierTransform.Direction)">
+            <summary>
+            Two dimensional Discrete Fourier Transform
+            </summary>
+            
+            <param name="data">Data to transform</param>
+            <param name="direction">Transformation direction</param>
+            
+        </member>
+        <member name="M:AForge.Math.FourierTransform.FFT(AForge.Math.Complex[],AForge.Math.FourierTransform.Direction)">
+            <summary>
+            One dimensional Fast Fourier Transform
+            </summary>
+            
+            <param name="data">Data to transform</param>
+            <param name="direction">Transformation direction</param>
+            
+        </member>
+        <member name="M:AForge.Math.FourierTransform.FFT2(AForge.Math.Complex[0:,0:],AForge.Math.FourierTransform.Direction)">
+            <summary>
+            Two dimensional Fast Fourier Transform
+            </summary>
+            
+            <param name="data">Data to transform</param>
+            <param name="direction">Transformation direction</param>
+            
+        </member>
+        <member name="T:AForge.Math.FourierTransform.Direction">
+            <summary>
+            Fourier transformation direction
+            </summary>
+        </member>
+        <member name="F:AForge.Math.FourierTransform.Direction.Forward">
+            <summary>
+            Forward direction of Fourier transformation
+            </summary>
+        </member>
+        <member name="F:AForge.Math.FourierTransform.Direction.Backward">
+            <summary>
+            Backward direction of Fourier transformation
+            </summary>
+        </member>
+        <member name="T:AForge.Math.Vector">
+            <summary>
+            A spatial vector, or simply vector, is a geometric
+            object which has both a magnitude and a direction.
+            </summary>
+        </member>
+        <member name="T:AForge.Math.PerlinNoise">
+            <summary>
+            Perlin Noise function
+            </summary>
+            
+            <remarks>The class represents Gaussian function.</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.PerlinNoise"/> class
+            </summary>
+            
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.#ctor(System.Double,System.Double,System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.PerlinNoise"/> class
+            </summary>
+            
+            <param name="initFrequency">Initial frequency</param>
+            <param name="initAmplitude">Initial amplitude</param>
+            <param name="persistance">Persistance</param>
+            <param name="octaves">Octaves</param>
+            
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.Function(System.Double)">
+            <summary>
+            1-D Perlin noise function
+            </summary>
+            
+            <param name="x">x value</param>
+            
+            <returns>Returns function's value at point <b>x</b>.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.Function2D(System.Double,System.Double)">
+            <summary>
+            2-D Perlin noise function
+            </summary>
+            
+            <param name="x">x value</param>
+            <param name="y">y value</param>
+            
+            <returns>Returns function's value at point <b>(x, y)</b>.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.Noise(System.Int32)">
+            <summary>
+            Ordinary noise function
+            </summary>
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.SmoothedNoise(System.Double)">
+            <summary>
+            Smoothed noise
+            </summary>
+        </member>
+        <member name="M:AForge.Math.PerlinNoise.CosineInterpolate(System.Double,System.Double,System.Double)">
+            <summary>
+            Cosine interpolation
+            </summary>
+        </member>
+        <member name="P:AForge.Math.PerlinNoise.InitFrequency">
+            <summary>
+            Initial frequency
+            </summary>
+        </member>
+        <member name="P:AForge.Math.PerlinNoise.InitAplitude">
+            <summary>
+            Initial aplitude
+            </summary>
+        </member>
+        <member name="P:AForge.Math.PerlinNoise.Persistance">
+            <summary>
+            Persistance
+            </summary>
+        </member>
+        <member name="P:AForge.Math.PerlinNoise.Octaves">
+            <summary>
+            Octaves
+            </summary>
+        </member>
+        <member name="T:AForge.Math.LinearAlgebra.EigenValueDecomposition">
+            <summary>
+            In the mathematical discipline of linear algebra, eigendecomposition
+            or sometimes spectral decomposition is the factorization of a matrix
+            into a canonical form, whereby the matrix is represented in terms of
+            its eigenvalues and eigenvectors.
+            </summary>
+            <remarks>
+             If A is symmetric, then A = V*D*V' where the eigenvalue matrix D is
+             diagonal and the eigenvector matrix V is orthogonal.
+            
+                i.e. A = V.times(D.times(V.transpose())) and 
+                V.times(V.transpose()) equals the identity matrix.
+            
+            
+             If A is not symmetric, then the eigenvalue matrix D is block diagonal
+             with the real eigenvalues in 1-by-1 blocks and any complex eigenvalues,
+             lambda + i*mu, in 2-by-2 blocks, [lambda, mu; -mu, lambda].  The
+             columns of V represent the eigenvectors in the sense that A*V = V*D,
+             
+                i.e. A.times(V) equals V.times(D).  The matrix V may be badly
+                conditioned, or even singular, so the validity of the equation
+                A = V*D*inverse(V) depends upon V.cond().
+            
+            </remarks>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.EigenValueDecomposition.#ctor(AForge.Math.Matrix)">
+            <summary>
+            Class to encompass the EigenValue decomposition of square matrices
+            </summary>
+            <param name="matrix">The matrix to be decomposed. The original matrix contents are left unchanged.</param>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.EigenValueDecomposition.Decompose">
+            <summary>
+            Performs the eigen value decomposition
+            </summary>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.EigenValueDecomposition.Decompose(AForge.Math.Vector@,AForge.Math.Vector@,AForge.Math.Matrix@)">
+            <summary>
+            Performs the eigen value decomposition
+            </summary>
+            <param name="eigenValuesReal"></param>
+            <param name="eigenValuesImaginary"></param>
+            <param name="eigenVectors"></param>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.EigenValueDecomposition.Decompose(AForge.Math.Vector@,AForge.Math.Matrix@)">
+            <summary>
+            Performs the eigen value decomposition
+            </summary>
+            <param name="eigenValues"></param>
+            <param name="eigenVectors"></param>
+        </member>
+        <member name="T:AForge.Math.Tools">
+            <summary>
+            Set of tool functions
+            </summary>
+            
+            <remarks>The class contains different utility functions.</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Tools.Pow2(System.Int32)">
+            <summary>
+            Calculates power of 2
+            </summary>
+            
+            <param name="power">Power</param>
+            
+            <returns>Returns specified power of 2 in the case if power is in the range of
+            [0, 30]. Otherwise returns 0.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Tools.IsPowerOf2(System.Int32)">
+            <summary>
+            Checks if the specified integer is power of 2
+            </summary>
+            
+            <param name="x">Integer number to check</param>
+            
+            <returns>Returns <b>true</b> if the specified number is power of 2.
+            Otherwise returns <b>false</b>.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Tools.Log2(System.Int32)">
+            <summary>
+            Get base of binary logarithm
+            </summary>
+            
+            <param name="x">Source integer number</param>
+            
+            <returns>Power of the number (base of binary logarithm).</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Tools.Hypotenuse(System.Double,System.Double)">
+            <summary>
+            Hypotenuse calculus without overflow/underflow
+            </summary>
+            <param name="a">first value</param>
+            <param name="b">second value</param>
+            <returns>The hypotenuse Sqrt(a^2 + b^2)</returns>
+        </member>
+        <member name="T:AForge.Math.Statistic.SampleMatrix">
+            <summary>
+            In statistics, a sample is a subset of a population.
+            </summary>
+        </member>
+        <member name="T:AForge.Math.Matrix">
+            <summary>
+            In mathematics, a matrix (plural matrices) is a rectangular
+            table of elements (or entries), which may be numbers or, more
+            generally, any abstract quantities that can be added and multiplied.
+            </summary>
+        </member>
+        <member name="M:AForge.Math.Matrix.#ctor(System.Double[][])">
+            <summary>
+            Creates a new matrix object.
+            </summary>
+            <param name="matrix">The base double[][] matrix</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.#ctor(System.Double[0:,0:])">
+            <summary>
+            Creates a new matrix object.
+            </summary>
+            <param name="matrix">The base double[,] matrix</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.#ctor(AForge.Math.Matrix)">
+            <summary>
+            Creates a new copy of a matrix object
+            </summary>
+            <param name="matrix">The matrix to be copied.</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new matrix object.
+            </summary>
+            <param name="rows">The matrix number of rows.</param>
+            <param name="columns">The matrix number of columns.</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.#ctor(System.Int32)">
+            <summary>
+            Creates a new square matrix object
+            </summary>
+            <param name="dimension">The square dimension of the matrix</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.SwapColumns(System.Int32,System.Int32)">
+            <summary>
+            Swaps two columns of this matrix
+            </summary>
+            <param name="column1">The first column index to be swapped</param>
+            <param name="column2">The second column index to be swapped</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.SwapRows(System.Int32,System.Int32)">
+            <summary>
+            Swaps two rows of this matrix
+            </summary>
+            <param name="row1">The first row index to be swapped</param>
+            <param name="row2">The second row index to be swapped</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.GetRow(System.Int32)">
+            <summary>
+            Gets a entire row of the matrix as a double array
+            </summary>
+            <param name="index">The row's index</param>
+            <returns>The row double array</returns>
+        </member>
+        <member name="M:AForge.Math.Matrix.SetRow(System.Int32,System.Double[])">
+            <summary>
+            Sets a entire row of the matrix based on a double array
+            </summary>
+            <param name="index">The row's index</param>
+            <param name="row">The row new double array</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.GetCol(System.Int32)">
+            <summary>
+            Gets a entire row of the matrix as a double array
+            </summary>
+            <param name="index">The row's index</param>
+            <returns>The row double array</returns>
+        </member>
+        <member name="M:AForge.Math.Matrix.SetCol(System.Int32,System.Double[])">
+            <summary>
+            Sets a entire column of the matrix based on a double array
+            </summary>
+            <param name="index">The column's index</param>
+            <param name="column">The column new double array</param>
+        </member>
+        <member name="M:AForge.Math.Matrix.Transpose">
+            <summary>
+            Returns the transpose of the this matrix
+            </summary>
+        </member>
+        <member name="M:AForge.Math.Matrix.Clone">
+            <summary>
+            Creates a shallow copy of this object
+            </summary>
+            <returns>The new object.</returns>
+        </member>
+        <member name="M:AForge.Math.Matrix.ToString">
+            <summary>
+            Converts this matrix to a string representation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AForge.Math.Matrix.DimensionEquals(AForge.Math.Matrix)">
+            <summary>
+            Compares two columns for dimension equality
+            </summary>
+            <param name="b">The second matrix</param>
+            <returns></returns>
+        </member>
+        <member name="P:AForge.Math.Matrix.Item(System.Int32,System.Int32)">
+            <summary>
+            Retrieves a matrix element
+            </summary>
+            <param name="i">Row index</param>
+            <param name="j">Column index</param>
+            <returns></returns>
+        </member>
+        <member name="P:AForge.Math.Matrix.Item(System.Int32)">
+            <summary>
+            Retrieves a matrix row
+            </summary>
+            <param name="i">The row index</param>
+            <returns></returns>
+        </member>
+        <member name="P:AForge.Math.Matrix.Columns">
+            <summary>
+            Returns number of columns (usually represented by n) of this matrix
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Matrix.Rows">
+            <summary>
+            Returns number of rows (usually represented by m) of this matrix
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Matrix.IsSquare">
+            <summary>
+            A square matrix is a matrix which has the same number of rows and columns.
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Matrix.IsSymmetric">
+            <summary>
+            In linear algebra, a symmetric matrix is a
+            square matrix that is equal to its transpose.
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Matrix.MainDiagonal">
+            <summary>
+            In linear algebra, the main diagonal (sometimes leading diagonal)
+            of a square matrix is the diagonal which runs from the top left
+            corner to the bottom right corner.
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Matrix.Trace">
+            <summary>
+            In linear algebra, the trace of an n-by-n square matrix A is defined
+            to be the sum of the elements on the main diagonal (the diagonal from
+            the upper left to the lower right) of A
+            </summary>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.#ctor(System.Double[][],AForge.Math.Statistic.DataModel)">
+            <summary>
+            Creates a new SampleMatrix object, where each columns corresponds
+            to a variable and each row to an observation of those variables.
+            </summary>
+            <param name="matrix">The base matrix</param>
+            <param name="model">The matrix model</param>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.#ctor(System.Double[0:,0:],AForge.Math.Statistic.DataModel)">
+            <summary>
+            Creates a new SampleMatrix object, where each columns corresponds
+            to a variable and each row to an observation of those variables.
+            </summary>
+            <param name="matrix">The base matrix</param>
+            <param name="model">The matrix model</param>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.#ctor(AForge.Math.Matrix,AForge.Math.Statistic.DataModel)">
+            <summary>
+            Creates a new SampleMatrix object, where each columns corresponds
+            to a variable and each row to an observation of those variables.
+            </summary>
+            <param name="matrix">The base matrix</param>
+            <param name="model">The matrix model</param>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.#ctor(AForge.Math.Statistic.SampleMatrix)">
+            <summary>
+            Creates a new SampleMatrix object, where each columns corresponds
+            to a variable and each row to an observation of those variables.
+            </summary>
+            <param name="matrix">The matrix to be copied.</param>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.Center">
+            <summary>
+            Centers column data, subtracting the empirical mean
+            from each variable.
+            </summary>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.Standardize">
+            <summary>
+            Standardizes column data, removing the empirical
+            standard deviation from each variable.
+            </summary>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.GenerateCovarianceMatrix">
+            <summary>
+            Calculates the covariance matrix of this samples, returning a new matrix object
+            </summary>
+            <remarks>
+            In statistics and probability theory, the covariance matrix is a matrix of
+            covariances between elements of a vector. It is the natural generalization
+            to higher dimensions of the concept of the variance of a scalar-valued
+            random variable.
+            </remarks>
+            <returns>The covariance matrix.</returns>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.GenerateCorrelationMatrix">
+            <summary>
+            Calculates the correlation matrix of this samples, returning a new matrix object
+            </summary>
+            <remarks>
+            In statistics and probability theory, the correlation matrix is the same
+            as the covariance matrix of the standardized random variables.
+            </remarks>
+            <returns>The correlation matrix</returns>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.ToMatrix">
+            <summary>
+            Converts this sample matrix to an ordinary matrix
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.ToMatrix(AForge.Math.Statistic.DataModel)">
+            <summary>
+            Converts this sample matrix to an ordinary matrix, using the
+            given data organization model
+            </summary>
+            <param name="model">The data model for the generated matrix</param>
+            <returns></returns>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.ToString(System.Boolean)">
+            <summary>
+            Converts this sample matrix to a string representation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AForge.Math.Statistic.SampleMatrix.Clone">
+            <summary>
+            Creates a shallow copy of this object
+            </summary>
+            <returns>The new object.</returns>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.Observations">
+            <summary>
+            The number of observations contained on this sample
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.Variables">
+            <summary>
+            The number of variables (data dimension) of this sample
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.ColumnNames">
+            <summary>
+            The column (variables) labels of this sample.
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.Item(System.Int32,System.Int32)">
+            <summary>
+            Retrieves a item from the sample
+            </summary>
+            <param name="variable">The variable index of the requested item</param>
+            <param name="observation">The observation index of the requested item</param>
+            <returns></returns>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.Item(System.String,System.Int32)">
+            <summary>
+            Retrieves a item from the sample
+            </summary>
+            <param name="variable">The variable label of the requested item</param>
+            <param name="observation">The observation index of the requested item</param>
+            <returns></returns>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.Mean">
+            <summary>
+            Finds the empirical mean along each dimension
+            </summary>
+        </member>
+        <member name="P:AForge.Math.Statistic.SampleMatrix.StandardDeviation">
+            <summary>
+            Finds the empirical standard deviation along each dimension
+            </summary>
+        </member>
+        <member name="T:AForge.Math.Statistics">
+            <summary>
+            Set of statistics functions
+            </summary>
+            
+            <remarks>The class represents collection of functions used
+            in statistics</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.Mean(System.Double[])">
+            <summary>
+            Calculate mean value
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns mean value</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.StdDev(System.Double[])">
+            <summary>
+            Calculate standard deviation
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns value of standard deviation</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.Median(System.Double[])">
+            <summary>
+            Calculate median value
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns value of median</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.Mean(System.Int32[])">
+            <summary>
+            Calculate mean value
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns mean value</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.StdDev(System.Int32[])">
+            <summary>
+            Calculate standard deviation
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns value of standard deviation</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.Median(System.Int32[])">
+            <summary>
+            Calculate median value
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns value of median</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.GetRange(System.Int32[],System.Double)">
+            <summary>
+            Get range around median containing specified percentage of values
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            <param name="percent">Values percentage around median</param>
+            
+            <returns>Returns the range which containes specifies percentage
+            of values.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Statistics.Entropy(System.Int32[])">
+            <summary>
+            Calculate an entropy
+            </summary>
+            
+            <param name="values">Histogram array</param>
+            
+            <returns>Returns entropy value</returns>
+            
+            <remarks>The input array is treated as histogram, i.e. its
+            indexes are treated as values of stochastic function, but
+            array values are treated as "probabilities" (total amount of
+            hits).</remarks>
+            
+        </member>
+        <member name="T:AForge.Math.Random.ExponentialGenerator">
+            <summary>
+            Exponential random numbers generator
+            </summary>
+            
+            <remarks><para>The random number generator generates exponential
+            random numbers with specified rate value (lambda).</para>
+            <para>The generator uses <see cref="T:AForge.Math.Random.UniformOneGenerator"/> generator
+            to generate random numbers.</para></remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Random.ExponentialGenerator.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.ExponentialGenerator"/> class
+            </summary>
+            
+            <param name="rate">Rate value</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.ExponentialGenerator.#ctor(System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.ExponentialGenerator"/> class
+            </summary>
+            
+            <param name="rate">Rate value</param>
+            <param name="seed">Seed value to initialize random numbers generator</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.ExponentialGenerator.Next">
+            <summary>
+            Generate next random number
+            </summary>
+            
+            <returns>Returns next random number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Random.ExponentialGenerator.SetSeed(System.Int32)">
+            <summary>
+            Set seed of the random numbers generator
+            </summary>
+            
+            <param name="seed">Seed value</param>
+            
+            <remarks>Resets random numbers generator initializing it with
+            specified seed value.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Random.ExponentialGenerator.Rate">
+            <summary>
+            Rate value (inverse scale)
+            </summary>
+            
+            <remarks>The rate value should be positive and non zero.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Random.ExponentialGenerator.Mean">
+            <summary>
+            Mean value of generator
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.ExponentialGenerator.Variance">
+             <summary>
+             Variance value of generator
+             </summary>
+            
+        </member>
+        <member name="T:AForge.Math.LinearAlgebra.Algorithms">
+            <summary>
+            Static class to hold algorithms commonly used in Linear Algebra
+            </summary>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.Algorithms.TridiagonalizeMatrix(AForge.Math.Matrix,AForge.Math.Vector@,AForge.Math.Vector@,AForge.Math.Matrix@)">
+            <summary>
+            This function reduces a real symmetric matrix to a
+            symmetric tridiagonal matrix using and accumulating 
+            orthogonal similarity transformations.
+            </summary>
+            <param name="matrix">The real symmetric input matrix.</param>
+            <param name="diagonal">The obtained diagonal elements</param>
+            <param name="subdiagonal">The obtained subdiagonal elements
+            of the tridiagonal matrix in its last n-1 positions.</param>
+            <param name="transformationMatrix">The orthogonal transformation matrix
+            produced in the reduction</param>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.Algorithms.DiagonalizeMatrix(AForge.Math.Matrix,AForge.Math.Vector,AForge.Math.Vector,AForge.Math.Matrix,AForge.Math.Vector@,AForge.Math.Matrix@)">
+            <param name="matrix">The real symmetric tridiagonal matrix</param>
+            <param name="diagonal">The diagonal of the tridiagonal input matrix</param>
+            <param name="subdiagonal">The subdiagonal of the tridiagonal input matrix</param>
+            <param name="transformationMatrix">the transformation matrix produced in
+            the reduction by  tred2, if performed. If the eigenvectors of the
+            tridiagonal matrix are desired, it must contain the identity matrix.</param>
+            <param name="eigenValues">The vector of eigen values</param>
+            <param name="eigenVectors">The matrix of eigen vectors</param>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.Algorithms.ReduceToHessenberg(AForge.Math.Matrix)">
+            <summary>
+            Given a real general matrix, this function reduces a submatrix
+            situated in rows and columns low through high to upper hessenberg
+            form by orthogonal similarity transformations.
+            </summary>
+            <param name="matrix">The original matrix</param>
+            <returns>The Hessenberg Matrix</returns>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.Algorithms.ReduceFromHessenbergToRealSchur(AForge.Math.Matrix,AForge.Math.Vector@,AForge.Math.Vector@,AForge.Math.Matrix@)">
+            <summary>
+            This subroutine finds the eigenvalues and eigenvectors of a
+            REAL UPPER Hessenberg matrix by the QR method. The eigenvectors
+            of a REAL GENERAL matrix can also be found if  ELMHES  and  ELTRAN
+            or  ORTHES  and  ORTRAN  have been used to reduce this general
+            matrix to Hessenberg form and to accumulate the similarity transformations.
+            </summary>
+            <param name="hessenbergMatrix">The original hessenberg matrix</param>
+            <param name="realEigenValues">The real part of the eigen values</param>
+            <param name="imagEigenValues">The imaginary part of the eigen values</param>
+            <param name="eigenVectors">The matrix of eigen vectors</param>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.Algorithms.cdiv(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Temporary function to calculate a complex number scalar division.
+            This function will be removed once the more complex algorithms gets
+            properly written in C#, since they were adapted from Algol.
+            </summary>
+            <param name="xr">First number real part</param>
+            <param name="xi">First number imaginary part</param>
+            <param name="yr">Second number real part</param>
+            <param name="yi">Second number imaginary part</param>
+            <returns>The complex result of this division</returns>
+        </member>
+        <member name="T:AForge.Math.Histogram">
+            <summary>
+            Histogram for discrete random values
+            </summary>
+            
+            <remarks></remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Histogram.#ctor(System.Int32[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Histogram"/> class
+            </summary>
+            
+            <param name="values">Values of the histogram</param>
+            
+        </member>
+        <member name="M:AForge.Math.Histogram.GetRange(System.Double)">
+            <summary>
+            Get range around median containing specified percentage of values
+            </summary>
+            
+            <param name="percent">Values percentage around median</param>
+            
+            <returns>Returns the range which containes specifies percentage
+            of values.</returns>
+            
+        </member>
+        <member name="P:AForge.Math.Histogram.Values">
+            <summary>
+            Values of the histogram
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Histogram.Mean">
+            <summary>
+            Mean value
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Histogram.StdDev">
+            <summary>
+            Standard deviation
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Histogram.Median">
+            <summary>
+            Median value
+            </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Histogram.Min">
+            <summary>
+            Minimum value
+            </summary>
+            
+            <remarks>Minimum value of the histogram with non zero
+            hits count.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Histogram.Max">
+            <summary>
+            Maximum value
+            </summary>
+            
+            <remarks>Maximum value of the histogram with non zero
+            hits count.</remarks>
+            
+        </member>
+        <member name="T:AForge.Math.Gaussian">
+            <summary>
+            Gaussian function
+            </summary>
+            
+            <remarks>The class represents Gaussian function.</remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Gaussian"/> class
+            </summary>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Gaussian"/> class
+            </summary>
+            
+            <param name="sigma">Sigma value</param>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.Function(System.Double)">
+            <summary>
+            1-D Gaussian function
+            </summary>
+            
+            <param name="x">x value</param>
+            
+            <returns>Returns function's value at point <b>x</b>.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.Function2D(System.Double,System.Double)">
+            <summary>
+            2-D Gaussian function
+            </summary>
+            
+            <param name="x">x value</param>
+            <param name="y">y value</param>
+            
+            <returns>Returns function's value at point <b>(x, y)</b>.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.Kernel(System.Int32)">
+            <summary>
+            1-D Gaussian kernel
+            </summary>
+            
+            <param name="size">Kernel size. The value should be odd and in the
+            range of [3, 101].</param>
+            
+            <returns>Returns Gaussian kernel of specified size.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.Kernel2D(System.Int32)">
+            <summary>
+            2-D Gaussian kernel
+            </summary>
+            
+            <param name="size">Kernel size. The value should be odd and in the
+            range of [3, 101].</param>
+            
+            <returns>Returns Gaussian kernel of specified size.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.KernelDiscret(System.Int32)">
+            <summary>
+            1-D Gaussian discret kernel
+            </summary>
+            
+            <param name="size">Kernel size. The value should be odd and in the
+            range of [3, 101].</param>
+            
+            <returns>Returns Gaussian kernel of specified size.</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Gaussian.KernelDiscret2D(System.Int32)">
+            <summary>
+            2-D Gaussian kernel (discret)
+            </summary>
+            
+            <param name="size">Kernel size. The value should be odd and in the
+            range of [3, 101].</param>
+            
+            <returns>Returns Gaussian kernel of specified size.</returns>
+            
+        </member>
+        <member name="P:AForge.Math.Gaussian.Sigma">
+            <summary>
+            Sigma value
+            </summary>
+            
+            <remarks>Sigma property of Gaussian function. Default value is 1.
+            Minimum allowed value is 0.00000001.</remarks>
+            
+        </member>
+        <member name="T:AForge.Math.Random.GaussianGenerator">
+            <summary>
+            Gaussian random numbers generator
+            </summary>
+            
+            <remarks><para>The random number generator generates gaussian
+            random numbers with specified mean and standard deviation values.</para>
+            <para>The generator uses <see cref="T:AForge.Math.Random.StandardGenerator"/> generator
+            to generate random numbers.</para></remarks>
+            
+        </member>
+        <member name="M:AForge.Math.Random.GaussianGenerator.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.GaussianGenerator"/> class
+            </summary>
+            
+            <param name="mean">Mean value</param>
+            <param name="stdDev">Standard deviation value</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.GaussianGenerator.#ctor(System.Double,System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AForge.Math.Random.GaussianGenerator"/> class
+            </summary>
+            
+            <param name="mean">Mean value</param>
+            <param name="stdDev">Standard deviation value</param>
+            <param name="seed">Seed value to initialize random numbers generator</param>
+            
+        </member>
+        <member name="M:AForge.Math.Random.GaussianGenerator.Next">
+            <summary>
+            Generate next random number
+            </summary>
+            
+            <returns>Returns next random number</returns>
+            
+        </member>
+        <member name="M:AForge.Math.Random.GaussianGenerator.SetSeed(System.Int32)">
+            <summary>
+            Set seed of the random numbers generator
+            </summary>
+            
+            <param name="seed">Seed value</param>
+            
+            <remarks>Resets random numbers generator initializing it with
+            specified seed value.</remarks>
+            
+        </member>
+        <member name="P:AForge.Math.Random.GaussianGenerator.Mean">
+             <summary>
+             Mean value of generator
+             </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.GaussianGenerator.Variance">
+             <summary>
+             Variance value of generator
+             </summary>
+            
+        </member>
+        <member name="P:AForge.Math.Random.GaussianGenerator.StdDev">
+             <summary>
+             Standard deviation value
+             </summary>
+            
+        </member>
+        <member name="T:AForge.Math.LinearAlgebra.Applications.PrincipalComponentAnalysis">
+             <summary>
+             Principal component analysis (PCA) is a technique used to reduce
+             multidimensional data sets to lower dimensions for analysis.
+             </summary>
+             <remarks>
+             Principal Components Analysis or the Karhunen-Loeve expansion is a
+             classical method for dimensionality reduction or exploratory data
+             analysis.  One reference among many is: F. Murtagh and A. Heck,
+             Multivariate Data Analysis, Kluwer Academic, Dordrecht, 1987. 
+                 
+                                      Based on work by F. Murtagh, 6 June 1989
+            </remarks>
+        </member>
+        <member name="M:AForge.Math.LinearAlgebra.Applications.PrincipalComponentAnalysis.Compute(AForge.Math.LinearAlgebra.Applications.PrincipalComponentAnalysis.AnalysisType)">
+            <summary>
+            Computes the Principal Component Analysis algorithm
+            </summary>
+            <param name="type">The type of analysis to be run</param>
+        </member>
+        <member name="P:AForge.Math.LinearAlgebra.Applications.PrincipalComponentAnalysis.Data">
+            <summary>
+            Returns the original supplied data to be analyzed.
+            </summary>
+        </member>
+        <member name="P:AForge.Math.LinearAlgebra.Applications.PrincipalComponentAnalysis.FractionVariance">
+            <summary>
+            The contribution is defined as:
+            Σi=from..to eigenvalue[i] / Σi=1..numberOfEigenvalues eigenvalue[i]
+            </summary>
+        </member>
+        <member name="T:AForge.Math.LinearAlgebra.LUDecomposition">
+            <summary>
+            In linear algebra, the LU decomposition is a matrix decomposition
+            which writes a matrix as the product of a lower and upper triangular
+            matrix. The product sometimes includes a permutation matrix as well.
+            This decomposition is used in numerical analysis to solve systems of
+            linear equations or calculate the determinant of a matrix.
+            </summary>
+        </member>
+    </members>
+</doc>

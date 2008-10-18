@@ -1,0 +1,6 @@
+ RichTextBoxExtended
+---------------------------------------
+ Originally developed by Richard Parsons
+ Available freely through CodeProject
+
+ http://www.codeproject.com/KB/miscctrl/richtextboxextended.aspx

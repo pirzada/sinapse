@@ -1,0 +1,78 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AForge.Statistics</RootNamespace>
+    <AssemblyName>AForge.Statistics</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>AForge.Statistics.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\AForge.Statistics.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAnalysis\DescriptiveAnalysis.cs" />
+    <Compile Include="DataAnalysis\DistributionAnalysis.cs" />
+    <Compile Include="DataAnalysis\FactorAnalysis.cs" />
+    <Compile Include="DataAnalysis\IndependentComponentAnalysis.cs" />
+    <Compile Include="DataAnalysis\PrincipalComponentAnalysis.cs" />
+    <Compile Include="Distances.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleMatrix.cs" />
+    <Compile Include="SampleVector.cs" />
+    <Compile Include="SignalAnalysis\HiddenMarkovModel.cs" />
+    <Compile Include="Tools.cs" />
+    <Compile Include="Visualizations\BoxPlot.cs" />
+    <Compile Include="Visualizations\Histogram.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\AForge.Core.csproj">
+      <Project>{BFAF50DC-4942-46B8-8615-2A0B4CF08AD2}</Project>
+      <Name>AForge.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Math\AForge.Mathematics.csproj">
+      <Project>{435E98DC-6780-4EA7-8D04-5B9337A10787}</Project>
+      <Name>AForge.Mathematics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AForge.Statistics.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Distributions\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

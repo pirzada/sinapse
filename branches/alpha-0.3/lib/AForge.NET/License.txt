@@ -1,0 +1,10 @@
+This is a heavily modified and reduced version of the AForge.NET Framework.
+
+AForge.NET is released under the GNU General Public License 2.0, so its same rules also apply to this branch.
+Modified source code is and will ever be distributed together with this application under the same licensing terms.
+
+Original project copyright Andrew Kirillov
+http://code.google.com/p/aforge/
+
+Changes by Cesar Roberto de Souza
+http://www.comp.ufscar.br/~cesarsouza
