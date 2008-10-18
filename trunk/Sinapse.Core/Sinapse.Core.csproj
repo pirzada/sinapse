@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\RotateTransform.cs" />
+    <Compile Include="Filters\TranslateTransform.cs" />
     <Compile Include="Networks\ActivationNetworkContainer.cs" />
     <Compile Include="Networks\DistanceNetworkContainer.cs" />
+    <Compile Include="Filters\Normalization.cs" />
     <Compile Include="Sources\NetworkImageSource.cs" />
     <Compile Include="Networks\NetworkContainerBase.cs" />
     <Compile Include="Sources\NetworkDataSourceBase.cs" />

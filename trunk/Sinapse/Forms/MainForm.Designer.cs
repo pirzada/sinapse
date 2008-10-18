@@ -1209,25 +1209,25 @@ namespace Sinapse.Forms
             // 
             // mruProviderDatabase
             // 
-            this.mruProviderDatabase.FileList = global::Sinapse.Properties.Settings.Default.history_Database;
+            this.mruProviderDatabase.Files = global::Sinapse.Properties.Settings.Default.history_Database;
             this.mruProviderDatabase.KeyMenuItem = this.MenuFileRecentDatabases;
             this.mruProviderDatabase.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
             // 
             // mruProviderNetwork
             // 
-            this.mruProviderNetwork.FileList = global::Sinapse.Properties.Settings.Default.history_Networks;
+            this.mruProviderNetwork.Files = global::Sinapse.Properties.Settings.Default.history_Networks;
             this.mruProviderNetwork.KeyMenuItem = this.MenuFileRecentNetworks;
             this.mruProviderNetwork.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
             // 
             // mruProviderWorkplace
             // 
-            this.mruProviderWorkplace.FileList = global::Sinapse.Properties.Settings.Default.history_Workplace;
+            this.mruProviderWorkplace.Files = global::Sinapse.Properties.Settings.Default.history_Workplace;
             this.mruProviderWorkplace.KeyMenuItem = this.MenuFileRecentWorkplaces;
             this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
             // 
             // mruProviderSession
             // 
-            this.mruProviderSession.FileList = global::Sinapse.Properties.Settings.Default.history_Sessions;
+            this.mruProviderSession.Files = global::Sinapse.Properties.Settings.Default.history_Sessions;
             this.mruProviderSession.KeyMenuItem = this.MenuFileRecentSessions;
             this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
             // 
