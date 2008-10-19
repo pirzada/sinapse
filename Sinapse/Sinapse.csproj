@@ -73,6 +73,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\TabControlEX.dll</HintPath>
     </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
     <Reference Include="ZedGraph, Version=5.0.4.13542, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
@@ -197,11 +201,11 @@
     <Compile Include="Controls\SideTabControl\SidePageSchema.Designer.cs">
       <DependentUpon>SidePageSchema.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SideTabControl\SideTabControl.cs">
+    <Compile Include="Controls\SideTabControl\SidebarControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\SideTabControl\SideTabControl.Designer.cs">
-      <DependentUpon>SideTabControl.cs</DependentUpon>
+    <Compile Include="Controls\SideTabControl\SidebarControl.Designer.cs">
+      <DependentUpon>SidebarControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SideTabControl\SidePageTrainer.cs">
       <SubType>UserControl</SubType>
@@ -293,6 +297,12 @@
     <Compile Include="Panels\FilterStackWindow.Designer.cs">
       <DependentUpon>FilterStackWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\TaskPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\TaskPanel.Designer.cs">
+      <DependentUpon>TaskPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Data\Logging\HistoryListener.cs" />
     <Compile Include="Utils\HtmlReport\Field.cs" />
@@ -325,10 +335,10 @@
     <Compile Include="Forms\Dialogs\GraphOptionsDialog.Designer.cs">
       <DependentUpon>GraphOptionsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dialogs\HistoryDialog.cs">
+    <Compile Include="Panels\HistoryDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Dialogs\HistoryDialog.Designer.cs">
+    <Compile Include="Panels\HistoryDialog.Designer.cs">
       <DependentUpon>HistoryDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\ImportWizard.cs">
@@ -447,9 +457,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>SidePageTrainer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SideTabControl.resx">
+    <EmbeddedResource Include="Controls\SideTabControl\SidebarControl.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SideTabControl.cs</DependentUpon>
+      <DependentUpon>SidebarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SideTabControl\SidePageWorplace.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SidePageWorplace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StatusBarControl.resx">
       <SubType>Designer</SubType>
@@ -475,7 +489,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>GraphOptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\HistoryDialog.resx">
+    <EmbeddedResource Include="Panels\HistoryDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HistoryDialog.cs</DependentUpon>
     </EmbeddedResource>

@@ -121,6 +121,12 @@ namespace Sinapse.Forms
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabControl = new Dotnetrix.Controls.TabControlEX();
+            this.tabContext = new Dotnetrix.Controls.TabPageEX();
+            this.tabWorkplace = new Dotnetrix.Controls.TabPageEX();
+            this.mainTabControl1 = new Sinapse.Controls.MainTabControl.MainTabControl();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.btnDatabaseNew = new System.Windows.Forms.ToolStripButton();
             this.btnDatabaseOpen = new System.Windows.Forms.ToolStripButton();
@@ -159,15 +165,23 @@ namespace Sinapse.Forms
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.statusBarControl = new Sinapse.Controls.StatusBarControl();
             this.mruProviderDatabase = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderNetwork = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderWorkplace = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderSession = new Sinapse.Forms.Controls.MruComponent();
+            this.statusBarControl = new Sinapse.Controls.StatusBarControl();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.sidePageWorkplace1 = new Sinapse.Controls.SideTabControl.SidePageWorkplace();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabWorkplace.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripTraining.SuspendLayout();
             this.toolStripTesting.SuspendLayout();
@@ -792,6 +806,8 @@ namespace Sinapse.Forms
             // 
             // toolStripContainer.ContentPanel
             // 
+            this.toolStripContainer.ContentPanel.Controls.Add(this.splitContainer1);
+            this.toolStripContainer.ContentPanel.Controls.Add(this.dockPanel1);
             this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(892, 552);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 74);
@@ -806,6 +822,76 @@ namespace Sinapse.Forms
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTraining);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTesting);
             this.toolStripContainer.TopToolStripPanel.MaximumSize = new System.Drawing.Size(0, 25);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.mainTabControl1);
+            this.splitContainer1.Size = new System.Drawing.Size(892, 552);
+            this.splitContainer1.SplitterDistance = 297;
+            this.splitContainer1.TabIndex = 20;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControl.Appearance = Dotnetrix.Controls.TabAppearanceEX.Bevel;
+            this.tabControl.AutoLoadTabPages = true;
+            this.tabControl.Controls.Add(this.tabContext);
+            this.tabControl.Controls.Add(this.tabWorkplace);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.HotColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabControl.HotTrack = true;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Multiline = true;
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 1;
+            this.tabControl.Size = new System.Drawing.Size(297, 552);
+            this.tabControl.TabIndex = 18;
+            this.tabControl.UseVisualStyles = false;
+            // 
+            // tabContext
+            // 
+            this.tabContext.Location = new System.Drawing.Point(27, 4);
+            this.tabContext.Name = "tabContext";
+            this.tabContext.Size = new System.Drawing.Size(266, 544);
+            this.tabContext.TabIndex = 1;
+            this.tabContext.Text = "Context";
+            // 
+            // tabWorkplace
+            // 
+            this.tabWorkplace.Controls.Add(this.sidePageWorkplace1);
+            this.tabWorkplace.Location = new System.Drawing.Point(27, 4);
+            this.tabWorkplace.Name = "tabWorkplace";
+            this.tabWorkplace.Size = new System.Drawing.Size(266, 544);
+            this.tabWorkplace.TabIndex = 2;
+            this.tabWorkplace.Text = "Workplace";
+            // 
+            // mainTabControl1
+            // 
+            this.mainTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.mainTabControl1.Name = "mainTabControl1";
+            this.mainTabControl1.Size = new System.Drawing.Size(591, 552);
+            this.mainTabControl1.TabIndex = 0;
+            this.mainTabControl1.Text = "mainTabControl1";
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.ActiveAutoHideContent = null;
+            this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dockPanel1.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.Size = new System.Drawing.Size(892, 552);
+            this.dockPanel1.TabIndex = 18;
             // 
             // toolStripMain
             // 
@@ -1153,16 +1239,6 @@ namespace Sinapse.Forms
             this.notifyIcon.Text = "Sinapse Neural Networking Tool";
             this.notifyIcon.Visible = true;
             // 
-            // statusBarControl
-            // 
-            this.statusBarControl.AutoSize = true;
-            this.statusBarControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.statusBarControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusBarControl.Location = new System.Drawing.Point(0, 651);
-            this.statusBarControl.Name = "statusBarControl";
-            this.statusBarControl.Size = new System.Drawing.Size(892, 22);
-            this.statusBarControl.TabIndex = 17;
-            // 
             // mruProviderDatabase
             // 
             this.mruProviderDatabase.Files = global::Sinapse.Properties.Settings.Default.history_Database;
@@ -1191,6 +1267,30 @@ namespace Sinapse.Forms
             this.mruProviderSession.MaxPathLength = 96;
             this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
             // 
+            // statusBarControl
+            // 
+            this.statusBarControl.AutoSize = true;
+            this.statusBarControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.statusBarControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusBarControl.Location = new System.Drawing.Point(0, 651);
+            this.statusBarControl.Name = "statusBarControl";
+            this.statusBarControl.Size = new System.Drawing.Size(892, 22);
+            this.statusBarControl.TabIndex = 17;
+            // 
+            // imageList
+            // 
+            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // sidePageWorkplace1
+            // 
+            this.sidePageWorkplace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sidePageWorkplace1.Location = new System.Drawing.Point(0, 0);
+            this.sidePageWorkplace1.Name = "sidePageWorkplace1";
+            this.sidePageWorkplace1.Size = new System.Drawing.Size(266, 544);
+            this.sidePageWorkplace1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1211,10 +1311,16 @@ namespace Sinapse.Forms
             this.panelTitle.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.toolStripContainer.ContentPanel.ResumeLayout(false);
             this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.tabWorkplace.ResumeLayout(false);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.toolStripTraining.ResumeLayout(false);
@@ -1344,5 +1450,13 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuExtensionsExcel;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox btnTestRoundCustom;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private Dotnetrix.Controls.TabControlEX tabControl;
+        private Dotnetrix.Controls.TabPageEX tabContext;
+        private Dotnetrix.Controls.TabPageEX tabWorkplace;
+        private System.Windows.Forms.ImageList imageList;
+        private Sinapse.Controls.MainTabControl.MainTabControl mainTabControl1;
+        private Sinapse.Controls.SideTabControl.SidePageWorkplace sidePageWorkplace1;
     }
 }
