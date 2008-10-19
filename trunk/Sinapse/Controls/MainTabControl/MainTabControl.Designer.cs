@@ -37,12 +37,14 @@ namespace Sinapse.Controls.MainTabControl
             this.tabQuery = new Dotnetrix.Controls.TabPageEX();
             this.tabGraph = new Dotnetrix.Controls.TabPageEX();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.tabPageEX1 = new Dotnetrix.Controls.TabPageEX();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
             this.tabControl.Appearance = Dotnetrix.Controls.TabAppearanceEX.Bevel;
+            this.tabControl.Controls.Add(this.tabPageEX1);
             this.tabControl.Controls.Add(this.tabTraining);
             this.tabControl.Controls.Add(this.tabValidation);
             this.tabControl.Controls.Add(this.tabTesting);
@@ -112,6 +114,14 @@ namespace Sinapse.Controls.MainTabControl
             this.imageList.Images.SetKeyName(3, "Query.png");
             this.imageList.Images.SetKeyName(4, "Graph");
             // 
+            // tabPageEX1
+            // 
+            this.tabPageEX1.Location = new System.Drawing.Point(4, 25);
+            this.tabPageEX1.Name = "tabPageEX1";
+            this.tabPageEX1.Size = new System.Drawing.Size(550, 416);
+            this.tabPageEX1.TabIndex = 5;
+            this.tabPageEX1.Text = "Preprocessing";
+            // 
             // MainTabControl
             // 
             this.Controls.Add(this.tabControl);
@@ -130,5 +140,6 @@ namespace Sinapse.Controls.MainTabControl
         private Dotnetrix.Controls.TabPageEX tabTesting;
         private Dotnetrix.Controls.TabPageEX tabQuery;
         private Dotnetrix.Controls.TabPageEX tabGraph;
+        private Dotnetrix.Controls.TabPageEX tabPageEX1;
     }
 }
