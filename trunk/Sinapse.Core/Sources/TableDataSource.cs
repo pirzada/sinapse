@@ -35,9 +35,12 @@ namespace Sinapse.Core.Sources
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
     [Serializable]
-    public class NetworkTableSource : NetworkDataSourceBase
+    public class TableDataSource : DataSourceBase
     {
 
+        /// <summary>
+        /// The DataSet which holds the actual data. The first table (accessible by index 0) holds the actual data, the second table on the set holds the categories
+        /// </summary>
         private DataSet m_dataSet;
         private DataTable m_dataTable;
         private NetworkTableColumnCollection m_columns;
@@ -47,7 +50,7 @@ namespace Sinapse.Core.Sources
         #region Constructor
         /// <summary>Creates a new NetworkTableSource object.</summary>
         /// <param name="dataTable">A DataTable which will be deep copied into this object.</param>
-        public NetworkTableSource(String title, DataTable dataTable)
+        public TableDataSource(String title, DataTable dataTable)
             : base(title)
         {
             this.m_dataSet = new DataSet(title);
@@ -68,7 +71,7 @@ namespace Sinapse.Core.Sources
           //  this.m_columns = new NetworkTableColumnCollection(dataTable);
         }
 
-        public NetworkTableSource(String title, NetworkTableColumn[] columns)
+        public TableDataSource(String title, NetworkTableColumn[] columns)
             : base(title)
         {
             this.m_dataSet = new DataSet(title);
@@ -118,12 +121,12 @@ namespace Sinapse.Core.Sources
     {
 
         public enum ColumnRole { None, Input, Output };
-        public enum ColumnData { Nummeric, Categoric, Boolean, Time };
+        public enum ColumnDataType { Nummeric, Categoric, Boolean, Time };
         public enum ColumnRelevance { None, Low, Medium, High };
 
         private string m_columnDescription;
         private ColumnRole m_columnRole;
-        private ColumnData m_columnData;
+        private ColumnDataType m_columnData;
         private ColumnRelevance m_columnRelevance;
 
         private DataColumn m_dataColumn;
@@ -136,11 +139,11 @@ namespace Sinapse.Core.Sources
         // --------------------------------------
 
         #region Constructor
-        public NetworkTableColumn(DataColumn relatedColumn, ColumnData data, ColumnRole role)
+        public NetworkTableColumn(DataColumn dataColumn, ColumnDataType type, ColumnRole role)
         {
-            this.m_dataColumn = relatedColumn;
+            this.m_dataColumn = dataColumn;
 
-            this.m_columnData = data;
+            this.m_columnData = type;
             this.m_columnRole = role;
 
             this.m_dataColumn.Table.Columns.Add(this.Name, typeof(double));
@@ -149,9 +152,6 @@ namespace Sinapse.Core.Sources
         public NetworkTableColumn(DataColumn relatedColumn)
         {
             this.m_dataColumn = relatedColumn;
-
-            //if (relatedColumn.DataType == typeof(String))
-                //this.co
         }
         #endregion
 
@@ -192,7 +192,7 @@ namespace Sinapse.Core.Sources
             }
         }
 
-        public ColumnData Data
+        public ColumnDataType Data
         {
             get { return this.m_columnData; }
             set

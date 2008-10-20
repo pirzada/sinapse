@@ -32,7 +32,7 @@ namespace Sinapse.Core.Networks
     ///   This class encompass a Neural Network inside a Input/Output structure which can
     ///   perform transformations on such data before feeding/reading the network. 
     /// </summary>
-    public abstract class NetworkContainerBase
+    public abstract class AdaptativeSystemBase
     {
 
         protected Network m_network;
@@ -50,7 +50,7 @@ namespace Sinapse.Core.Networks
         //----------------------------------------
 
         #region Constructor
-        protected NetworkContainerBase()
+        protected AdaptativeSystemBase()
         {
             m_inputTransformations = new ITransformationCollection();
             m_outputTransformations = new ITransformationCollection();

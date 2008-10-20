@@ -68,6 +68,7 @@ namespace Sinapse.Forms.Controls.Controls
         private void InitializeGraph()
         {
             zedGraphControl1 = new ZedGraphControl();
+            zedGraphControl1.Dock = DockStyle.Fill;
             GraphPane myPane = this.zedGraphControl1.GraphPane;
 
             // Set the titles and axis labels

@@ -1,6 +1,6 @@
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.Windows
 {
-    partial class HistoryDialog
+    partial class HistoryWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -82,7 +82,7 @@ namespace Sinapse.Forms.Dialogs
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(137, 26);
             // 
-            // HistoryDialog
+            // HistoryPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,8 +91,13 @@ namespace Sinapse.Forms.Dialogs
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.cbAutoscroll);
+            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((((WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)
+                        | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop)
+                        | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "HistoryDialog";
+            this.HideOnClose = true;
+            this.Name = "HistoryPanel";
+            this.TabText = "History Dialog";
             this.Text = "History Dialog";
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);

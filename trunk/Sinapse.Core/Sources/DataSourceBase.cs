@@ -30,7 +30,7 @@ using Sinapse.Core.Networks;
 namespace Sinapse.Core.Sources
 {
 
-    public enum NetworkDataSet { Training, Testing, Validation };
+    public enum NetworkDataSet { All, Training, Testing, Validation };
 
 
     /// <summary>
@@ -40,7 +40,7 @@ namespace Sinapse.Core.Sources
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class NetworkDataSourceBase
+    public abstract class DataSourceBase
     {
 
         private String m_title;
@@ -50,7 +50,7 @@ namespace Sinapse.Core.Sources
         //----------------------------------------
 
         #region Constructor
-        protected NetworkDataSourceBase(String title)
+        protected DataSourceBase(String title)
         {
             this.m_title = title;
             this.m_description = String.Empty;
@@ -93,7 +93,7 @@ namespace Sinapse.Core.Sources
         //----------------------------------------
 
         #region Public Methods
-        public bool IsCompatible(NetworkContainerBase network)
+        public bool IsCompatible(AdaptativeSystemBase network)
         {
             return (network.Network.InputsCount == this.InputsCount && network.Network.OutputsCount == this.OutputsCount);
         }

@@ -27,23 +27,81 @@ using Sinapse.Core.Training;
 
 namespace Sinapse.Core
 {
-    public class Workbench
+    public class Workplace
     {
 
-        private String m_name;
+        #region Active Workplace Placeholder
+        private static Workplace active;
+
+        public static Workplace Active
+        {
+            get { return active; }
+            set
+            {
+                if (value != active)
+                {
+                    active = value;
+
+                    if (ActiveWorkplaceChanged != null)
+                        ActiveWorkplaceChanged.Invoke(value, EventArgs.Empty);
+                }
+            }
+        }
+
+        public static event EventHandler ActiveWorkplaceChanged;
+        #endregion
+
+
+        private String m_name;     
         private String m_description;
         private DateTime m_creationTime;
 
-        private BindingList<NetworkContainerBase> m_networks;
-        private BindingList<NetworkDataSourceBase> m_dataSources;
+        private BindingList<AdaptativeSystemBase> m_networks;
+        private BindingList<DataSourceBase> m_dataSources;
         private BindingList<TrainingSession> m_trainingSessions;
+       
 
         //List<NetworkReports> m_reports;
 
-        public Workbench()
+        public Workplace()
         {
             this.m_creationTime = DateTime.Now;
+            this.m_networks = new BindingList<AdaptativeSystemBase>();
+            this.m_dataSources = new BindingList<DataSourceBase>();
+            this.m_trainingSessions = new BindingList<TrainingSession>();
         }
 
+
+        #region Properties
+        public BindingList<AdaptativeSystemBase> Systems
+        {
+            get { return m_networks; }
+        }
+        public BindingList<DataSourceBase> DataSources
+        {
+            get { return m_dataSources; }
+        }
+
+        public BindingList<TrainingSession> TrainingSessions
+        {
+            get { return m_trainingSessions; }
+        }
+
+        public String Name
+        {
+            get { return m_name; }
+            set { m_name = value; }
+        }
+        public String Description
+        {
+            get { return m_description; }
+            set { m_description = value; }
+        }
+
+        public DateTime CreationTime
+        {
+            get { return m_creationTime; }
+        }
+        #endregion
     }
 }

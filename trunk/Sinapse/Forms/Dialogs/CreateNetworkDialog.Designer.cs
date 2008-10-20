@@ -1,6 +1,6 @@
 namespace Sinapse.Forms.Dialogs
 {
-    partial class NewNetworkDialog
+    partial class CreateNetworkDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -52,10 +52,6 @@ namespace Sinapse.Forms.Dialogs
             this.lbHidden4 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbSwitchTraining = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numRangeLow = new System.Windows.Forms.NumericUpDown();
-            this.numRangeHigh = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numSigmoidAlpha)).BeginInit();
@@ -65,8 +61,6 @@ namespace Sinapse.Forms.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.nHidden3)).BeginInit();
             this.gbHiddenLayers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nHidden4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRangeLow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRangeHigh)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -381,84 +375,10 @@ namespace Sinapse.Forms.Dialogs
             this.cbSwitchTraining.Text = "Switch to training tab automatically after network is created";
             this.cbSwitchTraining.UseVisualStyleBackColor = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Default output range:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numRangeLow
-            // 
-            this.numRangeLow.DecimalPlaces = 3;
-            this.numRangeLow.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numRangeLow.Location = new System.Drawing.Point(130, 63);
-            this.numRangeLow.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numRangeLow.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numRangeLow.Name = "numRangeLow";
-            this.numRangeLow.Size = new System.Drawing.Size(51, 20);
-            this.numRangeLow.TabIndex = 13;
-            // 
-            // numRangeHigh
-            // 
-            this.numRangeHigh.DecimalPlaces = 3;
-            this.numRangeHigh.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numRangeHigh.Location = new System.Drawing.Point(209, 63);
-            this.numRangeHigh.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numRangeHigh.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numRangeHigh.Name = "numRangeHigh";
-            this.numRangeHigh.Size = new System.Drawing.Size(51, 20);
-            this.numRangeHigh.TabIndex = 13;
-            this.numRangeHigh.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(187, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "to";
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.numSigmoidAlpha);
-            this.groupBox2.Controls.Add(this.numRangeLow);
-            this.groupBox2.Controls.Add(this.numRangeHigh);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(277, 82);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(293, 96);
@@ -470,7 +390,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // NetworkCreationDialog
+            // CreateNetworkDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -488,7 +408,7 @@ namespace Sinapse.Forms.Dialogs
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "NetworkCreationDialog";
+            this.Name = "CreateNetworkDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create new Neural Network...";
             ((System.ComponentModel.ISupportInitialize)(this.numSigmoidAlpha)).EndInit();
@@ -500,8 +420,6 @@ namespace Sinapse.Forms.Dialogs
             this.gbHiddenLayers.ResumeLayout(false);
             this.gbHiddenLayers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nHidden4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRangeLow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRangeHigh)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -535,10 +453,6 @@ namespace Sinapse.Forms.Dialogs
         private System.Windows.Forms.Label lbHidden4;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox cbSwitchTraining;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numRangeLow;
-        private System.Windows.Forms.NumericUpDown numRangeHigh;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ErrorProvider errorProvider;
     }

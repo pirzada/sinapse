@@ -26,10 +26,10 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Sources
 {
-    public class NetworkImageSource : NetworkDataSourceBase
+    public class ImageDataSource : DataSourceBase
     {
 
-        public NetworkImageSource(string title)
+        public ImageDataSource(string title)
             : base(title)
         {
         }

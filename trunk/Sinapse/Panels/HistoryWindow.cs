@@ -27,33 +27,17 @@ using System.Windows.Forms;
 using Sinapse.Data;
 
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.Windows
 {
     
-    internal sealed partial class HistoryDialog : WeifenLuo.WinFormsUI.Docking.DockContent
+    public sealed partial class HistoryWindow : WeifenLuo.WinFormsUI.Docking.DockContent
     {
 
 
-        #region Singleton
-        private static HistoryDialog m_instance = null;
-
-        public static HistoryDialog Instance
-        {
-            get
-            {
-                if (m_instance == null || m_instance.IsDisposed)
-                    m_instance = new HistoryDialog();
-                return m_instance;
-            }
-        }
-        #endregion
-
-
-        //----------------------------------------
 
 
         #region Constructor
-        private HistoryDialog()
+        public HistoryWindow()
         {
             InitializeComponent();
         }

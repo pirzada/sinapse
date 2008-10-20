@@ -27,7 +27,7 @@ using System.IO;
 
 using WizardBase;
 
-using Sinapse.Data.Network;
+//using Sinapse.Data.Network;
 using Sinapse.Utils.CsvParser;
 
 
@@ -38,7 +38,7 @@ namespace Sinapse.Forms.Dialogs
     {
 
         private DataTable m_dataTable;
-        private NetworkSchema m_networkSchema;
+  //      private NetworkSchema m_networkSchema;
 
         //---------------------------------------------
 
@@ -56,20 +56,21 @@ namespace Sinapse.Forms.Dialogs
 
 
         #region Public Methods
-        internal NetworkDatabase GetNetworkData()
+ /*       internal NetworkDatabase GetNetworkData()
         {
             return new NetworkDatabase(m_networkSchema, m_dataTable);
         }
-
+        */
         internal DataTable GetDataTable()
         {
             return m_dataTable;
         }
-
+        /*
         internal NetworkSchema GetSchema()
         {
             return m_networkSchema;
         }
+         */ 
         #endregion
 
 
@@ -147,11 +148,11 @@ namespace Sinapse.Forms.Dialogs
 
 
             //Create Network Schema
-            this.m_networkSchema = new NetworkSchema(
+    /*        this.m_networkSchema = new NetworkSchema(
                 inputColumns.ToArray(),
                 outputColumns.ToArray(),
                 stringColumns.ToArray());
-
+            */
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Panels
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace Sinapse.Documents
 {
-    public partial class TaskPanel : Form
+    public partial class AdaptativeSystemTrainer :  WeifenLuo.WinFormsUI.Docking.DockContent
     {
-        public TaskPanel()
+        public AdaptativeSystemTrainer()
         {
             InitializeComponent();
         }

@@ -108,7 +108,7 @@ namespace Sinapse.Core.Training
     {
 
         private TrainingSavepoint m_currentSavepoint;
-        private ActivationNetworkContainer m_networkContainer;
+        private ActivationNetworkSystem m_networkContainer;
 
         [NonSerialized]
         public EventHandler CurrentChanged;
@@ -124,7 +124,7 @@ namespace Sinapse.Core.Training
 
 
         #region Constructor
-        public TrainingSavepointCollection(ActivationNetworkContainer networkContainer)
+        public TrainingSavepointCollection(ActivationNetworkSystem networkContainer)
         {
             this.m_networkContainer = networkContainer;
             this.m_currentSavepoint = null;

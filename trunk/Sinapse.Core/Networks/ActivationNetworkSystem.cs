@@ -6,12 +6,12 @@ using AForge.Neuro;
 
 namespace Sinapse.Core.Networks
 {
-    public class ActivationNetworkContainer : NetworkContainerBase
+    public class ActivationNetworkSystem : AdaptativeSystemBase
     {
 
 
         #region Constructor
-        public ActivationNetworkContainer(IActivationFunction function, int inputsCount, params int[] neuronsCount)
+        public ActivationNetworkSystem(IActivationFunction function, int inputsCount, params int[] neuronsCount)
         {
             this.m_network = new ActivationNetwork(function, inputsCount, neuronsCount);
         }

@@ -6,10 +6,10 @@ using AForge.Neuro;
 
 namespace Sinapse.Core.Networks
 {
-    public class DistanceNetworkContainer : NetworkContainerBase
+    public class DistanceNetworkSystem : AdaptativeSystemBase
     {
 
-        public DistanceNetworkContainer(int inputsCount, int neuronsCount)
+        public DistanceNetworkSystem(int inputsCount, int neuronsCount)
         {
             m_network = new DistanceNetwork(inputsCount, neuronsCount);
         }

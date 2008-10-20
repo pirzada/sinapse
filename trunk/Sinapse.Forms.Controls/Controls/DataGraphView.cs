@@ -5,7 +5,7 @@ using ZedGraph;
 
 namespace Sinapse.Forms.Controls
 {
-    class DataGraphView  : System.Windows.Forms.Control
+   public class DataGraphView  : System.Windows.Forms.Control
     {
         public enum ViewMode { Bar, Pie, Boxplot, Scatterplot, Histogram, CumulativeHistogram };
 

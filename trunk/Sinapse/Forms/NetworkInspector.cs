@@ -27,7 +27,7 @@ using System.Windows.Forms;
 
 using AForge.Neuro;
 
-using Sinapse.Data.Network;
+//using Sinapse.Data.Network;
 
 
 namespace Sinapse.Forms.Dialogs
