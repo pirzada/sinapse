@@ -25,7 +25,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
-using Sinapse.Data.Structures;
+//using Sinapse.Data.Structures;
 using Sinapse.Forms.Dialogs;
 
 
@@ -55,7 +55,7 @@ namespace Sinapse.Controls
 
 
         #region Public Methods
-        internal void UpdateNetworkState(TrainingStatus networkState)
+   /*     internal void UpdateNetworkState(TrainingStatus networkState)
         {
             this.progressBar.Visible = (networkState.Progress > 0);
 
@@ -66,7 +66,7 @@ namespace Sinapse.Controls
             this.lbSpeed.Text = String.Format("{0:0.00} e/s", networkState.EpochsBySecond);
 
         }
-
+        */
         internal void UpdateSelectedItems(int selected, int total)
         {
             this.lbItems.Text = String.Format("{0}/{1}", selected, total);
@@ -74,7 +74,7 @@ namespace Sinapse.Controls
 
         internal void ResetControl()
         {
-            this.UpdateNetworkState(new TrainingStatus());
+   //         this.UpdateNetworkState(new TrainingStatus());
             this.UpdateSelectedItems(0, 0);
             this.lbStatus.Text = String.Empty;
 
@@ -113,13 +113,11 @@ namespace Sinapse.Controls
         #region Buttons
         private void lbStatus_Click(object sender, EventArgs e)
         {
-            if (!HistoryDialog.Instance.Visible)
-                HistoryDialog.Instance.Show(this.ParentForm);
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            this.UpdateNetworkState(new TrainingStatus());
+    //        this.UpdateNetworkState(new TrainingStatus());
         }
 
         private void btnOptions_Click(object sender, EventArgs e)

@@ -43,8 +43,9 @@ namespace Sinapse.Core.Training
 
         private SessionState m_currentState;
         
-        private NetworkDataSourceBase m_networkDataSource;
-        private ActivationNetworkContainer m_networkContainer;
+        private DataSourceBase m_networkDataSource;
+        private ActivationNetworkSystem m_networkContainer;
+        private string name;
 
         private TrainingOptions m_options;
         private TrainingStatus m_status;
@@ -85,6 +86,12 @@ namespace Sinapse.Core.Training
 
 
         #region Properties
+        public String Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+
         public TrainingStatus Status
         {
             get { return this.m_status; }

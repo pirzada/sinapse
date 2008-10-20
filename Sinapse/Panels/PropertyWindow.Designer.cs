@@ -1,13 +1,13 @@
-namespace Sinapse.Panels
+namespace Sinapse.Windows
 {
-    partial class FilterStackWindow
+    partial class PropertyWindow
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,40 +20,40 @@ namespace Sinapse.Panels
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.SuspendLayout();
             // 
-            // listBox1
+            // propertyGrid1
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(174, 407);
-            this.listBox1.TabIndex = 0;
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(283, 414);
+            this.propertyGrid1.TabIndex = 0;
             // 
-            // FilterStackWindow
+            // PropertyWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(174, 408);
-            this.Controls.Add(this.listBox1);
-            this.Name = "FilterStackWindow";
-            this.Text = "FilterStackPanel";
+            this.ClientSize = new System.Drawing.Size(283, 414);
+            this.Controls.Add(this.propertyGrid1);
+            this.Name = "PropertyWindow";
+            this.TabText = "Properties";
+            this.Text = "Properties";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.PropertyGrid propertyGrid1;
     }
 }

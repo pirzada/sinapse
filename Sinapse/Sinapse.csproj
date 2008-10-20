@@ -83,135 +83,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DataAnalyzer\BdmControl.cs">
+    <Compile Include="Controls\ActivationNetworkDesigner.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataAnalyzer\BdmControl.Designer.cs">
-      <DependentUpon>BdmControl.cs</DependentUpon>
+    <Compile Include="Controls\ActivationNetworkDesigner.Designer.cs">
+      <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataAnalyzer\IcaControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Documents\AdaptativeSystemEditor.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\DataAnalyzer\IcaControl.Designer.cs">
-      <DependentUpon>IcaControl.cs</DependentUpon>
+    <Compile Include="Documents\AdaptativeSystemEditor.Designer.cs">
+      <DependentUpon>AdaptativeSystemEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataAnalyzer\PcaControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Documents\AdaptativeSystemTrainer.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\DataAnalyzer\PcaControl.Designer.cs">
-      <DependentUpon>PcaControl.cs</DependentUpon>
+    <Compile Include="Documents\AdaptativeSystemTrainer.Designer.cs">
+      <DependentUpon>AdaptativeSystemTrainer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainTabControl\Base\TabPageDataControlBase.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Documents\TableDataSourceEditor.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\MainTabControl\Base\TabPageDataControlBase.Designer.cs">
-      <DependentUpon>TabPageDataControlBase.cs</DependentUpon>
+    <Compile Include="Documents\TableDataSourceEditor.Designer.cs">
+      <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Base\TabPageControlBase.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Windows\WorplaceWindow.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\MainTabControl\MainTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\MainTabControl.Designer.cs">
-      <DependentUpon>MainTabControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageFunctionGraph.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageFunctionGraph.Designer.cs">
-      <DependentUpon>TabPageFunctionGraph.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageLearningGraph.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageLearningGraph.Designer.cs">
-      <DependentUpon>TabPageLearningGraph.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageQuery.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageQuery.Designer.cs">
-      <DependentUpon>TabPageQuery.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\InspectorLayerDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\InspectorLayerDetails.Designer.cs">
-      <DependentUpon>InspectorLayerDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\InspectorNetworkDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\InspectorNetworkDetails.Designer.cs">
-      <DependentUpon>InspectorNetworkDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\Base\InspectorPanelBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\Base\InspectorPanelBase.Designer.cs">
-      <DependentUpon>InspectorPanelBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\InspectorNeuronDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkInspector\InspectorNeuronDetails.Designer.cs">
-      <DependentUpon>InspectorNeuronDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkViewer\NetworkViewerControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\NetworkViewer\NetworkViewerControl.Designer.cs">
-      <DependentUpon>NetworkViewerControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NetworkViewer\Neuron.cs" />
-    <Compile Include="Controls\ReportColumnOptionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ReportColumnOptionControl.Designer.cs">
-      <DependentUpon>ReportColumnOptionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageReport.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageReport.Designer.cs">
-      <DependentUpon>SidePageReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageSolutionExplorer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageSolutionExplorer.Designer.cs">
-      <DependentUpon>SidePageSolutionExplorer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageWorplace.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageWorplace.Designer.cs">
-      <DependentUpon>SidePageWorplace.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageDisplay.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageDisplay.Designer.cs">
-      <DependentUpon>SidePageDisplay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageSchema.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageSchema.Designer.cs">
-      <DependentUpon>SidePageSchema.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidebarControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidebarControl.Designer.cs">
-      <DependentUpon>SidebarControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageTrainer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SideTabControl\SidePageTrainer.Designer.cs">
-      <DependentUpon>SidePageTrainer.cs</DependentUpon>
+    <Compile Include="Windows\WorplaceWindow.Designer.cs">
+      <DependentUpon>WorplaceWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatusBarControl.cs">
       <SubType>UserControl</SubType>
@@ -219,68 +119,12 @@
     <Compile Include="Controls\StatusBarControl.Designer.cs">
       <DependentUpon>StatusBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageTesting.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageTesting.Designer.cs">
-      <DependentUpon>TabPageTesting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageTraining.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageTraining.Designer.cs">
-      <DependentUpon>TabPageTraining.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageValidation.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MainTabControl\TabPageValidation.Designer.cs">
-      <DependentUpon>TabPageValidation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CodeGeneration\CANSI.cs" />
-    <Compile Include="Data\CodeGeneration\CPlusPlus.cs" />
-    <Compile Include="Data\CodeGeneration\CSharp.cs" />
-    <Compile Include="Data\CodeGeneration\CodeGenerator.cs" />
-    <Compile Include="Data\CodeGeneration\Java.cs" />
-    <Compile Include="Data\CodeGeneration\Matlab.cs" />
     <Compile Include="Data\Logging\HistoryEvent.cs" />
-    <Compile Include="Data\Network\DataCategory.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Data\Network\TrainingSession.cs" />
-    <Compile Include="Data\Network\NetworkWorkplace.cs" />
-    <Compile Include="Data\Reporting\ReportGenerator.cs">
-    </Compile>
-    <Compile Include="Data\SerializableObject.cs" />
-    <Compile Include="Forms\Dialogs\NewDatabaseDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NewDatabaseDialog.Designer.cs">
-      <DependentUpon>NewDatabaseDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NewWorkplaceDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NewWorkplaceDialog.Designer.cs">
-      <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Dialogs\PreferencesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Dialogs\PreferencesDialog.Designer.cs">
       <DependentUpon>PreferencesDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\NetworkViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NetworkViewer.Designer.cs">
-      <DependentUpon>NetworkViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SchemaMapper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SchemaMapper.Designer.cs">
-      <DependentUpon>SchemaMapper.cs</DependentUpon>
     </Compile>
     <None Include="Resources\Templates\TemplateCpp.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -291,17 +135,17 @@
     <None Include="Resources\Templates\TemplateCSharp.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Panels\FilterStackWindow.cs">
+    <Compile Include="Windows\PropertyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Panels\FilterStackWindow.Designer.cs">
-      <DependentUpon>FilterStackWindow.cs</DependentUpon>
+    <Compile Include="Windows\PropertyWindow.Designer.cs">
+      <DependentUpon>PropertyWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panels\TaskPanel.cs">
+    <Compile Include="Windows\TaskWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Panels\TaskPanel.Designer.cs">
-      <DependentUpon>TaskPanel.cs</DependentUpon>
+    <Compile Include="Windows\TaskWindow.Designer.cs">
+      <DependentUpon>TaskWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Data\Logging\HistoryListener.cs" />
@@ -309,17 +153,6 @@
     <Compile Include="Utils\HtmlReport\Misc.cs" />
     <Compile Include="Utils\HtmlReport\Report.cs" />
     <Compile Include="Utils\HtmlReport\Section.cs" />
-    <Compile Include="Data\Network\NetworkSavepoint.cs" />
-    <Compile Include="Data\Network\NetworkDatabase.cs" />
-    <Compile Include="Data\Network\NetworkCaptions.cs" />
-    <Compile Include="Data\Network\NetworkRanges.cs" />
-    <Compile Include="Data\Network\NetworkSchema.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Data\Structures\TrainingOptions.cs" />
-    <Compile Include="Data\Structures\TrainingStatus.cs" />
-    <Compile Include="Data\Network\NetworkContainer.cs" />
-    <Compile Include="Data\Structures\TrainingVectors.cs" />
     <Compile Include="Forms\Base\SingleInstanceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,17 +162,11 @@
     <Compile Include="Forms\Dialogs\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dialogs\GraphOptionsDialog.cs">
+    <Compile Include="Windows\HistoryWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Dialogs\GraphOptionsDialog.Designer.cs">
-      <DependentUpon>GraphOptionsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Panels\HistoryDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Panels\HistoryDialog.Designer.cs">
-      <DependentUpon>HistoryDialog.cs</DependentUpon>
+    <Compile Include="Windows\HistoryWindow.Designer.cs">
+      <DependentUpon>HistoryWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\ImportWizard.cs">
       <SubType>Form</SubType>
@@ -353,30 +180,6 @@
     <Compile Include="Forms\Dialogs\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dialogs\NewNetworkDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NewNetworkDialog.Designer.cs">
-      <DependentUpon>NewNetworkDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NetworkReportOptionsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NetworkReportOptionsDialog.Designer.cs">
-      <DependentUpon>NetworkReportOptionsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\NetworkInspector.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NetworkInspector.Designer.cs">
-      <DependentUpon>NetworkInspector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NetworkReportDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NetworkReportDialog.Designer.cs">
-      <DependentUpon>NetworkReportDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Dialogs\StatusBarOptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -389,109 +192,43 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SchemaEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SchemaEditor.Designer.cs">
-      <DependentUpon>SchemaEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\DataAnalyzer\PcaControl.resx">
+    <EmbeddedResource Include="Controls\ActivationNetworkDesigner.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>PcaControl.cs</DependentUpon>
+      <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\Base\TabPageDataControlBase.resx">
-      <DependentUpon>TabPageDataControlBase.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\AdaptativeSystemEditor.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>AdaptativeSystemEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\MainTabControl.resx">
-      <DependentUpon>MainTabControl.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\AdaptativeSystemTrainer.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>AdaptativeSystemTrainer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageFunctionGraph.resx">
+    <EmbeddedResource Include="Documents\TableDataSourceEditor.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabPageFunctionGraph.cs</DependentUpon>
+      <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageLearningGraph.resx">
+    <EmbeddedResource Include="Windows\TaskWindow.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabPageLearningGraph.cs</DependentUpon>
+      <DependentUpon>TaskWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageQuery.resx">
+    <EmbeddedResource Include="Windows\WorplaceWindow.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabPageQuery.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkInspector\Base\InspectorPanelBase.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InspectorPanelBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkInspector\InspectorLayerDetails.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InspectorLayerDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkInspector\InspectorNetworkDetails.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InspectorNetworkDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkInspector\InspectorNeuronDetails.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InspectorNeuronDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ReportColumnOptionControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ReportColumnOptionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidePageDisplay.resx">
-      <DependentUpon>SidePageDisplay.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidePageSchema.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SidePageSchema.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidePageSolutionExplorer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SidePageSolutionExplorer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidePageTrainer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SidePageTrainer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidebarControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SidebarControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SideTabControl\SidePageWorplace.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SidePageWorplace.cs</DependentUpon>
+      <DependentUpon>WorplaceWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StatusBarControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StatusBarControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageTesting.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TabPageTesting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageValidation.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TabPageValidation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainTabControl\TabPageTraining.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TabPageTraining.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\GraphOptionsDialog.resx">
+    <EmbeddedResource Include="Windows\HistoryWindow.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>GraphOptionsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Panels\HistoryDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>HistoryDialog.cs</DependentUpon>
+      <DependentUpon>HistoryWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\ImportWizard.resx">
       <DependentUpon>ImportWizard.cs</DependentUpon>
@@ -501,18 +238,6 @@
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\NewNetworkDialog.resx">
-      <DependentUpon>NewNetworkDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\NetworkReportDialog.resx">
-      <DependentUpon>NetworkReportDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\NetworkReportOptionsDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NetworkReportOptionsDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\StatusBarOptionsDialog.resx">
       <DependentUpon>StatusBarOptionsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -521,17 +246,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NetworkInspector.resx">
+    <EmbeddedResource Include="Windows\PropertyWindow.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NetworkInspector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SchemaEditor.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SchemaEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Panels\FilterStackWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FilterStackWindow.cs</DependentUpon>
+      <DependentUpon>PropertyWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -561,17 +278,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Samples\Logic Functions.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="cSouza Company SecurityCode.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Optimizer.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Samples\Linear Separation.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -592,6 +303,10 @@
       <Project>{C742E00B-3933-4834-BC41-19848E1E3AF2}</Project>
       <Name>WizardBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Core\Sinapse.Core.csproj">
+      <Project>{CE75E853-93A7-4690-9EE3-6AFB684E48C1}</Project>
+      <Name>Sinapse.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sinapse.Databases\Sinapse.Databases.csproj">
       <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
       <Name>Sinapse.Databases</Name>
@@ -607,11 +322,6 @@
       <ProductName>.NET Framework 2.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Samples\Logic Functions.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\webexport.png" />
@@ -822,9 +532,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\switchuser.png" />
-    <None Include="Samples\Body Mass Index.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\wizard.png" />
@@ -924,10 +631,9 @@
     <None Include="Resources\Templates\TemplateJava.java">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\reload1.png" />
+    <None Include="Resources\documentinfo1.png" />
     <Content Include="Sinapse.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Reporting\Modules\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

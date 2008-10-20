@@ -18,19 +18,39 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Text;
-using System.Windows.Forms;
+using System.Data;
 
-namespace Sinapse.Controls.SideTabControl
+using AForge.Mathematics;
+
+namespace Sinapse.Core.Sources
 {
-    internal sealed partial class SidePageWorkplace : Sinapse.Controls.Base.TabPageControlBase
+    public class SoundDataSource : DataSourceBase
     {
-        public SidePageWorkplace()
+
+        public SoundDataSource(string title) : base(title)
         {
-            InitializeComponent();
+
+        }
+        
+        public override Matrix CreateVectors(NetworkDataSet set)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override DataView CreateDataView(NetworkDataSet set)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override int InputsCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public override int OutputsCount
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
         }
     }
 }

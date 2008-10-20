@@ -25,14 +25,14 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Sources
 {
-    public class NetworkSoundSource : NetworkDataSourceBase
+    public class VideoDataSource : DataSourceBase
     {
 
-        public NetworkSoundSource(string title) : base(title)
+        public VideoDataSource(string title)
+            : base(title)
         {
-
         }
-        
+
         public override Matrix CreateVectors(NetworkDataSet set)
         {
             throw new Exception("The method or operation is not implemented.");

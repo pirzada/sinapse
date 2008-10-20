@@ -8,10 +8,10 @@
       <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Sources.NetworkTableSource">
+  <Class Name="Sinapse.Core.Sources.TableDataSource">
     <Position X="15.25" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkTableSource.cs</FileName>
+      <FileName>Sources\TableDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAEABCAAgAAAE=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -25,17 +25,17 @@
       </Path>
     </AssociationLine>
   </Class>
-  <Class Name="Sinapse.Core.Sources.NetworkImageSource" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.ImageDataSource" Collapsed="true">
     <Position X="19.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkImageSource.cs</FileName>
+      <FileName>Sources\ImageDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAgAAAE=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Networks.NetworkContainerBase" Collapsed="true">
+  <Class Name="Sinapse.Core.Networks.AdaptativeSystemBase" Collapsed="true">
     <Position X="16.75" Y="6" Width="2" />
     <TypeIdentifier>
-      <FileName>Networks\NetworkContainerBase.cs</FileName>
+      <FileName>Networks\AdaptativeSystemBase.cs</FileName>
       <HashCode>EEAAAAAAAIAgIAAAAAAAgAQIgQAIAAAIAQAAgAxAAAA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -80,17 +80,17 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Sources.NetworkSoundSource" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.SoundDataSource" Collapsed="true">
     <Position X="17.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkSoundSource.cs</FileName>
+      <FileName>Sources\SoundDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAgAAAE=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Sources.NetworkVideoSource" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.VideoDataSource" Collapsed="true">
     <Position X="21.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkVideoSource.cs</FileName>
+      <FileName>Sources\VideoDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAgAAAE=</HashCode>
     </TypeIdentifier>
   </Class>
@@ -157,17 +157,34 @@
       <HashCode>AAIEAAAAAUAAgAAAAACCIAAAABAAAAACAABAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Sources.NetworkTableColumn" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.NetworkTableColumn">
     <Position X="12" Y="14" Width="2.5" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkTableSource.cs</FileName>
+      <FileName>Sources\TableDataSource.cs</FileName>
       <HashCode>gAAAAAACAAAgAAgAEAAAEAQAAACAABBACAQQCigAAAA=</HashCode>
     </TypeIdentifier>
+    <NestedTypes>
+      <Enum Name="Sinapse.Core.Sources.NetworkTableColumn.ColumnRole" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Sources\TableDataSource.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Sinapse.Core.Sources.NetworkTableColumn.ColumnDataType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Sources\TableDataSource.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Sinapse.Core.Sources.NetworkTableColumn.ColumnRelevance" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Sources\TableDataSource.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
   </Class>
   <Class Name="Sinapse.Core.Sources.NetworkTableColumnCollection" Collapsed="true">
     <Position X="12" Y="13.25" Width="2.5" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkTableSource.cs</FileName>
+      <FileName>Sources\TableDataSource.cs</FileName>
       <HashCode>BAAAAAAAAAAAAAgACAAAAAAAEACAAAAAAAAAQAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
@@ -176,10 +193,10 @@
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Sources.NetworkDataSourceBase" Collapsed="true">
+  <Class Name="Sinapse.Core.Sources.DataSourceBase" Collapsed="true">
     <Position X="18.25" Y="11" Width="2" />
     <TypeIdentifier>
-      <FileName>Sources\NetworkDataSourceBase.cs</FileName>
+      <FileName>Sources\DataSourceBase.cs</FileName>
       <HashCode>AAAAAACAAIAgAAAAAAQAAAQIAAAAAAAAEABAAAhAAAE=</HashCode>
     </TypeIdentifier>
   </Class>
@@ -197,33 +214,25 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Networks.ActivationNetworkContainer">
+  <Class Name="Sinapse.Core.Networks.ActivationNetworkSystem">
     <Position X="15.5" Y="7.25" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Networks\ActivationNetworkContainer.cs</FileName>
+      <FileName>Networks\ActivationNetworkSystem.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAQAAAAQAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Sinapse.Core.Networks.NetworkContainerBase" FixedFromPoint="true">
-      <Path>
-        <Point X="17.75" Y="6.509" />
-        <Point X="17.75" Y="6.875" />
-        <Point X="16.625" Y="6.875" />
-        <Point X="16.625" Y="7.25" />
-      </Path>
-    </InheritanceLine>
   </Class>
-  <Class Name="Sinapse.Core.Networks.DistanceNetworkContainer">
+  <Class Name="Sinapse.Core.Networks.DistanceNetworkSystem">
     <Position X="18" Y="7.25" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Networks\DistanceNetworkContainer.cs</FileName>
+      <FileName>Networks\DistanceNetworkSystem.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Workbench">
+  <Class Name="Sinapse.Core.Workplace">
     <Position X="20.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Workbench.cs</FileName>
-      <HashCode>OAAAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Workplace.cs</FileName>
+      <HashCode>OAAAAAAAAAAgAAAAAAAACAQAAQAAAAAAAAAAgABAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Sinapse.Core.Transformations.ThresholdSeparation" Collapsed="true">

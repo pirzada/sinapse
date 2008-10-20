@@ -25,21 +25,21 @@ using System.Text;
 using System.Windows.Forms;
 
 using AForge.Neuro;
-using Sinapse.Data.Network;
+//using Sinapse.Data.Network;
 
 
 namespace Sinapse.Forms.Dialogs
 {
-    internal sealed partial class NewNetworkDialog : Form
+    internal sealed partial class CreateNetworkDialog : Form
     {
 
-        private NetworkSchema m_networkSchema;
+     //   private NetworkSchema m_networkSchema;
 
         //---------------------------------------------
 
 
         #region Constructor
-        public NewNetworkDialog(NetworkSchema schema)
+        public CreateNetworkDialog(NetworkSchema schema)
         {
             InitializeComponent();
 
@@ -76,20 +76,20 @@ namespace Sinapse.Forms.Dialogs
         #region Control Events
         private void rbSigmoid_CheckedChanged(object sender, EventArgs e)
         {
-            numRangeHigh.Minimum = 0;
-            numRangeHigh.Maximum = 1;
+    //        numRangeHigh.Minimum = 0;
+    //        numRangeHigh.Maximum = 1;
 
-            numRangeLow.Minimum = 0;
-            numRangeLow.Maximum = 1;
+   //         numRangeLow.Minimum = 0;
+   //         numRangeLow.Maximum = 1;
         }
 
         private void rbBipolarSigmoid_CheckedChanged(object sender, EventArgs e)
         {
-            numRangeHigh.Minimum = -1;
-            numRangeHigh.Maximum = 1;
+   //         numRangeHigh.Minimum = -1;
+   //         numRangeHigh.Maximum = 1;
 
-            numRangeLow.Minimum = -1;
-            numRangeLow.Maximum = 1;
+   //         numRangeLow.Minimum = -1;
+   //         numRangeLow.Maximum = 1;
         }
 
         #endregion
@@ -172,7 +172,7 @@ namespace Sinapse.Forms.Dialogs
                     hiddenLayers);
 
 
-            neuralNetwork.Schema.DataRanges.ActivationFunctionRange = new AForge.DoubleRange((double)numRangeLow.Value, (double)numRangeHigh.Value);
+ //         neuralNetwork.Schema.DataRanges.ActivationFunctionRange = new AForge.DoubleRange((double)numRangeLow.Value, (double)numRangeHigh.Value);
 
 
             return neuralNetwork;
@@ -190,8 +190,8 @@ namespace Sinapse.Forms.Dialogs
             this.cbHiddenLayerNumber.SelectedIndex = 1;
             this.nHidden1.Value = Math.Ceiling((decimal)(m_networkSchema.InputColumns.Length + m_networkSchema.OutputColumns.Length) / 2);
             this.numSigmoidAlpha.Value = 0.5M;
-            this.numRangeHigh.Value = 0.85M;
-            this.numRangeLow.Value = -0.85M;
+  //          this.numRangeHigh.Value = 0.85M;
+  //          this.numRangeLow.Value = -0.85M;
         }
 
         private void cbHiddenLayerNumber_SelectedIndexChanged(object sender, EventArgs e)
@@ -232,12 +232,12 @@ namespace Sinapse.Forms.Dialogs
 
         private bool validateInput()
         {
-            if (numRangeLow.Value >= numRangeHigh.Value)
+  /*          if (numRangeLow.Value >= numRangeHigh.Value)
             {
-                errorProvider.SetError(numRangeHigh, "The maximum output value should be greather than the minimum choosen value");
+  //              errorProvider.SetError(numRangeHigh, "The maximum output value should be greather than the minimum choosen value");
                 return false;
             }
-
+            */
             return true;
         }
 
