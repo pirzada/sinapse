@@ -30,6 +30,23 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Sinapse.Core.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\Sinapse.Core.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -40,29 +57,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filters\ChangeColumns.cs" />
-    <Compile Include="Filters\RotateTransform.cs" />
-    <Compile Include="Filters\TranslateTransform.cs" />
+    <Compile Include="Filters\Table\MatrixToTable.cs" />
+    <Compile Include="Filters\Table\TableToMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Networks\ActivationNetworkSystem.cs" />
     <Compile Include="Networks\DistanceNetworkSystem.cs" />
-    <Compile Include="Filters\Normalization.cs" />
     <Compile Include="Sources\ImageDataSource.cs" />
-    <Compile Include="Networks\AdaptativeSystemBase.cs" />
+    <Compile Include="Networks\SystemBase.cs" />
     <Compile Include="Sources\DataSourceBase.cs" />
     <Compile Include="Sources\SoundDataSource.cs" />
     <Compile Include="Sources\TableDataSource.cs" />
     <Compile Include="Sources\VideoDataSource.cs" />
+    <Compile Include="Networks\SystemInputOutput.cs" />
     <Compile Include="Training\TrainingStep.cs" />
     <Compile Include="Training\MultipleTrainingSession.cs" />
     <Compile Include="Training\TrainingOptions.cs" />
     <Compile Include="Training\TrainingSavepoint.cs" />
     <Compile Include="Training\TrainingSession.cs" />
     <Compile Include="Training\TrainingStatus.cs" />
-    <Compile Include="Filters\Base\ITransformation.cs" />
-    <Compile Include="Filters\PrincipalComponent.cs" />
+    <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Filters\RangeConversion.cs" />
-    <Compile Include="Filters\ThresholdSeparation.cs" />
     <Compile Include="Workplace.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +103,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Filters\Image\" />
+    <Folder Include="Filters\Matrix\" />
+    <Folder Include="Filters\Sound\" />
+    <Folder Include="Filters\Video\" />
     <Folder Include="Reporting\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

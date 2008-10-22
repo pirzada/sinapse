@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Sinapse.Core.Filters
 {
-    class TranslateTransform
+    public class Normalization : IFilter
     {
+
     }
 }

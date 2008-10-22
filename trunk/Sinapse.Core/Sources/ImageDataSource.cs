@@ -34,24 +34,5 @@ namespace Sinapse.Core.Sources
         {
         }
 
-        public override Matrix CreateVectors(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override DataView CreateDataView(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override int InputsCount
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
-
-        public override int OutputsCount
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
     }
 }

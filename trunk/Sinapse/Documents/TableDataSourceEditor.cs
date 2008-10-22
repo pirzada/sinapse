@@ -18,15 +18,21 @@ namespace Sinapse.Documents
         private TableDataSource tableSource;
 
 
-        public TableDataSourceEditor()
+        public TableDataSourceEditor(TableDataSource source)
         {
             InitializeComponent();
+
+            this.tableSource = source;
         }
+
 
         private void TableDataSourceEditor_Load(object sender, EventArgs e)
         {
-            this.dgvViewer.DataSource = this.tableSource.CreateDataView(NetworkDataSet.All);
-            this.dgvColumns.DataSource = this.tableSource.Columns;
+            if (tableSource != null)
+            {
+         //       this.dgvViewer.DataSource = this.tableSource.CreateDataView(NetworkDataSet.All);
+         //       this.dgvColumns.DataSource = this.tableSource.Columns;
+            }
         }
 
     }

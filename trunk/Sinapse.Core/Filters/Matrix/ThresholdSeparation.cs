@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using AForge.Mathematics;
+
 namespace Sinapse.Core.Filters
 {
-    public interface IImageFilter : Sinapse.Core.Filters.IDataFilter
+    public class ThresholdSeparation : IFilter
     {
+
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using AForge.Mathematics;
 
 
-namespace Sinapse.Core.Transformations
+namespace Sinapse.Core.Filters
 {
     /// <summary>
     /// 
@@ -15,7 +15,7 @@ namespace Sinapse.Core.Transformations
     ///   make sure when testing and using the network the maximum and minimum values won't
     ///   ever be extrapolated, otherwise erratic behaviour of the network may occur.
     /// </remarks>
-    public class RangeConversion : ITransformation
+    public class RangeConversion : IFilter
     {
 
       //  AForge.Mathematics.RangeConversion rangeConversion;

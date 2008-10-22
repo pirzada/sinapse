@@ -11,4 +11,16 @@
     <StartArguments>/resetaddin Sinapse.Extensions.VisualStudio.Connect</StartArguments>
     <StartAction>Program</StartAction>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <StartProgram>C:\Arquivos de programas\Microsoft Visual Studio 8\Common7\IDE\devenv.exe</StartProgram>
+    <StartWorkingDirectory>C:\Arquivos de programas\Microsoft Visual Studio 8\Common7\IDE\</StartWorkingDirectory>
+    <StartArguments>/resetaddin Sinapse.Extensions.VisualStudio.Connect</StartArguments>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <StartProgram>C:\Arquivos de programas\Microsoft Visual Studio 8\Common7\IDE\devenv.exe</StartProgram>
+    <StartWorkingDirectory>C:\Arquivos de programas\Microsoft Visual Studio 8\Common7\IDE\</StartWorkingDirectory>
+    <StartArguments>/resetaddin Sinapse.Extensions.VisualStudio.Connect</StartArguments>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
 </Project>

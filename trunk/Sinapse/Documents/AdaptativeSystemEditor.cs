@@ -8,18 +8,25 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
-using Sinapse.Core.Networks;
+using Sinapse.Core.Systems;
 
 namespace Sinapse.Documents
 {
     public partial class AdaptativeSystemEditor : DockContent
     {
 
-        private AdaptativeSystemBase system;
+        private NetworkSystemBase system;
 
-        public AdaptativeSystemEditor()
+        public AdaptativeSystemEditor(NetworkSystemBase system)
         {
             InitializeComponent();
+            this.system = system;
+        }
+
+        private void AdaptativeSystemEditor_Load(object sender, EventArgs e)
+        {
+            this.dgvInterfaceInputs.DataSource = this.system.Inputs;
+            this.dgvInterfaceOutputs.DataSource = this.system.Outputs;
         }
     }
 }
