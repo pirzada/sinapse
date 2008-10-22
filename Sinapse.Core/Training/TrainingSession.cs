@@ -22,19 +22,21 @@ using System.Text;
 
 using AForge.Neuro;
 
-using Sinapse.Core.Networks;
+using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 
 
 namespace Sinapse.Core.Training
 {
 
+    public enum TrainingSet { All, Training, Testing, Validation };
+
     /// <summary>
     ///   Encapsultates an Asynchronous and Thread-Safe way to train Backpropagation Networks
     ///   using crossvalidation and other advanced techniques. Also provides additional feedback
     ///   about current traning status.
     /// </summary>
-    public class TrainingSession
+    public class TrainingSession : WorkplaceContent
     {
 
         public enum SessionState { Stopped, Paused, Running, Error };

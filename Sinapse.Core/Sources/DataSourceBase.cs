@@ -23,16 +23,14 @@ using System.Data;
 
 using AForge.Mathematics;
 
-using Sinapse.Core.Transformations;
-using Sinapse.Core.Networks;
+using Sinapse.Core.Filters;
+using Sinapse.Core.Systems;
 
 
 namespace Sinapse.Core.Sources
 {
 
-    public enum NetworkDataSet { All, Training, Testing, Validation };
-
-
+    
     /// <summary>
     ///   This class encompass a Neural Network DataSource, or in other words, a
     ///   source of information that can be used to train and feed Neural Networks.
@@ -40,7 +38,7 @@ namespace Sinapse.Core.Sources
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class DataSourceBase
+    public abstract class DataSourceBase : WorkplaceContent
     {
 
         private String m_title;
@@ -56,16 +54,6 @@ namespace Sinapse.Core.Sources
             this.m_description = String.Empty;
             this.m_remarks = String.Empty;
         }
-        #endregion
-
-        //----------------------------------------
-
-        #region Abstract Methods
-        public abstract Matrix CreateVectors(NetworkDataSet set);
-        public abstract DataView CreateDataView(NetworkDataSet set);
-
-        public abstract int InputsCount { get; }
-        public abstract int OutputsCount { get; }
         #endregion
 
         //----------------------------------------
@@ -92,12 +80,7 @@ namespace Sinapse.Core.Sources
 
         //----------------------------------------
 
-        #region Public Methods
-        public bool IsCompatible(AdaptativeSystemBase network)
-        {
-            return (network.Network.InputsCount == this.InputsCount && network.Network.OutputsCount == this.OutputsCount);
-        }
-        #endregion
+
 
     }
 }

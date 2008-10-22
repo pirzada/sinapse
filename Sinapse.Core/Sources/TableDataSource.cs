@@ -43,7 +43,7 @@ namespace Sinapse.Core.Sources
         /// </summary>
         private DataSet m_dataSet;
         private DataTable m_dataTable;
-        private NetworkTableColumnCollection m_columns;
+        private TableDataSourceColumnCollection m_columns;
 
         //----------------------------------------
 
@@ -61,30 +61,35 @@ namespace Sinapse.Core.Sources
             // if the column is a category, create another column columnName_index and another table
             // with the same name.
 
-            NetworkTableColumn[] columns = new NetworkTableColumn[m_dataTable.Columns.Count];
+            TableDataSourceColumn[] columns = new TableDataSourceColumn[m_dataTable.Columns.Count];
             for (int i = 0; i < columns.Length; i++)
             {
                 // User will determine the type of the data or it will be selected based on data type?
-                columns[i] = new NetworkTableColumn(m_dataTable.Columns[i]); 
+                columns[i] = new TableDataSourceColumn(m_dataTable.Columns[i]); 
             }
 
           //  this.m_columns = new NetworkTableColumnCollection(dataTable);
         }
 
-        public TableDataSource(String title, NetworkTableColumn[] columns)
+        public TableDataSource(String title, TableDataSourceColumn[] columns)
             : base(title)
         {
             this.m_dataSet = new DataSet(title);
             this.m_dataTable = new DataTable();
 
-            this.m_columns = new NetworkTableColumnCollection(columns);
+            this.m_columns = new TableDataSourceColumnCollection(columns);
+        }
+
+        public TableDataSource(String title)
+            : this(title, new DataTable())
+        {
         }
         #endregion
 
         //----------------------------------------
 
         #region Properties
-        public NetworkTableColumnCollection Columns
+        public TableDataSourceColumnCollection Columns
         {
             get { return this.m_columns; }
         }
@@ -93,63 +98,43 @@ namespace Sinapse.Core.Sources
         //----------------------------------------
 
         #region Public Methods
-        public override Matrix CreateVectors(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
 
-        public override DataView CreateDataView(NetworkDataSet set)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override int InputsCount
-        {
-            get { return this.m_columns.Inputs.Length; }
-        }
-
-        public override int OutputsCount
-        {
-            get { return this.m_columns.Outputs.Length; }
-        }
         #endregion
 
     }
 
     [Serializable]
-    public class NetworkTableColumn
+    public class TableDataSourceColumn
     {
 
-        public enum ColumnRole { None, Input, Output };
-        public enum ColumnDataType { Nummeric, Categoric, Boolean, Time };
-        public enum ColumnRelevance { None, Low, Medium, High };
+        public enum TableDataSourceColumnRole { None, Input, Output };
+  //      public enum ColumnRelevance { None, Low, Medium, High };
 
         private string m_columnDescription;
-        private ColumnRole m_columnRole;
-        private ColumnDataType m_columnData;
-        private ColumnRelevance m_columnRelevance;
+        private TableDataSourceColumnRole m_columnRole;
+        private SystemInputOutputDataType m_columnDataType;
+ //       private ColumnRelevance m_columnRelevance;
 
         private DataColumn m_dataColumn;
         private DataColumn m_networkAnswer;
         private DataColumn m_networkDelta;
         private DataColumn m_categoryIndex;
 
-        private bool m_locked;
 
         // --------------------------------------
 
         #region Constructor
-        public NetworkTableColumn(DataColumn dataColumn, ColumnDataType type, ColumnRole role)
+        public TableDataSourceColumn(DataColumn dataColumn, SystemInputOutputDataType type, TableDataSourceColumnRole role)
         {
             this.m_dataColumn = dataColumn;
 
-            this.m_columnData = type;
+            this.m_columnDataType = type;
             this.m_columnRole = role;
 
             this.m_dataColumn.Table.Columns.Add(this.Name, typeof(double));
         }
 
-        public NetworkTableColumn(DataColumn relatedColumn)
+        public TableDataSourceColumn(DataColumn relatedColumn)
         {
             this.m_dataColumn = relatedColumn;
         }
@@ -176,38 +161,30 @@ namespace Sinapse.Core.Sources
             set { this.m_columnDescription = value; }
         }
 
-        public bool SchemaLocked
-        {
-            get { return this.m_locked; }
-            internal set { this.m_locked = value; }
-        }
-
-        public ColumnRole Role
+        public TableDataSourceColumnRole Role
         {
             get { return this.m_columnRole; }
             set
             {
-                if (!this.m_locked)
                     this.m_columnRole = value;
             }
         }
 
-        public ColumnDataType Data
+        public SystemInputOutputDataType DataType
         {
-            get { return this.m_columnData; }
+            get { return this.m_columnDataType; }
             set
             {
-                if (!this.m_locked)
-                    this.m_columnData = value;
+                    this.m_columnDataType = value;
             }
         }
-
+        /*
         public ColumnRelevance Relevance
         {
             get { return this.m_columnRelevance; }
             set { this.m_columnRelevance = value; }
         }
-
+        */
         public DataColumn DataColumn
         {
             get { return this.m_dataColumn; }
@@ -246,42 +223,29 @@ namespace Sinapse.Core.Sources
     }
 
     [Serializable]
-    public sealed class NetworkTableColumnCollection :
-        System.Collections.ObjectModel.ReadOnlyCollection<NetworkTableColumn>
+    public sealed class TableDataSourceColumnCollection :
+        System.Collections.ObjectModel.ReadOnlyCollection<TableDataSourceColumn>
     {
 
-        private bool m_locked;
 
         // --------------------------------------
 
         #region Constructor
-        internal NetworkTableColumnCollection(NetworkTableColumn[] columns)
+        internal TableDataSourceColumnCollection(TableDataSourceColumn[] columns)
             : base(columns)
         {
-            m_locked = false;
+           
         }
         #endregion
 
         // --------------------------------------
 
         #region Properties
-        public bool SchemaLocked
-        {
-            get { return m_locked; }
-            internal set
-            {
-                m_locked = value;
-
-                foreach (NetworkTableColumn c in this)
-                    c.SchemaLocked = value;
-            }
-        }
-
-        public NetworkTableColumn this[DataColumn dataColumn]
+        public TableDataSourceColumn this[DataColumn dataColumn]
         {
             get
             {
-                foreach (NetworkTableColumn col in this)
+                foreach (TableDataSourceColumn col in this)
                 {
                     if (col.DataColumn == dataColumn)
                         return col;
@@ -290,11 +254,11 @@ namespace Sinapse.Core.Sources
             }
         }
 
-        public NetworkTableColumn this[string columnName]
+        public TableDataSourceColumn this[string columnName]
         {
             get
             {
-                foreach (NetworkTableColumn col in this)
+                foreach (TableDataSourceColumn col in this)
                 {
                     if (col.Name == columnName)
                         return col;
@@ -307,11 +271,11 @@ namespace Sinapse.Core.Sources
         // --------------------------------------
 
         #region Public Methods
-        public NetworkTableColumn[] Select(NetworkTableColumn.ColumnRole columnRole)
+        public TableDataSourceColumn[] Select(TableDataSourceColumn.TableDataSourceColumnRole columnRole)
         {
-            List<NetworkTableColumn> search = new List<NetworkTableColumn>(this.Count);
+            List<TableDataSourceColumn> search = new List<TableDataSourceColumn>(this.Count);
 
-            foreach (NetworkTableColumn col in this)
+            foreach (TableDataSourceColumn col in this)
             {
                 if (col.Role == columnRole)
                     search.Add(col);
@@ -320,14 +284,14 @@ namespace Sinapse.Core.Sources
             return search.ToArray();
         }
 
-        public NetworkTableColumn[] Inputs
+        public TableDataSourceColumn[] Inputs
         {
-            get { return Select(NetworkTableColumn.ColumnRole.Input); }
+            get { return Select(TableDataSourceColumn.TableDataSourceColumnRole.Input); }
         }
 
-        public NetworkTableColumn[] Outputs
+        public TableDataSourceColumn[] Outputs
         {
-            get { return Select(NetworkTableColumn.ColumnRole.Output); }
+            get { return Select(TableDataSourceColumn.TableDataSourceColumnRole.Output); }
         }
         #endregion
 

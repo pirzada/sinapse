@@ -4,9 +4,9 @@ using System.Text;
 
 using AForge.Neuro;
 
-namespace Sinapse.Core.Networks
+namespace Sinapse.Core.Systems
 {
-    public class ActivationNetworkSystem : AdaptativeSystemBase
+    public class ActivationNetworkSystem : NetworkSystemBase
     {
 
 
@@ -14,6 +14,10 @@ namespace Sinapse.Core.Networks
         public ActivationNetworkSystem(IActivationFunction function, int inputsCount, params int[] neuronsCount)
         {
             this.m_network = new ActivationNetwork(function, inputsCount, neuronsCount);
+        }
+
+        public ActivationNetworkSystem()
+        {
         }
         #endregion
 

@@ -61,6 +61,30 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRules>-Microsoft.Globalization#CA1301;-Microsoft.Globalization#CA1302;-Microsoft.Globalization#CA1303;-Microsoft.Globalization#CA1306;-Microsoft.Globalization#CA1304;-Microsoft.Globalization#CA1305;-Microsoft.Globalization#CA1300</CodeAnalysisRules>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Final Release|x86' ">
+    <OutputPath>bin\x86\Final Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -89,6 +113,12 @@
     <Compile Include="Controls\ActivationNetworkDesigner.Designer.cs">
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransformSequenceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransformSequenceControl.Designer.cs">
+      <DependentUpon>TransformSequenceControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Documents\AdaptativeSystemEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +130,12 @@
     </Compile>
     <Compile Include="Documents\AdaptativeSystemTrainer.Designer.cs">
       <DependentUpon>AdaptativeSystemTrainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\StartPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Documents\StartPage.Designer.cs">
+      <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\TableDataSourceEditor.cs">
       <SubType>Form</SubType>
@@ -198,6 +234,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TransformSequenceControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TransformSequenceControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Documents\AdaptativeSystemEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdaptativeSystemEditor.cs</DependentUpon>
@@ -205,6 +245,10 @@
     <EmbeddedResource Include="Documents\AdaptativeSystemTrainer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdaptativeSystemTrainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Documents\StartPage.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\TableDataSourceEditor.resx">
       <SubType>Designer</SubType>

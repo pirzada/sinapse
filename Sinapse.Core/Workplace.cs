@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-using Sinapse.Core.Networks;
+using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Training;
 
@@ -56,7 +56,7 @@ namespace Sinapse.Core
         private String m_description;
         private DateTime m_creationTime;
 
-        private BindingList<AdaptativeSystemBase> m_networks;
+        private BindingList<NetworkSystemBase> m_networks;
         private BindingList<DataSourceBase> m_dataSources;
         private BindingList<TrainingSession> m_trainingSessions;
        
@@ -66,14 +66,14 @@ namespace Sinapse.Core
         public Workplace()
         {
             this.m_creationTime = DateTime.Now;
-            this.m_networks = new BindingList<AdaptativeSystemBase>();
+            this.m_networks = new BindingList<NetworkSystemBase>();
             this.m_dataSources = new BindingList<DataSourceBase>();
             this.m_trainingSessions = new BindingList<TrainingSession>();
         }
 
 
         #region Properties
-        public BindingList<AdaptativeSystemBase> Systems
+        public BindingList<NetworkSystemBase> Systems
         {
             get { return m_networks; }
         }
@@ -103,5 +103,9 @@ namespace Sinapse.Core
             get { return m_creationTime; }
         }
         #endregion
+    }
+
+    public class WorkplaceContent
+    {
     }
 }

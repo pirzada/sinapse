@@ -30,9 +30,13 @@ using WeifenLuo.WinFormsUI.Docking;
 using Sinapse.Data;
 using Sinapse.Windows;
 using Sinapse.Forms.Dialogs;
+using Sinapse.Documents;
 
 using Sinapse.Core;
-using Sinapse.Documents;
+using Sinapse.Core.Sources;
+using Sinapse.Core.Systems;
+using Sinapse.Core.Training;
+
 
 
 namespace Sinapse.Forms
@@ -60,139 +64,39 @@ namespace Sinapse.Forms
             InitializeComponent();
 
             this.windowWorkplace = new WorkplaceWindow();
-            this.windowWorkplace.Show(this.dockPanel1, DockState.DockLeft);
+            this.windowWorkplace.WorkplaceContentDoubleClicked += new WorkplaceContentDoubleClickedEventHandler(windowWorkplace_WorkplaceContentDoubleClicked);
+            this.windowWorkplace.Show(this.dockMain, DockState.DockLeft);
 
             this.windowProperties = new PropertyWindow();
             this.windowProperties.Show(this.windowWorkplace.Pane, DockAlignment.Bottom, 0.4);
 
             this.windowHistory = new HistoryWindow();
-            this.windowHistory.Show(this.dockPanel1, DockState.DockBottomAutoHide);
+            this.windowHistory.Show(this.dockMain, DockState.DockBottomAutoHide);
 
             this.windowTask = new TaskWindow();
-            this.windowTask.Show(this.dockPanel1, DockState.DockBottomAutoHide);
+            this.windowTask.Show(this.dockMain, DockState.DockBottomAutoHide);
 
             this.lbVersion.Text = "v" + Application.ProductVersion;
         }
-        #endregion
 
-
-        //---------------------------------------------
-
-
-        #region Properties
- /*       public NetworkContainer CurrentNetworkContainer
+        void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
-            get { return this.m_networkContainer; }
-            set
+            if (e.WorkplaceContent is TableDataSource)
             {
-                this.m_networkContainer = value;
-
-             //   this.tabControlSide.NetworkContainer = value;
-             //   this.tabControlMain.NetworkContainer = value;
-
-                bool notNull = (value != null);
-
-                if (notNull)
-                {
-
-                    if (this.m_networkDatabase != null)
-                        this.m_networkDatabase.Schema = this.m_networkContainer.Schema;
-
-
-                    this.m_networkContainer.ObjectSaved += new FileSystemEventHandler(currentNetwork_ObjectSaved);
-
-                    if (this.m_networkContainer.IsSaved)
-                        this.MenuNetworkSaveAs.Enabled = true;
-                    
-                }
-
-                this.createSession();
-                this.btnNetworkSave.Enabled = notNull;
-                this.MenuNetworkClose.Enabled = notNull;
-                this.MenuNetworkSave.Enabled = notNull;
-                this.MenuNetworkSaveAs.Enabled = notNull;
-                this.MenuNetworkWeights.Enabled = notNull;
-                this.MenuNetworkCodeGenerator.Enabled = notNull;
-
+                TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent as TableDataSource);
+                editor.Show(this.dockMain, DockState.Document);
+            }
+            else if (e.WorkplaceContent is NetworkSystemBase)
+            {
+                AdaptativeSystemEditor editor = new AdaptativeSystemEditor(e.WorkplaceContent as NetworkSystemBase);
+                editor.Show(this.dockMain, DockState.Document);
+            }
+            else if (e.WorkplaceContent is TrainingSession)
+            {
+                AdaptativeSystemTrainer editor = new AdaptativeSystemTrainer(e.WorkplaceContent as TrainingSession);
+                editor.Show(this.dockMain, DockState.Document);
             }
         }
-
-        public NetworkDatabase CurrentNetworkDatabase
-        {
-            get { return this.m_networkDatabase; }
-            set
-            {
-                this.m_networkDatabase = value;
-
-           //     this.tabControlSide.NetworkDatabase = value;
-           //     this.tabControlMain.NetworkDatabase = value;
-
-                bool notNull = (value != null);
-
-                if (notNull)
-                {
-                    this.m_networkDatabase.ObjectSaved += new FileSystemEventHandler(currentDatabase_ObjectSaved);
-
-                    if (this.m_networkDatabase.IsSaved)
-                        this.MenuDatabaseSaveAs.Enabled = true;
-                }
-
-                this.createSession();
-                this.btnDatabaseSave.Enabled = notNull;
-                this.MenuFileDatabaseClose.Enabled = notNull;
-                this.MenuDatabaseSave.Enabled = notNull;
-                this.MenuDatabaseSaveAs.Enabled = notNull;
-                this.MenuDatabaseEdit.Enabled = notNull;
-
-            }
-        }
-
-        public NetworkWorkplace CurrentNetworkWorkplace
-        {
-            get { return this.m_networkWorkplace; }
-            set
-            {
-                this.m_networkWorkplace = value;
-
-                bool notNull = (value != null);
-
-                if (notNull)
-                {
-                    this.m_networkWorkplace.ObjectSaved += new FileSystemEventHandler(currentWorkplace_ObjectSaved);
-                }
-                else
-                {
-                }
-
-                this.MenuWorkplaceClose.Enabled = notNull;
-            }
-        }
-
-        public TrainingSession CurrentTrainingSession
-        {
-            get { return this.m_trainingSession; }
-            set
-            {
-                this.m_trainingSession = value;
-
-                bool notNull = (value != null);
-
-                if (notNull)
-                {
-                    this.m_trainingSession.ObjectSaved += new FileSystemEventHandler(currentSession_ObjectSaved);
-                }
-                else
-                {
-                  //  this.CurrentNetworkDatabase = m_trainingSession.Database;
-                  //  this.CurrentNetworkContainer = m_trainingSession.Network;
-                }
-
-                this.MenuSessionClose.Enabled = notNull;
-            }
-        }
-
-        */
-       
         #endregion
 
 
@@ -926,8 +830,8 @@ namespace Sinapse.Forms
 
         private void systemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Sinapse.Documents.AdaptativeSystemEditor document = new AdaptativeSystemEditor();
-            document.Show(this.dockPanel1, DockState.Document);
+            Sinapse.Documents.AdaptativeSystemEditor document = new AdaptativeSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
+            document.Show(this.dockMain, DockState.Document);
         }
 
 

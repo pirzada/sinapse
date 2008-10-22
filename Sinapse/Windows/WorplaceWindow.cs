@@ -27,24 +27,22 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core;
-using Sinapse.Core.Networks;
+using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Training;
 
 namespace Sinapse.Windows
 {
+
     internal sealed partial class WorkplaceWindow : WeifenLuo.WinFormsUI.Docking.DockContent
     {
 
-       private TreeNode nodeSources;
-       private TreeNode nodeSystems;
-       private TreeNode nodeTraining;
-        private TreeNode rootWorkplace; 
+        private TreeNode nodeSources;
+        private TreeNode nodeSystems;
+        private TreeNode nodeTraining;
+        private TreeNode rootWorkplace;
 
-        public event EventHandler AddNewSource;
-        public event EventHandler AddNewSystem;
-        public event EventHandler AddNewSession;
-
+        public event WorkplaceContentDoubleClickedEventHandler WorkplaceContentDoubleClicked;
 
         #region Constructor
         public WorkplaceWindow()
@@ -52,10 +50,17 @@ namespace Sinapse.Windows
             InitializeComponent();
 
             nodeSources = new System.Windows.Forms.TreeNode("Sources", 1, 1);
+            nodeSources.ContextMenuStrip = this.menuSource;
+
             nodeSystems = new System.Windows.Forms.TreeNode("Systems", 1, 1);
+            nodeSystems.ContextMenuStrip = this.menuSystem;
+
             nodeTraining = new System.Windows.Forms.TreeNode("Trainings", 1, 1);
+            nodeTraining.ContextMenuStrip = this.menuTraining;
+
             rootWorkplace = new System.Windows.Forms.TreeNode("Workplace", new System.Windows.Forms.TreeNode[] {
                 nodeSources, nodeSystems, nodeTraining});
+
 
             Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
         }
@@ -74,23 +79,32 @@ namespace Sinapse.Windows
             if (Workplace.Active != null)
             {
                 this.label1.Hide();
-                this.treeView1.Enabled = true;
-                this.RefreshTreeView();
+                this.treeViewWorkplace.Enabled = true;
+                this.refreshView();
+
+                Workplace.Active.DataSources.ListChanged += new ListChangedEventHandler(WorkplaceContentChanged);
+                Workplace.Active.TrainingSessions.ListChanged += new ListChangedEventHandler(WorkplaceContentChanged);
+                Workplace.Active.Systems.ListChanged += new ListChangedEventHandler(WorkplaceContentChanged);
             }
             else
             {
-                this.treeView1.Nodes.Clear();
-                this.treeView1.Enabled = false;
+                this.treeViewWorkplace.Nodes.Clear();
+                this.treeViewWorkplace.Enabled = false;
                 this.label1.Show();
             }
         }
 
-        private void RefreshTreeView()
+        private void WorkplaceContentChanged(object sender, ListChangedEventArgs e)
         {
-            this.treeView1.SuspendLayout();
-            this.treeView1.Nodes.Clear();
+            this.refreshView();
+        }
+
+        private void refreshView()
+        {
+            this.treeViewWorkplace.SuspendLayout();
+            this.treeViewWorkplace.Nodes.Clear();
             TreeNode node;
-            foreach (AdaptativeSystemBase system in Workplace.Active.Systems)
+            foreach (NetworkSystemBase system in Workplace.Active.Systems)
             {
                 node = new TreeNode(system.Name, 1, 1);
                 node.Tag = system;
@@ -108,21 +122,55 @@ namespace Sinapse.Windows
                 node.Tag = session;
                 nodeTraining.Nodes.Add(node);
             }
-            this.treeView1.Nodes.Add(rootWorkplace);
-            this.treeView1.ExpandAll();
-            this.treeView1.ResumeLayout(true);
+            this.treeViewWorkplace.Nodes.Add(rootWorkplace);
+            this.treeViewWorkplace.ExpandAll();
+            this.treeViewWorkplace.ResumeLayout(true);
         }
 
         private void btnAddSourceTable_Click(object sender, EventArgs e)
         {
-            
+            TableDataSource item = new TableDataSource("TableDataSource");
+            Workplace.Active.DataSources.Add(item);
+
+            this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
+        }
+
+        private void treeViewWorkplace_DoubleClick(object sender, EventArgs e)
+        {
+            object tag = this.treeViewWorkplace.SelectedNode.Tag;
+
+            if (tag is WorkplaceContent)
+                this.OnWorkplaceContentDoubleClicked(
+                    new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceContent));
+        }
+
+        private void treeViewWorkplace_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void OnWorkplaceContentDoubleClicked(WorkplaceContentDoubleClickedEventArgs e)
+        {
+            if (this.WorkplaceContentDoubleClicked != null)
+                this.WorkplaceContentDoubleClicked.Invoke(this, e);
         }
     }
 
-    public delegate void SourceAddedEventHandler(SourceAddedEventArgs e, object sender);
-
-    public class SourceAddedEventArgs : EventArgs
+    #region Event Delegates & Arguments
+    internal delegate void WorkplaceContentDoubleClickedEventHandler(object sender, WorkplaceContentDoubleClickedEventArgs e);
+    internal sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
     {
-        
+        private WorkplaceContent workplaceContent;
+
+        public WorkplaceContent WorkplaceContent
+        {
+            get { return workplaceContent; }
+            set { workplaceContent = value; }
+        }
+        public WorkplaceContentDoubleClickedEventArgs(WorkplaceContent item)
+        {
+            this.workplaceContent = item;
+        }
     }
+    #endregion
 }

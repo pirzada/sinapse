@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sinapse.Core.Filters
 {
-    public interface ITextFilter : IDataFilter
+    class RotateTransform : IFilter
     {
     }
 }

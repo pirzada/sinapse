@@ -28,7 +28,7 @@ using System.IO;
 using AForge.Neuro;
 
 using Sinapse.Core;
-using Sinapse.Core.Networks;
+using Sinapse.Core.Systems;
 
 
 namespace Sinapse.Core.Training

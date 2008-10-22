@@ -17,59 +17,46 @@
  ***************************************************************************/
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 using AForge.Mathematics;
-using AForge.Statistics.DataAnalysis;
 
-
-namespace Sinapse.Core.Transformations
+namespace Sinapse.Core.Filters
 {
-
-    public class PrincipalComponent : Sinapse.Core.Transformations.ITransformation
+    public abstract class IFilter
     {
-        
-        private PrincipalComponentAnalysis pca;
-        private int m_components;
-        
+        public abstract object Input { get; set; }
+        public abstract object Output { get; protected set; }
+        public abstract void Apply();
+    }
 
-        // -------------------------------------------------
+    public class IFilterCollection : System.ComponentModel.BindingList<IFilter>
+    {
 
-
-        #region Constructor
-        public PrincipalComponent()
+        public IFilterCollection()
         {
-            throw new System.NotImplementedException();
-        }
-        #endregion
 
-        // -------------------------------------------------
-
-
-        #region Properties
-        public int Inputs
-        {
-            get { return pca.EigenValues.Length; }
         }
 
-        public int Outputs
+        public object Apply(object source)
         {
-            get { return m_components; }
+            try
+            {
+                foreach (IFilter filter in this)
+                {
+                    filter.Input = source;
+                    filter.Apply();
+                    source = filter.Output;
+                }
+            }
+            catch
+            {
+            }
+
+            return source;
         }
-        #endregion
-
-
-        // -------------------------------------------------
-
-
-        #region Public Members
-        public Matrix Apply(Matrix source)
-        {
-            return pca.Transform(source);
-        }
-        #endregion
-
 
     }
+
+    
 }

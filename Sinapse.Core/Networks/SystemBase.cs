@@ -23,16 +23,16 @@ using System.Text;
 using AForge.Neuro;
 using AForge.Mathematics;
 
-using Sinapse.Core.Transformations;
+using Sinapse.Core.Filters;
 
-namespace Sinapse.Core.Networks
+namespace Sinapse.Core.Systems
 {
 
     /// <summary>
     ///   This class encompass a Neural Network inside a Input/Output structure which can
     ///   perform transformations on such data before feeding/reading the network. 
     /// </summary>
-    public abstract class AdaptativeSystemBase
+    public abstract class NetworkSystemBase : WorkplaceContent
     {
 
         protected Network m_network;
@@ -42,30 +42,30 @@ namespace Sinapse.Core.Networks
         private String m_remarks;
         private DateTime m_creationTime;
 
-        private ITransformationCollection m_inputTransformations;
-        private ITransformationCollection m_outputTransformations;
+        private IFilterCollection m_inputTransformations;
+        private IFilterCollection m_outputTransformations;
 
         public event EventHandler NetworkContainerChanged;
 
         //----------------------------------------
 
         #region Constructor
-        protected AdaptativeSystemBase()
+        protected NetworkSystemBase()
         {
-            m_inputTransformations = new ITransformationCollection();
-            m_outputTransformations = new ITransformationCollection();
+            m_inputTransformations = new IFilterCollection();
+            m_outputTransformations = new IFilterCollection();
         }
         #endregion
 
         //----------------------------------------
 
         #region Properties
-        public ITransformationCollection InputTransformations
+        public IFilterCollection InputTransforms
         {
             get { return m_inputTransformations; }
         }
 
-        public ITransformationCollection OutputTransformations
+        public IFilterCollection OutputTransforms
         {
             get { return m_outputTransformations; }
         }
@@ -114,12 +114,35 @@ namespace Sinapse.Core.Networks
         }
         #endregion
 
+        public SystemInputOutputCollection Inputs
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public SystemInputOutputCollection Outputs
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         //----------------------------------------
 
         #region Public Methods
         public Matrix Compute(Matrix inputs)
         {
-            inputs = this.InputTransformations.Apply(inputs);
+            throw new NotImplementedException();
+            inputs = (Matrix)this.InputTransforms.Apply(inputs);
             
             Matrix outputs = new Matrix(inputs.Rows, this.Network.OutputsCount);
             for (int i = 0; i < inputs.Rows; i++)
@@ -127,13 +150,14 @@ namespace Sinapse.Core.Networks
                 outputs[i] = Network.Compute(inputs[i]);
             }
 
-            return this.OutputTransformations.Apply(outputs);
+            return (Matrix)this.OutputTransforms.Apply(outputs);
         }
 
         public Vector Compute(Vector inputs)
         {
-            inputs = this.InputTransformations.Apply((Matrix)inputs)[0];
-            return this.OutputTransformations.Apply((Matrix)Network.Compute(inputs))[0];
+            throw new NotImplementedException();
+            //inputs = this.InputTransforms.Apply((Matrix)inputs)[0];
+            //return this.OutputTransforms.Apply((Matrix)Network.Compute(inputs))[0];
         }
         #endregion
 

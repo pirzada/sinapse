@@ -4,9 +4,9 @@ using System.Text;
 
 using AForge.Neuro;
 
-namespace Sinapse.Core.Networks
+namespace Sinapse.Core.Systems
 {
-    public class DistanceNetworkSystem : AdaptativeSystemBase
+    public class DistanceNetworkSystem : NetworkSystemBase
     {
 
         public DistanceNetworkSystem(int inputsCount, int neuronsCount)
