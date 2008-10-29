@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Collections;
+using System.ComponentModel;
 
 using AForge.Mathematics;
 using AForge;
@@ -39,9 +40,8 @@ namespace Sinapse.Core.Sources
     {
 
         /// <summary>
-        /// The DataSet which holds the actual data. The first table (accessible by index 0) holds the actual data, the second table on the set holds the categories
+        ///   The DataTable which holds the actual data.
         /// </summary>
-        private DataSet m_dataSet;
         private DataTable m_dataTable;
         private TableDataSourceColumnCollection m_columns;
 
@@ -50,38 +50,30 @@ namespace Sinapse.Core.Sources
         #region Constructor
         /// <summary>Creates a new NetworkTableSource object.</summary>
         /// <param name="dataTable">A DataTable which will be deep copied into this object.</param>
-        public TableDataSource(String title, DataTable dataTable)
-            : base(title)
+        public TableDataSource(DataTable dataTable)
+            : base(dataTable.TableName)
         {
-            this.m_dataSet = new DataSet(title);
             this.m_dataTable = dataTable.Copy();
-            this.m_dataSet.Tables.Add(m_dataTable);
-
-            // For each column, create other 2 columns: columnName_networkanswer, columnName_networkdelta
-            // if the column is a category, create another column columnName_index and another table
-            // with the same name.
-
+     
             TableDataSourceColumn[] columns = new TableDataSourceColumn[m_dataTable.Columns.Count];
             for (int i = 0; i < columns.Length; i++)
             {
-                // User will determine the type of the data or it will be selected based on data type?
                 columns[i] = new TableDataSourceColumn(m_dataTable.Columns[i]); 
             }
 
-          //  this.m_columns = new NetworkTableColumnCollection(dataTable);
+            this.m_columns = new TableDataSourceColumnCollection(columns);
         }
 
         public TableDataSource(String title, TableDataSourceColumn[] columns)
             : base(title)
         {
-            this.m_dataSet = new DataSet(title);
-            this.m_dataTable = new DataTable();
+            this.m_dataTable = new DataTable(title);
 
             this.m_columns = new TableDataSourceColumnCollection(columns);
         }
 
         public TableDataSource(String title)
-            : this(title, new DataTable())
+            : this(new DataTable(title))
         {
         }
         #endregion
@@ -89,9 +81,16 @@ namespace Sinapse.Core.Sources
         //----------------------------------------
 
         #region Properties
+        [Browsable(false)]
         public TableDataSourceColumnCollection Columns
         {
             get { return this.m_columns; }
+        }
+
+        [Browsable(false)]
+        public DataTable Data
+        {
+            get { return this.m_dataTable; }
         }
         #endregion
 
@@ -100,6 +99,7 @@ namespace Sinapse.Core.Sources
         #region Public Methods
 
         #endregion
+
 
     }
 
@@ -164,10 +164,7 @@ namespace Sinapse.Core.Sources
         public TableDataSourceColumnRole Role
         {
             get { return this.m_columnRole; }
-            set
-            {
-                    this.m_columnRole = value;
-            }
+            set { this.m_columnRole = value; }
         }
 
         public SystemInputOutputDataType DataType
@@ -178,13 +175,7 @@ namespace Sinapse.Core.Sources
                     this.m_columnDataType = value;
             }
         }
-        /*
-        public ColumnRelevance Relevance
-        {
-            get { return this.m_columnRelevance; }
-            set { this.m_columnRelevance = value; }
-        }
-        */
+
         public DataColumn DataColumn
         {
             get { return this.m_dataColumn; }
@@ -204,27 +195,11 @@ namespace Sinapse.Core.Sources
 
         // --------------------------------------
 
-        /*
-        private void getCaptions()
-        {
-            if (this.m_columnData == ColumnData.Categoric)
-            {
-                
-                //Extract Unique List from data:
-                DataTable captions = this.m_relatedDataColumn.Table.DefaultView.ToTable(true, new string[] { this.m_relatedDataColumn.ColumnName });
-
-                for (int i = 0; i < captions.Rows; i++)
-                {
-                //    this.m_categoryMap.Add(i, 
-                }
-            }
-        }
-         */ 
     }
 
     [Serializable]
     public sealed class TableDataSourceColumnCollection :
-        System.Collections.ObjectModel.ReadOnlyCollection<TableDataSourceColumn>
+        System.ComponentModel.BindingList<TableDataSourceColumn>
     {
 
 

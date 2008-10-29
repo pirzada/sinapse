@@ -23,15 +23,28 @@ namespace Sinapse.Documents
             InitializeComponent();
 
             this.tableSource = source;
+            this.tableSource.NameChanged += new EventHandler(tableSource_NameChanged);
+
+            this.updateName();
+        }
+
+        private void tableSource_NameChanged(object sender, EventArgs e)
+        {
+            this.updateName();
+        }
+
+        private void updateName()
+        {
+            this.Text = String.Format("{0} - Data Source Editor", this.tableSource.Name);
         }
 
 
         private void TableDataSourceEditor_Load(object sender, EventArgs e)
         {
-            if (tableSource != null)
+            if (this.tableSource != null)
             {
-         //       this.dgvViewer.DataSource = this.tableSource.CreateDataView(NetworkDataSet.All);
-         //       this.dgvColumns.DataSource = this.tableSource.Columns;
+                this.dgvViewer.DataSource = this.tableSource.Data;
+                this.dgvColumns.DataSource = this.tableSource.Columns;
             }
         }
 

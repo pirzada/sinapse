@@ -63,8 +63,11 @@ namespace Sinapse.Forms
             
             InitializeComponent();
 
+            this.SuspendLayout();
             this.windowWorkplace = new WorkplaceWindow();
             this.windowWorkplace.WorkplaceContentDoubleClicked += new WorkplaceContentDoubleClickedEventHandler(windowWorkplace_WorkplaceContentDoubleClicked);
+            this.windowWorkplace.GotFocus += new EventHandler(windowWorkplace_GotFocus);
+            this.windowWorkplace.SelectionChanged += new TreeViewEventHandler(windowWorkplace_SelectionChanged);
             this.windowWorkplace.Show(this.dockMain, DockState.DockLeft);
 
             this.windowProperties = new PropertyWindow();
@@ -77,26 +80,11 @@ namespace Sinapse.Forms
             this.windowTask.Show(this.dockMain, DockState.DockBottomAutoHide);
 
             this.lbVersion.Text = "v" + Application.ProductVersion;
+            this.ResumeLayout(true);
         }
 
-        void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
-        {
-            if (e.WorkplaceContent is TableDataSource)
-            {
-                TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent as TableDataSource);
-                editor.Show(this.dockMain, DockState.Document);
-            }
-            else if (e.WorkplaceContent is NetworkSystemBase)
-            {
-                AdaptativeSystemEditor editor = new AdaptativeSystemEditor(e.WorkplaceContent as NetworkSystemBase);
-                editor.Show(this.dockMain, DockState.Document);
-            }
-            else if (e.WorkplaceContent is TrainingSession)
-            {
-                AdaptativeSystemTrainer editor = new AdaptativeSystemTrainer(e.WorkplaceContent as TrainingSession);
-                editor.Show(this.dockMain, DockState.Document);
-            }
-        }
+
+        
         #endregion
 
 
@@ -118,6 +106,11 @@ namespace Sinapse.Forms
                     this.WindowState = Properties.Settings.Default.main_WindowState;
                 }
 
+                if (Properties.Settings.Default.behaviour_ShowStartPage)
+                {
+                    StartPage page = new StartPage();
+                    page.Show(this.dockMain, DockState.Document);
+                }
                 // Wire up controls and events
             //    this..TrainerControl.GraphControl = this.tabControlMain.GraphControl;
             //    this.tabControlMain.GraphControl.NetworkTrainer = this.tabControlSide.TrainerControl;
@@ -195,37 +188,35 @@ namespace Sinapse.Forms
 
         //---------------------------------------------
 
-
-        #region Main Tab Control Events
-        private void tabControlMain_SelectionChanged(object sender, EventArgs e)
+        #region Window Workplace Events
+        private void windowWorkplace_GotFocus(object sender, EventArgs e)
         {
-   //         this.statusBarControl.UpdateSelectedItems(tabControlMain.SelectedItemCount, tabControlMain.ItemCount);
+            if (this.windowProperties != null)
+                this.windowProperties.PropertyGrid.SelectedObject = this.windowWorkplace.SelectedItem;
         }
 
-        private void tabControlMain_SelectedControlChanged(object sender, EventArgs e)
+        private void windowWorkplace_SelectionChanged(object sender, TreeViewEventArgs e)
         {
-           
-        }
-        #endregion
-
-
-        //---------------------------------------------
-
-
-        #region Network Trainer Control Events
-        private void sideTrainerControl_StatusChanged(object sender, EventArgs e)
-        {
-            //this.statusBarControl.UpdateNetworkState(this.CurrentTrainingSession.NetworkState);
-    //        this.statusBarControl.UpdateNetworkState(this.tabControlSide.TrainerControl.NetworkState);
+            if (this.windowProperties != null)
+                this.windowProperties.PropertyGrid.SelectedObject = this.windowWorkplace.SelectedItem;
         }
 
-        private void sideTrainerControl_TrainingComplete(object sender, EventArgs e)
+        private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
-            if (MessageBox.Show("Training completed. Would you like to start querying the Network?",
-                "Done", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            if (e.WorkplaceContent is TableDataSource)
             {
-                this.MenuNetworkQuery_Click(this, EventArgs.Empty);
+                TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent as TableDataSource);
+                editor.Show(this.dockMain, DockState.Document);
+            }
+            else if (e.WorkplaceContent is NetworkSystemBase)
+            {
+                AdaptativeSystemEditor editor = new AdaptativeSystemEditor(e.WorkplaceContent as NetworkSystemBase);
+                editor.Show(this.dockMain, DockState.Document);
+            }
+            else if (e.WorkplaceContent is TrainingSession)
+            {
+                AdaptativeSystemTrainer editor = new AdaptativeSystemTrainer(e.WorkplaceContent as TrainingSession);
+                editor.Show(this.dockMain, DockState.Document);
             }
         }
         #endregion
@@ -233,18 +224,6 @@ namespace Sinapse.Forms
 
         //---------------------------------------------
 
-
-        #region Object Events
-
-
-        private void currentWorkplace_ObjectSaved(object sender, FileSystemEventArgs e)
-        {
-        }
-
-        private void currentSession_ObjectSaved(object sender, EventArgs e)
-        {
-        }
-        #endregion
 
 
         //---------------------------------------------

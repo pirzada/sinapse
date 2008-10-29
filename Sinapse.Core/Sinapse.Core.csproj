@@ -61,15 +61,16 @@
     <Compile Include="Filters\Table\TableToMatrix.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Networks\ActivationNetworkSystem.cs" />
-    <Compile Include="Networks\DistanceNetworkSystem.cs" />
     <Compile Include="Sources\ImageDataSource.cs" />
-    <Compile Include="Networks\SystemBase.cs" />
     <Compile Include="Sources\DataSourceBase.cs" />
     <Compile Include="Sources\SoundDataSource.cs" />
     <Compile Include="Sources\TableDataSource.cs" />
     <Compile Include="Sources\VideoDataSource.cs" />
-    <Compile Include="Networks\SystemInputOutput.cs" />
+    <Compile Include="Systems\ActivationNetworkSystem.cs" />
+    <Compile Include="Systems\NetworkSystemBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Systems\SystemInputOutput.cs" />
     <Compile Include="Training\TrainingStep.cs" />
     <Compile Include="Training\MultipleTrainingSession.cs" />
     <Compile Include="Training\TrainingOptions.cs" />

@@ -105,6 +105,8 @@ namespace Sinapse.Forms
             this.btnWizard = new System.Windows.Forms.ToolStripButton();
             this.toolStripPanel1 = new System.Windows.Forms.ToolStripPanel();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -148,6 +150,8 @@ namespace Sinapse.Forms
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuFile,
+            this.editToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.MenuExtensionsExcel,
             this.MenuHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 50);
@@ -186,27 +190,27 @@ namespace Sinapse.Forms
             // workplaceToolStripMenuItem
             // 
             this.workplaceToolStripMenuItem.Name = "workplaceToolStripMenuItem";
-            this.workplaceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.workplaceToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.workplaceToolStripMenuItem.Text = "Workplace";
             this.workplaceToolStripMenuItem.Click += new System.EventHandler(this.workplaceToolStripMenuItem_Click);
             // 
             // systemToolStripMenuItem
             // 
             this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.systemToolStripMenuItem.Text = "System";
             this.systemToolStripMenuItem.Click += new System.EventHandler(this.systemToolStripMenuItem_Click);
             // 
             // dataSourceToolStripMenuItem
             // 
             this.dataSourceToolStripMenuItem.Name = "dataSourceToolStripMenuItem";
-            this.dataSourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataSourceToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.dataSourceToolStripMenuItem.Text = "Source";
             // 
             // trainingSessionToolStripMenuItem
             // 
             this.trainingSessionToolStripMenuItem.Name = "trainingSessionToolStripMenuItem";
-            this.trainingSessionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.trainingSessionToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.trainingSessionToolStripMenuItem.Text = "Session";
             // 
             // MenuFileWizard
@@ -551,14 +555,26 @@ namespace Sinapse.Forms
             this.toolStripPanel1.RowMargin = new System.Windows.Forms.Padding(0);
             this.toolStripPanel1.Size = new System.Drawing.Size(892, 25);
             // 
-            // dockPanel1
+            // dockMain
             // 
             this.dockMain.ActiveAutoHideContent = null;
             this.dockMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockMain.Location = new System.Drawing.Point(0, 99);
-            this.dockMain.Name = "dockPanel1";
+            this.dockMain.Name = "dockMain";
             this.dockMain.Size = new System.Drawing.Size(892, 552);
             this.dockMain.TabIndex = 21;
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // MainForm
             // 
@@ -650,5 +666,7 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnWizard;
         private System.Windows.Forms.ToolStripPanel toolStripPanel1;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
     }
 }

@@ -45,6 +45,8 @@ namespace Sinapse.Core.Sources
         private String m_description;
         private String m_remarks;
 
+        public event EventHandler NameChanged;
+
         //----------------------------------------
 
         #region Constructor
@@ -62,7 +64,13 @@ namespace Sinapse.Core.Sources
         public String Name
         {
             get { return this.m_title; }
-            set { this.m_title = value; }
+            set
+            {
+                this.m_title = value;
+
+                if (this.NameChanged != null)
+                    this.NameChanged.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public String Description
@@ -79,7 +87,6 @@ namespace Sinapse.Core.Sources
         #endregion
 
         //----------------------------------------
-
 
 
     }
