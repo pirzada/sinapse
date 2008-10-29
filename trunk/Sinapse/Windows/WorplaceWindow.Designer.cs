@@ -53,19 +53,14 @@ namespace Sinapse.Windows
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbNothingToShow = new System.Windows.Forms.Label();
             this.menuTraining = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSystem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.activationNetworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.distanceNetworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuSource.SuspendLayout();
             this.menuTraining.SuspendLayout();
@@ -154,7 +149,7 @@ namespace Sinapse.Windows
             this.btnAddSourceTable.Name = "btnAddSourceTable";
             this.btnAddSourceTable.Size = new System.Drawing.Size(151, 22);
             this.btnAddSourceTable.Text = "Table Source";
-            this.btnAddSourceTable.Click += new System.EventHandler(this.btnAddSourceTable_Click);
+            this.btnAddSourceTable.Click += new System.EventHandler(this.menuSourceAddTable_Click);
             // 
             // imageSourceToolStripMenuItem
             // 
@@ -240,39 +235,39 @@ namespace Sinapse.Windows
             // tableToolStripMenuItem
             // 
             this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            this.tableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.tableToolStripMenuItem.Text = "Table";
-            this.tableToolStripMenuItem.Click += new System.EventHandler(this.btnAddSourceTable_Click);
+            this.tableToolStripMenuItem.Click += new System.EventHandler(this.menuSourceAddTable_Click);
             // 
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.imageToolStripMenuItem.Text = "Image";
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.videoToolStripMenuItem.Text = "Video";
             // 
             // soundToolStripMenuItem
             // 
             this.soundToolStripMenuItem.Name = "soundToolStripMenuItem";
-            this.soundToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.soundToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.soundToolStripMenuItem.Text = "Sound";
             // 
-            // label1
+            // lbNothingToShow
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.Window;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(0, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(273, 357);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "No Workplace loaded. Please click the \'New\' menu  and select \'Workplace\' to begin" +
+            this.lbNothingToShow.BackColor = System.Drawing.SystemColors.Window;
+            this.lbNothingToShow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbNothingToShow.Location = new System.Drawing.Point(0, 25);
+            this.lbNothingToShow.Name = "lbNothingToShow";
+            this.lbNothingToShow.Size = new System.Drawing.Size(273, 357);
+            this.lbNothingToShow.TabIndex = 2;
+            this.lbNothingToShow.Text = "No Workplace loaded. Please click the \'New\' menu  and select \'Workplace\' to begin" +
                 ".";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbNothingToShow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuTraining
             // 
@@ -284,86 +279,54 @@ namespace Sinapse.Windows
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
             this.toolStripMenuItem5});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(104, 22);
             this.toolStripMenuItem1.Text = "Add";
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem2.Text = "Table";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem3.Text = "Image";
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem4.Text = "Video";
-            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem5.Text = "Sound";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem5.Text = "Training Session";
             // 
             // menuSystem
             // 
             this.menuSystem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem6});
             this.menuSystem.Name = "contextMenuStrip1";
-            this.menuSystem.Size = new System.Drawing.Size(105, 26);
+            this.menuSystem.Size = new System.Drawing.Size(153, 48);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8,
-            this.toolStripMenuItem9,
-            this.toolStripMenuItem10});
+            this.activationNetworkToolStripMenuItem,
+            this.distanceNetworkToolStripMenuItem});
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem6.Text = "Add";
             // 
-            // toolStripMenuItem7
+            // activationNetworkToolStripMenuItem
             // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem7.Text = "Table";
+            this.activationNetworkToolStripMenuItem.Name = "activationNetworkToolStripMenuItem";
+            this.activationNetworkToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.activationNetworkToolStripMenuItem.Text = "Activation Network";
+            this.activationNetworkToolStripMenuItem.Click += new System.EventHandler(this.menuSystemAddNetworkActivation_Click);
             // 
-            // toolStripMenuItem8
+            // distanceNetworkToolStripMenuItem
             // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem8.Text = "Image";
-            // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem9.Text = "Video";
-            // 
-            // toolStripMenuItem10
-            // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(115, 22);
-            this.toolStripMenuItem10.Text = "Sound";
+            this.distanceNetworkToolStripMenuItem.Enabled = false;
+            this.distanceNetworkToolStripMenuItem.Name = "distanceNetworkToolStripMenuItem";
+            this.distanceNetworkToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.distanceNetworkToolStripMenuItem.Text = "Distance Network";
+            this.distanceNetworkToolStripMenuItem.Click += new System.EventHandler(this.menuSystemAddNetworkDistance_Click);
             // 
             // WorkplaceWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(273, 382);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbNothingToShow);
             this.Controls.Add(this.treeViewWorkplace);
             this.Controls.Add(this.toolStrip1);
             this.Name = "WorkplaceWindow";
@@ -399,7 +362,7 @@ namespace Sinapse.Windows
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbNothingToShow;
         private System.Windows.Forms.ToolStripMenuItem addNewSourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
@@ -407,15 +370,10 @@ namespace Sinapse.Windows
         private System.Windows.Forms.ToolStripMenuItem soundToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip menuTraining;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ContextMenuStrip menuSystem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem activationNetworkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem distanceNetworkToolStripMenuItem;
     }
 }

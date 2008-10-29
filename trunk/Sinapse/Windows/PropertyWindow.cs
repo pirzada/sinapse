@@ -12,9 +12,16 @@ namespace Sinapse.Windows
 {
     public partial class PropertyWindow : DockContent
     {
+
         public PropertyWindow()
         {
             InitializeComponent();
         }
+
+        public PropertyGrid PropertyGrid
+        {
+            get { return this.propertyGrid; }
+        }
+
     }
 }

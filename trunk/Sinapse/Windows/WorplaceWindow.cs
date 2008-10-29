@@ -44,6 +44,7 @@ namespace Sinapse.Windows
 
         public event WorkplaceContentDoubleClickedEventHandler WorkplaceContentDoubleClicked;
 
+
         #region Constructor
         public WorkplaceWindow()
         {
@@ -67,43 +68,80 @@ namespace Sinapse.Windows
         #endregion
 
 
-        #region Form Events
-        protected override void OnLoad(EventArgs e)
+        #region Properties
+        public WorkplaceContent SelectedItem
         {
-            base.OnLoad(e);
+            get
+            {
+                if (this.treeViewWorkplace.SelectedNode != null)
+                {
+                    object tag = this.treeViewWorkplace.SelectedNode.Tag;
+
+                    if (tag is WorkplaceContent)
+                        return tag as WorkplaceContent;
+                }
+                return null;
+            }
+        }
+
+        public event TreeViewEventHandler SelectionChanged
+        {
+            add { this.treeViewWorkplace.AfterSelect += value; }
+            remove { this.treeViewWorkplace.AfterSelect -= value; }
+        }
+
+        public new event EventHandler DoubleClick
+        {
+            add { this.treeViewWorkplace.DoubleClick += value; }
+            remove { this.treeViewWorkplace.DoubleClick -= value; }
         }
         #endregion
 
+
+        #region Form Events
+        #endregion
+
+        #region Workplace Events
         private void Workplace_ActiveWorkplaceChanged(object sender, EventArgs e)
         {
+            // If we have an active workplace,
             if (Workplace.Active != null)
             {
-                this.label1.Hide();
+                // Lets hide the "Nothing to show" label and populate the tree view
+                this.lbNothingToShow.Hide();
                 this.treeViewWorkplace.Enabled = true;
-                this.refreshView();
+                this.populateTreeView();
 
-                Workplace.Active.DataSources.ListChanged += new ListChangedEventHandler(WorkplaceContentChanged);
-                Workplace.Active.TrainingSessions.ListChanged += new ListChangedEventHandler(WorkplaceContentChanged);
-                Workplace.Active.Systems.ListChanged += new ListChangedEventHandler(WorkplaceContentChanged);
+                // And also register the events for the new workplace
+                Workplace.Active.DataSources.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
+                Workplace.Active.TrainingSessions.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
+                Workplace.Active.Systems.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
             }
             else
             {
+                // Otherwise, we hide everything and show a "Nothing to show"
+                //   text label on the middle of the control.
                 this.treeViewWorkplace.Nodes.Clear();
                 this.treeViewWorkplace.Enabled = false;
-                this.label1.Show();
+                this.lbNothingToShow.Show();
             }
         }
 
-        private void WorkplaceContentChanged(object sender, ListChangedEventArgs e)
-        {
-            this.refreshView();
-        }
 
-        private void refreshView()
+        private void Workplace_ContentChanged(object sender, ListChangedEventArgs e)
+        {
+            this.populateTreeView();
+        }
+        #endregion
+
+
+        #region TreeView Methods
+        private void populateTreeView()
         {
             this.treeViewWorkplace.SuspendLayout();
             this.treeViewWorkplace.Nodes.Clear();
             TreeNode node;
+
             foreach (NetworkSystemBase system in Workplace.Active.Systems)
             {
                 node = new TreeNode(system.Name, 1, 1);
@@ -122,18 +160,14 @@ namespace Sinapse.Windows
                 node.Tag = session;
                 nodeTraining.Nodes.Add(node);
             }
+
             this.treeViewWorkplace.Nodes.Add(rootWorkplace);
             this.treeViewWorkplace.ExpandAll();
             this.treeViewWorkplace.ResumeLayout(true);
         }
+        #endregion
 
-        private void btnAddSourceTable_Click(object sender, EventArgs e)
-        {
-            TableDataSource item = new TableDataSource("TableDataSource");
-            Workplace.Active.DataSources.Add(item);
 
-            this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
-        }
 
         private void treeViewWorkplace_DoubleClick(object sender, EventArgs e)
         {
@@ -154,6 +188,32 @@ namespace Sinapse.Windows
             if (this.WorkplaceContentDoubleClicked != null)
                 this.WorkplaceContentDoubleClicked.Invoke(this, e);
         }
+
+        #region Menu Events
+        private void menuSourceAddTable_Click(object sender, EventArgs e)
+        {
+            TableDataSource item = new TableDataSource("TableDataSource");
+            Workplace.Active.DataSources.Add(item);
+
+            this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
+        }
+
+        private void menuSystemAddNetworkActivation_Click(object sender, EventArgs e)
+        {
+            ActivationNetworkSystem item = new ActivationNetworkSystem();
+            Workplace.Active.Systems.Add(item);
+
+            // Update
+            this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
+        }
+
+        private void menuSystemAddNetworkDistance_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+
     }
 
     #region Event Delegates & Arguments
@@ -173,4 +233,5 @@ namespace Sinapse.Windows
         }
     }
     #endregion
+
 }
