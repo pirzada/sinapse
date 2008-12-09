@@ -34,7 +34,7 @@ using Sinapse.Core.Systems;
 namespace Sinapse.Core.Training
 {
     /// <summary>
-    /// Stores a network state
+    /// A Savepoint stores the Network state during a Training Session.
     /// </summary>
     [Serializable]
     public sealed class TrainingSavepoint

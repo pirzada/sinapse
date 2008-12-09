@@ -31,7 +31,9 @@ namespace Sinapse.Core.Filters
     {
         
         private PrincipalComponentAnalysis pca;
-        private int m_components;
+        private Matrix input;
+        private Matrix output;
+        private int components;
         
 
         // -------------------------------------------------
@@ -44,32 +46,49 @@ namespace Sinapse.Core.Filters
         }
         #endregion
 
-        // -------------------------------------------------
-
-
-        #region Properties
-        public int Inputs
-        {
-            get { return pca.EigenValues.Length; }
-        }
-
-        public int Outputs
-        {
-            get { return m_components; }
-        }
-        #endregion
-
 
         // -------------------------------------------------
 
 
-        #region Public Members
-        public Matrix Apply(Matrix source)
+
+        #region IFilter Members
+
+        public object Input
         {
-            return pca.Transform(source);
+            get { return input; }
+            set { this.input = (Matrix)value; }
         }
+
+        public object Output
+        {
+            get { return output; }
+            set { throw new InvalidOperationException(); }
+        }
+
+        public void Apply()
+        {
+            output = pca.Transform(input);
+        }
+
+        public System.Windows.Forms.Control Control
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Name
+        {
+            get { return "Principal Component Filter"; }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return "Projects the given input into an orthogonal space based on the " +
+                         "feature vectors of a Principal Component Analysis.";
+            }
+        }
+
         #endregion
-
-
     }
 }

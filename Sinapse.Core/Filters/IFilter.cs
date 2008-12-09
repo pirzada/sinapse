@@ -23,11 +23,20 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Filters
 {
-    public abstract class IFilter
+    /// <summary>
+    /// A Filter is a proccess from which a Input is processed and then transformed in a Output. Some transformations are reversible, where others are not.
+    /// </summary>
+    /// <remarks>This is a Interface and thus cannot be instantiated.</remarks>
+    public interface IFilter
     {
-        public abstract object Input { get; set; }
-        public abstract object Output { get; protected set; }
-        public abstract void Apply();
+        object Input { get; set; }
+        object Output { get; set; }
+        void Apply();
+
+        string Name { get; }
+        string Description { get; }
+
+        System.Windows.Forms.Control Control { get; }
     }
 
     public class IFilterCollection : System.ComponentModel.BindingList<IFilter>
@@ -49,7 +58,10 @@ namespace Sinapse.Core.Filters
                     source = filter.Output;
                 }
             }
-            catch
+            catch (InputMismatchException ex)
+            {
+            }
+            catch (Exception ex)
             {
             }
 

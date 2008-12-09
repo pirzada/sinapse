@@ -12,12 +12,12 @@ using Sinapse.Core.Systems;
 
 namespace Sinapse.Documents
 {
-    public partial class AdaptativeSystemEditor : DockContent
+    public partial class AdaptiveSystemEditor : DockContent
     {
 
-        private NetworkSystemBase system;
+        private NetworkSystem system;
 
-        public AdaptativeSystemEditor(NetworkSystemBase system)
+        public AdaptiveSystemEditor(NetworkSystem system)
         {
             InitializeComponent();
             this.system = system;

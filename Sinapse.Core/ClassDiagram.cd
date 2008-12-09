@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Font Name="Tahoma" Size="8.25" />
-  <Class Name="Sinapse.Core.Filters.IFilterCollection" Collapsed="true">
-    <Position X="15.75" Y="3.75" Width="2" />
+  <Class Name="Sinapse.Core.Filters.IFilterCollection">
+    <Position X="15.25" Y="2.5" Width="2" />
     <TypeIdentifier>
       <FileName>Filters\IFilter.cs</FileName>
       <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Sinapse.Core.Sources.TableDataSource">
-    <Position X="15.25" Y="12.25" Width="1.75" />
+    <Position X="22.25" Y="24" Width="2" />
     <TypeIdentifier>
       <FileName>Sources\TableDataSource.cs</FileName>
-      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAACAAgAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="m_columns" />
@@ -22,104 +22,57 @@
     </Compartments>
     <AssociationLine Name="m_columns" Type="Sinapse.Core.Sources.TableDataSourceColumnCollection" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="15.25" Y="12.652" />
-        <Point X="13.25" Y="12.652" />
-        <Point X="13.25" Y="13.25" />
+        <Point X="22.25" Y="24.402" />
+        <Point X="20.25" Y="24.402" />
+        <Point X="20.25" Y="25" />
       </Path>
     </AssociationLine>
   </Class>
-  <Class Name="Sinapse.Core.Sources.ImageDataSource" Collapsed="true">
-    <Position X="19.5" Y="12.25" Width="1.75" />
+  <Class Name="Sinapse.Core.Sources.ImageDataSource">
+    <Position X="28.5" Y="24" Width="1.75" />
     <TypeIdentifier>
       <FileName>Sources\ImageDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Systems.NetworkSystemBase">
-    <Position X="12.75" Y="2.25" Width="2.25" />
+  <Class Name="Sinapse.Core.Systems.NetworkSystem">
+    <Position X="15.25" Y="6.25" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Networks\SystemBase.cs</FileName>
-      <HashCode>FEAAAAAAAIAgIAAAAAAAgAQIkQAAAEAAAQAAgAxACAA=</HashCode>
+      <FileName>Systems\Network\NetworkSystem.cs</FileName>
+      <HashCode>EEAAAAAAAAAAIAAAAAAAgAAIgQAAAAAAAQAAAAxAAAA=</HashCode>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="InputTransforms" />
-      <Property Name="OutputTransforms" />
-      <Property Name="Inputs" />
-      <Property Name="Outputs" />
-    </ShowAsAssociation>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
-    <AssociationLine Name="InputTransforms" Type="Sinapse.Core.Filters.IFilterCollection" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="15" Y="4.77" />
-        <Point X="16.688" Y="4.77" />
-        <Point X="16.688" Y="4.38" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
-        <Position X="0.088" Y="0.51" Height="0.16" Width="1.438" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="OutputTransforms" Type="Sinapse.Core.Filters.IFilterCollection" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="15" Y="3.098" />
-        <Point X="16.688" Y="3.098" />
-        <Point X="16.688" Y="3.75" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
-        <Position X="0.203" Y="0.305" Height="0.16" Width="1.318" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="Inputs" Type="Sinapse.Core.SystemInputOutputCollection" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="12.75" Y="4.871" />
-        <Point X="11" Y="4.871" />
-        <Point X="11" Y="4.38" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.235" Y="0.22" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="Outputs" Type="Sinapse.Core.SystemInputOutputCollection" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="12.75" Y="3" />
-        <Point X="10.938" Y="3" />
-        <Point X="10.938" Y="3.75" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.414" Y="0.454" />
-      </MemberNameLabel>
-    </AssociationLine>
   </Class>
-  <Class Name="Sinapse.Core.Sources.SoundDataSource" Collapsed="true">
-    <Position X="17.5" Y="12.25" Width="1.75" />
+  <Class Name="Sinapse.Core.Sources.SoundDataSource">
+    <Position X="25.5" Y="24" Width="2" />
     <TypeIdentifier>
       <FileName>Sources\SoundDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Sources.VideoDataSource" Collapsed="true">
-    <Position X="21.5" Y="12.25" Width="1.75" />
+  <Class Name="Sinapse.Core.Sources.VideoDataSource">
+    <Position X="31" Y="24" Width="1.75" />
     <TypeIdentifier>
       <FileName>Sources\VideoDataSource.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Sinapse.Core.Training.TrainingSession">
-    <Position X="24.5" Y="7" Width="2" />
+    <Position X="35" Y="8.75" Width="3" />
     <TypeIdentifier>
       <FileName>Training\TrainingSession.cs</FileName>
-      <HashCode>AEAkQAAEAiIAAEIAAAiAAAwAAFIEAIAAIAAgAoAAAIA=</HashCode>
+      <HashCode>AEQhAICEAKIgJEIAAAIAAAQAAEIEAAABIAAwAAAAIIA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_options" />
-      <Field Name="m_status" />
-      <Field Name="m_savepoints" />
-      <Field Name="m_trainingSteps" />
+      <Field Name="options" />
+      <Property Name="Status" />
+      <Property Name="Steps" />
     </ShowAsAssociation>
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+    <ShowAsCollectionAssociation>
+      <Property Name="Savepoints" />
+    </ShowAsCollectionAssociation>
     <NestedTypes>
       <Enum Name="Sinapse.Core.Training.TrainingSession.SessionState" Collapsed="true">
         <TypeIdentifier>
@@ -127,52 +80,40 @@
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
-    <AssociationLine Name="m_options" Type="Sinapse.Core.Training.TrainingOptions" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="options" Type="Sinapse.Core.Training.TrainingOptions" FixedFromPoint="true">
       <Path>
-        <Point X="26.5" Y="9.25" />
-        <Point X="26.875" Y="9.25" />
-        <Point X="26.875" Y="9.255" />
-        <Point X="28.25" Y="9.255" />
+        <Point X="35.375" Y="14.71" />
+        <Point X="35.375" Y="15.5" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="m_status" Type="Sinapse.Core.Training.TrainingStatus" FixedToPoint="true">
-      <Path>
-        <Point X="26.5" Y="10.375" />
-        <Point X="28.25" Y="10.375" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="m_savepoints" Type="Sinapse.Core.Training.TrainingSavepointCollection" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="26.5" Y="8.32" />
-        <Point X="26.875" Y="8.32" />
-        <Point X="26.875" Y="8.315" />
-        <Point X="28.25" Y="8.315" />
-      </Path>
-    </AssociationLine>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Training.TrainingStatus" Collapsed="true">
-    <Position X="28.25" Y="10" Width="2.25" />
+  <Class Name="Sinapse.Core.Training.TrainingStatus">
+    <Position X="37" Y="15.5" Width="2.25" />
     <TypeIdentifier>
       <FileName>Training\TrainingStatus.cs</FileName>
       <HashCode>ABAAAAAAAIAARACAAEAAAAAAEAAAQAAAAIAAAAKQAAA=</HashCode>
     </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
   </Class>
-  <Class Name="Sinapse.Core.Training.TrainingOptions" Collapsed="true">
-    <Position X="28.25" Y="9" Width="2.25" />
+  <Class Name="Sinapse.Core.Training.TrainingOptions">
+    <Position X="33.75" Y="15.5" Width="2.25" />
     <TypeIdentifier>
       <FileName>Training\TrainingOptions.cs</FileName>
-      <HashCode>QDAEAAAAgAAgAAAAAAYAAAAAAAAAAAAAAAAAAgAACAA=</HashCode>
+      <HashCode>QCAkAAAAgAAgACAAAAYAAAIAAAAAAAAAAAAAAgAACAA=</HashCode>
     </TypeIdentifier>
-  </Class>
-  <Class Name="Sinapse.Core.Training.TrainingSavepointCollection" Collapsed="true">
-    <Position X="28.25" Y="8" Width="2.25" />
-    <TypeIdentifier>
-      <FileName>Training\TrainingSavepoint.cs</FileName>
-      <HashCode>AAIEAAAAAUAAgAAAAACCIAAAABAAAAACAABAAAAAAIA=</HashCode>
-    </TypeIdentifier>
+    <NestedTypes>
+      <Enum Name="Sinapse.Core.Training.TrainingOptions.TrainingMethod" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Training\TrainingOptions.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
   </Class>
   <Class Name="Sinapse.Core.Sources.TableDataSourceColumn">
-    <Position X="12" Y="14" Width="2.5" />
+    <Position X="18.75" Y="27.25" Width="3" />
     <TypeIdentifier>
       <FileName>Sources\TableDataSource.cs</FileName>
       <HashCode>AAAAAAACAAIgAAAAEAAAEAQAACAAAABACAQQCggAAAA=</HashCode>
@@ -181,83 +122,191 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <NestedTypes>
-      <Enum Name="Sinapse.Core.Sources.TableDataSourceColumn.TableDataSourceColumnRole" Collapsed="true">
+      <Enum Name="Sinapse.Core.Sources.TableDataSourceColumn.ColumnRole" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>Sources\TableDataSource.cs</NewMemberFileName>
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
   </Class>
-  <Class Name="Sinapse.Core.Sources.TableDataSourceColumnCollection" Collapsed="true">
-    <Position X="12" Y="13.25" Width="2.5" />
+  <Class Name="Sinapse.Core.Sources.TableDataSourceColumnCollection">
+    <Position X="18.75" Y="25" Width="3" />
     <TypeIdentifier>
       <FileName>Sources\TableDataSource.cs</FileName>
       <HashCode>BAAAAAAAAAAAAAAACAAAAAAAEAAAAAAAAAAAQAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="System.Data.DataTable" Collapsed="true">
-    <Position X="12" Y="11.5" Width="1.75" />
-    <TypeIdentifier />
+  <Class Name="Sinapse.Core.Sources.DataSource">
+    <Position X="26.75" Y="19.75" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Sources\DataSource.cs</FileName>
+      <HashCode>AAAAAIAAAIAgIEAAAAIAAAQAAAAAAAAAAAAQAAAIAAA=</HashCode>
+    </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.Sources.DataSourceBase" Collapsed="true">
-    <Position X="18.25" Y="11" Width="2" />
-    <TypeIdentifier>
-      <FileName>Sources\DataSourceBase.cs</FileName>
-      <HashCode>AAAAAAAAAIAgAAAAAAQAAAQIAAAAAAAAAAAAAABAAAA=</HashCode>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Sinapse.Core.Training.TrainingStepCollection" Collapsed="true">
-    <Position X="28.25" Y="7" Width="2.25" />
+  <Class Name="Sinapse.Core.Training.TrainingStepCollection">
+    <Position X="39.25" Y="8.75" Width="2.25" />
     <TypeIdentifier>
       <FileName>Training\TrainingStep.cs</FileName>
       <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Sinapse.Core.Training.MultipleTrainingSession">
-    <Position X="24.5" Y="5.25" Width="2" />
+    <Position X="30.75" Y="8.75" Width="3" />
     <TypeIdentifier>
       <FileName>Training\MultipleTrainingSession.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sessions" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Sinapse.Core.Systems.ActivationNetworkSystem">
-    <Position X="12.75" Y="6.75" Width="2.25" />
+    <Position X="15.25" Y="10.75" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Networks\ActivationNetworkSystem.cs</FileName>
+      <FileName>Systems\Network\ActivationNetworkSystem.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAQAAAAQAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Systems.DistanceNetworkSystem">
-    <Position X="15.25" Y="6.75" Width="2.25" />
-    <TypeIdentifier>
-      <FileName>Networks\DistanceNetworkSystem.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAA=</HashCode>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Sinapse.Core.Workplace">
-    <Position X="20.25" Y="1" Width="1.5" />
+    <Position X="22.75" Y="5" Width="3.25" />
     <TypeIdentifier>
       <FileName>Workplace.cs</FileName>
-      <HashCode>OAAAAAAAAAAkIAAAAAAACAQAAQAAAAAgAAEAoABAAAA=</HashCode>
+      <HashCode>AAAAAAQAABAkIAAQAAAAAAQAAAAAAAAgAAEYIAAAAAA=</HashCode>
     </TypeIdentifier>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
   </Class>
   <Class Name="Sinapse.Core.SystemInputOutput">
-    <Position X="7.5" Y="3.5" Width="1.75" />
+    <Position X="8.5" Y="2.25" Width="2.25" />
     <TypeIdentifier>
-      <FileName>Networks\SystemInputOutput.cs</FileName>
-      <HashCode>AAAAAAAAAAIgAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems\SystemInputOutput.cs</FileName>
+      <HashCode>AAAAAgAAAAIgAAAAIAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+  </Class>
+  <Class Name="Sinapse.Core.Training.TrainingStep">
+    <Position X="42.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Training\TrainingStep.cs</FileName>
+      <HashCode>ABAAAAAABgARAAAEAAAAAAAAAAAAAIAAAAAAAAAAAQQ=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.SystemInputOutputCollection" Collapsed="true">
-    <Position X="10" Y="3.75" Width="2.25" />
+  <Class Name="Sinapse.Core.Systems.AdaptiveSystem">
+    <Position X="12" Y="2" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Networks\SystemInputOutput.cs</FileName>
-      <NewMemberFileName>Networks\SystemInput.cs</NewMemberFileName>
+      <FileName>Systems\AdaptiveSystem.cs</FileName>
+      <HashCode>BEAAAIAKAIAgIEAAAAIAAAQAEAAAABAAAIAAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Postprocess" />
+      <Property Name="Preprocess" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Inputs" />
+      <Property Name="Outputs" />
+    </ShowAsCollectionAssociation>
+    <AssociationLine Name="Inputs" Type="Sinapse.Core.SystemInputOutput" FixedToPoint="true">
+      <Path>
+        <Point X="12" Y="2.994" />
+        <Point X="10.75" Y="2.994" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Outputs" Type="Sinapse.Core.SystemInputOutput" FixedFromPoint="true">
+      <Path>
+        <Point X="12" Y="3.709" />
+        <Point X="10.75" Y="3.709" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Postprocess" Type="Sinapse.Core.Filters.IFilterCollection" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="3.25" />
+        <Point X="15.25" Y="3.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Preprocess" Type="Sinapse.Core.Filters.IFilterCollection" FixedFromPoint="true">
+      <Path>
+        <Point X="13.75" Y="3.111" />
+        <Point X="15.25" Y="3.111" />
+      </Path>
+    </AssociationLine>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sinapse.Core.StatisticSystem">
+    <Position X="9" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Systems\Statistic\StatisticSystem.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
+  <Class Name="Sinapse.Core.Systems.DistanceNetworkSystem">
+    <Position X="18.5" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Systems\Network\DistanceNetworkSystem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Filters.PrincipalComponent">
+    <Position X="7.25" Y="17.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Filters\Matrix\PrincipalComponent.cs</FileName>
+      <HashCode>ACAAAAAEABAgAAAAAACIAAQAGAAAABAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sinapse.Core.Training.TrainingSavepoint">
+    <Position X="39.25" Y="11.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Training\TrainingSavepoint.cs</FileName>
+      <HashCode>AAAAAAIAAAAAAAgAAAAAAAAAAQAAAAAAAAAAgAQAQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sinapse.Core.Systems.NeocognitronNetworkSystem">
+    <Position X="12" Y="10.75" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Systems\Network\NeocognitronNetworkSystem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Sinapse.Core.Systems.NetworkSystem" ManuallyRouted="true">
+      <Path>
+        <Point X="16.375" Y="8.826" />
+        <Point X="16.375" Y="10.346" />
+        <Point X="13.125" Y="10.346" />
+        <Point X="13.125" Y="10.75" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Sinapse.Core.Filters.RangeConversion">
+    <Position X="9.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Filters\Matrix\RangeConversion.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sinapse.Core.SerializableObject&lt;T&gt;">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SerializableObject.cs</FileName>
+      <HashCode>AAAAAIAAAIAgIEAAIAIAAAQCAAAEAAAAAAAAAAAAQAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Sinapse.Core.Filters.IFilter">
+    <Position X="18" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Filters\IFilter.cs</FileName>
+      <HashCode>AAAAAAAEABAgAAAAAAAIAAQAEAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sinapse.Core.ISerializableObject&lt;T&gt;">
+    <Position X="31.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>ISerializableObject.cs</FileName>
+      <HashCode>AAAAAIAAAIAgAEAAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
 </ClassDiagram>

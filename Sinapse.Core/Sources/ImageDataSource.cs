@@ -26,7 +26,7 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Sources
 {
-    public class ImageDataSource : DataSourceBase
+    public class ImageDataSource : DataSource
     {
 
         public ImageDataSource(string title)

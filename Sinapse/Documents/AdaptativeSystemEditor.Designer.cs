@@ -1,6 +1,6 @@
 namespace Sinapse.Documents
 {
-    partial class AdaptativeSystemEditor
+    partial class AdaptiveSystemEditor
     {
         /// <summary> 
         /// Required designer variable.

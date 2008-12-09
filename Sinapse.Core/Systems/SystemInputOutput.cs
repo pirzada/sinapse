@@ -5,57 +5,44 @@ using System.Text;
 namespace Sinapse.Core
 {
 
-    public enum SystemInputOutputDataType { Nummeric, Category, Boolean, Time };
 
+    public enum SystemDataType { Nummeric, Category, Boolean, Time };
+
+    /// <summary>
+    /// SystemInputOutput provides a description for a Input or Output of a System. It stores the name, description and type of the input or output.
+    /// </summary>
     public class SystemInputOutput
     {
-        public string Description
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+
+        private string description;
+        private string name;
+        private SystemDataType dataType;
+
 
         public string Name
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return name; }
+            set { name = value; }
         }
 
-        public SystemInputOutput DataType
+        public string Description
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return description; }
+            set { description = value; }
         }
 
-        public int NodeIndex
+
+        public SystemDataType DataType
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return dataType; }
+            set { dataType = value; }
         }
+
     }
 
 
     public class SystemInputOutputCollection : System.ComponentModel.BindingList<SystemInputOutput>
     {
     }
+
 }

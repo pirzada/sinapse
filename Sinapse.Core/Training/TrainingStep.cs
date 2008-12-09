@@ -26,10 +26,7 @@ namespace Sinapse.Core.Training
 {
 
     /// <summary>
-    ///   This class stores information about a Training Step (i.e. a change in
-    ///   Learning Rate, a training pause) to help keeping track of which algorithm
-    ///   we used when training a Network. This is particulary useful if you are dealing
-    ///   with a set of experiments using Neural Networks.
+    /// A Training Step is the record of an event occured during the training of a Neural Network. For example, a change in the learning rate, the pausing of the trainment, the restart of the proccess, etc.
     /// </summary>
     public sealed class TrainingStep
     {

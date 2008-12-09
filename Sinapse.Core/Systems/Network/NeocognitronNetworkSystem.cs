@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sinapse.Core.Systems
 {
-    class NeocognitronNetworkSystem : SystemBase
+    class NeocognitronNetworkSystem : NetworkSystem
     {
         public override string Type
         {

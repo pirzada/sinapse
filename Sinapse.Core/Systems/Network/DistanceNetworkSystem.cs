@@ -6,7 +6,7 @@ using AForge.Neuro;
 
 namespace Sinapse.Core.Systems
 {
-    public class DistanceNetworkSystem : NetworkSystemBase
+    public class DistanceNetworkSystem : NetworkSystem
     {
 
         public DistanceNetworkSystem(int inputsCount, int neuronsCount)
