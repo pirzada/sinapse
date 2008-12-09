@@ -10,14 +10,14 @@ namespace Sinapse.Core.Training
     public class MultipleTrainingSession
     {
 
-        private List<TrainingSession> trainingSessions;
+        private List<BackpropagationTrainingSession> trainingSessions;
 
         public MultipleTrainingSession()
         {
 
         }
 
-        public List<TrainingSession> Sessions
+        public List<BackpropagationTrainingSession> Sessions
         {
             get { throw new System.NotImplementedException(); }
         }

@@ -203,21 +203,24 @@ namespace Sinapse.Forms
 
         private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
-            if (e.WorkplaceContent is TableDataSource)
+
+
+            if (e.WorkplaceContent.Type == typeof(TableDataSource))
             {
-                TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent as TableDataSource);
+                TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent.Open() as TableDataSource);
                 editor.Show(this.dockMain, DockState.Document);
             }
-            else if (e.WorkplaceContent is NetworkSystem)
+            else if (e.WorkplaceContent.Type == typeof(NetworkSystem))
             {
-                AdaptiveSystemEditor editor = new AdaptiveSystemEditor(e.WorkplaceContent as NetworkSystem);
+                AdaptiveSystemEditor editor = new AdaptiveSystemEditor(e.WorkplaceContent.Open() as NetworkSystem);
                 editor.Show(this.dockMain, DockState.Document);
             }
-            else if (e.WorkplaceContent is TrainingSession)
+            else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
             {
-                AdaptiveSystemTrainer editor = new AdaptiveSystemTrainer(e.WorkplaceContent as TrainingSession);
+                AdaptiveSystemTrainer editor = new AdaptiveSystemTrainer(e.WorkplaceContent.Open() as BackpropagationTrainingSession);
                 editor.Show(this.dockMain, DockState.Document);
             }
+
         }
         #endregion
 

@@ -28,7 +28,7 @@ namespace Sinapse.Core.Training
     /// <summary>
     /// A Training Step is the record of an event occured during the training of a Neural Network. For example, a change in the learning rate, the pausing of the trainment, the restart of the proccess, etc.
     /// </summary>
-    public sealed class TrainingStep
+    public sealed class TrainingHistoryEvent
     {
 
         private string m_action;
@@ -42,12 +42,12 @@ namespace Sinapse.Core.Training
 
 
         #region Constructor
-        internal TrainingStep(string text)
+        internal TrainingHistoryEvent(string text)
             : this(text, String.Empty)
         {
         }
 
-        internal TrainingStep(string text, string detail)
+        internal TrainingHistoryEvent(string text, string detail)
         {
             this.m_time = DateTime.Now;
             this.m_action = text;
@@ -100,13 +100,14 @@ namespace Sinapse.Core.Training
     /// <summary>
     /// A collection of History Events
     /// </summary>
-    public sealed class TrainingStepCollection : BindingList<TrainingStep>
+    public sealed class TrainingHistory : BindingList<TrainingHistoryEvent>
     {
 
 
-
-
-        //---------------------------------------------
+        public void Add(string text, string detail)
+        {
+            Add(new TrainingHistoryEvent(text, detail));
+        }
 
 
         public string[] ToStringArray()

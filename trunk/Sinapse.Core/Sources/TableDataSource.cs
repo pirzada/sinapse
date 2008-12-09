@@ -42,13 +42,24 @@ namespace Sinapse.Core.Sources
         ///   The DataTable which holds the actual data.
         /// </summary>
         private DataTable m_dataTable;
+
+
+        /// <summary>
+        ///   The info and description associated which each DataTable column
+        /// </summary>
         private TableDataSourceColumnCollection m_columns;
+
 
         //----------------------------------------
 
+
         #region Constructor
-        /// <summary>Creates a new NetworkTableSource object.</summary>
-        /// <param name="dataTable">A DataTable which will be deep copied into this object.</param>
+        /// <summary>
+        ///   Creates a new NetworkTableSource object.
+        /// </summary>
+        /// <param name="dataTable">
+        ///   A DataTable which will be deep copied into this object.
+        /// </param>
         public TableDataSource(DataTable dataTable)
             : base(dataTable.TableName)
         {
@@ -77,7 +88,9 @@ namespace Sinapse.Core.Sources
         }
         #endregion
 
+
         //----------------------------------------
+
 
         #region Properties
         [Browsable(false)]
@@ -93,7 +106,9 @@ namespace Sinapse.Core.Sources
         }
         #endregion
 
+
         //----------------------------------------
+
 
         #region Public Methods
 
@@ -106,29 +121,17 @@ namespace Sinapse.Core.Sources
     public class TableDataSourceColumn
     {
 
-        public enum ColumnRole { None, Input, Output };
-  //      public enum ColumnRelevance { None, Low, Medium, High };
-
         private string m_columnDescription;
-        private ColumnRole m_columnRole;
         private SystemDataType m_columnDataType;
- //       private ColumnRelevance m_columnRelevance;
-
         private DataColumn m_dataColumn;
-        private DataColumn m_networkAnswer;
-        private DataColumn m_networkDelta;
-        private DataColumn m_categoryIndex;
 
 
-        // --------------------------------------
 
         #region Constructor
-        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type, ColumnRole role)
+        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type)
         {
             this.m_dataColumn = dataColumn;
-
             this.m_columnDataType = type;
-            this.m_columnRole = role;
 
             this.m_dataColumn.Table.Columns.Add(this.Name, typeof(double));
         }
@@ -139,31 +142,34 @@ namespace Sinapse.Core.Sources
         }
         #endregion
 
-        // --------------------------------------
+
 
         #region Properties
+        /// <summary>
+        ///   The name for this Table Column
+        /// </summary>
         public string Name
         {
             get { return this.m_dataColumn.ColumnName; }
             set { this.m_dataColumn.ColumnName = value; }
         }
 
+        /// <summary>
+        ///   The display text for this Table Column
+        /// </summary>
         public string Caption
         {
             get { return this.m_dataColumn.Caption; }
             set { this.m_dataColumn.Caption = value; }
         }
 
+        /// <summary>
+        ///   Gets or sets a text describing which information this Column contains.
+        /// </summary>
         public string Description
         {
             get { return this.m_columnDescription; }
             set { this.m_columnDescription = value; }
-        }
-
-        public ColumnRole Role
-        {
-            get { return this.m_columnRole; }
-            set { this.m_columnRole = value; }
         }
 
         public SystemDataType DataType
@@ -180,16 +186,6 @@ namespace Sinapse.Core.Sources
             get { return this.m_dataColumn; }
         }
 
-        public DoubleRange DataRange
-        {
-            get
-            {
-                double max, min;
-                max = (double)this.DataColumn.Table.Compute(String.Format("MAX([{0}])", this.Name), String.Empty);
-                min = (double)this.DataColumn.Table.Compute(String.Format("MIN([{0}])", this.Name), String.Empty);
-                return new DoubleRange(max, min);
-            }
-        }
         #endregion
 
         // --------------------------------------
@@ -202,7 +198,7 @@ namespace Sinapse.Core.Sources
     {
 
 
-        // --------------------------------------
+       
 
         #region Constructor
         internal TableDataSourceColumnCollection(TableDataSourceColumn[] columns)
@@ -212,9 +208,14 @@ namespace Sinapse.Core.Sources
         }
         #endregion
 
-        // --------------------------------------
+       
 
         #region Properties
+        /// <summary>
+        ///   Gets the associated column info for the given DataColumn.
+        /// </summary>
+        /// <param name="dataColumn"></param>
+        /// <returns></returns>
         public TableDataSourceColumn this[DataColumn dataColumn]
         {
             get
@@ -228,6 +229,11 @@ namespace Sinapse.Core.Sources
             }
         }
 
+        /// <summary>
+        ///   Gets the associated column info for the given column name.
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public TableDataSourceColumn this[string columnName]
         {
             get
@@ -242,32 +248,6 @@ namespace Sinapse.Core.Sources
         }
         #endregion
 
-        // --------------------------------------
-
-        #region Public Methods
-        public TableDataSourceColumn[] Select(TableDataSourceColumn.ColumnRole columnRole)
-        {
-            List<TableDataSourceColumn> search = new List<TableDataSourceColumn>(this.Count);
-
-            foreach (TableDataSourceColumn col in this)
-            {
-                if (col.Role == columnRole)
-                    search.Add(col);
-            }
-
-            return search.ToArray();
-        }
-
-        public TableDataSourceColumn[] Inputs
-        {
-            get { return Select(TableDataSourceColumn.ColumnRole.Input); }
-        }
-
-        public TableDataSourceColumn[] Outputs
-        {
-            get { return Select(TableDataSourceColumn.ColumnRole.Output); }
-        }
-        #endregion
 
     }
 

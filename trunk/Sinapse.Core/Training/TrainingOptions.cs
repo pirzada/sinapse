@@ -42,6 +42,8 @@ namespace Sinapse.Core.Training
         private int? testingEpochs;
         private int? rotateSubsetsEpochs;
 
+        bool enableSavepointCompression;
+
 
         public TrainingOptions()
         {
