@@ -38,11 +38,12 @@ namespace Sinapse.Core.Sources
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class DataSource : IWorkplaceContent, Sinapse.Core.ISerializableObject<DataSource>
+    public abstract class DataSource : Sinapse.Core.ISerializableObject<DataSource>
     {
         private SerializableObject<DataSource> serializableObject;
 
         public event EventHandler NameChanged;
+
 
         //----------------------------------------
 
@@ -50,14 +51,28 @@ namespace Sinapse.Core.Sources
         protected DataSource(String name)
         {
             serializableObject = new SerializableObject<DataSource>();
-
             serializableObject.Name = name;
         }
         #endregion
 
+
         //----------------------------------------
 
+
         #region Properties
+        
+        #endregion
+
+
+        //----------------------------------------
+
+
+
+
+
+
+        #region ISerializableObject<object> Members
+
         public String Name
         {
             get { return this.serializableObject.Name; }
@@ -81,14 +96,6 @@ namespace Sinapse.Core.Sources
             get { return serializableObject.Remarks; }
             set { serializableObject.Remarks = value; }
         }
-        #endregion
-
-        //----------------------------------------
-
-
-
-        #region ISerializableObject<object> Members
-
 
         public string Location
         {
@@ -118,5 +125,6 @@ namespace Sinapse.Core.Sources
         }
 
         #endregion
+
     }
 }

@@ -57,9 +57,9 @@ namespace Sinapse.Core
 
         private SerializableObject<Workplace> serializableObject;
 
-        private BindingList<AdaptiveSystem> adaptiveSystems;
-        private BindingList<DataSource> dataSources;
-        private BindingList<TrainingSession> trainingSessions;
+        private BindingList<WorkplaceContent> adaptiveSystems;
+        private BindingList<WorkplaceContent> dataSources;
+        private BindingList<WorkplaceContent> trainingSessions;
        
 
 
@@ -68,28 +68,32 @@ namespace Sinapse.Core
         {
             serializableObject = new SerializableObject<Workplace>();
 
-            dataSources = new BindingList<DataSource>();
-            adaptiveSystems = new BindingList<AdaptiveSystem>();
-            trainingSessions = new BindingList<TrainingSession>();
+            dataSources      = new BindingList<WorkplaceContent>();
+            adaptiveSystems  = new BindingList<WorkplaceContent>();
+            trainingSessions = new BindingList<WorkplaceContent>();
         }
 
 
 
         #region Properties
-        public BindingList<AdaptiveSystem> AdaptiveSystems
+        public BindingList<WorkplaceContent> AdaptiveSystems
         {
             get { return adaptiveSystems; }
         }
-        public BindingList<DataSource> DataSources
+        public BindingList<WorkplaceContent> DataSources
         {
             get { return dataSources; }
         }
 
-        public BindingList<TrainingSession> TrainingSessions
+        public BindingList<WorkplaceContent> TrainingSessions
         {
             get { return trainingSessions; }
         }
+        #endregion
 
+
+
+        #region SerializableObject Members
         public String Name
         {
             get { return serializableObject.Name; }
@@ -118,8 +122,6 @@ namespace Sinapse.Core
             get { return serializableObject.HasChanges; }
             set { serializableObject.HasChanges = value; }
         }
-        #endregion
-
 
         public bool Save(string path)
         {
@@ -135,11 +137,10 @@ namespace Sinapse.Core
         {
             return SerializableObject<Workplace>.Open(path);
         }
+        #endregion
 
 
     }
 
-    public interface IWorkplaceContent
-    {
-    }
+
 }

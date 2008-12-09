@@ -69,7 +69,7 @@ namespace Sinapse.Windows
 
 
         #region Properties
-        public IWorkplaceContent SelectedItem
+        public WorkplaceContent SelectedItem
         {
             get
             {
@@ -142,22 +142,22 @@ namespace Sinapse.Windows
             this.treeViewWorkplace.Nodes.Clear();
             TreeNode node;
 
-            foreach (NetworkSystem system in Workplace.Active.AdaptiveSystems)
+            foreach (WorkplaceContent content in Workplace.Active.AdaptiveSystems)
             {
-                node = new TreeNode(system.Name, 1, 1);
-                node.Tag = system;
+                node = new TreeNode(content.FileName, 1, 1);
+                node.Tag = content;
                 nodeSystems.Nodes.Add(node);
             }
-            foreach (DataSource source in Workplace.Active.DataSources)
+            foreach (WorkplaceContent content in Workplace.Active.DataSources)
             {
-                node = new TreeNode(source.Name, 1, 1);
-                node.Tag = source;
+                node = new TreeNode(content.FileName, 1, 1);
+                node.Tag = content;
                 nodeSources.Nodes.Add(node);
             }
-            foreach (TrainingSession session in Workplace.Active.TrainingSessions)
+            foreach (WorkplaceContent content in Workplace.Active.TrainingSessions)
             {
-                node = new TreeNode(session.Name, 1, 1);
-                node.Tag = session;
+                node = new TreeNode(content.FileName, 1, 1);
+                node.Tag = content;
                 nodeTraining.Nodes.Add(node);
             }
 
@@ -192,7 +192,7 @@ namespace Sinapse.Windows
         #region Menu Events
         private void menuSourceAddTable_Click(object sender, EventArgs e)
         {
-            TableDataSource item = new TableDataSource("TableDataSource");
+            WorkplaceContent item = new WorkplaceContent("New item", typeof(DataSource));
             Workplace.Active.DataSources.Add(item);
 
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
@@ -200,7 +200,7 @@ namespace Sinapse.Windows
 
         private void menuSystemAddNetworkActivation_Click(object sender, EventArgs e)
         {
-            ActivationNetworkSystem item = new ActivationNetworkSystem();
+            WorkplaceContent item = new WorkplaceContent("New item", typeof(NetworkSystem));
             Workplace.Active.AdaptiveSystems.Add(item);
 
             // Update
@@ -220,9 +220,9 @@ namespace Sinapse.Windows
     internal delegate void WorkplaceContentDoubleClickedEventHandler(object sender, WorkplaceContentDoubleClickedEventArgs e);
     internal sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
     {
-        private IWorkplaceContent workplaceContent;
+        private WorkplaceContent workplaceContent;
 
-        public IWorkplaceContent WorkplaceContent
+        public WorkplaceContent WorkplaceContent
         {
             get { return workplaceContent; }
             set { workplaceContent = value; }

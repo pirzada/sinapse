@@ -14,7 +14,7 @@ namespace Sinapse.Documents
 {
     public partial class AdaptiveSystemTrainer :  WeifenLuo.WinFormsUI.Docking.DockContent
     {
-        public AdaptiveSystemTrainer(TrainingSession session)
+        public AdaptiveSystemTrainer(BackpropagationTrainingSession session)
         {
             InitializeComponent();
         }
