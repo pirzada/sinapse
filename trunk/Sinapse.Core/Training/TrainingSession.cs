@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 using AForge.Neuro;
 
@@ -36,24 +37,23 @@ namespace Sinapse.Core.Training
     ///   using crossvalidation and other advanced techniques. Also provides additional feedback
     ///   about current traning status.
     /// </summary>
-    public class TrainingSession : WorkplaceContent
+    public class TrainingSession : WorkplaceContent, ISerializableObject<TrainingSession>
     {
 
         public enum SessionState { Stopped, Paused, Running, Error };
 
         //----------------------------------------
 
-        private SessionState m_currentState;
-        
-        private DataSourceBase m_networkDataSource;
-        private ActivationNetworkSystem m_networkContainer;
+        private SerializableObject<TrainingSession> serializableObject;
+        private DataSource dataSource;
+        private ActivationNetworkSystem networkSystem;
         private string name;
+        private TrainingStatus status;
 
-        private TrainingOptions m_options;
-        private TrainingStatus m_status;
+        private TrainingOptions options;
 
-        private TrainingSavepointCollection m_savepoints;
-        private TrainingStepCollection m_trainingSteps;
+        private List<Sinapse.Core.Training.TrainingSavepoint> savepoints;
+        private TrainingStepCollection trainingSteps;
 
 
         public event EventHandler Started;
@@ -62,10 +62,6 @@ namespace Sinapse.Core.Training
         public event EventHandler Completed;
 
         public event EventHandler StatusChanged;
-        public event EventHandler MessageChanged;
-        
-
-        private String m_statusMessage;
 
 
         //----------------------------------------
@@ -79,7 +75,7 @@ namespace Sinapse.Core.Training
 
         public TrainingSession(TrainingOptions options)
         {
-            this.m_options = options;
+            this.options = options;
         }
         #endregion
 
@@ -90,18 +86,13 @@ namespace Sinapse.Core.Training
         #region Properties
         public String Name
         {
-            get { return this.name; }
-            set { this.name = value; }
+            get { return name; }
+            set { name = value; }
         }
 
         public TrainingStatus Status
         {
-            get { return this.m_status; }
-        }
-
-        public String StatusMessage
-        {
-            get { return this.m_statusMessage; }
+            get { return status; }
         }
         #endregion
 
@@ -116,9 +107,9 @@ namespace Sinapse.Core.Training
         }
         public void Start(TrainingOptions options)
         {
-            this.m_options = options;
+            this.options = options;
 
-            this.m_trainingSteps.Add(new TrainingStep("Training Started", "Training session started with the following options"));
+            this.trainingSteps.Add(new TrainingStep("Training Started", "Training session started with the following options"));
 
         }
 
@@ -130,10 +121,10 @@ namespace Sinapse.Core.Training
         {
         }
 
-        public void Rewind()
+        public void Reset()
         {
-            this.m_status.Reset();
-            this.m_networkContainer.Network.Randomize();
+            this.status.Reset();
+            this.networkSystem.Network.Randomize();
         }
 
         public void Goto(TrainingSavepoint savepoint)
@@ -152,58 +143,64 @@ namespace Sinapse.Core.Training
             if (this.StatusChanged != null)
                 this.StatusChanged.Invoke(this, EventArgs.Empty);
         }
-
-        protected void OnMessageChanged()
-        {
-            if (this.MessageChanged != null)
-                this.MessageChanged.Invoke(this, EventArgs.Empty);
-        }
         #endregion
 
-    }
-
-    public class TrainingSessionCollection : System.ComponentModel.BindingList<TrainingSession>
-    {
-
-        public event EventHandler AllSessionsCompleted;
-        
-
-        public TrainingSessionCollection()
+        public List<TrainingSavepoint> Savepoints
         {
+            get { return savepoints; }
+        }
+
+        public TrainingStepCollection Steps
+        {
+            get { return trainingSteps; }
         }
 
 
-        #region Events
-        protected override void OnAddingNew(System.ComponentModel.AddingNewEventArgs e)
-        {
-            base.OnAddingNew(e);
+        #region ISerializableObject<TrainingSession> Members
 
-            TrainingSession newSession = e.NewObject as TrainingSession;
-            newSession.Completed += new EventHandler(sessionCompleted);
+
+        public string Description
+        {
+            get { return serializableObject.Description; }
+            set { serializableObject.Description = value; }
         }
 
-        private void sessionCompleted(object sender, EventArgs e)
+
+        public string Location
         {
-            
-          /*Array.TrueForAll<TrainingSession>(this as Array,
-                new Predicate<TrainingSession>(
-          */
- 
-            foreach (TrainingSession session in this)
-            {
-                if (session.Status.Progress != 100)
-                    return;
-            }
-            
-            // If all sessions are complete, call
-            OnAllSessionsCompleted();
+            get { return serializableObject.Location; }
+            protected set { serializableObject.Location = value; }
         }
 
-        private void OnAllSessionsCompleted()
+
+        public string Remarks
         {
-            if (this.AllSessionsCompleted != null)
-                this.AllSessionsCompleted.Invoke(this, EventArgs.Empty);
+            get { return serializableObject.Remarks; }
+            set { serializableObject.Remarks = value; }
         }
+
+        public bool HasChanges
+        {
+            get { return serializableObject.HasChanges; }
+        }
+
+        public bool Save(string path)
+        {
+            return serializableObject.Save(path);
+        }
+
+        public bool Save()
+        {
+            return serializableObject.Save();
+        }
+
+        public static TrainingSession Open(string path)
+        {
+            return SerializableObject<TrainingSession>.Open(path);
+        }
+
         #endregion
     }
+
+
 }

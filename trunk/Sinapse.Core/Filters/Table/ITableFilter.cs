@@ -3,33 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-using AForge.Mathematics;
-
-using Sinapse.Core.Sources;
-
-namespace Sinapse.Core.Filters
+namespace Sinapse.Core.Filters.Table
 {
-    class TableToMatrix : IFilter
+    public interface ITableFilter
     {
 
-        private Dictionary<int, string>[] stringColumnCaptions;
-        private Matrix output;
-        private DataTable input;
-
-        
-        public TableToMatrix()
-        {
-
-        }
-
-        public override void Apply()
-        {
-            throw new NotImplementedException();
-            // this.stringColumnCaptions = new Dictionary<int,string>[]
-        }
-
-
-        public override object Input
+        public DataTable Input
         {
             get
             {
@@ -51,6 +30,11 @@ namespace Sinapse.Core.Filters
             {
                 throw new Exception("The method or operation is not implemented.");
             }
+        }
+
+        public override void Apply()
+        {
+            throw new Exception("The method or operation is not implemented.");
         }
     }
 }

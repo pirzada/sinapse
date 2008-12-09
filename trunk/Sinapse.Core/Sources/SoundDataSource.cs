@@ -25,7 +25,7 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Sources
 {
-    public class SoundDataSource : DataSourceBase
+    public class SoundDataSource : DataSource
     {
 
         public SoundDataSource(string title) : base(title)

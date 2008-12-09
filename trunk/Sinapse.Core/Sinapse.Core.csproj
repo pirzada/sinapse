@@ -54,20 +54,29 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filters\Table\MatrixToTable.cs" />
-    <Compile Include="Filters\Table\TableToMatrix.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Filters\InputMismatchException.cs" />
+    <Compile Include="Filters\Matrix\PrincipalComponent.cs" />
+    <Compile Include="Filters\Matrix\RangeConversion.cs" />
+    <Compile Include="Filters\Table\ProjectionFilter.cs" />
+    <Compile Include="Filters\Table\SelectionFilter.cs" />
+    <Compile Include="Systems\Statistic\HiddenMarkovModel.cs" />
+    <Compile Include="ISerializableObject.cs" />
+    <Compile Include="SerializableObject.cs" />
     <Compile Include="Sources\ImageDataSource.cs" />
-    <Compile Include="Sources\DataSourceBase.cs" />
+    <Compile Include="Sources\DataSource.cs" />
     <Compile Include="Sources\SoundDataSource.cs" />
     <Compile Include="Sources\TableDataSource.cs" />
     <Compile Include="Sources\VideoDataSource.cs" />
-    <Compile Include="Systems\ActivationNetworkSystem.cs" />
-    <Compile Include="Systems\NetworkSystemBase.cs">
+    <Compile Include="Systems\Network\NeocognitronNetworkSystem.cs" />
+    <Compile Include="Systems\Statistic\StatisticSystem.cs" />
+    <Compile Include="Systems\AdaptiveSystem.cs" />
+    <Compile Include="Systems\Network\ActivationNetworkSystem.cs" />
+    <Compile Include="Systems\Network\DistanceNetworkSystem.cs" />
+    <Compile Include="Systems\Network\NetworkSystem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Systems\SystemInputOutput.cs" />
@@ -105,7 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\Image\" />
-    <Folder Include="Filters\Matrix\" />
     <Folder Include="Filters\Sound\" />
     <Folder Include="Filters\Video\" />
     <Folder Include="Reporting\" />

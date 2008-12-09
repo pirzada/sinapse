@@ -32,29 +32,26 @@ namespace Sinapse.Core.Sources
 
     
     /// <summary>
-    ///   This class encompass a Neural Network DataSource, or in other words, a
-    ///   source of information that can be used to train and feed Neural Networks.
+    ///   This class encompass a Adaptive System DataSource, or in other words, a
+    ///   source of information that can be used to train and feed Adaptive Systems.
     ///   A common example of data sources are tables of sample data or a collection
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class DataSourceBase : WorkplaceContent
+    public abstract class DataSource : WorkplaceContent, Sinapse.Core.ISerializableObject<DataSource>
     {
-
-        private String m_title;
-        private String m_description;
-        private String m_remarks;
+        private SerializableObject<DataSource> serializableObject;
 
         public event EventHandler NameChanged;
 
         //----------------------------------------
 
         #region Constructor
-        protected DataSourceBase(String title)
+        protected DataSource(String name)
         {
-            this.m_title = title;
-            this.m_description = String.Empty;
-            this.m_remarks = String.Empty;
+            serializableObject = new SerializableObject<DataSource>();
+
+            serializableObject.Name = name;
         }
         #endregion
 
@@ -63,31 +60,61 @@ namespace Sinapse.Core.Sources
         #region Properties
         public String Name
         {
-            get { return this.m_title; }
+            get { return this.serializableObject.Name; }
             set
             {
-                this.m_title = value;
+                serializableObject.Name = value;
 
-                if (this.NameChanged != null)
-                    this.NameChanged.Invoke(this, EventArgs.Empty);
+                if (NameChanged != null)
+                    NameChanged.Invoke(this, EventArgs.Empty);
             }
         }
 
         public String Description
         {
-            get { return this.m_description; }
-            set { this.m_description = value; }
+            get { return serializableObject.Description; }
+            set { serializableObject.Description = value; }
         }
 
         public String Remarks
         {
-            get { return this.m_remarks; }
-            set { this.m_remarks = value; }
+            get { return serializableObject.Remarks; }
+            set { serializableObject.Remarks = value; }
         }
         #endregion
 
         //----------------------------------------
 
 
+
+        #region ISerializableObject<object> Members
+
+
+        public string Location
+        {
+            get { return serializableObject.Location; }
+        }
+
+        public bool HasChanges
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public bool Save(string path)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public bool Save()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public object Open(string path)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
     }
 }

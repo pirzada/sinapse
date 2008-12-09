@@ -28,7 +28,7 @@ namespace Sinapse.Core.Training
     {
         public enum TrainingMethod { ByError, ByEpoch, Manual };
 
-        private TrainingMethod m_method;
+        private TrainingMethod method;
         private int    epochLimit;
         private double errorLimit;
 
@@ -40,10 +40,13 @@ namespace Sinapse.Core.Training
         private int? saveEpochs;
         private int? validateEpochs;
         private int? testingEpochs;
+        private bool rotateSubsets;
+        private int rotateSubsetsEpochs;
+
 
         public TrainingOptions()
         {
-            this.m_method = TrainingMethod.ByError;
+            method = TrainingMethod.ByError;
         }
 
 

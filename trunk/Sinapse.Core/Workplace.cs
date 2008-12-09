@@ -27,6 +27,9 @@ using Sinapse.Core.Training;
 
 namespace Sinapse.Core
 {
+    /// <summary>
+    /// The Workplace is a collection of Network Systems, Data Sources and Training Sessions currently hosted in a usage session of the program.
+    /// </summary>
     public class Workplace
     {
 
@@ -52,60 +55,55 @@ namespace Sinapse.Core
         #endregion
 
 
-        private String m_name;     
-        private String m_description;
-        private DateTime m_creationTime;
+        private SerializableObject<Workplace> serializableObject;
 
-        private BindingList<NetworkSystemBase> m_networks;
-        private BindingList<DataSourceBase> m_dataSources;
-        private BindingList<TrainingSession> m_trainingSessions;
+
+        private BindingList<AdaptiveSystem> adaptiveSystems;
+        private BindingList<DataSource> dataSources;
+        private BindingList<TrainingSession> trainingSessions;
        
 
         //List<NetworkReports> m_reports;
 
         public Workplace()
         {
-            this.m_creationTime = DateTime.Now;
-            this.m_networks = new BindingList<NetworkSystemBase>();
-            this.m_dataSources = new BindingList<DataSourceBase>();
-            this.m_trainingSessions = new BindingList<TrainingSession>();
+            serializableObject = new SerializableObject<Workplace>();
+
+            dataSources = new BindingList<DataSource>();
+            adaptiveSystems = new BindingList<AdaptiveSystem>();
+            trainingSessions = new BindingList<TrainingSession>();
         }
 
 
         #region Properties
-        public BindingList<NetworkSystemBase> Systems
+        public BindingList<AdaptiveSystem> AdaptiveSystems
         {
-            get { return m_networks; }
+            get { return adaptiveSystems; }
         }
-        public BindingList<DataSourceBase> DataSources
+        public BindingList<DataSource> DataSources
         {
-            get { return m_dataSources; }
+            get { return dataSources; }
         }
 
         public BindingList<TrainingSession> TrainingSessions
         {
-            get { return m_trainingSessions; }
+            get { return trainingSessions; }
         }
 
         public String Name
         {
-            get { return m_name; }
-            set { m_name = value; }
+            get { return serializableObject.Name; }
+            set { serializableObject.Name = value; }
         }
         public String Description
         {
-            get { return m_description; }
-            set { m_description = value; }
-        }
-
-        public DateTime CreationTime
-        {
-            get { return m_creationTime; }
+            get { return serializableObject.Description; }
+            set { serializableObject.Description = value; }
         }
         #endregion
     }
 
-    public class WorkplaceContent
+    public interface WorkplaceContent
     {
     }
 }

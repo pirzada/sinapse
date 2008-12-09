@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sinapse.Core.Filters.Table
 {
-    class MatrixToTable : IFilter
+    class MatrixToTable : ITableFilter
     {
 
 

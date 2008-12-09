@@ -6,7 +6,7 @@ using AForge.Neuro;
 
 namespace Sinapse.Core.Systems
 {
-    public class ActivationNetworkSystem : NetworkSystemBase
+    public class ActivationNetworkSystem : NetworkSystem
     {
 
 

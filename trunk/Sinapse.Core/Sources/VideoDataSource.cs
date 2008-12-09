@@ -25,7 +25,7 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Sources
 {
-    public class VideoDataSource : DataSourceBase
+    public class VideoDataSource : DataSource
     {
 
         public VideoDataSource(string title)

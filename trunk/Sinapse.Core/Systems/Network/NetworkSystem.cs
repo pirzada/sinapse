@@ -29,10 +29,10 @@ namespace Sinapse.Core.Systems
 {
 
     /// <summary>
-    ///   This class encompass a Neural Network inside a Input/Output structure which can
-    ///   perform transformations on such data before feeding/reading the network. 
+    /// NetworkSystem is a system which contains a Neural Network as its core.
     /// </summary>
-    public abstract class NetworkSystemBase : WorkplaceContent
+    /// <remarks>This is an abstract class and cannot be instantiated.</remarks>
+    public abstract class NetworkSystem : Sinapse.Core.Systems.AdaptiveSystem
     {
 
         protected Network m_network;
@@ -50,7 +50,7 @@ namespace Sinapse.Core.Systems
         //----------------------------------------
 
         #region Constructor
-        protected NetworkSystemBase()
+        protected NetworkSystem()
         {
             m_inputTransformations = new IFilterCollection();
             m_outputTransformations = new IFilterCollection();
@@ -60,81 +60,17 @@ namespace Sinapse.Core.Systems
         //----------------------------------------
 
         #region Properties
-        public IFilterCollection InputTransforms
-        {
-            get { return m_inputTransformations; }
-        }
 
-        public IFilterCollection OutputTransforms
-        {
-            get { return m_outputTransformations; }
-        }
 
         public Network Network
         {
             get { return m_network; }
         }
 
-        /// <summary>Gets or sets the name of this network.</summary>
-        public string Name
-        {
-            get { return this.m_name; }
-            set
-            {
-                this.m_name = value;
-                this.OnNetworkContainerChanged();
-            }
-        }
-
-        /// <summary>Gets or sets this network description.</summary>
-        public string Description
-        {
-            get { return this.m_description; }
-            set
-            {
-                this.m_description = value;
-                this.OnNetworkContainerChanged();
-            }
-        }
-
-        /// <summary>Gets information about network usage, tips and other useful resources.</summary>
-        public string Remarks
-        {
-            get { return this.m_remarks; }
-            set { this.m_remarks = value; }
-        }
-
         /// <summary>Gets a string representing the type of the network.</summary>
         public abstract string Type { get;}
-
-        /// <summary>Gets the creation time of this network.</summary>
-        public DateTime CreationTime
-        {
-            get { return this.m_creationTime; }
-        }
         #endregion
 
-        public SystemInputOutputCollection Inputs
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public SystemInputOutputCollection Outputs
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
 
         //----------------------------------------
 
@@ -142,7 +78,7 @@ namespace Sinapse.Core.Systems
         public Matrix Compute(Matrix inputs)
         {
             throw new NotImplementedException();
-            inputs = (Matrix)this.InputTransforms.Apply(inputs);
+            inputs = (Matrix)this.Postprocess.Apply(inputs);
             
             Matrix outputs = new Matrix(inputs.Rows, this.Network.OutputsCount);
             for (int i = 0; i < inputs.Rows; i++)
@@ -150,7 +86,7 @@ namespace Sinapse.Core.Systems
                 outputs[i] = Network.Compute(inputs[i]);
             }
 
-            return (Matrix)this.OutputTransforms.Apply(outputs);
+            return (Matrix)this.Preprocess.Apply(outputs);
         }
 
         public Vector Compute(Vector inputs)

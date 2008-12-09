@@ -35,8 +35,7 @@ namespace Sinapse.Core.Sources
     ///   The source encompassed here is presented as a DataTable, which can be created
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
-    [Serializable]
-    public class TableDataSource : DataSourceBase
+    public class TableDataSource : DataSource
     {
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace Sinapse.Core.Sources
         }
 
         [Browsable(false)]
-        public DataTable Data
+        public DataTable DataTable
         {
             get { return this.m_dataTable; }
         }
@@ -107,12 +106,12 @@ namespace Sinapse.Core.Sources
     public class TableDataSourceColumn
     {
 
-        public enum TableDataSourceColumnRole { None, Input, Output };
+        public enum ColumnRole { None, Input, Output };
   //      public enum ColumnRelevance { None, Low, Medium, High };
 
         private string m_columnDescription;
-        private TableDataSourceColumnRole m_columnRole;
-        private SystemInputOutputDataType m_columnDataType;
+        private ColumnRole m_columnRole;
+        private SystemDataType m_columnDataType;
  //       private ColumnRelevance m_columnRelevance;
 
         private DataColumn m_dataColumn;
@@ -124,7 +123,7 @@ namespace Sinapse.Core.Sources
         // --------------------------------------
 
         #region Constructor
-        public TableDataSourceColumn(DataColumn dataColumn, SystemInputOutputDataType type, TableDataSourceColumnRole role)
+        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type, ColumnRole role)
         {
             this.m_dataColumn = dataColumn;
 
@@ -161,13 +160,13 @@ namespace Sinapse.Core.Sources
             set { this.m_columnDescription = value; }
         }
 
-        public TableDataSourceColumnRole Role
+        public ColumnRole Role
         {
             get { return this.m_columnRole; }
             set { this.m_columnRole = value; }
         }
 
-        public SystemInputOutputDataType DataType
+        public SystemDataType DataType
         {
             get { return this.m_columnDataType; }
             set
@@ -246,7 +245,7 @@ namespace Sinapse.Core.Sources
         // --------------------------------------
 
         #region Public Methods
-        public TableDataSourceColumn[] Select(TableDataSourceColumn.TableDataSourceColumnRole columnRole)
+        public TableDataSourceColumn[] Select(TableDataSourceColumn.ColumnRole columnRole)
         {
             List<TableDataSourceColumn> search = new List<TableDataSourceColumn>(this.Count);
 
@@ -261,12 +260,12 @@ namespace Sinapse.Core.Sources
 
         public TableDataSourceColumn[] Inputs
         {
-            get { return Select(TableDataSourceColumn.TableDataSourceColumnRole.Input); }
+            get { return Select(TableDataSourceColumn.ColumnRole.Input); }
         }
 
         public TableDataSourceColumn[] Outputs
         {
-            get { return Select(TableDataSourceColumn.TableDataSourceColumnRole.Output); }
+            get { return Select(TableDataSourceColumn.ColumnRole.Output); }
         }
         #endregion
 

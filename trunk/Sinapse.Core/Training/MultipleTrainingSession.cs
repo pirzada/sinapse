@@ -10,11 +10,16 @@ namespace Sinapse.Core.Training
     public class MultipleTrainingSession
     {
 
-        private TrainingSessionCollection trainingSessions;
+        private List<TrainingSession> trainingSessions;
 
         public MultipleTrainingSession()
         {
 
+        }
+
+        public List<TrainingSession> Sessions
+        {
+            get { throw new System.NotImplementedException(); }
         }
     }
 }

@@ -208,9 +208,9 @@ namespace Sinapse.Forms
                 TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent as TableDataSource);
                 editor.Show(this.dockMain, DockState.Document);
             }
-            else if (e.WorkplaceContent is NetworkSystemBase)
+            else if (e.WorkplaceContent is NetworkSystem)
             {
-                AdaptativeSystemEditor editor = new AdaptativeSystemEditor(e.WorkplaceContent as NetworkSystemBase);
+                AdaptiveSystemEditor editor = new AdaptiveSystemEditor(e.WorkplaceContent as NetworkSystem);
                 editor.Show(this.dockMain, DockState.Document);
             }
             else if (e.WorkplaceContent is TrainingSession)
@@ -809,7 +809,7 @@ namespace Sinapse.Forms
 
         private void systemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Sinapse.Documents.AdaptativeSystemEditor document = new AdaptativeSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
+            Sinapse.Documents.AdaptiveSystemEditor document = new AdaptiveSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
             document.Show(this.dockMain, DockState.Document);
         }
 

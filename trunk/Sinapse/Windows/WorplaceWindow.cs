@@ -115,7 +115,7 @@ namespace Sinapse.Windows
                 // And also register the events for the new workplace
                 Workplace.Active.DataSources.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
                 Workplace.Active.TrainingSessions.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
-                Workplace.Active.Systems.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
+                Workplace.Active.AdaptiveSystems.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
             }
             else
             {
@@ -142,13 +142,13 @@ namespace Sinapse.Windows
             this.treeViewWorkplace.Nodes.Clear();
             TreeNode node;
 
-            foreach (NetworkSystemBase system in Workplace.Active.Systems)
+            foreach (NetworkSystem system in Workplace.Active.AdaptiveSystems)
             {
                 node = new TreeNode(system.Name, 1, 1);
                 node.Tag = system;
                 nodeSystems.Nodes.Add(node);
             }
-            foreach (DataSourceBase source in Workplace.Active.DataSources)
+            foreach (DataSource source in Workplace.Active.DataSources)
             {
                 node = new TreeNode(source.Name, 1, 1);
                 node.Tag = source;
@@ -201,7 +201,7 @@ namespace Sinapse.Windows
         private void menuSystemAddNetworkActivation_Click(object sender, EventArgs e)
         {
             ActivationNetworkSystem item = new ActivationNetworkSystem();
-            Workplace.Active.Systems.Add(item);
+            Workplace.Active.AdaptiveSystems.Add(item);
 
             // Update
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
