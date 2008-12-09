@@ -40,8 +40,7 @@ namespace Sinapse.Core.Training
         private int? saveEpochs;
         private int? validateEpochs;
         private int? testingEpochs;
-        private bool rotateSubsets;
-        private int rotateSubsetsEpochs;
+        private int? rotateSubsetsEpochs;
 
 
         public TrainingOptions()

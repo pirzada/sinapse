@@ -6,5 +6,9 @@ namespace Sinapse.Core
 {
     public class HiddenMarkovModel : StatisticSystem
     {
+        public override object Compute(object input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

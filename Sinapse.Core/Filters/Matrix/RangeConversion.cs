@@ -60,12 +60,12 @@ namespace Sinapse.Core.Filters
 
         public string Name
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return "Range Conversion"; }
         }
 
         public string Description
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return "Converts from a range to another"; }
         }
 
         public System.Windows.Forms.Control Control

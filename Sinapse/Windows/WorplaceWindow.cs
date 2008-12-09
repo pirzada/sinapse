@@ -69,7 +69,7 @@ namespace Sinapse.Windows
 
 
         #region Properties
-        public WorkplaceContent SelectedItem
+        public IWorkplaceContent SelectedItem
         {
             get
             {
@@ -220,9 +220,9 @@ namespace Sinapse.Windows
     internal delegate void WorkplaceContentDoubleClickedEventHandler(object sender, WorkplaceContentDoubleClickedEventArgs e);
     internal sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
     {
-        private WorkplaceContent workplaceContent;
+        private IWorkplaceContent workplaceContent;
 
-        public WorkplaceContent WorkplaceContent
+        public IWorkplaceContent WorkplaceContent
         {
             get { return workplaceContent; }
             set { workplaceContent = value; }

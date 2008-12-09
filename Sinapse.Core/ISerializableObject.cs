@@ -11,11 +11,11 @@ namespace Sinapse.Core
 
         string Description { get; set;}
 
-        string Location { get; }
+        string Location { get; set; }
 
         string Remarks { get; set;}
 
-        bool HasChanges { get; }
+        bool HasChanges { get; set; }
 
         // DateTime Creation { get; }
 

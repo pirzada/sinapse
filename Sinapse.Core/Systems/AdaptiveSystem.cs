@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+
+using Sinapse.Core.Filters;
 
 namespace Sinapse.Core.Systems
 {
@@ -8,139 +11,83 @@ namespace Sinapse.Core.Systems
     /// A AdaptiveSystem is a model which accepts an Input, processes the information and then produces out an Output, while being able to respond to environmental changes or changes in its interacting parts.
     /// </summary>
     /// <remarks>This is an abstract class and cannot be instantiated.</remarks>
-    public abstract class AdaptiveSystem : Sinapse.Core.ISerializableObject<System.Object>
+    public abstract class AdaptiveSystem : Sinapse.Core.ISerializableObject<AdaptiveSystem>
     {
-        private List<SystemInputOutput> inputs;
-        private List<SystemInputOutput> outputs;
-    
-        public List<SystemInputOutput> Inputs
+        private SerializableObject<AdaptiveSystem> serializableObject;
+
+        private IList<SystemInputOutput> inputs;
+        private IList<SystemInputOutput> outputs;
+        private IFilterCollection preprocess;
+        private IFilterCollection postprocess;
+
+
+        public IList<SystemInputOutput> Inputs
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return inputs; }
         }
 
-        public List<SystemInputOutput> Outputs
+        public IList<SystemInputOutput> Outputs
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return outputs; }
         }
 
-        public Sinapse.Core.Filters.IFilterCollection Preprocess
+        public IFilterCollection Preprocess
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return preprocess; }
         }
 
-        public Sinapse.Core.Filters.IFilterCollection Postprocess
+        public IFilterCollection Postprocess
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return postprocess; }
         }
 
-        public DateTime Creation
+
+        public String Name
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return serializableObject.Name; }
+            set { serializableObject.Name = value; }
         }
 
         public String Description
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return serializableObject.Description; }
+            set { serializableObject.Description = value; }
         }
 
-        public string Remarks
+        public String Remarks
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return serializableObject.Remarks; }
+            set { serializableObject.Remarks = value; }
         }
-
-        public string Name
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public void Compute(params object[] args)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        #region ISerializableObject<object> Members
-
 
         public string Location
         {
-            get
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
-            set
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
+            get { return serializableObject.Location; }
+            set { serializableObject.Location = value; }
         }
 
         public bool HasChanges
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return serializableObject.HasChanges; }
+            set { serializableObject.HasChanges = value; }
         }
 
         public bool Save(string path)
         {
-            throw new Exception("The method or operation is not implemented.");
+            return serializableObject.Save(path);
         }
 
         public bool Save()
         {
-            throw new Exception("The method or operation is not implemented.");
+            return serializableObject.Save();
         }
 
-        public object Open(string path)
+        public static AdaptiveSystem Open(string path)
         {
-            throw new Exception("The method or operation is not implemented.");
+            return SerializableObject<AdaptiveSystem>.Open(path);
         }
 
-        #endregion
+
+        public abstract object Compute(object args);
     }
 }

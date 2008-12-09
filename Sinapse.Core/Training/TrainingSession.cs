@@ -37,7 +37,7 @@ namespace Sinapse.Core.Training
     ///   using crossvalidation and other advanced techniques. Also provides additional feedback
     ///   about current traning status.
     /// </summary>
-    public class TrainingSession : WorkplaceContent, ISerializableObject<TrainingSession>
+    public class TrainingSession : IWorkplaceContent, ISerializableObject<TrainingSession>
     {
 
         public enum SessionState { Stopped, Paused, Running, Error };
@@ -169,7 +169,7 @@ namespace Sinapse.Core.Training
         public string Location
         {
             get { return serializableObject.Location; }
-            protected set { serializableObject.Location = value; }
+            set { serializableObject.Location = value; }
         }
 
 
@@ -182,6 +182,7 @@ namespace Sinapse.Core.Training
         public bool HasChanges
         {
             get { return serializableObject.HasChanges; }
+            set { serializableObject.HasChanges = value; }
         }
 
         public bool Save(string path)
@@ -198,6 +199,7 @@ namespace Sinapse.Core.Training
         {
             return SerializableObject<TrainingSession>.Open(path);
         }
+
 
         #endregion
     }

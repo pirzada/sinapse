@@ -38,7 +38,7 @@ namespace Sinapse.Core.Sources
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class DataSource : WorkplaceContent, Sinapse.Core.ISerializableObject<DataSource>
+    public abstract class DataSource : IWorkplaceContent, Sinapse.Core.ISerializableObject<DataSource>
     {
         private SerializableObject<DataSource> serializableObject;
 
@@ -93,26 +93,28 @@ namespace Sinapse.Core.Sources
         public string Location
         {
             get { return serializableObject.Location; }
+            set { serializableObject.Location = value; }
         }
 
         public bool HasChanges
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return serializableObject.HasChanges; }
+            set { serializableObject.HasChanges = value; }
         }
 
         public bool Save(string path)
         {
-            throw new Exception("The method or operation is not implemented.");
+            return serializableObject.Save(path);
         }
 
         public bool Save()
         {
-            throw new Exception("The method or operation is not implemented.");
+            return serializableObject.Save();
         }
 
-        public object Open(string path)
+        public static DataSource Open(string path)
         {
-            throw new Exception("The method or operation is not implemented.");
+            return SerializableObject<DataSource>.Open(path);
         }
 
         #endregion

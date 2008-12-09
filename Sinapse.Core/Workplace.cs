@@ -30,7 +30,7 @@ namespace Sinapse.Core
     /// <summary>
     /// The Workplace is a collection of Network Systems, Data Sources and Training Sessions currently hosted in a usage session of the program.
     /// </summary>
-    public class Workplace
+    public class Workplace : ISerializableObject<Workplace>
     {
 
         #region Active Workplace Placeholder
@@ -57,13 +57,12 @@ namespace Sinapse.Core
 
         private SerializableObject<Workplace> serializableObject;
 
-
         private BindingList<AdaptiveSystem> adaptiveSystems;
         private BindingList<DataSource> dataSources;
         private BindingList<TrainingSession> trainingSessions;
        
 
-        //List<NetworkReports> m_reports;
+
 
         public Workplace()
         {
@@ -73,6 +72,7 @@ namespace Sinapse.Core
             adaptiveSystems = new BindingList<AdaptiveSystem>();
             trainingSessions = new BindingList<TrainingSession>();
         }
+
 
 
         #region Properties
@@ -100,10 +100,46 @@ namespace Sinapse.Core
             get { return serializableObject.Description; }
             set { serializableObject.Description = value; }
         }
+
+        public string Location
+        {
+            get { return serializableObject.Location; }
+            set { serializableObject.Location = value; }
+        }
+
+        public string Remarks
+        {
+            get { return serializableObject.Remarks; }
+            set { serializableObject.Remarks = value; }
+        }
+
+        public bool HasChanges
+        {
+            get { return serializableObject.HasChanges; }
+            set { serializableObject.HasChanges = value; }
+        }
         #endregion
+
+
+        public bool Save(string path)
+        {
+            return serializableObject.Save(path);
+        }
+
+        public bool Save()
+        {
+            return serializableObject.Save();
+        }
+
+        public static Workplace Open(string path)
+        {
+            return SerializableObject<Workplace>.Open(path);
+        }
+
+
     }
 
-    public interface WorkplaceContent
+    public interface IWorkplaceContent
     {
     }
 }

@@ -215,7 +215,7 @@ namespace Sinapse.Forms
             }
             else if (e.WorkplaceContent is TrainingSession)
             {
-                AdaptativeSystemTrainer editor = new AdaptativeSystemTrainer(e.WorkplaceContent as TrainingSession);
+                AdaptiveSystemTrainer editor = new AdaptiveSystemTrainer(e.WorkplaceContent as TrainingSession);
                 editor.Show(this.dockMain, DockState.Document);
             }
         }

@@ -1,6 +1,6 @@
 namespace Sinapse.Controls
 {
-    partial class TransformSequenceControl
+    partial class FilterSequenceControl
     {
         /// <summary> 
         /// Required designer variable.

@@ -1,6 +1,6 @@
 namespace Sinapse.Documents
 {
-    partial class AdaptativeSystemTrainer
+    partial class AdaptiveSystemTrainer
     {
         /// <summary> 
         /// Required designer variable.
