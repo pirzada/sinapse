@@ -10,5 +10,10 @@ namespace Sinapse.Core.Systems
         {
             get { throw new Exception("The method or operation is not implemented."); }
         }
+
+        public override object Compute(object input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -12,9 +12,9 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Sinapse.Documents
 {
-    public partial class AdaptativeSystemTrainer :  WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class AdaptiveSystemTrainer :  WeifenLuo.WinFormsUI.Docking.DockContent
     {
-        public AdaptativeSystemTrainer(TrainingSession session)
+        public AdaptiveSystemTrainer(TrainingSession session)
         {
             InitializeComponent();
         }

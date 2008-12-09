@@ -45,7 +45,7 @@ namespace Sinapse.Documents
             this.dgvInterfaceOutputs = new System.Windows.Forms.DataGridView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.transformSequenceControl1 = new Sinapse.Controls.TransformSequenceControl();
+            this.transformSequenceControl1 = new Sinapse.Controls.FilterSequenceControl();
             this.tabControl1.SuspendLayout();
             this.tabSource.SuspendLayout();
             this.tabPreprocessing.SuspendLayout();
@@ -331,6 +331,6 @@ namespace Sinapse.Documents
         private System.Windows.Forms.DataGridView dgvInterfaceOutputs;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private Sinapse.Controls.TransformSequenceControl transformSequenceControl1;
+        private Sinapse.Controls.FilterSequenceControl transformSequenceControl1;
     }
 }

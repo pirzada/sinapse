@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Sinapse.Controls
 {
-    public partial class TransformSequenceControl : UserControl
+    public partial class FilterSequenceControl : UserControl
     {
-        public TransformSequenceControl()
+        public FilterSequenceControl()
         {
             InitializeComponent();
         }

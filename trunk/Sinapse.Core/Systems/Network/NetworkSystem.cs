@@ -35,37 +35,30 @@ namespace Sinapse.Core.Systems
     public abstract class NetworkSystem : Sinapse.Core.Systems.AdaptiveSystem
     {
 
-        protected Network m_network;
+        protected Network network;
 
-        private String m_name;
-        private String m_description;
-        private String m_remarks;
-        private DateTime m_creationTime;
-
-        private IFilterCollection m_inputTransformations;
-        private IFilterCollection m_outputTransformations;
-
-        public event EventHandler NetworkContainerChanged;
 
         //----------------------------------------
 
         #region Constructor
         protected NetworkSystem()
         {
-            m_inputTransformations = new IFilterCollection();
-            m_outputTransformations = new IFilterCollection();
+            
         }
         #endregion
 
         //----------------------------------------
+
 
         #region Properties
 
 
         public Network Network
         {
-            get { return m_network; }
+            get { return network; }
+            protected set { network = value; }
         }
+
 
         /// <summary>Gets a string representing the type of the network.</summary>
         public abstract string Type { get;}
@@ -75,35 +68,46 @@ namespace Sinapse.Core.Systems
         //----------------------------------------
 
         #region Public Methods
-        public Matrix Compute(Matrix inputs)
+        public override object Compute(object input)
         {
-            throw new NotImplementedException();
-            inputs = (Matrix)this.Postprocess.Apply(inputs);
-            
-            Matrix outputs = new Matrix(inputs.Rows, this.Network.OutputsCount);
-            for (int i = 0; i < inputs.Rows; i++)
+            double[] procInput;
+            object procOutput;
+
+
+            // Apply Input Filtering
+            try
             {
-                outputs[i] = Network.Compute(inputs[i]);
+                procInput = (double[])Preprocess.Apply(input);
+            }
+            catch (Filters.InputMismatchException exception)
+            {
+                throw new Filters.InputMismatchException(
+                    "Exception ocurred while appling Input filtering", exception);
             }
 
-            return (Matrix)this.Preprocess.Apply(outputs);
-        }
 
-        public Vector Compute(Vector inputs)
-        {
-            throw new NotImplementedException();
-            //inputs = this.InputTransforms.Apply((Matrix)inputs)[0];
-            //return this.OutputTransforms.Apply((Matrix)Network.Compute(inputs))[0];
+            // Calculate Network Answers
+            double[] output = Network.Compute((double[])procInput);
+
+
+            // Apply Output Filtering
+            try
+            {
+                procOutput = Postprocess.Apply(output);
+            }
+            catch (Filters.InputMismatchException exception)
+            {
+                throw new Filters.InputMismatchException(
+                    "Exception ocurred while appling Output filtering", exception);
+            }
+
+
+            // Return final result
+            return procOutput;
         }
         #endregion
 
 
-        //----------------------------------------
 
-        protected void OnNetworkContainerChanged()
-        {
-            if (this.NetworkContainerChanged != null)
-                this.NetworkContainerChanged.Invoke(this, EventArgs.Empty);
-        }
     }
 }

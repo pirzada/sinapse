@@ -113,23 +113,23 @@
     <Compile Include="Controls\ActivationNetworkDesigner.Designer.cs">
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TransformSequenceControl.cs">
+    <Compile Include="Controls\FilterSequenceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TransformSequenceControl.Designer.cs">
-      <DependentUpon>TransformSequenceControl.cs</DependentUpon>
+    <Compile Include="Controls\FilterSequenceControl.Designer.cs">
+      <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\AdaptativeSystemEditor.cs">
+    <Compile Include="Documents\AdaptiveSystemEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\AdaptativeSystemEditor.Designer.cs">
-      <DependentUpon>AdaptativeSystemEditor.cs</DependentUpon>
+    <Compile Include="Documents\AdaptiveSystemEditor.Designer.cs">
+      <DependentUpon>AdaptiveSystemEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\AdaptativeSystemTrainer.cs">
+    <Compile Include="Documents\AdaptiveSystemTrainer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\AdaptativeSystemTrainer.Designer.cs">
-      <DependentUpon>AdaptativeSystemTrainer.cs</DependentUpon>
+    <Compile Include="Documents\AdaptiveSystemTrainer.Designer.cs">
+      <DependentUpon>AdaptiveSystemTrainer.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\StartPage.cs">
       <SubType>Form</SubType>
@@ -234,17 +234,17 @@
       <SubType>Designer</SubType>
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TransformSequenceControl.resx">
+    <EmbeddedResource Include="Controls\FilterSequenceControl.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TransformSequenceControl.cs</DependentUpon>
+      <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\AdaptativeSystemEditor.resx">
+    <EmbeddedResource Include="Documents\AdaptiveSystemEditor.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>AdaptativeSystemEditor.cs</DependentUpon>
+      <DependentUpon>AdaptiveSystemEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\AdaptativeSystemTrainer.resx">
+    <EmbeddedResource Include="Documents\AdaptiveSystemTrainer.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>AdaptativeSystemTrainer.cs</DependentUpon>
+      <DependentUpon>AdaptiveSystemTrainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\StartPage.resx">
       <SubType>Designer</SubType>
@@ -314,11 +314,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\Misc.cs" />
-    <Compile Include="Utils\Patterns\FormSingleton.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utils\Patterns\Singleton.cs">
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

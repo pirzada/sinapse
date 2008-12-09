@@ -102,7 +102,7 @@
     <Position X="33.75" Y="15.5" Width="2.25" />
     <TypeIdentifier>
       <FileName>Training\TrainingOptions.cs</FileName>
-      <HashCode>QCAkAAAAgAAgACAAAAYAAAIAAAAAAAAAAAAAAgAACAA=</HashCode>
+      <HashCode>QCAEAAAAgAAgACAAAAYAAAIAAAAAAAAAAAAAAgAACAA=</HashCode>
     </TypeIdentifier>
     <NestedTypes>
       <Enum Name="Sinapse.Core.Training.TrainingOptions.TrainingMethod" Collapsed="true">
@@ -202,8 +202,8 @@
       <HashCode>BEAAAIAKAIAgIEAAAAIAAAQAEAAAABAAAIAAAAQAAAA=</HashCode>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Postprocess" />
       <Property Name="Preprocess" />
+      <Property Name="Postprocess" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Inputs" />
@@ -221,22 +221,22 @@
         <Point X="10.75" Y="3.709" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="Postprocess" Type="Sinapse.Core.Filters.IFilterCollection" FixedToPoint="true">
-      <Path>
-        <Point X="13.75" Y="3.25" />
-        <Point X="15.25" Y="3.25" />
-      </Path>
-    </AssociationLine>
     <AssociationLine Name="Preprocess" Type="Sinapse.Core.Filters.IFilterCollection" FixedFromPoint="true">
       <Path>
         <Point X="13.75" Y="3.111" />
         <Point X="15.25" Y="3.111" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="Postprocess" Type="Sinapse.Core.Filters.IFilterCollection" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="3.25" />
+        <Point X="15.25" Y="3.25" />
+      </Path>
+    </AssociationLine>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Sinapse.Core.StatisticSystem">
-    <Position X="9" Y="6.25" Width="1.75" />
+    <Position X="9" Y="6.25" Width="2" />
     <TypeIdentifier>
       <FileName>Systems\Statistic\StatisticSystem.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -283,7 +283,7 @@
     <Position X="9.5" Y="17.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>Filters\Matrix\RangeConversion.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEABAgAAAAAAAIAAQAEAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

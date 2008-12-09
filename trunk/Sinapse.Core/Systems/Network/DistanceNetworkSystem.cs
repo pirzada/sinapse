@@ -11,17 +11,22 @@ namespace Sinapse.Core.Systems
 
         public DistanceNetworkSystem(int inputsCount, int neuronsCount)
         {
-            m_network = new DistanceNetwork(inputsCount, neuronsCount);
+            network = new DistanceNetwork(inputsCount, neuronsCount);
         }
 
         public new DistanceNetwork Network
         {
-            get { return this.m_network as DistanceNetwork; }
+            get { return this.network as DistanceNetwork; }
         }
 
         public override string Type
         {
             get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public override object Compute(object input)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sinapse.Core
 {
-    public class StatisticSystem : Sinapse.Core.Systems.AdaptiveSystem
+    public abstract class StatisticSystem : Sinapse.Core.Systems.AdaptiveSystem
     {
     }
 }
