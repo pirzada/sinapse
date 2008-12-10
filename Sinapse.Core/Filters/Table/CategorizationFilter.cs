@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using AForge.Mathematics;
-
-namespace Sinapse.Core.Filters
+namespace Sinapse.Core.Filters.Table
 {
-    public class ThresholdSeparation : IFilter
+    /// <summary>
+    ///   This filter can replace strings into numbers, indexing every different
+    ///  word in a Dictionary, deleting the column and then inserting a new column
+    ///  with only nummeric (integer) data.
+    /// </summary>
+    class CategorizationFilter : IFilter
     {
+        Dictionary<int, string> dictionary;
+
 
         #region IFilter Members
 

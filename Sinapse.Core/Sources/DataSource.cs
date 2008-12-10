@@ -38,93 +38,22 @@ namespace Sinapse.Core.Sources
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class DataSource : Sinapse.Core.ISerializableObject<DataSource>
+    public abstract class DataSource 
     {
-        private SerializableObject<DataSource> serializableObject;
-
-        public event EventHandler NameChanged;
-
-
-        //----------------------------------------
-
-        #region Constructor
-        protected DataSource(String name)
-        {
-            serializableObject = new SerializableObject<DataSource>();
-            serializableObject.Name = name;
-        }
-        #endregion
+        [Flags]
+        public enum Set { None = 0, Training = 2, Testing = 8, Validation = 16, };
 
 
-        //----------------------------------------
+
+        public abstract void Shuffle();
 
 
-        #region Properties
+
+        public abstract object GetData(Set set);
+        public abstract object GetData(Set set, int subset);
         
-        #endregion
 
 
-        //----------------------------------------
-
-
-
-
-
-
-        #region ISerializableObject<object> Members
-
-        public String Name
-        {
-            get { return this.serializableObject.Name; }
-            set
-            {
-                serializableObject.Name = value;
-
-                if (NameChanged != null)
-                    NameChanged.Invoke(this, EventArgs.Empty);
-            }
-        }
-
-        public String Description
-        {
-            get { return serializableObject.Description; }
-            set { serializableObject.Description = value; }
-        }
-
-        public String Remarks
-        {
-            get { return serializableObject.Remarks; }
-            set { serializableObject.Remarks = value; }
-        }
-
-        public string Location
-        {
-            get { return serializableObject.Location; }
-            set { serializableObject.Location = value; }
-        }
-
-        public bool HasChanges
-        {
-            get { return serializableObject.HasChanges; }
-            set { serializableObject.HasChanges = value; }
-        }
-
-        public bool Save(string path)
-        {
-            return serializableObject.Save(path);
-        }
-
-        public bool Save()
-        {
-            return serializableObject.Save();
-        }
-
-        public static DataSource Open(string path)
-        {
-            return SerializableObject<DataSource>.Open(path);
-        }
-
-        #endregion
 
     }
 }

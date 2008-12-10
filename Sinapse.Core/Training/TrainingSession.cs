@@ -12,21 +12,9 @@ namespace Sinapse.Core.Training
     public abstract class TrainingSession
     {
         private TrainingHistory history;
-        private DataSource dataSource;
+        private TableDataSource dataSource;
+        private AdaptiveSystem adaptiveSystem;
 
-        // Adapter filters are necessary to match outputs from a Data Source
-        //  into inputs from a Adaptive System and vice-versa
-        private IFilterCollection inputAdapterFilters;
-        private IFilterCollection outputAdapterFilters;
-
-
-        public TrainingHistory History
-        {
-            get { return history; }
-        }
-
-
-        public abstract AdaptiveSystem AdaptiveSystem { get; protected set; }
 
 
         public abstract void Start();
@@ -35,20 +23,44 @@ namespace Sinapse.Core.Training
         public abstract void Reset();
 
 
-        public DataSource DataSource
+        public event EventHandler TrainingStarted;
+        public event EventHandler TrainingStopped;
+        public event EventHandler TrainingPaused;
+        public event EventHandler TrainingReset;
+        public event EventHandler TrainingComplete;
+        public event EventHandler AdaptiveSystemChanged;
+        public event EventHandler DataSourceChanged;
+
+
+        public TrainingHistory History
+        {
+            get { return history; }
+        }
+
+        public TableDataSource DataSource
         {
             get { return dataSource; }
             protected set { dataSource = value; }
         }
 
-        public IFilterCollection InputAdapters
+        public AdaptiveSystem AdaptiveSystem
         {
-            get { return inputAdapterFilters; }
+            get { return adaptiveSystem; }
+            protected set { adaptiveSystem = value; }
         }
 
-        public IFilterCollection OutputAdapters
+
+
+        protected virtual void OnAdaptiveSystemChanged()
         {
-            get { return outputAdapterFilters; }
+            if (AdaptiveSystemChanged != null)
+                AdaptiveSystemChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnDataSourceChanged()
+        {
+            if (AdaptiveSystemChanged != null)
+                AdaptiveSystemChanged.Invoke(this, EventArgs.Empty);
         }
 
 

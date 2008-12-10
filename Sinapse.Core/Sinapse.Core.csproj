@@ -55,17 +55,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\InputMismatchException.cs" />
+    <Compile Include="Filters\IReversibleFilter.cs" />
     <Compile Include="Filters\Matrix\PrincipalComponent.cs" />
     <Compile Include="Filters\Matrix\RangeConversion.cs" />
+    <Compile Include="Filters\Matrix\ThresholdSeparation.cs" />
+    <Compile Include="Filters\Table\CategorizationFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filters\Table\DecategorizationFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Filters\Table\ProjectionFilter.cs" />
     <Compile Include="Filters\Table\SelectionFilter.cs" />
+    <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="Systems\Statistic\HiddenMarkovModel.cs" />
     <Compile Include="ISerializableObject.cs" />
     <Compile Include="SerializableObject.cs" />
     <Compile Include="Sources\ImageDataSource.cs" />
     <Compile Include="Sources\DataSource.cs" />
     <Compile Include="Sources\SoundDataSource.cs" />
-    <Compile Include="Sources\TableDataSource.cs" />
+    <Compile Include="Sources\TableDataSource\TableDataSource.cs" />
     <Compile Include="Sources\VideoDataSource.cs" />
     <Compile Include="Systems\Network\NeocognitronNetworkSystem.cs" />
     <Compile Include="Systems\Statistic\StatisticSystem.cs" />
@@ -109,6 +118,9 @@
       <Project>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</Project>
       <Name>AForge.Statistics</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Requisites.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\Controls\" />

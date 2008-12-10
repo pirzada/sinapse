@@ -28,10 +28,37 @@ namespace Sinapse.Core.Sources
     public class SoundDataSource : DataSource
     {
 
-        public SoundDataSource(string title) : base(title)
+        public SoundDataSource()
         {
 
         }
-        
+
+
+        public override void Shuffle()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public string Name
+        {
+            get
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
+            set
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
+        }
+
+        public override object GetData(DataSource.Set set)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override object GetData(DataSource.Set set, int subset)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Sinapse.Core.Filters
     public interface IFilter
     {
         object Input { get; set; }
-        object Output { get; set; }
+        object Output { get; }
         void Apply();
 
         string Name { get; }
