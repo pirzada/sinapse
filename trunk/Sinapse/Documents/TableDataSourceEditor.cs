@@ -23,7 +23,7 @@ namespace Sinapse.Documents
             InitializeComponent();
 
             this.tableSource = source;
-            this.tableSource.NameChanged += new EventHandler(tableSource_NameChanged);
+        //    this.tableSource.NameChanged += new EventHandler(tableSource_NameChanged);
 
             this.updateName();
         }
@@ -43,7 +43,7 @@ namespace Sinapse.Documents
         {
             if (this.tableSource != null)
             {
-                this.dgvViewer.DataSource = this.tableSource.DataTable;
+                this.dgvViewer.DataSource = this.tableSource.GetData(DataSource.Set.Training);
                 this.dgvColumns.DataSource = this.tableSource.Columns;
             }
         }

@@ -1,0 +1,12 @@
+A manipulação da DataSource deverá
+
+A escolha de entradas e saídas deverá ser feita na manipulação da DataSource
+Devemos escolher as entradas e saídas na datasource e depois casar com o AdaptiveSystem
+
+O adaptivesystem deve poder ser criado a partir de um DataSource ou pelo menos de um
+TableDataSource pra agilizar as coisas
+
+
+
+a escolha de training set, testing set e validation set também deve estar no datasource
+a escolha de subgrupos de treinamento tb

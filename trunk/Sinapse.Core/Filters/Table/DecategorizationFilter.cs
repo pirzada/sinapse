@@ -2,12 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using AForge.Mathematics;
-
-namespace Sinapse.Core.Filters
+namespace Sinapse.Core.Filters.Table
 {
-    public class ThresholdSeparation : IFilter
+    /// <summary>
+    ///   This filter reverts a categorization filter, by using the same dictionary
+    ///  to recreate the old column of string values. However, since this will be tipically
+    ///  the output of a Adaptive System, we cannot garantee every nummeric value
+    ///  encountered will be found on the dictionary
+    /// </summary>
+    class DecategorizationFilter : IFilter
     {
+        bool includeErrorColumn;
+        string columnName;
+
+
+
 
         #region IFilter Members
 

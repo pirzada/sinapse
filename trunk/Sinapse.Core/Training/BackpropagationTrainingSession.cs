@@ -33,7 +33,7 @@ namespace Sinapse.Core.Training
     public enum TrainingSet { All, Training, Testing, Validation };
 
     /// <summary>
-    ///   Encapsultates an Asynchronous and Thread-Safe way to train Backpropagation Networks
+    ///   Encapsulates an Asynchronous and Thread-Safe way to train Backpropagation Networks
     ///   using crossvalidation and other advanced techniques. Also provides additional feedback
     ///   about current traning status.
     /// </summary>
@@ -46,28 +46,22 @@ namespace Sinapse.Core.Training
 
         private SerializableObject<BackpropagationTrainingSession> serializableObject;
 
-        private ActivationNetworkSystem networkSystem;
 
-        private DataSource dataCache;
 
+
+        private ActivationNetwork activationNetwork;
         private TrainingStatus status;
         private TrainingOptions options;
 
-        private List<TrainingSavepoint> savepoints;
-
-
-        public event EventHandler Started;
-        public event EventHandler Stopped;
-        public event EventHandler Paused;
-        public event EventHandler Completed;
+        private BindingList<TrainingSavepoint> savepoints;
 
         public event EventHandler StatusChanged;
 
 
-        //----------------------------------------
+      
 
 
-        #region Constructors
+
         public BackpropagationTrainingSession()
         {
             this.options = new TrainingOptions();
@@ -77,10 +71,10 @@ namespace Sinapse.Core.Training
         {
             this.options = options;
         }
-        #endregion
 
 
-        //----------------------------------------
+
+      
 
 
         #region Properties
@@ -89,26 +83,31 @@ namespace Sinapse.Core.Training
             get { return status; }
         }
 
-        public override AdaptiveSystem AdaptiveSystem
+        public TrainingOptions Options
         {
-            get { return networkSystem; }
-            protected set { networkSystem = (ActivationNetworkSystem)value; }
+            get { return options; }
+            set { options = value; }
         }
 
-        public List<TrainingSavepoint> Savepoints
+        public BindingList<TrainingSavepoint> Savepoints
         {
             get { return savepoints; }
         }
         #endregion
 
 
-        //----------------------------------------
+     
 
 
         #region Public Methods
         public override void Start()
         {
             History.Add("Training Started", "Training session started with the following options");
+
+            object trainingData = DataSource.GetData(Core.Sources.DataSource.Set.Training);
+            double[][] inputData = (double[][])AdaptiveSystem.Preprocess.Apply(trainingData);
+            
+            
         }
 
         public void Start(TrainingOptions options)
@@ -129,7 +128,7 @@ namespace Sinapse.Core.Training
         public override void Reset()
         {
             this.status.Reset();
-            this.networkSystem.Network.Randomize();
+            this.activationNetwork.Randomize();
         }
 
         public void Goto(TrainingSavepoint savepoint)
@@ -139,7 +138,7 @@ namespace Sinapse.Core.Training
         #endregion
 
 
-        //----------------------------------------
+     
 
 
         #region Protected Methods
@@ -147,6 +146,12 @@ namespace Sinapse.Core.Training
         {
             if (this.StatusChanged != null)
                 this.StatusChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        protected override void OnAdaptiveSystemChanged()
+        {
+            base.OnAdaptiveSystemChanged();
+            activationNetwork = (AdaptiveSystem as ActivationNetworkSystem).Network;
         }
         #endregion
 

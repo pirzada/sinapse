@@ -90,5 +90,6 @@ namespace Sinapse.Core.Filters
         }
 
         #endregion
+
     }
 }
