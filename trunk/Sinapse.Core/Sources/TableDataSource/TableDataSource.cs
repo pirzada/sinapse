@@ -35,7 +35,7 @@ namespace Sinapse.Core.Sources
     ///   The source encompassed here is presented as a DataTable, which can be created
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
-    public class TableDataSource : DataSource, ISerializableObject<TableDataSource>
+    public class TableDataSource : IDataSource, ISerializableObject<TableDataSource>
     {
         
         private SerializableObject<TableDataSource> serializableObject;
@@ -112,9 +112,17 @@ namespace Sinapse.Core.Sources
 
 
 
+        public DataTable CopySchema()
+        {
+            return dataTable.Clone();
+        }
 
+        public DataTable CopyTable()
+        {
+            return dataTable.Copy();
+        }
 
-        public override object GetData(Set set)
+        public DataTable GetData(DataSourceSet set)
         {
             dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
@@ -122,7 +130,7 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
-        public override object GetData(Set set, int subset)
+        public DataTable GetData(DataSourceSet set, int subset)
         {
             dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
@@ -130,13 +138,44 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
-        public object GetData(Set set, int subset, TableDataSourceColumn.ColumnRole role)
+        public DataTable GetData(DataSourceSet set, int subset, TableDataSourceColumn.ColumnRole role)
         {
             DataView view = (DataView)GetData(set, subset);
             DataTable table = view.ToTable(false, this.columns.GetNames(role));
             return table;
         }
 
+
+        /// <summary>
+        ///   Gets the input data stored inside a DataRow. The DataRow must be a
+        ///   member of the internal DataTable of this TableDataSource.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public object[] GetData(DataRow row, TableDataSourceColumn.ColumnRole role)
+        {
+            if (row.Table != dataTable)
+                throw new ArgumentException("row");
+
+            object[] data = new object[columns.Count(role)];
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = row[columns[i].DataColumn];
+            }
+        }
+
+        public void SetData(DataRow row, TableDataSourceColumn.ColumnRole role, out object[] data)
+        {
+            if (row.Table != dataTable)
+                throw new ArgumentException("row");
+
+            data = new object[columns.Count(role)];
+            for (int i = 0; i < data.Length; i++)
+            {
+                row[columns[i].DataColumn] = data[i];
+            }
+        }
 
 
         /// <summary>
@@ -170,6 +209,9 @@ namespace Sinapse.Core.Sources
         {
             Shuffle(3);
         }
+
+
+
 
 
         #region ISerializableObject<TableDataSource> Members
@@ -222,6 +264,21 @@ namespace Sinapse.Core.Sources
         #endregion
 
 
+
+        #region IDataSource Members
+
+
+        object IDataSource.GetData(DataSourceSet set)
+        {
+            return GetData(set);
+        }
+
+        object IDataSource.GetData(DataSourceSet set, int subset)
+        {
+            return GetData(set, subset);
+        }
+
+        #endregion
     }
 
 

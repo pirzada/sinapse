@@ -143,6 +143,24 @@
     <Compile Include="Documents\TableDataSourceEditor.Designer.cs">
       <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SavepointsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SavepointsWindow.Designer.cs">
+      <DependentUpon>SavepointsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TrainingGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\TrainingGraph.Designer.cs">
+      <DependentUpon>TrainingGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TrainingTableVisualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\TrainingTableVisualizer.Designer.cs">
+      <DependentUpon>TrainingTableVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WorplaceWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,9 +272,21 @@
       <SubType>Designer</SubType>
       <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SavepointsWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SavepointsWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\TaskWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TaskWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\TrainingGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TrainingGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\TrainingTableVisualizer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TrainingTableVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\WorplaceWindow.resx">
       <SubType>Designer</SubType>
