@@ -113,6 +113,9 @@
     <Compile Include="Controls\ActivationNetworkDesigner.Designer.cs">
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CaptionLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\FilterSequenceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -124,6 +127,12 @@
     </Compile>
     <Compile Include="Documents\AdaptiveSystemEditor.Designer.cs">
       <DependentUpon>AdaptiveSystemEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\AdaptiveSystemQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Documents\AdaptiveSystemQuery.Designer.cs">
+      <DependentUpon>AdaptiveSystemQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\AdaptiveSystemTrainer.cs">
       <SubType>Form</SubType>
@@ -143,23 +152,32 @@
     <Compile Include="Documents\TableDataSourceEditor.Designer.cs">
       <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SavepointsWindow.cs">
+    <Compile Include="Forms\Base\SingleInstanceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\SavepointsWindow.Designer.cs">
+    <Compile Include="Windows\Training\SavepointsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Training\SavepointsWindow.Designer.cs">
       <DependentUpon>SavepointsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TrainingGraph.cs">
+    <Compile Include="Windows\Training\GraphVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\TrainingGraph.Designer.cs">
-      <DependentUpon>TrainingGraph.cs</DependentUpon>
+    <Compile Include="Windows\Training\GraphVisualizer.Designer.cs">
+      <DependentUpon>GraphVisualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TrainingTableVisualizer.cs">
+    <Compile Include="Windows\Training\LearningGraph.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\TrainingTableVisualizer.Designer.cs">
-      <DependentUpon>TrainingTableVisualizer.cs</DependentUpon>
+    <Compile Include="Windows\Training\LearningGraph.Designer.cs">
+      <DependentUpon>LearningGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Training\TableVisualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Training\TableVisualizer.Designer.cs">
+      <DependentUpon>TableVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\WorplaceWindow.cs">
       <SubType>Form</SubType>
@@ -207,9 +225,6 @@
     <Compile Include="Utils\HtmlReport\Misc.cs" />
     <Compile Include="Utils\HtmlReport\Report.cs" />
     <Compile Include="Utils\HtmlReport\Section.cs" />
-    <Compile Include="Forms\Base\SingleInstanceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,7 +250,6 @@
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\StatusBarOptionsDialog.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Dialogs\StatusBarOptionsDialog.Designer.cs">
       <DependentUpon>StatusBarOptionsDialog.cs</DependentUpon>
@@ -251,6 +265,10 @@
     <EmbeddedResource Include="Controls\ActivationNetworkDesigner.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CaptionLabel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CaptionLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\FilterSequenceControl.resx">
       <SubType>Designer</SubType>
@@ -272,7 +290,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\SavepointsWindow.resx">
+    <EmbeddedResource Include="Windows\Training\SavepointsWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SavepointsWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,13 +298,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>TaskWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\TrainingGraph.resx">
+    <EmbeddedResource Include="Windows\Training\LearningGraph.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TrainingGraph.cs</DependentUpon>
+      <DependentUpon>LearningGraph.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\TrainingTableVisualizer.resx">
+    <EmbeddedResource Include="Windows\Training\TableVisualizer.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TrainingTableVisualizer.cs</DependentUpon>
+      <DependentUpon>TableVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\WorplaceWindow.resx">
       <SubType>Designer</SubType>

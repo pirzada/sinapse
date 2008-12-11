@@ -45,5 +45,15 @@ namespace Sinapse.Core.Systems
 
 
 
+
+        public override object[][] Compute(params object[][] args)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override object[] Test(object[] input, object[] desiredOutput, out double[] rawOutput, out double[] deviation)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }

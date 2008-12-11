@@ -71,7 +71,7 @@ namespace Sinapse.Core.Systems
         public override object[] Compute(params object[] input)
         {
             double[] procInput;
-            object procOutput;
+            object[] procOutput;
 
 
             // Apply Input Filtering
@@ -93,7 +93,7 @@ namespace Sinapse.Core.Systems
             // Apply Output Filtering
             try
             {
-                procOutput = Postprocess.Apply(output);
+                procOutput = (object[])Postprocess.Apply(output);
             }
             catch (Filters.InputMismatchException exception)
             {

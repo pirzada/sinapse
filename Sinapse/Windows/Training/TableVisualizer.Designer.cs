@@ -30,11 +30,12 @@ namespace Sinapse.Windows
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnCompute = new System.Windows.Forms.ToolStripButton();
-            this.btnReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnCurrentValidation = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCurrentTesting = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCompute = new System.Windows.Forms.ToolStripButton();
+            this.btnReport = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +46,7 @@ namespace Sinapse.Windows
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(0, 25);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(629, 422);
+            this.dataGridView.Size = new System.Drawing.Size(629, 397);
             this.dataGridView.TabIndex = 0;
             // 
             // toolStrip1
@@ -59,6 +60,29 @@ namespace Sinapse.Windows
             this.toolStrip1.Size = new System.Drawing.Size(629, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnCurrentValidation,
+            this.btnCurrentTesting});
+            this.toolStripDropDownButton1.Image = global::Sinapse.Properties.Resources.txt;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(92, 22);
+            this.toolStripDropDownButton1.Text = "Current Set";
+            // 
+            // btnCurrentValidation
+            // 
+            this.btnCurrentValidation.Name = "btnCurrentValidation";
+            this.btnCurrentValidation.Size = new System.Drawing.Size(131, 22);
+            this.btnCurrentValidation.Text = "Validation";
+            // 
+            // btnCurrentTesting
+            // 
+            this.btnCurrentTesting.Name = "btnCurrentTesting";
+            this.btnCurrentTesting.Size = new System.Drawing.Size(131, 22);
+            this.btnCurrentTesting.Text = "Testing";
             // 
             // btnCompute
             // 
@@ -77,28 +101,13 @@ namespace Sinapse.Windows
             this.btnReport.Size = new System.Drawing.Size(65, 22);
             this.btnReport.Text = "Analyze";
             // 
-            // toolStripDropDownButton1
+            // panel1
             // 
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnCurrentValidation,
-            this.btnCurrentTesting});
-            this.toolStripDropDownButton1.Image = global::Sinapse.Properties.Resources.txt;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(92, 22);
-            this.toolStripDropDownButton1.Text = "Current Set";
-            // 
-            // btnCurrentValidation
-            // 
-            this.btnCurrentValidation.Name = "btnCurrentValidation";
-            this.btnCurrentValidation.Size = new System.Drawing.Size(152, 22);
-            this.btnCurrentValidation.Text = "Validation";
-            // 
-            // btnCurrentTesting
-            // 
-            this.btnCurrentTesting.Name = "btnCurrentTesting";
-            this.btnCurrentTesting.Size = new System.Drawing.Size(152, 22);
-            this.btnCurrentTesting.Text = "Testing";
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 422);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(629, 25);
+            this.panel1.TabIndex = 2;
             // 
             // TrainingTableVisualizer
             // 
@@ -106,6 +115,7 @@ namespace Sinapse.Windows
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(629, 447);
             this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "TrainingTableVisualizer";
             this.TabText = "Table Visualizer";
@@ -127,5 +137,6 @@ namespace Sinapse.Windows
         private System.Windows.Forms.ToolStripMenuItem btnCurrentValidation;
         private System.Windows.Forms.ToolStripMenuItem btnCurrentTesting;
         private System.Windows.Forms.ToolStripButton btnReport;
+        private System.Windows.Forms.Panel panel1;
     }
 }

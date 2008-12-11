@@ -68,19 +68,12 @@
     <Compile Include="Filters\Table\ProjectionFilter.cs" />
     <Compile Include="Filters\Table\SelectionFilter.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
-    <Compile Include="Systems\Statistic\HiddenMarkovModel.cs" />
     <Compile Include="ISerializableObject.cs" />
     <Compile Include="SerializableObject.cs" />
-    <Compile Include="Sources\ImageDataSource.cs" />
     <Compile Include="Sources\DataSource.cs" />
-    <Compile Include="Sources\SoundDataSource.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSource.cs" />
-    <Compile Include="Sources\VideoDataSource.cs" />
-    <Compile Include="Systems\Network\NeocognitronNetworkSystem.cs" />
-    <Compile Include="Systems\Statistic\StatisticSystem.cs" />
     <Compile Include="Systems\AdaptiveSystem.cs" />
     <Compile Include="Systems\Network\ActivationNetworkSystem.cs" />
-    <Compile Include="Systems\Network\DistanceNetworkSystem.cs" />
     <Compile Include="Systems\Network\NetworkSystem.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -128,6 +121,7 @@
     <Folder Include="Filters\Sound\" />
     <Folder Include="Filters\Video\" />
     <Folder Include="Reporting\" />
+    <Folder Include="Systems\Statistic\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

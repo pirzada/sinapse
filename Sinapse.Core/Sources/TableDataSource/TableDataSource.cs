@@ -80,11 +80,11 @@ namespace Sinapse.Core.Sources
             // Creates the extra two columns for storing the Set and Subset
             DataColumn col = new DataColumn("@SET", typeof(int));
             dataTable.Columns.Add(col);
-            this.columns.Add(col, SystemDataType.Nummeric, TableDataSourceColumn.ColumnRole.None);
+            this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
 
             col = new DataColumn("@SUBSET", typeof(int));
             dataTable.Columns.Add(col);
-            this.columns.Add(col, SystemDataType.Nummeric, TableDataSourceColumn.ColumnRole.None);
+            this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
         }
 
 
@@ -122,7 +122,7 @@ namespace Sinapse.Core.Sources
             return dataTable.Copy();
         }
 
-        public DataTable GetData(DataSourceSet set)
+        public DataView GetData(DataSourceSet set)
         {
             dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
@@ -130,19 +130,29 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
-        public DataTable GetData(DataSourceSet set, int subset)
+        public DataView GetData(DataSourceSet set, int subset)
         {
             dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
             dataView.RowFilter = String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset);
             return dataView;
         }
-
-        public DataTable GetData(DataSourceSet set, int subset, TableDataSourceColumn.ColumnRole role)
+/*
+        public DataTable GetData(DataSourceSet set, int subset, DataSourceRole role)
         {
-            DataView view = (DataView)GetData(set, subset);
+            DataView view = GetData(set, subset);
             DataTable table = view.ToTable(false, this.columns.GetNames(role));
             return table;
+        }
+*/
+        public DataView GetExtendedView()
+        {
+            // For each output column, three extra columns should be added, one for
+            //  storing the desired output as seen by a system, one for the raw output
+            //  calculed by the system and other to show the deviation between those
+            //  two raw outputs, the given by the system and the desired.
+
+            throw new NotImplementedException();
         }
 
 
@@ -153,24 +163,25 @@ namespace Sinapse.Core.Sources
         /// <param name="row"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        public object[] GetData(DataRow row, TableDataSourceColumn.ColumnRole role)
+        public object[] GetData(DataRow row, DataSourceRole role)
         {
             if (row.Table != dataTable)
                 throw new ArgumentException("row");
 
-            object[] data = new object[columns.Count(role)];
+            object[] data = new object[columns.GetCount(role)];
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = row[columns[i].DataColumn];
             }
+            return data;
         }
 
-        public void SetData(DataRow row, TableDataSourceColumn.ColumnRole role, out object[] data)
+        public void SetData(DataRow row, DataSourceRole role, out object[] data)
         {
             if (row.Table != dataTable)
                 throw new ArgumentException("row");
 
-            data = new object[columns.Count(role)];
+            data = new object[columns.GetCount(role)];
             for (int i = 0; i < data.Length; i++)
             {
                 row[columns[i].DataColumn] = data[i];
@@ -205,7 +216,7 @@ namespace Sinapse.Core.Sources
         /// </summary>
         /// <param name="shuffleIterations"></param>
         /// <returns></returns>
-        public override void Shuffle()
+        public void Shuffle()
         {
             Shuffle(3);
         }
@@ -276,6 +287,16 @@ namespace Sinapse.Core.Sources
         object IDataSource.GetData(DataSourceSet set, int subset)
         {
             return GetData(set, subset);
+        }
+
+        object IDataSource.GetData(DataSourceSet set, DataSourceRole role)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        object IDataSource.GetData(DataSourceSet set, int subset, DataSourceRole role)
+        {
+            throw new Exception("The method or operation is not implemented.");
         }
 
         #endregion
