@@ -88,6 +88,6 @@ namespace Sinapse.Core.Systems
         }
 
 
-        public abstract object Compute(object args);
+        public abstract object[] Compute(params object[] args);
     }
 }

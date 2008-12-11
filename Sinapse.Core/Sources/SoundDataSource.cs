@@ -25,7 +25,7 @@ using AForge.Mathematics;
 
 namespace Sinapse.Core.Sources
 {
-    public class SoundDataSource : DataSource
+    public class SoundDataSource : IDataSource
     {
 
         public SoundDataSource()
@@ -34,7 +34,7 @@ namespace Sinapse.Core.Sources
         }
 
 
-        public override void Shuffle()
+        public void Shuffle()
         {
             throw new Exception("The method or operation is not implemented.");
         }
@@ -51,12 +51,12 @@ namespace Sinapse.Core.Sources
             }
         }
 
-        public override object GetData(DataSource.Set set)
+        public object GetData(DataSourceSet set)
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override object GetData(DataSource.Set set, int subset)
+        public object GetData(DataSourceSet set, int subset)
         {
             throw new Exception("The method or operation is not implemented.");
         }

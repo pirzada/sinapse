@@ -30,7 +30,9 @@ using Sinapse.Core.Systems;
 namespace Sinapse.Core.Sources
 {
 
-    
+    [Flags]
+    public enum DataSourceSet { None = 0, Training = 2, Testing = 8, Validation = 16, };
+
     /// <summary>
     ///   This class encompass a Adaptive System DataSource, or in other words, a
     ///   source of information that can be used to train and feed Adaptive Systems.
@@ -38,22 +40,14 @@ namespace Sinapse.Core.Sources
     ///   of images.
     /// </summary>
     [Serializable]
-    public abstract class DataSource 
+    public interface IDataSource 
     {
-        [Flags]
-        public enum Set { None = 0, Training = 2, Testing = 8, Validation = 16, };
-
-
-
-        public abstract void Shuffle();
-
-
-
-        public abstract object GetData(Set set);
-        public abstract object GetData(Set set, int subset);
         
+        void Shuffle();
 
 
-
+        object GetData(DataSourceSet set);
+        object GetData(DataSourceSet set, int subset);
+        
     }
 }

@@ -29,6 +29,9 @@ namespace Sinapse.Core.Filters
     /// <remarks>This is a Interface and thus cannot be instantiated.</remarks>
     public interface IFilter
     {
+        // Cada filtro teria de suportar Matrix, Vector, DataTable, object[] e object[][]
+        // object[] e object[][] seriam os fallbacks, os outros seriam otimizados
+
         object Input { get; set; }
         object Output { get; }
         void Apply();
@@ -47,6 +50,7 @@ namespace Sinapse.Core.Filters
 
         }
 
+        
         public object Apply(object source)
         {
             try

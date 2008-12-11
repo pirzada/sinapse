@@ -171,6 +171,16 @@ namespace Sinapse.Core.Sources
             }
         }
 
+        public int Count(TableDataSourceColumn.ColumnRole role)
+        {
+            int count = 0;
+            foreach (TableDataSourceColumn col in this)
+            {
+                if (col.Role == role)
+                    count++;
+            }
+            return count;
+        }
 
         public string[] GetNames(TableDataSourceColumn.ColumnRole role)
         {

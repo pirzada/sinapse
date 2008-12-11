@@ -68,7 +68,7 @@ namespace Sinapse.Core.Systems
         //----------------------------------------
 
         #region Public Methods
-        public override object Compute(object input)
+        public override object[] Compute(params object[] input)
         {
             double[] procInput;
             object procOutput;
