@@ -9,7 +9,8 @@ namespace Sinapse.Core
     public enum SystemDataType { Nummeric, Category, Boolean, Time };
 
     /// <summary>
-    /// SystemInputOutput provides a description for a Input or Output of a System. It stores the name, description and type of the input or output.
+    /// SystemInputOutput provides a description for a Input or Output of a System.
+    /// It stores the name, description and type of the input or output.
     /// </summary>
     public class SystemInputOutput
     {

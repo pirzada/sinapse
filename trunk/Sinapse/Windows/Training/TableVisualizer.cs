@@ -18,6 +18,7 @@ namespace Sinapse.Windows
 
         TableDataSource dataSource;
         AdaptiveSystem adaptiveSystem;
+        DataView currentView;
 
         public TrainingTableVisualizer()
         {
@@ -28,19 +29,35 @@ namespace Sinapse.Windows
         {
             // Lembrete: O usuário nao deve poder alterar a tabela nesta janela, que
             //  é apenas um visualizador. Então devemos usar cópias de DataTables imutáveis
-            
-            int inputCount  = dataSource.Columns.Count(TableDataSourceColumn.ColumnRole.Input);
+
+            int inputCount = dataSource.Columns.Count(TableDataSourceColumn.ColumnRole.Input);
             int outputCount = dataSource.Columns.Count(TableDataSourceColumn.ColumnRole.Output);
 
-            dataSource.GetData(
 
-                outputs = adaptiveSystem.Compute(inputs);
 
-                // Copiar o vetor de saída para a linha
+            foreach (DataRow row in currentView.Table)
+            {
+                object[] inputs = dataSource.GetData(row, DataSourceRole.Input);
+                object[] outputs = dataSource.GetData(row, DataSourceRole.Output);
+                object[] rawOutputs;
+                object[] deviations;
 
+                adaptiveSystem.Test(inputs, outputs, rawOutputs, deviations);
+
+                dataSource.SetData(row, DataSourceRole.Input, inputs);
+                dataSource.SetData(row, DataSourceRole.Output, outputs);
 
             }
 
+
+
+            outputs = adaptiveSystem.Test(inputs);
+
+            // Copiar o vetor de saída para a linha
+
+
         }
+
+
     }
 }

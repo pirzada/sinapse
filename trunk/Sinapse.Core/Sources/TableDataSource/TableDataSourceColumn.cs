@@ -10,17 +10,15 @@ namespace Sinapse.Core.Sources
     public class TableDataSourceColumn
     {
 
-        public enum ColumnRole { None = 0, Input = 1, Output = 2 };
-
         private string columnDescription;
         private SystemDataType columnDataType;
         private DataColumn dataColumn;
-        private ColumnRole columnRole;
+        private DataSourceRole columnRole;
         bool hidden; // Setar quando o usuário esconder na GUI
 
 
 
-        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type, ColumnRole role)
+        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type, DataSourceRole role)
         {
             this.dataColumn = dataColumn;
             this.columnDataType = type;
@@ -77,7 +75,7 @@ namespace Sinapse.Core.Sources
             set { this.columnDataType = value; }
         }
 
-        public ColumnRole Role
+        public DataSourceRole Role
         {
             get { return this.columnRole; }
             set { this.columnRole = value; }
@@ -116,7 +114,7 @@ namespace Sinapse.Core.Sources
         #endregion
 
 
-        public TableDataSourceColumn[] Select(TableDataSourceColumn.ColumnRole role)
+        public TableDataSourceColumn[] Select(DataSourceRole role)
         {
             List<TableDataSourceColumn> cols = new List<TableDataSourceColumn>(this.Count);
             foreach (TableDataSourceColumn col in this)
@@ -128,7 +126,7 @@ namespace Sinapse.Core.Sources
         }
 
 
-        public void Add(DataColumn dataColumn, SystemDataType type, TableDataSourceColumn.ColumnRole role)
+        public void Add(DataColumn dataColumn, SystemDataType type, DataSourceRole role)
         {
             Add(new TableDataSourceColumn(dataColumn, type, role));
         }
@@ -171,7 +169,7 @@ namespace Sinapse.Core.Sources
             }
         }
 
-        public int Count(TableDataSourceColumn.ColumnRole role)
+        public int GetCount(DataSourceRole role)
         {
             int count = 0;
             foreach (TableDataSourceColumn col in this)
@@ -182,7 +180,7 @@ namespace Sinapse.Core.Sources
             return count;
         }
 
-        public string[] GetNames(TableDataSourceColumn.ColumnRole role)
+        public string[] GetNames(DataSourceRole role)
         {
             List<string> names = new List<string>(this.Count);
             foreach (TableDataSourceColumn col in this)

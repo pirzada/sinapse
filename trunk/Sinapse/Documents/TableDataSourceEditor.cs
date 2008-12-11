@@ -43,7 +43,7 @@ namespace Sinapse.Documents
         {
             if (this.tableSource != null)
             {
-                this.dgvViewer.DataSource = this.tableSource.GetData(DataSource.Set.Training);
+                this.dgvViewer.DataSource = this.tableSource.GetData(DataSourceSet.Training);
                 this.dgvColumns.DataSource = this.tableSource.Columns;
             }
         }

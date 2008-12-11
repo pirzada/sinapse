@@ -104,7 +104,7 @@ namespace Sinapse.Core.Training
         {
             History.Add("Training Started", "Training session started with the following options");
 
-            object trainingData = DataSource.GetData(Core.Sources.DataSource.Set.Training);
+            object trainingData = DataSource.GetData(DataSourceSet.Training);
             double[][] inputData = (double[][])AdaptiveSystem.Preprocess.Apply(trainingData);
             
             
@@ -112,7 +112,7 @@ namespace Sinapse.Core.Training
 
         public void Start(TrainingOptions options)
         {
-            options = options;
+            this.options = options;
 
             Start();
         }

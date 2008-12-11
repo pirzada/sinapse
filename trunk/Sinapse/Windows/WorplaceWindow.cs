@@ -192,7 +192,7 @@ namespace Sinapse.Windows
         #region Menu Events
         private void menuSourceAddTable_Click(object sender, EventArgs e)
         {
-            WorkplaceContent item = new WorkplaceContent("New item", typeof(DataSource));
+            WorkplaceContent item = new WorkplaceContent("New item", typeof(TableDataSource));
             Workplace.Active.DataSources.Add(item);
 
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
