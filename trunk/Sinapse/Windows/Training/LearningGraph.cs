@@ -106,7 +106,7 @@ namespace Sinapse.Windows
         private void btnTrim_Click(object sender, EventArgs e)
         {
             if (ptsCurrentSavepoint.Count > 0)
-                Trim(ptsCurrentSavepoint[0].X);
+                Trim((int)ptsCurrentSavepoint[0].X);
         }
 
 

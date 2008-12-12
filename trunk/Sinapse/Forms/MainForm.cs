@@ -217,7 +217,7 @@ namespace Sinapse.Forms
             }
             else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
             {
-                AdaptiveSystemTrainer editor = new AdaptiveSystemTrainer(e.WorkplaceContent.Open() as BackpropagationTrainingSession);
+                BackpropagationTrainer editor = new BackpropagationTrainer(e.WorkplaceContent.Open() as BackpropagationTrainingSession);
                 editor.Show(this.dockMain, DockState.Document);
             }
 

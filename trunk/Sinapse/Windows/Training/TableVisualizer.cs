@@ -30,30 +30,24 @@ namespace Sinapse.Windows
             // Lembrete: O usuário nao deve poder alterar a tabela nesta janela, que
             //  é apenas um visualizador. Então devemos usar cópias de DataTables imutáveis
 
-            int inputCount = dataSource.Columns.Count(TableDataSourceColumn.ColumnRole.Input);
-            int outputCount = dataSource.Columns.Count(TableDataSourceColumn.ColumnRole.Output);
+            int inputCount = dataSource.Columns.GetCount(DataSourceRole.Input);
+            int outputCount = dataSource.Columns.GetCount(DataSourceRole.Output);
 
 
 
-            foreach (DataRow row in currentView.Table)
+            foreach (DataRow row in currentView.Table.Rows)
             {
                 object[] inputs = dataSource.GetData(row, DataSourceRole.Input);
                 object[] outputs = dataSource.GetData(row, DataSourceRole.Output);
-                object[] rawOutputs;
-                object[] deviations;
+                double[] rawOutputs;
+                double[] deviations;
 
-                adaptiveSystem.Test(inputs, outputs, rawOutputs, deviations);
+                adaptiveSystem.Test(inputs, outputs, out rawOutputs, out deviations);
 
                 dataSource.SetData(row, DataSourceRole.Input, inputs);
                 dataSource.SetData(row, DataSourceRole.Output, outputs);
 
             }
-
-
-
-            outputs = adaptiveSystem.Test(inputs);
-
-            // Copiar o vetor de saída para a linha
 
 
         }

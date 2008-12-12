@@ -38,13 +38,24 @@ namespace Sinapse.Core.Training
         //----------------------------------------
 
 
-        #region Constructor
         public TrainingStatus()
         {
 
         }
-        #endregion
 
+
+        public TrainingStatus Copy()
+        {
+            TrainingStatus status = new TrainingStatus();
+            status.epoch = epoch;
+            status.progress = progress;
+            status.trainingError = trainingError;
+            status.validationError = validationError;
+            status.epochsPerSecond = epochsPerSecond;
+            status.trainingRound = trainingRound;
+            
+            return status;
+        }
 
         //----------------------------------------
 

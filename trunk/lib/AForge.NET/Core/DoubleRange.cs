@@ -163,5 +163,17 @@ namespace AForge
             return new DoubleRange(min, max);
         }
 
+        /// <summary>
+        ///   Converts a value from a scale to another.
+        /// </summary>
+        /// <param name="x">The value to convert.</param>
+        /// <param name="from">The scale in which x is measured.</param>
+        /// <param name="dest">The destination scale for x.</param>
+        /// <returns>The value of x in the destination scale.</returns>
+        public static double Convert(double x, DoubleRange from, DoubleRange dest)
+        {
+            return ((x - from.Min) * (dest.Length) / (from.Length)) + dest.Min;
+        }
+
     }
 }

@@ -12,7 +12,7 @@ using Sinapse.Core.Sources;
 
 namespace Sinapse.Documents
 {
-    public partial class TableDataSourceEditor : DockContent
+    public partial class TableDataSourceEditor : DockContent, IDocument
     {
 
         private TableDataSource tableSource;
@@ -47,6 +47,31 @@ namespace Sinapse.Documents
                 this.dgvColumns.DataSource = this.tableSource.Columns;
             }
         }
+
+
+        #region IDocument Members
+
+        public void Save()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void SaveAs()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public ToolStripMenuItem[] MenuItems
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public ToolStrip[] ToolStrips
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        #endregion
 
     }
 }
