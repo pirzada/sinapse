@@ -14,18 +14,6 @@ namespace Sinapse.Core.Filters.Table
         DataTable outputTable;
 
 
-        #region IFilter Members
-
-        public object Input
-        {
-            get { return inputTable; }
-            set { inputTable = (DataTable)value; }
-        }
-
-        public object Output
-        {
-            get { return outputTable; }
-        }
 
         public void Apply()
         {

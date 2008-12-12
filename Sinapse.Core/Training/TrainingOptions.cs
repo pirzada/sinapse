@@ -26,28 +26,47 @@ namespace Sinapse.Core.Training
     [Serializable]
     public sealed class TrainingOptions
     {
-        public enum TrainingMethod { ByError, ByEpoch, Manual };
+        public enum TrainingLimit { None = 0, ByError = 1, ByEpoch = 2 };
 
-        private TrainingMethod method;
-        private int    epochLimit;
-        private double errorLimit;
+        public TrainingLimit Limit;
+        public int LimitByEpochs;
+        public double LimitByError;
 
-        private double momentum;
-        private double learningRate1;
-        private double learningRate2;
-        private bool changeLearningRate;
+        public double Momentum;
+        public double LearningRate1;
+        public double LearningRate2;
+        public bool ChangeLearningRate;
 
-        private int? saveEpochs;
-        private int? validateEpochs;
-        private int? testingEpochs;
-        private int? rotateSubsetsEpochs;
+        public bool MarkSavepoints;
+        public int MarkSavepointsEpochs;
 
-        bool enableSavepointCompression;
+        public bool Validate;
+        public int ValidateEpochs;
 
+        public bool RotateSubsets;
+        public int RotateSubsetsEpochs;
+
+        public bool CompressSavepoints;
+        public int CompressSavepointsLimit;
+
+        public bool ReportProgress;
+        public int ReportProgressEpochs;
+
+        public bool Delay;
+        public int DelayMilliseconds;
+
+        public TrainingOptions Copy()
+        {
+            TrainingOptions options = new TrainingOptions();
+            options.Limit = Limit;
+            options.LimitByEpochs = LimitByEpochs;
+
+            throw new NotImplementedException();
+        }
 
         public TrainingOptions()
         {
-            method = TrainingMethod.ByError;
+            Limit = TrainingLimit.ByError;
         }
 
 

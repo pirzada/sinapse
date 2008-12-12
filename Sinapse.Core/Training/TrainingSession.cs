@@ -11,11 +11,14 @@ namespace Sinapse.Core.Training
 {
     public abstract class TrainingSession
     {
+        public enum SessionState { Stopped, Paused, Running, Error };
+
         private TrainingHistory history;
         private TableDataSource dataSource;
         private AdaptiveSystem adaptiveSystem;
-
-
+        private SessionState state;
+        private string notes;
+        
 
         public abstract void Start();
         public abstract void Stop();
@@ -23,11 +26,11 @@ namespace Sinapse.Core.Training
         public abstract void Reset();
 
 
-        public event EventHandler TrainingStarted;
-        public event EventHandler TrainingStopped;
-        public event EventHandler TrainingPaused;
-        public event EventHandler TrainingReset;
-        public event EventHandler TrainingComplete;
+        public event EventHandler Started;
+        public event EventHandler Stopped;
+        public event EventHandler Paused;
+        public event EventHandler Reseted;
+        public event EventHandler Completed;
         public event EventHandler AdaptiveSystemChanged;
         public event EventHandler DataSourceChanged;
 
@@ -49,20 +52,55 @@ namespace Sinapse.Core.Training
             protected set { adaptiveSystem = value; }
         }
 
-
-
-        protected virtual void OnAdaptiveSystemChanged()
+        public SessionState State
         {
-            if (AdaptiveSystemChanged != null)
-                AdaptiveSystemChanged.Invoke(this, EventArgs.Empty);
+            get { return state; }
+            protected set { state = value; }
         }
 
-        protected virtual void OnDataSourceChanged()
+        public string Notes
         {
-            if (AdaptiveSystemChanged != null)
-                AdaptiveSystemChanged.Invoke(this, EventArgs.Empty);
+            get { return notes; }
+            set { notes = value; }
         }
 
+
+
+        protected virtual void OnAdaptiveSystemChanged(EventArgs e)
+        {
+            if (AdaptiveSystemChanged != null)
+                AdaptiveSystemChanged.Invoke(this, e);
+        }
+
+        protected virtual void OnDataSourceChanged(EventArgs e)
+        {
+            if (AdaptiveSystemChanged != null)
+                AdaptiveSystemChanged.Invoke(this, e);
+        }
+
+        protected virtual void OnStarted(EventArgs e)
+        {
+            if (Started != null)
+                Started.Invoke(this, e);
+        }
+
+        protected virtual void OnStopped(EventArgs e)
+        {
+            if (Stopped != null)
+                Stopped.Invoke(this, e);
+        }
+
+        protected virtual void OnPaused(EventArgs e)
+        {
+            if (Paused != null)
+                Paused.Invoke(this, e);
+        }
+
+        protected virtual void OnCompleted(EventArgs e)
+        {
+            if (Completed != null)
+                Completed.Invoke(this, e);
+        }
 
     }
 }

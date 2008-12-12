@@ -86,6 +86,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RichTextBoxExtended, Version=1.1.3268.30113, Culture=neutral, PublicKeyToken=9fa7dfa6666a2638, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RichTextBoxExtended\bin\Release\RichTextBoxExtended.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -114,7 +118,7 @@
       <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CaptionLabel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\FilterSequenceControl.cs">
       <SubType>UserControl</SubType>
@@ -134,12 +138,13 @@
     <Compile Include="Documents\AdaptiveSystemQuery.Designer.cs">
       <DependentUpon>AdaptiveSystemQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\AdaptiveSystemTrainer.cs">
+    <Compile Include="Documents\BackpropagationTrainer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\AdaptiveSystemTrainer.Designer.cs">
-      <DependentUpon>AdaptiveSystemTrainer.cs</DependentUpon>
+    <Compile Include="Documents\BackpropagationTrainer.Designer.cs">
+      <DependentUpon>BackpropagationTrainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Documents\IDocument.cs" />
     <Compile Include="Documents\StartPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +255,7 @@
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\StatusBarOptionsDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Dialogs\StatusBarOptionsDialog.Designer.cs">
       <DependentUpon>StatusBarOptionsDialog.cs</DependentUpon>
@@ -278,9 +284,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>AdaptiveSystemEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\AdaptiveSystemTrainer.resx">
+    <EmbeddedResource Include="Documents\BackpropagationTrainer.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>AdaptiveSystemTrainer.cs</DependentUpon>
+      <DependentUpon>BackpropagationTrainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\StartPage.resx">
       <SubType>Designer</SubType>
@@ -721,6 +727,9 @@
     <None Include="Resources\reload1.png" />
     <None Include="Resources\documentinfo1.png" />
     <Content Include="Sinapse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows\SourceEditor\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

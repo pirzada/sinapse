@@ -70,40 +70,47 @@ namespace Sinapse.Core.Systems
         #region Public Methods
         public override object[] Compute(params object[] input)
         {
-            double[] procInput;
-            object[] procOutput;
+            object[] output;
 
 
-            // Apply Input Filtering
-            try
+            try // Apply preprocessing (input filtering)
             {
-                procInput = (double[])Preprocess.Apply(input);
+                Preprocess.Apply(input);
             }
             catch (Filters.InputMismatchException exception)
             {
                 throw new Filters.InputMismatchException(
-                    "Exception ocurred while appling Input filtering", exception);
+                    "Exception ocurred while appling Input processing", exception);
             }
+
+
+            // Prepare for network calculation
+            double[] doubleInput = Array.ConvertAll<object, double>(input,
+                delegate(object o) { return (double)o; });
 
 
             // Calculate Network Answers
-            double[] output = Network.Compute((double[])procInput);
+            double[] doubleOutput = Network.Compute(doubleInput);
 
 
-            // Apply Output Filtering
-            try
+            // Prepare for output post processing
+            output = Array.ConvertAll<double, object>(doubleOutput,
+                delegate(double o) { return (object)o; });
+
+
+            try // Apply postprocessing (output filtering)
             {
-                procOutput = (object[])Postprocess.Apply(output);
+                Postprocess.Apply(output);
             }
             catch (Filters.InputMismatchException exception)
             {
                 throw new Filters.InputMismatchException(
-                    "Exception ocurred while appling Output filtering", exception);
+                    "Exception ocurred while appling Output processing", exception);
             }
 
 
             // Return final result
-            return procOutput;
+            return output;
         }
         #endregion
 

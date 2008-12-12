@@ -31,28 +31,51 @@ namespace Sinapse.Core.Training
     public sealed class TrainingHistoryEvent
     {
 
-        private string m_action;
-        private string m_detail;
-        private DateTime m_time;
-        private TrainingOptions m_options;
-        private TrainingStatus m_status;
+        private string action;
+        private string detail;
+        private DateTime time;
+        private TrainingOptions options;
+        private TrainingStatus status;
 
 
         //---------------------------------------------
 
 
         #region Constructor
-        internal TrainingHistoryEvent(string text)
+        public TrainingHistoryEvent(string text)
             : this(text, String.Empty)
         {
         }
 
-        internal TrainingHistoryEvent(string text, string detail)
+        public TrainingHistoryEvent(string text, string detail)
         {
-            this.m_time = DateTime.Now;
-            this.m_action = text;
-            this.m_detail = detail;
+            this.time = DateTime.Now;
+            this.action = text;
+            this.detail = detail;
         }
+
+        public TrainingHistoryEvent(string text, string detail, TrainingStatus status) : this(text, detail)
+        {
+            this.status = status.Copy();
+        }
+
+        public TrainingHistoryEvent(string text, string detail, TrainingStatus status, TrainingOptions options)
+            : this(text, detail, status)
+        {
+            this.time = DateTime.Now;
+            this.options = options.Copy();
+        }
+
+        public TrainingHistoryEvent(string text, TrainingStatus status)
+            : this(text, String.Empty, status)
+        {
+        }
+
+        public TrainingHistoryEvent(string text, TrainingStatus status, TrainingOptions options)
+            : this(text, String.Empty, status, options)
+        {
+        }
+
         #endregion
 
 
@@ -63,19 +86,19 @@ namespace Sinapse.Core.Training
         /// <summary>Gets the creation time of this action.</summary>
         public DateTime Time
         {
-            get { return this.m_time; }
+            get { return time; }
         }
 
         /// <summary>Get the action registered.</summary>
         public string Action
         {
-            get { return this.m_action; }
+            get { return action; }
         }
 
         /// <summary>Gets details about the registered action.</summary>
         public string Details
         {
-            get { return this.m_detail; }
+            get { return detail; }
         }
         #endregion
 
@@ -91,7 +114,7 @@ namespace Sinapse.Core.Training
 
         public string ToString(bool showDetail)
         {
-            return String.Format("[{0}] {1} - {2}", m_time, m_action, m_detail);
+            return String.Format("[{0}] {1} - {2}", time, action, detail);
         }
         #endregion
 
@@ -108,6 +131,27 @@ namespace Sinapse.Core.Training
         {
             Add(new TrainingHistoryEvent(text, detail));
         }
+
+        public void Add(string text, TrainingStatus status)
+        {
+            Add(new TrainingHistoryEvent(text, status));
+        }
+
+        public void Add(string text, string detail, TrainingStatus status)
+        {
+            Add(new TrainingHistoryEvent(text, detail, status));
+        }
+
+        public void Add(string text, string detail, TrainingStatus status, TrainingOptions options)
+        {
+            Add(new TrainingHistoryEvent(text, detail, status, options));
+        }
+
+        public void Add(string text, TrainingStatus status, TrainingOptions options)
+        {
+            Add(new TrainingHistoryEvent(text, status, options));
+        }
+
 
 
         public string[] ToStringArray()

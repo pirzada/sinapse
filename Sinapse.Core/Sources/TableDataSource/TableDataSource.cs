@@ -122,7 +122,8 @@ namespace Sinapse.Core.Sources
             return dataTable.Copy();
         }
 
-        public DataView GetData(DataSourceSet set)
+
+        public DataView GetView(DataSourceSet set)
         {
             dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
@@ -130,13 +131,62 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
-        public DataView GetData(DataSourceSet set, int subset)
+
+        public DataView GetView(DataSourceSet set, int subset)
         {
             dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
             dataView.RowFilter = String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset);
             return dataView;
         }
+
+
+        public object[][] GetData(DataSourceSet set)
+        {
+            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}'", (int)set));
+            object[][] data = new object[rows.Length][];
+            for (int i = 0; i < rows.Length; i++)
+            {
+                data[i] = rows[i].ItemArray;
+            }
+            return data;
+        }
+
+
+        public object[][] GetData(DataSourceSet set, int subset)
+        {
+            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset));
+            object[][] data = new object[rows.Length][];
+            for (int i = 0; i < rows.Length; i++)
+            {
+                data[i] = rows[i].ItemArray;
+            }
+            return data;
+        }
+
+        public object[][] GetData(DataSourceSet set, DataSourceRole role)
+        {
+            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}'", (int)set));
+            object[][] data = new object[rows.Length][];
+            for (int i = 0; i < rows.Length; i++)
+            {
+                data[i] = GetData(rows[i], role);
+            }
+            return data;
+        }
+
+        public object[][] GetData(DataSourceSet set, int subset, DataSourceRole role)
+        {
+            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset));
+            object[][] data = new object[rows.Length][];
+            for (int i = 0; i < rows.Length; i++)
+			{
+                data[i] = GetData(rows[i], role);
+            }
+            return data;
+        }
+
+
 /*
         public DataTable GetData(DataSourceSet set, int subset, DataSourceRole role)
         {
@@ -176,7 +226,7 @@ namespace Sinapse.Core.Sources
             return data;
         }
 
-        public void SetData(DataRow row, DataSourceRole role, out object[] data)
+        public void SetData(DataRow row, DataSourceRole role, object[] data)
         {
             if (row.Table != dataTable)
                 throw new ArgumentException("row");
