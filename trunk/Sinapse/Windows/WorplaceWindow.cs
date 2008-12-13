@@ -31,6 +31,7 @@ using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Training;
 
+
 namespace Sinapse.Windows
 {
 
@@ -68,11 +69,12 @@ namespace Sinapse.Windows
         #endregion
 
 
+
         #region Properties
         /// <summary>
         ///   Gets the current selected WorkplaceContent on the Workplace Window
         /// </summary>
-        public WorkplaceContent SelectedItem
+        public WorkplaceItem SelectedItem
         {
             get
             {
@@ -80,8 +82,8 @@ namespace Sinapse.Windows
                 {
                     object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-                    if (tag is WorkplaceContent)
-                        return tag as WorkplaceContent;
+                    if (tag is WorkplaceItem)
+                        return tag as WorkplaceItem;
                 }
                 return null;
             }
@@ -107,9 +109,9 @@ namespace Sinapse.Windows
         {
             object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-            if (tag is WorkplaceContent)
+            if (tag is WorkplaceItem)
                 this.OnWorkplaceContentDoubleClicked(
-                    new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceContent));
+                    new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceItem));
         }
         #endregion
 
@@ -158,19 +160,19 @@ namespace Sinapse.Windows
             this.treeViewWorkplace.Nodes.Clear();
             TreeNode node;
 
-            foreach (WorkplaceContent content in Workplace.Active.AdaptiveSystems)
+            foreach (WorkplaceItem content in Workplace.Active.AdaptiveSystems)
             {
                 node = new TreeNode(content.FileName, 1, 1);
                 node.Tag = content;
                 nodeSystems.Nodes.Add(node);
             }
-            foreach (WorkplaceContent content in Workplace.Active.DataSources)
+            foreach (WorkplaceItem content in Workplace.Active.DataSources)
             {
                 node = new TreeNode(content.FileName, 1, 1);
                 node.Tag = content;
                 nodeSources.Nodes.Add(node);
             }
-            foreach (WorkplaceContent content in Workplace.Active.TrainingSessions)
+            foreach (WorkplaceItem content in Workplace.Active.TrainingSessions)
             {
                 node = new TreeNode(content.FileName, 1, 1);
                 node.Tag = content;
@@ -192,21 +194,22 @@ namespace Sinapse.Windows
 
         #region Menu Events
         private void menuSourceAddTable_Click(object sender, EventArgs e)
-        {
-            WorkplaceContent item = new WorkplaceContent(Workplace.Active, "New item", typeof(TableDataSource));
-            Workplace.Active.DataSources.Add(item);
-            
+        {           
+/*
             // Tell listeners we double clicked a workplace entry (request open)
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
+ */ 
         }
 
         private void menuSystemAddNetworkActivation_Click(object sender, EventArgs e)
         {
-            WorkplaceContent item = new WorkplaceContent(Workplace.Active, "New item", typeof(NetworkSystem));
+/*
+            WorkplaceComponentInfo item = new WorkplaceComponentInfo(Workplace.Active, "New item", typeof(NetworkSystem));
             Workplace.Active.AdaptiveSystems.Add(item);
 
             // Tell listeners we double clicked a workplace entry (request open)
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
+*/ 
         }
 
         private void menuSystemAddNetworkDistance_Click(object sender, EventArgs e)
@@ -237,14 +240,14 @@ namespace Sinapse.Windows
     
     public sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
     {
-        private WorkplaceContent workplaceContent;
+        private WorkplaceItem workplaceContent;
 
-        public WorkplaceContent WorkplaceContent
+        public WorkplaceItem WorkplaceContent
         {
             get { return workplaceContent; }
             set { workplaceContent = value; }
         }
-        public WorkplaceContentDoubleClickedEventArgs(WorkplaceContent item)
+        public WorkplaceContentDoubleClickedEventArgs(WorkplaceItem item)
         {
             this.workplaceContent = item;
         }

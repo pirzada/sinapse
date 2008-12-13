@@ -14,23 +14,20 @@ namespace Sinapse.Core
 
     public interface ISerializableObject<T>
     {
-        // Metadata associated
-        string Name { get; set;}
-        string Description { get; set;}
-        string Remarks { get; set;}
-
         // IO Data
         string FilePath { get; set; }
         string FileName { get; set; }
         string FullPath { get; }
         string DefaultExtension { get; }
 
-        bool HasChanges { get; set; }
+        // bool HasChanges { get; set; }
 
         // DateTime Creation { get; }
 
         bool Save(string path);
         bool Save();
+
+        event EventHandler FileChanged;
 
     }
 
@@ -38,55 +35,33 @@ namespace Sinapse.Core
     public class SerializableObject<T> : ISerializableObject<T>
         where T : ISerializableObject<T>
     {
-
-        private string name;
-        private string description;
-        private string remarks;
+        private T owner;
+        
 
         [NonSerialized]
         private string filename;
+
         [NonSerialized]
         private string filepath;
+/*        
         [NonSerialized]
         private bool hasChanges;
-
-        private T owner;
+*/
+        [field: NonSerialized]
+        public event EventHandler FileChanged;
 
 
 
         public SerializableObject(T owner)
         {
             this.owner = owner;
-            this.name = String.Empty;
-            this.description = String.Empty;
-            this.remarks = String.Empty;
+         //   this.name = String.Empty;
+         //   this.description = String.Empty;
+         //   this.remarks = String.Empty;
             this.filepath = String.Empty;
             this.filename = String.Empty;
-            this.hasChanges = false;
+//            this.hasChanges = false;
         }
-
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return remarks; }
-            set { remarks = value; }
-        }
-
-
-
-
 
 
 
@@ -96,7 +71,11 @@ namespace Sinapse.Core
         public string FilePath
         {
             get { return filepath; }
-            set { filepath = value; }
+            set
+            {
+                filepath = value;
+                OnFileChanged(EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -105,7 +84,11 @@ namespace Sinapse.Core
         public string FileName
         {
             get { return filename; }
-            set { filename = value; }
+            set
+            {
+                filename = value;
+                OnFileChanged(EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -124,11 +107,23 @@ namespace Sinapse.Core
             get { return Path.Combine(FilePath, FileName); }
         }
 
-
+/*
+        /// <summary>
+        ///   Gets a boolean value indicating if the file has changed
+        ///   since the last time it was saved.
+        /// </summary>
         public bool HasChanges
         {
             get { return hasChanges; }
             set { hasChanges = value; }
+        }
+*/
+
+
+        protected void OnFileChanged(EventArgs e)
+        {
+            if (FileChanged != null)
+                FileChanged.Invoke(this, e);
         }
 
 
@@ -174,7 +169,7 @@ namespace Sinapse.Core
                 binaryFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
                 binaryFormatter.Serialize(gzipStream, owner);
 
-                hasChanges = false;
+ //               hasChanges = false;
                 success = true;
             }
             catch (SerializationException exception)
@@ -233,6 +228,7 @@ namespace Sinapse.Core
 
                 obj.FilePath = Path.GetDirectoryName(path);
                 obj.FileName = Path.GetFileNameWithoutExtension(path);
+//                obj.HasChanges = false;
             }
             catch (FileNotFoundException e)
             {

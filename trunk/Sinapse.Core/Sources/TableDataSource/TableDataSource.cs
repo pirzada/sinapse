@@ -40,9 +40,10 @@ namespace Sinapse.Core.Sources
     [Serializable]
     public class TableDataSource : IDataSource, ISerializableObject<TableDataSource>
     {
-        
+
+        private SinapseComponent workplaceComponent;
         private SerializableObject<TableDataSource> serializableObject;
-        
+
 
         private DataTable dataTable;
         private TableDataSourceColumnCollection columns;
@@ -65,7 +66,9 @@ namespace Sinapse.Core.Sources
 
         public TableDataSource(String name)
         {
+            // Initialize simulated multiple-inheritance helpers
             this.serializableObject = new SerializableObject<TableDataSource>(this);
+            this.workplaceComponent = new SinapseComponent();
 
             this.dataTable = new DataTable(name);
             this.columns = new TableDataSourceColumnCollection();
@@ -73,7 +76,10 @@ namespace Sinapse.Core.Sources
 
             // Create the extra two columns for storing the Set and Subset
             createExtendedColumns();
+
+            HasChanges = true;
         }
+
 
         /// <summary>
         ///   Imports a DataTable
@@ -89,6 +95,7 @@ namespace Sinapse.Core.Sources
             // Create the extra two columns for storing the Set and Subset
             createExtendedColumns();
 
+            HasChanges = true;
             OnChanged(EventArgs.Empty);
         }
 
@@ -99,6 +106,7 @@ namespace Sinapse.Core.Sources
         public void Import(DataTable table)
         {
             dataTable.Merge(table, true, MissingSchemaAction.Ignore);
+            HasChanges = true;
         }
 
 
@@ -106,13 +114,26 @@ namespace Sinapse.Core.Sources
         {
             if (!dataTable.Columns.Contains("@SET"))
             {
-                DataColumn col = new DataColumn("@SET", typeof(int));
-                dataTable.Columns.Add(col);
-                this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
+                DataColumn dataColumn;
+                TableDataSourceColumn dataColumnInfo;
 
-                col = new DataColumn("@SUBSET", typeof(int));
-                dataTable.Columns.Add(col);
-                this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
+                dataColumn = new DataColumn("@SET", typeof(int));
+                dataColumn.DefaultValue = DataSourceSet.Training;
+                this.dataTable.Columns.Add(dataColumn);
+
+                dataColumnInfo = new TableDataSourceColumn(dataColumn);
+                dataColumnInfo.Visible = false;
+                dataColumnInfo.Role = DataSourceRole.None;
+                this.columns.Add(dataColumnInfo);
+
+                dataColumn = new DataColumn("@SUBSET", typeof(int));
+                dataColumn.DefaultValue = 0;
+                this.dataTable.Columns.Add(dataColumn);
+
+                dataColumnInfo = new TableDataSourceColumn(dataColumn);
+                dataColumnInfo.Visible = false;
+                dataColumnInfo.Role = DataSourceRole.None;
+                this.columns.Add(dataColumnInfo);
             }
         }
 
@@ -161,6 +182,8 @@ namespace Sinapse.Core.Sources
                 this.dataTable.Rows.Add(dataTable.Rows[index].ItemArray);
                 this.dataTable.Rows.RemoveAt(index);
             }
+
+            HasChanges = true;
         }
 
         /// <summary>
@@ -188,22 +211,30 @@ namespace Sinapse.Core.Sources
 
             newRow["@SET"] = set;
             row.Table.Rows.Add(newRow);
+
+            HasChanges = true;
         }
 
         public void MoveRowToSet(DataRow row, DataSourceSet set)
         {
-            row["@SET"]    = set;
+            row["@SET"] = set;
+
+            HasChanges = true;
         }
 
         public void MoveRowToSubset(DataRow row, int subset)
         {
             row["@SUBSET"] = subset;
+
+            HasChanges = true;
         }
 
         public void MoveRowToSubset(DataRow row, DataSourceSet set, int subset)
         {
             row["@SET"] = set;
             row["@SUBSET"] = subset;
+
+            HasChanges = true;
         }
 
         #endregion
@@ -267,21 +298,21 @@ namespace Sinapse.Core.Sources
             DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
-			{
+            {
                 data[i] = GetData(rows[i], role);
             }
             return data;
         }
 
 
-/*
-        public DataTable GetData(DataSourceSet set, int subset, DataSourceRole role)
-        {
-            DataView view = GetData(set, subset);
-            DataTable table = view.ToTable(false, this.columns.GetNames(role));
-            return table;
-        }
-*/
+        /*
+                public DataTable GetData(DataSourceSet set, int subset, DataSourceRole role)
+                {
+                    DataView view = GetData(set, subset);
+                    DataTable table = view.ToTable(false, this.columns.GetNames(role));
+                    return table;
+                }
+        */
         public DataView GetExtendedView()
         {
             // For each output column, three extra columns should be added, one for
@@ -323,6 +354,8 @@ namespace Sinapse.Core.Sources
             {
                 row[columns[i].DataColumn] = data[i];
             }
+
+            HasChanges = true;
         }
         #endregion
 
@@ -343,24 +376,6 @@ namespace Sinapse.Core.Sources
 
 
         #region ISerializableObject<TableDataSource> Members
-
-        public String Name
-        {
-            get { return serializableObject.Name; }
-            set { serializableObject.Name = value; }
-        }
-        public String Description
-        {
-            get { return serializableObject.Description; }
-            set { serializableObject.Description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return serializableObject.Remarks; }
-            set { serializableObject.Remarks = value; }
-        }
-
 
 
         public string FileName
@@ -385,22 +400,18 @@ namespace Sinapse.Core.Sources
             get { return "stds"; }
         }
 
-        public bool HasChanges
-        {
-            get { return serializableObject.HasChanges; }
-            set { serializableObject.HasChanges = value; }
-        }
-
-
-
         public bool Save(string path)
         {
-            return serializableObject.Save(path);
+            bool success = serializableObject.Save(path);
+            if (success) this.HasChanges = false;
+            return success;
         }
 
         public bool Save()
         {
-            return serializableObject.Save();
+            bool success = serializableObject.Save();
+            if (success) this.HasChanges = false;
+            return success;
         }
 
         public static TableDataSource Open(string path)
@@ -408,7 +419,50 @@ namespace Sinapse.Core.Sources
             return SerializableObject<TableDataSource>.Open(path);
         }
 
+
+        public event EventHandler FileChanged
+        {
+            add { serializableObject.FileChanged += value; }
+            remove { serializableObject.FileChanged -= value; }
+        }
         #endregion
+
+
+
+
+
+        #region IWorkplaceComponent Members
+
+        public string Name
+        {
+            get { return workplaceComponent.Name; }
+            set { workplaceComponent.Name = value; }
+        }
+
+        public string Description
+        {
+            get { return workplaceComponent.Description; }
+            set { workplaceComponent.Description = value; }
+        }
+
+        public string Remarks
+        {
+            get { return workplaceComponent.Remarks; }
+            set { workplaceComponent.Remarks = value; }
+        }
+
+        public bool HasChanges
+        {
+            get { return workplaceComponent.HasChanges; }
+            protected set { workplaceComponent.HasChanges = value; }
+        }
+
+
+        public event EventHandler Closed;
+
+        #endregion
+
+
 
 
 
@@ -438,12 +492,5 @@ namespace Sinapse.Core.Sources
         #endregion
 
     }
-
-
-
-
-
-
-    
 
 }

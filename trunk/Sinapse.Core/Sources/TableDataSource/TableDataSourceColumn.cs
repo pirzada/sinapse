@@ -18,7 +18,7 @@ namespace Sinapse.Core.Sources
         private string columnDescription;
         private SystemDataType columnDataType;
         private DataSourceRole columnRole;
-        bool hidden; // Setar quando o usuário esconder na GUI
+        bool visible; // Setar quando o usuário mostrar/esconder na GUI
 
 
 
@@ -28,12 +28,12 @@ namespace Sinapse.Core.Sources
             this.columnName = dataColumn.ColumnName;
             this.columnDataType = type;
             this.columnRole = role;
+            this.visible = true;
         }
 
         public TableDataSourceColumn(DataColumn dataColumn)
+            : this(dataColumn, SystemDataType.Nummeric, DataSourceRole.None)
         {
-            this.table = dataColumn.Table;
-            this.columnName = dataColumn.ColumnName;
         }
 
 
@@ -56,12 +56,12 @@ namespace Sinapse.Core.Sources
         }
 
         /// <summary>
-        ///   Gets or sets whether this column should remain hidden from the user.
+        ///   Gets or sets whether this column should by visible by the user.
         /// </summary>
-        public bool Hidden
+        public bool Visible
         {
-            get { return hidden; }
-            set { hidden = value; }
+            get { return visible; }
+            set { visible = value; }
         }
 
         /// <summary>

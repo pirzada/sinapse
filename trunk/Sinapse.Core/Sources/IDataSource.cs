@@ -41,7 +41,7 @@ namespace Sinapse.Core.Sources
     ///   A common example of data sources are tables of sample data or a collection
     ///   of images.
     /// </summary>
-    public interface IDataSource 
+    public interface IDataSource : ISinapseComponent
     {
         void Shuffle();
 
@@ -50,7 +50,6 @@ namespace Sinapse.Core.Sources
         object GetData(DataSourceSet set, int subset);
         object GetData(DataSourceSet set, int subset, DataSourceRole role);
 
-        event EventHandler Changed;
         event EventHandler DataChanged;
     }
 }

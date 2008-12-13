@@ -29,7 +29,7 @@ namespace Sinapse.Windows.Documents
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableDataSourceEditor));
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabControl = new Dotnetrix.Controls.TabControlEX();
             this.tabTable = new System.Windows.Forms.TabPage();
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -49,6 +49,13 @@ namespace Sinapse.Windows.Documents
             this.dgvColumns = new System.Windows.Forms.DataGridView();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.importDialog = new System.Windows.Forms.OpenFileDialog();
+            this.tabOverview = new Dotnetrix.Controls.TabPageEX();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
@@ -59,16 +66,22 @@ namespace Sinapse.Windows.Documents
             this.splitContainer1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).BeginInit();
+            this.tabOverview.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
+            this.tabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControl.Controls.Add(this.tabTable);
             this.tabControl.Controls.Add(this.tabColumns);
+            this.tabControl.Controls.Add(this.tabOverview);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.HotColor = System.Drawing.SystemColors.ActiveCaption;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
+            this.tabControl.SelectedTabColor = System.Drawing.SystemColors.ActiveCaption;
             this.tabControl.Size = new System.Drawing.Size(834, 640);
             this.tabControl.TabIndex = 3;
             // 
@@ -77,12 +90,12 @@ namespace Sinapse.Windows.Documents
             this.tabTable.Controls.Add(this.dgvTable);
             this.tabTable.Controls.Add(this.toolStrip1);
             this.tabTable.Controls.Add(this.panel1);
-            this.tabTable.Location = new System.Drawing.Point(4, 22);
+            this.tabTable.Location = new System.Drawing.Point(27, 4);
             this.tabTable.Name = "tabTable";
             this.tabTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTable.Size = new System.Drawing.Size(826, 614);
+            this.tabTable.Size = new System.Drawing.Size(803, 632);
             this.tabTable.TabIndex = 1;
-            this.tabTable.Text = "Table";
+            this.tabTable.Text = "Table (Data)";
             this.tabTable.UseVisualStyleBackColor = true;
             // 
             // dgvTable
@@ -91,7 +104,7 @@ namespace Sinapse.Windows.Documents
             this.dgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTable.Location = new System.Drawing.Point(3, 28);
             this.dgvTable.Name = "dgvTable";
-            this.dgvTable.Size = new System.Drawing.Size(820, 555);
+            this.dgvTable.Size = new System.Drawing.Size(797, 573);
             this.dgvTable.TabIndex = 3;
             // 
             // toolStrip1
@@ -103,7 +116,7 @@ namespace Sinapse.Windows.Documents
             this.toolStripSplitButton1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(820, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(797, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -148,27 +161,30 @@ namespace Sinapse.Windows.Documents
             this.btnTrainingSet.Name = "btnTrainingSet";
             this.btnTrainingSet.Size = new System.Drawing.Size(131, 22);
             this.btnTrainingSet.Text = "Training";
+            this.btnTrainingSet.Click += new System.EventHandler(this.btnTrainingSet_Click);
             // 
             // btnValidationSet
             // 
             this.btnValidationSet.Name = "btnValidationSet";
             this.btnValidationSet.Size = new System.Drawing.Size(131, 22);
             this.btnValidationSet.Text = "Validation";
+            this.btnValidationSet.Click += new System.EventHandler(this.btnValidationSet_Click);
             // 
             // btnTestingSet
             // 
             this.btnTestingSet.Name = "btnTestingSet";
             this.btnTestingSet.Size = new System.Drawing.Size(131, 22);
             this.btnTestingSet.Text = "Testing";
+            this.btnTestingSet.Click += new System.EventHandler(this.btnTestingSet_Click);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.outputCaption);
             this.panel1.Controls.Add(this.inputCaption);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 583);
+            this.panel1.Location = new System.Drawing.Point(3, 601);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(820, 28);
+            this.panel1.Size = new System.Drawing.Size(797, 28);
             this.panel1.TabIndex = 5;
             // 
             // outputCaption
@@ -196,10 +212,10 @@ namespace Sinapse.Windows.Documents
             // tabColumns
             // 
             this.tabColumns.Controls.Add(this.splitContainer1);
-            this.tabColumns.Location = new System.Drawing.Point(4, 22);
+            this.tabColumns.Location = new System.Drawing.Point(27, 4);
             this.tabColumns.Name = "tabColumns";
             this.tabColumns.Padding = new System.Windows.Forms.Padding(3);
-            this.tabColumns.Size = new System.Drawing.Size(826, 614);
+            this.tabColumns.Size = new System.Drawing.Size(803, 632);
             this.tabColumns.TabIndex = 0;
             this.tabColumns.Text = "Column Specification";
             this.tabColumns.UseVisualStyleBackColor = true;
@@ -213,8 +229,8 @@ namespace Sinapse.Windows.Documents
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
-            this.splitContainer1.Size = new System.Drawing.Size(820, 608);
-            this.splitContainer1.SplitterDistance = 578;
+            this.splitContainer1.Size = new System.Drawing.Size(797, 626);
+            this.splitContainer1.SplitterDistance = 561;
             this.splitContainer1.TabIndex = 2;
             // 
             // groupBox3
@@ -223,7 +239,7 @@ namespace Sinapse.Windows.Documents
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(578, 608);
+            this.groupBox3.Size = new System.Drawing.Size(561, 626);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Columns";
@@ -234,13 +250,75 @@ namespace Sinapse.Windows.Documents
             this.dgvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvColumns.Location = new System.Drawing.Point(3, 16);
             this.dgvColumns.Name = "dgvColumns";
-            this.dgvColumns.Size = new System.Drawing.Size(572, 589);
+            this.dgvColumns.Size = new System.Drawing.Size(555, 607);
             this.dgvColumns.TabIndex = 0;
             // 
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "stds";
             this.saveFileDialog.Filter = "Sinapse Table Data Source Files (*.stds)|*.stds|All files (*.*)|*.*";
+            // 
+            // tabOverview
+            // 
+            this.tabOverview.Controls.Add(this.label3);
+            this.tabOverview.Controls.Add(this.label2);
+            this.tabOverview.Controls.Add(this.label1);
+            this.tabOverview.Controls.Add(this.textBox3);
+            this.tabOverview.Controls.Add(this.textBox2);
+            this.tabOverview.Controls.Add(this.textBox1);
+            this.tabOverview.Location = new System.Drawing.Point(27, 4);
+            this.tabOverview.Name = "tabOverview";
+            this.tabOverview.Size = new System.Drawing.Size(803, 632);
+            this.tabOverview.TabIndex = 2;
+            this.tabOverview.Text = "Overview";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(294, 98);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(90, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Name:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(90, 133);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Description";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(90, 182);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Remarks";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(294, 130);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 0;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(294, 175);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 0;
             // 
             // TableDataSourceEditor
             // 
@@ -265,13 +343,15 @@ namespace Sinapse.Windows.Documents
             this.splitContainer1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).EndInit();
+            this.tabOverview.ResumeLayout(false);
+            this.tabOverview.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl;
+        private Dotnetrix.Controls.TabControlEX tabControl;
         private System.Windows.Forms.TabPage tabColumns;
         private System.Windows.Forms.TabPage tabTable;
         private System.Windows.Forms.DataGridView dgvTable;
@@ -291,5 +371,12 @@ namespace Sinapse.Windows.Documents
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog importDialog;
+        private Dotnetrix.Controls.TabPageEX tabOverview;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

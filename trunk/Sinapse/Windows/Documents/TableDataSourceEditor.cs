@@ -17,6 +17,7 @@ namespace Sinapse.Windows.Documents
     {
 
         private TableDataSource tableSource;
+        private DataSourceSet currentSet;
 
 
         public TableDataSourceEditor(TableDataSource source)
@@ -26,9 +27,6 @@ namespace Sinapse.Windows.Documents
             InitializeComponent();
 
             tableSource.Changed += new EventHandler(tableSource_Changed);
-
-        //    this.dgvViewer.AutoGenerateColumns = false;
-            this.updateName();
         }
 
 
@@ -46,6 +44,7 @@ namespace Sinapse.Windows.Documents
         #region Form Events
         private void TableDataSourceEditor_Load(object sender, EventArgs e)
         {
+            updateName();
             updateDataBindings();
         }
 
@@ -84,14 +83,14 @@ namespace Sinapse.Windows.Documents
         {
             if (this.tableSource != null)
             {
-                this.dgvTable.DataSource = this.tableSource.GetView(DataSourceSet.Training);
+                this.dgvTable.DataSource = this.tableSource.GetView(currentSet);
                 this.dgvColumns.DataSource = this.tableSource.Columns;
             }
         }
 
         private void updateColumns()
         {
-            foreach (DataGridViewColumn viewColumn in this.dgvTable.Columns)
+            foreach (DataGridViewColumn viewColumn in dgvTable.Columns)
             {
                 TableDataSourceColumn col = tableSource.Columns[viewColumn.Name];
 
@@ -99,6 +98,8 @@ namespace Sinapse.Windows.Documents
                     viewColumn.DefaultCellStyle.BackColor = inputCaption.Color;
                 else if (col.Role == DataSourceRole.Output)
                     viewColumn.DefaultCellStyle.BackColor = outputCaption.Color;
+
+                viewColumn.Visible = col.Visible;
             }
         }
         #endregion
@@ -193,6 +194,25 @@ namespace Sinapse.Windows.Documents
         }
 
         #endregion
+
+
+        private void btnTrainingSet_Click(object sender, EventArgs e)
+        {
+            currentSet = DataSourceSet.Training;
+            updateDataBindings();
+        }
+
+        private void btnValidationSet_Click(object sender, EventArgs e)
+        {
+            currentSet = DataSourceSet.Validation;
+            updateDataBindings();
+        }
+
+        private void btnTestingSet_Click(object sender, EventArgs e)
+        {
+            currentSet = DataSourceSet.Testing;
+            updateDataBindings();
+        }
 
 
 

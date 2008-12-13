@@ -62,24 +62,6 @@ namespace Sinapse.Core.Systems
 
         #region ISerializableObject<ActivationNetworkSystem> Members
 
-        public String Name
-        {
-            get { return serializableObject.Name; }
-            set { serializableObject.Name = value; }
-        }
-        public String Description
-        {
-            get { return serializableObject.Description; }
-            set { serializableObject.Description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return serializableObject.Remarks; }
-            set { serializableObject.Remarks = value; }
-        }
-
-
 
         public string FileName
         {
@@ -98,14 +80,6 @@ namespace Sinapse.Core.Systems
             get { return "sann"; }
         }
 
-        public bool HasChanges
-        {
-            get { return serializableObject.HasChanges; }
-            set { serializableObject.HasChanges = value; }
-        }
-
-
-
         public string FullPath
         {
             get { return serializableObject.FullPath; }
@@ -114,12 +88,16 @@ namespace Sinapse.Core.Systems
 
         public bool Save(string path)
         {
-            return serializableObject.Save(path);
+            bool success = serializableObject.Save(path);
+            if (success) this.HasChanges = false;
+            return success;
         }
 
         public bool Save()
         {
-            return serializableObject.Save();
+            bool success = serializableObject.Save();
+            if (success) this.HasChanges = false;
+            return success;
         }
 
         public static ActivationNetworkSystem Open(string path)
@@ -127,6 +105,12 @@ namespace Sinapse.Core.Systems
             return SerializableObject<ActivationNetworkSystem>.Open(path);
         }
 
+
+        public event EventHandler FileChanged
+        {
+            add { serializableObject.FileChanged += value; }
+            remove { serializableObject.FileChanged -= value; }
+        }
         #endregion
     }
 }

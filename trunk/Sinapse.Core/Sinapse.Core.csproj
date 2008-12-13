@@ -60,9 +60,10 @@
     <Compile Include="Filters\Table\Categorization.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ISinapseComponent.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="ISerializableObject.cs" />
-    <Compile Include="Sources\DataSource.cs" />
+    <Compile Include="Sources\IDataSource.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSource.cs" />
     <Compile Include="Systems\AdaptiveSystem.cs" />
     <Compile Include="Systems\Network\ActivationNetworkSystem.cs" />

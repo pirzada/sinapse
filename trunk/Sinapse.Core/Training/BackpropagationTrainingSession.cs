@@ -375,26 +375,10 @@ namespace Sinapse.Core.Training
 
 
 
+        
+
+
         #region ISerializableObject<TrainingSession> Members
-
-
-        public String Name
-        {
-            get { return serializableObject.Name; }
-            set { serializableObject.Name = value; }
-        }
-        public String Description
-        {
-            get { return serializableObject.Description; }
-            set { serializableObject.Description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return serializableObject.Remarks; }
-            set { serializableObject.Remarks = value; }
-        }
-
 
 
         public string FileName
@@ -419,27 +403,31 @@ namespace Sinapse.Core.Training
             get { return "sbpts"; }
         }
 
-        public bool HasChanges
-        {
-            get { return serializableObject.HasChanges; }
-            set { serializableObject.HasChanges = value; }
-        }
-
 
 
         public bool Save(string path)
         {
-            return serializableObject.Save(path);
+            bool success = serializableObject.Save(path);
+            if (success) this.HasChanges = false;
+            return success;
         }
 
         public bool Save()
         {
-            return serializableObject.Save();
+            bool success = serializableObject.Save();
+            if (success) this.HasChanges = false;
+            return success;
         }
 
         public static BackpropagationTrainingSession Open(string path)
         {
             return SerializableObject<BackpropagationTrainingSession>.Open(path);
+        }
+
+        public event EventHandler FileChanged
+        {
+            add { serializableObject.FileChanged += value; }
+            remove { serializableObject.FileChanged -= value; }
         }
         #endregion
 
