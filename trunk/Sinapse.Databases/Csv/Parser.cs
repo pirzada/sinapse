@@ -14,7 +14,7 @@ using System.Data;
 using System.Text;
 using System.IO;
 
-namespace Sinapse.Utils.CsvParser
+namespace Sinapse.Databases.Csv
 {
 
     /*Like the CsvWriter class, all methods in the CsvParser class are static.
@@ -43,12 +43,12 @@ namespace Sinapse.Utils.CsvParser
         }
 
         //By Filename
-        public static DataTable Parse(string filename, System.Text.Encoding encoding, bool headers, CsvDelimiter delimiter)
+        public static DataTable Parse(string filename, Encoding encoding, bool headers, CsvDelimiter delimiter)
         {
             return Parse(new StreamReader(filename, encoding), headers, (char)delimiter);
         }
 
-        public static DataTable Parse(string filename, System.Text.Encoding Encoding, bool headers)
+        public static DataTable Parse(string filename, Encoding Encoding, bool headers)
         {
             return Parse(filename, Encoding, true, CsvUtils.DetectFieldDelimiterChar(filename, Encoding));
         }

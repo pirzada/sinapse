@@ -58,16 +58,16 @@ namespace Sinapse.Controls
             this.toolStripDropDownButton1.Image = global::Sinapse.Properties.Resources.edit_add;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(107, 22);
-            this.toolStripDropDownButton1.Text = "Add Transform";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(82, 22);
+            this.toolStripDropDownButton1.Text = "Add Filter";
             // 
-            // TransformSequenceControl
+            // FilterSequenceControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "TransformSequenceControl";
+            this.Name = "FilterSequenceControl";
             this.Size = new System.Drawing.Size(217, 440);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

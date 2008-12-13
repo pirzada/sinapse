@@ -18,7 +18,7 @@ namespace Sinapse.Controls
         public CaptionLabel()
         {
             InitializeComponent();
-            lbCaption.Text = this.Text;
+           // lbCaption.Text = this.Text;
         }
 
         [Browsable(true)]

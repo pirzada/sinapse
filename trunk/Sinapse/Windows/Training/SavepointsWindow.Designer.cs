@@ -1,4 +1,4 @@
-namespace Sinapse.Windows
+namespace Sinapse.Windows.Training
 {
     partial class SavepointsWindow
     {

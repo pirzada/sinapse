@@ -6,10 +6,13 @@ using System.Windows.Forms;
 
 namespace Sinapse.Documents
 {
-    interface IDocument
+    interface IWorkplaceDocument
     {
+        
         void Save();
         void SaveAs();
+
+     //   string Name { get; }
 
         ToolStripMenuItem[] MenuItems { get; }
         ToolStrip[] ToolStrips { get; }

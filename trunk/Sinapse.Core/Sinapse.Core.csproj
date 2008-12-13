@@ -56,14 +56,12 @@
   <ItemGroup>
     <Compile Include="Filters\InputMismatchException.cs" />
     <Compile Include="Filters\Table\Normalization.cs" />
-    <Compile Include="Filters\Controls\RangeConversion.cs" />
     <Compile Include="Filters\Table\Discretization.cs" />
     <Compile Include="Filters\Table\Categorization.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="ISerializableObject.cs" />
-    <Compile Include="SerializableObject.cs" />
     <Compile Include="Sources\DataSource.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSource.cs" />
     <Compile Include="Systems\AdaptiveSystem.cs" />
@@ -112,6 +110,7 @@
     <Content Include="Requisites.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Filters\DesignerEditors\" />
     <Folder Include="Filters\Image\" />
     <Folder Include="Filters\Matrix\" />
     <Folder Include="Filters\Sound\" />

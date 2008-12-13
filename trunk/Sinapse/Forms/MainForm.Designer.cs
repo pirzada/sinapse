@@ -67,6 +67,8 @@ namespace Sinapse.Forms
             this.MenuFilePreferences = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuExtensionsExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +87,6 @@ namespace Sinapse.Forms
             this.mruProviderNetwork = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderWorkplace = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderSession = new Sinapse.Forms.Controls.MruComponent();
-            this.statusBarControl = new Sinapse.Controls.StatusBarControl();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -105,8 +106,7 @@ namespace Sinapse.Forms
             this.btnWizard = new System.Windows.Forms.ToolStripButton();
             this.toolStripPanel1 = new System.Windows.Forms.ToolStripPanel();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -262,6 +262,18 @@ namespace Sinapse.Forms
             this.MenuFileExit.Size = new System.Drawing.Size(177, 22);
             this.MenuFileExit.Text = "E&xit";
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
             // MenuExtensionsExcel
             // 
             this.MenuExtensionsExcel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -389,16 +401,6 @@ namespace Sinapse.Forms
             this.mruProviderSession.Files = global::Sinapse.Properties.Settings.Default.history_Sessions;
             this.mruProviderSession.MaxPathLength = 96;
             this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
-            // 
-            // statusBarControl
-            // 
-            this.statusBarControl.AutoSize = true;
-            this.statusBarControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.statusBarControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusBarControl.Location = new System.Drawing.Point(0, 651);
-            this.statusBarControl.Name = "statusBarControl";
-            this.statusBarControl.Size = new System.Drawing.Size(892, 22);
-            this.statusBarControl.TabIndex = 17;
             // 
             // imageList
             // 
@@ -561,31 +563,27 @@ namespace Sinapse.Forms
             this.dockMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockMain.Location = new System.Drawing.Point(0, 99);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(892, 552);
+            this.dockMain.Size = new System.Drawing.Size(892, 574);
             this.dockMain.TabIndex = 21;
             // 
-            // editToolStripMenuItem
+            // statusStrip1
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
+            this.statusStrip1.Location = new System.Drawing.Point(0, 651);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(892, 22);
+            this.statusStrip1.TabIndex = 25;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 673);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.toolStripPanel1);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelTitle);
-            this.Controls.Add(this.statusBarControl);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -621,7 +619,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuHelpAbout;
         private System.Windows.Forms.OpenFileDialog openNetworkDialog;
         private System.Windows.Forms.SaveFileDialog saveNetworkDialog;
-        private Sinapse.Controls.StatusBarControl statusBarControl;
         private System.Windows.Forms.ToolStripMenuItem MenuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuFileExit;
         private System.Windows.Forms.ToolStripMenuItem MenuFileRecentDatabases;
@@ -668,5 +665,6 @@ namespace Sinapse.Forms
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

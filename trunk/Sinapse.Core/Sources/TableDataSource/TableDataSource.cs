@@ -26,12 +26,14 @@ using System.ComponentModel;
 using AForge.Mathematics;
 using AForge;
 
+using Sinapse.Core.Systems;
+
 namespace Sinapse.Core.Sources
 {
 
     /// <summary>
-    ///   This class encompass a Neural Network DataSource, or in other words, a
-    ///   source of information that can be used to train and feed Neural Networks.
+    ///   This class encompass an adaptive system data source, or in other words, a
+    ///   source of information that can be used to train and feed adptive systems.
     ///   The source encompassed here is presented as a DataTable, which can be created
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
@@ -39,45 +41,42 @@ namespace Sinapse.Core.Sources
     {
         
         private SerializableObject<TableDataSource> serializableObject;
+        
 
-
-        /// <summary>
-        ///   The DataTable which holds the actual data.
-        /// </summary>
         private DataTable dataTable;
-
-
-        /// <summary>
-        ///   The info and description associated which each DataTable column
-        /// </summary>
         private TableDataSourceColumnCollection columns;
 
 
+        public event EventHandler Changed;
+        public event EventHandler DataChanged;
 
 
         /// <summary>
         ///   Creates a new TableDataSource object by using a DataTable.
         /// </summary>
-        /// <param name="dataTable">
-        ///   A DataTable which will be deep copied into this object.
-        /// </param>
-        public TableDataSource(DataTable dataTable)
+        public TableDataSource()
+            : this("New Table Source")
+        {
+        }
+
+
+        public TableDataSource(String name)
         {
             this.serializableObject = new SerializableObject<TableDataSource>();
 
-            this.dataTable = dataTable.Copy();
-            this.Name = dataTable.TableName;
-     
-            // Creates the array of TableDataSourceColumns, which holds information
-            //  and description for every DataColumn on the DataTable
-            TableDataSourceColumn[] columns = new TableDataSourceColumn[dataTable.Columns.Count];
-            for (int i = 0; i < columns.Length; i++)
-            {
-                columns[i] = new TableDataSourceColumn(dataTable.Columns[i]); 
-            }
-            this.columns = new TableDataSourceColumnCollection(columns);
+            this.dataTable = new DataTable(name);
+            this.columns = new TableDataSourceColumnCollection();
+            this.Name = name;
+        }
 
-            // Creates the extra two columns for storing the Set and Subset
+
+        public void Import(DataTable table, TableDataSourceColumnCollection columns)
+        {
+            // Store the table and column information
+            this.dataTable = table;
+            this.columns = columns;
+
+            // Create the extra two columns for storing the Set and Subset
             DataColumn col = new DataColumn("@SET", typeof(int));
             dataTable.Columns.Add(col);
             this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
@@ -87,17 +86,14 @@ namespace Sinapse.Core.Sources
             this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
         }
 
-
-        public TableDataSource(String name)
+        /// <summary>
+        ///   Imports only matching columns from a DataTable
+        /// </summary>
+        /// <param name="table"></param>
+        public void Import(DataTable table)
         {
-            this.serializableObject = new SerializableObject<TableDataSource>();
-
-            this.dataTable = new DataTable(name);
-            this.Name = name;
+            dataTable.Merge(table, true, MissingSchemaAction.Ignore);
         }
-
-
-
 
 
 
@@ -123,6 +119,76 @@ namespace Sinapse.Core.Sources
         }
 
 
+        /// <summary>
+        ///   Randomizes the order of the rows in a DataTable by pulling out a single
+        ///   row and moving it to the end for the specified ammount of iterations.
+        /// </summary>
+        /// <param name="shuffleIterations"></param>
+        /// <returns></returns>
+        public void Shuffle(int iterations)
+        {
+            int index;
+            iterations = this.dataTable.Rows.Count * iterations;
+
+            System.Random rnd = new Random();
+
+            // Remove and throw to the end random rows
+            for (int i = 0; i < iterations; i++)
+            {
+                index = rnd.Next(0, dataTable.Rows.Count - 1);
+                this.dataTable.Rows.Add(dataTable.Rows[index].ItemArray);
+                this.dataTable.Rows.RemoveAt(index);
+            }
+        }
+
+        /// <summary>
+        ///   Randomizes the order of the rows in a DataTable
+        /// </summary>
+        /// <param name="shuffleIterations"></param>
+        /// <returns></returns>
+        public void Shuffle()
+        {
+            Shuffle(3);
+        }
+
+
+
+
+        #region Data Copy & Movement Operations
+        public void CopyRowToSet(DataRow row, DataSourceSet set)
+        {
+            DataRow newRow = row.Table.NewRow();
+            foreach (DataColumn col in row.Table.Columns)
+            {
+                newRow[col] = row[col];
+            }
+
+            newRow["@SET"] = set;
+            row.Table.Rows.Add(newRow);
+        }
+
+        public void MoveRowToSet(DataRow row, DataSourceSet set)
+        {
+            row["@SET"]    = set;
+        }
+
+        public void MoveRowToSubset(DataRow row, int subset)
+        {
+            row["@SUBSET"] = subset;
+        }
+
+        public void MoveRowToSubset(DataRow row, DataSourceSet set, int subset)
+        {
+            row["@SET"] = set;
+            row["@SUBSET"] = subset;
+        }
+
+        #endregion
+
+
+
+
+        #region Data Retrieval Methods
         public DataView GetView(DataSourceSet set)
         {
             dataTable.Select("@SET = " + set);
@@ -237,38 +303,18 @@ namespace Sinapse.Core.Sources
                 row[columns[i].DataColumn] = data[i];
             }
         }
+        #endregion
 
 
-        /// <summary>
-        ///   Randomizes the order of the rows in a DataTable by pulling out a single
-        ///   row and moving it to the end for the specified ammount of iterations.
-        /// </summary>
-        /// <param name="shuffleIterations"></param>
-        /// <returns></returns>
-        public void Shuffle(int iterations)
+
+
+
+
+
+        protected void OnChanged(EventArgs e)
         {
-            int index;
-            iterations = this.dataTable.Rows.Count * iterations;
-
-            System.Random rnd = new Random();
-
-            // Remove and throw to the end random rows
-            for (int i = 0; i < iterations; i++)
-            {
-                index = rnd.Next(0, dataTable.Rows.Count - 1);
-                this.dataTable.Rows.Add(dataTable.Rows[index].ItemArray);
-                this.dataTable.Rows.RemoveAt(index);
-            }
-        }
-
-        /// <summary>
-        ///   Randomizes the order of the rows in a DataTable
-        /// </summary>
-        /// <param name="shuffleIterations"></param>
-        /// <returns></returns>
-        public void Shuffle()
-        {
-            Shuffle(3);
+            if (Changed != null)
+                Changed.Invoke(this, e);
         }
 
 

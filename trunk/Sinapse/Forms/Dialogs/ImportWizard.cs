@@ -27,8 +27,9 @@ using System.IO;
 
 using WizardBase;
 
-//using Sinapse.Data.Network;
-using Sinapse.Utils.CsvParser;
+using Sinapse.Core.Systems;
+using Sinapse.Core.Sources;
+using Sinapse.Databases.Csv;
 
 
 namespace Sinapse.Forms.Dialogs
@@ -37,8 +38,8 @@ namespace Sinapse.Forms.Dialogs
     internal sealed partial class ImportWizard : Form
     {
 
-        private DataTable m_dataTable;
-  //      private NetworkSchema m_networkSchema;
+        private DataTable dataTable;
+        private TableDataSourceColumnCollection columns;
 
         //---------------------------------------------
 
@@ -56,21 +57,15 @@ namespace Sinapse.Forms.Dialogs
 
 
         #region Public Methods
- /*       internal NetworkDatabase GetNetworkData()
+        public DataTable GetTable()
         {
-            return new NetworkDatabase(m_networkSchema, m_dataTable);
+            return dataTable;
         }
-        */
-        internal DataTable GetDataTable()
+
+        public TableDataSourceColumnCollection GetColumns()
         {
-            return m_dataTable;
+            return columns;
         }
-        /*
-        internal NetworkSchema GetSchema()
-        {
-            return m_networkSchema;
-        }
-         */ 
         #endregion
 
 
@@ -83,7 +78,7 @@ namespace Sinapse.Forms.Dialogs
             switch (wizardControl.CurrentStepIndex)
             {
                 case 0:
-                    m_dataTable = null;
+                    dataTable = null;
                     break;
 
                 case 1:
@@ -113,46 +108,45 @@ namespace Sinapse.Forms.Dialogs
 
         private void wizardControl_CancelButtonClick(object sender, EventArgs e)
         {
-            this.m_dataTable = null;
+            this.dataTable = null;
             this.Close();
         }
 
 
         private void wizardControl_FinishButtonClick(object sender, EventArgs e)
         {
+            columns = new TableDataSourceColumnCollection();
+            TableDataSourceColumn col = null;
 
-            List<String> inputColumns = new List<String>();
-            foreach (string strColumn in clbInput.CheckedItems)
-                inputColumns.Add(strColumn);
-
-            List<String> outputColumns = new List<String>();
-            foreach (string strColumn in clbOutput.CheckedItems)
-                outputColumns.Add(strColumn);
-
-            List<String> stringColumns = new List<String>();
-            foreach (string strColumn in clbString.CheckedItems)
-                stringColumns.Add(strColumn);
-
-
-            //Remove unusable columns
-            List<DataColumn> removeCols = new List<DataColumn>();
-            foreach (DataColumn col in m_dataTable.Columns)
+            foreach (DataColumn dataColumn in dataTable.Columns)
             {
-                if (!inputColumns.Contains(col.ColumnName) &&
-                    !outputColumns.Contains(col.ColumnName))
-                    removeCols.Add(col);
+                col = new TableDataSourceColumn(dataColumn);
+                col.Role = DataSourceRole.None;
+                col.Hidden = true;
+                col.DataType = SystemDataType.Nummeric;
+                columns.Add(col);
             }
 
-            foreach (DataColumn col in removeCols)
-                m_dataTable.Columns.Remove(col);
+            foreach (string strColumn in clbInput.CheckedItems)
+            {
+                col = columns[strColumn];
+                col.Role = DataSourceRole.Input;
+                col.Hidden = false;
+            }
 
+            foreach (string strColumn in clbOutput.CheckedItems)
+            {
+                col = columns[strColumn];
+                col.Role = DataSourceRole.Output;
+                col.Hidden = false;
+            }
 
-            //Create Network Schema
-    /*        this.m_networkSchema = new NetworkSchema(
-                inputColumns.ToArray(),
-                outputColumns.ToArray(),
-                stringColumns.ToArray());
-            */
+            foreach (string strColumn in clbString.CheckedItems)
+            {
+                columns[strColumn].DataType = SystemDataType.Category;
+            }
+
+ 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -167,7 +161,7 @@ namespace Sinapse.Forms.Dialogs
         {
             try
             {
-                this.m_dataTable = CsvParser.Parse(tbDatapath.Text, Encoding.Default, true, (CsvDelimiter)cbDelimiter.SelectedValue);
+                this.dataTable = CsvParser.Parse(tbDatapath.Text, Encoding.Default, true, (CsvDelimiter)cbDelimiter.SelectedValue);
             }
             catch (IOException e)
             {
@@ -185,7 +179,7 @@ namespace Sinapse.Forms.Dialogs
         {
             clbInput.Items.Clear();
             //         clbString.Items.Clear();
-            foreach (DataColumn col in m_dataTable.Columns)
+            foreach (DataColumn col in dataTable.Columns)
             {
                 clbInput.Items.Add(col.ColumnName, false);
                 //           clbString.Items.Add(col.ColumnName, false);
@@ -195,7 +189,7 @@ namespace Sinapse.Forms.Dialogs
         private void loadOutputCombobox()
         {
             clbOutput.Items.Clear();
-            foreach (DataColumn col in m_dataTable.Columns)
+            foreach (DataColumn col in dataTable.Columns)
             {
                 if (!clbInput.CheckedItems.Contains(col.ColumnName))
                     clbOutput.Items.Add(col.ColumnName, false);
@@ -205,7 +199,7 @@ namespace Sinapse.Forms.Dialogs
         private void loadStringCombobox()
         {
             clbString.Items.Clear();
-            foreach (DataColumn col in m_dataTable.Columns)
+            foreach (DataColumn col in dataTable.Columns)
             {
                 if (clbInput.CheckedItems.Contains(col.ColumnName) ||
                     clbOutput.CheckedItems.Contains(col.ColumnName))

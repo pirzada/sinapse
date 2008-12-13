@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using Sinapse.Core.Training;
 
-namespace Sinapse.Windows
+namespace Sinapse.Windows.Training
 {
     /// <summary>
     ///   Display a list of TrainingSavepoints and offers buttons to interact with
@@ -23,11 +23,13 @@ namespace Sinapse.Windows
         /// <summary>
         ///   Constructs a new Savepoints Window
         /// </summary>
-        public SavepointsWindow()
+        public SavepointsWindow(BindingList<TrainingSavepoint> savepoints)
         {
             InitializeComponent();
 
             dataGridView.AutoGenerateColumns = false;
+
+            this.Savepoints = savepoints;
         }
 
 
