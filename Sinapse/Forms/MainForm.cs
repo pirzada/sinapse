@@ -52,6 +52,9 @@ namespace Sinapse.Forms
         private HistoryWindow windowHistory;
         private TaskWindow windowTask;
 
+        private Dictionary<ISinapseComponent, DockContent> openDocuments;
+
+
         //---------------------------------------------
 
 
@@ -83,6 +86,9 @@ namespace Sinapse.Forms
 
             this.lbVersion.Text = "v" + Application.ProductVersion;
             this.ResumeLayout(true);
+
+
+            this.openDocuments = new Dictionary<ISinapseComponent, DockContent>();
         }
 
 
@@ -115,7 +121,23 @@ namespace Sinapse.Forms
                     page.Show(this.dockMain, DockState.Document);
                 }
                 
+                // Wire-up some events
+                Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
+
+
                 HistoryListener.Write("Waiting data");
+            }
+        }
+
+        private void Workplace_ActiveWorkplaceChanged(object sender, EventArgs e)
+        {
+            if (Workplace.Active == null)
+            {
+                MenuWorkplace.Visible = false;
+            }
+            else
+            {
+                MenuWorkplace.Visible = true;
             }
         }
 
@@ -125,40 +147,6 @@ namespace Sinapse.Forms
 
             HistoryListener.Write("Exiting...");
 
-            // Stops any thread that could be running before exiting
-      //      if (this.tabControlSide.TrainerControl.IsTraining)
-      //          this.tabControlSide.TrainerControl.Stop();
-
-
-            /*           // Asks user if unsaved changes should be saved on exiting
-                       if (this.m_networkContainer != null && this.m_networkContainer.HasUnsavedChanges)
-                       {
-                           DialogResult r = MessageBox.Show("The current network has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
-                           if (r == DialogResult.Yes)
-                           {
-                               this.MenuNetworkSave_Click(this, EventArgs.Empty);
-                           }
-                           else if (r == DialogResult.Cancel)
-                           {
-                               e.Cancel = true;
-                               return;
-                           }                   
-                       }
-
-                       if (this.m_networkDatabase != null && this.m_networkDatabase.HasUnsavedChanges)
-                       {
-                           DialogResult r = MessageBox.Show("The current database has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
-                           if (r == DialogResult.Yes)
-                           {
-                               this.MenuDatabaseSave_Click(this, EventArgs.Empty);
-                           }
-                           else if (r == DialogResult.Cancel)
-                           {
-                               e.Cancel = true;
-                               return;
-                           }
-                       }
-                    */
 
             // Save settings before closing
             Properties.Settings.Default.main_FirstLoad = false;
@@ -183,36 +171,54 @@ namespace Sinapse.Forms
         #region Window Workplace Events
         private void windowWorkplace_GotFocus(object sender, EventArgs e)
         {
+            // Update the property window to reflect information about the selected item
             if (this.windowProperties != null)
                 this.windowProperties.PropertyGrid.SelectedObject = this.windowWorkplace.SelectedItem;
         }
 
         private void windowWorkplace_SelectionChanged(object sender, TreeViewEventArgs e)
         {
+            // Update the property window to reflect information about the selected item
             if (this.windowProperties != null)
                 this.windowProperties.PropertyGrid.SelectedObject = this.windowWorkplace.SelectedItem;
         }
 
         private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
-            if (e.WorkplaceContent.Type == typeof(TableDataSource))
-            {
-                TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent.Open() as TableDataSource);
-                editor.Show(this.dockMain, DockState.Document);
-            }
-            else if (e.WorkplaceContent.Type == typeof(NetworkSystem))
-            {
-                NetworkSystemEditor editor = new NetworkSystemEditor(e.WorkplaceContent.Open() as ActivationNetworkSystem);
-                editor.Show(this.dockMain, DockState.Document);
-            }
-            else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
-            {
-                BackpropagationTrainingSession session = e.WorkplaceContent.Open() as BackpropagationTrainingSession;
-                TrainingSessionEditor editor = new TrainingSessionEditor(session);
-                editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
-                editor.ControllerWindow.Show(this.dockMain);
+            // A WorkplaceDocument has been double clicked
+            // TODO: check if document is already open
 
-                editor.ControllerWindow.DockHandler.FloatPane.DockTo(this.dockMain.DockWindows[DockState.DockRight]);           
+            ISinapseComponent component;
+
+            if (e.WorkplaceContent.Open(out component))
+            {
+                // The component was open succesfully
+                if (e.WorkplaceContent.Type == typeof(TableDataSource))
+                {
+                    TableDataSourceEditor editor = new TableDataSourceEditor(component as TableDataSource);
+                    editor.Show(this.dockMain, DockState.Document);
+                }
+                else if (e.WorkplaceContent.Type == typeof(ActivationNetworkSystem))
+                {
+
+                    NetworkSystemEditor editor = new NetworkSystemEditor(component as ActivationNetworkSystem);
+                    editor.Show(this.dockMain, DockState.Document);
+                }
+                else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
+                {
+                    BackpropagationTrainingSession session = component as BackpropagationTrainingSession;
+                    TrainingSessionEditor editor = new TrainingSessionEditor(session);
+                    editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
+                    editor.ControllerWindow.Show(this.dockMain);
+                    
+
+                    editor.ControllerWindow.DockHandler.FloatPane.DockTo(this.dockMain.DockWindows[DockState.DockRight]);
+                }
+            }
+            else
+            {
+                // The component was already open
+                this.openDocuments[component].Show();
             }
 
         }
@@ -265,31 +271,54 @@ namespace Sinapse.Forms
             Workplace.Active = null;
         }
 
+        /// <summary>
+        ///   Handling for Menu -> File -> Save
+        /// </summary>
         private void MenuFileSave_Click(object sender, EventArgs e)
         {
-            if (this.dockMain.ActiveDocument is IWorkplaceDocument)
+            if (dockMain.ActiveDocument is IWorkplaceDocument)
             {
-                (this.dockMain.ActiveDocument as IWorkplaceDocument).Save();
+                (dockMain.ActiveDocument as IWorkplaceDocument).Save();
             }
+
+            Workplace.Active.Save();
         }
 
+        /// <summary>
+        ///   Handling for Menu -> File -> Save As
+        /// </summary>
         private void MenuFileSaveAs_Click(object sender, EventArgs e)
         {
-            if (this.dockMain.ActiveDocument is IWorkplaceDocument)
+            if (dockMain.ActiveDocument is IWorkplaceDocument)
             {
-                (this.dockMain.ActiveDocument as IWorkplaceDocument).SaveAs();
+                (dockMain.ActiveDocument as IWorkplaceDocument).SaveAs();
             }
+
+            Workplace.Active.Save();
         }
 
+        /// <summary>
+        ///   Handling for Menu -> File -> Save All
+        /// </summary>
         private void MenuFileSaveAll_Click(object sender, EventArgs e)
         {
             foreach (IWorkplaceDocument doc in this.dockMain.Documents)
             {
                 doc.Save();
             }
+
+            Workplace.Active.Save();
         }
         #endregion
 
+
+        #region Menu Workplace
+        private void MenuWorkplaceAddDataSource_Click(object sender, EventArgs e)
+        {
+           new NewDataSourceDialog().ShowDialog(this);
+            
+        }
+        #endregion
 
 
         #region Menu Help
@@ -308,359 +337,28 @@ namespace Sinapse.Forms
         //---------------------------------------------
 
 
-        #region ToolStripMenu Training
-        private void btnTrainStart_Click(object sender, EventArgs e)
-        {
-  //          this.tabControlSide.TrainerControl.Start();
-        }
 
-        private void btnTrainStop_Click(object sender, EventArgs e)
-        {
-  //          this.tabControlSide.TrainerControl.Stop();
-        }
-
-        private void btnTrainPause_Click(object sender, EventArgs e)
-        {
-  //          this.tabControlSide.TrainerControl.Pause();
-        }
-
-        private void btnTrainForget_Click(object sender, EventArgs e)
-        {
-   //         this.tabControlSide.TrainerControl.Forget();
-        }
-
-        private void btnTrainNext_Click(object sender, EventArgs e)
-        {
-            //   this.tabControlSide.TrainerControl.Start();
-        }
-
-        private void btnTrainBack_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnTrainGraph_Click(object sender, EventArgs e)
-        {
-  //          this.tabControlMain.GraphControl.ShowTab();
-        }
-        #endregion
-
-
-        #region ToolStripMenu Testing
-        private void btnTestCompute_Click(object sender, EventArgs e)
-        {
-  //          if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
-  //              this.tabControlMain.TestingSetControl.ShowTab();
-
-  //          this.tabControlMain.TestingSetControl.Compute();
-        }
-
-        private void btnTestReport_Click(object sender, EventArgs e)
-        {
-  //          this.tabControlMain.TestingSetControl.Compare();
-        }
-
-        private void btnTestRound_Click(object sender, EventArgs e)
-        {
-            /*if (this.tabControlMain.SelectedControl != this.tabControlMain.TestingSetControl)
-                this.tabControlMain.TestingSetControl.ShowTab();
-            */
-            ToolStripMenuItem item = (sender as ToolStripMenuItem);
-            
-            if (item.Tag is Single)
-            {
-                float value = (float)item.Tag;
-
-  //              if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageTesting)
-  //                  this.tabControlMain.TestingSetControl.NetworkDatabase.Round(true, value);
-  //              else if (this.tabControlMain.SelectedControl is Sinapse.Controls.MainTabControl.TabPageQuery)
-  //                  this.tabControlMain.QueryControl.NetworkDatabase.Round(false, value);
-            }
-        }
-
-
-        #endregion
-
-
-        //---------------------------------------------
-
-
-        #region File Dialogs
-        private void openNetworkDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            this.networkOpen(openNetworkDialog.FileName);
-        }
-
-
-        private void openDatabaseDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            this.databaseOpen(openDatabaseDialog.FileName);
-        }
-
-        private void mruProviderDatabase_MenuItemClicked(string filename)
-        {
-            this.databaseOpen(filename);
-        }
-
-        private void mruProviderNetwork_MenuItemClicked(string filename)
-        {
-            this.networkOpen(filename);
-        }
-
+        #region Most Recently Used Lists Events
         private void mruProviderWorkplace_MenuItemClicked(string filename)
         {
-            this.workplaceOpen(filename);
+         //   this.workplaceOpen(filename);
         }
 
-        private void mruProviderSession_MenuItemClicked(string filename)
+        private void mruProviderDocuments_MenuItemClicked(string filename)
         {
-            this.sessionOpen(filename);
+         //   this.sessionOpen(filename);
         }
         #endregion
 
-
-        //---------------------------------------------
-
-
-        #region Open & Save Network
-        private void networkSave(string path)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            try
-            {
- //               NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
-                this.mruProviderSystem.Insert(path);
-                HistoryListener.Write("Network Saved");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error saving network");
-#if DEBUG
-                throw;
-#endif
-            }
-        }
-
-        private void networkOpen(string path)
-        {
-   //         NetworkContainer neuralNetwork = null;
-
-            try
-            {
-     //           neuralNetwork = NetworkContainer.Deserialize(path);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error opening network");
-#if DEBUG
-                throw;
-#endif
-            }
-            finally
-            {
-    /*            if (neuralNetwork != null)
-                {
-                    neuralNetwork.WireUpEvents();
-        //            this.CurrentNetworkContainer = neuralNetwork;
-                    this.mruProviderNetwork.Insert(path);
-                    HistoryListener.Write("Network Loaded");
-
-                    if (m_networkDatabase == null && File.Exists(Path.ChangeExtension(path,".sdo")))
-                    {
-                        if (MessageBox.Show("Sinapse detected a database with the same name as this network. " +
-                            "Would you like to load this database too?", "Matching database found", MessageBoxButtons.YesNo)
-                            == DialogResult.Yes)
-                        {
-                            this.databaseOpen(Path.ChangeExtension(path, ".sdo"));
-                        }
-                    }
-                }
-     */ 
-            }
-        }
-        #endregion
-
-
-        #region Open & Save Database
-        private void databaseSave(string path)
-        {
-            try
-            {
-          //      NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
-                this.mruProviderDatasource.Insert(path);
-                HistoryListener.Write("Database Saved");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error saving database");
-#if DEBUG
-                throw;
-#endif
-            }
-         
-        }
-
-        private void databaseOpen(string path)
-        {
-    //        NetworkDatabase networkDatabase = null;
-
-            try
-            {
-    //            networkDatabase = NetworkDatabase.Deserialize(path);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error opening database");
-#if DEBUG
-                throw;
-#endif
-            }
-            finally
-            {
-       /*         if (networkDatabase != null)
-                {
-    //                this.CurrentNetworkDatabase = networkDatabase;
-                    this.mruProviderDatabase.Insert(path);
-                    HistoryListener.Write("Database Loaded");
-
-    //                if (m_networkContainer == null && File.Exists(Path.ChangeExtension(path, ".ann")))
-                    {
-                        if (MessageBox.Show("Sinapse detected a network with the same name as this database. " +
-                            "Would you like to load this network too?", "Matching network found", MessageBoxButtons.YesNo)
-                            == DialogResult.Yes)
-                        {
-                            this.networkOpen(Path.ChangeExtension(path, ".ann"));
-                        }
-                    }
-                }
-        */ 
-            }
-        }
-        #endregion
-
-
-        #region Open & Save Workplace
-        private void workplaceSave(string path)
-        {
-            try
-            {
-      //          NetworkWorkplace.Serialize(this.CurrentNetworkWorkplace, path);
-                this.mruProviderWorkplace.Insert(path);
-                HistoryListener.Write("Workplace Saved");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error saving workplace");
-#if DEBUG
-                throw;
-#endif
-            }
 
         }
 
-        private void workplaceOpen(string path)
-        {
-    //        NetworkWorkplace networkWorkplace = null;
-
-            try
-            {
-                //          networkWorkplace = NetworkWorkplace.Deserialize(path);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error opening workplace");
-#if DEBUG
-                throw;
-#endif
-            }
-            finally
-            {
-                /*           if (networkWorkplace != null)
-                           {
-                   //            this.CurrentNetworkWorkplace = networkWorkplace;
-                               this.mruProviderWorkplace.Insert(path);
-                               HistoryListener.Write("Workplace Loaded");
-                           }
-                       }
-                 */
-            }
-        }
-     
-        #endregion
-
-
-        #region Open & Save Session
-        private void sessionSave(string path)
-        {
-            try
-            {
-     //           TrainingSession.Serialize(this.CurrentTrainingSession, path);
-                this.mruProviderTrainingSession.Insert(path);
-                HistoryListener.Write("Training Session Saved");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error saving trainng session");
-#if DEBUG
-                throw;
-#endif
-            }
-
-        }
-
-        private void sessionOpen(string path)
-        {
-  //          TrainingSession trainingSession = null;
-
-            try
-            {
-  //              trainingSession = TrainingSession.Deserialize(path);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error opening training session");
-#if DEBUG
-                throw;
-#endif
-            }
-            finally
-            {
-   /*             if (trainingSession != null)
-                {
-     //               this.CurrentTrainingSession = trainingSession;
-                    this.mruProviderSession.Insert(path);
-                    HistoryListener.Write("Training Session Loaded");
-                }
-    */ 
-            }
-        }
-
-        #endregion
-
-
-        //---------------------------------------------
-
-
-        #region Private Methods
-        private void createSession()
-        {
-    //        if (this.m_networkDatabase != null && m_networkContainer != null)
-            {
-    //            this.CurrentTrainingSession = new TrainingSession("New session", this.m_networkDatabase, this.m_networkContainer);
-            }
-        }
-        #endregion
 
 
 
 
-/*
-        private void systemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Sinapse.Documents.NetworkSystemEditor document = new NetworkSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
-            document.Show(this.dockMain, DockState.Document);
-        }
-
-        */
 
 
     }

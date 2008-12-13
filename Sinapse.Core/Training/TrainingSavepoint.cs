@@ -40,9 +40,9 @@ namespace Sinapse.Core.Training
     public sealed class TrainingSavepoint
     {
 
-        private MemoryStream m_memoryStream;
-        private TrainingStatus m_networkStatus;
-        private DateTime m_creationTime;
+        private MemoryStream memoryStream;
+        private TrainingStatus networkStatus;
+        private DateTime creationTime;
 
 
         //---------------------------------------------
@@ -51,14 +51,14 @@ namespace Sinapse.Core.Training
         #region Constructor
         public TrainingSavepoint(Network network, TrainingStatus networkStatus)
         {
-            this.m_memoryStream = new MemoryStream();
+            this.memoryStream = new MemoryStream();
 
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(m_memoryStream, network);
-            this.m_memoryStream.Seek(0, SeekOrigin.Begin);
+            bf.Serialize(memoryStream, network);
+            this.memoryStream.Seek(0, SeekOrigin.Begin);
 
-            this.m_networkStatus = networkStatus;
-            this.m_creationTime = DateTime.Now;
+            this.networkStatus = networkStatus;
+            this.creationTime = DateTime.Now;
         }
         #endregion
 
@@ -72,21 +72,21 @@ namespace Sinapse.Core.Training
             get
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                m_memoryStream.Seek(0, SeekOrigin.Begin);
-                ActivationNetwork network = bf.Deserialize(m_memoryStream) as ActivationNetwork;
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                ActivationNetwork network = bf.Deserialize(memoryStream) as ActivationNetwork;
                 return network;
             }
         }
 
         public TrainingStatus NetworkStatus
         {
-            get { return this.m_networkStatus; }
-            set { this.m_networkStatus = value; }
+            get { return this.networkStatus; }
+            set { this.networkStatus = value; }
         }
 
         public DateTime CreationTime
         {
-            get { return this.m_creationTime; }
+            get { return this.creationTime; }
         }
 
         #endregion

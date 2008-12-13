@@ -122,7 +122,7 @@ namespace Sinapse.Forms.Dialogs
             {
                 col = new TableDataSourceColumn(dataColumn);
                 col.Role = DataSourceRole.None;
-                col.Hidden = true;
+                col.Visible = false;
                 col.DataType = SystemDataType.Nummeric;
                 columns.Add(col);
             }
@@ -131,14 +131,14 @@ namespace Sinapse.Forms.Dialogs
             {
                 col = columns[strColumn];
                 col.Role = DataSourceRole.Input;
-                col.Hidden = false;
+                col.Visible = true;
             }
 
             foreach (string strColumn in clbOutput.CheckedItems)
             {
                 col = columns[strColumn];
                 col.Role = DataSourceRole.Output;
-                col.Hidden = false;
+                col.Visible = true;
             }
 
             foreach (string strColumn in clbString.CheckedItems)

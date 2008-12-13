@@ -126,6 +126,12 @@
     <Compile Include="Controls\FilterSequenceControl.Designer.cs">
       <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Dialogs\NewDataSourceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\NewDataSourceDialog.Designer.cs">
+      <DependentUpon>NewDataSourceDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Documents\NetworkSystemEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,10 @@
     <Compile Include="Windows\Documents\AdaptiveSystemQuery.Designer.cs">
       <DependentUpon>AdaptiveSystemQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Documents\StartPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Documents\StartPage.Designer.cs" />
     <Compile Include="Windows\Documents\TrainingSessionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,11 +155,6 @@
       <DependentUpon>TrainingSessionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Documents\IDocument.cs" />
-    <Compile Include="Windows\Documents\StartPage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Documents\StartPage.Designer.cs">
-    </Compile>
     <Compile Include="Windows\Documents\TableDataSourceEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,16 +278,20 @@
       <SubType>Designer</SubType>
       <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\NewDataSourceDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewDataSourceDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Documents\NetworkSystemEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NetworkSystemEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Documents\StartPage.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Documents\TrainingSessionEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TrainingSessionEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\StartPage.resx">
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Documents\TableDataSourceEditor.resx">
       <SubType>Designer</SubType>
@@ -718,6 +727,15 @@
     </None>
     <None Include="Resources\reload1.png" />
     <None Include="Resources\documentinfo1.png" />
+    <None Include="Resources\project_open.png" />
+    <None Include="Resources\kivio.png" />
+    <None Include="Resources\fifteenpieces.png" />
+    <None Include="Resources\add_user.png" />
+    <None Include="Resources\view_tree.png" />
+    <None Include="Resources\new window.png" />
+    <None Include="Resources\kviewshell.png" />
+    <None Include="Resources\package_graphics.png" />
+    <None Include="Resources\database.png" />
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

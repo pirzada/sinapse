@@ -54,17 +54,11 @@ namespace Sinapse
 
         static void Initialize()
         {
-            if (Settings.Default.history_Database == null)
-                Settings.Default.history_Database = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.mruDocuments == null)
+                Settings.Default.mruDocuments = new System.Collections.Specialized.StringCollection();
 
-            if (Settings.Default.history_Networks == null)
-                Settings.Default.history_Networks = new System.Collections.Specialized.StringCollection();
-
-            if (Settings.Default.history_Workplace == null)
-                Settings.Default.history_Workplace = new System.Collections.Specialized.StringCollection();
-
-            if (Settings.Default.history_Sessions == null)
-                Settings.Default.history_Sessions = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.mruWorkplaces == null)
+                Settings.Default.mruWorkplaces = new System.Collections.Specialized.StringCollection();
 
         }
 
