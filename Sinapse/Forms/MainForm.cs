@@ -29,6 +29,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Data;
 using Sinapse.Windows;
+using Sinapse.Windows.Training;
 using Sinapse.Forms.Dialogs;
 using Sinapse.Documents;
 
@@ -203,8 +204,6 @@ namespace Sinapse.Forms
 
         private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
-
-
             if (e.WorkplaceContent.Type == typeof(TableDataSource))
             {
                 TableDataSourceEditor editor = new TableDataSourceEditor(e.WorkplaceContent.Open() as TableDataSource);
@@ -212,13 +211,17 @@ namespace Sinapse.Forms
             }
             else if (e.WorkplaceContent.Type == typeof(NetworkSystem))
             {
-                AdaptiveSystemEditor editor = new AdaptiveSystemEditor(e.WorkplaceContent.Open() as NetworkSystem);
+                NetworkSystemEditor editor = new NetworkSystemEditor(e.WorkplaceContent.Open() as NetworkSystem);
                 editor.Show(this.dockMain, DockState.Document);
             }
             else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
             {
-                BackpropagationTrainer editor = new BackpropagationTrainer(e.WorkplaceContent.Open() as BackpropagationTrainingSession);
-                editor.Show(this.dockMain, DockState.Document);
+                BackpropagationTrainingSession session = e.WorkplaceContent.Open() as BackpropagationTrainingSession;
+                TrainingSessionEditor editor = new TrainingSessionEditor(session);
+                editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
+                editor.ControllerWindow.Show(this.dockMain);
+
+                editor.ControllerWindow.DockHandler.FloatPane.DockTo(this.dockMain.DockWindows[DockState.DockRight]);           
             }
 
         }
@@ -812,7 +815,7 @@ namespace Sinapse.Forms
 
         private void systemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Sinapse.Documents.AdaptiveSystemEditor document = new AdaptiveSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
+            Sinapse.Documents.NetworkSystemEditor document = new NetworkSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
             document.Show(this.dockMain, DockState.Document);
         }
 

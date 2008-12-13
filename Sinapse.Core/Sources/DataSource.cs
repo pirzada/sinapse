@@ -49,6 +49,8 @@ namespace Sinapse.Core.Sources
         object GetData(DataSourceSet set, DataSourceRole role);
         object GetData(DataSourceSet set, int subset);
         object GetData(DataSourceSet set, int subset, DataSourceRole role);
-        
+
+        event EventHandler Changed;
+        event EventHandler DataChanged;
     }
 }

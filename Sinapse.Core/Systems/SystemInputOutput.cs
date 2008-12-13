@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sinapse.Core
+namespace Sinapse.Core.Systems
 {
 
 
@@ -19,6 +19,11 @@ namespace Sinapse.Core
         private string name;
         private SystemDataType dataType;
 
+        public SystemInputOutput(string name, SystemDataType type)
+        {
+            this.name = name;
+            this.dataType = type;
+        }
 
         public string Name
         {

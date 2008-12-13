@@ -4,6 +4,9 @@ using System.Data;
 using System.ComponentModel;
 using System.Text;
 
+using Sinapse.Core;
+using Sinapse.Core.Systems;
+
 namespace Sinapse.Core.Sources
 {
     [Serializable]
@@ -69,12 +72,18 @@ namespace Sinapse.Core.Sources
             set { hidden = value; }
         }
 
+        /// <summary>
+        ///   Gets or sets the type of data stored by this column.
+        /// </summary>
         public SystemDataType DataType
         {
             get { return this.columnDataType; }
             set { this.columnDataType = value; }
         }
 
+        /// <summary>
+        ///   Gets or sets the role for this column, if Input or Output.
+        /// </summary>
         public DataSourceRole Role
         {
             get { return this.columnRole; }
@@ -103,13 +112,15 @@ namespace Sinapse.Core.Sources
     {
 
 
-
-
         #region Constructor
-        internal TableDataSourceColumnCollection(TableDataSourceColumn[] columns)
+        public TableDataSourceColumnCollection(TableDataSourceColumn[] columns)
             : base(columns)
         {
 
+        }
+
+        public TableDataSourceColumnCollection()
+        {
         }
         #endregion
 
