@@ -1,4 +1,4 @@
-namespace Sinapse.Documents
+namespace Sinapse.Windows.Documents
 {
     partial class AdaptiveSystemQuery
     {

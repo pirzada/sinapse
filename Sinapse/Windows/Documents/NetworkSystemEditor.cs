@@ -10,14 +10,14 @@ using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core.Systems;
 
-namespace Sinapse.Documents
+namespace Sinapse.Windows.Documents
 {
     public partial class NetworkSystemEditor : DockContent, IWorkplaceDocument
     {
 
-        private NetworkSystem system;
+        private ActivationNetworkSystem system;
 
-        public NetworkSystemEditor(NetworkSystem system)
+        public NetworkSystemEditor(ActivationNetworkSystem system)
         {
             InitializeComponent();
             this.system = system;
@@ -32,14 +32,11 @@ namespace Sinapse.Documents
 
 
 
-
-
-
         #region IWorkplaceDocument Members
 
         public void Save()
         {
-            if (system.Location != String.Empty)
+            if (system.FullPath != String.Empty)
                 system.Save();
             else SaveAs();
         }

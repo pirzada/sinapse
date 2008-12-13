@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Panels
+namespace Sinapse.Windows.Documents
 {
-    public partial class FilterStackPanel : Form
+    public partial class AdaptiveSystemQuery : Form
     {
-        public FilterStackPanel()
+        public AdaptiveSystemQuery()
         {
             InitializeComponent();
         }

@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 
 
-namespace Sinapse.Documents
+namespace Sinapse.Windows.Documents
 {
     interface IWorkplaceDocument
     {

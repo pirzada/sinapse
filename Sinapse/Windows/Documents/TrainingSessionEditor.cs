@@ -11,7 +11,7 @@ using Sinapse.Windows.Training;
 
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Sinapse.Documents
+namespace Sinapse.Windows.Documents
 {
 
     public partial class TrainingSessionEditor :  WeifenLuo.WinFormsUI.Docking.DockContent, IWorkplaceDocument
@@ -56,7 +56,7 @@ namespace Sinapse.Documents
 
         public void Save()
         {
-            if (session.Location != String.Empty)
+            if (session.FullPath != String.Empty)
                 session.Save();
             else SaveAs();
         }

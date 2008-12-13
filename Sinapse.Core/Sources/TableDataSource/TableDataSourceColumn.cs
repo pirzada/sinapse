@@ -12,10 +12,11 @@ namespace Sinapse.Core.Sources
     [Serializable]
     public class TableDataSourceColumn
     {
+        private DataTable table;
 
+        private string columnName; // key
         private string columnDescription;
         private SystemDataType columnDataType;
-        private DataColumn dataColumn;
         private DataSourceRole columnRole;
         bool hidden; // Setar quando o usuário esconder na GUI
 
@@ -23,39 +24,30 @@ namespace Sinapse.Core.Sources
 
         public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type, DataSourceRole role)
         {
-            this.dataColumn = dataColumn;
+            this.table = dataColumn.Table;
+            this.columnName = dataColumn.ColumnName;
             this.columnDataType = type;
             this.columnRole = role;
         }
 
         public TableDataSourceColumn(DataColumn dataColumn)
         {
-            this.dataColumn = dataColumn;
+            this.table = dataColumn.Table;
+            this.columnName = dataColumn.ColumnName;
         }
 
-
-
-
-        /// <summary>
-        ///   Gets or sets the name for this Column
-        /// </summary>
-        public string Name
-        {
-            get { return this.dataColumn.ColumnName; }
-            set { this.dataColumn.ColumnName = value; }
-        }
 
         /// <summary>
         ///   Gets or sets the display text for this Column
         /// </summary>
         public string Caption
         {
-            get { return this.dataColumn.Caption; }
-            set { this.dataColumn.Caption = value; }
+            get { return this.DataColumn.Caption; }
+            set { this.DataColumn.Caption = value; }
         }
 
         /// <summary>
-        ///   Gets or sets a text describing which information this Column contains.
+        ///   Gets or sets a text describing which information this column contains.
         /// </summary>
         public string Description
         {
@@ -90,15 +82,21 @@ namespace Sinapse.Core.Sources
             set { this.columnRole = value; }
         }
 
-
         /// <summary>
-        ///   Gets the underlying DataColumn associated with this object.
+        ///   Gets the DataColumn associated with this object.
         /// </summary>
         public DataColumn DataColumn
         {
-            get { return this.dataColumn; }
+            get { return table.Columns[this.columnName]; }
         }
 
+        /// <summary>
+        ///   Gets the name of the DataColumn associated with this object.
+        /// </summary>
+        public string Name
+        {
+            get { return this.columnName; }
+        }
 
     }
 
@@ -107,22 +105,20 @@ namespace Sinapse.Core.Sources
 
 
     [Serializable]
-    public sealed class TableDataSourceColumnCollection :
-        System.ComponentModel.BindingList<TableDataSourceColumn>
+    public sealed class TableDataSourceColumnCollection : BindingList<TableDataSourceColumn>
     {
 
 
-        #region Constructor
-        public TableDataSourceColumnCollection(TableDataSourceColumn[] columns)
+        public TableDataSourceColumnCollection(IList<TableDataSourceColumn> columns)
             : base(columns)
         {
-
         }
 
         public TableDataSourceColumnCollection()
+            : base()
         {
         }
-        #endregion
+
 
 
         public TableDataSourceColumn[] Select(DataSourceRole role)
@@ -151,15 +147,7 @@ namespace Sinapse.Core.Sources
         /// <returns></returns>
         public TableDataSourceColumn this[DataColumn dataColumn]
         {
-            get
-            {
-                foreach (TableDataSourceColumn col in this)
-                {
-                    if (col.DataColumn == dataColumn)
-                        return col;
-                }
-                throw new KeyNotFoundException();
-            }
+            get            {                return this[dataColumn.ColumnName];}
         }
 
         /// <summary>

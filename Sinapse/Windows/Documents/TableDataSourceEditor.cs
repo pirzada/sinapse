@@ -11,7 +11,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Sinapse.Core.Sources;
 using Sinapse.Forms.Dialogs;
 
-namespace Sinapse.Documents
+namespace Sinapse.Windows.Documents
 {
     public partial class TableDataSourceEditor : DockContent, IWorkplaceDocument
     {
@@ -168,7 +168,7 @@ namespace Sinapse.Documents
 
         public void Save()
         {
-            if (tableSource.Location == String.Empty)
+            if (tableSource.FullPath == String.Empty)
                 SaveAs();
             else tableSource.Save();
         }
@@ -177,6 +177,7 @@ namespace Sinapse.Documents
         {
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
+            //    saveFileDialog.DefaultExt = tableSource.DefaultExtension;
                 tableSource.Save(saveFileDialog.FileName);
             }
         }

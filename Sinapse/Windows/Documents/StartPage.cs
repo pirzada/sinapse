@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Documents
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace Sinapse.Windows.Documents
 {
-    public partial class AdaptiveSystemQuery : Form
+    public partial class StartPage : WeifenLuo.WinFormsUI.Docking.DockContent
     {
-        public AdaptiveSystemQuery()
+        public StartPage()
         {
             InitializeComponent();
         }
