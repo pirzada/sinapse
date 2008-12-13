@@ -34,7 +34,7 @@ using Sinapse.Core.Training;
 namespace Sinapse.Windows
 {
 
-    internal sealed partial class WorkplaceWindow : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class WorkplaceWindow : WeifenLuo.WinFormsUI.Docking.DockContent
     {
 
         private TreeNode nodeSources;
@@ -69,6 +69,9 @@ namespace Sinapse.Windows
 
 
         #region Properties
+        /// <summary>
+        ///   Gets the current selected WorkplaceContent on the Workplace Window
+        /// </summary>
         public WorkplaceContent SelectedItem
         {
             get
@@ -98,8 +101,19 @@ namespace Sinapse.Windows
         #endregion
 
 
+
         #region Form Events
+        private void treeViewWorkplace_DoubleClick(object sender, EventArgs e)
+        {
+            object tag = this.treeViewWorkplace.SelectedNode.Tag;
+
+            if (tag is WorkplaceContent)
+                this.OnWorkplaceContentDoubleClicked(
+                    new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceContent));
+        }
         #endregion
+
+
 
         #region Workplace Events
         private void Workplace_ActiveWorkplaceChanged(object sender, EventArgs e)
@@ -133,6 +147,8 @@ namespace Sinapse.Windows
             this.populateTreeView();
         }
         #endregion
+
+
 
 
         #region TreeView Methods
@@ -169,41 +185,27 @@ namespace Sinapse.Windows
 
 
 
-        private void treeViewWorkplace_DoubleClick(object sender, EventArgs e)
-        {
-            object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-            if (tag is WorkplaceContent)
-                this.OnWorkplaceContentDoubleClicked(
-                    new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceContent));
-        }
 
-        private void treeViewWorkplace_AfterSelect(object sender, TreeViewEventArgs e)
-        {
 
-        }
 
-        private void OnWorkplaceContentDoubleClicked(WorkplaceContentDoubleClickedEventArgs e)
-        {
-            if (this.WorkplaceContentDoubleClicked != null)
-                this.WorkplaceContentDoubleClicked.Invoke(this, e);
-        }
 
         #region Menu Events
         private void menuSourceAddTable_Click(object sender, EventArgs e)
         {
-            WorkplaceContent item = new WorkplaceContent("New item", typeof(TableDataSource));
+            WorkplaceContent item = new WorkplaceContent(Workplace.Active, "New item", typeof(TableDataSource));
             Workplace.Active.DataSources.Add(item);
-
+            
+            // Tell listeners we double clicked a workplace entry (request open)
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
         }
 
         private void menuSystemAddNetworkActivation_Click(object sender, EventArgs e)
         {
-            WorkplaceContent item = new WorkplaceContent("New item", typeof(NetworkSystem));
+            WorkplaceContent item = new WorkplaceContent(Workplace.Active, "New item", typeof(NetworkSystem));
             Workplace.Active.AdaptiveSystems.Add(item);
 
-            // Update
+            // Tell listeners we double clicked a workplace entry (request open)
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));
         }
 
@@ -214,11 +216,26 @@ namespace Sinapse.Windows
         #endregion
 
 
+
+
+
+        #region Protected Methods (For Events)
+        protected void OnWorkplaceContentDoubleClicked(WorkplaceContentDoubleClickedEventArgs e)
+        {
+            if (this.WorkplaceContentDoubleClicked != null)
+                this.WorkplaceContentDoubleClicked.Invoke(this, e);
+        }
+        #endregion
+
     }
 
+
+
+
     #region Event Delegates & Arguments
-    internal delegate void WorkplaceContentDoubleClickedEventHandler(object sender, WorkplaceContentDoubleClickedEventArgs e);
-    internal sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
+    public delegate void WorkplaceContentDoubleClickedEventHandler(object sender, WorkplaceContentDoubleClickedEventArgs e);
+    
+    public sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
     {
         private WorkplaceContent workplaceContent;
 

@@ -30,6 +30,7 @@ namespace Sinapse.Core
     /// <summary>
     /// The Workplace is a collection of Network Systems, Data Sources and Training Sessions currently hosted in a usage session of the program.
     /// </summary>
+    [Serializable]
     public class Workplace : ISerializableObject<Workplace>
     {
 
@@ -60,13 +61,19 @@ namespace Sinapse.Core
         private BindingList<WorkplaceContent> adaptiveSystems;
         private BindingList<WorkplaceContent> dataSources;
         private BindingList<WorkplaceContent> trainingSessions;
-       
 
 
+        public Workplace(string name, string location)
+            : this()
+        {
+            serializableObject.FilePath = location;
+            serializableObject.FileName = name + "." + DefaultExtension;
+            serializableObject.Name = name;
+        }
 
         public Workplace()
         {
-            serializableObject = new SerializableObject<Workplace>();
+            serializableObject = new SerializableObject<Workplace>(this);
 
             dataSources      = new BindingList<WorkplaceContent>();
             adaptiveSystems  = new BindingList<WorkplaceContent>();
@@ -94,6 +101,7 @@ namespace Sinapse.Core
 
 
         #region SerializableObject Members
+
         public String Name
         {
             get { return serializableObject.Name; }
@@ -105,16 +113,29 @@ namespace Sinapse.Core
             set { serializableObject.Description = value; }
         }
 
-        public string Location
-        {
-            get { return serializableObject.Location; }
-            set { serializableObject.Location = value; }
-        }
-
         public string Remarks
         {
             get { return serializableObject.Remarks; }
             set { serializableObject.Remarks = value; }
+        }
+
+
+
+        public string FileName
+        {
+            get { return serializableObject.FileName; }
+            set { serializableObject.FileName = value; }
+        }
+
+        public string FilePath
+        {
+            get { return serializableObject.FilePath; }
+            set { serializableObject.FilePath = value; }
+        }
+
+        public string DefaultExtension
+        {
+            get { return "swp"; }
         }
 
         public bool HasChanges
@@ -122,6 +143,14 @@ namespace Sinapse.Core
             get { return serializableObject.HasChanges; }
             set { serializableObject.HasChanges = value; }
         }
+
+
+
+        public string FullPath
+        {
+            get { return serializableObject.FullPath; }
+        }
+
 
         public bool Save(string path)
         {

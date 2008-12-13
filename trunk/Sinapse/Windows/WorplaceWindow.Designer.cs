@@ -77,7 +77,6 @@ namespace Sinapse.Windows
             this.treeViewWorkplace.Size = new System.Drawing.Size(273, 357);
             this.treeViewWorkplace.TabIndex = 0;
             this.treeViewWorkplace.DoubleClick += new System.EventHandler(this.treeViewWorkplace_DoubleClick);
-            this.treeViewWorkplace.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewWorkplace_AfterSelect);
             // 
             // imageList
             // 

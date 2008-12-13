@@ -126,39 +126,44 @@
     <Compile Include="Controls\FilterSequenceControl.Designer.cs">
       <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\NetworkSystemEditor.cs">
+    <Compile Include="Windows\Documents\NetworkSystemEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\NetworkSystemEditor.Designer.cs">
+    <Compile Include="Windows\Documents\NetworkSystemEditor.Designer.cs">
       <DependentUpon>NetworkSystemEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\AdaptiveSystemQuery.cs">
+    <Compile Include="Windows\Documents\AdaptiveSystemQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\AdaptiveSystemQuery.Designer.cs">
+    <Compile Include="Windows\Documents\AdaptiveSystemQuery.Designer.cs">
       <DependentUpon>AdaptiveSystemQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\TrainingSessionEditor.cs">
+    <Compile Include="Windows\Documents\TrainingSessionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\TrainingSessionEditor.Designer.cs">
+    <Compile Include="Windows\Documents\TrainingSessionEditor.Designer.cs">
       <DependentUpon>TrainingSessionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\IDocument.cs" />
-    <Compile Include="Documents\StartPage.cs">
+    <Compile Include="Windows\Documents\IDocument.cs" />
+    <Compile Include="Windows\Documents\StartPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\StartPage.Designer.cs">
-      <DependentUpon>StartPage.cs</DependentUpon>
+    <Compile Include="Windows\Documents\StartPage.Designer.cs">
     </Compile>
-    <Compile Include="Documents\TableDataSourceEditor.cs">
+    <Compile Include="Windows\Documents\TableDataSourceEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\TableDataSourceEditor.Designer.cs">
+    <Compile Include="Windows\Documents\TableDataSourceEditor.Designer.cs">
       <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Base\SingleInstanceForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\NewWorkplaceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\NewWorkplaceDialog.Designer.cs">
+      <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Training\TrainingOptionsWindow.cs">
       <SubType>Form</SubType>
@@ -268,21 +273,24 @@
       <SubType>Designer</SubType>
       <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\NetworkSystemEditor.resx">
+    <EmbeddedResource Include="Windows\Documents\NetworkSystemEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NetworkSystemEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\TrainingSessionEditor.resx">
+    <EmbeddedResource Include="Windows\Documents\TrainingSessionEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TrainingSessionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\StartPage.resx">
+    <EmbeddedResource Include="Windows\Documents\StartPage.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\TableDataSourceEditor.resx">
+    <EmbeddedResource Include="Windows\Documents\TableDataSourceEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TableDataSourceEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\NewWorkplaceDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Training\TrainingOptionsWindow.resx">
       <SubType>Designer</SubType>
@@ -711,9 +719,6 @@
     <None Include="Resources\reload1.png" />
     <None Include="Resources\documentinfo1.png" />
     <Content Include="Sinapse.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\SourceEditor\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

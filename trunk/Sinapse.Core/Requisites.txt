@@ -1,10 +1,9 @@
-A manipulação da DataSource deverá
 
 A escolha de entradas e saídas deverá ser feita na manipulação da DataSource
 Devemos escolher as entradas e saídas na datasource e depois casar com o AdaptiveSystem
 
 O adaptivesystem deve poder ser criado a partir de um DataSource ou pelo menos de um
-TableDataSource pra agilizar as coisas
+TableDataSource pra agilizar as coisas, mas isto também poderá ser feito manualmente.
 
 
 

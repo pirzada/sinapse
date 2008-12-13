@@ -5,18 +5,14 @@
 
 
 
- Sinapse 0.0.0.3 release notes
+ Sinapse 0.0.0.4 release notes
  ----------------------------
- x.x.2008.
+ x.x.2009.
 
 
  Version updates and fixes:
 
-  * Export to code (C, C++, C#, Java and Matlab),
-  * Training Session saving implemented,
-  * Report Generation upgraded,
-  * Network Inspector (weight viewer) is now working.
-  * Minor bug fixes.
+  * Major rewrite again. Things should be much better (and clearer) now.
 
 
 

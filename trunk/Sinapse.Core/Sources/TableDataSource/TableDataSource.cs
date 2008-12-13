@@ -37,6 +37,7 @@ namespace Sinapse.Core.Sources
     ///   The source encompassed here is presented as a DataTable, which can be created
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
+    [Serializable]
     public class TableDataSource : IDataSource, ISerializableObject<TableDataSource>
     {
         
@@ -46,8 +47,10 @@ namespace Sinapse.Core.Sources
         private DataTable dataTable;
         private TableDataSourceColumnCollection columns;
 
-
+        [field: NonSerialized]
         public event EventHandler Changed;
+
+        [field: NonSerialized]
         public event EventHandler DataChanged;
 
 
@@ -62,14 +65,21 @@ namespace Sinapse.Core.Sources
 
         public TableDataSource(String name)
         {
-            this.serializableObject = new SerializableObject<TableDataSource>();
+            this.serializableObject = new SerializableObject<TableDataSource>(this);
 
             this.dataTable = new DataTable(name);
             this.columns = new TableDataSourceColumnCollection();
             this.Name = name;
+
+            // Create the extra two columns for storing the Set and Subset
+            createExtendedColumns();
         }
 
-
+        /// <summary>
+        ///   Imports a DataTable
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="columns"></param>
         public void Import(DataTable table, TableDataSourceColumnCollection columns)
         {
             // Store the table and column information
@@ -77,13 +87,9 @@ namespace Sinapse.Core.Sources
             this.columns = columns;
 
             // Create the extra two columns for storing the Set and Subset
-            DataColumn col = new DataColumn("@SET", typeof(int));
-            dataTable.Columns.Add(col);
-            this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
+            createExtendedColumns();
 
-            col = new DataColumn("@SUBSET", typeof(int));
-            dataTable.Columns.Add(col);
-            this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
+            OnChanged(EventArgs.Empty);
         }
 
         /// <summary>
@@ -94,6 +100,22 @@ namespace Sinapse.Core.Sources
         {
             dataTable.Merge(table, true, MissingSchemaAction.Ignore);
         }
+
+
+        private void createExtendedColumns()
+        {
+            if (!dataTable.Columns.Contains("@SET"))
+            {
+                DataColumn col = new DataColumn("@SET", typeof(int));
+                dataTable.Columns.Add(col);
+                this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
+
+                col = new DataColumn("@SUBSET", typeof(int));
+                dataTable.Columns.Add(col);
+                this.columns.Add(col, SystemDataType.Nummeric, DataSourceRole.None);
+            }
+        }
+
 
 
 
@@ -154,6 +176,7 @@ namespace Sinapse.Core.Sources
 
 
 
+
         #region Data Copy & Movement Operations
         public void CopyRowToSet(DataRow row, DataSourceSet set)
         {
@@ -191,25 +214,23 @@ namespace Sinapse.Core.Sources
         #region Data Retrieval Methods
         public DataView GetView(DataSourceSet set)
         {
-            dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
-            dataView.RowFilter = String.Format("@SET='{0}'", (int)set);
+            dataView.RowFilter = String.Format("[@SET]='{0}'", (int)set);
             return dataView;
         }
 
 
         public DataView GetView(DataSourceSet set, int subset)
         {
-            dataTable.Select("@SET = " + set);
             DataView dataView = new DataView(this.dataTable);
-            dataView.RowFilter = String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset);
+            dataView.RowFilter = String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset);
             return dataView;
         }
 
 
         public object[][] GetData(DataSourceSet set)
         {
-            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}'", (int)set));
+            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}'", (int)set));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
             {
@@ -221,7 +242,7 @@ namespace Sinapse.Core.Sources
 
         public object[][] GetData(DataSourceSet set, int subset)
         {
-            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset));
+            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
             {
@@ -232,7 +253,7 @@ namespace Sinapse.Core.Sources
 
         public object[][] GetData(DataSourceSet set, DataSourceRole role)
         {
-            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}'", (int)set));
+            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}'", (int)set));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
             {
@@ -243,7 +264,7 @@ namespace Sinapse.Core.Sources
 
         public object[][] GetData(DataSourceSet set, int subset, DataSourceRole role)
         {
-            DataRow[] rows = dataTable.Select(String.Format("@SET='{0}' AND @SUBSET='{1}'", (int)set, subset));
+            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
 			{
@@ -325,26 +346,43 @@ namespace Sinapse.Core.Sources
 
         public String Name
         {
-            get { return this.serializableObject.Name; }
+            get { return serializableObject.Name; }
             set { serializableObject.Name = value; }
         }
-
         public String Description
         {
             get { return serializableObject.Description; }
             set { serializableObject.Description = value; }
         }
 
-        public String Remarks
+        public string Remarks
         {
             get { return serializableObject.Remarks; }
             set { serializableObject.Remarks = value; }
         }
 
-        public string Location
+
+
+        public string FileName
         {
-            get { return serializableObject.Location; }
-            set { serializableObject.Location = value; }
+            get { return serializableObject.FileName; }
+            set { serializableObject.FileName = value; }
+        }
+
+        public string FilePath
+        {
+            get { return serializableObject.FilePath; }
+            set { serializableObject.FilePath = value; }
+        }
+
+        public string FullPath
+        {
+            get { return serializableObject.FullPath; }
+        }
+
+        public string DefaultExtension
+        {
+            get { return "stds"; }
         }
 
         public bool HasChanges
@@ -352,6 +390,8 @@ namespace Sinapse.Core.Sources
             get { return serializableObject.HasChanges; }
             set { serializableObject.HasChanges = value; }
         }
+
+
 
         public bool Save(string path)
         {
@@ -396,6 +436,7 @@ namespace Sinapse.Core.Sources
         }
 
         #endregion
+
     }
 
 

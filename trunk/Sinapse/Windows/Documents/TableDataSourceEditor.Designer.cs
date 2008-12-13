@@ -1,4 +1,4 @@
-namespace Sinapse.Documents
+namespace Sinapse.Windows.Documents
 {
     partial class TableDataSourceEditor
     {
@@ -239,7 +239,8 @@ namespace Sinapse.Documents
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.DefaultExt = "tds";
+            this.saveFileDialog.DefaultExt = "stds";
+            this.saveFileDialog.Filter = "Sinapse Table Data Source Files (*.stds)|*.stds|All files (*.*)|*.*";
             // 
             // TableDataSourceEditor
             // 

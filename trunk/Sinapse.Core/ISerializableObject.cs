@@ -14,13 +14,16 @@ namespace Sinapse.Core
 
     public interface ISerializableObject<T>
     {
+        // Metadata associated
         string Name { get; set;}
-
         string Description { get; set;}
-
-        string Location { get; set; }
-
         string Remarks { get; set;}
+
+        // IO Data
+        string FilePath { get; set; }
+        string FileName { get; set; }
+        string FullPath { get; }
+        string DefaultExtension { get; }
 
         bool HasChanges { get; set; }
 
@@ -31,23 +34,35 @@ namespace Sinapse.Core
 
     }
 
-
+    [Serializable]
     public class SerializableObject<T> : ISerializableObject<T>
         where T : ISerializableObject<T>
     {
 
         private string name;
         private string description;
-        private string location;
+        private string remarks;
+
+        [NonSerialized]
+        private string filename;
+        [NonSerialized]
+        private string filepath;
+        [NonSerialized]
         private bool hasChanges;
 
+        private T owner;
 
-        public SerializableObject()
+
+
+        public SerializableObject(T owner)
         {
-            name = String.Empty;
-            description = String.Empty;
-            location = String.Empty;
-            hasChanges = false;
+            this.owner = owner;
+            this.name = String.Empty;
+            this.description = String.Empty;
+            this.remarks = String.Empty;
+            this.filepath = String.Empty;
+            this.filename = String.Empty;
+            this.hasChanges = false;
         }
 
 
@@ -63,17 +78,52 @@ namespace Sinapse.Core
             set { description = value; }
         }
 
-        public string Location
-        {
-            get { return location; }
-            set { location = value; }
-        }
-
         public string Remarks
         {
-            get { return Remarks; }
-            set { Remarks = value; }
+            get { return remarks; }
+            set { remarks = value; }
         }
+
+
+
+
+
+
+
+        /// <summary>
+        ///   Gets the full path for this object, excluding its filename.
+        /// </summary>
+        public string FilePath
+        {
+            get { return filepath; }
+            set { filepath = value; }
+        }
+
+        /// <summary>
+        ///   Gets the filename for this object.
+        /// </summary>
+        public string FileName
+        {
+            get { return filename; }
+            set { filename = value; }
+        }
+
+        /// <summary>
+        ///   Gets the default extension for this object.
+        /// </summary>
+        public string DefaultExtension
+        {
+            get { return owner.DefaultExtension; }
+        }
+
+        /// <summary>
+        ///   Gets the full path for this object, including its filename.
+        /// </summary>
+        public string FullPath
+        {
+            get { return Path.Combine(FilePath, FileName); }
+        }
+
 
         public bool HasChanges
         {
@@ -82,28 +132,48 @@ namespace Sinapse.Core
         }
 
 
+
+
+        /// <summary>
+        ///   Saves the object.
+        /// </summary>
+        /// <returns>
+        ///   Returns true for success, false otherwise.
+        /// </returns>
         public bool Save()
         {
-            return Save(location);
+            return Save(FullPath);
         }
 
+
+        /// <summary>
+        ///   Saves the object.
+        /// </summary>
+        /// <param name="path">
+        ///   The full path where to save the file.
+        /// </param>
+        /// <returns>
+        ///   Returns true for success, false otherwise.
+        /// </returns>
         public bool Save(string path)
         {
             bool success = false;
             FileStream fileStream = null;
             GZipStream gzipStream = null;
 
-
             try
             {
-                fileStream = new FileStream(path, FileMode.Truncate, FileAccess.Write, FileShare.None);
+                this.filename = Path.GetFileNameWithoutExtension(path);
+                this.filepath = Path.GetDirectoryName(path);
+
+                //string fullpath = Path.Combine(path, name + "." + extension);
+                fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
                 gzipStream = new GZipStream(fileStream, CompressionMode.Compress);
 
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 binaryFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
-                binaryFormatter.Serialize(gzipStream, this);
+                binaryFormatter.Serialize(gzipStream, owner);
 
-                location = path;
                 hasChanges = false;
                 success = true;
             }
@@ -136,7 +206,15 @@ namespace Sinapse.Core
 
 
 
-
+        /// <summary>
+        ///   Opens an object.
+        /// </summary>
+        /// <param name="path">
+        ///   The full path for the object to be open.
+        /// </param>
+        /// <returns>
+        ///   The loaded object.
+        /// </returns>
         public static T Open(string path)
         {
             T obj = default(T);
@@ -153,7 +231,8 @@ namespace Sinapse.Core
                 binaryFormatter.Binder = new AnyVersionObjectBinder();
                 obj = (T)binaryFormatter.Deserialize(gzipStream);
 
-                obj.Location = path;
+                obj.FilePath = Path.GetDirectoryName(path);
+                obj.FileName = Path.GetFileNameWithoutExtension(path);
             }
             catch (FileNotFoundException e)
             {

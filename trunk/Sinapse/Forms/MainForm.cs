@@ -29,9 +29,10 @@ using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Data;
 using Sinapse.Windows;
+using Sinapse.Windows.Documents;
 using Sinapse.Windows.Training;
+
 using Sinapse.Forms.Dialogs;
-using Sinapse.Documents;
 
 using Sinapse.Core;
 using Sinapse.Core.Sources;
@@ -107,23 +108,13 @@ namespace Sinapse.Forms
                     this.WindowState = Properties.Settings.Default.main_WindowState;
                 }
 
+                // Show Start Page (if configured to do so)
                 if (Properties.Settings.Default.behaviour_ShowStartPage)
                 {
                     StartPage page = new StartPage();
                     page.Show(this.dockMain, DockState.Document);
                 }
-                // Wire up controls and events
-            //    this..TrainerControl.GraphControl = this.tabControlMain.GraphControl;
-            //    this.tabControlMain.GraphControl.NetworkTrainer = this.tabControlSide.TrainerControl;
-
-             //   this.tabControlSide.TrainerControl.StatusChanged += sideTrainerControl_StatusChanged;
-             //   this.tabControlSide.TrainerControl.TrainingComplete += sideTrainerControl_TrainingComplete;
-/*
-                this.CurrentNetworkContainer = null;
-                this.CurrentNetworkDatabase = null;
-                this.CurrentNetworkWorkplace = null;
-                this.CurrentTrainingSession = null;
-                */
+                
                 HistoryListener.Write("Waiting data");
             }
         }
@@ -138,36 +129,36 @@ namespace Sinapse.Forms
       //      if (this.tabControlSide.TrainerControl.IsTraining)
       //          this.tabControlSide.TrainerControl.Stop();
 
-            
- /*           // Asks user if unsaved changes should be saved on exiting
-            if (this.m_networkContainer != null && this.m_networkContainer.HasUnsavedChanges)
-            {
-                DialogResult r = MessageBox.Show("The current network has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
-                if (r == DialogResult.Yes)
-                {
-                    this.MenuNetworkSave_Click(this, EventArgs.Empty);
-                }
-                else if (r == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                    return;
-                }                   
-            }
 
-            if (this.m_networkDatabase != null && this.m_networkDatabase.HasUnsavedChanges)
-            {
-                DialogResult r = MessageBox.Show("The current database has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
-                if (r == DialogResult.Yes)
-                {
-                    this.MenuDatabaseSave_Click(this, EventArgs.Empty);
-                }
-                else if (r == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            
+            /*           // Asks user if unsaved changes should be saved on exiting
+                       if (this.m_networkContainer != null && this.m_networkContainer.HasUnsavedChanges)
+                       {
+                           DialogResult r = MessageBox.Show("The current network has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
+                           if (r == DialogResult.Yes)
+                           {
+                               this.MenuNetworkSave_Click(this, EventArgs.Empty);
+                           }
+                           else if (r == DialogResult.Cancel)
+                           {
+                               e.Cancel = true;
+                               return;
+                           }                   
+                       }
+
+                       if (this.m_networkDatabase != null && this.m_networkDatabase.HasUnsavedChanges)
+                       {
+                           DialogResult r = MessageBox.Show("The current database has been modified. Would you like to save changes?", "Save", MessageBoxButtons.YesNoCancel);
+                           if (r == DialogResult.Yes)
+                           {
+                               this.MenuDatabaseSave_Click(this, EventArgs.Empty);
+                           }
+                           else if (r == DialogResult.Cancel)
+                           {
+                               e.Cancel = true;
+                               return;
+                           }
+                       }
+                    */
 
             // Save settings before closing
             Properties.Settings.Default.main_FirstLoad = false;
@@ -182,7 +173,7 @@ namespace Sinapse.Forms
                 Properties.Settings.Default.main_Size = this.RestoreBounds.Size;
                 Properties.Settings.Default.main_Location = this.RestoreBounds.Location;
             }
-  */ 
+ 
         }
         #endregion
 
@@ -211,7 +202,7 @@ namespace Sinapse.Forms
             }
             else if (e.WorkplaceContent.Type == typeof(NetworkSystem))
             {
-                NetworkSystemEditor editor = new NetworkSystemEditor(e.WorkplaceContent.Open() as NetworkSystem);
+                NetworkSystemEditor editor = new NetworkSystemEditor(e.WorkplaceContent.Open() as ActivationNetworkSystem);
                 editor.Show(this.dockMain, DockState.Document);
             }
             else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
@@ -236,209 +227,69 @@ namespace Sinapse.Forms
 
 
         #region Menu File
-        private void MenuFileWizard_Click(object sender, EventArgs e)
+        /// <summary>
+        ///   Handling for Menu -> File -> New-> Workplace
+        /// </summary>
+        private void MenuFileNewWorkplace_Click(object sender, EventArgs e)
         {
-            ImportWizard importWizard = new ImportWizard();
-            if (importWizard.ShowDialog(this) == DialogResult.OK)
+            NewWorkplaceDialog dlg = new NewWorkplaceDialog();
+            if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                /*
-                this.CurrentNetworkDatabase = importWizard.GetNetworkData();
-                if (this.CurrentNetworkContainer == null)
-                {
-                    HistoryListener.Write("Database imported!");
-
-                    if (MessageBox.Show("Data imported successfuly. Would you like to create" +
-                        " the neural network now?", "Import Complete", MessageBoxButtons.YesNo)
-                        == DialogResult.Yes)
-                    {
-                        this.MenuNetworkNew_Click(this, e);
-                    }
-                }
-                 */
+                Workplace.Active = dlg.Workplace;
+                Workplace.Active.Save();
             }
         }
 
-        private void btnSaveAll_Click(object sender, EventArgs e)
+        /// <summary>
+        ///   Handling for Menu -> File -> Open -> Workplace
+        /// </summary>
+        private void MenuFileOpenWorkplace_Click(object sender, EventArgs e)
         {
-            /*
-            if (this.CurrentNetworkDatabase != null)
-            MenuDatabaseSave_Click(sender, e);
-            if (this.CurrentNetworkContainer != null)
-            MenuNetworkSave_Click(sender, e);
-             */ 
-        }
-        #endregion
-
-        
-        #region Menu Workplace
-        private void MenuWorkplaceClose_Click(object sender, EventArgs e)
-        {
-        //    this.CurrentNetworkWorkplace = null;
-            HistoryListener.Write("Workplace Closed");
-        }
-        #endregion
-
-
-        #region Menu Session
-        private void MenuSessionNew_Click(object sender, EventArgs e)
-        {
-    /*        if (this.m_networkContainer == null || this.m_networkDatabase == null)
+            if (openWorkplaceDialog.ShowDialog(this) == DialogResult.OK)
             {
-                MessageBox.Show("Before creating new training session, please first create (or open) a database and a network. A new Training Session will then be created automatically.");
+                Workplace.Active = Workplace.Open(openWorkplaceDialog.FileName);
             }
-            else
+        }
+
+        /// <summary>
+        ///   Handling for Menu -> File -> Close Workplace
+        /// </summary>
+        private void MenuFileCloseWorkplace_Click(object sender, EventArgs e)
+        {
+            if (Workplace.Active.HasChanges)
             {
-                this.CurrentTrainingSession = new TrainingSession("New session", this.CurrentNetworkDatabase, this.CurrentNetworkContainer);
+                DialogResult r = MessageBox.Show(
+                    "The Workplace has unsaved changes. Quit anyway?", "Unsaved changes",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
             }
-     */ 
+            Workplace.Active = null;
         }
 
-        private void MenuSessionOpen_Click(object sender, EventArgs e)
+        private void MenuFileSave_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void MenuSessionSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuSessionSaveAs_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuSessionClose_Click(object sender, EventArgs e)
-        {
-  //          this.CurrentTrainingSession = null;
-            HistoryListener.Write("Training Session Closed");
-        }
-        #endregion
-
-
-        #region Menu Database
-        private void MenuDatabaseSave_Click(object sender, EventArgs e)
-        {
-    //        if (this.CurrentNetworkDatabase.IsSaved)
-    //            this.databaseSave(this.CurrentNetworkDatabase.LastSavePath);
-
-      //      else this.saveDatabaseDialog.ShowDialog(this);
-        }
-
-
-        private void MenuDatabaseSaveAs_Click(object sender, EventArgs e)
-        {
-            this.saveDatabaseDialog.ShowDialog(this);
-        }
-
-
-        private void MenuDatabaseOpen_Click(object sender, EventArgs e)
-        {
-            this.openDatabaseDialog.ShowDialog(this);
-        }
-
-        private void MenuDatabaseEdit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuDatabaseClose_Click(object sender, EventArgs e)
-        {
-    //        this.CurrentNetworkDatabase = null;
-            HistoryListener.Write("Database Closed");
-        }
-        #endregion
-
-
-        #region Menu Network
-        private void MenuNetworkNew_Click(object sender, EventArgs e)
-        {
-  /*          if (this.m_networkDatabase == null)
+            if (this.dockMain.ActiveDocument is IWorkplaceDocument)
             {
-                MessageBox.Show("Please import or create a database schema before creating the Network.");
-                return;
+                (this.dockMain.ActiveDocument as IWorkplaceDocument).Save();
             }
+        }
 
-            if (this.CurrentNetworkContainer == null || 
-                (this.CurrentNetworkContainer != null &&
-                MessageBox.Show("Would you like to overwrite your current network?" +
-                                "\nAny unsaved training sessions will be lost",
-                                "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes))
+        private void MenuFileSaveAs_Click(object sender, EventArgs e)
+        {
+            if (this.dockMain.ActiveDocument is IWorkplaceDocument)
             {
-                CreateNetworkDialog creationDlg = new CreateNetworkDialog(m_networkDatabase.Schema);
-                if (creationDlg.ShowDialog(this) == DialogResult.OK)
-                {
-                    this.CurrentNetworkContainer = creationDlg.CreateNetworkContainer();
-                    HistoryListener.Write("Network created!");
-
-                    if (Properties.Settings.Default.main_AutoSwitchToTrainingTab)
-                    {
- //                       this.tabControlSide.TrainerControl.ShowTab();
-                    }
-                }
+                (this.dockMain.ActiveDocument as IWorkplaceDocument).SaveAs();
             }
-   */ 
         }
 
-        private void MenuNetworkSave_Click(object sender, EventArgs e)
+        private void MenuFileSaveAll_Click(object sender, EventArgs e)
         {
-   //         if (this.CurrentNetworkContainer.IsSaved)
-   //             this.networkSave(this.CurrentNetworkContainer.LastSavePath);
-
-      //      else this.saveNetworkDialog.ShowDialog(this);
-        }
-
-        private void MenuNetworkSaveAs_Click(object sender, EventArgs e)
-        {
-            this.saveNetworkDialog.ShowDialog(this);
-        }
-
-        private void MenuNetworkOpen_Click(object sender, EventArgs e)
-        {
-            this.openNetworkDialog.ShowDialog(this);
-        }
-
-        private void MenuNetworkQuery_Click(object sender, EventArgs e)
-        {
-  //          this.tabControlMain.QueryControl.ShowTab();
-        }
-
-        private void MenuNetworkShowWeight_Click(object sender, EventArgs e)
-        {
-   //         new NetworkInspectorDialog(CurrentNetworkContainer).ShowDialog(this);
-        }
-
-        private void MenuNetworkClose_Click(object sender, EventArgs e)
-        {
-    //        this.CurrentNetworkContainer = null;
-            HistoryListener.Write("Network Closed");
-        }
-
-
-        #region Menu Network CodeGenerator
-        private void MenuNetworkCodeGeneratorANSIC_Click(object sender, EventArgs e)
-        {
-   //         new Sinapse.Data.CodeGeneration.CGenerator(this.CurrentNetworkContainer).Save("output.c");
-            System.Diagnostics.Process.Start("output.c");
-        }
-
-        private void MenuNetworkCodeGeneratorCSharp_Click(object sender, EventArgs e)
-        {
-    //        new Sinapse.Data.CodeGeneration.CSharpGenerator(this.CurrentNetworkContainer).Save("output.cs");
-            System.Diagnostics.Process.Start("output.cs");
+            foreach (IWorkplaceDocument doc in this.dockMain.Documents)
+            {
+                doc.Save();
+            }
         }
         #endregion
 
-
-        #endregion
-
-
-        #region Menu Extensions
-        private void MenuExtensionsExcel_Click(object sender, EventArgs e)
-        {
-            
-        }
-        #endregion
 
 
         #region Menu Help
@@ -540,19 +391,10 @@ namespace Sinapse.Forms
             this.networkOpen(openNetworkDialog.FileName);
         }
 
-        private void saveNetworkDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            this.networkSave(saveNetworkDialog.FileName);
-        }
 
         private void openDatabaseDialog_FileOk(object sender, CancelEventArgs e)
         {
             this.databaseOpen(openDatabaseDialog.FileName);
-        }
-
-        private void saveDatabaseDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            this.databaseSave(saveDatabaseDialog.FileName);
         }
 
         private void mruProviderDatabase_MenuItemClicked(string filename)
@@ -586,7 +428,7 @@ namespace Sinapse.Forms
             try
             {
  //               NetworkContainer.Serialize(this.CurrentNetworkContainer, path);
-                this.mruProviderNetwork.Insert(path);
+                this.mruProviderSystem.Insert(path);
                 HistoryListener.Write("Network Saved");
             }
             catch (Exception e)
@@ -644,7 +486,7 @@ namespace Sinapse.Forms
             try
             {
           //      NetworkDatabase.Serialize(this.CurrentNetworkDatabase, path);
-                this.mruProviderDatabase.Insert(path);
+                this.mruProviderDatasource.Insert(path);
                 HistoryListener.Write("Database Saved");
             }
             catch (Exception e)
@@ -752,7 +594,7 @@ namespace Sinapse.Forms
             try
             {
      //           TrainingSession.Serialize(this.CurrentTrainingSession, path);
-                this.mruProviderSession.Insert(path);
+                this.mruProviderTrainingSession.Insert(path);
                 HistoryListener.Write("Training Session Saved");
             }
             catch (Exception e)
@@ -808,16 +650,17 @@ namespace Sinapse.Forms
         }
         #endregion
 
-        private void workplaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Workplace.Active = new Workplace();
-        }
 
+
+
+/*
         private void systemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Sinapse.Documents.NetworkSystemEditor document = new NetworkSystemEditor(new Sinapse.Core.Systems.ActivationNetworkSystem());
             document.Show(this.dockMain, DockState.Document);
         }
+
+        */
 
 
     }

@@ -55,16 +55,19 @@ namespace Sinapse.Forms
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.newWorkplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.workplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileNewWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trainingSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileOpenWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileWizard = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuFileCloseWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileRecentDatabases = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileRecentWorkplaces = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuFilePreferences = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,16 +81,12 @@ namespace Sinapse.Forms
             this.MenuHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
-            this.saveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
-            this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.mruProviderDatabase = new Sinapse.Forms.Controls.MruComponent();
-            this.mruProviderNetwork = new Sinapse.Forms.Controls.MruComponent();
+            this.mruProviderDatasource = new Sinapse.Forms.Controls.MruComponent();
+            this.mruProviderSystem = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderWorkplace = new Sinapse.Forms.Controls.MruComponent();
-            this.mruProviderSession = new Sinapse.Forms.Controls.MruComponent();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.mruProviderTrainingSession = new Sinapse.Forms.Controls.MruComponent();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -96,17 +95,23 @@ namespace Sinapse.Forms
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.btnDatabaseNew = new System.Windows.Forms.ToolStripButton();
             this.btnDatabaseOpen = new System.Windows.Forms.ToolStripButton();
-            this.btnDatabaseSave = new System.Windows.Forms.ToolStripButton();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnSaveAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnNetworkNew = new System.Windows.Forms.ToolStripButton();
-            this.btnNetworkOpen = new System.Windows.Forms.ToolStripButton();
-            this.btnNetworkSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.btnWizard = new System.Windows.Forms.ToolStripButton();
             this.toolStripPanel1 = new System.Windows.Forms.ToolStripPanel();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.openWorkplaceDialog = new System.Windows.Forms.OpenFileDialog();
+            this.MenuFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileSaveAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFilePreferences = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -164,12 +169,17 @@ namespace Sinapse.Forms
             // 
             this.MenuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newWorkplaceToolStripMenuItem,
+            this.openToolStripMenuItem,
             this.MenuFileWizard,
+            this.toolStripSeparator1,
+            this.MenuFileCloseWorkplace,
             this.toolStripSeparator6,
+            this.MenuFileSave,
+            this.MenuFileSaveAs,
+            this.MenuFileSaveAll,
+            this.MenuFileSeparator1,
             this.MenuFileRecentDatabases,
             this.MenuFileRecentWorkplaces,
-            this.MenuFileSeparator1,
-            this.MenuFilePreferences,
             this.MenuFileSeparator2,
             this.MenuFileExit});
             this.MenuFile.Name = "MenuFile";
@@ -179,7 +189,7 @@ namespace Sinapse.Forms
             // newWorkplaceToolStripMenuItem
             // 
             this.newWorkplaceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.workplaceToolStripMenuItem,
+            this.MenuFileNewWorkplace,
             this.systemToolStripMenuItem,
             this.dataSourceToolStripMenuItem,
             this.trainingSessionToolStripMenuItem});
@@ -187,31 +197,48 @@ namespace Sinapse.Forms
             this.newWorkplaceToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.newWorkplaceToolStripMenuItem.Text = "New";
             // 
-            // workplaceToolStripMenuItem
+            // MenuFileNewWorkplace
             // 
-            this.workplaceToolStripMenuItem.Name = "workplaceToolStripMenuItem";
-            this.workplaceToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.workplaceToolStripMenuItem.Text = "Workplace";
-            this.workplaceToolStripMenuItem.Click += new System.EventHandler(this.workplaceToolStripMenuItem_Click);
+            this.MenuFileNewWorkplace.Name = "MenuFileNewWorkplace";
+            this.MenuFileNewWorkplace.Size = new System.Drawing.Size(135, 22);
+            this.MenuFileNewWorkplace.Text = "Workplace";
+            this.MenuFileNewWorkplace.Click += new System.EventHandler(this.MenuFileNewWorkplace_Click);
             // 
             // systemToolStripMenuItem
             // 
+            this.systemToolStripMenuItem.Enabled = false;
             this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
             this.systemToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.systemToolStripMenuItem.Text = "System";
-            this.systemToolStripMenuItem.Click += new System.EventHandler(this.systemToolStripMenuItem_Click);
             // 
             // dataSourceToolStripMenuItem
             // 
+            this.dataSourceToolStripMenuItem.Enabled = false;
             this.dataSourceToolStripMenuItem.Name = "dataSourceToolStripMenuItem";
             this.dataSourceToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.dataSourceToolStripMenuItem.Text = "Source";
             // 
             // trainingSessionToolStripMenuItem
             // 
+            this.trainingSessionToolStripMenuItem.Enabled = false;
             this.trainingSessionToolStripMenuItem.Name = "trainingSessionToolStripMenuItem";
             this.trainingSessionToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.trainingSessionToolStripMenuItem.Text = "Session";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuFileOpenWorkplace});
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // MenuFileOpenWorkplace
+            // 
+            this.MenuFileOpenWorkplace.Name = "MenuFileOpenWorkplace";
+            this.MenuFileOpenWorkplace.Size = new System.Drawing.Size(135, 22);
+            this.MenuFileOpenWorkplace.Text = "Workplace";
+            this.MenuFileOpenWorkplace.Click += new System.EventHandler(this.MenuFileOpenWorkplace_Click);
             // 
             // MenuFileWizard
             // 
@@ -219,12 +246,28 @@ namespace Sinapse.Forms
             this.MenuFileWizard.Name = "MenuFileWizard";
             this.MenuFileWizard.Size = new System.Drawing.Size(177, 22);
             this.MenuFileWizard.Text = "Run &Wizard...";
-            this.MenuFileWizard.Click += new System.EventHandler(this.MenuFileWizard_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
+            // 
+            // MenuFileCloseWorkplace
+            // 
+            this.MenuFileCloseWorkplace.Name = "MenuFileCloseWorkplace";
+            this.MenuFileCloseWorkplace.Size = new System.Drawing.Size(177, 22);
+            this.MenuFileCloseWorkplace.Text = "Close Workplace";
+            this.MenuFileCloseWorkplace.Click += new System.EventHandler(this.MenuFileCloseWorkplace_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(174, 6);
+            // 
+            // MenuFileSeparator1
+            // 
+            this.MenuFileSeparator1.Name = "MenuFileSeparator1";
+            this.MenuFileSeparator1.Size = new System.Drawing.Size(174, 6);
             // 
             // MenuFileRecentDatabases
             // 
@@ -237,18 +280,6 @@ namespace Sinapse.Forms
             this.MenuFileRecentWorkplaces.Name = "MenuFileRecentWorkplaces";
             this.MenuFileRecentWorkplaces.Size = new System.Drawing.Size(177, 22);
             this.MenuFileRecentWorkplaces.Text = "Recent &Workplaces";
-            // 
-            // MenuFileSeparator1
-            // 
-            this.MenuFileSeparator1.Name = "MenuFileSeparator1";
-            this.MenuFileSeparator1.Size = new System.Drawing.Size(174, 6);
-            // 
-            // MenuFilePreferences
-            // 
-            this.MenuFilePreferences.Image = global::Sinapse.Properties.Resources.configure_16;
-            this.MenuFilePreferences.Name = "MenuFilePreferences";
-            this.MenuFilePreferences.Size = new System.Drawing.Size(177, 22);
-            this.MenuFilePreferences.Text = "Preferences";
             // 
             // MenuFileSeparator2
             // 
@@ -264,6 +295,13 @@ namespace Sinapse.Forms
             // 
             // editToolStripMenuItem
             // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.MenuFilePreferences});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -282,7 +320,6 @@ namespace Sinapse.Forms
             this.MenuExtensionsExcel.Name = "MenuExtensionsExcel";
             this.MenuExtensionsExcel.Size = new System.Drawing.Size(71, 20);
             this.MenuExtensionsExcel.Text = "Extensions";
-            this.MenuExtensionsExcel.Click += new System.EventHandler(this.MenuExtensionsExcel_Click);
             // 
             // excelToolStripMenuItem
             // 
@@ -344,20 +381,6 @@ namespace Sinapse.Forms
             this.openNetworkDialog.Title = "Open Network Object";
             this.openNetworkDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openNetworkDialog_FileOk);
             // 
-            // saveNetworkDialog
-            // 
-            this.saveNetworkDialog.DefaultExt = "ann";
-            this.saveNetworkDialog.Filter = "Network Objects (*.ann)|*.ann|All Files (*.*)|*.*";
-            this.saveNetworkDialog.Title = "Save Network Object";
-            this.saveNetworkDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveNetworkDialog_FileOk);
-            // 
-            // saveDatabaseDialog
-            // 
-            this.saveDatabaseDialog.DefaultExt = "sdo";
-            this.saveDatabaseDialog.Filter = "Sinapse Database Objects (*.sdo)|*.sdo|All Files (*.*)|*.*";
-            this.saveDatabaseDialog.Title = "Save Database";
-            this.saveDatabaseDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveDatabaseDialog_FileOk);
-            // 
             // openDatabaseDialog
             // 
             this.openDatabaseDialog.DefaultExt = "sdo";
@@ -365,29 +388,24 @@ namespace Sinapse.Forms
             this.openDatabaseDialog.Title = "Open Database";
             this.openDatabaseDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openDatabaseDialog_FileOk);
             // 
-            // browseWorkplaceDialog
-            // 
-            this.browseWorkplaceDialog.Description = "Select the workplace directory";
-            this.browseWorkplaceDialog.RootFolder = System.Environment.SpecialFolder.Personal;
-            // 
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Sinapse Neural Networking Tool";
             this.notifyIcon.Visible = true;
             // 
-            // mruProviderDatabase
+            // mruProviderDatasource
             // 
-            this.mruProviderDatabase.Files = global::Sinapse.Properties.Settings.Default.history_Database;
-            this.mruProviderDatabase.KeyMenuItem = this.MenuFileRecentDatabases;
-            this.mruProviderDatabase.MaxPathLength = 96;
-            this.mruProviderDatabase.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
+            this.mruProviderDatasource.Files = global::Sinapse.Properties.Settings.Default.history_Database;
+            this.mruProviderDatasource.KeyMenuItem = this.MenuFileRecentDatabases;
+            this.mruProviderDatasource.MaxPathLength = 96;
+            this.mruProviderDatasource.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderDatabase_MenuItemClicked);
             // 
-            // mruProviderNetwork
+            // mruProviderSystem
             // 
-            this.mruProviderNetwork.Files = global::Sinapse.Properties.Settings.Default.history_Networks;
-            this.mruProviderNetwork.MaxPathLength = 96;
-            this.mruProviderNetwork.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
+            this.mruProviderSystem.Files = global::Sinapse.Properties.Settings.Default.history_Networks;
+            this.mruProviderSystem.MaxPathLength = 96;
+            this.mruProviderSystem.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderNetwork_MenuItemClicked);
             // 
             // mruProviderWorkplace
             // 
@@ -396,17 +414,11 @@ namespace Sinapse.Forms
             this.mruProviderWorkplace.MaxPathLength = 96;
             this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
             // 
-            // mruProviderSession
+            // mruProviderTrainingSession
             // 
-            this.mruProviderSession.Files = global::Sinapse.Properties.Settings.Default.history_Sessions;
-            this.mruProviderSession.MaxPathLength = 96;
-            this.mruProviderSession.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
-            // 
-            // imageList
-            // 
-            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.mruProviderTrainingSession.Files = global::Sinapse.Properties.Settings.Default.history_Sessions;
+            this.mruProviderTrainingSession.MaxPathLength = 96;
+            this.mruProviderTrainingSession.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderSession_MenuItemClicked);
             // 
             // BottomToolStripPanel
             // 
@@ -451,18 +463,14 @@ namespace Sinapse.Forms
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnDatabaseNew,
             this.btnDatabaseOpen,
-            this.btnDatabaseSave,
+            this.btnSave,
             this.btnSaveAll,
             this.toolStripSeparator8,
-            this.btnNetworkNew,
-            this.btnNetworkOpen,
-            this.btnNetworkSave,
-            this.toolStripSeparator7,
             this.btnWizard});
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(133, 25);
             this.toolStripMain.TabIndex = 19;
             // 
             // btnDatabaseNew
@@ -483,14 +491,15 @@ namespace Sinapse.Forms
             this.btnDatabaseOpen.Size = new System.Drawing.Size(23, 22);
             this.btnDatabaseOpen.Text = "Open Database";
             // 
-            // btnDatabaseSave
+            // btnSave
             // 
-            this.btnDatabaseSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDatabaseSave.Image = global::Sinapse.Properties.Resources.file_save;
-            this.btnDatabaseSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDatabaseSave.Name = "btnDatabaseSave";
-            this.btnDatabaseSave.Size = new System.Drawing.Size(23, 22);
-            this.btnDatabaseSave.Text = "Save Database";
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = global::Sinapse.Properties.Resources.file_save;
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(23, 22);
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.MenuFileSave_Click);
             // 
             // btnSaveAll
             // 
@@ -505,38 +514,6 @@ namespace Sinapse.Forms
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnNetworkNew
-            // 
-            this.btnNetworkNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNetworkNew.Image = global::Sinapse.Properties.Resources.network_16;
-            this.btnNetworkNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNetworkNew.Name = "btnNetworkNew";
-            this.btnNetworkNew.Size = new System.Drawing.Size(23, 22);
-            this.btnNetworkNew.Text = "New Network";
-            // 
-            // btnNetworkOpen
-            // 
-            this.btnNetworkOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNetworkOpen.Image = global::Sinapse.Properties.Resources.file_import;
-            this.btnNetworkOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNetworkOpen.Name = "btnNetworkOpen";
-            this.btnNetworkOpen.Size = new System.Drawing.Size(23, 22);
-            this.btnNetworkOpen.Text = "Open Network";
-            // 
-            // btnNetworkSave
-            // 
-            this.btnNetworkSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNetworkSave.Image = global::Sinapse.Properties.Resources.file_export;
-            this.btnNetworkSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNetworkSave.Name = "btnNetworkSave";
-            this.btnNetworkSave.Size = new System.Drawing.Size(23, 22);
-            this.btnNetworkSave.Text = "Save Network";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
             // btnWizard
             // 
@@ -573,6 +550,69 @@ namespace Sinapse.Forms
             this.statusStrip1.Size = new System.Drawing.Size(892, 22);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // openWorkplaceDialog
+            // 
+            this.openWorkplaceDialog.DefaultExt = "swp";
+            this.openWorkplaceDialog.FileName = "Workplace";
+            this.openWorkplaceDialog.Filter = "Sinapse Workplace (*.swp)|*.swp|All files (*.*)|*.*";
+            // 
+            // MenuFileSave
+            // 
+            this.MenuFileSave.Name = "MenuFileSave";
+            this.MenuFileSave.Size = new System.Drawing.Size(177, 22);
+            this.MenuFileSave.Text = "Save";
+            this.MenuFileSave.Click += new System.EventHandler(this.MenuFileSave_Click);
+            // 
+            // MenuFileSaveAll
+            // 
+            this.MenuFileSaveAll.Name = "MenuFileSaveAll";
+            this.MenuFileSaveAll.Size = new System.Drawing.Size(177, 22);
+            this.MenuFileSaveAll.Text = "Save All";
+            this.MenuFileSaveAll.Click += new System.EventHandler(this.MenuFileSaveAll_Click);
+            // 
+            // MenuFilePreferences
+            // 
+            this.MenuFilePreferences.Image = global::Sinapse.Properties.Resources.configure_16;
+            this.MenuFilePreferences.Name = "MenuFilePreferences";
+            this.MenuFilePreferences.Size = new System.Drawing.Size(152, 22);
+            this.MenuFilePreferences.Text = "Preferences";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // MenuFileSaveAs
+            // 
+            this.MenuFileSaveAs.Name = "MenuFileSaveAs";
+            this.MenuFileSaveAs.Size = new System.Drawing.Size(177, 22);
+            this.MenuFileSaveAs.Text = "Save As...";
+            this.MenuFileSaveAs.Click += new System.EventHandler(this.MenuFileSaveAs_Click);
             // 
             // MainForm
             // 
@@ -618,7 +658,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripSeparator MenuHelpSeparator;
         private System.Windows.Forms.ToolStripMenuItem MenuHelpAbout;
         private System.Windows.Forms.OpenFileDialog openNetworkDialog;
-        private System.Windows.Forms.SaveFileDialog saveNetworkDialog;
         private System.Windows.Forms.ToolStripMenuItem MenuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuFileExit;
         private System.Windows.Forms.ToolStripMenuItem MenuFileRecentDatabases;
@@ -626,22 +665,18 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripSeparator MenuFileSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuFileWizard;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.SaveFileDialog saveDatabaseDialog;
         private System.Windows.Forms.OpenFileDialog openDatabaseDialog;
-        private System.Windows.Forms.FolderBrowserDialog browseWorkplaceDialog;
         private System.Windows.Forms.ToolStripSeparator MenuFileSeparator2;
-        private Sinapse.Forms.Controls.MruComponent mruProviderDatabase;
-        private Sinapse.Forms.Controls.MruComponent mruProviderNetwork;
+        private Sinapse.Forms.Controls.MruComponent mruProviderDatasource;
+        private Sinapse.Forms.Controls.MruComponent mruProviderSystem;
         private Sinapse.Forms.Controls.MruComponent mruProviderWorkplace;
-        private Sinapse.Forms.Controls.MruComponent mruProviderSession;
+        private Sinapse.Forms.Controls.MruComponent mruProviderTrainingSession;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Label lbVersion;
-        private System.Windows.Forms.ToolStripMenuItem MenuFilePreferences;
         private System.Windows.Forms.ToolStripMenuItem MenuExtensionsExcel;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
-        private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripMenuItem newWorkplaceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem workplaceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileNewWorkplace;
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainingSessionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataSourceToolStripMenuItem;
@@ -653,18 +688,28 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStrip toolStripMain;
         private System.Windows.Forms.ToolStripButton btnDatabaseNew;
         private System.Windows.Forms.ToolStripButton btnDatabaseOpen;
-        private System.Windows.Forms.ToolStripButton btnDatabaseSave;
+        private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnSaveAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripButton btnNetworkNew;
-        private System.Windows.Forms.ToolStripButton btnNetworkOpen;
-        private System.Windows.Forms.ToolStripButton btnNetworkSave;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton btnWizard;
         private System.Windows.Forms.ToolStripPanel toolStripPanel1;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileOpenWorkplace;
+        private System.Windows.Forms.OpenFileDialog openWorkplaceDialog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileCloseWorkplace;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileSave;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileSaveAs;
+        private System.Windows.Forms.ToolStripMenuItem MenuFileSaveAll;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem MenuFilePreferences;
     }
 }
