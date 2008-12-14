@@ -52,7 +52,7 @@ namespace Sinapse.Forms
         private HistoryWindow windowHistory;
         private TaskWindow windowTask;
 
-        private Dictionary<ISinapseComponent, DockContent> openDocuments;
+        private Dictionary<WorkplaceItem, DockContent> openDocuments;
 
 
         //---------------------------------------------
@@ -88,7 +88,7 @@ namespace Sinapse.Forms
             this.ResumeLayout(true);
 
 
-            this.openDocuments = new Dictionary<ISinapseComponent, DockContent>();
+            this.openDocuments = new Dictionary<WorkplaceItem, DockContent>();
         }
 
 
@@ -114,6 +114,10 @@ namespace Sinapse.Forms
                     this.WindowState = Properties.Settings.Default.main_WindowState;
                 }
 
+                // Fix ToolStrip
+                ToolStripManager.LoadSettings(this);
+                
+
                 // Show Start Page (if configured to do so)
                 if (Properties.Settings.Default.behaviour_ShowStartPage)
                 {
@@ -125,21 +129,12 @@ namespace Sinapse.Forms
                 Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
 
 
+                Workplace_ActiveWorkplaceChanged(null, EventArgs.Empty);
                 HistoryListener.Write("Waiting data");
             }
         }
 
-        private void Workplace_ActiveWorkplaceChanged(object sender, EventArgs e)
-        {
-            if (Workplace.Active == null)
-            {
-                MenuWorkplace.Visible = false;
-            }
-            else
-            {
-                MenuWorkplace.Visible = true;
-            }
-        }
+
 
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -147,6 +142,18 @@ namespace Sinapse.Forms
 
             HistoryListener.Write("Exiting...");
 
+            // Close All Documents
+            foreach (IDockContent content in this.dockMain.Documents)
+            {
+                if (content is IWorkplaceDocument)
+                    (content as Form).Close();
+            }
+
+            // Close Workspace
+            Workplace.Active = null;
+
+            // Save ToolStripPanels
+            ToolStripManager.SaveSettings(this);
 
             // Save settings before closing
             Properties.Settings.Default.main_FirstLoad = false;
@@ -166,7 +173,36 @@ namespace Sinapse.Forms
         #endregion
 
 
+
+
+        #region Workplace Events
+        private void Workplace_ActiveWorkplaceChanged(object sender, EventArgs e)
+        {
+            if (Workplace.Active == null)
+            {
+                MenuWorkplace.Visible = false;
+            }
+            else
+            {
+                MenuWorkplace.Visible = true;
+                Workplace.Active.Closing += new EventHandler(Workplace_Closing);
+                //Workplace.Active.Closed += new EventHandler(Workplace_ActiveWorkplaceClosed);
+            }
+        }
+
+        private void Workplace_Closing(object sender, EventArgs e)
+        {
+            if (Workplace.Active.HasChanges)
+                Workplace.Active.Save();
+        }
+
+
+        #endregion
+
+
+
         //---------------------------------------------
+
 
         #region Window Workplace Events
         private void windowWorkplace_GotFocus(object sender, EventArgs e)
@@ -185,48 +221,61 @@ namespace Sinapse.Forms
 
         private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
-            // A WorkplaceDocument has been double clicked
-            // TODO: check if document is already open
+            // A WorkplaceItem has been double clicked
+            WorkplaceItem item = e.WorkplaceItem;
 
-            ISinapseComponent component;
 
-            if (e.WorkplaceContent.Open(out component))
+            // Check if the item isn't already open
+            if (this.openDocuments.ContainsKey(item))
             {
-                // The component was open succesfully
-                if (e.WorkplaceContent.Type == typeof(TableDataSource))
-                {
-                    TableDataSourceEditor editor = new TableDataSourceEditor(component as TableDataSource);
-                    editor.Show(this.dockMain, DockState.Document);
-                }
-                else if (e.WorkplaceContent.Type == typeof(ActivationNetworkSystem))
-                {
-
-                    NetworkSystemEditor editor = new NetworkSystemEditor(component as ActivationNetworkSystem);
-                    editor.Show(this.dockMain, DockState.Document);
-                }
-                else if (e.WorkplaceContent.Type == typeof(BackpropagationTrainingSession))
-                {
-                    BackpropagationTrainingSession session = component as BackpropagationTrainingSession;
-                    TrainingSessionEditor editor = new TrainingSessionEditor(session);
-                    editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
-                    editor.ControllerWindow.Show(this.dockMain);
-                    
-
-                    editor.ControllerWindow.DockHandler.FloatPane.DockTo(this.dockMain.DockWindows[DockState.DockRight]);
-                }
+                // Yes, it is, just activate the control
+                this.openDocuments[item].Show();
             }
             else
             {
-                // The component was already open
-                this.openDocuments[component].Show();
-            }
+                // The item must be open
+                ISinapseComponent component = item.Open();
 
+                // Verify which editor to open
+                if (item.Type == typeof(TableDataSource))
+                {
+                    TableDataSourceEditor editor = new TableDataSourceEditor(component as TableDataSource);
+                    editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
+                    editor.Item = item;
+                    editor.Show(this.dockMain, DockState.Document);
+                    openDocuments.Add(item, editor);
+                }
+                else if (item.Type == typeof(ActivationNetworkSystem))
+                {
+                    NetworkSystemEditor editor = new NetworkSystemEditor(component as ActivationNetworkSystem);
+                    editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
+                    editor.Item = item;
+                    editor.Show(this.dockMain, DockState.Document);
+                    openDocuments.Add(item, editor);
+                }
+                else if (item.Type == typeof(BackpropagationTrainingSession))
+                {
+                    TrainingSessionEditor editor = new TrainingSessionEditor(component as BackpropagationTrainingSession);
+                    editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
+                    editor.Item = item;
+                    editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
+                    editor.ControllerWindow.Show(this.dockMain);
+                    editor.ControllerWindow.DockHandler.FloatPane.DockTo(this.dockMain.DockWindows[DockState.DockRight]);
+
+                    openDocuments.Add(item, editor);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unsupported type");
+                }
+            }
+        }
+
+        void editor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            openDocuments.Remove((sender as IWorkplaceDocument).Item);
         }
         #endregion
-
-
-        //---------------------------------------------
-
 
 
         //---------------------------------------------
@@ -243,6 +292,7 @@ namespace Sinapse.Forms
             {
                 Workplace.Active = dlg.Workplace;
                 Workplace.Active.Save();
+                mruProviderWorkplace.Insert(dlg.Workplace.FullPath);
             }
         }
 
@@ -254,6 +304,7 @@ namespace Sinapse.Forms
             if (openWorkplaceDialog.ShowDialog(this) == DialogResult.OK)
             {
                 Workplace.Active = Workplace.Open(openWorkplaceDialog.FileName);
+                mruProviderWorkplace.Insert(openWorkplaceDialog.FileName);
             }
         }
 
@@ -262,12 +313,6 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileCloseWorkplace_Click(object sender, EventArgs e)
         {
-            if (Workplace.Active.HasChanges)
-            {
-                DialogResult r = MessageBox.Show(
-                    "The Workplace has unsaved changes. Quit anyway?", "Unsaved changes",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-            }
             Workplace.Active = null;
         }
 
@@ -302,9 +347,10 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileSaveAll_Click(object sender, EventArgs e)
         {
-            foreach (IWorkplaceDocument doc in this.dockMain.Documents)
+            foreach (IDockContent content in this.dockMain.Documents)
             {
-                doc.Save();
+                if (content is IWorkplaceDocument)
+                    (content as IWorkplaceDocument).Save();
             }
 
             Workplace.Active.Save();
@@ -341,7 +387,7 @@ namespace Sinapse.Forms
         #region Most Recently Used Lists Events
         private void mruProviderWorkplace_MenuItemClicked(string filename)
         {
-         //   this.workplaceOpen(filename);
+            Workplace.Active = Workplace.Open(filename);
         }
 
         private void mruProviderDocuments_MenuItemClicked(string filename)
@@ -349,15 +395,6 @@ namespace Sinapse.Forms
          //   this.sessionOpen(filename);
         }
         #endregion
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
 
 
 

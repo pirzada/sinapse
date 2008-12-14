@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Runtime.Serialization;
 
 using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
@@ -44,10 +45,17 @@ namespace Sinapse.Core
             {
                 if (value != active)
                 {
+                    if (value == null)
+                        active.OnClosing(EventArgs.Empty);
+
                     active = value;
+
+                    if (value == null)
+                        active.OnClosed(EventArgs.Empty);
 
                     if (ActiveWorkplaceChanged != null)
                         ActiveWorkplaceChanged.Invoke(value, EventArgs.Empty);
+
                 }
             }
         }
@@ -56,12 +64,24 @@ namespace Sinapse.Core
         #endregion
 
 
+
         private SerializableObject<Workplace> serializableObject;
         private SinapseComponent workplaceComponent;
 
         private WorkplaceItemCollection adaptiveSystems;
         private WorkplaceItemCollection dataSources;
         private WorkplaceItemCollection trainingSessions;
+
+
+        [field: NonSerialized]
+        public event EventHandler Changed;
+
+        [field: NonSerialized]
+        public event EventHandler Closed;
+
+        [field: NonSerialized]
+        public event EventHandler Closing;
+
 
 
         public Workplace(string name, string location)
@@ -81,11 +101,29 @@ namespace Sinapse.Core
             dataSources = new WorkplaceItemCollection(this);
             adaptiveSystems = new WorkplaceItemCollection(this);
             trainingSessions = new WorkplaceItemCollection(this);
+
+            dataSources.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
+            adaptiveSystems.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
+            trainingSessions.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
         }
 
+/*
+        [OnDeserialized]
+        private void onDeserializing(StreamingContext context)
+        {
+            dataSources.Owner = this;
+            adaptiveSystems.Owner = this;
+            trainingSessions.Owner = this;
+        }
+
+        [OnSerializing]
+        private void onSerializing(StreamingContext context)
+        {
+            
+        }
+*/
 
 
-        #region Properties
         public WorkplaceItemCollection AdaptiveSystems
         {
             get { return adaptiveSystems; }
@@ -99,10 +137,25 @@ namespace Sinapse.Core
         {
             get { return trainingSessions; }
         }
-        #endregion
 
 
 
+        void workplaceItemsListChanged(object sender, ListChangedEventArgs e)
+        {
+            HasChanges = true;
+        }
+
+        protected void OnClosing(EventArgs e)
+        {
+            if (Closing != null)
+                Closing.Invoke(this, e);
+        }
+
+        protected void OnClosed(EventArgs e)
+        {
+            if (Closed != null)
+                Closed.Invoke(this, e);
+        }
 
 
         #region IWorkplaceComponent Members
@@ -130,10 +183,6 @@ namespace Sinapse.Core
             get { return workplaceComponent.HasChanges; }
             protected set { workplaceComponent.HasChanges = value; }
         }
-
-        public event EventHandler Changed;
-        public event EventHandler Closed;
-
         #endregion
 
 

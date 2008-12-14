@@ -83,7 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Training\TrainingThreadParameters.cs" />
     <Compile Include="Workplace.cs" />
-    <Compile Include="WorkplaceContent.cs" />
+    <Compile Include="WorkplaceItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

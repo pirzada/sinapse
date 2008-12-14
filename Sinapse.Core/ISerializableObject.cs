@@ -158,7 +158,7 @@ namespace Sinapse.Core
 
             try
             {
-                this.filename = Path.GetFileNameWithoutExtension(path);
+                this.filename = Path.GetFileName(path);
                 this.filepath = Path.GetDirectoryName(path);
 
                 //string fullpath = Path.Combine(path, name + "." + extension);
@@ -227,7 +227,7 @@ namespace Sinapse.Core
                 obj = (T)binaryFormatter.Deserialize(gzipStream);
 
                 obj.FilePath = Path.GetDirectoryName(path);
-                obj.FileName = Path.GetFileNameWithoutExtension(path);
+                obj.FileName = Path.GetFileName(path);
 //                obj.HasChanges = false;
             }
             catch (FileNotFoundException e)

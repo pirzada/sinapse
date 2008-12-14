@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
+using Sinapse.Core;
 using Sinapse.Core.Sources;
 using Sinapse.Forms.Dialogs;
 
@@ -16,6 +17,7 @@ namespace Sinapse.Windows.Documents
     public partial class TableDataSourceEditor : DockContent, IWorkplaceDocument
     {
 
+        private WorkplaceItem item;
         private TableDataSource tableSource;
         private DataSourceSet currentSet;
 
@@ -193,6 +195,11 @@ namespace Sinapse.Windows.Documents
             get { throw new Exception("The method or operation is not implemented."); }
         }
 
+        public WorkplaceItem Item
+        {
+            get { return item; }
+            set { item = value; }
+        }
         #endregion
 
 

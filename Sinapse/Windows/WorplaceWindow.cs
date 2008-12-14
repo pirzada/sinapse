@@ -70,6 +70,7 @@ namespace Sinapse.Windows
 
 
 
+
         #region Properties
         /// <summary>
         ///   Gets the current selected WorkplaceContent on the Workplace Window
@@ -104,7 +105,15 @@ namespace Sinapse.Windows
 
 
 
+
         #region Form Events
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            Workplace_ActiveWorkplaceChanged(null, EventArgs.Empty);
+        }
+
         private void treeViewWorkplace_DoubleClick(object sender, EventArgs e)
         {
             object tag = this.treeViewWorkplace.SelectedNode.Tag;
@@ -113,7 +122,13 @@ namespace Sinapse.Windows
                 this.OnWorkplaceContentDoubleClicked(
                     new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceItem));
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.populateTreeView();
+        }
         #endregion
+
 
 
 
@@ -123,6 +138,8 @@ namespace Sinapse.Windows
             // If we have an active workplace,
             if (Workplace.Active != null)
             {
+                this.Enabled = true;
+
                 // Lets hide the "Nothing to show" label and populate the tree view
                 this.lbNothingToShow.Hide();
                 this.treeViewWorkplace.Enabled = true;
@@ -140,6 +157,7 @@ namespace Sinapse.Windows
                 this.treeViewWorkplace.Nodes.Clear();
                 this.treeViewWorkplace.Enabled = false;
                 this.lbNothingToShow.Show();
+                this.Enabled = false;
             }
         }
 
@@ -153,12 +171,16 @@ namespace Sinapse.Windows
 
 
 
+
         #region TreeView Methods
         private void populateTreeView()
         {
             this.treeViewWorkplace.SuspendLayout();
             this.treeViewWorkplace.Nodes.Clear();
             TreeNode node;
+
+            rootWorkplace.Text = Workplace.Active.Name;
+            rootWorkplace.Tag = Workplace.Active;
 
             foreach (WorkplaceItem content in Workplace.Active.AdaptiveSystems)
             {
@@ -230,6 +252,8 @@ namespace Sinapse.Windows
         }
         #endregion
 
+
+
     }
 
 
@@ -242,7 +266,7 @@ namespace Sinapse.Windows
     {
         private WorkplaceItem workplaceContent;
 
-        public WorkplaceItem WorkplaceContent
+        public WorkplaceItem WorkplaceItem
         {
             get { return workplaceContent; }
             set { workplaceContent = value; }
