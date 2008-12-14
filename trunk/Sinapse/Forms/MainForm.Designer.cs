@@ -542,6 +542,7 @@ namespace Sinapse.Forms
             this.addAdaptiveSystemToolStripMenuItem.Name = "addAdaptiveSystemToolStripMenuItem";
             this.addAdaptiveSystemToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.addAdaptiveSystemToolStripMenuItem.Text = "Add Adaptive System...";
+            this.addAdaptiveSystemToolStripMenuItem.Click += new System.EventHandler(this.MenuWorkplaceAddAdaptiveSystem_Click);
             // 
             // MenuWorkplaceAddDataSource
             // 
@@ -767,7 +768,7 @@ namespace Sinapse.Forms
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(239, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
             this.toolStripMain.TabIndex = 19;
             // 
             // btnMenuNewWorkplace

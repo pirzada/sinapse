@@ -176,12 +176,17 @@ namespace Sinapse.Windows
         private void populateTreeView()
         {
             this.treeViewWorkplace.SuspendLayout();
-            this.treeViewWorkplace.Nodes.Clear();
-            TreeNode node;
 
             rootWorkplace.Text = Workplace.Active.Name;
             rootWorkplace.Tag = Workplace.Active;
 
+            treeViewWorkplace.Nodes.Clear();
+            nodeSources.Nodes.Clear();
+            nodeSystems.Nodes.Clear();
+            nodeTraining.Nodes.Clear();
+
+
+            TreeNode node;
             foreach (WorkplaceItem content in Workplace.Active.AdaptiveSystems)
             {
                 node = new TreeNode(content.FileName, 1, 1);

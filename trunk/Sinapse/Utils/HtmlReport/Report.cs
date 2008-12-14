@@ -37,7 +37,7 @@ using System.Text;
 using System.IO;
 
 
-namespace Sinapse.Utils.HtmlReport
+namespace Sinapse.Tools.HtmlReport
 {
 
     /// <summary>

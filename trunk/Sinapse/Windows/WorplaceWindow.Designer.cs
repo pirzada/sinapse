@@ -65,7 +65,7 @@ namespace Sinapse.Windows
             this.treeViewWorkplace.Location = new System.Drawing.Point(0, 25);
             this.treeViewWorkplace.Name = "treeViewWorkplace";
             this.treeViewWorkplace.SelectedImageIndex = 0;
-            this.treeViewWorkplace.Size = new System.Drawing.Size(273, 357);
+            this.treeViewWorkplace.Size = new System.Drawing.Size(221, 357);
             this.treeViewWorkplace.TabIndex = 0;
             this.treeViewWorkplace.DoubleClick += new System.EventHandler(this.treeViewWorkplace_DoubleClick);
             // 
@@ -85,7 +85,7 @@ namespace Sinapse.Windows
             this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(273, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(221, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -167,7 +167,7 @@ namespace Sinapse.Windows
             this.lbNothingToShow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbNothingToShow.Location = new System.Drawing.Point(0, 25);
             this.lbNothingToShow.Name = "lbNothingToShow";
-            this.lbNothingToShow.Size = new System.Drawing.Size(273, 357);
+            this.lbNothingToShow.Size = new System.Drawing.Size(221, 357);
             this.lbNothingToShow.TabIndex = 2;
             this.lbNothingToShow.Text = "No Workplace loaded. Please click the \'New\' menu  and select \'Workplace\' to begin" +
                 ".";
@@ -229,13 +229,13 @@ namespace Sinapse.Windows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 382);
+            this.ClientSize = new System.Drawing.Size(221, 382);
             this.Controls.Add(this.lbNothingToShow);
             this.Controls.Add(this.treeViewWorkplace);
             this.Controls.Add(this.toolStrip1);
             this.Name = "WorkplaceWindow";
-            this.TabText = "Workplace Explorer";
-            this.Text = "Workplace Explorer";
+            this.TabText = "Workplace";
+            this.Text = "Workplace";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.menuSource.ResumeLayout(false);
