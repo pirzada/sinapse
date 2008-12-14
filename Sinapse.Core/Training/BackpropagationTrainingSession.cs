@@ -429,6 +429,12 @@ namespace Sinapse.Core.Training
             add { serializableObject.FileChanged += value; }
             remove { serializableObject.FileChanged -= value; }
         }
+
+        public event EventHandler FileSaved
+        {
+            add { serializableObject.FileSaved += value; }
+            remove { serializableObject.FileSaved -= value; }
+        }
         #endregion
 
 

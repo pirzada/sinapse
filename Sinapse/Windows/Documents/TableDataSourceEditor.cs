@@ -12,6 +12,8 @@ using Sinapse.Core;
 using Sinapse.Core.Sources;
 using Sinapse.Forms.Dialogs;
 
+using Sinapse.Windows.DataSourceEditor;
+
 namespace Sinapse.Windows.Documents
 {
     public partial class TableDataSourceEditor : DockContent, IWorkplaceDocument
@@ -19,24 +21,43 @@ namespace Sinapse.Windows.Documents
 
         private WorkplaceItem item;
         private TableDataSource tableSource;
-        private DataSourceSet currentSet;
+
+        private TableEditor wndTableEditor;
+        private SourceOverview wndSourceOverview;
+        private ColumnSpecification wndColumnSpecification;
+        
 
 
         public TableDataSourceEditor(TableDataSource source)
         {
-            tableSource = source;
-
             InitializeComponent();
 
-            tableSource.Changed += new EventHandler(tableSource_Changed);
+            this.TableSource = source;
         }
 
+
+        public TableDataSource TableSource
+        {
+            get { return tableSource; }
+            protected set
+            {
+                tableSource = value;
+                
+                if (value != null)
+                {
+                    tableSource.Changed += tableSource_Changed;
+                    tableSource.DataChanged += tableSource_Changed;
+                    tableSource.FileSaved += tableSource_Changed;
+                    updateCaption();
+                }
+            }
+        }
 
 
         #region Table Data Source Events
         private void tableSource_Changed(object sender, EventArgs e)
         {
-            updateName();
+            updateCaption();
         }
         #endregion
 
@@ -46,123 +67,72 @@ namespace Sinapse.Windows.Documents
         #region Form Events
         private void TableDataSourceEditor_Load(object sender, EventArgs e)
         {
-            updateName();
-            updateDataBindings();
+            this.SuspendLayout();
+            this.wndColumnSpecification = new ColumnSpecification();
+            this.wndColumnSpecification.TableSource = this.tableSource;
+            this.wndColumnSpecification.Show(this.dockPanel, DockState.Document);
+
+            this.wndSourceOverview = new SourceOverview();
+            this.wndSourceOverview.DataSource = tableSource;
+            this.wndSourceOverview.Show(this.dockPanel, DockState.Document);
+
+            this.wndTableEditor = new TableEditor();
+            this.wndTableEditor.TableSource = tableSource;
+            this.wndTableEditor.Show(this.dockPanel, DockState.Document);
+            this.ResumeLayout(true);
+            
         }
 
-        private void btnWizard_Click(object sender, EventArgs e)
-        {
-            ImportWizard wizard = new ImportWizard();
-            if (wizard.ShowDialog(this) == DialogResult.OK)
-            {
-                tableSource.Import(wizard.GetTable(), wizard.GetColumns());
-            }
 
-        }
-
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            if (importDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                DataTable import = Sinapse.Databases.Csv.
-                    CsvParser.Parse(importDialog.FileName, Encoding.Default,
-                    true, Sinapse.Databases.Csv.CsvDelimiter.Tabulation);
-                tableSource.Import(import);
-            }
-        }
         #endregion
 
 
 
 
         #region GUI Update
-        private void updateName()
+        private void updateCaption()
         {
-            this.Text = String.Format("{0} - Data Source Editor", this.tableSource.Name);
+            this.Name = this.tableSource.Name;
+            this.Text = this.tableSource.Name;
+
+            this.TabText = this.tableSource.Name;
+
+            if (tableSource.HasChanges)
+                this.TabText = this.Name + "*";
         }
 
-        private void updateDataBindings()
-        {
-            if (this.tableSource != null)
-            {
-                this.dgvTable.DataSource = this.tableSource.GetView(currentSet);
-                this.dgvColumns.DataSource = this.tableSource.Columns;
-            }
-        }
 
-        private void updateColumns()
-        {
-            foreach (DataGridViewColumn viewColumn in dgvTable.Columns)
-            {
-                TableDataSourceColumn col = tableSource.Columns[viewColumn.Name];
-
-                if (col.Role == DataSourceRole.Input)
-                    viewColumn.DefaultCellStyle.BackColor = inputCaption.Color;
-                else if (col.Role == DataSourceRole.Output)
-                    viewColumn.DefaultCellStyle.BackColor = outputCaption.Color;
-
-                viewColumn.Visible = col.Visible;
-            }
-        }
+        
         #endregion
 
 
 
 
 
-        #region Copy & Move Operations
-        private void copySelection(DataSourceSet set)
-        {
-            // If none is selected, we copy only the current
-            if (dgvTable.SelectedRows.Count == 0)
-            {
-                copySelection(dgvTable.CurrentRow, set);
-            }
-            else
-            {
-                // Otherwise we copy all the selected rows.
-                foreach (DataGridViewRow viewRow in dgvTable.SelectedRows)
-                {
-                    copySelection(viewRow, set);
-                }
-            }
+   
 
-            //this.BindingSource.ResetBindings(false);
+
+
+        private void btnOverview_Click(object sender, EventArgs e)
+        {
+
         }
 
-        private void copySelection(DataGridViewRow viewRow, DataSourceSet set)
+        private void btnTable_Click(object sender, EventArgs e)
         {
-            DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
 
-            if (row != null)
-                tableSource.CopyRowToSet(row, set);
         }
 
-        private void moveSelection(DataSourceSet set, int subset)
+        private void btnColumns_Click(object sender, EventArgs e)
         {
-            // If none is selected, we move only the current
-            if (dgvTable.SelectedRows.Count == 0)
-            {
-                moveSelection(dgvTable.CurrentRow, set, subset);
-            }
-            else
-            {
-                foreach (DataGridViewRow viewRow in dgvTable.SelectedRows)
-                {
-                    moveSelection(viewRow, set, subset);
-                }
-            }
 
-    //        this.BindingSource.ResetBindings(false);
         }
 
-        private void moveSelection(DataGridViewRow viewRow, DataSourceSet set, int subset)
+        private void btnNotes_Click(object sender, EventArgs e)
         {
-            DataRow row = (viewRow.DataBoundItem as DataRowView).Row;
-            if (row != null)
-                tableSource.MoveRowToSubset(row, set, subset);
+
         }
-        #endregion
+
 
 
 
@@ -200,30 +170,12 @@ namespace Sinapse.Windows.Documents
             get { return item; }
             set { item = value; }
         }
+
+        public bool HasChanges
+        {
+            get { return tableSource.HasChanges; }
+        }
+
         #endregion
-
-
-        private void btnTrainingSet_Click(object sender, EventArgs e)
-        {
-            currentSet = DataSourceSet.Training;
-            updateDataBindings();
-        }
-
-        private void btnValidationSet_Click(object sender, EventArgs e)
-        {
-            currentSet = DataSourceSet.Validation;
-            updateDataBindings();
-        }
-
-        private void btnTestingSet_Click(object sender, EventArgs e)
-        {
-            currentSet = DataSourceSet.Testing;
-            updateDataBindings();
-        }
-
-
-
-
-
     }
 }

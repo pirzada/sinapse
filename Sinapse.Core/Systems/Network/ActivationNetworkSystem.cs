@@ -4,6 +4,9 @@ using System.Text;
 
 using AForge.Neuro;
 
+using Sinapse.Core.Filters;
+
+
 namespace Sinapse.Core.Systems
 {
     public class ActivationNetworkSystem : NetworkSystem, ISerializableObject<ActivationNetworkSystem>
@@ -15,6 +18,8 @@ namespace Sinapse.Core.Systems
         public ActivationNetworkSystem(IActivationFunction function, int inputsCount, params int[] neuronsCount)
         {
             Network = new ActivationNetwork(function, inputsCount, neuronsCount);
+            Preprocess = new FilterCollection(false);
+            Postprocess = new FilterCollection(true);
         }
 
         public ActivationNetworkSystem()
@@ -110,6 +115,12 @@ namespace Sinapse.Core.Systems
         {
             add { serializableObject.FileChanged += value; }
             remove { serializableObject.FileChanged -= value; }
+        }
+
+        public event EventHandler FileSaved
+        {
+            add { serializableObject.FileSaved += value; }
+            remove { serializableObject.FileSaved -= value; }
         }
         #endregion
     }

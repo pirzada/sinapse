@@ -52,7 +52,7 @@ namespace Sinapse.Forms
         private HistoryWindow windowHistory;
         private TaskWindow windowTask;
 
-        private Dictionary<WorkplaceItem, DockContent> openDocuments;
+        private Dictionary<WorkplaceItem, IWorkplaceDocument> openDocuments;
 
 
         //---------------------------------------------
@@ -88,7 +88,7 @@ namespace Sinapse.Forms
             this.ResumeLayout(true);
 
 
-            this.openDocuments = new Dictionary<WorkplaceItem, DockContent>();
+            this.openDocuments = new Dictionary<WorkplaceItem, IWorkplaceDocument>();
         }
 
 
@@ -142,15 +142,14 @@ namespace Sinapse.Forms
 
             HistoryListener.Write("Exiting...");
 
-            // Close All Documents
-            foreach (IDockContent content in this.dockMain.Documents)
-            {
-                if (content is IWorkplaceDocument)
-                    (content as Form).Close();
-            }
-
             // Close Workspace
             Workplace.Active = null;
+
+            if (Workplace.Active != null)
+            {
+                e.Cancel = true;
+                return;
+            }
 
             // Save ToolStripPanels
             ToolStripManager.SaveSettings(this);
@@ -185,17 +184,42 @@ namespace Sinapse.Forms
             else
             {
                 MenuWorkplace.Visible = true;
-                Workplace.Active.Closing += new EventHandler(Workplace_Closing);
-                //Workplace.Active.Closed += new EventHandler(Workplace_ActiveWorkplaceClosed);
+                Workplace.Active.Closing += Workplace_Closing;
+                //Workplace.Active.Closed += Workplace_ActiveWorkplaceClosed;
             }
         }
 
-        private void Workplace_Closing(object sender, EventArgs e)
+        private void Workplace_Closing(object sender, CancelEventArgs e)
         {
+            WorkplaceItem[] items = new WorkplaceItem[openDocuments.Keys.Count];
+            openDocuments.Keys.CopyTo(items, 0);
+
+            foreach (WorkplaceItem item in items)
+            {
+                IWorkplaceDocument document = openDocuments[item];
+
+                if (document.HasChanges)
+                {
+                    DialogResult r = MessageBox.Show(String.Format("Save changes to {0}?", document.Name),
+                        "Save changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
+                    {
+                        document.Save();
+                    }
+                    else if (r == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+
+                openDocuments.Remove(document.Item);
+                document.Close();
+            }
+
             if (Workplace.Active.HasChanges)
                 Workplace.Active.Save();
         }
-
 
         #endregion
 

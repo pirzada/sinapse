@@ -59,6 +59,7 @@ namespace Sinapse.Windows
             // 
             // treeViewWorkplace
             // 
+            this.treeViewWorkplace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewWorkplace.ImageIndex = 0;
             this.treeViewWorkplace.ImageList = this.imageList;
             this.treeViewWorkplace.Location = new System.Drawing.Point(0, 25);
