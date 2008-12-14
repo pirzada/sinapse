@@ -34,7 +34,7 @@ using System.Text;
 using System.Drawing;
 
 
-namespace Sinapse.Utils.HtmlReport
+namespace Sinapse.Tools.HtmlReport
 {
 
     public enum HtmlAlign

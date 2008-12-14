@@ -34,7 +34,7 @@ using System.Text;
 using System.Drawing;
 
 
-namespace Sinapse.Utils.HtmlReport
+namespace Sinapse.Tools.HtmlReport
 {
     /// <summary>
     /// Class to hold HTMLReport field details

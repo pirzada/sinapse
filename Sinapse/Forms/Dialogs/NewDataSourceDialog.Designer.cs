@@ -28,7 +28,7 @@ namespace Sinapse.Forms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Table");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Table");
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.tbName = new System.Windows.Forms.TextBox();
@@ -40,7 +40,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(438, 235);
+            this.btnCancel.Location = new System.Drawing.Point(435, 233);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -52,7 +52,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(357, 235);
+            this.btnOk.Location = new System.Drawing.Point(354, 233);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -64,9 +64,9 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.Location = new System.Drawing.Point(56, 209);
+            this.tbName.Location = new System.Drawing.Point(56, 207);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(457, 20);
+            this.tbName.Size = new System.Drawing.Size(454, 20);
             this.tbName.TabIndex = 1;
             this.tbName.Text = "tableDataSource.stds";
             // 
@@ -74,7 +74,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 212);
+            this.label1.Location = new System.Drawing.Point(12, 210);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 2;
@@ -86,10 +86,10 @@ namespace Sinapse.Forms.Dialogs
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.listView.Location = new System.Drawing.Point(15, 12);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(498, 191);
+            this.listView.Size = new System.Drawing.Size(495, 189);
             this.listView.TabIndex = 3;
             this.listView.UseCompatibleStateImageBehavior = false;
             // 
@@ -99,7 +99,7 @@ namespace Sinapse.Forms.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(525, 268);
+            this.ClientSize = new System.Drawing.Size(522, 266);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbName);
@@ -109,7 +109,8 @@ namespace Sinapse.Forms.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewDataSourceDialog";
-            this.Text = "New Data Source";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Add New Data Source";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -4,23 +4,29 @@ using System.Text;
 
 using AForge.Statistics;
 
+using System.ComponentModel;
 
 namespace Sinapse.Core.Filters.Table
 {
+    
+    [DisplayName("Normalization")]
+    [Description("This normalizes things")]
+    [Serializable]
     class Normalization : ICompleteFilter
     {
         [Flags]
-        public enum Method
+        public enum NormalizationMethod
         {
             Normalize = 0,
             Standardize = 2,
             Both = Normalize | Standardize
         }
 
-        private double mean;
-        private double stdDev;
-        private int columnIndex;
-        private Method method;
+        private double[] mean;
+        private double[] stdDev;
+        private int[] columnIndexes;
+        private NormalizationMethod method;
+        private int inputCount;
 
         
 
@@ -31,25 +37,44 @@ namespace Sinapse.Core.Filters.Table
 
         public string Name
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return "Normalization"; }
         }
 
-        public string Description
+        public double[] Means
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return mean; }
+            set { mean = value; }
         }
 
+        public double[] StdDevs
+        {
+            get { return stdDev; }
+            set { stdDev = value; }
+        }
 
+        public int[] ColumnIndex
+        {
+            get { return columnIndexes; }
+            set { columnIndexes = value; }
+        }
+
+        public NormalizationMethod Method
+        {
+            get { return method; }
+            set { method = value; }
+        }
 
         public int InputCount
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return inputCount; }
+            set { inputCount = value; }
         }
 
         public int OutputCount
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return inputCount; }
         }
+
 
         public void Apply(object input)
         {
@@ -58,16 +83,27 @@ namespace Sinapse.Core.Filters.Table
 
         public void Apply(object[] input)
         {
-            if ((method & Method.Normalize) == Method.Normalize)
+            if ((method & NormalizationMethod.Normalize) ==
+                NormalizationMethod.Normalize)
             {
                 // Subtract mean
-                input[columnIndex] = (double)input[columnIndex] - mean;
+                for (int i = 0; i < columnIndexes.Length; i++)
+                {
+                    int j = columnIndexes[i];
+                    input[j] = (double)input[j] - mean[j];    
+                }
+                
             }
 
-            if ((method & Method.Standardize) == Method.Standardize)
+            if ((method & NormalizationMethod.Standardize) ==
+                NormalizationMethod.Standardize)
             {
                 // Divide by Standard Deviation
-                input[columnIndex] = (double)input[columnIndex]/stdDev;
+                for (int i = 0; i < columnIndexes.Length; i++)
+                {
+                    int j = columnIndexes[i];
+                    input[j] = (double)input[j] / stdDev[j];
+                }
             }
         }
 

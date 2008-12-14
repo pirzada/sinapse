@@ -11,6 +11,7 @@ namespace Sinapse.Core.Systems
     /// A AdaptiveSystem is a model which accepts an Input, processes the information and then produces out an Output, while being able to respond to environmental changes or changes in its interacting parts.
     /// </summary>
     /// <remarks>This is an abstract class and cannot be instantiated.</remarks>
+    [Serializable]
     public abstract class AdaptiveSystem : ISinapseComponent
     {
         private SinapseComponent workplaceComponent;

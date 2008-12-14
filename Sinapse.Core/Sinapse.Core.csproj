@@ -56,10 +56,6 @@
   <ItemGroup>
     <Compile Include="Filters\InputMismatchException.cs" />
     <Compile Include="Filters\Table\Normalization.cs" />
-    <Compile Include="Filters\Table\Discretization.cs" />
-    <Compile Include="Filters\Table\Categorization.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ISinapseComponent.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="ISerializableObject.cs" />

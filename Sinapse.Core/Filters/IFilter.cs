@@ -19,6 +19,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 using AForge.Mathematics;
 
@@ -35,17 +36,16 @@ namespace Sinapse.Core.Filters
         object Input { get; set; }
         object Output { get; }
 */
-        int InputCount { get; }
+        int InputCount { get; set; }
         int OutputCount { get; }
+
+        string Name { get; }
 
         void Apply(object input); // For special transport units (Matrix and such) that can be optimized
         void Apply(object[] input); // For single entries
         void Apply(object[][] input); // For a full set of entries
-
-        string Name { get; }
-        string Description { get; }
-
     }
+
 
     /// <summary>
     ///   A filter which can be reversed.
@@ -58,8 +58,30 @@ namespace Sinapse.Core.Filters
     }
 
 
+    [Serializable]
     public class FilterCollection : System.ComponentModel.BindingList<IFilter>
     {
+
+        public static Type[] GetAllFilters()
+        {
+            List<Type> filters = new List<Type>();
+
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    foreach (Type interfaceType in type.GetInterfaces())
+                    {
+                        if (interfaceType == typeof(IFilter))
+                        {
+                            filters.Add(type);
+                        }
+                    }
+                }
+            }
+            return filters.ToArray();
+        }
+
 
         private bool reversible;
 
@@ -191,4 +213,18 @@ namespace Sinapse.Core.Filters
         }
 
     }
+
+
+/*
+    [AttributeUsage(AttributeTargets.Class |
+       AttributeTargets.Constructor |
+       AttributeTargets.Field |
+       AttributeTargets.Method |
+       AttributeTargets.Property,
+       AllowMultiple = true)]
+    public class FilterAttribute : System.Attribute
+    {
+
+    }
+ */ 
 }

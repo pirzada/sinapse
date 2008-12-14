@@ -12,6 +12,7 @@ namespace Sinapse.Core.Systems
     /// SystemInputOutput provides a description for a Input or Output of a System.
     /// It stores the name, description and type of the input or output.
     /// </summary>
+    [Serializable]
     public class SystemInputOutput
     {
 
@@ -47,6 +48,7 @@ namespace Sinapse.Core.Systems
     }
 
 
+    [Serializable]
     public class SystemInputOutputCollection : System.ComponentModel.BindingList<SystemInputOutput>
     {
     }

@@ -263,7 +263,7 @@ namespace Sinapse.Forms
                 // Verify which editor to open
                 if (item.Type == typeof(TableDataSource))
                 {
-                    TableDataSourceEditor editor = new TableDataSourceEditor(component as TableDataSource);
+                    TableDataSourceDocument editor = new TableDataSourceDocument(component as TableDataSource);
                     editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
                     editor.Item = item;
                     editor.Show(this.dockMain, DockState.Document);
@@ -271,7 +271,7 @@ namespace Sinapse.Forms
                 }
                 else if (item.Type == typeof(ActivationNetworkSystem))
                 {
-                    NetworkSystemEditor editor = new NetworkSystemEditor(component as ActivationNetworkSystem);
+                    NetworkSystemDocument editor = new NetworkSystemDocument(component as ActivationNetworkSystem);
                     editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
                     editor.Item = item;
                     editor.Show(this.dockMain, DockState.Document);
@@ -279,7 +279,7 @@ namespace Sinapse.Forms
                 }
                 else if (item.Type == typeof(BackpropagationTrainingSession))
                 {
-                    TrainingSessionEditor editor = new TrainingSessionEditor(component as BackpropagationTrainingSession);
+                    TrainingSessionDocument editor = new TrainingSessionDocument(component as BackpropagationTrainingSession);
                     editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
                     editor.Item = item;
                     editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
@@ -386,7 +386,11 @@ namespace Sinapse.Forms
         private void MenuWorkplaceAddDataSource_Click(object sender, EventArgs e)
         {
            new NewDataSourceDialog().ShowDialog(this);
-            
+        }
+
+        private void MenuWorkplaceAddAdaptiveSystem_Click(object sender, EventArgs e)
+        {
+            new NewAdaptiveSystemDialog().ShowDialog(this);
         }
         #endregion
 

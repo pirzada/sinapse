@@ -32,6 +32,7 @@ namespace Sinapse.Core.Systems
     /// NetworkSystem is a system which contains a Neural Network as its core.
     /// </summary>
     /// <remarks>This is an abstract class and cannot be instantiated.</remarks>
+    [Serializable]
     public abstract class NetworkSystem : Sinapse.Core.Systems.AdaptiveSystem
     {
 

@@ -9,21 +9,35 @@ using Sinapse.Core.Filters;
 
 namespace Sinapse.Core.Systems
 {
+    [Serializable]
     public class ActivationNetworkSystem : NetworkSystem, ISerializableObject<ActivationNetworkSystem>
     {
         private SerializableObject<ActivationNetworkSystem> serializableObject;
 
 
-
+/*
         public ActivationNetworkSystem(IActivationFunction function, int inputsCount, params int[] neuronsCount)
         {
             Network = new ActivationNetwork(function, inputsCount, neuronsCount);
             Preprocess = new FilterCollection(false);
             Postprocess = new FilterCollection(true);
         }
+*/
 
         public ActivationNetworkSystem()
+            : this("New Activation Network System")
         {
+        }
+  
+        public ActivationNetworkSystem(string name)
+        {
+            serializableObject = new SerializableObject<ActivationNetworkSystem>(this);
+
+            Preprocess = new FilterCollection(false);
+            Postprocess = new FilterCollection(true);
+
+            this.Name = name;
+            this.HasChanges = true;
         }
 
 
