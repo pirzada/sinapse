@@ -6,10 +6,12 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
+using Sinapse.Core;
 using Sinapse.Core.Training;
 using Sinapse.Windows.Training;
 
 using WeifenLuo.WinFormsUI.Docking;
+
 
 namespace Sinapse.Windows.Documents
 {
@@ -17,6 +19,7 @@ namespace Sinapse.Windows.Documents
     public partial class TrainingSessionEditor :  WeifenLuo.WinFormsUI.Docking.DockContent, IWorkplaceDocument
     {
 
+        private WorkplaceItem item;
         private BackpropagationTrainingSession session;
         private TrainingSessionController controller;
         private SavepointsWindow savepoints;
@@ -54,6 +57,8 @@ namespace Sinapse.Windows.Documents
 
 
 
+
+
         public void Save()
         {
             if (session.FullPath != String.Empty)
@@ -79,6 +84,11 @@ namespace Sinapse.Windows.Documents
             get { return null; }
         }
 
+        public WorkplaceItem Item
+        {
+            get { return item; }
+            set { item = value; }
+        }
 
     }
 }

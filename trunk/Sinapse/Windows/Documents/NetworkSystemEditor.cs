@@ -8,14 +8,16 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
+using Sinapse.Core;
 using Sinapse.Core.Systems;
 
 namespace Sinapse.Windows.Documents
 {
     public partial class NetworkSystemEditor : DockContent, IWorkplaceDocument
     {
-
+        private WorkplaceItem item;
         private ActivationNetworkSystem system;
+
 
         public NetworkSystemEditor(ActivationNetworkSystem system)
         {
@@ -57,6 +59,12 @@ namespace Sinapse.Windows.Documents
         public ToolStrip[] ToolStrips
         {
             get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public WorkplaceItem Item
+        {
+            get { return item; }
+            set { item = value; }
         }
 
         #endregion

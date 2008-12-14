@@ -59,7 +59,6 @@ namespace Sinapse
 
             if (Settings.Default.mruWorkplaces == null)
                 Settings.Default.mruWorkplaces = new System.Collections.Specialized.StringCollection();
-
         }
 
     }

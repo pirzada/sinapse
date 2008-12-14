@@ -17,15 +17,13 @@ namespace Sinapse.Core
     [Serializable]
     public class WorkplaceItem
     {
+ //       [NonSerialized]
         private Workplace workplace; // For resolving relative paths
 
         private string fileName;
         private string relativePath; // Relative Path inside the workplace
         private bool included;
         Type type;
-
-        [NonSerialized]
-        ISinapseComponent component;
 
 
 
@@ -42,14 +40,18 @@ namespace Sinapse.Core
             this.relativePath = String.Empty;
             this.fileName = fileName;
             this.included = true;
-            this.component = null;
         }
 
-
-
+/*
+        internal Workplace Owner
+        {
+            get { return workplace; }
+            set { workplace = value; }
+        }
+*/
         /// <summary>
-        ///   Gets or sets the relative filepath for the file
-        ///   associated with this WorkplaceContent
+        ///   Gets or sets the relative filepath for the file associated
+        ///   with this WorkplaceContent. Does not include the filename.
         /// </summary>
         public string RelativePath
         {
@@ -74,7 +76,11 @@ namespace Sinapse.Core
         /// </summary>
         public string FullPath
         {
-            get { return Path.Combine(workplace.FilePath, relativePath); }
+            get
+            {
+                return Path.Combine(workplace.FilePath,
+                Path.Combine(relativePath, fileName));
+            }
         }
 
         public Type Type
@@ -114,40 +120,32 @@ namespace Sinapse.Core
         /// </summary>
         /// <param name="newObject"></param>
         /// <returns></returns>
-        public bool Open(out ISinapseComponent newObject)
+        public ISinapseComponent Open()
         {
-            // First, check if the object isn't already open
-            if (component == null)
+            ISinapseComponent component = null;
+
+            // First we check if file exists,
+            if (File.Exists(FullPath))
             {
-                // Then we check if file exists,
-                if (File.Exists(FullPath))
-                {
-                    // Create the method info for the static method SerializableObject<T>.Open
-                    MethodInfo methodOpen = type.GetMethod("Open",
-                        BindingFlags.Static | BindingFlags.Public);
+                // Create the method info for the static method SerializableObject<T>.Open
+                MethodInfo methodOpen = type.GetMethod("Open",
+                    BindingFlags.Static | BindingFlags.Public);
 
-                    component = (ISinapseComponent)methodOpen.Invoke(null, new object[] { FullPath });
-                }
-                else
-                {
-                    // The file does not exists, so we create a new instance.
-                    component = (ISinapseComponent)Activator.CreateInstance(type);
-                }
-
-                // Now we register the FileChanged event to keep track on name changes
-                EventInfo e = type.GetEvent("FileChanged");
-                e.AddEventHandler(component, new EventHandler(document_FileChanged));
-
-                newObject = component;
-
-                return true;
+                component = (ISinapseComponent)methodOpen.Invoke(null, new object[] { FullPath });
             }
             else
             {
-                // The file is already open.
-                newObject = component;
-                return false;
+                // The file does not exists, so we create a new instance.
+              //  component = (ISinapseComponent)Activator.CreateInstance(type);
+                throw new InvalidOperationException();
             }
+/*
+            // Now we register the FileChanged event to keep track on name changes
+            EventInfo e = type.GetEvent("FileChanged");
+            e.AddEventHandler(component, new EventHandler(document_FileChanged));
+*/
+
+            return component;
         }
 
 
@@ -162,6 +160,7 @@ namespace Sinapse.Core
     [Serializable]
     public class WorkplaceItemCollection : BindingList<WorkplaceItem>
     {
+   //     [NonSerialized]
         Workplace workplaceOwner;
 
         internal WorkplaceItemCollection(Workplace owner)
@@ -173,5 +172,20 @@ namespace Sinapse.Core
         {
             this.Add(new WorkplaceItem(workplaceOwner, filename, type));
         }
+/*
+        internal Workplace Owner
+        {
+            get { return workplaceOwner; }
+            set
+            {
+                workplaceOwner = value;
+
+                foreach (WorkplaceItem item in this)
+                {
+                    item.Owner = value;
+                }
+            }
+        }
+ */ 
     }
 }
