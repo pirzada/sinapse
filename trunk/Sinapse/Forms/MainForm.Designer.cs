@@ -145,19 +145,12 @@ namespace Sinapse.Forms
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openWorkplaceDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.toolStripLayout = new System.Windows.Forms.ToolStrip();
-            this.btnLayoutDefault = new System.Windows.Forms.ToolStripButton();
-            this.btnLayoutDataEditing = new System.Windows.Forms.ToolStripButton();
-            this.btnLayoutSystemEditing = new System.Windows.Forms.ToolStripButton();
-            this.btnLayoutTraining = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.toolStripLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -772,9 +765,9 @@ namespace Sinapse.Forms
             this.btnShowWorkplaceWindow,
             this.btnShowPropertiesWindow});
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripMain.Location = new System.Drawing.Point(5, 0);
+            this.toolStripMain.Location = new System.Drawing.Point(3, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(208, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(239, 25);
             this.toolStripMain.TabIndex = 19;
             // 
             // btnMenuNewWorkplace
@@ -910,68 +903,6 @@ namespace Sinapse.Forms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripMain);
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripLayout);
-            // 
-            // toolStripLayout
-            // 
-            this.toolStripLayout.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripLayout.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnLayoutDefault,
-            this.btnLayoutDataEditing,
-            this.btnLayoutSystemEditing,
-            this.btnLayoutTraining,
-            this.toolStripButton1});
-            this.toolStripLayout.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripLayout.Location = new System.Drawing.Point(445, 0);
-            this.toolStripLayout.Name = "toolStripLayout";
-            this.toolStripLayout.Size = new System.Drawing.Size(133, 25);
-            this.toolStripLayout.TabIndex = 20;
-            this.toolStripLayout.Text = "Layouts";
-            // 
-            // btnLayoutDefault
-            // 
-            this.btnLayoutDefault.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLayoutDefault.Image = global::Sinapse.Properties.Resources.project_open;
-            this.btnLayoutDefault.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLayoutDefault.Name = "btnLayoutDefault";
-            this.btnLayoutDefault.Size = new System.Drawing.Size(23, 22);
-            this.btnLayoutDefault.Text = "Default Layout";
-            // 
-            // btnLayoutDataEditing
-            // 
-            this.btnLayoutDataEditing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLayoutDataEditing.Image = global::Sinapse.Properties.Resources.database;
-            this.btnLayoutDataEditing.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLayoutDataEditing.Name = "btnLayoutDataEditing";
-            this.btnLayoutDataEditing.Size = new System.Drawing.Size(23, 22);
-            this.btnLayoutDataEditing.Text = "Data Layout";
-            // 
-            // btnLayoutSystemEditing
-            // 
-            this.btnLayoutSystemEditing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLayoutSystemEditing.Image = global::Sinapse.Properties.Resources.package_graphics;
-            this.btnLayoutSystemEditing.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLayoutSystemEditing.Name = "btnLayoutSystemEditing";
-            this.btnLayoutSystemEditing.Size = new System.Drawing.Size(23, 22);
-            this.btnLayoutSystemEditing.Text = "System Editing Layout";
-            // 
-            // btnLayoutTraining
-            // 
-            this.btnLayoutTraining.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLayoutTraining.Image = global::Sinapse.Properties.Resources.oscilloscope;
-            this.btnLayoutTraining.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLayoutTraining.Name = "btnLayoutTraining";
-            this.btnLayoutTraining.Size = new System.Drawing.Size(23, 22);
-            this.btnLayoutTraining.Text = "Training Layout";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Sinapse.Properties.Resources.fifteenpieces;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripButton1.Text = "Custom Layouts";
             // 
             // MainForm
             // 
@@ -1002,8 +933,6 @@ namespace Sinapse.Forms
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.toolStripLayout.ResumeLayout(false);
-            this.toolStripLayout.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1081,12 +1010,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.ToolStrip toolStripLayout;
-        private System.Windows.Forms.ToolStripButton btnLayoutDefault;
-        private System.Windows.Forms.ToolStripButton btnLayoutTraining;
-        private System.Windows.Forms.ToolStripButton btnLayoutDataEditing;
-        private System.Windows.Forms.ToolStripButton btnLayoutSystemEditing;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton btnShowWorkplaceWindow;
         private System.Windows.Forms.ToolStripButton btnShowPropertiesWindow;

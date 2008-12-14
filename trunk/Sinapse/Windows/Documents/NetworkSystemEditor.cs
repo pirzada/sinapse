@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
+using Sinapse.Windows.SystemEditor;
+
 using Sinapse.Core;
 using Sinapse.Core.Systems;
 
@@ -18,18 +20,43 @@ namespace Sinapse.Windows.Documents
         private WorkplaceItem item;
         private ActivationNetworkSystem system;
 
+        private InterfaceSpecification wndInterface;
+        private NetworkSystemDesign wndNetworkDesign;
+
+
 
         public NetworkSystemEditor(ActivationNetworkSystem system)
         {
-            InitializeComponent();
             this.system = system;
+
+            InitializeComponent();
         }
+
+        public ActivationNetworkSystem ActivationSystem
+        {
+            get { return system; }
+            set { system = value; }
+        }
+
 
         private void AdaptativeSystemEditor_Load(object sender, EventArgs e)
         {
-            this.dgvInterfaceInputs.DataSource = this.system.Inputs;
-            this.dgvInterfaceOutputs.DataSource = this.system.Outputs;
+            this.SuspendLayout();
+            this.wndInterface = new InterfaceSpecification();
+            this.wndInterface.Inputs = this.system.Inputs;
+            this.wndInterface.Outputs = this.system.Outputs;
+            this.wndInterface.Show(this.dockPanel, DockState.Document);
+
+            this.wndNetworkDesign = new NetworkSystemDesign();
+            this.wndNetworkDesign.NetworkSystem = system;
+            this.wndNetworkDesign.Show(this.dockPanel, DockState.Document);
+
+            this.ResumeLayout(true);
         }
+
+
+
+
 
 
 
@@ -67,6 +94,12 @@ namespace Sinapse.Windows.Documents
             set { item = value; }
         }
 
+        public bool HasChanges
+        {
+            get { return system.HasChanges; }
+        }
+
         #endregion
+
     }
 }

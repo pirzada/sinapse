@@ -58,7 +58,7 @@ namespace Sinapse.Core.Filters
     }
 
 
-    public class IFilterCollection : System.ComponentModel.BindingList<IFilter>
+    public class FilterCollection : System.ComponentModel.BindingList<IFilter>
     {
 
         private bool reversible;
@@ -97,7 +97,7 @@ namespace Sinapse.Core.Filters
             }
         }
 
-        public IFilterCollection(bool reversible)
+        public FilterCollection(bool reversible)
         {
             this.reversible = reversible;
         }

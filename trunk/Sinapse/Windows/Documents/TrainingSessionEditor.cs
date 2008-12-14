@@ -57,7 +57,7 @@ namespace Sinapse.Windows.Documents
 
 
 
-
+        #region IWorkplaceDocument Members
 
         public void Save()
         {
@@ -90,5 +90,11 @@ namespace Sinapse.Windows.Documents
             set { item = value; }
         }
 
+        public bool HasChanges
+        {
+            get { return session.HasChanges; }
+        }
+
+        #endregion
     }
 }

@@ -48,8 +48,6 @@ namespace Sinapse.Core.Sources
         private DataTable dataTable;
         private TableDataSourceColumnCollection columns;
 
-        [field: NonSerialized]
-        public event EventHandler Changed;
 
         [field: NonSerialized]
         public event EventHandler DataChanged;
@@ -78,6 +76,10 @@ namespace Sinapse.Core.Sources
             createExtendedColumns();
 
             HasChanges = true;
+
+            this.dataTable.ColumnChanged+= dataTable_Changed;
+            this.dataTable.RowChanged += dataTable_Changed;
+            this.dataTable.TableCleared += dataTable_Changed;
         }
 
 
@@ -88,23 +90,45 @@ namespace Sinapse.Core.Sources
         /// <param name="columns"></param>
         public void Import(DataTable table, TableDataSourceColumnCollection columns)
         {
-            // Store the table and column information
-            this.dataTable = table;
-            this.columns = columns;
+            // Import the DataTable
+            this.dataTable.Merge(table, true, MissingSchemaAction.Add);
 
-            // Create the extra two columns for storing the Set and Subset
-            createExtendedColumns();
+            // Import the TableDataColumns (copy)
+            this.columns.RaiseListChangedEvents = false;
+            foreach (TableDataSourceColumn col in columns)
+            {
+                if (!this.columns.Contains(col.Name))
+                {
+                    TableDataSourceColumn newCol;
+                    newCol = new TableDataSourceColumn(dataTable.Columns[col.Name]);
+                    newCol.Role = col.Role;
+                    newCol.DataType = col.DataType;
+                    newCol.Description = col.Description;
+                    newCol.Visible = col.Visible;
+                    this.columns.Add(newCol);
+                }
+            }
+            this.columns.RaiseListChangedEvents = true;
+            this.columns.ResetBindings();
+
 
             HasChanges = true;
-            OnChanged(EventArgs.Empty);
+            OnDataChanged(EventArgs.Empty);
         }
 
         /// <summary>
         ///   Imports only matching columns from a DataTable
         /// </summary>
         /// <param name="table"></param>
-        public void Import(DataTable table)
+        public void Import(DataTable table, DataSourceSet set)
         {
+            // Add a new column to the to-be-imported DataTable
+            //  to determine which will be the default set when importing
+            DataColumn col = new DataColumn("@SET", typeof(DataSourceSet));
+            col.DefaultValue = set;
+            table.Columns.Add(col);
+
+            // Merge the two
             dataTable.Merge(table, true, MissingSchemaAction.Ignore);
             HasChanges = true;
         }
@@ -197,7 +221,13 @@ namespace Sinapse.Core.Sources
         }
 
 
-
+        #region DataTable Events
+        private void dataTable_Changed(object sender, EventArgs e)
+        {
+            HasChanges = true;
+            OnDataChanged(EventArgs.Empty);
+        }
+        #endregion
 
 
         #region Data Copy & Movement Operations
@@ -365,10 +395,10 @@ namespace Sinapse.Core.Sources
 
 
 
-        protected void OnChanged(EventArgs e)
+        protected void OnDataChanged(EventArgs e)
         {
-            if (Changed != null)
-                Changed.Invoke(this, e);
+            if (this.DataChanged != null)
+                this.DataChanged.Invoke(this, e);
         }
 
 
@@ -376,7 +406,6 @@ namespace Sinapse.Core.Sources
 
 
         #region ISerializableObject<TableDataSource> Members
-
 
         public string FileName
         {
@@ -425,6 +454,12 @@ namespace Sinapse.Core.Sources
             add { serializableObject.FileChanged += value; }
             remove { serializableObject.FileChanged -= value; }
         }
+
+        public event EventHandler FileSaved
+        {
+            add { serializableObject.FileSaved += value; }
+            remove { serializableObject.FileSaved -= value; }
+        }
         #endregion
 
 
@@ -457,8 +492,11 @@ namespace Sinapse.Core.Sources
             protected set { workplaceComponent.HasChanges = value; }
         }
 
-
-        public event EventHandler Closed;
+        public event EventHandler Changed
+        {
+            add { workplaceComponent.Changed += value; }
+            remove { workplaceComponent.Changed -= value; }
+        }
 
         #endregion
 

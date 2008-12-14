@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Text;
 
 using Sinapse.Core;
@@ -10,7 +11,7 @@ using Sinapse.Core.Systems;
 namespace Sinapse.Core.Sources
 {
     [Serializable]
-    public class TableDataSourceColumn
+    public class TableDataSourceColumn : INotifyPropertyChanged
     {
         private DataTable table;
 
@@ -43,7 +44,14 @@ namespace Sinapse.Core.Sources
         public string Caption
         {
             get { return this.DataColumn.Caption; }
-            set { this.DataColumn.Caption = value; }
+            set
+            {
+                if (this.DataColumn.Caption != value)
+                {
+                    this.DataColumn.Caption = value;
+                    OnPropertyChanged("Caption");
+                }
+            }
         }
 
         /// <summary>
@@ -52,7 +60,14 @@ namespace Sinapse.Core.Sources
         public string Description
         {
             get { return this.columnDescription; }
-            set { this.columnDescription = value; }
+            set
+            {
+                if (this.columnDescription != value)
+                {
+                    this.columnDescription = value;
+                    OnPropertyChanged("Description");
+                }
+            }
         }
 
         /// <summary>
@@ -61,7 +76,14 @@ namespace Sinapse.Core.Sources
         public bool Visible
         {
             get { return visible; }
-            set { visible = value; }
+            set
+            {
+                if (this.visible != value)
+                {
+                    this.visible = value;
+                    OnPropertyChanged("Visible");
+                }
+            }
         }
 
         /// <summary>
@@ -70,7 +92,14 @@ namespace Sinapse.Core.Sources
         public SystemDataType DataType
         {
             get { return this.columnDataType; }
-            set { this.columnDataType = value; }
+            set
+            {
+                if (this.columnDataType != value)
+                {
+                    this.columnDataType = value;
+                    OnPropertyChanged("DataType");
+                }
+            }
         }
 
         /// <summary>
@@ -79,9 +108,17 @@ namespace Sinapse.Core.Sources
         public DataSourceRole Role
         {
             get { return this.columnRole; }
-            set { this.columnRole = value; }
+            set
+            {
+                if (this.columnRole != value)
+                {
+                    this.columnRole = value;
+                    OnPropertyChanged("Role");
+                }
+            }
         }
 
+        
         /// <summary>
         ///   Gets the DataColumn associated with this object.
         /// </summary>
@@ -97,6 +134,20 @@ namespace Sinapse.Core.Sources
         {
             get { return this.columnName; }
         }
+
+
+
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+        #endregion
 
     }
 
@@ -147,7 +198,7 @@ namespace Sinapse.Core.Sources
         /// <returns></returns>
         public TableDataSourceColumn this[DataColumn dataColumn]
         {
-            get            {                return this[dataColumn.ColumnName];}
+            get { return this[dataColumn.ColumnName]; }
         }
 
         /// <summary>
@@ -166,6 +217,16 @@ namespace Sinapse.Core.Sources
                 }
                 throw new KeyNotFoundException();
             }
+        }
+
+        public bool Contains(string columnName)
+        {
+            foreach (TableDataSourceColumn col in this)
+            {
+                if (col.Name == columnName)
+                    return true;
+            }
+            return false;
         }
 
         public int GetCount(DataSourceRole role)
@@ -190,6 +251,22 @@ namespace Sinapse.Core.Sources
             return names.ToArray();
         }
 
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            // Fix for deserialization of items which implement INotifyPropertyChanged
+
+            List<TableDataSourceColumn> items = new List<TableDataSourceColumn>(Items);
+            int index = 0;
+
+            // call SetItem again on each item to re-establish event hookups
+            foreach (TableDataSourceColumn item in items)
+            {
+                // explicitly call the base version in case SetItem is overridden
+                base.SetItem(index++, item);
+            }
+        }
 
     }
 }

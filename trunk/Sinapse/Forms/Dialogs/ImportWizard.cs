@@ -64,7 +64,7 @@ namespace Sinapse.Forms.Dialogs
 
         public TableDataSourceColumnCollection GetColumns()
         {
-            return columns;
+            return this.columns;
         }
         #endregion
 

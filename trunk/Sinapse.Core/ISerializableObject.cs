@@ -28,6 +28,7 @@ namespace Sinapse.Core
         bool Save();
 
         event EventHandler FileChanged;
+        event EventHandler FileSaved;
 
     }
 
@@ -49,6 +50,9 @@ namespace Sinapse.Core
 */
         [field: NonSerialized]
         public event EventHandler FileChanged;
+
+        [field: NonSerialized]
+        public event EventHandler FileSaved;
 
 
 
@@ -126,6 +130,11 @@ namespace Sinapse.Core
                 FileChanged.Invoke(this, e);
         }
 
+        protected void OnFileSaved(EventArgs e)
+        {
+            if (FileSaved != null)
+                FileSaved.Invoke(this, e);
+        }
 
 
 
@@ -171,6 +180,7 @@ namespace Sinapse.Core
 
  //               hasChanges = false;
                 success = true;
+                OnFileSaved(EventArgs.Empty);
             }
             catch (SerializationException exception)
             {

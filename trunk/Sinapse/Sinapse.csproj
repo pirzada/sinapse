@@ -132,6 +132,30 @@
     <Compile Include="Forms\Dialogs\NewDataSourceDialog.Designer.cs">
       <DependentUpon>NewDataSourceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DataSourceEditor\ColumnSpecification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\ColumnSpecification.Designer.cs">
+      <DependentUpon>ColumnSpecification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\NoteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\NoteEditor.Designer.cs">
+      <DependentUpon>NoteEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\SourceOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\SourceOverview.Designer.cs">
+      <DependentUpon>SourceOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\TableEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DataSourceEditor\TableEditor.Designer.cs">
+      <DependentUpon>TableEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Documents\NetworkSystemEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,7 +178,7 @@
     <Compile Include="Windows\Documents\TrainingSessionEditor.Designer.cs">
       <DependentUpon>TrainingSessionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\IDocument.cs" />
+    <Compile Include="Windows\Documents\IWorkplaceDocument.cs" />
     <Compile Include="Windows\Documents\TableDataSourceEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +193,18 @@
     </Compile>
     <Compile Include="Forms\Dialogs\NewWorkplaceDialog.Designer.cs">
       <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SystemEditor\InterfaceSpecification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SystemEditor\InterfaceSpecification.Designer.cs">
+      <DependentUpon>InterfaceSpecification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SystemEditor\NetworkSystemDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SystemEditor\NetworkSystemDesign.Designer.cs">
+      <DependentUpon>NetworkSystemDesign.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Training\TrainingOptionsWindow.cs">
       <SubType>Form</SubType>
@@ -282,6 +318,18 @@
       <SubType>Designer</SubType>
       <DependentUpon>NewDataSourceDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DataSourceEditor\ColumnSpecification.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ColumnSpecification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DataSourceEditor\SourceOverview.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SourceOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DataSourceEditor\TableEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TableEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Documents\NetworkSystemEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NetworkSystemEditor.cs</DependentUpon>
@@ -300,6 +348,14 @@
     <EmbeddedResource Include="Forms\Dialogs\NewWorkplaceDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SystemEditor\InterfaceSpecification.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InterfaceSpecification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SystemEditor\NetworkSystemDesign.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NetworkSystemDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Training\TrainingOptionsWindow.resx">
       <SubType>Designer</SubType>

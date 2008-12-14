@@ -24,13 +24,13 @@ namespace Sinapse.Core
         private string name;
         private string description;
         private string remarks;
+
+        [NonSerialized]
         private bool hasChanges;
 
         [field: NonSerialized]
         public event EventHandler Changed;
 
-        [field: NonSerialized]
-        public event EventHandler Closed;
 
 
         public SinapseComponent()
@@ -46,8 +46,12 @@ namespace Sinapse.Core
             get { return name; }
             set
             {
-                name = value;
-                hasChanges = true;
+                if (name != value)
+                {
+                    name = value;
+                    hasChanges = true;
+                    OnChanged(EventArgs.Empty);
+                }
             }
         }
 
@@ -56,8 +60,12 @@ namespace Sinapse.Core
             get { return description; }
             set
             {
-                description = value;
-                hasChanges = true;
+                if (name != value)
+                {
+                    name = value;
+                    hasChanges = true;
+                    OnChanged(EventArgs.Empty);
+                }
             }
         }
 
@@ -66,16 +74,32 @@ namespace Sinapse.Core
             get { return remarks; }
             set
             {
-                remarks = value;
-                hasChanges = true;
+                if (remarks != value)
+                {
+                    remarks = value;
+                    hasChanges = true;
+                    OnChanged(EventArgs.Empty);
+                }
             }
         }
 
         public bool HasChanges
         {
             get { return hasChanges; }
-            set { hasChanges = value; }
+            set
+            {
+                if (hasChanges != value)
+                {
+                    hasChanges = value;
+                }
+            }
         }
 
+
+        protected void OnChanged(EventArgs e)
+        {
+            if (Changed != null)
+                Changed.Invoke(this, e);
+        }
     }
 }

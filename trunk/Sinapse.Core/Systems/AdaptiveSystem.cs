@@ -15,36 +15,41 @@ namespace Sinapse.Core.Systems
     {
         private SinapseComponent workplaceComponent;
 
-        private IList<SystemInputOutput> inputs;
-        private IList<SystemInputOutput> outputs;
-        private IFilterCollection preprocess;
-        private IFilterCollection postprocess;
+        private SystemInputOutputCollection inputs;
+        private SystemInputOutputCollection outputs;
+        private FilterCollection preprocess;
+        private FilterCollection postprocess;
 
 
         public AdaptiveSystem()
         {
             workplaceComponent = new SinapseComponent();
+
+            inputs = new SystemInputOutputCollection();
+            outputs = new SystemInputOutputCollection();
         }
 
 
-        public IList<SystemInputOutput> Inputs
+        public SystemInputOutputCollection Inputs
         {
             get { return inputs; }
         }
 
-        public IList<SystemInputOutput> Outputs
+        public SystemInputOutputCollection Outputs
         {
             get { return outputs; }
         }
 
-        public IFilterCollection Preprocess
+        public FilterCollection Preprocess
         {
             get { return preprocess; }
+            protected set { preprocess = value; }
         }
 
-        public IFilterCollection Postprocess
+        public FilterCollection Postprocess
         {
             get { return postprocess; }
+            protected set { postprocess = value; }
         }
 
 

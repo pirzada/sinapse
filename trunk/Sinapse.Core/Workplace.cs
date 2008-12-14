@@ -46,12 +46,15 @@ namespace Sinapse.Core
                 if (value != active)
                 {
                     if (value == null)
-                        active.OnClosing(EventArgs.Empty);
+                    {
+                        // We are trying to close the Active Workplace
+                        CancelEventArgs e = new CancelEventArgs();
+                        active.OnClosing(e);
+
+                        if (e.Cancel == true) return; // Cancelled
+                    }
 
                     active = value;
-
-                    if (value == null)
-                        active.OnClosed(EventArgs.Empty);
 
                     if (ActiveWorkplaceChanged != null)
                         ActiveWorkplaceChanged.Invoke(value, EventArgs.Empty);
@@ -77,10 +80,7 @@ namespace Sinapse.Core
         public event EventHandler Changed;
 
         [field: NonSerialized]
-        public event EventHandler Closed;
-
-        [field: NonSerialized]
-        public event EventHandler Closing;
+        public event CancelEventHandler Closing;
 
 
 
@@ -145,17 +145,15 @@ namespace Sinapse.Core
             HasChanges = true;
         }
 
-        protected void OnClosing(EventArgs e)
+        protected void OnClosing(CancelEventArgs e)
         {
             if (Closing != null)
                 Closing.Invoke(this, e);
         }
 
-        protected void OnClosed(EventArgs e)
-        {
-            if (Closed != null)
-                Closed.Invoke(this, e);
-        }
+
+
+
 
 
         #region IWorkplaceComponent Members
@@ -238,6 +236,12 @@ namespace Sinapse.Core
         {
             add { serializableObject.FileChanged += value; }
             remove { serializableObject.FileChanged -= value; }
+        }
+
+        public event EventHandler FileSaved
+        {
+            add { serializableObject.FileSaved += value; }
+            remove { serializableObject.FileSaved -= value; }
         }
         #endregion
 
