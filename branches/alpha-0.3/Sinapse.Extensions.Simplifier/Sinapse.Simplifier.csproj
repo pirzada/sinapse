@@ -7,10 +7,15 @@
     <ProjectGuid>{8FCC8A47-88A9-4145-BC45-97354AF1402D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sinapse.Extensions.Simplifier</RootNamespace>
-    <AssemblyName>Sinapse.Extensions.Simplifier</AssemblyName>
+    <RootNamespace>Sinapse.Simplifier</RootNamespace>
+    <AssemblyName>Sinapse.Simplifier</AssemblyName>
     <StartupObject>
     </StartupObject>
+    <SignManifests>false</SignManifests>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Sinapse.pfx</AssemblyOriginatorKeyFile>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -105,10 +110,6 @@
       <Project>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</Project>
       <Name>AForge.Statistics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sinapse.Core\Sinapse.Core.csproj">
-      <Project>{CE75E853-93A7-4690-9EE3-6AFB684E48C1}</Project>
-      <Name>Sinapse.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sinapse.Databases\Sinapse.Databases.csproj">
       <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
       <Name>Sinapse.Databases</Name>
@@ -137,7 +138,9 @@
     <None Include="Resources\kded.png" />
   </ItemGroup>
   <ItemGroup>
+    <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Resources\restart2.png" />
+    <None Include="Sinapse.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

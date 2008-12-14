@@ -959,6 +959,11 @@ namespace Sinapse.Forms
         }
         #endregion
 
+        private void simplifierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+      //      new Sinapse.Extensions.Simplifier.Forms.Simplifier().Show();
+        }
+
 
     }
 }

@@ -111,7 +111,7 @@ namespace Sinapse.Forms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuNetworkCodeGeneratorOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuExtensionsExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simplifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelpContents = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelpIndex = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,6 +121,9 @@ namespace Sinapse.Forms
             this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveNetworkDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.tabControlSide = new Sinapse.Controls.SideTabControl.SideTabControl();
+            this.tabControlMain = new Sinapse.Controls.MainTabControl.MainTabControl();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.btnDatabaseNew = new System.Windows.Forms.ToolStripButton();
             this.btnDatabaseOpen = new System.Windows.Forms.ToolStripButton();
@@ -159,9 +162,6 @@ namespace Sinapse.Forms
             this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.browseWorkplaceDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.tabControlSide = new Sinapse.Controls.SideTabControl.SideTabControl();
-            this.tabControlMain = new Sinapse.Controls.MainTabControl.MainTabControl();
             this.statusBarControl = new Sinapse.Controls.StatusBarControl();
             this.mruProviderDatabase = new Sinapse.Forms.Controls.MruProvider();
             this.mruProviderNetwork = new Sinapse.Forms.Controls.MruProvider();
@@ -172,12 +172,12 @@ namespace Sinapse.Forms
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            this.toolStripMain.SuspendLayout();
-            this.toolStripTraining.SuspendLayout();
-            this.toolStripTesting.SuspendLayout();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.toolStripMain.SuspendLayout();
+            this.toolStripTraining.SuspendLayout();
+            this.toolStripTesting.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -720,18 +720,18 @@ namespace Sinapse.Forms
             // MenuExtensionsExcel
             // 
             this.MenuExtensionsExcel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.excelToolStripMenuItem});
-            this.MenuExtensionsExcel.Enabled = false;
+            this.simplifierToolStripMenuItem});
             this.MenuExtensionsExcel.Name = "MenuExtensionsExcel";
             this.MenuExtensionsExcel.Size = new System.Drawing.Size(71, 20);
             this.MenuExtensionsExcel.Text = "Extensions";
             this.MenuExtensionsExcel.Click += new System.EventHandler(this.MenuExtensionsExcel_Click);
             // 
-            // excelToolStripMenuItem
+            // simplifierToolStripMenuItem
             // 
-            this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.excelToolStripMenuItem.Text = "Sinapse for Excel";
+            this.simplifierToolStripMenuItem.Name = "simplifierToolStripMenuItem";
+            this.simplifierToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.simplifierToolStripMenuItem.Text = "Simplifier";
+            this.simplifierToolStripMenuItem.Click += new System.EventHandler(this.simplifierToolStripMenuItem_Click);
             // 
             // MenuHelp
             // 
@@ -814,6 +814,42 @@ namespace Sinapse.Forms
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTraining);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripTesting);
             this.toolStripContainer.TopToolStripPanel.MaximumSize = new System.Drawing.Size(0, 25);
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.tabControlSide);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
+            this.splitContainer.Size = new System.Drawing.Size(892, 552);
+            this.splitContainer.SplitterDistance = 263;
+            this.splitContainer.TabIndex = 17;
+            // 
+            // tabControlSide
+            // 
+            this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlSide.Location = new System.Drawing.Point(0, 0);
+            this.tabControlSide.Name = "tabControlSide";
+            this.tabControlSide.Size = new System.Drawing.Size(263, 552);
+            this.tabControlSide.TabIndex = 0;
+            // 
+            // tabControlMain
+            // 
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.Size = new System.Drawing.Size(625, 552);
+            this.tabControlMain.TabIndex = 0;
+            this.tabControlMain.DataSelectionChanged += new System.EventHandler(this.tabControlMain_SelectionChanged);
+            this.tabControlMain.SelectedControlChanged += new System.EventHandler(this.tabControlMain_SelectedControlChanged);
             // 
             // toolStripMain
             // 
@@ -1161,42 +1197,6 @@ namespace Sinapse.Forms
             this.notifyIcon.Text = "Sinapse Neural Networking Tool";
             this.notifyIcon.Visible = true;
             // 
-            // splitContainer
-            // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer.Name = "splitContainer";
-            // 
-            // splitContainer.Panel1
-            // 
-            this.splitContainer.Panel1.Controls.Add(this.tabControlSide);
-            // 
-            // splitContainer.Panel2
-            // 
-            this.splitContainer.Panel2.Controls.Add(this.tabControlMain);
-            this.splitContainer.Size = new System.Drawing.Size(892, 552);
-            this.splitContainer.SplitterDistance = 263;
-            this.splitContainer.TabIndex = 17;
-            // 
-            // tabControlSide
-            // 
-            this.tabControlSide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlSide.Location = new System.Drawing.Point(0, 0);
-            this.tabControlSide.Name = "tabControlSide";
-            this.tabControlSide.Size = new System.Drawing.Size(263, 552);
-            this.tabControlSide.TabIndex = 0;
-            // 
-            // tabControlMain
-            // 
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.Size = new System.Drawing.Size(625, 552);
-            this.tabControlMain.TabIndex = 0;
-            this.tabControlMain.DataSelectionChanged += new System.EventHandler(this.tabControlMain_SelectionChanged);
-            this.tabControlMain.SelectedControlChanged += new System.EventHandler(this.tabControlMain_SelectedControlChanged);
-            // 
             // statusBarControl
             // 
             this.statusBarControl.AutoSize = true;
@@ -1256,15 +1256,15 @@ namespace Sinapse.Forms
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.ResumeLayout(false);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.toolStripTraining.ResumeLayout(false);
             this.toolStripTraining.PerformLayout();
             this.toolStripTesting.ResumeLayout(false);
             this.toolStripTesting.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
-            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1389,7 +1389,7 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuFilePreferences;
         private System.Windows.Forms.ToolStripMenuItem MenuWorkplaceClose;
         private System.Windows.Forms.ToolStripMenuItem MenuExtensionsExcel;
-        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simplifierToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox btnTestRoundCustom;
     }
 }
