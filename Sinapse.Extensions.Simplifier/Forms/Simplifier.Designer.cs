@@ -467,7 +467,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             // 
             // btnRunAnalysis
             // 
-            this.btnRunAnalysis.Image = global::Sinapse.Extensions.Simplifier.Properties.Resources.restart;
+            this.btnRunAnalysis.Image = global::Sinapse.Simplifier.Properties.Resources.restart;
             this.btnRunAnalysis.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRunAnalysis.Name = "btnRunAnalysis";
             this.btnRunAnalysis.Size = new System.Drawing.Size(88, 22);
@@ -575,7 +575,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.btnSampleRunAnalysis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSampleRunAnalysis.Image = global::Sinapse.Extensions.Simplifier.Properties.Resources.restart2;
+            this.btnSampleRunAnalysis.Image = global::Sinapse.Simplifier.Properties.Resources.restart2;
             this.btnSampleRunAnalysis.Location = new System.Drawing.Point(6, 72);
             this.btnSampleRunAnalysis.Name = "btnSampleRunAnalysis";
             this.btnSampleRunAnalysis.Size = new System.Drawing.Size(160, 510);
@@ -1384,7 +1384,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Image = global::Sinapse.Extensions.Simplifier.Properties.Resources.agt_web;
+            this.button2.Image = global::Sinapse.Simplifier.Properties.Resources.agt_web;
             this.button2.Location = new System.Drawing.Point(6, 478);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(182, 104);
@@ -1398,7 +1398,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             // 
             this.btnShift.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShift.Image = global::Sinapse.Extensions.Simplifier.Properties.Resources.kded;
+            this.btnShift.Image = global::Sinapse.Simplifier.Properties.Resources.kded;
             this.btnShift.Location = new System.Drawing.Point(6, 216);
             this.btnShift.Name = "btnShift";
             this.btnShift.Size = new System.Drawing.Size(182, 256);
@@ -1623,7 +1623,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             // 
             // button3
             // 
-            this.button3.Image = global::Sinapse.Extensions.Simplifier.Properties.Resources.kservices;
+            this.button3.Image = global::Sinapse.Simplifier.Properties.Resources.kservices;
             this.button3.Location = new System.Drawing.Point(6, 247);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(182, 95);
