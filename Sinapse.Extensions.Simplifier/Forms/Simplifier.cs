@@ -131,7 +131,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
         private void btnShift_Click(object sender, EventArgs e)
         {
             Matrix shiftSource = new Matrix(tableShiftSource);
-            Matrix m = pca.Transform(shiftSource, (int)numComponents.Value);
+            Matrix m = pca.Transform(shiftSource, (int)numComponents.Value, true);
             dgvShiftProjection.DataSource = m.ToDataTable();
         }
         #endregion
@@ -155,9 +155,14 @@ namespace Sinapse.Extensions.Simplifier.Forms
                         this.dgvSample.DataSource = tableAnalysisSource;
                     }
                 }
-                else if (extension == ".txt")
+                else if (extension == ".xml")
                 {
+                    tableAnalysisSource = new DataTable();
+                    tableAnalysisSource.ReadXml(openFileDialog.FileName);
 
+                    this.tableShiftSource = tableAnalysisSource;
+                    this.dgvSample.DataSource = tableAnalysisSource;
+                    this.dgvShiftSample.DataSource = tableAnalysisSource;
                 }
             }
         }
@@ -262,6 +267,16 @@ namespace Sinapse.Extensions.Simplifier.Forms
                     ((DescriptiveMeasures)row.DataBoundItem).SourceVariable;
             }
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                
+                tableAnalysisSource.WriteXml(saveFileDialog1.FileName,XmlWriteMode.WriteSchema);
+            }
+        }
+
 
 
     }

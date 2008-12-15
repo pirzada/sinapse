@@ -176,6 +176,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -295,7 +296,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.MenuFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuFileNew.Name = "MenuFileNew";
             this.MenuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.MenuFileNew.Size = new System.Drawing.Size(151, 22);
+            this.MenuFileNew.Size = new System.Drawing.Size(155, 22);
             this.MenuFileNew.Text = "&New";
             // 
             // MenuFileOpen
@@ -304,14 +305,14 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.MenuFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuFileOpen.Name = "MenuFileOpen";
             this.MenuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.MenuFileOpen.Size = new System.Drawing.Size(151, 22);
+            this.MenuFileOpen.Size = new System.Drawing.Size(155, 22);
             this.MenuFileOpen.Text = "&Open";
             this.MenuFileOpen.Click += new System.EventHandler(this.MenuFileOpen_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(152, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -319,19 +320,20 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -339,26 +341,27 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.printToolStripMenuItem.Text = "&Print";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.printToolStripMenuItem.Text = "&Import";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.MenuFileOpen_Click);
             // 
             // printPreviewToolStripMenuItem
             // 
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // helpToolStripMenuItem
@@ -682,7 +685,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.dataGridViewTextBoxColumn6.HeaderText = "Column";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 62;
+            this.dataGridViewTextBoxColumn6.Width = 60;
             // 
             // colIndex
             // 
@@ -1114,7 +1117,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.colComponent.HeaderText = "Component";
             this.colComponent.Name = "colComponent";
             this.colComponent.ReadOnly = true;
-            this.colComponent.Width = 78;
+            this.colComponent.Width = 76;
             // 
             // colEigenValue
             // 
@@ -1368,7 +1371,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.colBaseIndex.HeaderText = "Index";
             this.colBaseIndex.Name = "colBaseIndex";
             this.colBaseIndex.ReadOnly = true;
-            this.colBaseIndex.Width = 53;
+            this.colBaseIndex.Width = 51;
             // 
             // colBaseProportion
             // 
@@ -1609,7 +1612,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.dataGridViewTextBoxColumn1.HeaderText = "Index";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 53;
+            this.dataGridViewTextBoxColumn1.Width = 51;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -1694,7 +1697,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.dataGridViewTextBoxColumn3.HeaderText = "Column";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 62;
+            this.dataGridViewTextBoxColumn3.Width = 60;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -1702,7 +1705,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.dataGridViewTextBoxColumn4.HeaderText = "Mean";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 54;
+            this.dataGridViewTextBoxColumn4.Width = 52;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -1710,7 +1713,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
             this.dataGridViewTextBoxColumn5.HeaderText = "Std Deviation";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 86;
+            this.dataGridViewTextBoxColumn5.Width = 84;
             // 
             // splitContainer14
             // 
@@ -1776,7 +1779,8 @@ namespace Sinapse.Extensions.Simplifier.Forms
             // 
             // openFileDialog
             // 
-            this.openFileDialog.Filter = "Excel files (*.xls)|*.xls|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            this.openFileDialog.Filter = "Xml Files (*.xml) |*.xml|Excel files (*.xls)|*.xls|Text files (*.txt)|*.txt|All f" +
+                "iles (*.*)|*.*";
             this.openFileDialog.Title = "Open file";
             // 
             // Simplifier
@@ -2001,5 +2005,6 @@ namespace Sinapse.Extensions.Simplifier.Forms
         private System.Windows.Forms.DataGridView dgvStatisticCorrelation;
         private System.Windows.Forms.GroupBox groupBox12;
         private Sinapse.Forms.Controls.Controls.DataHistogramView dataHistogramView2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
