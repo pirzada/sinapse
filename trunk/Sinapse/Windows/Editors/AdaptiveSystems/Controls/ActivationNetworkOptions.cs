@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 
+using AForge;
 using AForge.Neuro;
 
 using Sinapse.Tools;
@@ -21,11 +22,17 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
         public ActivationNetworkOptions()
         {
             InitializeComponent();
-
-            this.cbActivationFunction.DisplayMember = "Name";
-            this.cbActivationFunction.DataSource = Utils.GetTypesImplementingInterface(typeof(IActivationFunction));
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (!this.DesignMode)
+            {
+                this.cbActivationFunction.DisplayMember = "Name";
+                this.cbActivationFunction.DataSource = Utils.GetTypesImplementingInterface(typeof(IActivationFunction));
+            }
+        }
 
         public IActivationFunction ActivationFunction
         {
@@ -40,12 +47,31 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
        
         private void cbActivationFunction_SelectedIndexChanged(object sender, EventArgs e)
         {
+            updateGraph();
+        }
+
+        private void propertyGrid_Validated(object sender, EventArgs e)
+        {
+            updateGraph();
+        }
+
+        private void updateGraph()
+        {
             Type functionType = cbActivationFunction.SelectedItem as Type;
-            if (functionType != null)
+            if (functionType != null && (function == null || functionType != function.GetType()))
             {
-                this.function = (IActivationFunction)System.Activator.CreateInstance(functionType);
+                this.function = (IActivationFunction)Activator.CreateInstance(functionType);
                 this.propertyGrid.SelectedObject = function;
+                this.activationFunctionView.Function = function;
+                this.activationFunctionView.Domain = new DoubleRange(-1.0, 1.0);
+                this.activationFunctionView.Steps = 50;
+                this.activationFunctionView.Plot();
             }
+        }
+
+        private void btnPlot_Click(object sender, EventArgs e)
+        {
+            this.activationFunctionView.Plot();
         }
 
 

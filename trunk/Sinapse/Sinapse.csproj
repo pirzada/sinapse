@@ -480,6 +480,10 @@
       <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
       <Name>Sinapse.Databases</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Diagramming\Sinapse.Diagramming.csproj">
+      <Project>{4235CA0B-2268-438B-8BD6-F1126753954B}</Project>
+      <Name>Sinapse.Diagramming</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sinapse.Forms.Controls\Sinapse.Forms.Controls.csproj">
       <Project>{81CA91DE-585F-4ED7-A086-24F1F2C95A6B}</Project>
       <Name>Sinapse.Forms.Controls</Name>

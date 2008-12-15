@@ -30,6 +30,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActivationNetworkOptions));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnPlot = new System.Windows.Forms.Button();
             this.cbActivationFunction = new System.Windows.Forms.ComboBox();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.activationFunctionView = new Sinapse.Forms.Controls.Controls.ActivationFunctionView();
@@ -37,15 +38,18 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.networkLayersEditor = new Sinapse.Windows.Editors.AdaptiveSystems.Controls.LayersControl();
+            this.networkDiagram1 = new Sinapse.Diagramming.NetworkDiagram();
             this.groupBox2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnPlot);
             this.groupBox2.Controls.Add(this.cbActivationFunction);
             this.groupBox2.Controls.Add(this.propertyGrid);
             this.groupBox2.Controls.Add(this.activationFunctionView);
@@ -57,13 +61,23 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Activation Function";
             // 
+            // btnPlot
+            // 
+            this.btnPlot.Location = new System.Drawing.Point(189, 17);
+            this.btnPlot.Name = "btnPlot";
+            this.btnPlot.Size = new System.Drawing.Size(48, 23);
+            this.btnPlot.TabIndex = 3;
+            this.btnPlot.Text = "Plot";
+            this.btnPlot.UseVisualStyleBackColor = true;
+            this.btnPlot.Click += new System.EventHandler(this.btnPlot_Click);
+            // 
             // cbActivationFunction
             // 
             this.cbActivationFunction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbActivationFunction.FormattingEnabled = true;
             this.cbActivationFunction.Location = new System.Drawing.Point(6, 19);
             this.cbActivationFunction.Name = "cbActivationFunction";
-            this.cbActivationFunction.Size = new System.Drawing.Size(231, 21);
+            this.cbActivationFunction.Size = new System.Drawing.Size(177, 21);
             this.cbActivationFunction.TabIndex = 0;
             this.cbActivationFunction.SelectedIndexChanged += new System.EventHandler(this.cbActivationFunction_SelectedIndexChanged);
             // 
@@ -75,12 +89,14 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(231, 169);
             this.propertyGrid.TabIndex = 0;
+            this.propertyGrid.Validated += new System.EventHandler(this.propertyGrid_Validated);
             // 
             // activationFunctionView
             // 
             this.activationFunctionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.activationFunctionView.Derivative = Sinapse.Forms.Controls.Controls.ActivationFunctionView.FunctionDerivative.None;
             this.activationFunctionView.Domain = ((AForge.DoubleRange)(resources.GetObject("activationFunctionView.Domain")));
             this.activationFunctionView.Function = null;
             this.activationFunctionView.Location = new System.Drawing.Point(243, 19);
@@ -112,6 +128,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.networkDiagram1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(115, 0);
             this.groupBox1.Name = "groupBox1";
@@ -140,6 +157,14 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             this.networkLayersEditor.Size = new System.Drawing.Size(109, 204);
             this.networkLayersEditor.TabIndex = 5;
             // 
+            // networkDiagram1
+            // 
+            this.networkDiagram1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.networkDiagram1.Location = new System.Drawing.Point(3, 16);
+            this.networkDiagram1.Name = "networkDiagram1";
+            this.networkDiagram1.Size = new System.Drawing.Size(477, 204);
+            this.networkDiagram1.TabIndex = 0;
+            // 
             // ActivationNetworkOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,6 +176,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -166,6 +192,8 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private LayersControl networkLayersEditor;
+        private System.Windows.Forms.Button btnPlot;
+        private Sinapse.Diagramming.NetworkDiagram networkDiagram1;
 
     }
 }

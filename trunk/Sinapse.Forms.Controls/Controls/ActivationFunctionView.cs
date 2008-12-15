@@ -17,69 +17,132 @@ namespace Sinapse.Forms.Controls.Controls
     public partial class ActivationFunctionView : Control
     {
 
-        private ZedGraphControl zedGraphControl1;
-        private IActivationFunction _function;
-        private DoubleRange _plotDomain;
-        private uint _plotSteps;
+        public enum FunctionDerivative { None, First, Second }
+
+        private IActivationFunction function;
+        private DoubleRange plotDomain;
+        private FunctionDerivative derivative = FunctionDerivative.None;
+        private ZedGraphControl zedGraphControl;
+        private IContainer components;
+        private uint plotSteps;
 
 
-        #region Constructor
+
+
         public ActivationFunctionView()
         {
-            this._plotSteps = 1;
-            this._plotDomain = new DoubleRange(-1,1);
+            this.plotSteps = 1;
+            this.plotDomain = new DoubleRange(-1, 1);
 
-            InitializeGraph();
+
+            InitializeComponent();
+            CreateGraph(zedGraphControl);
         }
-        #endregion
 
 
 
-        #region Public Properties
+
+
         public IActivationFunction Function
         {
-            get { return this._function; }
-            set
-            {
-                this._function = value;
-            }
+            get { return this.function; }
+            set { this.function = value; }
         }
 
         public DoubleRange Domain
         {
-            get { return this._plotDomain; }
-            set { this._plotDomain = value; }
+            get { return this.plotDomain; }
+            set { this.plotDomain = value; }
         }
 
         [DefaultValue(1)]
         public uint Steps
         {
-            get { return this._plotSteps; }
+            get { return this.plotSteps; }
             set {
                 if (value == 0)
                     throw new ArgumentOutOfRangeException();
 
-                this._plotSteps = value; }
+                this.plotSteps = value; }
         }
-        #endregion
 
-
-
-        private void InitializeGraph()
+        public FunctionDerivative Derivative
         {
-            zedGraphControl1 = new ZedGraphControl();
-            zedGraphControl1.Dock = DockStyle.Fill;
-            GraphPane myPane = this.zedGraphControl1.GraphPane;
+            get { return this.derivative; }
+            set { this.derivative = value; }
+        }
+
+
+
+
+
+        public void Plot()
+        {
+            if (this.function == null)
+                throw new InvalidOperationException();
+
+            zedGraphControl.GraphPane.CurveList.Clear();
+
+            double x, y;
+            double stepSize = plotDomain.Length / plotSteps;
+
+
+            PointPairList list = new PointPairList();
+            for (int i = 0; i < plotSteps; i++)
+            {
+                x = this.plotDomain.Min + ((double)i * stepSize);
+                switch (this.derivative)
+                {
+                    case FunctionDerivative.None:
+                        y = this.function.Function(x); break;
+                    case FunctionDerivative.First:
+                        y = this.function.Derivative(x); break;
+                    case FunctionDerivative.Second:
+                        y = this.function.Derivative2(x); break;
+                    default: 
+                        goto case FunctionDerivative.None;
+                }
+
+                list.Add(x,y);
+            }
+
+
+            LineItem curve = zedGraphControl.GraphPane.
+                AddCurve(function.GetType().Name, list, Color.Red, SymbolType.None);
+            //curve.Line.IsSmooth = true;
+            //curve.Line.SmoothTension = 0.1f;
+            curve.Line.IsAntiAlias = true;
+            curve.Line.Width = 2f;
+
+
+            zedGraphControl.AxisChange();
+            zedGraphControl.Invalidate();
+        }
+
+
+
+
+
+        private void CreateGraph(ZedGraphControl zgc)
+        {
+            GraphPane myPane = zgc.GraphPane;
 
             // Set the titles and axis labels
-            
             myPane.Title.Text = "Activation Function";
-            myPane.XAxis.Title.Text = "X";
-            myPane.YAxis.Title.Text = "Y";
+            //myPane.XAxis.Title.Text = "X";
+            //myPane.XAxis.Title.IsTitleAtCross = true;
+            myPane.XAxis.Title.IsVisible = false;
+
+            //myPane.YAxis.Title.Text = "Y";
+            //myPane.YAxis.Title.IsTitleAtCross = true;
+            myPane.YAxis.Title.IsVisible = false;
+
 
             // Set the Y axis intersect the X axis at an X value of 0.0
             myPane.YAxis.Cross = 0.0;
-            myPane.Legend.IsVisible = false;
+            myPane.XAxis.Cross = 0.0;
+            myPane.Legend.IsVisible = true;
+
 
             // Turn off the axis frame and all the opposite side tics
             myPane.Chart.Border.IsVisible = false;
@@ -88,37 +151,41 @@ namespace Sinapse.Forms.Controls.Controls
             myPane.YAxis.MajorTic.IsOpposite = false;
             myPane.YAxis.MinorTic.IsOpposite = false;
 
-            this.Controls.Add(this.zedGraphControl1);
 
             // Calculate the Axis Scale Ranges
-            zedGraphControl1.AxisChange();
+            zgc.AxisChange();
+            zgc.Invalidate();
         }
 
-        public void Plot()
+
+        private void InitializeComponent()
         {
-            if (this._function == null)
-                throw new InvalidOperationException();
+            this.components = new System.ComponentModel.Container();
+            this.zedGraphControl = new ZedGraph.ZedGraphControl();
+            this.SuspendLayout();
+            // 
+            // zedGraphControl
+            // 
+            this.zedGraphControl.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControl.Name = "zedGraphControl";
+            this.zedGraphControl.ScrollGrace = 0;
+            this.zedGraphControl.ScrollMaxX = 0;
+            this.zedGraphControl.ScrollMaxY = 0;
+            this.zedGraphControl.ScrollMaxY2 = 0;
+            this.zedGraphControl.ScrollMinX = 0;
+            this.zedGraphControl.ScrollMinY = 0;
+            this.zedGraphControl.ScrollMinY2 = 0;
+            this.zedGraphControl.Size = new System.Drawing.Size(150, 150);
+            this.zedGraphControl.TabIndex = 0;
+            this.zedGraphControl.Dock = DockStyle.Fill;
+            //
+            // ActivationFunctionView
+            //
+            this.Name = "ActivationFunctionView";
+            this.Controls.Add(zedGraphControl);
 
-            zedGraphControl1.GraphPane.CurveList.Clear();
-
-            double x, y;
-            double stepSize = _plotDomain.Length / _plotSteps;
-
-            PointPairList list = new PointPairList();
-            for (int i = 0; i < _plotSteps; i++)
-            {
-                x = this._plotDomain.Min + i * stepSize;
-                y = this._function.Function(x);
-
-                list.Add(x,y);
-            }
-
-
-            zedGraphControl1.GraphPane.AddCurve(
-                _function.GetType().Name,
-                list, Color.Red, SymbolType.None);
-
-            zedGraphControl1.AxisChange();
+            this.zedGraphControl.ResumeLayout(false);
+            this.ResumeLayout(false);
         }
 
     }
