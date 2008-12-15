@@ -117,6 +117,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ActivationFunctionView.resx">
+      <DependentUpon>ActivationFunctionView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataHistogramView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DataHistogramView.cs</DependentUpon>
@@ -133,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\Wizard\" />
+    <Folder Include="Shapes\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
