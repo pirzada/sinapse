@@ -405,6 +405,7 @@ namespace Sinapse.Forms
             this.workplaceWindowToolStripMenuItem.Name = "workplaceWindowToolStripMenuItem";
             this.workplaceWindowToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.workplaceWindowToolStripMenuItem.Text = "Workplace Window";
+            this.workplaceWindowToolStripMenuItem.Click += new System.EventHandler(this.workplaceWindowToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -870,12 +871,12 @@ namespace Sinapse.Forms
             this.dockMain.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(792, 417);
+            this.dockMain.Size = new System.Drawing.Size(792, 467);
             this.dockMain.TabIndex = 21;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 494);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(792, 22);
             this.statusStrip1.TabIndex = 25;
@@ -893,11 +894,11 @@ namespace Sinapse.Forms
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.dockMain);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 417);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 467);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 74);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(792, 442);
+            this.toolStripContainer1.Size = new System.Drawing.Size(792, 492);
             this.toolStripContainer1.TabIndex = 29;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -909,7 +910,7 @@ namespace Sinapse.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 516);
+            this.ClientSize = new System.Drawing.Size(792, 566);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.toolStripPanel1);

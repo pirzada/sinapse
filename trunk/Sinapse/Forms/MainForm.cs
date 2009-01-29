@@ -65,9 +65,11 @@ namespace Sinapse.Forms
               ControlStyles.UserPaint |
               ControlStyles.OptimizedDoubleBuffer,
               true);
-            
-            InitializeComponent();
 
+            this.openDocuments = new Dictionary<WorkplaceItem, IWorkplaceDocument>();
+
+            InitializeComponent();
+/*
             this.SuspendLayout();
             this.windowWorkplace = new WorkplaceWindow();
             this.windowWorkplace.WorkplaceContentDoubleClicked += new WorkplaceContentDoubleClickedEventHandler(windowWorkplace_WorkplaceContentDoubleClicked);
@@ -83,12 +85,12 @@ namespace Sinapse.Forms
 
             this.windowTask = new TaskWindow();
             this.windowTask.Show(this.dockMain, DockState.DockBottomAutoHide);
-
+*/
             this.lbVersion.Text = "v" + Application.ProductVersion;
-            this.ResumeLayout(true);
+ //           this.ResumeLayout(true);
 
 
-            this.openDocuments = new Dictionary<WorkplaceItem, IWorkplaceDocument>();
+            
         }
 
 
@@ -423,6 +425,11 @@ namespace Sinapse.Forms
          //   this.sessionOpen(filename);
         }
         #endregion
+
+        private void workplaceWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
 
