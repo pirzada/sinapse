@@ -38,10 +38,15 @@ namespace Sinapse.Windows
     public partial class WorkplaceWindow : WeifenLuo.WinFormsUI.Docking.DockContent
     {
 
+        private bool directoryView = true;
+
+
+        private TreeNode rootWorkplace;
+
         private TreeNode nodeSources;
         private TreeNode nodeSystems;
-        private TreeNode nodeTraining;
-        private TreeNode rootWorkplace;
+        private TreeNode nodeSessions;
+        
 
         public event WorkplaceContentDoubleClickedEventHandler WorkplaceContentDoubleClicked;
 
@@ -51,17 +56,18 @@ namespace Sinapse.Windows
         {
             InitializeComponent();
 
-            nodeSources = new System.Windows.Forms.TreeNode("Sources", 1, 1);
+            rootWorkplace = new TreeNode("Workplace", 0, 0);
+
+            nodeSources = new System.Windows.Forms.TreeNode("Sources", 2, 2);
             nodeSources.ContextMenuStrip = this.menuSource;
 
-            nodeSystems = new System.Windows.Forms.TreeNode("Systems", 1, 1);
+            nodeSystems = new System.Windows.Forms.TreeNode("Systems", 3, 3);
             nodeSystems.ContextMenuStrip = this.menuSystem;
 
-            nodeTraining = new System.Windows.Forms.TreeNode("Trainings", 1, 1);
+            nodeTraining = new System.Windows.Forms.TreeNode("Trainings", 4, 4);
             nodeTraining.ContextMenuStrip = this.menuTraining;
 
-            rootWorkplace = new System.Windows.Forms.TreeNode("Workplace", new System.Windows.Forms.TreeNode[] {
-                nodeSources, nodeSystems, nodeTraining});
+            
 
 
             Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
@@ -75,7 +81,7 @@ namespace Sinapse.Windows
         /// <summary>
         ///   Gets the current selected WorkplaceContent on the Workplace Window
         /// </summary>
-        public WorkplaceItem SelectedItem
+        public SinapseDocumentInfo SelectedItem
         {
             get
             {
@@ -83,8 +89,8 @@ namespace Sinapse.Windows
                 {
                     object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-                    if (tag is WorkplaceItem)
-                        return tag as WorkplaceItem;
+                    if (tag is SinapseDocumentInfo)
+                        return tag as SinapseDocumentInfo;
                 }
                 return null;
             }
@@ -118,9 +124,9 @@ namespace Sinapse.Windows
         {
             object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-            if (tag is WorkplaceItem)
+            if (tag is SinapseDocumentInfo)
                 this.OnWorkplaceContentDoubleClicked(
-                    new WorkplaceContentDoubleClickedEventArgs(tag as WorkplaceItem));
+                    new WorkplaceContentDoubleClickedEventArgs(tag as SinapseDocumentInfo));
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -171,9 +177,7 @@ namespace Sinapse.Windows
 
 
 
-
-        #region TreeView Methods
-        private void populateTreeView()
+        private void showCategoryView()
         {
             this.treeViewWorkplace.SuspendLayout();
 
@@ -181,41 +185,67 @@ namespace Sinapse.Windows
             rootWorkplace.Tag = Workplace.Active;
 
             treeViewWorkplace.Nodes.Clear();
+            rootWorkplace.Nodes.Clear();
             nodeSources.Nodes.Clear();
             nodeSystems.Nodes.Clear();
-            nodeTraining.Nodes.Clear();
+            nodeSessions.Nodes.Clear();
 
 
             TreeNode node;
-            foreach (WorkplaceItem content in Workplace.Active.AdaptiveSystems)
+            foreach (SinapseDocumentInfo document in Workplace.Active.Documents.Select(Extensions.System))
             {
-                node = new TreeNode(content.FileName, 1, 1);
-                node.Tag = content;
-                nodeSystems.Nodes.Add(node);
+                nodeSystems.Nodes.Add(createNode(document));
             }
-            foreach (WorkplaceItem content in Workplace.Active.DataSources)
-            {
-                node = new TreeNode(content.FileName, 1, 1);
-                node.Tag = content;
-                nodeSources.Nodes.Add(node);
-            }
-            foreach (WorkplaceItem content in Workplace.Active.TrainingSessions)
-            {
-                node = new TreeNode(content.FileName, 1, 1);
-                node.Tag = content;
-                nodeTraining.Nodes.Add(node);
-            }
+
+            
+
+            this.rootWorkplace.Nodes.Add(nodeSystems);
+            this.rootWorkplace.Nodes.Add(nodeSystems);
+            this.rootWorkplace.Nodes.Add(nodeSystems);
+            this.treeViewWorkplace.Nodes.Add(rootWorkplace);
+            this.treeViewWorkplace.ExpandAll();
+            this.treeViewWorkplace.ResumeLayout(true);
+        }
+
+        private void showDirectoryView()
+        {
+            this.treeViewWorkplace.SuspendLayout();
+
+            rootWorkplace.Text = Workplace.Active.Name;
+            rootWorkplace.Tag = Workplace.Active;
+
+            treeViewWorkplace.Nodes.Clear();
+
 
             this.treeViewWorkplace.Nodes.Add(rootWorkplace);
             this.treeViewWorkplace.ExpandAll();
             this.treeViewWorkplace.ResumeLayout(true);
         }
-        #endregion
 
 
+        private TreeNode createNode(SinapseDocumentInfo document)
+        {
+            TreeNode node = new TreeNode(document.Name);
+            node.Tag = document;
 
+            if      (document.Type.IsAssignableFrom(typeof(ISource)))
+            {
+                node.ImageKey         = "Source";
+                node.SelectedImageKey = "Source";
+            }
+            else if (document.Type.IsAssignableFrom(typeof(ISystem)))
+            {
+                node.ImageKey         = "System";
+                node.SelectedImageKey = "System";
+            }
+            else if (document.Type.IsAssignableFrom(typeof(ISession)))
+            {
+                node.ImageKey         = "Session";
+                node.SelectedImageKey = "Session";
+            }
 
-
+            return node;
+        }
 
 
 
@@ -257,6 +287,11 @@ namespace Sinapse.Windows
         }
         #endregion
 
+        private void btnViewAll_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
     }
@@ -269,14 +304,14 @@ namespace Sinapse.Windows
     
     public sealed class WorkplaceContentDoubleClickedEventArgs : EventArgs
     {
-        private WorkplaceItem workplaceContent;
+        private SinapseDocumentInfo workplaceContent;
 
-        public WorkplaceItem WorkplaceItem
+        public SinapseDocumentInfo WorkplaceItem
         {
             get { return workplaceContent; }
             set { workplaceContent = value; }
         }
-        public WorkplaceContentDoubleClickedEventArgs(WorkplaceItem item)
+        public WorkplaceContentDoubleClickedEventArgs(SinapseDocumentInfo item)
         {
             this.workplaceContent = item;
         }

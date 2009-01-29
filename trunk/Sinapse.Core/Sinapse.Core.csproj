@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CE75E853-93A7-4690-9EE3-6AFB684E48C1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -16,6 +16,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -61,17 +65,20 @@
   <ItemGroup>
     <Compile Include="Filters\InputMismatchException.cs" />
     <Compile Include="Filters\Table\Normalization.cs" />
-    <Compile Include="ISinapseComponent.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="ISinapseDocument.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="ISerializableObject.cs" />
-    <Compile Include="Sources\IDataSource.cs" />
+    <Compile Include="Sources\ISource.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSource.cs" />
     <Compile Include="Systems\AdaptiveSystem.cs" />
+    <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\Network\ActivationNetworkSystem.cs" />
     <Compile Include="Systems\Network\NetworkSystem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Systems\SystemInputOutput.cs" />
+    <Compile Include="Training\ISession.cs" />
     <Compile Include="Training\SystemSourceMap.cs" />
     <Compile Include="Training\TrainingSession.cs" />
     <Compile Include="Training\TrainingHistory.cs" />
@@ -84,7 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Training\TrainingThreadParameters.cs" />
     <Compile Include="Workplace.cs" />
-    <Compile Include="WorkplaceItem.cs" />
+    <Compile Include="ISinapseDocumentInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -119,6 +126,7 @@
     <Folder Include="Filters\Video\" />
     <Folder Include="Reporting\" />
     <Folder Include="Systems\Statistic\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

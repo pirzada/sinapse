@@ -10,10 +10,10 @@ using Sinapse.Core;
 
 namespace Sinapse.Windows.Documents
 {
-    interface IWorkplaceDocument : IDockContent
+    interface ISinapseDocumentView : IDockContent
     {
 
-        WorkplaceItem Item { get; set; }
+        SinapseDocumentInfo Item { get; set; }
 
         void Save();
         void SaveAs();

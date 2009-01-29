@@ -16,10 +16,10 @@ using Sinapse.Windows.Editors.DataSources;
 
 namespace Sinapse.Windows.Documents
 {
-    public partial class TableDataSourceDocument : DockContent, IWorkplaceDocument
+    public partial class TableDataSourceDocument : DockContent, ISinapseDocumentView
     {
 
-        private WorkplaceItem item;
+        private SinapseDocumentInfo item;
         private TableDataSource tableSource;
 
         private TableEditor wndTableEditor;
@@ -165,7 +165,7 @@ namespace Sinapse.Windows.Documents
             get { throw new Exception("The method or operation is not implemented."); }
         }
 
-        public WorkplaceItem Item
+        public SinapseDocumentInfo Item
         {
             get { return item; }
             set { item = value; }

@@ -865,6 +865,13 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap view_tree1 {
+            get {
+                object obj = ResourceManager.GetObject("view_tree1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap volume_manager_16 {
             get {
                 object obj = ResourceManager.GetObject("volume_manager_16", resourceCulture);

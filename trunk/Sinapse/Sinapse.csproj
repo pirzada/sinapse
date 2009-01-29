@@ -259,13 +259,14 @@
     <Compile Include="Windows\Editors\Training\TrainingSessionController.Designer.cs">
       <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Workbench.cs" />
     <Compile Include="Windows\WorplaceWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\WorplaceWindow.Designer.cs">
       <DependentUpon>WorplaceWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\Logging\HistoryEvent.cs" />
+    <Compile Include="Utils\Logging\HistoryEvent.cs" />
     <None Include="Resources\Templates\TemplateCpp.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -288,7 +289,7 @@
       <DependentUpon>TaskWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Data\Logging\HistoryListener.cs" />
+    <Compile Include="Utils\Logging\HistoryListener.cs" />
     <Compile Include="Utils\HtmlReport\Field.cs" />
     <Compile Include="Utils\HtmlReport\Misc.cs" />
     <Compile Include="Utils\HtmlReport\Report.cs" />
@@ -844,6 +845,7 @@
     <None Include="Resources\database.png" />
     <None Include="Resources\1downarrow.png" />
     <None Include="Resources\1uparrow.png" />
+    <None Include="Resources\view_tree1.png" />
     <Content Include="Sinapse.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

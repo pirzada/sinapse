@@ -12,9 +12,9 @@ namespace Sinapse.Core.Systems
     /// </summary>
     /// <remarks>This is an abstract class and cannot be instantiated.</remarks>
     [Serializable]
-    public abstract class AdaptiveSystem : ISinapseComponent
+    public abstract class AdaptiveSystem : ISinapseDocument
     {
-        private SinapseComponent workplaceComponent;
+        private SinapseDocument workplaceComponent;
 
         private SystemInputOutputCollection inputs;
         private SystemInputOutputCollection outputs;
@@ -24,7 +24,7 @@ namespace Sinapse.Core.Systems
 
         public AdaptiveSystem()
         {
-            workplaceComponent = new SinapseComponent();
+            workplaceComponent = new SinapseDocument();
 
             inputs = new SystemInputOutputCollection();
             outputs = new SystemInputOutputCollection();

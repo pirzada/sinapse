@@ -17,9 +17,9 @@ using Sinapse.Windows.Editors.AdaptiveSystems.Controls;
 
 namespace Sinapse.Windows.Documents
 {
-    public partial class NetworkSystemDocument : DockContent, IWorkplaceDocument
+    public partial class NetworkSystemDocument : DockContent, ISinapseDocumentView
     {
-        private WorkplaceItem item;
+        private SinapseDocumentInfo item;
         private ActivationNetworkSystem system;
 
         private SystemInterfaceSpecification wndInterface;
@@ -88,7 +88,7 @@ namespace Sinapse.Windows.Documents
             get { throw new Exception("The method or operation is not implemented."); }
         }
 
-        public WorkplaceItem Item
+        public SinapseDocumentInfo Item
         {
             get { return item; }
             set { item = value; }

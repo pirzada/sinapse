@@ -14,42 +14,19 @@ namespace Sinapse.Core
 
     public interface ISerializableObject<T>
     {
-        // IO Data
-        string FilePath { get; set; }
-        string FileName { get; set; }
-        string FullPath { get; }
-        string DefaultExtension { get; }
-
-        // bool HasChanges { get; set; }
-
-        // DateTime Creation { get; }
-
         bool Save(string path);
         bool Save();
 
-        event EventHandler FileChanged;
         event EventHandler FileSaved;
-
     }
 
     [Serializable]
     public class SerializableObject<T> : ISerializableObject<T>
         where T : ISerializableObject<T>
     {
+
         private T owner;
-        
 
-        [NonSerialized]
-        private string filename;
-
-        [NonSerialized]
-        private string filepath;
-/*        
-        [NonSerialized]
-        private bool hasChanges;
-*/
-        [field: NonSerialized]
-        public event EventHandler FileChanged;
 
         [field: NonSerialized]
         public event EventHandler FileSaved;
@@ -59,76 +36,9 @@ namespace Sinapse.Core
         public SerializableObject(T owner)
         {
             this.owner = owner;
-         //   this.name = String.Empty;
-         //   this.description = String.Empty;
-         //   this.remarks = String.Empty;
-            this.filepath = String.Empty;
-            this.filename = String.Empty;
-//            this.hasChanges = false;
         }
 
 
-
-        /// <summary>
-        ///   Gets the full path for this object, excluding its filename.
-        /// </summary>
-        public string FilePath
-        {
-            get { return filepath; }
-            set
-            {
-                filepath = value;
-                OnFileChanged(EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        ///   Gets the filename for this object.
-        /// </summary>
-        public string FileName
-        {
-            get { return filename; }
-            set
-            {
-                filename = value;
-                OnFileChanged(EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        ///   Gets the default extension for this object.
-        /// </summary>
-        public string DefaultExtension
-        {
-            get { return owner.DefaultExtension; }
-        }
-
-        /// <summary>
-        ///   Gets the full path for this object, including its filename.
-        /// </summary>
-        public string FullPath
-        {
-            get { return Path.Combine(FilePath, FileName); }
-        }
-
-/*
-        /// <summary>
-        ///   Gets a boolean value indicating if the file has changed
-        ///   since the last time it was saved.
-        /// </summary>
-        public bool HasChanges
-        {
-            get { return hasChanges; }
-            set { hasChanges = value; }
-        }
-*/
-
-
-        protected void OnFileChanged(EventArgs e)
-        {
-            if (FileChanged != null)
-                FileChanged.Invoke(this, e);
-        }
 
         protected void OnFileSaved(EventArgs e)
         {
@@ -136,18 +46,6 @@ namespace Sinapse.Core
                 FileSaved.Invoke(this, e);
         }
 
-
-
-        /// <summary>
-        ///   Saves the object.
-        /// </summary>
-        /// <returns>
-        ///   Returns true for success, false otherwise.
-        /// </returns>
-        public bool Save()
-        {
-            return Save(FullPath);
-        }
 
 
         /// <summary>
@@ -167,10 +65,6 @@ namespace Sinapse.Core
 
             try
             {
-                this.filename = Path.GetFileName(path);
-                this.filepath = Path.GetDirectoryName(path);
-
-                //string fullpath = Path.Combine(path, name + "." + extension);
                 fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
                 gzipStream = new GZipStream(fileStream, CompressionMode.Compress);
 
@@ -178,25 +72,11 @@ namespace Sinapse.Core
                 binaryFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
                 binaryFormatter.Serialize(gzipStream, owner);
 
- //               hasChanges = false;
                 success = true;
                 OnFileSaved(EventArgs.Empty);
             }
-            catch (SerializationException exception)
+            catch (Exception ex)
             {
-                // TODO: Add exception handling here
-                success = false;
-                throw;
-            }
-            catch (IOException exception)
-            {
-                // TODO: Add exception handling here
-                success = false;
-                throw;
-            }
-            catch (Exception exception)
-            {
-                // TODO: Add exception handling here
                 success = false;
                 throw;
             }
@@ -235,29 +115,9 @@ namespace Sinapse.Core
                 binaryFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
                 binaryFormatter.Binder = new AnyVersionObjectBinder();
                 obj = (T)binaryFormatter.Deserialize(gzipStream);
-
-                obj.FilePath = Path.GetDirectoryName(path);
-                obj.FileName = Path.GetFileName(path);
-//                obj.HasChanges = false;
             }
-            catch (FileNotFoundException e)
+            catch (Exception ex)
             {
-                // TODO: Add exception handling here
-                throw;
-            }
-            catch (SerializationException e)
-            {
-                // TODO: Add exception handling here
-                throw;
-            }
-            catch (IOException e)
-            {
-                // TODO: Add exception handling here
-                throw;
-            }
-            catch (Exception e)
-            {
-                // TODO: Add exception handling here
                 throw;
             }
             finally
@@ -268,7 +128,6 @@ namespace Sinapse.Core
 
             return obj;
         }
-
 
 
 

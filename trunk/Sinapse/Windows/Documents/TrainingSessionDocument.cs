@@ -16,10 +16,10 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace Sinapse.Windows.Documents
 {
 
-    public partial class TrainingSessionDocument :  WeifenLuo.WinFormsUI.Docking.DockContent, IWorkplaceDocument
+    public partial class TrainingSessionDocument :  WeifenLuo.WinFormsUI.Docking.DockContent, ISinapseDocumentView
     {
 
-        private WorkplaceItem item;
+        private SinapseDocumentInfo item;
         private BackpropagationTrainingSession session;
         private TrainingSessionController controller;
         private SavepointsWindow savepoints;
@@ -84,7 +84,7 @@ namespace Sinapse.Windows.Documents
             get { return null; }
         }
 
-        public WorkplaceItem Item
+        public SinapseDocumentInfo Item
         {
             get { return item; }
             set { item = value; }

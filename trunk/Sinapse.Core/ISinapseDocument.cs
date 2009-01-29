@@ -1,29 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Sinapse.Core
 {
-    public interface ISinapseComponent //: IDisposable
+    public interface ISinapseDocument
     {
         string Name { get; set;}
         string Description { get; set;}
         string Remarks { get; set;}
+        FileInfo File { get; }
 
         bool HasChanges { get; }
-        //   void Close();
 
         event EventHandler Changed;
- //       event EventHandler Closed;
-
     }
 
     [Serializable]
-    internal sealed class SinapseComponent : ISinapseComponent
+    internal class SinapseDocument : ISinapseDocument
     {
+               
+        
         private string name;
         private string description;
         private string remarks;
+        private FileInfo fileInfo;
 
         [NonSerialized]
         private bool hasChanges;
@@ -33,13 +35,15 @@ namespace Sinapse.Core
 
 
 
-        public SinapseComponent()
+        public SinapseDocument(String name, FileInfo fileInfo)
         {
-            this.name = String.Empty;
-            this.description = String.Empty;
+            this.name = name;
+            this.fileInfo = fileInfo;
             this.remarks = String.Empty;
+            this.description = String.Empty;
         }
 
+        
 
         public string Name
         {
@@ -95,11 +99,42 @@ namespace Sinapse.Core
             }
         }
 
+        public FileInfo File
+        {
+            get { return fileInfo; }
+        }
+
+
+
+
 
         protected void OnChanged(EventArgs e)
         {
             if (Changed != null)
                 Changed.Invoke(this, e);
         }
+
+
+
+        #region Static Methods - Extensions & Icons
+        private static Dictionary<String, Type> extensions;
+        private static Dictionary<Type, String> icons;
+
+        public static Type GetType(string extension)
+        {
+            return extensions[extension];
+        }
+
+        public static String GetIcon(Type type)
+        {
+            return icons[type];
+        }
+
+        public static String GetExtension(Type type)
+        {
+            extensions.
+        }
+        #endregion
+
     }
 }

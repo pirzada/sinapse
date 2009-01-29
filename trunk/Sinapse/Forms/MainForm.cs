@@ -47,12 +47,9 @@ namespace Sinapse.Forms
     internal sealed partial class MainForm : Form
     {
 
-        private WorkplaceWindow windowWorkplace;
-        private PropertyWindow windowProperties;
-        private HistoryWindow windowHistory;
-        private TaskWindow windowTask;
+        
 
-        private Dictionary<WorkplaceItem, IWorkplaceDocument> openDocuments;
+        private Dictionary<SinapseDocumentInfo, ISinapseDocumentView> openDocuments;
 
 
         //---------------------------------------------
@@ -66,7 +63,7 @@ namespace Sinapse.Forms
               ControlStyles.OptimizedDoubleBuffer,
               true);
 
-            this.openDocuments = new Dictionary<WorkplaceItem, IWorkplaceDocument>();
+            this.openDocuments = new Dictionary<SinapseDocumentInfo, ISinapseDocumentView>();
 
             InitializeComponent();
 /*
@@ -193,12 +190,12 @@ namespace Sinapse.Forms
 
         private void Workplace_Closing(object sender, CancelEventArgs e)
         {
-            WorkplaceItem[] items = new WorkplaceItem[openDocuments.Keys.Count];
+            SinapseDocumentInfo[] items = new SinapseDocumentInfo[openDocuments.Keys.Count];
             openDocuments.Keys.CopyTo(items, 0);
 
-            foreach (WorkplaceItem item in items)
+            foreach (SinapseDocumentInfo item in items)
             {
-                IWorkplaceDocument document = openDocuments[item];
+                ISinapseDocumentView document = openDocuments[item];
 
                 if (document.HasChanges)
                 {
@@ -248,7 +245,7 @@ namespace Sinapse.Forms
         private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
         {
             // A WorkplaceItem has been double clicked
-            WorkplaceItem item = e.WorkplaceItem;
+            SinapseDocumentInfo item = e.WorkplaceItem;
 
 
             // Check if the item isn't already open
@@ -260,7 +257,7 @@ namespace Sinapse.Forms
             else
             {
                 // The item must be open
-                ISinapseComponent component = item.Open();
+                ISinapseDocument component = item.Open();
 
                 // Verify which editor to open
                 if (item.Type == typeof(TableDataSource))
@@ -299,7 +296,7 @@ namespace Sinapse.Forms
 
         void editor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            openDocuments.Remove((sender as IWorkplaceDocument).Item);
+            openDocuments.Remove((sender as ISinapseDocumentView).Item);
         }
         #endregion
 
@@ -347,9 +344,9 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileSave_Click(object sender, EventArgs e)
         {
-            if (dockMain.ActiveDocument is IWorkplaceDocument)
+            if (dockMain.ActiveDocument is ISinapseDocumentView)
             {
-                (dockMain.ActiveDocument as IWorkplaceDocument).Save();
+                (dockMain.ActiveDocument as ISinapseDocumentView).Save();
             }
 
             Workplace.Active.Save();
@@ -360,9 +357,9 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileSaveAs_Click(object sender, EventArgs e)
         {
-            if (dockMain.ActiveDocument is IWorkplaceDocument)
+            if (dockMain.ActiveDocument is ISinapseDocumentView)
             {
-                (dockMain.ActiveDocument as IWorkplaceDocument).SaveAs();
+                (dockMain.ActiveDocument as ISinapseDocumentView).SaveAs();
             }
 
             Workplace.Active.Save();
@@ -375,8 +372,8 @@ namespace Sinapse.Forms
         {
             foreach (IDockContent content in this.dockMain.Documents)
             {
-                if (content is IWorkplaceDocument)
-                    (content as IWorkplaceDocument).Save();
+                if (content is ISinapseDocumentView)
+                    (content as ISinapseDocumentView).Save();
             }
 
             Workplace.Active.Save();
