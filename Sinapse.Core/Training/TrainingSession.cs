@@ -9,11 +9,11 @@ using Sinapse.Core.Filters;
 
 namespace Sinapse.Core.Training
 {
-    public abstract class TrainingSession : ISinapseComponent
+    public abstract class TrainingSession : ISinapseDocument
     {
         public enum SessionState { Stopped, Paused, Running, Error };
 
-        private SinapseComponent workplaceComponent;
+        private SinapseDocument workplaceComponent;
 
         private TrainingHistory history;
         private TableDataSource dataSource;
@@ -111,7 +111,7 @@ namespace Sinapse.Core.Training
 
 
 
-        #region IWorkplaceComponent Members
+        #region ISinapseDocument Members
 
         public string Name
         {

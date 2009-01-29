@@ -55,8 +55,8 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.outputFilters);
-            this.splitContainer2.Size = new System.Drawing.Size(774, 467);
-            this.splitContainer2.SplitterDistance = 613;
+            this.splitContainer2.Size = new System.Drawing.Size(916, 597);
+            this.splitContainer2.SplitterDistance = 755;
             this.splitContainer2.TabIndex = 4;
             // 
             // splitContainer1
@@ -73,7 +73,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.activationNetworkDesigner1);
-            this.splitContainer1.Size = new System.Drawing.Size(613, 467);
+            this.splitContainer1.Size = new System.Drawing.Size(755, 597);
             this.splitContainer1.SplitterDistance = 153;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -83,7 +83,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems
             this.inputFilters.Filters = null;
             this.inputFilters.Location = new System.Drawing.Point(0, 0);
             this.inputFilters.Name = "inputFilters";
-            this.inputFilters.Size = new System.Drawing.Size(153, 467);
+            this.inputFilters.Size = new System.Drawing.Size(153, 597);
             this.inputFilters.TabIndex = 1;
             // 
             // activationNetworkDesigner1
@@ -91,7 +91,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems
             this.activationNetworkDesigner1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.activationNetworkDesigner1.Location = new System.Drawing.Point(0, 0);
             this.activationNetworkDesigner1.Name = "activationNetworkDesigner1";
-            this.activationNetworkDesigner1.Size = new System.Drawing.Size(456, 467);
+            this.activationNetworkDesigner1.Size = new System.Drawing.Size(598, 597);
             this.activationNetworkDesigner1.TabIndex = 1;
             // 
             // outputFilters
@@ -100,14 +100,14 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems
             this.outputFilters.Filters = null;
             this.outputFilters.Location = new System.Drawing.Point(0, 0);
             this.outputFilters.Name = "outputFilters";
-            this.outputFilters.Size = new System.Drawing.Size(157, 467);
+            this.outputFilters.Size = new System.Drawing.Size(157, 597);
             this.outputFilters.TabIndex = 0;
             // 
             // ActivationNetworkDesigner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 467);
+            this.ClientSize = new System.Drawing.Size(916, 597);
             this.Controls.Add(this.splitContainer2);
             this.Name = "ActivationNetworkDesigner";
             this.TabText = "NetworkSystemDesign";

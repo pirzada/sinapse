@@ -19,35 +19,37 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+
+using AForge.Mathematics;
+
+using Sinapse.Core.Filters;
+using Sinapse.Core.Systems;
 
 
-namespace Sinapse.Data.Structures
+namespace Sinapse.Core.Sources
 {
+
+    [Flags]
+    public enum DataSourceSet { None = 0, Training = 2, Testing = 8, Validation = 16, };
+
+    public enum DataSourceRole { None = 0, Input = 1, Output = 2 };
+
     /// <summary>
-    /// Holds both input and output vectors to be fed to a neural network.
+    ///   This class encompass a Adaptive System DataSource, or in other words, a
+    ///   source of information that can be used to train and feed Adaptive Systems.
+    ///   A common example of data sources are tables of sample data or a collection
+    ///   of images.
     /// </summary>
-    internal struct TrainingVectors
+    public interface ISource
     {
+        void Shuffle();
 
-        public double[][] Input;
-        public double[][] Output;
+        object GetData(DataSourceSet set);
+        object GetData(DataSourceSet set, DataSourceRole role);
+        object GetData(DataSourceSet set, int subset);
+        object GetData(DataSourceSet set, int subset, DataSourceRole role);
 
-
-        public TrainingVectors(double[][] input, double[][] output)
-        {
-            this.Input = input;
-            this.Output = output;
-        }
-
-
-        public bool IsEmpty
-        {
-            get
-            {
-                return (Input == null || Output == null ||
-                    Input.Length == 0 || Output.Length == 0);
-            }
-        }
-
+        event EventHandler DataChanged;
     }
 }

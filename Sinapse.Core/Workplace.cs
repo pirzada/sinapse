@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Runtime.Serialization;
+using System.IO;
 
 using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
@@ -29,10 +30,11 @@ using Sinapse.Core.Training;
 namespace Sinapse.Core
 {
     /// <summary>
-    /// The Workplace is a collection of Network Systems, Data Sources and Training Sessions currently hosted in a usage session of the program.
+    ///   The Workplace is a collection of Network Systems, Data Sources and
+    ///   Training Sessions currently hosted in a usage session of the program.
     /// </summary>
     [Serializable]
-    public class Workplace : ISerializableObject<Workplace>, ISinapseComponent
+    public class Workplace : ISerializableObject<Workplace>, ISinapseDocument
     {
 
         #region Active Workplace Placeholder
@@ -66,76 +68,40 @@ namespace Sinapse.Core
         public static event EventHandler ActiveWorkplaceChanged;
         #endregion
 
+        private DirectoryInfo root;
+
+        private SinapseDocumentInfoCollection documents;
 
 
-        private SerializableObject<Workplace> serializableObject;
-        private SinapseComponent workplaceComponent;
-
-        private WorkplaceItemCollection adaptiveSystems;
-        private WorkplaceItemCollection dataSources;
-        private WorkplaceItemCollection trainingSessions;
-
-
-        [field: NonSerialized]
-        public event EventHandler Changed;
 
         [field: NonSerialized]
         public event CancelEventHandler Closing;
 
 
 
-        public Workplace(string name, string location)
-            : this()
-        {
-            serializableObject.FilePath = location;
-            serializableObject.FileName = name + "." + DefaultExtension;
-            workplaceComponent.Name = name;
-        }
 
-        public Workplace()
-        {
-            // Initialize simulated multiple-inheritance helpers
-            serializableObject = new SerializableObject<Workplace>(this);
-            workplaceComponent = new SinapseComponent();
-
-            dataSources = new WorkplaceItemCollection(this);
-            adaptiveSystems = new WorkplaceItemCollection(this);
-            trainingSessions = new WorkplaceItemCollection(this);
-
-            dataSources.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
-            adaptiveSystems.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
-            trainingSessions.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
-        }
-
-/*
-        [OnDeserialized]
-        private void onDeserializing(StreamingContext context)
-        {
-            dataSources.Owner = this;
-            adaptiveSystems.Owner = this;
-            trainingSessions.Owner = this;
-        }
-
-        [OnSerializing]
-        private void onSerializing(StreamingContext context)
+        public Workplace(string name, FileInfo info)
         {
             
-        }
-*/
+            // Initialize simulated multiple-inheritance helpers
+            serializableObject = new SerializableObject<Workplace>(this);
+            sinapseDocument = new SinapseDocument(name, info);
 
+            documents = new SinapseDocumentInfoCollection(this);
 
-        public WorkplaceItemCollection AdaptiveSystems
-        {
-            get { return adaptiveSystems; }
-        }
-        public WorkplaceItemCollection DataSources
-        {
-            get { return dataSources; }
+            documents.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
         }
 
-        public WorkplaceItemCollection TrainingSessions
+
+
+        public SinapseDocumentInfoCollection Documents
         {
-            get { return trainingSessions; }
+            get { return documents; }
+        }
+
+        public DirectoryInfo Root
+        {
+            get { return this.root; }
         }
 
 
@@ -156,86 +122,23 @@ namespace Sinapse.Core
 
 
 
-        #region IWorkplaceComponent Members
-
-        public string Name
-        {
-            get { return workplaceComponent.Name; }
-            set { workplaceComponent.Name = value; }
-        }
-
-        public string Description
-        {
-            get { return workplaceComponent.Description; }
-            set { workplaceComponent.Description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return workplaceComponent.Remarks; }
-            set { workplaceComponent.Remarks = value; }
-        }
-
-        public bool HasChanges
-        {
-            get { return workplaceComponent.HasChanges; }
-            protected set { workplaceComponent.HasChanges = value; }
-        }
-        #endregion
-
-
-
-
         #region SerializableObject Members
+        private SerializableObject<Workplace> serializableObject;
 
-
-        public string FileName
-        {
-            get { return serializableObject.FileName; }
-            set { serializableObject.FileName = value; }
-        }
-
-        public string FilePath
-        {
-            get { return serializableObject.FilePath; }
-            set { serializableObject.FilePath = value; }
-        }
-
-        public string DefaultExtension
-        {
-            get { return "swp"; }
-        }
-
-
-        public string FullPath
-        {
-            get { return serializableObject.FullPath; }
-        }
-
-
+ 
         public bool Save(string path)
         {
-            bool success = serializableObject.Save(path);
-            if (success) this.HasChanges = false;
-            return success;
+            return serializableObject.Save(path);
         }
 
         public bool Save()
         {
-            bool success = serializableObject.Save();
-            if (success) this.HasChanges = false;
-            return success;
+            return serializableObject.Save(sinapseDocument.File.FullName);
         }
 
         public static Workplace Open(string path)
         {
             return SerializableObject<Workplace>.Open(path);
-        }
-
-        public event EventHandler FileChanged
-        {
-            add { serializableObject.FileChanged += value; }
-            remove { serializableObject.FileChanged -= value; }
         }
 
         public event EventHandler FileSaved
@@ -246,6 +149,45 @@ namespace Sinapse.Core
         #endregion
 
 
+
+        #region ISinapseDocument Members
+        private SinapseDocument sinapseDocument;
+
+        string ISinapseDocument.Name
+        {
+            get { return sinapseDocument.Name; }
+            set { sinapseDocument.Name = value; }
+        }
+
+        string ISinapseDocument.Description
+        {
+            get { return sinapseDocument.Description; }
+            set { sinapseDocument.Description = value; }
+        }
+
+        string ISinapseDocument.Remarks
+        {
+            get { return sinapseDocument.Remarks; }
+            set { sinapseDocument.Remarks = value; }
+        }
+
+        FileInfo ISinapseDocument.File
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        bool HasChanges
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        event EventHandler Changed
+        {
+            add { sinapseDocument.Changed += value; }
+            remove { sinapseDocument.Changed -= value; }
+        }
+
+        #endregion
     }
 
 

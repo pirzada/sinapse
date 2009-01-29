@@ -38,10 +38,10 @@ namespace Sinapse.Core.Sources
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
     [Serializable]
-    public class TableDataSource : IDataSource, ISerializableObject<TableDataSource>
+    public class TableDataSource : ISource, ISerializableObject<TableDataSource>
     {
 
-        private SinapseComponent workplaceComponent;
+        private SinapseDocument workplaceComponent;
         private SerializableObject<TableDataSource> serializableObject;
 
 
@@ -66,7 +66,7 @@ namespace Sinapse.Core.Sources
         {
             // Initialize simulated multiple-inheritance helpers
             this.serializableObject = new SerializableObject<TableDataSource>(this);
-            this.workplaceComponent = new SinapseComponent();
+            this.workplaceComponent = new SinapseDocument();
 
             this.dataTable = new DataTable(name);
             this.columns = new TableDataSourceColumnCollection();
@@ -507,22 +507,22 @@ namespace Sinapse.Core.Sources
         #region IDataSource Members
 
 
-        object IDataSource.GetData(DataSourceSet set)
+        object ISource.GetData(DataSourceSet set)
         {
             return GetData(set);
         }
 
-        object IDataSource.GetData(DataSourceSet set, int subset)
+        object ISource.GetData(DataSourceSet set, int subset)
         {
             return GetData(set, subset);
         }
 
-        object IDataSource.GetData(DataSourceSet set, DataSourceRole role)
+        object ISource.GetData(DataSourceSet set, DataSourceRole role)
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        object IDataSource.GetData(DataSourceSet set, int subset, DataSourceRole role)
+        object ISource.GetData(DataSourceSet set, int subset, DataSourceRole role)
         {
             throw new Exception("The method or operation is not implemented.");
         }

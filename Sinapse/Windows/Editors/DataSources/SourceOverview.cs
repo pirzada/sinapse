@@ -18,7 +18,7 @@ namespace Sinapse.Windows.Editors.DataSources
     public partial class SourceOverview : DockContent
     {
 
-        private IDataSource dataSource;
+        private ISource dataSource;
 
 
         public SourceOverview()
@@ -26,7 +26,7 @@ namespace Sinapse.Windows.Editors.DataSources
             InitializeComponent();
         }
 
-        public IDataSource DataSource
+        public ISource DataSource
         {
             get { return dataSource; }
             set

@@ -35,8 +35,12 @@ namespace Sinapse.Windows
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnViewAll = new System.Windows.Forms.ToolStripButton();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnViewDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnViewCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSource = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,16 +77,21 @@ namespace Sinapse.Windows
             // 
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "Workspace");
+            this.imageList.Images.SetKeyName(0, "Workplace");
             this.imageList.Images.SetKeyName(1, "Folder");
+            this.imageList.Images.SetKeyName(2, "System");
+            this.imageList.Images.SetKeyName(3, "Source");
+            this.imageList.Images.SetKeyName(4, "Session");
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton2,
             this.toolStripSeparator1,
+            this.btnViewAll,
             this.btnRefresh,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(221, 25);
@@ -103,6 +112,16 @@ namespace Sinapse.Windows
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // btnViewAll
+            // 
+            this.btnViewAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnViewAll.Image = global::Sinapse.Properties.Resources.view_tree;
+            this.btnViewAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnViewAll.Name = "btnViewAll";
+            this.btnViewAll.Size = new System.Drawing.Size(23, 22);
+            this.btnViewAll.Text = "View All";
+            this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
+            // 
             // btnRefresh
             // 
             this.btnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -117,6 +136,30 @@ namespace Sinapse.Windows
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnViewDirectory,
+            this.btnViewCategory});
+            this.toolStripDropDownButton1.Image = global::Sinapse.Properties.Resources.view_choose;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            // 
+            // btnViewDirectory
+            // 
+            this.btnViewDirectory.Name = "btnViewDirectory";
+            this.btnViewDirectory.Size = new System.Drawing.Size(155, 22);
+            this.btnViewDirectory.Text = "Directory View";
+            // 
+            // btnViewCategory
+            // 
+            this.btnViewCategory.Name = "btnViewCategory";
+            this.btnViewCategory.Size = new System.Drawing.Size(155, 22);
+            this.btnViewCategory.Text = "Category View";
             // 
             // menuSource
             // 
@@ -133,7 +176,7 @@ namespace Sinapse.Windows
             this.videoToolStripMenuItem,
             this.soundToolStripMenuItem});
             this.addNewSourceToolStripMenuItem.Name = "addNewSourceToolStripMenuItem";
-            this.addNewSourceToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.addNewSourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addNewSourceToolStripMenuItem.Text = "Add";
             // 
             // tableToolStripMenuItem
@@ -169,8 +212,8 @@ namespace Sinapse.Windows
             this.lbNothingToShow.Name = "lbNothingToShow";
             this.lbNothingToShow.Size = new System.Drawing.Size(221, 357);
             this.lbNothingToShow.TabIndex = 2;
-            this.lbNothingToShow.Text = "No Workplace loaded. Please click the \'New\' menu  and select \'Workplace\' to begin" +
-                ".";
+            this.lbNothingToShow.Text = "No Workplace loaded. Please click the \'New\' menu and select \'Workplace\' to begin." +
+                "";
             this.lbNothingToShow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuTraining
@@ -269,5 +312,9 @@ namespace Sinapse.Windows
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem activationNetworkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distanceNetworkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnViewAll;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem btnViewDirectory;
+        private System.Windows.Forms.ToolStripMenuItem btnViewCategory;
     }
 }
