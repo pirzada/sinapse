@@ -10,6 +10,7 @@ using Sinapse.Core.Filters;
 namespace Sinapse.Core.Systems
 {
     [Serializable]
+    [DefaultExtension(".system.ann")]
     public class ActivationNetworkSystem : NetworkSystem, ISerializableObject<ActivationNetworkSystem>
     {
         private SerializableObject<ActivationNetworkSystem> serializableObject;

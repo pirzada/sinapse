@@ -114,6 +114,10 @@
       <Project>{943CEC35-59C3-4B03-A4E6-7E1BA5152090}</Project>
       <Name>AForge.Statistics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Utils\Sinapse.Utils.csproj">
+      <Project>{EF37DCC0-B749-45AD-BCB8-D86D0661C300}</Project>
+      <Name>Sinapse.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Requisites.txt" />

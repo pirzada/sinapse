@@ -112,6 +112,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
+    <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fa7dfa6666a2638, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WizardBase.dll</HintPath>
+    </Reference>
     <Reference Include="ZedGraph, Version=5.0.4.13542, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ZedGraph\ZedGraph.dll</HintPath>
@@ -476,10 +480,6 @@
       <Project>{53B51230-2CD7-435B-8677-A3E24D134CD8}</Project>
       <Name>AForge.Neuro</Name>
     </ProjectReference>
-    <ProjectReference Include="..\lib\WizardBase\WizardBase.csproj">
-      <Project>{C742E00B-3933-4834-BC41-19848E1E3AF2}</Project>
-      <Name>WizardBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sinapse.Core\Sinapse.Core.csproj">
       <Project>{CE75E853-93A7-4690-9EE3-6AFB684E48C1}</Project>
       <Name>Sinapse.Core</Name>
@@ -492,9 +492,13 @@
       <Project>{4235CA0B-2268-438B-8BD6-F1126753954B}</Project>
       <Name>Sinapse.Diagramming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sinapse.Forms.Controls\Sinapse.Forms.Controls.csproj">
+    <ProjectReference Include="..\Sinapse.Forms.Controls\Sinapse.WinForms.Controls.csproj">
       <Project>{81CA91DE-585F-4ED7-A086-24F1F2C95A6B}</Project>
-      <Name>Sinapse.Forms.Controls</Name>
+      <Name>Sinapse.WinForms.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sinapse.Utils\Sinapse.Utils.csproj">
+      <Project>{EF37DCC0-B749-45AD-BCB8-D86D0661C300}</Project>
+      <Name>Sinapse.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
