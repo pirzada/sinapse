@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AForge.Neuro", "lib\AForge.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AForge.Core", "lib\AForge.NET\Core\AForge.Core.csproj", "{BFAF50DC-4942-46B8-8615-2A0B4CF08AD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse", "Sinapse\Sinapse.csproj", "{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinapse.WinForms", "Sinapse\Sinapse.WinForms.csproj", "{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C742E00B-3933-4834-BC41-19848E1E3AF2} = {C742E00B-3933-4834-BC41-19848E1E3AF2}
 	EndProjectSection

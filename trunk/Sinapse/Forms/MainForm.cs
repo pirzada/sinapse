@@ -47,9 +47,7 @@ namespace Sinapse.Forms
     internal sealed partial class MainForm : Form
     {
 
-        
-
-        private Dictionary<SinapseDocumentInfo, ISinapseDocumentView> openDocuments;
+        private Workbench workbench;
 
 
         //---------------------------------------------
@@ -63,34 +61,12 @@ namespace Sinapse.Forms
               ControlStyles.OptimizedDoubleBuffer,
               true);
 
-            this.openDocuments = new Dictionary<SinapseDocumentInfo, ISinapseDocumentView>();
+            this.workbench = new Workbench(this.dockMain);
 
             InitializeComponent();
-/*
-            this.SuspendLayout();
-            this.windowWorkplace = new WorkplaceWindow();
-            this.windowWorkplace.WorkplaceContentDoubleClicked += new WorkplaceContentDoubleClickedEventHandler(windowWorkplace_WorkplaceContentDoubleClicked);
-            this.windowWorkplace.GotFocus += new EventHandler(windowWorkplace_GotFocus);
-            this.windowWorkplace.SelectionChanged += new TreeViewEventHandler(windowWorkplace_SelectionChanged);
-            this.windowWorkplace.Show(this.dockMain, DockState.DockLeft);
 
-            this.windowProperties = new PropertyWindow();
-            this.windowProperties.Show(this.windowWorkplace.Pane, DockAlignment.Bottom, 0.4);
-
-            this.windowHistory = new HistoryWindow();
-            this.windowHistory.Show(this.dockMain, DockState.DockBottomAutoHide);
-
-            this.windowTask = new TaskWindow();
-            this.windowTask.Show(this.dockMain, DockState.DockBottomAutoHide);
-*/
-            this.lbVersion.Text = "v" + Application.ProductVersion;
- //           this.ResumeLayout(true);
-
-
-            
+            this.workbench.Load();
         }
-
-
         
         #endregion
 
