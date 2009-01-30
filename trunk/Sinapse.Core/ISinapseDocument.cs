@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Reflection;
 
 namespace Sinapse.Core
 {
@@ -117,24 +118,52 @@ namespace Sinapse.Core
 
 
         #region Static Methods - Extensions & Icons
-        private static Dictionary<String, Type> extensions;
-        private static Dictionary<Type, String> icons;
-
         public static Type GetType(string extension)
         {
-            return extensions[extension];
-        }
+            Type[] types = Sinapse.Utils.GetTypesImplementingInterface(
+                Assembly.GetAssembly(typeof(ISinapseDocument)), typeof(ISinapseDocument));
+            
+            foreach (Type type in types)
+            {
+                object[] attr = type.GetCustomAttributes(typeof(DefaultExtension), false);
+                if (attr.Length > 0)
+                {
+                    if ((attr[0] as DefaultExtension).Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)))
+                      return type;
+                }
+            }
 
-        public static String GetIcon(Type type)
-        {
-            return icons[type];
+            return null;
         }
 
         public static String GetExtension(Type type)
         {
-            extensions.
+            object[] attr = type.GetCustomAttributes(typeof(DefaultExtension), false);
+            if (attr.Length > 0) return (attr[0] as DefaultExtension).Extension;
+            throw new ArgumentException("", "type");
         }
         #endregion
+
+    }
+
+
+
+    [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    sealed class DefaultExtension : Attribute
+    {
+        readonly string extension;
+
+        // This is a positional argument
+        public DefaultExtension(string extension)
+        {
+            this.extension = extension;
+        }
+
+        public String Extension
+        {
+            get { return extension; }
+            //set { extension = value; }
+        }
 
     }
 }

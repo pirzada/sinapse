@@ -32,29 +32,7 @@ namespace Sinapse.Tools
     {
 
 
-        /// <summary>
-        /// Returns all types in the current AppDomain implementing the interface or inheriting the type. 
-        /// </summary>
-        public static Type[] GetTypesImplementingInterface(Type baseType)
-        {
 
-            List<Type> childTypes = new List<Type>();
-
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    foreach (Type interfaceType in type.GetInterfaces())
-                    {
-                        if (interfaceType.Equals(baseType))
-                        {
-                            childTypes.Add(type);
-                        }
-                    }
-                }
-            }
-            return childTypes.ToArray();
-        }
 
 
         public static double ConvertRange(int value, DoubleRange from, DoubleRange to)

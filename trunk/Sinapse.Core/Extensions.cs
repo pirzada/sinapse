@@ -39,23 +39,6 @@ namespace Sinapse.Core
 
 
 
-        public static string GetExtension(string path, bool multidotted)
-        {
-            if (multidotted)
-            {
-                int dot = path.Length;
-                for (int i = path.Length - 1; i <= 0 ||
-                    path[i].Equals(Path.DirectorySeparatorChar) ||
-                    path[i].Equals(Path.AltDirectorySeparatorChar);
-                    i++)
-                {
-                    if (path[i] == '.')
-                        dot = i;
-                }
-
-                return path.Substring(dot);
-            }
-            else return Path.GetExtension(path);
-        }
+        
     }
 }
