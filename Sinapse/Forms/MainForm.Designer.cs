@@ -48,9 +48,6 @@ namespace Sinapse.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.panelTitle = new System.Windows.Forms.Panel();
-            this.lbVersion = new System.Windows.Forms.Label();
-            this.lbTitle = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,46 +142,12 @@ namespace Sinapse.Forms
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openWorkplaceDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.panelTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelTitle
-            // 
-            this.panelTitle.BackColor = System.Drawing.Color.DarkBlue;
-            this.panelTitle.Controls.Add(this.lbVersion);
-            this.panelTitle.Controls.Add(this.lbTitle);
-            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitle.Location = new System.Drawing.Point(0, 0);
-            this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(792, 50);
-            this.panelTitle.TabIndex = 5;
-            // 
-            // lbVersion
-            // 
-            this.lbVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbVersion.ForeColor = System.Drawing.Color.AliceBlue;
-            this.lbVersion.Location = new System.Drawing.Point(358, 35);
-            this.lbVersion.Name = "lbVersion";
-            this.lbVersion.Size = new System.Drawing.Size(55, 13);
-            this.lbVersion.TabIndex = 0;
-            this.lbVersion.Text = "v0.0.0.0";
-            this.lbVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbTitle
-            // 
-            this.lbTitle.AutoSize = true;
-            this.lbTitle.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitle.ForeColor = System.Drawing.SystemColors.Window;
-            this.lbTitle.Location = new System.Drawing.Point(12, 8);
-            this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(397, 29);
-            this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "Sinapse Neural Networking Tool";
             // 
             // menuStrip
             // 
@@ -199,7 +162,7 @@ namespace Sinapse.Forms
             this.toolsToolStripMenuItem,
             this.MenuExtensionsExcel,
             this.MenuHelp});
-            this.menuStrip.Location = new System.Drawing.Point(0, 50);
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(792, 24);
             this.menuStrip.TabIndex = 10;
@@ -346,37 +309,37 @@ namespace Sinapse.Forms
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // MenuFilePreferences
             // 
             this.MenuFilePreferences.Image = global::Sinapse.Properties.Resources.configure_16;
             this.MenuFilePreferences.Name = "MenuFilePreferences";
-            this.MenuFilePreferences.Size = new System.Drawing.Size(143, 22);
+            this.MenuFilePreferences.Size = new System.Drawing.Size(152, 22);
             this.MenuFilePreferences.Text = "Preferences";
             // 
             // viewToolStripMenuItem
@@ -602,15 +565,15 @@ namespace Sinapse.Forms
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.dataToolStripMenuItem.Text = "Data";
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.dataToolStripMenuItem.Text = "Source";
             this.dataToolStripMenuItem.Visible = false;
             // 
             // trainingToolStripMenuItem1
             // 
             this.trainingToolStripMenuItem1.Name = "trainingToolStripMenuItem1";
-            this.trainingToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
-            this.trainingToolStripMenuItem1.Text = "Training";
+            this.trainingToolStripMenuItem1.Size = new System.Drawing.Size(55, 20);
+            this.trainingToolStripMenuItem1.Text = "Session";
             this.trainingToolStripMenuItem1.Visible = false;
             // 
             // toolsToolStripMenuItem
@@ -858,7 +821,7 @@ namespace Sinapse.Forms
             // toolStripPanel1
             // 
             this.toolStripPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolStripPanel1.Location = new System.Drawing.Point(0, 74);
+            this.toolStripPanel1.Location = new System.Drawing.Point(0, 24);
             this.toolStripPanel1.Name = "toolStripPanel1";
             this.toolStripPanel1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.toolStripPanel1.RowMargin = new System.Windows.Forms.Padding(0);
@@ -871,7 +834,7 @@ namespace Sinapse.Forms
             this.dockMain.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(792, 467);
+            this.dockMain.Size = new System.Drawing.Size(792, 517);
             this.dockMain.TabIndex = 21;
             // 
             // statusStrip1
@@ -894,11 +857,11 @@ namespace Sinapse.Forms
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.dockMain);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 467);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 517);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 74);
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 24);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(792, 492);
+            this.toolStripContainer1.Size = new System.Drawing.Size(792, 542);
             this.toolStripContainer1.TabIndex = 29;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -915,7 +878,6 @@ namespace Sinapse.Forms
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.toolStripPanel1);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.panelTitle);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -924,8 +886,6 @@ namespace Sinapse.Forms
             this.MinimumSize = new System.Drawing.Size(800, 550);
             this.Name = "MainForm";
             this.Text = "Sinapse";
-            this.panelTitle.ResumeLayout(false);
-            this.panelTitle.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStripMain.ResumeLayout(false);
@@ -942,8 +902,6 @@ namespace Sinapse.Forms
 
         #endregion
 
-        private System.Windows.Forms.Panel panelTitle;
-        private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem MenuHelp;
@@ -965,7 +923,6 @@ namespace Sinapse.Forms
         private Sinapse.Forms.Controls.MruComponent mruProviderDocuments;
         private Sinapse.Forms.Controls.MruComponent mruProviderWorkplace;
         private System.Windows.Forms.NotifyIcon notifyIcon;
-        private System.Windows.Forms.Label lbVersion;
         private System.Windows.Forms.ToolStripMenuItem MenuExtensionsExcel;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newWorkplaceToolStripMenuItem;

@@ -190,7 +190,7 @@
     <Compile Include="Windows\Documents\TrainingSessionDocument.Designer.cs">
       <DependentUpon>TrainingSessionDocument.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\IWorkplaceDocument.cs" />
+    <Compile Include="Windows\Documents\ISinapseDocumentView.cs" />
     <Compile Include="Windows\Documents\TableDataSourceDocument.cs">
       <SubType>Form</SubType>
     </Compile>
