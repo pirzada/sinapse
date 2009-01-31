@@ -1,15 +1,23 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Security.Permissions;
+using System.Runtime.InteropServices;
+
+using Sinapse.Properties;
 
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Sinapse.Windows.Documents
 {
+
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+    [ComVisibleAttribute(true)]
     public partial class StartPage : DockContent
     {
         private WebBrowser webBrowser1;
@@ -18,6 +26,42 @@ namespace Sinapse.Windows.Documents
         {
             InitializeComponent();
         }
+
+        public void Refresh()
+        {
+        }
+
+        public void OpenWorkspace(string path)
+        {
+        }
+
+        public void OpenDocument(string path)
+        {
+        }
+
+        public string CreateStartPage(string model)
+        {
+            StringBuilder sb = new StringBuilder(model);
+            sb.Replace("<!--WORKPLACES-->", CreateFileListing("OpenWorkplace", Settings.Default.mruWorkplaces));
+            sb.Replace("<!--DOCUMENTS-->",  CreateFileListing("OpenDocument", Settings.Default.mruDocuments));
+            return sb.ToString();
+        }
+
+        public string CreateFileListing(string method, StringCollection workplaces)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(string path in workplaces)
+            {
+                sb.AppendFormat("<li><a href=\"#\" onclick=\"window.external.{0}('{1}')\">{2}</a></li>\n",
+                    method, path, System.IO.Path.GetFileNameWithoutExtension(path));
+            }
+            return sb.ToString();
+        }
+
+
+
+
+
 
         private void InitializeComponent()
         {
@@ -32,6 +76,7 @@ namespace Sinapse.Windows.Documents
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(292, 266);
             this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.ObjectForScripting = this;
             // 
             // StartPage
             // 
@@ -43,5 +88,6 @@ namespace Sinapse.Windows.Documents
             this.ResumeLayout(false);
 
         }
+
     }
 }

@@ -137,17 +137,11 @@
     <Compile Include="Windows\Editors\AdaptiveSystems\Controls\FilterSequenceControl.Designer.cs">
       <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dialogs\NewAdaptiveSystemDialog.cs">
+    <Compile Include="Forms\Dialogs\NewDocumentDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Dialogs\NewAdaptiveSystemDialog.Designer.cs">
-      <DependentUpon>NewAdaptiveSystemDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NewDataSourceDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dialogs\NewDataSourceDialog.Designer.cs">
-      <DependentUpon>NewDataSourceDialog.cs</DependentUpon>
+    <Compile Include="Forms\Dialogs\NewDocumentDialog.Designer.cs">
+      <DependentUpon>NewDocumentDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Editors\DataSources\ColumnSpecification.cs">
       <SubType>Form</SubType>
@@ -161,45 +155,35 @@
     <Compile Include="Windows\Editors\DataSources\NoteEditor.Designer.cs">
       <DependentUpon>NoteEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Editors\DataSources\SourceOverview.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\SourceOverview.Designer.cs">
-      <DependentUpon>SourceOverview.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Editors\DataSources\TableEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\Editors\DataSources\TableEditor.Designer.cs">
       <DependentUpon>TableEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\NetworkSystemDocument.cs">
+    <Compile Include="Windows\Documents\NetworkSystemView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\NetworkSystemDocument.Designer.cs">
-      <DependentUpon>NetworkSystemDocument.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Documents\SystemQueryDocument.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Documents\SystemQueryDocument.Designer.cs">
-      <DependentUpon>SystemQueryDocument.cs</DependentUpon>
+    <Compile Include="Windows\Documents\NetworkSystemView.Designer.cs">
+      <DependentUpon>NetworkSystemView.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Documents\StartPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TrainingSessionDocument.cs">
+    <Compile Include="Windows\Documents\TrainingSessionView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TrainingSessionDocument.Designer.cs">
-      <DependentUpon>TrainingSessionDocument.cs</DependentUpon>
+    <Compile Include="Windows\Documents\TrainingSessionView.Designer.cs">
+      <DependentUpon>TrainingSessionView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\ISinapseDocumentView.cs" />
-    <Compile Include="Windows\Documents\TableDataSourceDocument.cs">
+    <Compile Include="Windows\Documents\SinapseDocumentView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TableDataSourceDocument.Designer.cs">
-      <DependentUpon>TableDataSourceDocument.cs</DependentUpon>
+    <Compile Include="Windows\Documents\TableSourceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Documents\TableSourceView.Designer.cs">
+      <DependentUpon>TableSourceView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Base\SingleInstanceForm.cs">
       <SubType>Form</SubType>
@@ -209,12 +193,6 @@
     </Compile>
     <Compile Include="Forms\Dialogs\NewWorkplaceDialog.Designer.cs">
       <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\SystemInterfaceSpecification.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\SystemInterfaceSpecification.Designer.cs">
-      <DependentUpon>SystemInterfaceSpecification.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Editors\AdaptiveSystems\Controls\LayersControl.cs">
       <SubType>UserControl</SubType>
@@ -292,7 +270,7 @@
     <Compile Include="Windows\TaskWindow.Designer.cs">
       <DependentUpon>TaskWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="Utils\Logging\HistoryListener.cs" />
     <Compile Include="Utils\HtmlReport\Field.cs" />
     <Compile Include="Utils\HtmlReport\Misc.cs" />
@@ -336,49 +314,37 @@
       <SubType>Designer</SubType>
       <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\NewAdaptiveSystemDialog.resx">
+    <EmbeddedResource Include="Forms\Dialogs\NewDocumentDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NewAdaptiveSystemDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dialogs\NewDataSourceDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NewDataSourceDialog.cs</DependentUpon>
+      <DependentUpon>NewDocumentDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\DataSources\ColumnSpecification.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ColumnSpecification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\DataSources\SourceOverview.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SourceOverview.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\DataSources\TableEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TableEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\NetworkSystemDocument.resx">
+    <EmbeddedResource Include="Windows\Documents\NetworkSystemView.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NetworkSystemDocument.cs</DependentUpon>
+      <DependentUpon>NetworkSystemView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Documents\StartPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\TrainingSessionDocument.resx">
+    <EmbeddedResource Include="Windows\Documents\TrainingSessionView.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TrainingSessionDocument.cs</DependentUpon>
+      <DependentUpon>TrainingSessionView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\TableDataSourceDocument.resx">
+    <EmbeddedResource Include="Windows\Documents\TableSourceView.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TableDataSourceDocument.cs</DependentUpon>
+      <DependentUpon>TableSourceView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\NewWorkplaceDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\SystemInterfaceSpecification.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SystemInterfaceSpecification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\LayersControl.resx">
       <SubType>Designer</SubType>
@@ -456,6 +422,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Properties\Workbench.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Workbench.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -850,7 +821,22 @@
     <None Include="Resources\1downarrow.png" />
     <None Include="Resources\1uparrow.png" />
     <None Include="Resources\view_tree1.png" />
+    <None Include="Resources\mainDockConfiguration.txt" />
+    <None Include="Properties\Workbench.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Workbench.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\view_detailed.png" />
+    <None Include="Resources\view_icon.png" />
     <Content Include="Sinapse.ico" />
+    <Content Include="Web\default.css" />
+    <Content Include="Web\images\a1.gif" />
+    <Content Include="Web\images\a2.gif" />
+    <Content Include="Web\images\a3.gif" />
+    <Content Include="Web\images\a4.gif" />
+    <Content Include="Web\images\a5.gif" />
+    <Content Include="Web\index.html" />
+    <Content Include="Web\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

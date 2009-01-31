@@ -844,9 +844,23 @@ namespace Sinapse.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap view_detailed {
+            get {
+                object obj = ResourceManager.GetObject("view_detailed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap view_details {
             get {
                 object obj = ResourceManager.GetObject("view_details", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap view_icon {
+            get {
+                object obj = ResourceManager.GetObject("view_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

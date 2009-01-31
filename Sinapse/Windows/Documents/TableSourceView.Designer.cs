@@ -1,6 +1,6 @@
 namespace Sinapse.Windows.Documents
 {
-    partial class TableDataSourceDocument
+    partial class TableSourceView
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace Sinapse.Windows.Documents
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableDataSourceDocument));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableSourceView));
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();

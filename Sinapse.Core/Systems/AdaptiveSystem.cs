@@ -12,9 +12,8 @@ namespace Sinapse.Core.Systems
     /// </summary>
     /// <remarks>This is an abstract class and cannot be instantiated.</remarks>
     [Serializable]
-    public abstract class AdaptiveSystem : ISinapseDocument
+    public abstract class AdaptiveSystem : ISystem
     {
-        private SinapseDocument workplaceComponent;
 
         private SystemInputOutputCollection inputs;
         private SystemInputOutputCollection outputs;
@@ -24,8 +23,6 @@ namespace Sinapse.Core.Systems
 
         public AdaptiveSystem()
         {
-            workplaceComponent = new SinapseDocument();
-
             inputs = new SystemInputOutputCollection();
             outputs = new SystemInputOutputCollection();
         }
@@ -93,35 +90,6 @@ namespace Sinapse.Core.Systems
 
 
 
-        #region IWorkplaceComponent Members
-
-        public string Name
-        {
-            get { return workplaceComponent.Name; }
-            set { workplaceComponent.Name = value; }
-        }
-
-        public string Description
-        {
-               get { return workplaceComponent.Description; }
-            set { workplaceComponent.Description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return workplaceComponent.Remarks; }
-            set { workplaceComponent.Remarks = value; }
-        }
-
-        public bool HasChanges
-        {
-            get { return workplaceComponent.HasChanges; }
-            protected set { workplaceComponent.HasChanges = value; }
-        }
-
-        public event EventHandler Changed;
-        public event EventHandler Closed;
-
-        #endregion
+ 
     }
 }

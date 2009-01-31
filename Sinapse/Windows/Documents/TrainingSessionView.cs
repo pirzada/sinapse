@@ -16,17 +16,16 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace Sinapse.Windows.Documents
 {
 
-    public partial class TrainingSessionDocument :  WeifenLuo.WinFormsUI.Docking.DockContent, ISinapseDocumentView
+    internal partial class TrainingSessionView :  SinapseDocumentView
     {
 
-        private SinapseDocumentInfo item;
         private BackpropagationTrainingSession session;
         private TrainingSessionController controller;
         private SavepointsWindow savepoints;
         private TrainingOptionsWindow options;
 
 
-        public TrainingSessionDocument(BackpropagationTrainingSession session)
+        public TrainingSessionView(Workbench workbench, BackpropagationTrainingSession session) : base(workbench, session)
         {
             this.session = session;
             InitializeComponent();
@@ -56,45 +55,5 @@ namespace Sinapse.Windows.Documents
 
 
 
-
-        #region IWorkplaceDocument Members
-
-        public void Save()
-        {
-            if (session.FullPath != String.Empty)
-                session.Save();
-            else SaveAs();
-        }
-
-        public void SaveAs()
-        {
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                session.Save(saveFileDialog.FileName);
-            }
-        }
-
-        public ToolStripMenuItem[] MenuItems
-        {
-            get { return null; }
-        }
-
-        public ToolStrip[] ToolStrips
-        {
-            get { return null; }
-        }
-
-        public SinapseDocumentInfo Item
-        {
-            get { return item; }
-            set { item = value; }
-        }
-
-        public bool HasChanges
-        {
-            get { return session.HasChanges; }
-        }
-
-        #endregion
     }
 }

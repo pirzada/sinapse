@@ -1,6 +1,6 @@
 namespace Sinapse.Windows.Documents
 {
-    partial class TrainingSessionDocument
+    partial class TrainingSessionView
     {
         /// <summary> 
         /// Required designer variable.

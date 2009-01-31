@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sinapse.Core.Training
 {
-    interface ISession
+    public interface ISession
     {
     }
 }

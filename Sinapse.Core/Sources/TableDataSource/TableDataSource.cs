@@ -38,13 +38,10 @@ namespace Sinapse.Core.Sources
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
     [Serializable]
-    public class TableDataSource : ISource, ISerializableObject<TableDataSource>
+    public class TableDataSource : ISource, ISerializableObject
     {
 
-        private SinapseDocument workplaceComponent;
-        private SerializableObject<TableDataSource> serializableObject;
-
-
+        
         private DataTable dataTable;
         private TableDataSourceColumnCollection columns;
 
@@ -53,20 +50,12 @@ namespace Sinapse.Core.Sources
         public event EventHandler DataChanged;
 
 
-        /// <summary>
-        ///   Creates a new TableDataSource object by using a DataTable.
-        /// </summary>
-        public TableDataSource()
-            : this("New Table Source")
-        {
-        }
 
-
-        public TableDataSource(String name)
+        public TableDataSource(String name, System.IO.FileInfo info)
         {
             // Initialize simulated multiple-inheritance helpers
             this.serializableObject = new SerializableObject<TableDataSource>(this);
-            this.workplaceComponent = new SinapseDocument();
+            this.sinapseDocument = new SinapseDocument(name, info);
 
             this.dataTable = new DataTable(name);
             this.columns = new TableDataSourceColumnCollection();
@@ -406,28 +395,7 @@ namespace Sinapse.Core.Sources
 
 
         #region ISerializableObject<TableDataSource> Members
-
-        public string FileName
-        {
-            get { return serializableObject.FileName; }
-            set { serializableObject.FileName = value; }
-        }
-
-        public string FilePath
-        {
-            get { return serializableObject.FilePath; }
-            set { serializableObject.FilePath = value; }
-        }
-
-        public string FullPath
-        {
-            get { return serializableObject.FullPath; }
-        }
-
-        public string DefaultExtension
-        {
-            get { return "stds"; }
-        }
+        private SerializableObject<TableDataSource> serializableObject;
 
         public bool Save(string path)
         {
@@ -438,7 +406,7 @@ namespace Sinapse.Core.Sources
 
         public bool Save()
         {
-            bool success = serializableObject.Save();
+            bool success = serializableObject.Save(File.FullName);
             if (success) this.HasChanges = false;
             return success;
         }
@@ -446,13 +414,6 @@ namespace Sinapse.Core.Sources
         public static TableDataSource Open(string path)
         {
             return SerializableObject<TableDataSource>.Open(path);
-        }
-
-
-        public event EventHandler FileChanged
-        {
-            add { serializableObject.FileChanged += value; }
-            remove { serializableObject.FileChanged -= value; }
         }
 
         public event EventHandler FileSaved
@@ -467,36 +428,39 @@ namespace Sinapse.Core.Sources
 
 
         #region IWorkplaceComponent Members
+        private SinapseDocument sinapseDocument;
 
         public string Name
         {
-            get { return workplaceComponent.Name; }
-            set { workplaceComponent.Name = value; }
+            get { return sinapseDocument.Name; }
+            set { sinapseDocument.Name = value; }
         }
 
         public string Description
         {
-            get { return workplaceComponent.Description; }
-            set { workplaceComponent.Description = value; }
+            get { return sinapseDocument.Description; }
+            set { sinapseDocument.Description = value; }
         }
 
         public string Remarks
         {
-            get { return workplaceComponent.Remarks; }
-            set { workplaceComponent.Remarks = value; }
+            get { return sinapseDocument.Remarks; }
+            set { sinapseDocument.Remarks = value; }
         }
 
         public bool HasChanges
         {
-            get { return workplaceComponent.HasChanges; }
-            protected set { workplaceComponent.HasChanges = value; }
+            get { return sinapseDocument.HasChanges; }
+            protected set { sinapseDocument.HasChanges = value; }
         }
 
-        public event EventHandler Changed
+        public System.IO.FileInfo File
         {
-            add { workplaceComponent.Changed += value; }
-            remove { workplaceComponent.Changed -= value; }
+            get { return sinapseDocument.File; }
         }
+
+        public event EventHandler Changed;
+        public event EventHandler Closed;
 
         #endregion
 
