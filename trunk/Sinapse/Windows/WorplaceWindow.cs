@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -40,15 +41,10 @@ namespace Sinapse.Windows
 
         private bool directoryView = true;
 
-
-        private TreeNode rootWorkplace;
-
-        private TreeNode nodeSources;
-        private TreeNode nodeSystems;
-        private TreeNode nodeSessions;
-        
+        private TreeNode nodeWorkplace;
 
         public event WorkplaceContentDoubleClickedEventHandler WorkplaceContentDoubleClicked;
+
 
 
         #region Constructor
@@ -56,19 +52,7 @@ namespace Sinapse.Windows
         {
             InitializeComponent();
 
-            rootWorkplace = new TreeNode("Workplace", 0, 0);
-
-            nodeSources = new System.Windows.Forms.TreeNode("Sources", 2, 2);
-            nodeSources.ContextMenuStrip = this.menuSource;
-
-            nodeSystems = new System.Windows.Forms.TreeNode("Systems", 3, 3);
-            nodeSystems.ContextMenuStrip = this.menuSystem;
-
-            nodeTraining = new System.Windows.Forms.TreeNode("Trainings", 4, 4);
-            nodeTraining.ContextMenuStrip = this.menuTraining;
-
-            
-
+            nodeWorkplace = new TreeNode("Workplace", 0, 0);           
 
             Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
         }
@@ -131,7 +115,7 @@ namespace Sinapse.Windows
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            this.populateTreeView();
+            this.createTree();
         }
         #endregion
 
@@ -149,12 +133,7 @@ namespace Sinapse.Windows
                 // Lets hide the "Nothing to show" label and populate the tree view
                 this.lbNothingToShow.Hide();
                 this.treeViewWorkplace.Enabled = true;
-                this.populateTreeView();
 
-                // And also register the events for the new workplace
-                Workplace.Active.DataSources.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
-                Workplace.Active.TrainingSessions.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
-                Workplace.Active.AdaptiveSystems.ListChanged += new ListChangedEventHandler(Workplace_ContentChanged);
             }
             else
             {
@@ -170,56 +149,57 @@ namespace Sinapse.Windows
 
         private void Workplace_ContentChanged(object sender, ListChangedEventArgs e)
         {
-            this.populateTreeView();
+  //          this.populateTreeView();
         }
         #endregion
 
 
 
 
-        private void showCategoryView()
+        #region Tree Creation
+        private void createTree()
         {
-            this.treeViewWorkplace.SuspendLayout();
+            treeViewWorkplace.SuspendLayout();
 
-            rootWorkplace.Text = Workplace.Active.Name;
-            rootWorkplace.Tag = Workplace.Active;
-
-            treeViewWorkplace.Nodes.Clear();
-            rootWorkplace.Nodes.Clear();
-            nodeSources.Nodes.Clear();
-            nodeSystems.Nodes.Clear();
-            nodeSessions.Nodes.Clear();
-
-
-            TreeNode node;
-            foreach (SinapseDocumentInfo document in Workplace.Active.Documents.Select(Extensions.System))
-            {
-                nodeSystems.Nodes.Add(createNode(document));
-            }
-
+            nodeWorkplace.Text = Workplace.Active.Name;
+            nodeWorkplace.Tag = Workplace.Active;
             
+            treeViewWorkplace.Nodes.Clear();
 
-            this.rootWorkplace.Nodes.Add(nodeSystems);
-            this.rootWorkplace.Nodes.Add(nodeSystems);
-            this.rootWorkplace.Nodes.Add(nodeSystems);
-            this.treeViewWorkplace.Nodes.Add(rootWorkplace);
-            this.treeViewWorkplace.ExpandAll();
-            this.treeViewWorkplace.ResumeLayout(true);
+            createTree(Workplace.Active.Root.FullName, nodeWorkplace);                        
+
+            treeViewWorkplace.Nodes.Add(nodeWorkplace);
+            treeViewWorkplace.ExpandAll();
+            treeViewWorkplace.ResumeLayout(true);
         }
 
-        private void showDirectoryView()
+        private void createTree(string dir, TreeNode root)
         {
-            this.treeViewWorkplace.SuspendLayout();
+            // get the information of the directory
+            DirectoryInfo directory = new DirectoryInfo(dir);
+            
+            // loop through each subdirectory
+            foreach (DirectoryInfo d in directory.GetDirectories())
+            {
+                // create a new node
+                TreeNode node = new TreeNode(d.Name);
 
-            rootWorkplace.Text = Workplace.Active.Name;
-            rootWorkplace.Tag = Workplace.Active;
+                // populate the new node recursively
+                createTree(d.FullName, node);
+                root.Nodes.Add(node); 
+            }
 
-            treeViewWorkplace.Nodes.Clear();
+            // lastly, loop through each file in the directory, and add these as nodes
+            foreach (FileInfo f in directory.GetFiles())
+            {
+                // create a new node
+                SinapseDocumentInfo documentInfo = new SinapseDocumentInfo(Path.Combine(dir, f.Name), true);
+                Workplace.Active.Documents.Add(documentInfo);
+                TreeNode node = createNode(documentInfo);
 
-
-            this.treeViewWorkplace.Nodes.Add(rootWorkplace);
-            this.treeViewWorkplace.ExpandAll();
-            this.treeViewWorkplace.ResumeLayout(true);
+                // add it to the root node
+                root.Nodes.Add(node);
+            }
         }
 
 
@@ -246,12 +226,14 @@ namespace Sinapse.Windows
 
             return node;
         }
+        #endregion
 
 
 
         #region Menu Events
-        private void menuSourceAddTable_Click(object sender, EventArgs e)
-        {           
+        private void menuAddSourceTable_Click(object sender, EventArgs e)
+        {
+            new Sinapse.Forms.Dialogs.NewDocumentDialog(typeof(ISource)).ShowDialog();
 /*
             // Tell listeners we double clicked a workplace entry (request open)
             this.OnWorkplaceContentDoubleClicked(new WorkplaceContentDoubleClickedEventArgs(item));

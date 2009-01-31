@@ -9,11 +9,10 @@ using Sinapse.Core.Filters;
 
 namespace Sinapse.Core.Training
 {
-    public abstract class TrainingSession : ISinapseDocument
+    public abstract class TrainingSession : ISession
     {
         public enum SessionState { Stopped, Paused, Running, Error };
 
-        private SinapseDocument workplaceComponent;
 
         private TrainingHistory history;
         private TableDataSource dataSource;
@@ -98,49 +97,18 @@ namespace Sinapse.Core.Training
                 Paused.Invoke(this, e);
         }
 
+        protected virtual void OnReset(EventArgs e)
+        {
+            if (Reseted != null)
+                Reseted.Invoke(this, e);
+        }
+
         protected virtual void OnCompleted(EventArgs e)
         {
             if (Completed != null)
                 Completed.Invoke(this, e);
         }
 
-
-
-
-
-
-
-
-        #region ISinapseDocument Members
-
-        public string Name
-        {
-            get { return workplaceComponent.Name; }
-            set { workplaceComponent.Name = value; }
-        }
-
-        public string Description
-        {
-            get { return workplaceComponent.Description; }
-            set { workplaceComponent.Description = value; }
-        }
-
-        public string Remarks
-        {
-            get { return workplaceComponent.Remarks; }
-            set { workplaceComponent.Remarks = value; }
-        }
-
-        public bool HasChanges
-        {
-            get { return workplaceComponent.HasChanges; }
-            protected set { workplaceComponent.HasChanges = value; }
-        }
-
-        public event EventHandler Changed;
-        public event EventHandler Closed;
-
-        #endregion
 
 
     }

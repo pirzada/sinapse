@@ -10,10 +10,10 @@ using Sinapse.Core.Filters;
 namespace Sinapse.Core.Systems
 {
     [Serializable]
-    [DefaultExtension(".system.ann")]
-    public class ActivationNetworkSystem : NetworkSystem, ISerializableObject<ActivationNetworkSystem>
+    [DocumentDescription(".system.ann")]
+    public class ActivationNetworkSystem : NetworkSystem, ISinapseDocument, ISerializableObject
     {
-        private SerializableObject<ActivationNetworkSystem> serializableObject;
+        
 
 
 /*
@@ -25,14 +25,11 @@ namespace Sinapse.Core.Systems
         }
 */
 
-        public ActivationNetworkSystem()
-            : this("New Activation Network System")
-        {
-        }
-  
-        public ActivationNetworkSystem(string name)
+ 
+        public ActivationNetworkSystem(string name, System.IO.FileInfo info)
         {
             serializableObject = new SerializableObject<ActivationNetworkSystem>(this);
+            sinapseDocument = new SinapseDocument(name, info);
 
             Preprocess = new FilterCollection(false);
             Postprocess = new FilterCollection(true);
@@ -80,31 +77,10 @@ namespace Sinapse.Core.Systems
 
 
 
+
+
         #region ISerializableObject<ActivationNetworkSystem> Members
-
-
-        public string FileName
-        {
-            get { return serializableObject.FileName; }
-            set { serializableObject.FileName = value; }
-        }
-
-        public string FilePath
-        {
-            get { return serializableObject.FilePath; }
-            set { serializableObject.FilePath = value; }
-        }
-
-        public string DefaultExtension
-        {
-            get { return "sann"; }
-        }
-
-        public string FullPath
-        {
-            get { return serializableObject.FullPath; }
-        }
-
+        private SerializableObject<ActivationNetworkSystem> serializableObject;
 
         public bool Save(string path)
         {
@@ -115,7 +91,7 @@ namespace Sinapse.Core.Systems
 
         public bool Save()
         {
-            bool success = serializableObject.Save();
+            bool success = serializableObject.Save(File.FullName);
             if (success) this.HasChanges = false;
             return success;
         }
@@ -125,18 +101,51 @@ namespace Sinapse.Core.Systems
             return SerializableObject<ActivationNetworkSystem>.Open(path);
         }
 
-
-        public event EventHandler FileChanged
-        {
-            add { serializableObject.FileChanged += value; }
-            remove { serializableObject.FileChanged -= value; }
-        }
-
         public event EventHandler FileSaved
         {
             add { serializableObject.FileSaved += value; }
             remove { serializableObject.FileSaved -= value; }
         }
+        #endregion
+
+
+
+        #region IWorkplaceComponent Members
+        private SinapseDocument sinapseDocument;
+
+        public string Name
+        {
+            get { return sinapseDocument.Name; }
+            set { sinapseDocument.Name = value; }
+        }
+
+        public string Description
+        {
+            get { return sinapseDocument.Description; }
+            set { sinapseDocument.Description = value; }
+        }
+
+        public string Remarks
+        {
+            get { return sinapseDocument.Remarks; }
+            set { sinapseDocument.Remarks = value; }
+        }
+
+        public bool HasChanges
+        {
+            get { return sinapseDocument.HasChanges; }
+            protected set { sinapseDocument.HasChanges = value; }
+        }
+
+        public System.IO.FileInfo File
+        {
+            get { return sinapseDocument.File; }
+        }
+
+        public event EventHandler DocumentChanged;
+        public event EventHandler FilepathChanged;
+        public event EventHandler Closed;
+
         #endregion
     }
 }

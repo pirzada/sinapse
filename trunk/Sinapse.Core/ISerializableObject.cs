@@ -12,17 +12,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Sinapse.Core
 {
 
-    public interface ISerializableObject<T>
+    public interface ISerializableObject
     {
         bool Save(string path);
-        bool Save();
 
         event EventHandler FileSaved;
     }
 
     [Serializable]
-    public class SerializableObject<T> : ISerializableObject<T>
-        where T : ISerializableObject<T>
+    public class SerializableObject<T> : ISerializableObject
+        where T : ISerializableObject
     {
 
         private T owner;

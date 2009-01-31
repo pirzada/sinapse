@@ -368,7 +368,6 @@ namespace Sinapse.Forms
             this.workplaceWindowToolStripMenuItem.Name = "workplaceWindowToolStripMenuItem";
             this.workplaceWindowToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.workplaceWindowToolStripMenuItem.Text = "Workplace Window";
-            this.workplaceWindowToolStripMenuItem.Click += new System.EventHandler(this.workplaceWindowToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 

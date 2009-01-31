@@ -48,5 +48,53 @@ namespace Sinapse
             }
             else return Path.GetExtension(path);
         }
+
+        /// <summary>
+        ///   Gets the relative path of the file in relation to a given directory.
+        /// </summary>
+        /// <param name="file">The file which will have its relative path computed.</param>
+        /// <param name="directory">The directory which will be the base for the relative path.</param>
+        /// <returns>The relative path.</returns>
+        public static string GetRelativePath(this FileInfo file, string directory)
+        {
+            string[] firstPathParts = directory.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
+            string[] secondPathParts = file.FullName.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
+
+            int sameCounter = 0;
+            for (int i = 0; i < Math.Min(firstPathParts.Length,
+            secondPathParts.Length); i++)
+            {
+                if (!firstPathParts[i].ToLower().Equals(secondPathParts[i].ToLower()))
+                {
+                    break;
+                }
+                sameCounter++;
+            }
+
+            if (sameCounter == 0)
+            {
+                return file.FullName;
+            }
+
+            string newPath = String.Empty;
+            for (int i = sameCounter; i < firstPathParts.Length; i++)
+            {
+                if (i > sameCounter)
+                {
+                    newPath += Path.DirectorySeparatorChar;
+                }
+                newPath += "..";
+            }
+            if (newPath.Length == 0)
+            {
+                newPath = ".";
+            }
+            for (int i = sameCounter; i < secondPathParts.Length; i++)
+            {
+                newPath += Path.DirectorySeparatorChar;
+                newPath += secondPathParts[i];
+            }
+            return newPath;
+        }
     }
 }

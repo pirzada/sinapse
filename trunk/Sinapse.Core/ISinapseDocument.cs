@@ -6,22 +6,25 @@ using System.Reflection;
 
 namespace Sinapse.Core
 {
-    public interface ISinapseDocument
+    public interface ISinapseDocument : ISerializableObject
     {
         string Name { get; set;}
         string Description { get; set;}
         string Remarks { get; set;}
         FileInfo File { get; }
 
+        bool Save(string path);
+        bool Save();
+
         bool HasChanges { get; }
 
-        event EventHandler Changed;
+        event EventHandler DocumentChanged;
+        event EventHandler FilepathChanged;
     }
 
     [Serializable]
-    internal class SinapseDocument : ISinapseDocument
+    public sealed class SinapseDocument
     {
-               
         
         private string name;
         private string description;
@@ -31,9 +34,7 @@ namespace Sinapse.Core
         [NonSerialized]
         private bool hasChanges;
 
-        [field: NonSerialized]
-        public event EventHandler Changed;
-
+        
 
 
         public SinapseDocument(String name, FileInfo fileInfo)
@@ -44,8 +45,12 @@ namespace Sinapse.Core
             this.description = String.Empty;
         }
 
-        
+        public SinapseDocument(string name) : this(name, null)
+        {
+        }
 
+
+        #region Properties
         public string Name
         {
             get { return name; }
@@ -55,7 +60,7 @@ namespace Sinapse.Core
                 {
                     name = value;
                     hasChanges = true;
-                    OnChanged(EventArgs.Empty);
+                    OnDocumentChanged(EventArgs.Empty);
                 }
             }
         }
@@ -69,7 +74,7 @@ namespace Sinapse.Core
                 {
                     name = value;
                     hasChanges = true;
-                    OnChanged(EventArgs.Empty);
+                    OnDocumentChanged(EventArgs.Empty);
                 }
             }
         }
@@ -83,7 +88,7 @@ namespace Sinapse.Core
                 {
                     remarks = value;
                     hasChanges = true;
-                    OnChanged(EventArgs.Empty);
+                    OnDocumentChanged(EventArgs.Empty);
                 }
             }
         }
@@ -104,43 +109,91 @@ namespace Sinapse.Core
         {
             get { return fileInfo; }
         }
+        #endregion
 
 
 
+        [field: NonSerialized]
+        public event EventHandler DocumentChanged;
+
+        [field: NonSerialized]
+        public event EventHandler FilepathChanged;
 
 
-        protected void OnChanged(EventArgs e)
+        protected void OnDocumentChanged(EventArgs e)
         {
-            if (Changed != null)
-                Changed.Invoke(this, e);
+            if (DocumentChanged != null)
+                DocumentChanged.Invoke(this, e);
+        }
+
+        protected void OnFilepathChanged(EventArgs e)
+        {
+            if (FilepathChanged != null)
+                FilepathChanged.Invoke(this, e);
         }
 
 
 
         #region Static Methods - Extensions & Icons
+        private static Dictionary<String, Type> extensions = null;
+
         public static Type GetType(string extension)
         {
-            Type[] types = Sinapse.Utils.GetTypesImplementingInterface(
-                Assembly.GetAssembly(typeof(ISinapseDocument)), typeof(ISinapseDocument));
-            
-            foreach (Type type in types)
-            {
-                object[] attr = type.GetCustomAttributes(typeof(DefaultExtension), false);
-                if (attr.Length > 0)
-                {
-                    if ((attr[0] as DefaultExtension).Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)))
-                      return type;
-                }
-            }
-
-            return null;
+            if (extension == null)
+                ConstructCache();
+            return extensions[extension];
         }
 
         public static String GetExtension(Type type)
         {
-            object[] attr = type.GetCustomAttributes(typeof(DefaultExtension), false);
-            if (attr.Length > 0) return (attr[0] as DefaultExtension).Extension;
+            object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
+            if (attr.Length > 0) return (attr[0] as DocumentDescription).Extension;
             throw new ArgumentException("", "type");
+        }
+
+        
+        public static void ConstructCache()
+        {
+            extensions = new Dictionary<string,Type>();
+
+            Type[] types = Sinapse.Utils.GetTypesImplementingInterface(
+              Assembly.GetAssembly(typeof(ISinapseDocument)), typeof(ISinapseDocument));
+
+            foreach (Type type in types)
+            {
+                object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
+                if (attr.Length > 0)
+                {
+                    extensions.Add((attr[0] as DocumentDescription).Extension, type);
+                }
+            }
+        }
+
+        public static ISinapseDocument Open(string fullName)
+        {
+            ISinapseDocument document = null;
+
+            // First we check if file exists,
+            if (System.IO.File.Exists(fullName))
+            {
+                // Determine the type of the document being open
+                Type type = SinapseDocument.GetType(Utils.GetExtension(fullName, true));
+                
+                // Create the method info for the static method SerializableObject<T>.Open
+                MethodInfo methodOpen = type.GetMethod("Open",
+                    BindingFlags.Static | BindingFlags.Public);
+
+                // Call the Open method passing the FullPath as its first parameter
+                document = (ISinapseDocument)methodOpen.Invoke(null, new object[] { fullName });
+            }
+            else
+            {
+                // The file does not exists, so we create a new instance.
+                //  component = (ISinapseComponent)Activator.CreateInstance(type);
+                throw new InvalidOperationException();
+            }
+
+            return document;
         }
         #endregion
 
@@ -149,20 +202,63 @@ namespace Sinapse.Core
 
 
     [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class DefaultExtension : Attribute
+    public sealed class DocumentDescription : Attribute
     {
-        readonly string extension;
+        private readonly string name;
+        private string extension;
+        private string description;
+        private string defaultName;
 
-        // This is a positional argument
-        public DefaultExtension(string extension)
+        public DocumentDescription(string name)
         {
-            this.extension = extension;
+            this.name = name;
         }
 
         public String Extension
         {
             get { return extension; }
-            //set { extension = value; }
+            set { extension = value; }
+        }
+
+        public String Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        public String Name
+        {
+            get { return name; }
+            //set { name = value; }
+        }
+
+        public String DefaultName
+        {
+            get { return defaultName; }
+            set { defaultName = value; }
+        }
+
+    }
+
+    [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class DocumentViewer : Attribute
+    {
+        private readonly Type type;
+
+        public DocumentViewer(Type documentType)
+        {
+           if (!type.IsAssignableFrom(typeof(ISinapseDocument)))
+           {
+               throw new ArgumentException(
+                   "The type must implement ISinapseDocument interface",
+                   "documentType");
+           }
+            this.type = documentType;
+        }
+
+        public Type DocumentType
+        {
+            get { return type; }
         }
 
     }

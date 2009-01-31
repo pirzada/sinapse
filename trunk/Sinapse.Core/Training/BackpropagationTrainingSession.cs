@@ -37,7 +37,8 @@ namespace Sinapse.Core.Training
     ///   using crossvalidation and other advanced techniques. Also provides additional feedback
     ///   about current traning status.
     /// </summary>
-    public class BackpropagationTrainingSession : TrainingSession, ISerializableObject<BackpropagationTrainingSession>
+    public class BackpropagationTrainingSession : TrainingSession,
+        ISinapseDocument, ISerializableObject
     {
 
         private SerializableObject<BackpropagationTrainingSession> serializableObject;
@@ -380,31 +381,6 @@ namespace Sinapse.Core.Training
 
         #region ISerializableObject<TrainingSession> Members
 
-
-        public string FileName
-        {
-            get { return serializableObject.FileName; }
-            set { serializableObject.FileName = value; }
-        }
-
-        public string FilePath
-        {
-            get { return serializableObject.FilePath; }
-            set { serializableObject.FilePath = value; }
-        }
-
-        public string FullPath
-        {
-            get { return serializableObject.FullPath; }
-        }
-
-        public string DefaultExtension
-        {
-            get { return "sbpts"; }
-        }
-
-
-
         public bool Save(string path)
         {
             bool success = serializableObject.Save(path);
@@ -414,7 +390,7 @@ namespace Sinapse.Core.Training
 
         public bool Save()
         {
-            bool success = serializableObject.Save();
+            bool success = serializableObject.Save(File.FullName);
             if (success) this.HasChanges = false;
             return success;
         }
@@ -424,12 +400,6 @@ namespace Sinapse.Core.Training
             return SerializableObject<BackpropagationTrainingSession>.Open(path);
         }
 
-        public event EventHandler FileChanged
-        {
-            add { serializableObject.FileChanged += value; }
-            remove { serializableObject.FileChanged -= value; }
-        }
-
         public event EventHandler FileSaved
         {
             add { serializableObject.FileSaved += value; }
@@ -437,6 +407,49 @@ namespace Sinapse.Core.Training
         }
         #endregion
 
+
+
+
+
+        #region ISinapseDocument Members
+        private SinapseDocument sinapseDocument;
+
+        public string Name
+        {
+            get { return sinapseDocument.Name; }
+            set { sinapseDocument.Name = value; }
+        }
+
+        public string Description
+        {
+            get { return sinapseDocument.Description; }
+            set { sinapseDocument.Description = value; }
+        }
+
+        public string Remarks
+        {
+            get { return sinapseDocument.Remarks; }
+            set { sinapseDocument.Remarks = value; }
+        }
+
+        public bool HasChanges
+        {
+            get { return sinapseDocument.HasChanges; }
+            protected set { sinapseDocument.HasChanges = value; }
+        }
+
+        public System.IO.FileInfo File
+        {
+            get { return sinapseDocument.File; }
+        }
+
+        [field: NonSerialized]
+        public event EventHandler FilepathChanged;
+
+        [field: NonSerialized]
+        public event EventHandler DocumentChanged;
+
+        #endregion
 
 
 

@@ -184,7 +184,7 @@ namespace Sinapse.Windows
             this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
             this.tableToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.tableToolStripMenuItem.Text = "Table";
-            this.tableToolStripMenuItem.Click += new System.EventHandler(this.menuSourceAddTable_Click);
+            this.tableToolStripMenuItem.Click += new System.EventHandler(this.menuAddSourceTable_Click);
             // 
             // imageToolStripMenuItem
             // 

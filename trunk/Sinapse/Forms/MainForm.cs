@@ -56,16 +56,15 @@ namespace Sinapse.Forms
         #region Constructor & Destructor
         public MainForm()
         {
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
-              ControlStyles.UserPaint |
-              ControlStyles.OptimizedDoubleBuffer,
-              true);
+            this.SetStyle(
+                ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
 
-            this.workbench = new Workbench(this.dockMain);
-
+            
             InitializeComponent();
 
-            this.workbench.Load();
+            workbench = new Workbench(this.dockMain);
+            workbench.Load();
         }
         
         #endregion
@@ -104,27 +103,32 @@ namespace Sinapse.Forms
                 Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
 
 
-                Workplace_ActiveWorkplaceChanged(null, EventArgs.Empty);
-                HistoryListener.Write("Waiting data");
+                HistoryListener.Write("Sinapse Interface Loaded");
             }
         }
 
 
-
         protected override void OnClosing(CancelEventArgs e)
         {
-            base.OnClosing(e);
-
             HistoryListener.Write("Exiting...");
+
+            base.OnClosing(e);
+            
+            // Close Workbench
+            if (workbench.CloseAll() == false)
+            {
+                e.Cancel = true;
+                return;
+            }
 
             // Close Workspace
             Workplace.Active = null;
-
             if (Workplace.Active != null)
             {
                 e.Cancel = true;
                 return;
             }
+
 
             // Save ToolStripPanels
             ToolStripManager.SaveSettings(this);
@@ -160,121 +164,25 @@ namespace Sinapse.Forms
             {
                 MenuWorkplace.Visible = true;
                 Workplace.Active.Closing += Workplace_Closing;
-                //Workplace.Active.Closed += Workplace_ActiveWorkplaceClosed;
             }
         }
 
         private void Workplace_Closing(object sender, CancelEventArgs e)
         {
-            SinapseDocumentInfo[] items = new SinapseDocumentInfo[openDocuments.Keys.Count];
-            openDocuments.Keys.CopyTo(items, 0);
-
-            foreach (SinapseDocumentInfo item in items)
+            // Close Workbench
+            if (workbench.CloseAll() == false)
             {
-                ISinapseDocumentView document = openDocuments[item];
-
-                if (document.HasChanges)
-                {
-                    DialogResult r = MessageBox.Show(String.Format("Save changes to {0}?", document.Name),
-                        "Save changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                    if (r == DialogResult.Yes)
-                    {
-                        document.Save();
-                    }
-                    else if (r == DialogResult.Cancel)
-                    {
-                        e.Cancel = true;
-                        return;
-                    }
-                }
-
-                openDocuments.Remove(document.Item);
-                document.Close();
+                e.Cancel = true;
+                return;
             }
 
+            // Save Workplace
             if (Workplace.Active.HasChanges)
                 Workplace.Active.Save();
         }
 
         #endregion
 
-
-
-        //---------------------------------------------
-
-
-        #region Window Workplace Events
-        private void windowWorkplace_GotFocus(object sender, EventArgs e)
-        {
-            // Update the property window to reflect information about the selected item
-            if (this.windowProperties != null)
-                this.windowProperties.PropertyGrid.SelectedObject = this.windowWorkplace.SelectedItem;
-        }
-
-        private void windowWorkplace_SelectionChanged(object sender, TreeViewEventArgs e)
-        {
-            // Update the property window to reflect information about the selected item
-            if (this.windowProperties != null)
-                this.windowProperties.PropertyGrid.SelectedObject = this.windowWorkplace.SelectedItem;
-        }
-
-        private void windowWorkplace_WorkplaceContentDoubleClicked(object sender, WorkplaceContentDoubleClickedEventArgs e)
-        {
-            // A WorkplaceItem has been double clicked
-            SinapseDocumentInfo item = e.WorkplaceItem;
-
-
-            // Check if the item isn't already open
-            if (this.openDocuments.ContainsKey(item))
-            {
-                // Yes, it is, just activate the control
-                this.openDocuments[item].Show();
-            }
-            else
-            {
-                // The item must be open
-                ISinapseDocument component = item.Open();
-
-                // Verify which editor to open
-                if (item.Type == typeof(TableDataSource))
-                {
-                    TableDataSourceDocument editor = new TableDataSourceDocument(component as TableDataSource);
-                    editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
-                    editor.Item = item;
-                    editor.Show(this.dockMain, DockState.Document);
-                    openDocuments.Add(item, editor);
-                }
-                else if (item.Type == typeof(ActivationNetworkSystem))
-                {
-                    NetworkSystemDocument editor = new NetworkSystemDocument(component as ActivationNetworkSystem);
-                    editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
-                    editor.Item = item;
-                    editor.Show(this.dockMain, DockState.Document);
-                    openDocuments.Add(item, editor);
-                }
-                else if (item.Type == typeof(BackpropagationTrainingSession))
-                {
-                    TrainingSessionDocument editor = new TrainingSessionDocument(component as BackpropagationTrainingSession);
-                    editor.FormClosed += new FormClosedEventHandler(editor_FormClosed);
-                    editor.Item = item;
-                    editor.SavepointsWindow.Show(this.dockMain, DockState.DockRight);
-                    editor.ControllerWindow.Show(this.dockMain);
-                    editor.ControllerWindow.DockHandler.FloatPane.DockTo(this.dockMain.DockWindows[DockState.DockRight]);
-
-                    openDocuments.Add(item, editor);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Unsupported type");
-                }
-            }
-        }
-
-        void editor_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            openDocuments.Remove((sender as ISinapseDocumentView).Item);
-        }
-        #endregion
 
 
         //---------------------------------------------
@@ -291,7 +199,7 @@ namespace Sinapse.Forms
             {
                 Workplace.Active = dlg.Workplace;
                 Workplace.Active.Save();
-                mruProviderWorkplace.Insert(dlg.Workplace.FullPath);
+                mruProviderWorkplace.Insert(dlg.Workplace.File.FullName);
             }
         }
 
@@ -320,12 +228,7 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileSave_Click(object sender, EventArgs e)
         {
-            if (dockMain.ActiveDocument is ISinapseDocumentView)
-            {
-                (dockMain.ActiveDocument as ISinapseDocumentView).Save();
-            }
-
-            Workplace.Active.Save();
+            workbench.ActiveDocumentView.Save();
         }
 
         /// <summary>
@@ -333,12 +236,7 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileSaveAs_Click(object sender, EventArgs e)
         {
-            if (dockMain.ActiveDocument is ISinapseDocumentView)
-            {
-                (dockMain.ActiveDocument as ISinapseDocumentView).SaveAs();
-            }
-
-            Workplace.Active.Save();
+            workbench.ActiveDocumentView.SaveAs();
         }
 
         /// <summary>
@@ -346,12 +244,7 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileSaveAll_Click(object sender, EventArgs e)
         {
-            foreach (IDockContent content in this.dockMain.Documents)
-            {
-                if (content is ISinapseDocumentView)
-                    (content as ISinapseDocumentView).Save();
-            }
-
+            this.workbench.SaveAll();
             Workplace.Active.Save();
         }
         #endregion
@@ -360,12 +253,12 @@ namespace Sinapse.Forms
         #region Menu Workplace
         private void MenuWorkplaceAddDataSource_Click(object sender, EventArgs e)
         {
-           new NewDataSourceDialog().ShowDialog(this);
+           new NewDocumentDialog(typeof(ISource)).ShowDialog(this);
         }
 
         private void MenuWorkplaceAddAdaptiveSystem_Click(object sender, EventArgs e)
         {
-            new NewAdaptiveSystemDialog().ShowDialog(this);
+            new NewDocumentDialog(typeof(ISystem)).ShowDialog(this);
         }
         #endregion
 
@@ -398,12 +291,6 @@ namespace Sinapse.Forms
          //   this.sessionOpen(filename);
         }
         #endregion
-
-        private void workplaceWindowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
 
     }

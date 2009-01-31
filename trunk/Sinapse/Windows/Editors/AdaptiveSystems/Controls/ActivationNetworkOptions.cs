@@ -30,7 +30,8 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             if (!this.DesignMode)
             {
                 this.cbActivationFunction.DisplayMember = "Name";
-                this.cbActivationFunction.DataSource = Utils.GetTypesImplementingInterface(typeof(IActivationFunction));
+                this.cbActivationFunction.DataSource = Utils.GetTypesImplementingInterface(
+                    Assembly.GetAssembly(typeof(AForge.Neuro.ActivationNetwork)), typeof(IActivationFunction));
             }
         }
 

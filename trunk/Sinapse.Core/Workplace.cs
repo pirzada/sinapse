@@ -34,7 +34,7 @@ namespace Sinapse.Core
     ///   Training Sessions currently hosted in a usage session of the program.
     /// </summary>
     [Serializable]
-    public class Workplace : ISerializableObject<Workplace>, ISinapseDocument
+    public class Workplace : ISinapseDocument
     {
 
         #region Active Workplace Placeholder
@@ -51,6 +51,7 @@ namespace Sinapse.Core
                     {
                         // We are trying to close the Active Workplace
                         CancelEventArgs e = new CancelEventArgs();
+
                         active.OnClosing(e);
 
                         if (e.Cancel == true) return; // Cancelled
@@ -68,27 +69,20 @@ namespace Sinapse.Core
         public static event EventHandler ActiveWorkplaceChanged;
         #endregion
 
-        private DirectoryInfo root;
+     
 
         private SinapseDocumentInfoCollection documents;
-
-
-
-        [field: NonSerialized]
-        public event CancelEventHandler Closing;
-
+        [field: NonSerialized] public event CancelEventHandler Closing;
 
 
 
         public Workplace(string name, FileInfo info)
         {
-            
             // Initialize simulated multiple-inheritance helpers
             serializableObject = new SerializableObject<Workplace>(this);
             sinapseDocument = new SinapseDocument(name, info);
 
-            documents = new SinapseDocumentInfoCollection(this);
-
+            documents = new SinapseDocumentInfoCollection();
             documents.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
         }
 
@@ -101,20 +95,21 @@ namespace Sinapse.Core
 
         public DirectoryInfo Root
         {
-            get { return this.root; }
+            get { return this.File.Directory; }
         }
 
-
-
-        void workplaceItemsListChanged(object sender, ListChangedEventArgs e)
-        {
-            HasChanges = true;
-        }
 
         protected void OnClosing(CancelEventArgs e)
         {
             if (Closing != null)
                 Closing.Invoke(this, e);
+        }
+
+
+
+        private void workplaceItemsListChanged(object sender, ListChangedEventArgs e)
+        {
+            HasChanges = true;
         }
 
 
@@ -133,7 +128,7 @@ namespace Sinapse.Core
 
         public bool Save()
         {
-            return serializableObject.Save(sinapseDocument.File.FullName);
+            return serializableObject.Save(File.FullName);
         }
 
         public static Workplace Open(string path)
@@ -149,46 +144,54 @@ namespace Sinapse.Core
         #endregion
 
 
-
         #region ISinapseDocument Members
         private SinapseDocument sinapseDocument;
 
-        string ISinapseDocument.Name
+        public string Name
         {
             get { return sinapseDocument.Name; }
             set { sinapseDocument.Name = value; }
         }
 
-        string ISinapseDocument.Description
+        public string Description
         {
             get { return sinapseDocument.Description; }
             set { sinapseDocument.Description = value; }
         }
 
-        string ISinapseDocument.Remarks
+        public string Remarks
         {
             get { return sinapseDocument.Remarks; }
             set { sinapseDocument.Remarks = value; }
         }
 
-        FileInfo ISinapseDocument.File
+        public bool HasChanges
         {
-            get { throw new NotImplementedException(); }
+            get { return sinapseDocument.HasChanges; }
+            protected set { sinapseDocument.HasChanges = value; }
         }
 
-        bool HasChanges
+        public System.IO.FileInfo File
         {
-            get { throw new NotImplementedException(); }
+            get { return sinapseDocument.File; }
         }
 
-        event EventHandler Changed
+        [field: NonSerialized]
+        public event EventHandler FilepathChanged
         {
-            add { sinapseDocument.Changed += value; }
-            remove { sinapseDocument.Changed -= value; }
+            add { sinapseDocument.FilepathChanged += value; }
+            remove { sinapseDocument.FilepathChanged -= value; }
         }
+
+        [field: NonSerialized]
+        public event EventHandler DocumentChanged
+        {
+            add { sinapseDocument.DocumentChanged += value; }
+            remove { sinapseDocument.DocumentChanged -= value; }
+        }
+
 
         #endregion
+
     }
-
-
 }
