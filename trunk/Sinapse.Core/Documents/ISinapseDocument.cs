@@ -120,13 +120,13 @@ namespace Sinapse.Core
         public event EventHandler FilepathChanged;
 
 
-        protected void OnDocumentChanged(EventArgs e)
+        private void OnDocumentChanged(EventArgs e)
         {
             if (DocumentChanged != null)
                 DocumentChanged.Invoke(this, e);
         }
 
-        protected void OnFilepathChanged(EventArgs e)
+        private void OnFilepathChanged(EventArgs e)
         {
             if (FilepathChanged != null)
                 FilepathChanged.Invoke(this, e);
@@ -134,41 +134,7 @@ namespace Sinapse.Core
 
 
 
-        #region Static Methods - Extensions & Icons
-        private static Dictionary<String, Type> extensions = null;
-
-        public static Type GetType(string extension)
-        {
-            if (extension == null)
-                ConstructCache();
-            return extensions[extension];
-        }
-
-        public static String GetExtension(Type type)
-        {
-            object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
-            if (attr.Length > 0) return (attr[0] as DocumentDescription).Extension;
-            throw new ArgumentException("", "type");
-        }
-
-        
-        public static void ConstructCache()
-        {
-            extensions = new Dictionary<string,Type>();
-
-            Type[] types = Sinapse.Utils.GetTypesImplementingInterface(
-              Assembly.GetAssembly(typeof(ISinapseDocument)), typeof(ISinapseDocument));
-
-            foreach (Type type in types)
-            {
-                object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
-                if (attr.Length > 0)
-                {
-                    extensions.Add((attr[0] as DocumentDescription).Extension, type);
-                }
-            }
-        }
-
+        #region Static Methods
         public static ISinapseDocument Open(string fullName)
         {
             ISinapseDocument document = null;
@@ -177,7 +143,7 @@ namespace Sinapse.Core
             if (System.IO.File.Exists(fullName))
             {
                 // Determine the type of the document being open
-                Type type = SinapseDocument.GetType(Utils.GetExtension(fullName, true));
+                Type type = DocumentCache.GetType(Utils.GetExtension(fullName, true));
                 
                 // Create the method info for the static method SerializableObject<T>.Open
                 MethodInfo methodOpen = type.GetMethod("Open",
@@ -204,10 +170,17 @@ namespace Sinapse.Core
     [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class DocumentDescription : Attribute
     {
-        private readonly string name;
+        private string name;
         private string extension;
         private string description;
         private string defaultName;
+
+        private string smallIconPath;
+        private string largeIconPath;
+        private int smallIconIndex;
+        private int largeIconIndex;
+
+
 
         public DocumentDescription(string name)
         {
@@ -229,13 +202,37 @@ namespace Sinapse.Core
         public String Name
         {
             get { return name; }
-            //set { name = value; }
+            set { name = value; }
         }
 
         public String DefaultName
         {
             get { return defaultName; }
             set { defaultName = value; }
+        }
+
+        public String SmallIconPath
+        {
+            get { return smallIconPath; }
+            set { smallIconPath = value; }
+        }
+
+        public Int32 SmallIconIndex
+        {
+            get { return smallIconIndex; }
+            set { smallIconIndex = value; }
+        }
+
+        public String LargeIconPath
+        {
+            get { return largeIconPath; }
+            set { largeIconPath = value; }
+        }
+
+        public Int32 LargeIconIndex
+        {
+            get { return largeIconIndex; }
+            set { largeIconIndex = value; }
         }
 
     }

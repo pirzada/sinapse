@@ -75,8 +75,8 @@ namespace Sinapse.Forms
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFilePreferences = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.propertiesWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.workplaceWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuViewProperties = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuViewWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.trainingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trainingWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,6 +108,7 @@ namespace Sinapse.Forms
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trainingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuExtensionsExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -309,44 +310,44 @@ namespace Sinapse.Forms
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
             // 
             // MenuFilePreferences
             // 
             this.MenuFilePreferences.Image = global::Sinapse.Properties.Resources.configure_16;
             this.MenuFilePreferences.Name = "MenuFilePreferences";
-            this.MenuFilePreferences.Size = new System.Drawing.Size(152, 22);
+            this.MenuFilePreferences.Size = new System.Drawing.Size(143, 22);
             this.MenuFilePreferences.Text = "Preferences";
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.propertiesWindowToolStripMenuItem,
-            this.workplaceWindowToolStripMenuItem,
+            this.MenuViewProperties,
+            this.MenuViewWorkplace,
             this.toolStripSeparator7,
             this.trainingToolStripMenuItem,
             this.sourceEditingToolStripMenuItem,
@@ -357,17 +358,19 @@ namespace Sinapse.Forms
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // propertiesWindowToolStripMenuItem
+            // MenuViewProperties
             // 
-            this.propertiesWindowToolStripMenuItem.Name = "propertiesWindowToolStripMenuItem";
-            this.propertiesWindowToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.propertiesWindowToolStripMenuItem.Text = "Properties Window";
+            this.MenuViewProperties.Name = "MenuViewProperties";
+            this.MenuViewProperties.Size = new System.Drawing.Size(176, 22);
+            this.MenuViewProperties.Text = "Properties Window";
+            this.MenuViewProperties.Click += new System.EventHandler(this.MenuViewProperties_Click);
             // 
-            // workplaceWindowToolStripMenuItem
+            // MenuViewWorkplace
             // 
-            this.workplaceWindowToolStripMenuItem.Name = "workplaceWindowToolStripMenuItem";
-            this.workplaceWindowToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.workplaceWindowToolStripMenuItem.Text = "Workplace Window";
+            this.MenuViewWorkplace.Name = "MenuViewWorkplace";
+            this.MenuViewWorkplace.Size = new System.Drawing.Size(176, 22);
+            this.MenuViewWorkplace.Text = "Workplace Window";
+            this.MenuViewWorkplace.Click += new System.EventHandler(this.MenuViewWorkplace_Click);
             // 
             // toolStripSeparator7
             // 
@@ -577,9 +580,17 @@ namespace Sinapse.Forms
             // 
             // toolsToolStripMenuItem
             // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
             // 
             // MenuExtensionsExcel
             // 
@@ -833,7 +844,7 @@ namespace Sinapse.Forms
             this.dockMain.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
-            this.dockMain.Size = new System.Drawing.Size(792, 517);
+            this.dockMain.Size = new System.Drawing.Size(792, 495);
             this.dockMain.TabIndex = 21;
             // 
             // statusStrip1
@@ -856,11 +867,11 @@ namespace Sinapse.Forms
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.dockMain);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 517);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 495);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 24);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(792, 542);
+            this.toolStripContainer1.Size = new System.Drawing.Size(792, 520);
             this.toolStripContainer1.TabIndex = 29;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -873,10 +884,10 @@ namespace Sinapse.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 566);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.toolStripPanel1);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.statusStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -973,8 +984,8 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripButton btnShowPropertiesWindow;
         private System.Windows.Forms.ToolStripButton btnMenuAddItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem propertiesWindowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem workplaceWindowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuViewProperties;
+        private System.Windows.Forms.ToolStripMenuItem MenuViewWorkplace;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem trainingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainingWindowToolStripMenuItem;
@@ -995,5 +1006,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainingToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }

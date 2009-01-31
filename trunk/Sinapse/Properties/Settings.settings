@@ -95,5 +95,8 @@
     <Setting Name="mruWorkplaces" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="startpage_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">web/index.html</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

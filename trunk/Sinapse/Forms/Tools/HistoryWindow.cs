@@ -27,10 +27,10 @@ using System.Windows.Forms;
 using Sinapse.Data;
 
 
-namespace Sinapse.Windows
+namespace Sinapse.Forms.ToolWindows
 {
     
-    public sealed partial class HistoryWindow : WeifenLuo.WinFormsUI.Docking.DockContent
+    public sealed partial class HistoryWindow : ToolWindow
     {
 
 

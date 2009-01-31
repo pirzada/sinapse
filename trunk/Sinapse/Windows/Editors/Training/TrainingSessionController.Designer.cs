@@ -1,4 +1,4 @@
-namespace Sinapse.Windows.Training
+namespace Sinapse.Forms.Training
 {
     partial class TrainingSessionController
     {

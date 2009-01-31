@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using Sinapse.Core.Training;
 
-namespace Sinapse.Windows.Training
+namespace Sinapse.Forms.Training
 {
     public partial class TrainingSessionController : WeifenLuo.WinFormsUI.Docking.DockContent
     {

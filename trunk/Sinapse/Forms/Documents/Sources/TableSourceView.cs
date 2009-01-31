@@ -12,9 +12,9 @@ using Sinapse.Core;
 using Sinapse.Core.Sources;
 using Sinapse.Forms.Dialogs;
 
-using Sinapse.Windows.Editors.DataSources;
+using Sinapse.Forms.Editors.DataSources;
 
-namespace Sinapse.Windows.Documents
+namespace Sinapse.Forms.Documents
 {
     [DocumentViewer(typeof(TableDataSource))]
     internal partial class TableSourceView : SinapseDocumentView

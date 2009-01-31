@@ -13,7 +13,7 @@ using Sinapse.Core.Sources;
 using Sinapse.Forms.Dialogs;
 
 
-namespace Sinapse.Windows.Editors.DataSources
+namespace Sinapse.Forms.Editors.DataSources
 {
     public partial class ColumnSpecification : DockContent
     {

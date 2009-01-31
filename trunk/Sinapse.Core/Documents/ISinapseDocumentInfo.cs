@@ -45,7 +45,7 @@ namespace Sinapse.Core
 
         private void initialize(string filePath, bool relative)
         {
-            Type type = SinapseDocument.GetType(Utils.GetExtension(filePath, true));
+            Type type = DocumentCache.GetType(Utils.GetExtension(filePath, true));
             initialize(filePath, relative, type);
         }
 

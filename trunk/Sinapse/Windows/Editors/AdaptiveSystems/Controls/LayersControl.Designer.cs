@@ -1,4 +1,4 @@
-namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
+namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
 {
     partial class LayersControl
     {

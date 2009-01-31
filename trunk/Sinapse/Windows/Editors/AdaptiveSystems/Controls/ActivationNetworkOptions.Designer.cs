@@ -1,4 +1,4 @@
-namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
+namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
 {
     partial class ActivationNetworkOptions
     {
@@ -37,7 +37,7 @@ namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.networkLayersEditor = new Sinapse.Windows.Editors.AdaptiveSystems.Controls.LayersControl();
+            this.networkLayersEditor = new Sinapse.Forms.Editors.AdaptiveSystems.Controls.LayersControl();
             this.networkDiagram1 = new Sinapse.Diagramming.NetworkDiagram();
             this.groupBox2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();

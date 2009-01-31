@@ -11,11 +11,11 @@ using WeifenLuo.WinFormsUI.Docking;
 using Sinapse.Core;
 using Sinapse.Core.Systems;
 
-using Sinapse.Windows.Editors.AdaptiveSystems;
-using Sinapse.Windows.Editors.AdaptiveSystems.Controls;
+using Sinapse.Forms.Editors.AdaptiveSystems;
+using Sinapse.Forms.Editors.AdaptiveSystems.Controls;
 
 
-namespace Sinapse.Windows.Documents
+namespace Sinapse.Forms.Documents
 {
     [DocumentViewer(typeof(ActivationNetworkSystem))]
     internal partial class NetworkSystemView : SinapseDocumentView

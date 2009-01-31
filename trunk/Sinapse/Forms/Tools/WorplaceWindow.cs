@@ -33,10 +33,10 @@ using Sinapse.Core.Sources;
 using Sinapse.Core.Training;
 
 
-namespace Sinapse.Windows
+namespace Sinapse.Forms.ToolWindows
 {
 
-    public partial class WorkplaceWindow : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class WorkplaceWindow : ToolWindow
     {
 
         private bool directoryView = true;

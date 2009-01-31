@@ -28,9 +28,9 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Data;
-using Sinapse.Windows;
-using Sinapse.Windows.Documents;
-using Sinapse.Windows.Training;
+using Sinapse.Forms;
+using Sinapse.Forms.Documents;
+using Sinapse.Forms.Training;
 
 using Sinapse.Forms.Dialogs;
 
@@ -60,11 +60,9 @@ namespace Sinapse.Forms
                 ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
 
-            
             InitializeComponent();
 
             workbench = new Workbench(this.dockMain);
-            workbench.Load();
         }
         
         #endregion
@@ -90,12 +88,14 @@ namespace Sinapse.Forms
 
                 // Fix ToolStrip
                 ToolStripManager.LoadSettings(this);
-                
+
+                // Load Workbench Layout
+                workbench.LoadLayout();
 
                 // Show Start Page (if configured to do so)
                 if (Properties.Settings.Default.behaviour_ShowStartPage)
                 {
-                    StartPage page = new StartPage();
+                    StartPage page = new StartPage(workbench);
                     page.Show(this.dockMain, DockState.Document);
                 }
                 
@@ -132,6 +132,9 @@ namespace Sinapse.Forms
 
             // Save ToolStripPanels
             ToolStripManager.SaveSettings(this);
+
+            // Save Workbench Layout
+            workbench.SaveLayout();
 
             // Save settings before closing
             Properties.Settings.Default.main_FirstLoad = false;
@@ -291,6 +294,16 @@ namespace Sinapse.Forms
          //   this.sessionOpen(filename);
         }
         #endregion
+
+        private void MenuViewProperties_Click(object sender, EventArgs e)
+        {
+            workbench.PropertyWindow.Show(dockMain);
+        }
+
+        private void MenuViewWorkplace_Click(object sender, EventArgs e)
+        {
+            workbench.WorkplaceWindow.Show(dockMain);
+        }
 
 
     }

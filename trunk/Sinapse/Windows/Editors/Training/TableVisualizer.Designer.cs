@@ -1,4 +1,4 @@
-namespace Sinapse.Windows
+namespace Sinapse.Forms
 {
     partial class TrainingTableVisualizer
     {

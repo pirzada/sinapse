@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Sinapse.Windows
+namespace Sinapse.Forms.ToolWindows
 {
-    public partial class PropertyWindow : DockContent
+    public partial class PropertyWindow : ToolWindow
     {
 
         public PropertyWindow()
