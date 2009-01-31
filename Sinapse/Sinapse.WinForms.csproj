@@ -122,6 +122,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IconCache.cs" />
+    <Compile Include="Forms\Dialogs\OptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\OptionsDialog.Designer.cs">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -161,28 +168,28 @@
     <Compile Include="Windows\Editors\DataSources\TableEditor.Designer.cs">
       <DependentUpon>TableEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\NetworkSystemView.cs">
+    <Compile Include="Forms\Documents\Systems\NetworkSystemView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\NetworkSystemView.Designer.cs">
+    <Compile Include="Forms\Documents\Systems\NetworkSystemView.Designer.cs">
       <DependentUpon>NetworkSystemView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\StartPage.cs">
+    <Compile Include="Forms\Documents\StartPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TrainingSessionView.cs">
+    <Compile Include="Forms\Documents\Sessions\TrainingSessionView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TrainingSessionView.Designer.cs">
+    <Compile Include="Forms\Documents\Sessions\TrainingSessionView.Designer.cs">
       <DependentUpon>TrainingSessionView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Documents\SinapseDocumentView.cs">
+    <Compile Include="Forms\Documents\SinapseDocumentView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TableSourceView.cs">
+    <Compile Include="Forms\Documents\Sources\TableSourceView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Documents\TableSourceView.Designer.cs">
+    <Compile Include="Forms\Documents\Sources\TableSourceView.Designer.cs">
       <DependentUpon>TableSourceView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Base\SingleInstanceForm.cs">
@@ -242,10 +249,16 @@
       <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Workbench.cs" />
-    <Compile Include="Windows\WorplaceWindow.cs">
+    <Compile Include="Forms\Tools\ToolWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\WorplaceWindow.Designer.cs">
+    <Compile Include="Forms\Tools\ToolWindow.Designer.cs">
+      <DependentUpon>ToolWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tools\WorplaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tools\WorplaceWindow.Designer.cs">
       <DependentUpon>WorplaceWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Logging\HistoryEvent.cs" />
@@ -258,16 +271,16 @@
     <None Include="Resources\Templates\TemplateCSharp.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Windows\PropertyWindow.cs">
+    <Compile Include="Forms\Tools\PropertyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\PropertyWindow.Designer.cs">
+    <Compile Include="Forms\Tools\PropertyWindow.Designer.cs">
       <DependentUpon>PropertyWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TaskWindow.cs">
+    <Compile Include="Forms\Tools\TaskWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\TaskWindow.Designer.cs">
+    <Compile Include="Forms\Tools\TaskWindow.Designer.cs">
       <DependentUpon>TaskWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.cs" />
@@ -282,10 +295,10 @@
     <Compile Include="Forms\Dialogs\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\HistoryWindow.cs">
+    <Compile Include="Forms\Tools\HistoryWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\HistoryWindow.Designer.cs">
+    <Compile Include="Forms\Tools\HistoryWindow.Designer.cs">
       <DependentUpon>HistoryWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\ImportWizard.cs">
@@ -302,6 +315,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Dialogs\OptionsDialog.resx">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ActivationNetworkOptions.cs</DependentUpon>
@@ -326,19 +342,19 @@
       <SubType>Designer</SubType>
       <DependentUpon>TableEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\NetworkSystemView.resx">
+    <EmbeddedResource Include="Forms\Documents\Systems\NetworkSystemView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NetworkSystemView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\StartPage.resx">
+    <EmbeddedResource Include="Forms\Documents\StartPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\TrainingSessionView.resx">
+    <EmbeddedResource Include="Forms\Documents\Sessions\TrainingSessionView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TrainingSessionView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Documents\TableSourceView.resx">
+    <EmbeddedResource Include="Forms\Documents\Sources\TableSourceView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TableSourceView.cs</DependentUpon>
     </EmbeddedResource>
@@ -362,7 +378,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>SavepointsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\TaskWindow.resx">
+    <EmbeddedResource Include="Forms\Tools\TaskWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TaskWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -378,7 +394,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\WorplaceWindow.resx">
+    <EmbeddedResource Include="Forms\Tools\ToolWindow.resx">
+      <DependentUpon>ToolWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tools\WorplaceWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WorplaceWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -386,7 +405,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\HistoryWindow.resx">
+    <EmbeddedResource Include="Forms\Tools\HistoryWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HistoryWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -398,7 +417,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\PropertyWindow.resx">
+    <EmbeddedResource Include="Forms\Tools\PropertyWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PropertyWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -434,7 +453,7 @@
   <ItemGroup>
     <None Include="cSouza Company SecurityCode.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
-    <None Include="Optimizer.bat">
+    <None Include="Tools\Optimizer.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -782,10 +801,10 @@
     <None Include="Resources\Templates\NetworkReport.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Changelog.txt">
+    <None Include="Docs\Changelog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="License.txt">
+    <None Include="Docs\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\reminders.png" />
@@ -829,14 +848,33 @@
     <None Include="Resources\view_detailed.png" />
     <None Include="Resources\view_icon.png" />
     <Content Include="Sinapse.ico" />
-    <Content Include="Web\default.css" />
-    <Content Include="Web\images\a1.gif" />
-    <Content Include="Web\images\a2.gif" />
-    <Content Include="Web\images\a3.gif" />
-    <Content Include="Web\images\a4.gif" />
-    <Content Include="Web\images\a5.gif" />
-    <Content Include="Web\index.html" />
-    <Content Include="Web\license.txt" />
+    <Content Include="Web\default.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\images\a1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\images\a2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\images\a3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\images\a4.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\images\a5.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

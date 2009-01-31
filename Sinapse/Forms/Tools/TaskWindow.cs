@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Training
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace Sinapse.Forms.ToolWindows
 {
-    public partial class GraphVisualizer : Form
+    public partial class TaskWindow : ToolWindow
     {
-        public GraphVisualizer()
+        public TaskWindow()
         {
             InitializeComponent();
         }

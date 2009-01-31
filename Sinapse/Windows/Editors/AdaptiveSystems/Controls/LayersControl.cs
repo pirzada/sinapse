@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Windows.Editors.AdaptiveSystems.Controls
+namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
 {
     public partial class LayersControl : UserControl
     {

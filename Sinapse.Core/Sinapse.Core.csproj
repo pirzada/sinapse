@@ -63,9 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Documents\DocumentCache.cs" />
     <Compile Include="Filters\InputMismatchException.cs" />
     <Compile Include="Filters\Table\Normalization.cs" />
-    <Compile Include="ISinapseDocument.cs" />
+    <Compile Include="Documents\ISinapseDocument.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="ISerializableObject.cs" />
     <Compile Include="Sources\ISource.cs" />
@@ -90,7 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Training\TrainingThreadParameters.cs" />
     <Compile Include="Workplace.cs" />
-    <Compile Include="ISinapseDocumentInfo.cs" />
+    <Compile Include="Documents\ISinapseDocumentInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -386,5 +386,17 @@ namespace Sinapse.Properties {
                 this["mruWorkplaces"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("web/index.html")]
+        public string startpage_path {
+            get {
+                return ((string)(this["startpage_path"]));
+            }
+            set {
+                this["startpage_path"] = value;
+            }
+        }
     }
 }

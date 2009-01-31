@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 
 
-namespace Sinapse.Windows.Editors.DataSources
+namespace Sinapse.Forms.Editors.DataSources
 {
     public partial class NoteEditor : Form
     {

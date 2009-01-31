@@ -8,10 +8,11 @@ using System.Reflection;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core;
-using Sinapse.Windows.Documents;
+using Sinapse.Forms.Documents;
+using Sinapse.Forms.ToolWindows;
 
 
-namespace Sinapse.Windows
+namespace Sinapse.Forms
 {
     public sealed class Workbench
     {
@@ -21,13 +22,10 @@ namespace Sinapse.Windows
 
 
         // Tool Windows
-        private WorkplaceWindow twWorkplace;
-        private PropertyWindow  twProperty;
-        private HistoryWindow   twHistory;
-        private TaskWindow      twTask;
-
-        
-
+        private WorkplaceWindow toolWorkplaceWindow;
+        private PropertyWindow  toolPropertyWindow;
+        private HistoryWindow   toolHistoryWindow;
+        private TaskWindow      toolTaskWindow;
 
 
 
@@ -35,27 +33,34 @@ namespace Sinapse.Windows
         {
             this.dockPanel = dockPanel;
             this.deserializeDockContent = new DeserializeDockContent(getContentFromPersistString);
+
+            this.toolWorkplaceWindow = new WorkplaceWindow();
+            this.toolPropertyWindow = new PropertyWindow();
+            this.toolHistoryWindow = new HistoryWindow();
+            this.toolTaskWindow = new TaskWindow();
         }
 
 
 
-        #region Properties
+        #region Tool Windows
         public WorkplaceWindow WorkplaceWindow
         {
-            get { return twWorkplace; } 
+            get { return toolWorkplaceWindow; } 
         }
+
         public PropertyWindow PropertyWindow
         {
-            get { return twProperty; }
+            get { return toolPropertyWindow; }
         }
+
         public HistoryWindow HistoryWindow
         {
-            get { return twHistory; }
+            get { return toolHistoryWindow; }
         }
 
         public TaskWindow TaskWindow
         {
-            get { return twTask; }
+            get { return toolTaskWindow; }
         }
 
         public SinapseDocumentView ActiveDocumentView
@@ -104,10 +109,14 @@ namespace Sinapse.Windows
         {
             IDockContent[] documents = dockPanel.DocumentsToArray();
 
-            foreach (SinapseDocumentView document in documents)
+            foreach (IDockContent content in documents)
             {
-                if (document.HasChanges)
-                    document.Save();
+                if (content is SinapseDocumentView)
+                {
+                    SinapseDocumentView document = content as SinapseDocumentView;
+                    if (document.HasChanges)
+                        document.Save();
+                }
             }
         }
 
@@ -115,16 +124,20 @@ namespace Sinapse.Windows
         {
             IDockContent[] documents = dockPanel.DocumentsToArray();
 
-            foreach (SinapseDocumentView document in documents)
+            foreach (IDockContent content in documents)
             {
-                if (document.HasChanges)
+                if (content is SinapseDocumentView)
                 {
-                    DialogResult r = MessageBox.Show(String.Format("Save changes to {0}?", document.Name),
-                        "Save changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                    if (r == DialogResult.Yes)
-                        document.Save();
-                    else if (r == DialogResult.Cancel)
-                        return false;
+                    SinapseDocumentView document = content as SinapseDocumentView;
+                    if (document.HasChanges)
+                    {
+                        DialogResult r = MessageBox.Show(String.Format("Save changes to {0}?", document.Name),
+                            "Save changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if (r == DialogResult.Yes)
+                            document.Save();
+                        else if (r == DialogResult.Cancel)
+                            return false;
+                    }
                 }
             }
             return true;
@@ -139,26 +152,27 @@ namespace Sinapse.Windows
         private readonly string config =
             Path.Combine(Application.LocalUserAppDataPath, "DockPanel.xml");
 
-        public void Save()
+        public void SaveLayout()
         {
             dockPanel.SaveAsXml(config);
         }
 
-        public void Load()
+        public void LoadLayout()
         {
+            if (File.Exists(config))
             dockPanel.LoadFromXml(config, deserializeDockContent);
         }
 
         private IDockContent getContentFromPersistString(string persistString)
         {
-            if (persistString.Equals(typeof(WorkplaceWindow)))
-                return twWorkplace;
+            if (persistString.Equals(typeof(WorkplaceWindow).ToString()))
+                return toolWorkplaceWindow;
             else if (persistString.Equals(typeof(PropertyWindow).ToString()))
-                return twProperty;
+                return toolPropertyWindow;
             else if (persistString.Equals(typeof(HistoryWindow).ToString()))
-                return twHistory;
+                return toolHistoryWindow;
             else if (persistString.Equals(typeof(TaskWindow).ToString()))
-                return twTask;
+                return toolTaskWindow;
             else return null;
         }
         #endregion

@@ -1,4 +1,4 @@
-namespace Sinapse.Windows.Documents
+namespace Sinapse.Forms.Documents
 {
     partial class TrainingSessionView
     {

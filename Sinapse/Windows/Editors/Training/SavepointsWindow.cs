@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using Sinapse.Core.Training;
 
-namespace Sinapse.Windows.Training
+namespace Sinapse.Forms.Training
 {
     /// <summary>
     ///   Display a list of TrainingSavepoints and offers buttons to interact with

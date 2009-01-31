@@ -9,10 +9,10 @@ using WeifenLuo.WinFormsUI.Docking;
 using Sinapse.Core;
 
 
-namespace Sinapse.Windows.Documents
+namespace Sinapse.Forms.Documents
 {
 
-    public abstract class SinapseDocumentView : DockContent
+    public class SinapseDocumentView : DockContent
     {
 
         private ISinapseDocument document;
@@ -26,11 +26,19 @@ namespace Sinapse.Windows.Documents
             this.workbench = workbench;
             this.document = document;
 
-            this.document.DocumentChanged += new EventHandler(document_DocumentChanged);
-            this.document.FileSaved += new EventHandler(document_FileSaved);
+            if (document != null)
+            {
+                this.document.DocumentChanged += new EventHandler(document_DocumentChanged);
+                this.document.FileSaved += new EventHandler(document_FileSaved);
 
-            saveFileDialog = new SaveFileDialog();
-            saveFileDialog.DefaultExt = SinapseDocument.GetExtension(document.GetType());
+                saveFileDialog = new SaveFileDialog();
+                saveFileDialog.DefaultExt = DocumentCache.GetExtension(document.GetType());
+            }
+        }
+
+        public SinapseDocumentView()
+        {
+
         }
 
         
@@ -55,7 +63,11 @@ namespace Sinapse.Windows.Documents
 
         public bool HasChanges
         {
-            get { return document.HasChanges; }
+            get { 
+                if (document != null)
+                return document.HasChanges;
+                return false;
+            }
         }
         #endregion
 
@@ -103,10 +115,10 @@ namespace Sinapse.Windows.Documents
         #region Private Methods
         private void updateCaption()
         {
-            this.Name = this.Document.Name;
-            this.Text = this.Document.Name;
+            this.Name = this.document.Name;
+            this.Text = this.document.Name;
 
-            this.TabText = this.Document.Name;
+            this.TabText = this.document.Name;
 
             if (this.Document.HasChanges)
                 this.TabText = this.Name + "*";

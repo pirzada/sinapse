@@ -42,7 +42,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreate.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCreate.Location = new System.Drawing.Point(347, 59);
+            this.btnCreate.Location = new System.Drawing.Point(314, 59);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 0;
@@ -65,14 +65,14 @@ namespace Sinapse.Forms.Dialogs
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Location = new System.Drawing.Point(69, 6);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(353, 20);
+            this.tbName.Size = new System.Drawing.Size(320, 20);
             this.tbName.TabIndex = 2;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(428, 59);
+            this.btnCancel.Location = new System.Drawing.Point(395, 59);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -92,7 +92,7 @@ namespace Sinapse.Forms.Dialogs
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(428, 30);
+            this.btnBrowse.Location = new System.Drawing.Point(395, 30);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 0;
@@ -109,7 +109,7 @@ namespace Sinapse.Forms.Dialogs
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.Location = new System.Drawing.Point(69, 32);
             this.cbLocation.Name = "cbLocation";
-            this.cbLocation.Size = new System.Drawing.Size(353, 21);
+            this.cbLocation.Size = new System.Drawing.Size(320, 21);
             this.cbLocation.TabIndex = 3;
             // 
             // NewWorkplaceDialog
@@ -118,7 +118,7 @@ namespace Sinapse.Forms.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(515, 89);
+            this.ClientSize = new System.Drawing.Size(482, 86);
             this.Controls.Add(this.cbLocation);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label2);

@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 using Sinapse.Core;
 using Sinapse.Core.Training;
-using Sinapse.Windows.Training;
+using Sinapse.Forms.Training;
 
 using WeifenLuo.WinFormsUI.Docking;
 
 
-namespace Sinapse.Windows.Documents
+namespace Sinapse.Forms.Documents
 {
 
     internal partial class TrainingSessionView :  SinapseDocumentView

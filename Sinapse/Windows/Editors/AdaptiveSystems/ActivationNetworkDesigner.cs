@@ -12,7 +12,7 @@ using Sinapse.Core;
 using Sinapse.Core.Systems;
 
 
-namespace Sinapse.Windows.Editors.AdaptiveSystems
+namespace Sinapse.Forms.Editors.AdaptiveSystems
 {
     public partial class ActivationNetworkDesigner : DockContent
     {

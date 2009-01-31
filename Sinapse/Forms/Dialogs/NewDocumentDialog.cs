@@ -35,7 +35,10 @@ namespace Sinapse.Forms.Dialogs
 
             if (directory == null) directory = String.Empty;
 
+
             InitializeComponent();
+
+            IconCache.CreateList(smallIcons, largeIcons);
 
             createListView(type);
         }
@@ -58,6 +61,7 @@ namespace Sinapse.Forms.Dialogs
                 {
                     DocumentDescription desc = attr[0] as DocumentDescription;
                     listViewItem = new ListViewItem(desc.Name);
+                    listViewItem.ImageKey = desc.Extension;
                     listViewItem.Tag = documentType;
 
                     subitem = new ListViewItem.ListViewSubItem(listViewItem, desc.Description);

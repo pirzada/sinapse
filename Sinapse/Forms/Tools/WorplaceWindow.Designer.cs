@@ -1,4 +1,4 @@
-namespace Sinapse.Windows
+namespace Sinapse.Forms.ToolWindows
 {
     partial class WorkplaceWindow
     {

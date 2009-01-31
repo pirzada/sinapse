@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using ZedGraph;
 
 
-namespace Sinapse.Windows
+namespace Sinapse.Forms
 {
     public partial class TrainingGraph : WeifenLuo.WinFormsUI.Docking.DockContent
     {

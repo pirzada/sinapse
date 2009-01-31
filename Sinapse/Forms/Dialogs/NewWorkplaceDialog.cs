@@ -30,7 +30,7 @@ namespace Sinapse.Forms.Dialogs
         {
             if (Directory.Exists(cbLocation.Text) && tbName.Text.Length > 0)
             {
-                this.workplace = new Workplace(tbName.Text, new FileInfo(cbLocation.Text));
+                this.workplace = new Workplace(tbName.Text, new FileInfo(Path.Combine(cbLocation.Text, tbName.Text)));
                 this.Close();
             }
         }

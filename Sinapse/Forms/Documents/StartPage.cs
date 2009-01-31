@@ -8,36 +8,42 @@ using System.Text;
 using System.Windows.Forms;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
+using System.IO;
 
 using Sinapse.Properties;
 
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Sinapse.Windows.Documents
+namespace Sinapse.Forms.Documents
 {
 
-    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-    [ComVisibleAttribute(true)]
-    public partial class StartPage : DockContent
+
+    public partial class StartPage : SinapseDocumentView
     {
         private WebBrowser webBrowser1;
+        private ScriptingObject scriptingObject;
+        private String address;
+
     
-        public StartPage()
+        public StartPage(Workbench workbench) : base(workbench, null)
         {
             InitializeComponent();
+
+            address = Path.Combine(Application.StartupPath,
+                Sinapse.Properties.Settings.Default.startpage_path);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.webBrowser1.Url = new Uri(address);
         }
 
         public void Refresh()
         {
         }
 
-        public void OpenWorkspace(string path)
-        {
-        }
 
-        public void OpenDocument(string path)
-        {
-        }
 
         public string CreateStartPage(string model)
         {
@@ -70,23 +76,46 @@ namespace Sinapse.Windows.Documents
             // 
             // webBrowser1
             // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.AllowWebBrowserDrop = false;
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(292, 266);
+            this.webBrowser1.ScrollBarsEnabled = false;
+            this.webBrowser1.Size = new System.Drawing.Size(569, 312);
             this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.ObjectForScripting = this;
             // 
             // StartPage
             // 
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(569, 312);
             this.Controls.Add(this.webBrowser1);
             this.Name = "StartPage";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
             this.TabText = "Start Page";
             this.Text = "Start Page";
             this.ResumeLayout(false);
 
+        }
+
+
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        [ComVisibleAttribute(true)]
+        public class ScriptingObject
+        {
+            public ScriptingObject()
+            {
+
+            }
+
+            public void OpenWorkspace(string path)
+            {
+                new Sinapse.Forms.Dialogs.NewWorkplaceDialog().ShowDialog();
+            }
+
+            public void OpenDocument(string path)
+            {
+            }
         }
 
     }

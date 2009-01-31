@@ -10,7 +10,10 @@ using Sinapse.Core.Filters;
 namespace Sinapse.Core.Systems
 {
     [Serializable]
-    [DocumentDescription(".system.ann")]
+    [DocumentDescription("Activation Network System",
+        DefaultName="activationNetwork",
+        Description="Activation Neural Network",
+        Extension="system.ann")]
     public class ActivationNetworkSystem : NetworkSystem, ISinapseDocument, ISerializableObject
     {
         

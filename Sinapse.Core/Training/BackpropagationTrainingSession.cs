@@ -37,6 +37,11 @@ namespace Sinapse.Core.Training
     ///   using crossvalidation and other advanced techniques. Also provides additional feedback
     ///   about current traning status.
     /// </summary>
+    [Serializable]
+    [DocumentDescription("Backpropagation Training Session",
+        DefaultName = "trainingSession",
+        Description = "Teaches a Source to an Activation Network using Backpropagation",
+        Extension = "session.bpp")]
     public class BackpropagationTrainingSession : TrainingSession,
         ISinapseDocument, ISerializableObject
     {

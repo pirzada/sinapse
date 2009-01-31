@@ -30,21 +30,22 @@ namespace Sinapse.Forms.Dialogs
         {
             this.components = new System.ComponentModel.Container();
             this.listView = new System.Windows.Forms.ListView();
+            this.colName = new System.Windows.Forms.ColumnHeader();
+            this.colDescription = new System.Windows.Forms.ColumnHeader();
+            this.colExtension = new System.Windows.Forms.ColumnHeader();
             this.label1 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.largeIcons = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnViewIcon = new System.Windows.Forms.Button();
             this.btnViewList = new System.Windows.Forms.Button();
-            this.colName = new System.Windows.Forms.ColumnHeader();
-            this.colDescription = new System.Windows.Forms.ColumnHeader();
-            this.colExtension = new System.Windows.Forms.ColumnHeader();
+            this.smallIcons = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,19 +57,33 @@ namespace Sinapse.Forms.Dialogs
             this.colExtension});
             this.tableLayoutPanel1.SetColumnSpan(this.listView, 4);
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView.Location = new System.Drawing.Point(143, 34);
+            this.listView.LargeImageList = this.largeIcons;
+            this.listView.Location = new System.Drawing.Point(150, 34);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(391, 225);
+            this.listView.Size = new System.Drawing.Size(413, 224);
+            this.listView.SmallImageList = this.smallIcons;
             this.listView.TabIndex = 8;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.ItemActivate += new System.EventHandler(this.listView_ItemActivate);
+            // 
+            // colName
+            // 
+            this.colName.Text = "Name";
+            // 
+            // colDescription
+            // 
+            this.colDescription.Text = "Description";
+            // 
+            // colExtension
+            // 
+            this.colExtension.Text = "Extension";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 288);
+            this.label1.Location = new System.Drawing.Point(3, 287);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 26);
             this.label1.TabIndex = 7;
@@ -80,18 +95,17 @@ namespace Sinapse.Forms.Dialogs
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.tbName, 5);
-            this.tbName.Location = new System.Drawing.Point(47, 291);
+            this.tbName.Location = new System.Drawing.Point(47, 290);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(487, 20);
+            this.tbName.Size = new System.Drawing.Size(516, 20);
             this.tbName.TabIndex = 6;
-            this.tbName.Text = "activationNetwork.sann";
             // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnOk, 3);
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(454, 317);
+            this.btnOk.Location = new System.Drawing.Point(483, 316);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(80, 23);
             this.btnOk.TabIndex = 4;
@@ -103,7 +117,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(367, 317);
+            this.btnCancel.Location = new System.Drawing.Point(396, 316);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 23);
             this.btnCancel.TabIndex = 5;
@@ -117,14 +131,14 @@ namespace Sinapse.Forms.Dialogs
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Location = new System.Drawing.Point(3, 34);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(134, 225);
+            this.treeView.Size = new System.Drawing.Size(141, 224);
             this.treeView.TabIndex = 11;
             // 
-            // imageList
+            // largeIcons
             // 
-            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.largeIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.largeIcons.ImageSize = new System.Drawing.Size(32, 32);
+            this.largeIcons.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // label2
             // 
@@ -133,7 +147,7 @@ namespace Sinapse.Forms.Dialogs
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 31);
+            this.label2.Size = new System.Drawing.Size(141, 31);
             this.label2.TabIndex = 11;
             this.label2.Text = "Categories";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -142,9 +156,9 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(143, 0);
+            this.label3.Location = new System.Drawing.Point(150, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(304, 31);
+            this.label3.Size = new System.Drawing.Size(326, 31);
             this.label3.TabIndex = 11;
             this.label3.Text = "Document Types";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -154,10 +168,10 @@ namespace Sinapse.Forms.Dialogs
             this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.tbDescription, 6);
-            this.tbDescription.Location = new System.Drawing.Point(3, 265);
+            this.tbDescription.Location = new System.Drawing.Point(3, 264);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
-            this.tbDescription.Size = new System.Drawing.Size(531, 20);
+            this.tbDescription.Size = new System.Drawing.Size(560, 20);
             this.tbDescription.TabIndex = 12;
             // 
             // tableLayoutPanel1
@@ -189,13 +203,13 @@ namespace Sinapse.Forms.Dialogs
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(537, 343);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(566, 342);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // btnViewIcon
             // 
             this.btnViewIcon.Image = global::Sinapse.Properties.Resources.view_icon;
-            this.btnViewIcon.Location = new System.Drawing.Point(508, 3);
+            this.btnViewIcon.Location = new System.Drawing.Point(537, 3);
             this.btnViewIcon.Name = "btnViewIcon";
             this.btnViewIcon.Size = new System.Drawing.Size(25, 25);
             this.btnViewIcon.TabIndex = 13;
@@ -205,29 +219,23 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnViewList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnViewList.Image = global::Sinapse.Properties.Resources.view_detailed;
-            this.btnViewList.Location = new System.Drawing.Point(477, 3);
+            this.btnViewList.Location = new System.Drawing.Point(506, 3);
             this.btnViewList.Name = "btnViewList";
             this.btnViewList.Size = new System.Drawing.Size(25, 25);
             this.btnViewList.TabIndex = 14;
             this.btnViewList.UseVisualStyleBackColor = true;
             // 
-            // colName
+            // smallIcons
             // 
-            this.colName.Text = "Name";
-            // 
-            // colDescription
-            // 
-            this.colDescription.Text = "Description";
-            // 
-            // colExtension
-            // 
-            this.colExtension.Text = "Extension";
+            this.smallIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.smallIcons.ImageSize = new System.Drawing.Size(16, 16);
+            this.smallIcons.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // NewDocumentDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 343);
+            this.ClientSize = new System.Drawing.Size(566, 342);
             this.Controls.Add(this.tableLayoutPanel1);
             this.HelpButton = true;
             this.Name = "NewDocumentDialog";
@@ -247,7 +255,7 @@ namespace Sinapse.Forms.Dialogs
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.ImageList largeIcons;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDescription;
@@ -257,6 +265,7 @@ namespace Sinapse.Forms.Dialogs
         private System.Windows.Forms.ColumnHeader colName;
         private System.Windows.Forms.ColumnHeader colDescription;
         private System.Windows.Forms.ColumnHeader colExtension;
+        private System.Windows.Forms.ImageList smallIcons;
 
     }
 }
