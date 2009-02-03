@@ -34,47 +34,20 @@ namespace Sinapse.Core
     ///   Training Sessions currently hosted in a usage session of the program.
     /// </summary>
     [Serializable]
+    [DocumentDescription("Workplace",
+        DefaultName="workplace",
+        Description="Default Workplace",
+        Extension=".workplace",
+        Name="Default",
+        IconPath="Resources/Workplace.ico")]
     public class Workplace : ISinapseDocument
     {
 
-        #region Active Workplace Placeholder
-        private static Workplace active;
-
-        public static Workplace Active
-        {
-            get { return active; }
-            set
-            {
-                if (value != active)
-                {
-                    if (value == null)
-                    {
-                        // We are trying to close the Active Workplace
-                        CancelEventArgs e = new CancelEventArgs();
-
-                        active.OnClosing(e);
-
-                        if (e.Cancel == true) return; // Cancelled
-                    }
-
-                    active = value;
-
-                    if (ActiveWorkplaceChanged != null)
-                        ActiveWorkplaceChanged.Invoke(value, EventArgs.Empty);
-
-                }
-            }
-        }
-
-        public static event EventHandler ActiveWorkplaceChanged;
-        #endregion
+    //    private SinapseDocumentInfoCollection documents;
 
 
         [field: NonSerialized]
         public event CancelEventHandler Closing;
-
-        private SinapseDocumentInfoCollection documents;
-
         
 
 
@@ -85,27 +58,20 @@ namespace Sinapse.Core
             serializableObject = new SerializableObject<Workplace>(this);
             sinapseDocument = new SinapseDocument(name, info);
 
-            documents = new SinapseDocumentInfoCollection();
-            documents.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
+    //        documents = new SinapseDocumentInfoCollection();
+    //        documents.ListChanged += new ListChangedEventHandler(workplaceItemsListChanged);
         }
 
 
-
+  /*
         public SinapseDocumentInfoCollection Documents
         {
             get { return documents; }
         }
-
+  */
         public DirectoryInfo Root
         {
             get { return this.File.Directory; }
-        }
-
-
-        protected void OnClosing(CancelEventArgs e)
-        {
-            if (Closing != null)
-                Closing.Invoke(this, e);
         }
 
 

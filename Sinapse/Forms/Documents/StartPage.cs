@@ -23,6 +23,7 @@ namespace Sinapse.Forms.Documents
         private WebBrowser webBrowser1;
         private ScriptingObject scriptingObject;
         private String address;
+        private String pageModel;
 
     
         public StartPage(Workbench workbench) : base(workbench, null)
@@ -33,39 +34,44 @@ namespace Sinapse.Forms.Documents
          
             InitializeComponent();
 
-            scriptingObject = new ScriptingObject();
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            
+            this.scriptingObject = new ScriptingObject(workbench);
             this.webBrowser1.Url = new Uri(address);
             this.webBrowser1.ObjectForScripting = scriptingObject;
         }
 
-        public void Refresh()
+
+        private void documentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            HtmlElement col;
+
+            // Create Most Recently Used Workplaces List
+            col = this.webBrowser1.Document.GetElementById("recentWorkplaces");
+            if (col != null)
+            {
+                col.InnerHtml = createFileListing("WorkplaceOpenPath", Settings.Default.mruWorkplaces);
+            }
+
+            // Create Most Recently Used Document List
+            col = this.webBrowser1.Document.GetElementById("recentDocuments");
+            if (col != null)
+            {
+                col.InnerHtml = createFileListing("DocumentOpenPath", Settings.Default.mruDocuments);
+            }
         }
 
 
 
-        public string CreateStartPage(string model)
-        {
-            StringBuilder sb = new StringBuilder(model);
-            sb.Replace("<!--WORKPLACES-->", CreateFileListing("WorkplaceOpenPath", Settings.Default.mruWorkplaces));
-            sb.Replace("<!--DOCUMENTS-->",  CreateFileListing("DocumentOpenPath", Settings.Default.mruDocuments));
-            return sb.ToString();
-        }
-
-        public string CreateFileListing(string method, StringCollection workplaces)
+        private string createFileListing(string method, StringCollection files)
         {
             StringBuilder sb = new StringBuilder();
-            foreach(string path in workplaces)
+            sb.Append("<ul>");
+            foreach(string path in files)
             {
+                string safePath = path.Replace(@"\",@"\\");
                 sb.AppendFormat("<li><a href=\"#\" onclick=\"window.external.{0}('{1}')\">{2}</a></li>\n",
-                    method, path, System.IO.Path.GetFileNameWithoutExtension(path));
+                    method, safePath, System.IO.Path.GetFileNameWithoutExtension(path));
             }
+            sb.Append("</ul>");
             return sb.ToString();
         }
 
@@ -90,6 +96,7 @@ namespace Sinapse.Forms.Documents
             this.webBrowser1.ScrollBarsEnabled = false;
             this.webBrowser1.Size = new System.Drawing.Size(569, 312);
             this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.documentCompleted);
             // 
             // StartPage
             // 
@@ -108,10 +115,12 @@ namespace Sinapse.Forms.Documents
         [ComVisibleAttribute(true)]
         public class ScriptingObject
         {
+            Workbench workbench;
 
-            public ScriptingObject()
+
+            public ScriptingObject(Workbench workbench)
             {
-
+                this.workbench = workbench;
             }
 
 
@@ -119,37 +128,44 @@ namespace Sinapse.Forms.Documents
             #region Workplace Actions
             public void WorkplaceOpenPath(string path)
             {
-             
+                workbench.OpenWorkplace(path);
             }
 
             public void WorkplaceOpen()
             {
+                workbench.ShowOpenWorkplaceDialog();
             }
 
             public void WorkplaceNew()
             {
-                new Sinapse.Forms.Dialogs.NewWorkplaceDialog().ShowDialog();
+                new Sinapse.Forms.Dialogs.NewWorkplaceDialog(workbench).ShowDialog();
             }
             #endregion
+
 
 
 
             #region Document Actions
             public void DocumentOpenPath(string path)
             {
+                workbench.OpenDocument(path);
             }
 
             public void DocumentOpen()
             {
+                workbench.ShowOpenDocumentDialog();
             }
 
             public void DocumentNew()
             {
+                new Sinapse.Forms.Dialogs.NewDocumentDialog(workbench).ShowDialog();
             }
             #endregion
 
 
         }
+
+
 
     }
 }

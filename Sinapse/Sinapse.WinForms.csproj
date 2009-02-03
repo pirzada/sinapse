@@ -38,6 +38,7 @@
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,9 @@
       <HintPath>..\lib\RichTextBoxExtended\bin\Release\RichTextBoxExtended.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -108,9 +112,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\TabControlEX.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.3321.36371, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>..\lib\DockPanel\WinFormsUI\bin\Release\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
     <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fa7dfa6666a2638, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -128,6 +132,12 @@
     </Compile>
     <Compile Include="Forms\Dialogs\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Workplaces\WorkplaceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Workplaces\WorkplaceView.Designer.cs">
+      <DependentUpon>WorkplaceView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Tools\NotesToolWindow.cs">
       <SubType>Form</SubType>
@@ -261,11 +271,11 @@
     <Compile Include="Forms\Tools\ToolWindow.Designer.cs">
       <DependentUpon>ToolWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tools\WorplaceWindow.cs">
+    <Compile Include="Forms\Tools\WorkplaceExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tools\WorplaceWindow.Designer.cs">
-      <DependentUpon>WorplaceWindow.cs</DependentUpon>
+    <Compile Include="Forms\Tools\WorkplaceExplorer.Designer.cs">
+      <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Logging\HistoryEvent.cs" />
     <None Include="Resources\Templates\TemplateCpp.cpp">
@@ -323,6 +333,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Dialogs\OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documents\SinapseDocumentView.resx">
+      <DependentUpon>SinapseDocumentView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tools\NotesToolWindow.resx">
       <DependentUpon>NotesToolWindow.cs</DependentUpon>
@@ -406,9 +419,9 @@
     <EmbeddedResource Include="Forms\Tools\ToolWindow.resx">
       <DependentUpon>ToolWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\WorplaceWindow.resx">
+    <EmbeddedResource Include="Forms\Tools\WorkplaceExplorer.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>WorplaceWindow.cs</DependentUpon>
+      <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -856,6 +869,7 @@
     </None>
     <None Include="Resources\view_detailed.png" />
     <None Include="Resources\view_icon.png" />
+    <None Include="Resources\Unknown.ico" />
     <Content Include="Sinapse.ico" />
     <Content Include="Web\default.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

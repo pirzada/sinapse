@@ -217,8 +217,9 @@ namespace Sinapse.Forms.Dialogs
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(80, 23);
             this.btnOk.TabIndex = 18;
-            this.btnOk.Text = "Add";
+            this.btnOk.Text = "Create";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // button1
             // 
@@ -229,6 +230,7 @@ namespace Sinapse.Forms.Dialogs
             this.button1.Size = new System.Drawing.Size(80, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "Browse..";
+            this.button1.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnCancel
             // 

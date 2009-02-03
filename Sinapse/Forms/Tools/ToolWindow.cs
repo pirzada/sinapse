@@ -12,9 +12,22 @@ namespace Sinapse.Forms.ToolWindows
 {
     public partial class ToolWindow : DockContent
     {
+        Workbench workbench;
+
         public ToolWindow()
         {
             InitializeComponent();
+        }
+
+        public ToolWindow(Workbench workbench)
+        {
+            this.workbench = workbench;
+        }
+
+        public Workbench Workbench
+        {
+            get { return this.workbench; }
+            set { this.workbench = value; }
         }
     }
 }

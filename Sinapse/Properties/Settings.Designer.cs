@@ -398,5 +398,17 @@ namespace Sinapse.Properties {
                 this["startpage_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workplaces_path {
+            get {
+                return ((string)(this["workplaces_path"]));
+            }
+            set {
+                this["workplaces_path"] = value;
+            }
+        }
     }
 }

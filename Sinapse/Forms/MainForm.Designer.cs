@@ -117,8 +117,6 @@ namespace Sinapse.Forms
             this.MenuHelpSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.openNetworkDialog = new System.Windows.Forms.OpenFileDialog();
-            this.openDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.mruProviderDocuments = new Sinapse.Forms.Controls.MruComponent();
             this.mruProviderWorkplace = new Sinapse.Forms.Controls.MruComponent();
@@ -141,7 +139,6 @@ namespace Sinapse.Forms
             this.toolStripPanel1 = new System.Windows.Forms.ToolStripPanel();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.openWorkplaceDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -654,18 +651,6 @@ namespace Sinapse.Forms
             this.MenuHelpAbout.Text = "&About...";
             this.MenuHelpAbout.Click += new System.EventHandler(this.MenuHelpAbout_Click);
             // 
-            // openNetworkDialog
-            // 
-            this.openNetworkDialog.DefaultExt = "ann";
-            this.openNetworkDialog.Filter = "Sinapse Network Objects (*.ann)|*.ann|All Files (*.*)|*.*";
-            this.openNetworkDialog.Title = "Open Network Object";
-            // 
-            // openDatabaseDialog
-            // 
-            this.openDatabaseDialog.DefaultExt = "sdo";
-            this.openDatabaseDialog.Filter = "Sinapse Database Objects (*.sdo)|*.sdo|All Files (*.*)|*.*";
-            this.openDatabaseDialog.Title = "Open Database";
-            // 
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
@@ -844,7 +829,6 @@ namespace Sinapse.Forms
             this.dockMain.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
-            this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new System.Drawing.Size(792, 495);
             this.dockMain.TabIndex = 21;
             // 
@@ -855,12 +839,6 @@ namespace Sinapse.Forms
             this.statusStrip1.Size = new System.Drawing.Size(792, 22);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // openWorkplaceDialog
-            // 
-            this.openWorkplaceDialog.DefaultExt = "swp";
-            this.openWorkplaceDialog.FileName = "Workplace";
-            this.openWorkplaceDialog.Filter = "Sinapse Workplace (*.swp)|*.swp|All files (*.*)|*.*";
             // 
             // toolStripContainer1
             // 
@@ -921,7 +899,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuHelpSearch;
         private System.Windows.Forms.ToolStripSeparator MenuHelpSeparator;
         private System.Windows.Forms.ToolStripMenuItem MenuHelpAbout;
-        private System.Windows.Forms.OpenFileDialog openNetworkDialog;
         private System.Windows.Forms.ToolStripMenuItem MenuFile;
         private System.Windows.Forms.ToolStripMenuItem MenuFileExit;
         private System.Windows.Forms.ToolStripMenuItem MenuFileRecentDocuments;
@@ -929,7 +906,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripSeparator MenuFileSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuFileWizard;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.OpenFileDialog openDatabaseDialog;
         private System.Windows.Forms.ToolStripSeparator MenuFileSeparator2;
         private Sinapse.Forms.Controls.MruComponent mruProviderDocuments;
         private Sinapse.Forms.Controls.MruComponent mruProviderWorkplace;
@@ -957,7 +933,6 @@ namespace Sinapse.Forms
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MenuFileOpenWorkplace;
-        private System.Windows.Forms.OpenFileDialog openWorkplaceDialog;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuFileCloseWorkplace;
         private System.Windows.Forms.ToolStripMenuItem MenuFileSave;

@@ -100,8 +100,7 @@ namespace Sinapse.Forms
                 }
                 
                 // Wire-up some events
-                Workplace.ActiveWorkplaceChanged += new EventHandler(Workplace_ActiveWorkplaceChanged);
-
+                this.workbench.WorkplaceOpen += new EventHandler(Workbench_WorkplaceChanged);
 
                 HistoryListener.Write("Sinapse Interface Loaded");
             }
@@ -115,15 +114,10 @@ namespace Sinapse.Forms
             base.OnClosing(e);
             
             // Close Workbench
-            if (workbench.CloseAll() == false)
-            {
-                e.Cancel = true;
-                return;
-            }
 
-            // Close Workspace
-            Workplace.Active = null;
-            if (Workplace.Active != null)
+
+            // Close Workplace, always asking for confirmation
+            if (!workbench.CloseAllDocuments(true))
             {
                 e.Cancel = true;
                 return;
@@ -157,33 +151,17 @@ namespace Sinapse.Forms
 
 
         #region Workplace Events
-        private void Workplace_ActiveWorkplaceChanged(object sender, EventArgs e)
+        private void Workbench_WorkplaceChanged(object sender, EventArgs e)
         {
-            if (Workplace.Active == null)
+            if (workbench.Workplace == null)
             {
                 MenuWorkplace.Visible = false;
             }
             else
             {
                 MenuWorkplace.Visible = true;
-                Workplace.Active.Closing += Workplace_Closing;
             }
         }
-
-        private void Workplace_Closing(object sender, CancelEventArgs e)
-        {
-            // Close Workbench
-            if (workbench.CloseAll() == false)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            // Save Workplace
-            if (Workplace.Active.HasChanges)
-                Workplace.Active.Save();
-        }
-
         #endregion
 
 
@@ -197,13 +175,7 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileNewWorkplace_Click(object sender, EventArgs e)
         {
-            NewWorkplaceDialog dlg = new NewWorkplaceDialog();
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-                Workplace.Active = dlg.Workplace;
-                Workplace.Active.Save();
-                mruProviderWorkplace.Insert(dlg.Workplace.File.FullName);
-            }
+            new NewWorkplaceDialog(workbench).ShowDialog(this);
         }
 
         /// <summary>
@@ -211,11 +183,7 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileOpenWorkplace_Click(object sender, EventArgs e)
         {
-            if (openWorkplaceDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                Workplace.Active = Workplace.Open(openWorkplaceDialog.FileName);
-                mruProviderWorkplace.Insert(openWorkplaceDialog.FileName);
-            }
+            workbench.ShowOpenWorkplaceDialog();
         }
 
         /// <summary>
@@ -223,7 +191,7 @@ namespace Sinapse.Forms
         /// </summary>
         private void MenuFileCloseWorkplace_Click(object sender, EventArgs e)
         {
-            Workplace.Active = null;
+            workbench.CloseWorkplace();
         }
 
         /// <summary>
@@ -248,7 +216,6 @@ namespace Sinapse.Forms
         private void MenuFileSaveAll_Click(object sender, EventArgs e)
         {
             this.workbench.SaveAll();
-            Workplace.Active.Save();
         }
         #endregion
 
@@ -256,12 +223,12 @@ namespace Sinapse.Forms
         #region Menu Workplace
         private void MenuWorkplaceAddDataSource_Click(object sender, EventArgs e)
         {
-           new NewDocumentDialog(typeof(ISource)).ShowDialog(this);
+           new NewDocumentDialog(workbench, typeof(ISource)).ShowDialog(this);
         }
 
         private void MenuWorkplaceAddAdaptiveSystem_Click(object sender, EventArgs e)
         {
-            new NewDocumentDialog(typeof(ISystem)).ShowDialog(this);
+            new NewDocumentDialog(workbench, typeof(ISystem)).ShowDialog(this);
         }
         #endregion
 
@@ -286,12 +253,12 @@ namespace Sinapse.Forms
         #region Most Recently Used Lists Events
         private void mruProviderWorkplace_MenuItemClicked(string filename)
         {
-            Workplace.Active = Workplace.Open(filename);
+            workbench.OpenWorkplace(filename);
         }
 
         private void mruProviderDocuments_MenuItemClicked(string filename)
         {
-         //   this.sessionOpen(filename);
+            workbench.OpenDocument(filename);
         }
         #endregion
 

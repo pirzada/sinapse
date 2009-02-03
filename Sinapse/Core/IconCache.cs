@@ -38,20 +38,25 @@ namespace Sinapse.Core
             IntPtr processHandle = System.Diagnostics.Process.GetCurrentProcess().Handle;
             IntPtr iconPtr;
 
+            // Special Icons
+            smallIcons.Add("null", Sinapse.Properties.Resources.Unknown);
+            largeIcons.Add("null", Sinapse.Properties.Resources.Unknown);
+
+            // Document Icons
             foreach (Type type in DocumentCache.TypeList)
             {
-                object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
-                if (attr.Length > 0)
-                {
-                    DocumentDescription desc = (attr[0] as DocumentDescription);
-                    iconPtr = ExtractIcon(processHandle, desc.SmallIconPath, desc.SmallIconIndex);
-                    if (iconPtr != IntPtr.Zero)
-                        smallIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
+                   object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
+                   if (attr.Length > 0)
+                   {
+                       DocumentDescription desc = (attr[0] as DocumentDescription);
+                       iconPtr = ExtractIcon(processHandle, desc.IconPath, desc.SmallIconIndex);
+                       if (iconPtr != IntPtr.Zero)
+                           smallIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
 
-                    iconPtr = ExtractIcon(processHandle, desc.LargeIconPath, desc.LargeIconIndex);
-                    if (iconPtr != IntPtr.Zero)
-                        largeIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
-                }
+                       iconPtr = ExtractIcon(processHandle, desc.IconPath, desc.LargeIconIndex);
+                       if (iconPtr != IntPtr.Zero)
+                           largeIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
+                   }
             }
         }
 
@@ -59,11 +64,18 @@ namespace Sinapse.Core
         {
             if (smallIcons == null || largeIcons == null) Build();
 
-            foreach (String ext in DocumentCache.Extensions)
+            foreach (String ext in smallIcons.Keys)
             {
+                if (smallImages != null && smallIcons.ContainsKey(ext))
                 smallImages.Images.Add(ext, smallIcons[ext]);
+                if (largeImages != null && largeIcons.ContainsKey(ext))
                 largeImages.Images.Add(ext, largeIcons[ext]);
             }
+        }
+
+        public static void CreateList(ImageList smallImages)
+        {
+            CreateList(smallImages, null);
         }
 
 

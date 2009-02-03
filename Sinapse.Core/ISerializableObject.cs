@@ -112,7 +112,7 @@ namespace Sinapse.Core
 
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 binaryFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
-                binaryFormatter.Binder = new AnyVersionObjectBinder();
+              //  binaryFormatter.Binder = new AnyVersionObjectBinder();
                 obj = (T)binaryFormatter.Deserialize(gzipStream);
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace Sinapse.Core
 
 
 
-
+/*
         private sealed class AnyVersionObjectBinder : SerializationBinder
         {
             // TODO: Remove the need for this ugly hack.
@@ -151,7 +151,7 @@ namespace Sinapse.Core
                 return type;
             }
         }
-
+*/
 
     }
 }

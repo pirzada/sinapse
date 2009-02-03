@@ -140,10 +140,11 @@ namespace Sinapse.Forms.Documents
 
 
 
+
         #region Static Methods
         private static Dictionary<Type, Type> viewers; // <Document Type, Viewer Type>
 
-        public static void ConstructCache()
+        public static void BuildCache()
         {
             viewers = new Dictionary<Type, Type>();
 
@@ -163,10 +164,29 @@ namespace Sinapse.Forms.Documents
         public static Type GetViewer(Type document)
         {
             if (viewers == null)
-                ConstructCache();
+                BuildCache();
             return viewers[document];
         }
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // SinapseDocumentView
+            // 
+            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Name = "SinapseDocumentView";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SinapseDocumentView_MouseClick);
+            this.ResumeLayout(false);
+
+        }
+
+        private void SinapseDocumentView_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
 
     }
 

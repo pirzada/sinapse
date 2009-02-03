@@ -66,6 +66,7 @@ namespace Sinapse.Forms.Dialogs
             this.listView.TabIndex = 8;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.ItemActivate += new System.EventHandler(this.listView_ItemActivate);
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_ItemActivate);
             // 
             // colName
             // 
@@ -214,15 +215,18 @@ namespace Sinapse.Forms.Dialogs
             // 
             // btnViewIcon
             // 
+            this.btnViewIcon.FlatAppearance.BorderSize = 0;
             this.btnViewIcon.Image = global::Sinapse.Properties.Resources.view_icon;
             this.btnViewIcon.Location = new System.Drawing.Point(537, 3);
             this.btnViewIcon.Name = "btnViewIcon";
             this.btnViewIcon.Size = new System.Drawing.Size(25, 25);
             this.btnViewIcon.TabIndex = 13;
             this.btnViewIcon.UseVisualStyleBackColor = true;
+            this.btnViewIcon.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnViewList
             // 
+            this.btnViewList.FlatAppearance.BorderSize = 0;
             this.btnViewList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnViewList.Image = global::Sinapse.Properties.Resources.view_detailed;
             this.btnViewList.Location = new System.Drawing.Point(506, 3);
@@ -230,6 +234,7 @@ namespace Sinapse.Forms.Dialogs
             this.btnViewList.Size = new System.Drawing.Size(25, 25);
             this.btnViewList.TabIndex = 14;
             this.btnViewList.UseVisualStyleBackColor = true;
+            this.btnViewList.Click += new System.EventHandler(this.btnView_Click);
             // 
             // NewDocumentDialog
             // 

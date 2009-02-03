@@ -13,34 +13,68 @@ using Sinapse.Core.Systems;
 
 namespace Sinapse.Forms.Dialogs
 {
-    
+
     public partial class NewDocumentDialog : Form
     {
 
         private String directory;
         private Type selectedType;
+        private Workbench workbench;
         private DocumentDescription selectedDescription;
 
 
+
         #region Constructor
-        public NewDocumentDialog(Type type)
-            : this(type, String.Empty)
+        public NewDocumentDialog(Workbench workbench, Type type)
+            : this(workbench, type, String.Empty)
         {
         }
 
-        public NewDocumentDialog(Type type, String directory)
+        public NewDocumentDialog(Workbench workbench)
+            : this(workbench, typeof(ISinapseConcept))
         {
-            if (!type.IsAssignableFrom(typeof(ISinapseDocument)))
-                throw new ArgumentException("", "type");
+        }
 
-            if (directory == null) directory = String.Empty;
+        public NewDocumentDialog(Workbench workbench, Type type, String path)
+        {
+            if (!typeof(ISinapseConcept).IsAssignableFrom(type))
+                throw new ArgumentException("Type must implement the ISinapseConcept interface", "type");
 
+            this.directory = path ?? String.Empty;
+            this.workbench = workbench;
 
             InitializeComponent();
 
             IconCache.CreateList(smallIcons, largeIcons);
 
+            this.ViewMode = View.LargeIcon;
+
             createListView(type);
+        }
+        #endregion
+
+
+
+
+        #region Properties
+        public View ViewMode
+        {
+            get { return listView.View; }
+            set
+            {
+                if (value == View.LargeIcon)
+                {
+                    listView.View = View.LargeIcon;
+                    btnViewIcon.FlatStyle = FlatStyle.Standard;
+                    btnViewList.FlatStyle = FlatStyle.Popup;
+                }
+                else
+                {
+                    listView.View = View.Details;
+                    btnViewIcon.FlatStyle = FlatStyle.Popup;
+                    btnViewList.FlatStyle = FlatStyle.Standard;
+                }
+            }
         }
         #endregion
 
@@ -67,6 +101,8 @@ namespace Sinapse.Forms.Dialogs
                     subitem = new ListViewItem.ListViewSubItem(listViewItem, desc.Description);
                     subitem.Name = "Description";
                     listViewItem.SubItems.Add(subitem);
+
+                    listView.Items.Add(listViewItem);
                 }
             }
         }
@@ -85,8 +121,9 @@ namespace Sinapse.Forms.Dialogs
             }
 
             string path = Path.Combine(directory, tbName.Text + selectedDescription.Extension);
-            SinapseDocumentInfo documentInfo = new SinapseDocumentInfo(path, true, selectedType);
+            SinapseDocumentInfo documentInfo = new SinapseDocumentInfo(path, workbench.Workplace, selectedType);
             documentInfo.Create();
+            workbench.OpenDocument(documentInfo);
 
             this.Close();
         }
@@ -101,18 +138,7 @@ namespace Sinapse.Forms.Dialogs
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            if (sender.Equals(btnViewIcon))
-            {
-                listView.View = View.LargeIcon;
-                btnViewIcon.FlatStyle = FlatStyle.Standard;
-                btnViewList.FlatStyle = FlatStyle.Popup;
-            }
-            else
-            {
-                listView.View = View.Details;
-                btnViewIcon.FlatStyle = FlatStyle.Popup;
-                btnViewList.FlatStyle = FlatStyle.Standard;
-            }
+
         }
 
         private void listView_ItemActivate(object sender, EventArgs e)
