@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 using AForge.Neuro;
@@ -113,7 +114,7 @@ namespace Sinapse.Core.Systems
 
 
 
-        #region IWorkplaceComponent Members
+        #region ISinapseDocument Members
         private SinapseDocument sinapseDocument;
 
         public string Name
@@ -145,10 +146,25 @@ namespace Sinapse.Core.Systems
             get { return sinapseDocument.File; }
         }
 
-        public event EventHandler DocumentChanged;
-        public event EventHandler FilepathChanged;
-        public event EventHandler Closed;
+        public Workplace Owner
+        {
+            get { return sinapseDocument.Owner; }
+            set { sinapseDocument.Owner = value; }
+        }
+
+        public event EventHandler SavepathChanged
+        {
+            add { sinapseDocument.SavepathChanged += value; }
+            remove { sinapseDocument.SavepathChanged -= value; }
+        }
+
+        public event EventHandler ContentChanged
+        {
+            add { sinapseDocument.ContentChanged += value; }
+            remove { sinapseDocument.ContentChanged -= value; }
+        }
 
         #endregion
+
     }
 }

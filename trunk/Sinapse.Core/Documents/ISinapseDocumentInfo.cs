@@ -28,6 +28,8 @@ namespace Sinapse.Core
         private bool missing;
         private Type type;
 
+        private FileInfo fileInfo; // can be null
+
 
 
 

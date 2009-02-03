@@ -28,7 +28,7 @@ namespace Sinapse.Forms.Documents
 
             if (document != null)
             {
-                this.document.DocumentChanged += new EventHandler(document_DocumentChanged);
+                this.document.ContentChanged += new EventHandler(document_DocumentChanged);
                 this.document.FileSaved += new EventHandler(document_FileSaved);
 
                 saveFileDialog = new SaveFileDialog();

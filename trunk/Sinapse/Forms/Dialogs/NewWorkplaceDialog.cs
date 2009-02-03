@@ -13,6 +13,7 @@ namespace Sinapse.Forms.Dialogs
 {
     public partial class NewWorkplaceDialog : Form
     {
+
         private Workplace workplace;
 
         
@@ -25,6 +26,7 @@ namespace Sinapse.Forms.Dialogs
         {
             get { return workplace; }
         }
+
 
         private void btnCreate_Click(object sender, EventArgs e)
         {

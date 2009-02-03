@@ -844,6 +844,7 @@ namespace Sinapse.Forms
             this.dockMain.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
+            this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new System.Drawing.Size(792, 495);
             this.dockMain.TabIndex = 21;
             // 

@@ -27,16 +27,21 @@ namespace Sinapse.Forms.Documents
     
         public StartPage(Workbench workbench) : base(workbench, null)
         {
-            InitializeComponent();
-
             address = Path.Combine(Application.StartupPath,
                 Sinapse.Properties.Settings.Default.startpage_path);
+            
+         
+            InitializeComponent();
+
+            scriptingObject = new ScriptingObject();
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            
             this.webBrowser1.Url = new Uri(address);
+            this.webBrowser1.ObjectForScripting = scriptingObject;
         }
 
         public void Refresh()
@@ -48,8 +53,8 @@ namespace Sinapse.Forms.Documents
         public string CreateStartPage(string model)
         {
             StringBuilder sb = new StringBuilder(model);
-            sb.Replace("<!--WORKPLACES-->", CreateFileListing("OpenWorkplace", Settings.Default.mruWorkplaces));
-            sb.Replace("<!--DOCUMENTS-->",  CreateFileListing("OpenDocument", Settings.Default.mruDocuments));
+            sb.Replace("<!--WORKPLACES-->", CreateFileListing("WorkplaceOpenPath", Settings.Default.mruWorkplaces));
+            sb.Replace("<!--DOCUMENTS-->",  CreateFileListing("DocumentOpenPath", Settings.Default.mruDocuments));
             return sb.ToString();
         }
 
@@ -103,19 +108,47 @@ namespace Sinapse.Forms.Documents
         [ComVisibleAttribute(true)]
         public class ScriptingObject
         {
+
             public ScriptingObject()
             {
 
             }
 
-            public void OpenWorkspace(string path)
+
+
+            #region Workplace Actions
+            public void WorkplaceOpenPath(string path)
+            {
+             
+            }
+
+            public void WorkplaceOpen()
+            {
+            }
+
+            public void WorkplaceNew()
             {
                 new Sinapse.Forms.Dialogs.NewWorkplaceDialog().ShowDialog();
             }
+            #endregion
 
-            public void OpenDocument(string path)
+
+
+            #region Document Actions
+            public void DocumentOpenPath(string path)
             {
             }
+
+            public void DocumentOpen()
+            {
+            }
+
+            public void DocumentNew()
+            {
+            }
+            #endregion
+
+
         }
 
     }

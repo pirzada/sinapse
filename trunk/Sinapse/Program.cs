@@ -54,6 +54,14 @@ namespace Sinapse
 
         static void Initialize()
         {
+            // Fix ToolStrips Visual
+            ToolStripManager.VisualStylesEnabled = false;
+
+            // Build Caches
+            Sinapse.Core.DocumentCache.Build();
+            Sinapse.Core.IconCache.Build();
+
+            // Load Most Recently Used Lists
             if (Settings.Default.mruDocuments == null)
                 Settings.Default.mruDocuments = new System.Collections.Specialized.StringCollection();
 
