@@ -69,10 +69,13 @@ namespace Sinapse.Core
         public static event EventHandler ActiveWorkplaceChanged;
         #endregion
 
-     
+
+        [field: NonSerialized]
+        public event CancelEventHandler Closing;
 
         private SinapseDocumentInfoCollection documents;
-        [field: NonSerialized] public event CancelEventHandler Closing;
+
+        
 
 
 
@@ -176,21 +179,23 @@ namespace Sinapse.Core
             get { return sinapseDocument.File; }
         }
 
-        [field: NonSerialized]
-        public event EventHandler FilepathChanged
+        public Workplace Owner
         {
-            add { sinapseDocument.FilepathChanged += value; }
-            remove { sinapseDocument.FilepathChanged -= value; }
+            get { return this; }
+            set { throw new InvalidOperationException(); }
         }
 
-        [field: NonSerialized]
-        public event EventHandler DocumentChanged
+        public event EventHandler SavepathChanged
         {
-            add { sinapseDocument.DocumentChanged += value; }
-            remove { sinapseDocument.DocumentChanged -= value; }
+            add { sinapseDocument.SavepathChanged += value; }
+            remove { sinapseDocument.SavepathChanged -= value; }
         }
 
-
+        public event EventHandler ContentChanged
+        {
+            add { sinapseDocument.ContentChanged += value; }
+            remove { sinapseDocument.ContentChanged -= value; }
+        }
         #endregion
 
     }

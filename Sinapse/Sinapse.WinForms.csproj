@@ -129,6 +129,12 @@
     <Compile Include="Forms\Dialogs\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Tools\NotesToolWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tools\NotesToolWindow.Designer.cs">
+      <DependentUpon>NotesToolWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -317,6 +323,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Dialogs\OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tools\NotesToolWindow.resx">
+      <DependentUpon>NotesToolWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.resx">
       <SubType>Designer</SubType>

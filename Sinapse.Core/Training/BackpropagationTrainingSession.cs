@@ -448,12 +448,23 @@ namespace Sinapse.Core.Training
             get { return sinapseDocument.File; }
         }
 
-        [field: NonSerialized]
-        public event EventHandler FilepathChanged;
+        public Workplace Owner
+        {
+            get { return sinapseDocument.Owner; }
+            set { sinapseDocument.Owner = value; }
+        }
 
-        [field: NonSerialized]
-        public event EventHandler DocumentChanged;
+        public event EventHandler SavepathChanged
+        {
+            add { sinapseDocument.SavepathChanged += value; }
+            remove { sinapseDocument.SavepathChanged -= value; }
+        }
 
+        public event EventHandler ContentChanged
+        {
+            add { sinapseDocument.ContentChanged += value; }
+            remove { sinapseDocument.ContentChanged -= value; }
+        }
         #endregion
 
 

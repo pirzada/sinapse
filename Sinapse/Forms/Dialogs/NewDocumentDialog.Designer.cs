@@ -33,19 +33,19 @@ namespace Sinapse.Forms.Dialogs
             this.colName = new System.Windows.Forms.ColumnHeader();
             this.colDescription = new System.Windows.Forms.ColumnHeader();
             this.colExtension = new System.Windows.Forms.ColumnHeader();
+            this.largeIcons = new System.Windows.Forms.ImageList(this.components);
+            this.smallIcons = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.largeIcons = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnViewIcon = new System.Windows.Forms.Button();
             this.btnViewList = new System.Windows.Forms.Button();
-            this.smallIcons = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +78,18 @@ namespace Sinapse.Forms.Dialogs
             // colExtension
             // 
             this.colExtension.Text = "Extension";
+            // 
+            // largeIcons
+            // 
+            this.largeIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.largeIcons.ImageSize = new System.Drawing.Size(32, 32);
+            this.largeIcons.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // smallIcons
+            // 
+            this.smallIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.smallIcons.ImageSize = new System.Drawing.Size(16, 16);
+            this.smallIcons.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // label1
             // 
@@ -134,12 +146,6 @@ namespace Sinapse.Forms.Dialogs
             this.treeView.Size = new System.Drawing.Size(141, 224);
             this.treeView.TabIndex = 11;
             // 
-            // largeIcons
-            // 
-            this.largeIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.largeIcons.ImageSize = new System.Drawing.Size(32, 32);
-            this.largeIcons.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -160,7 +166,7 @@ namespace Sinapse.Forms.Dialogs
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(326, 31);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Document Types";
+            this.label3.Text = "Documents";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // tbDescription
@@ -224,12 +230,6 @@ namespace Sinapse.Forms.Dialogs
             this.btnViewList.Size = new System.Drawing.Size(25, 25);
             this.btnViewList.TabIndex = 14;
             this.btnViewList.UseVisualStyleBackColor = true;
-            // 
-            // smallIcons
-            // 
-            this.smallIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.smallIcons.ImageSize = new System.Drawing.Size(16, 16);
-            this.smallIcons.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // NewDocumentDialog
             // 

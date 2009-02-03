@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 using System.Text;
 using System.IO;
-using System.Reflection;
+
 
 namespace Sinapse.Core
 {
@@ -12,31 +14,41 @@ namespace Sinapse.Core
         string Description { get; set;}
         string Remarks { get; set;}
         FileInfo File { get; }
+        Workplace Owner { get; set; } // Should be optional / can be null
 
-        bool Save(string path);
+        //bool Save(string path);
         bool Save();
 
         bool HasChanges { get; }
 
-        event EventHandler DocumentChanged;
-        event EventHandler FilepathChanged;
+        event EventHandler SavepathChanged;
+        event EventHandler ContentChanged;
     }
 
     [Serializable]
-    public sealed class SinapseDocument
+    public sealed class SinapseDocument : ISinapseDocument
     {
         
-        private string name;
-        private string description;
-        private string remarks;
+        private String name;
+        private String description;
+        private String remarks;
         private FileInfo fileInfo;
 
-        [NonSerialized]
+        [field: NonSerialized]
+        private Workplace owner;
+
+        [field: NonSerialized]
         private bool hasChanges;
 
-        
+        [field: NonSerialized]
+        public event EventHandler ContentChanged;
+
+        [field: NonSerialized]
+        public event EventHandler SavepathChanged;
 
 
+
+        #region Constructors
         public SinapseDocument(String name, FileInfo fileInfo)
         {
             this.name = name;
@@ -48,6 +60,7 @@ namespace Sinapse.Core
         public SinapseDocument(string name) : this(name, null)
         {
         }
+        #endregion
 
 
         #region Properties
@@ -59,8 +72,7 @@ namespace Sinapse.Core
                 if (name != value)
                 {
                     name = value;
-                    hasChanges = true;
-                    OnDocumentChanged(EventArgs.Empty);
+                    HasChanges = true;
                 }
             }
         }
@@ -73,8 +85,7 @@ namespace Sinapse.Core
                 if (name != value)
                 {
                     name = value;
-                    hasChanges = true;
-                    OnDocumentChanged(EventArgs.Empty);
+                    HasChanges = true;
                 }
             }
         }
@@ -87,8 +98,7 @@ namespace Sinapse.Core
                 if (remarks != value)
                 {
                     remarks = value;
-                    hasChanges = true;
-                    OnDocumentChanged(EventArgs.Empty);
+                    HasChanges = true;
                 }
             }
         }
@@ -98,9 +108,18 @@ namespace Sinapse.Core
             get { return hasChanges; }
             set
             {
-                if (hasChanges != value)
+                if (value)
                 {
-                    hasChanges = value;
+                    if (hasChanges != value)
+                    {
+                        OnContentChanged(EventArgs.Empty);
+                        hasChanges = value;
+                        return;
+                    }
+                }
+                else
+                {
+                    hasChanges = false;
                 }
             }
         }
@@ -109,28 +128,51 @@ namespace Sinapse.Core
         {
             get { return fileInfo; }
         }
+
+        public Workplace Owner
+        {
+            get { return owner; }
+            set { owner = value; }
+        }
         #endregion
 
 
 
-        [field: NonSerialized]
-        public event EventHandler DocumentChanged;
-
-        [field: NonSerialized]
-        public event EventHandler FilepathChanged;
-
-
-        private void OnDocumentChanged(EventArgs e)
+        private void OnContentChanged(EventArgs e)
         {
-            if (DocumentChanged != null)
-                DocumentChanged.Invoke(this, e);
+            if (ContentChanged != null)
+                ContentChanged.Invoke(this, e);
         }
 
-        private void OnFilepathChanged(EventArgs e)
+        private void OnSavepathChanged(EventArgs e)
         {
-            if (FilepathChanged != null)
-                FilepathChanged.Invoke(this, e);
+            if (SavepathChanged != null)
+                SavepathChanged.Invoke(this, e);
         }
+
+
+
+        #region ISinapseDocument Members
+        public event EventHandler FileSaved
+        {
+            add { throw new InvalidOperationException(); }
+            remove { throw new InvalidOperationException(); }
+        }
+
+        public bool Save(string path)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public bool Save()
+        {
+            throw new InvalidOperationException();
+        }
+        #endregion
+
+
+
+        // ----------------------------------------------------------
 
 
 

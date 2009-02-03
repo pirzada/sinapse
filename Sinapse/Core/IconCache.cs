@@ -24,8 +24,9 @@ namespace Sinapse.Core
         {
             IntPtr processHandle = System.Diagnostics.Process.GetCurrentProcess().Handle;
             IntPtr oPtr = ExtractIcon(processHandle, path, index);
-
-            return Icon.FromHandle(oPtr);
+            if (oPtr != IntPtr.Zero)
+                return Icon.FromHandle(oPtr);
+            else return null;
         }
 
 
@@ -44,10 +45,12 @@ namespace Sinapse.Core
                 {
                     DocumentDescription desc = (attr[0] as DocumentDescription);
                     iconPtr = ExtractIcon(processHandle, desc.SmallIconPath, desc.SmallIconIndex);
-                    smallIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
+                    if (iconPtr != IntPtr.Zero)
+                        smallIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
 
                     iconPtr = ExtractIcon(processHandle, desc.LargeIconPath, desc.LargeIconIndex);
-                    largeIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
+                    if (iconPtr != IntPtr.Zero)
+                        largeIcons.Add(desc.Extension, Icon.FromHandle(iconPtr));
                 }
             }
         }
