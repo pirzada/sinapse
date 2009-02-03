@@ -14,8 +14,9 @@ namespace Sinapse.Core.Systems
     [DocumentDescription("Activation Network System",
         DefaultName="activationNetwork",
         Description="Activation Neural Network",
-        Extension="system.ann")]
-    public class ActivationNetworkSystem : NetworkSystem, ISinapseDocument, ISerializableObject
+        Extension=".system.ann",
+        IconPath="Resources/System.ico")]
+    public class ActivationNetworkSystem : NetworkSystem, ISinapseDocument
     {
         
 

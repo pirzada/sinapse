@@ -98,5 +98,8 @@
     <Setting Name="startpage_path" Type="System.String" Scope="User">
       <Value Profile="(Default)">web/index.html</Value>
     </Setting>
+    <Setting Name="workplaces_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

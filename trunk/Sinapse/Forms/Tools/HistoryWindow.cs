@@ -37,7 +37,7 @@ namespace Sinapse.Forms.ToolWindows
 
 
         #region Constructor
-        public HistoryWindow()
+        public HistoryWindow(Workbench workbench) : base(workbench)
         {
             InitializeComponent();
         }

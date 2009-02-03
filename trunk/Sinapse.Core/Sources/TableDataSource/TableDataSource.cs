@@ -38,7 +38,7 @@ namespace Sinapse.Core.Sources
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
     [Serializable]
-    public class TableDataSource : ISource, ISerializableObject
+    public class TableDataSource : ISource, ISinapseDocument
     {
 
         
@@ -462,6 +462,23 @@ namespace Sinapse.Core.Sources
         public event EventHandler Changed;
         public event EventHandler Closed;
 
+        public Workplace Owner
+        {
+            get { return sinapseDocument.Owner; }
+            set { sinapseDocument.Owner = value; }
+        }
+
+        public event EventHandler SavepathChanged
+        {
+            add { sinapseDocument.SavepathChanged += value; }
+            remove { sinapseDocument.SavepathChanged -= value; }
+        }
+
+        public event EventHandler ContentChanged
+        {
+            add { sinapseDocument.ContentChanged += value; }
+            remove { sinapseDocument.ContentChanged -= value; }
+        }
         #endregion
 
 
@@ -492,6 +509,7 @@ namespace Sinapse.Core.Sources
         }
 
         #endregion
+
 
     }
 

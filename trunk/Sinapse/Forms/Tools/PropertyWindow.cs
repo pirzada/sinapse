@@ -13,7 +13,7 @@ namespace Sinapse.Forms.ToolWindows
     public partial class PropertyWindow : ToolWindow
     {
 
-        public PropertyWindow()
+        public PropertyWindow(Workbench workbench) : base(workbench)
         {
             InitializeComponent();
         }

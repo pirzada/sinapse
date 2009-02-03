@@ -41,7 +41,8 @@ namespace Sinapse.Core.Training
     [DocumentDescription("Backpropagation Training Session",
         DefaultName = "trainingSession",
         Description = "Teaches a Source to an Activation Network using Backpropagation",
-        Extension = "session.bpp")]
+        Extension = ".session.bpp",
+        IconPath = "Resources/Session.ico")]
     public class BackpropagationTrainingSession : TrainingSession,
         ISinapseDocument, ISerializableObject
     {

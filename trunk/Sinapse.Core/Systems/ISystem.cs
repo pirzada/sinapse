@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sinapse.Core.Systems
 {
-    public interface ISystem
+    public interface ISystem : ISinapseConcept
     {
     }
 }

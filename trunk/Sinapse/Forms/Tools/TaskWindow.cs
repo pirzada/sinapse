@@ -12,7 +12,7 @@ namespace Sinapse.Forms.ToolWindows
 {
     public partial class TaskWindow : ToolWindow
     {
-        public TaskWindow()
+        public TaskWindow(Workbench workbench) : base(workbench)
         {
             InitializeComponent();
         }

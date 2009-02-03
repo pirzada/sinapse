@@ -41,7 +41,7 @@ namespace Sinapse.Core.Sources
     ///   A common example of data sources are tables of sample data or a collection
     ///   of images.
     /// </summary>
-    public interface ISource
+    public interface ISource : ISinapseConcept
     {
         void Shuffle();
 

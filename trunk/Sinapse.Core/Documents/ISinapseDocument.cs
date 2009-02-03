@@ -37,6 +37,7 @@ namespace Sinapse.Core
         [field: NonSerialized]
         private Workplace owner;
 
+
         [field: NonSerialized]
         private bool hasChanges;
 
@@ -217,8 +218,7 @@ namespace Sinapse.Core
         private string description;
         private string defaultName;
 
-        private string smallIconPath;
-        private string largeIconPath;
+        private string iconPath;
         private int smallIconIndex;
         private int largeIconIndex;
 
@@ -229,6 +229,10 @@ namespace Sinapse.Core
             this.name = name;
         }
 
+        /// <summary>
+        ///   The default extension for the document file, including
+        ///   the first dot in the filename (e.g. Extension=".txt")
+        /// </summary>
         public String Extension
         {
             get { return extension; }
@@ -253,22 +257,16 @@ namespace Sinapse.Core
             set { defaultName = value; }
         }
 
-        public String SmallIconPath
+        public String IconPath
         {
-            get { return smallIconPath; }
-            set { smallIconPath = value; }
+            get { return iconPath; }
+            set { iconPath = value; }
         }
 
         public Int32 SmallIconIndex
         {
             get { return smallIconIndex; }
             set { smallIconIndex = value; }
-        }
-
-        public String LargeIconPath
-        {
-            get { return largeIconPath; }
-            set { largeIconPath = value; }
         }
 
         public Int32 LargeIconIndex
@@ -286,7 +284,7 @@ namespace Sinapse.Core
 
         public DocumentViewer(Type documentType)
         {
-           if (!type.IsAssignableFrom(typeof(ISinapseDocument)))
+            if (!typeof(ISinapseDocument).IsAssignableFrom(documentType))
            {
                throw new ArgumentException(
                    "The type must implement ISinapseDocument interface",

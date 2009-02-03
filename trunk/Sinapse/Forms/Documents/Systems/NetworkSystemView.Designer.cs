@@ -28,6 +28,7 @@ namespace Sinapse.Forms.Documents
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkSystemView));
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControlEX1 = new Dotnetrix.Controls.TabControlEX();
             this.tabPageEX1 = new Dotnetrix.Controls.TabPageEX();
@@ -183,6 +184,7 @@ namespace Sinapse.Forms.Documents
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 580);
             this.Controls.Add(this.tabControlEX1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NetworkSystemView";
             this.TabText = "Adaptative System Designer";
             this.Text = "Adaptative System Designer";

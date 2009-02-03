@@ -16,7 +16,9 @@ namespace Sinapse.Core
         public static Type GetType(string extension)
         {
             if (cacheByExtension == null) Build();
-            return cacheByExtension[extension];
+            if (cacheByExtension.ContainsKey(extension))
+                return cacheByExtension[extension];
+            else return null;
         }
 
         public static String GetExtension(Type type)

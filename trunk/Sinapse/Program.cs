@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 using Sinapse.Properties;
 using Sinapse.Forms;
@@ -67,6 +68,18 @@ namespace Sinapse
 
             if (Settings.Default.mruWorkplaces == null)
                 Settings.Default.mruWorkplaces = new System.Collections.Specialized.StringCollection();
+
+            // Set options
+            if (Settings.Default.workplaces_path == null || Settings.Default.workplaces_path == String.Empty)
+            {
+                Settings.Default.workplaces_path =
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sinapse Workplaces");
+                
+                if (!Directory.Exists(Settings.Default.workplaces_path))
+                {
+                    Directory.CreateDirectory(Settings.Default.workplaces_path);
+                }
+            }
         }
 
     }

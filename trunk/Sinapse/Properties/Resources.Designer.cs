@@ -60,20 +60,6 @@ namespace Sinapse.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap _1downarrow {
-            get {
-                object obj = ResourceManager.GetObject("1downarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _1uparrow {
-            get {
-                object obj = ResourceManager.GetObject("1uparrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap action_apply {
             get {
                 object obj = ResourceManager.GetObject("action_apply", resourceCulture);
@@ -827,6 +813,13 @@ namespace Sinapse.Properties {
             get {
                 object obj = ResourceManager.GetObject("txt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon Unknown {
+            get {
+                object obj = ResourceManager.GetObject("Unknown", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

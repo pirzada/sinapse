@@ -32,10 +32,10 @@ namespace Sinapse.Forms.Documents
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnTable = new System.Windows.Forms.ToolStripButton();
             this.btnOverview = new System.Windows.Forms.ToolStripButton();
-            this.btnNotes = new System.Windows.Forms.ToolStripButton();
+            this.btnTable = new System.Windows.Forms.ToolStripButton();
             this.btnColumns = new System.Windows.Forms.ToolStripButton();
+            this.btnNotes = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,15 +67,6 @@ namespace Sinapse.Forms.Documents
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnTable
-            // 
-            this.btnTable.Image = ((System.Drawing.Image)(resources.GetObject("btnTable.Image")));
-            this.btnTable.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTable.Name = "btnTable";
-            this.btnTable.Size = new System.Drawing.Size(53, 22);
-            this.btnTable.Text = "Table";
-            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
-            // 
             // btnOverview
             // 
             this.btnOverview.Image = ((System.Drawing.Image)(resources.GetObject("btnOverview.Image")));
@@ -85,14 +76,14 @@ namespace Sinapse.Forms.Documents
             this.btnOverview.Text = "Overview";
             this.btnOverview.Click += new System.EventHandler(this.btnOverview_Click);
             // 
-            // btnNotes
+            // btnTable
             // 
-            this.btnNotes.Image = ((System.Drawing.Image)(resources.GetObject("btnNotes.Image")));
-            this.btnNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNotes.Name = "btnNotes";
-            this.btnNotes.Size = new System.Drawing.Size(55, 22);
-            this.btnNotes.Text = "Notes";
-            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
+            this.btnTable.Image = ((System.Drawing.Image)(resources.GetObject("btnTable.Image")));
+            this.btnTable.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTable.Name = "btnTable";
+            this.btnTable.Size = new System.Drawing.Size(53, 22);
+            this.btnTable.Text = "Table";
+            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
             // 
             // btnColumns
             // 
@@ -103,14 +94,24 @@ namespace Sinapse.Forms.Documents
             this.btnColumns.Text = "Columns";
             this.btnColumns.Click += new System.EventHandler(this.btnColumns_Click);
             // 
-            // TableDataSourceEditor
+            // btnNotes
+            // 
+            this.btnNotes.Image = ((System.Drawing.Image)(resources.GetObject("btnNotes.Image")));
+            this.btnNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNotes.Name = "btnNotes";
+            this.btnNotes.Size = new System.Drawing.Size(55, 22);
+            this.btnNotes.Text = "Notes";
+            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
+            // 
+            // TableSourceView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 640);
             this.Controls.Add(this.dockPanel);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "TableDataSourceEditor";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "TableSourceView";
             this.TabText = "DataSource Editor";
             this.Text = "Table Data Source Editor";
             this.Load += new System.EventHandler(this.TableDataSourceEditor_Load);

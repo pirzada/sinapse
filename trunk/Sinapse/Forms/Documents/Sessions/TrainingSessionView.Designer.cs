@@ -29,6 +29,7 @@ namespace Sinapse.Forms.Documents
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrainingSessionView));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -905,13 +906,14 @@ namespace Sinapse.Forms.Documents
             this.richTextBoxExtended1.Toolbar.Size = new System.Drawing.Size(765, 26);
             this.richTextBoxExtended1.Toolbar.TabIndex = 0;
             // 
-            // BackpropagationConfiguration
+            // TrainingSessionView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 594);
             this.Controls.Add(this.tabControl1);
-            this.Name = "BackpropagationConfiguration";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "TrainingSessionView";
             this.TabText = "Backpropagation Training Session";
             this.Text = "Backpropagation Training Session";
             this.tabControl1.ResumeLayout(false);

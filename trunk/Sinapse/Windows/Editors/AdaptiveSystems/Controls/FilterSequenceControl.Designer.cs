@@ -68,7 +68,7 @@ namespace Sinapse.Controls
             // btnMoveUp
             // 
             this.btnMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMoveUp.Image = global::Sinapse.Properties.Resources._1downarrow;
+         //   this.btnMoveUp.Image = global::Sinapse.Properties.Resources._1downarrow;
             this.btnMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(23, 22);
@@ -78,7 +78,7 @@ namespace Sinapse.Controls
             // btnMoveDown
             // 
             this.btnMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMoveDown.Image = global::Sinapse.Properties.Resources._1uparrow;
+          //  this.btnMoveDown.Image = global::Sinapse.Properties.Resources._1uparrow;
             this.btnMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(23, 22);
