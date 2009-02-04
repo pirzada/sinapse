@@ -139,11 +139,47 @@
     <Compile Include="Forms\Documents\Workplaces\WorkplaceView.Designer.cs">
       <DependentUpon>WorkplaceView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tools\NotesToolWindow.cs">
+    <Compile Include="Forms\ToolWindows\HistoryWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tools\NotesToolWindow.Designer.cs">
+    <Compile Include="Forms\ToolWindows\HistoryWindow.Designer.cs">
+      <DependentUpon>HistoryWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\NotesToolWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\NotesToolWindow.Designer.cs">
       <DependentUpon>NotesToolWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\PropertyWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\PropertyWindow.Designer.cs">
+      <DependentUpon>PropertyWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\Sessions\SavepointsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\Sessions\SavepointsWindow.Designer.cs">
+      <DependentUpon>SavepointsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\TaskWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\TaskWindow.Designer.cs">
+      <DependentUpon>TaskWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\ToolWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\ToolWindow.Designer.cs">
+      <DependentUpon>ToolWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\WorkplaceExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolWindows\WorkplaceExplorer.Designer.cs">
+      <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.cs">
       <SubType>UserControl</SubType>
@@ -234,12 +270,6 @@
     </Compile>
     <Compile Include="Windows\Editors\Training\TrainingOptionsWindow.Designer.cs">
     </Compile>
-    <Compile Include="Forms\Tools\Sessions\SavepointsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tools\Sessions\SavepointsWindow.Designer.cs">
-      <DependentUpon>SavepointsWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Editors\Training\GraphVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,18 +295,6 @@
       <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Workbench.cs" />
-    <Compile Include="Forms\Tools\ToolWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tools\ToolWindow.Designer.cs">
-      <DependentUpon>ToolWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tools\WorkplaceExplorer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tools\WorkplaceExplorer.Designer.cs">
-      <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Utils\Logging\HistoryEvent.cs" />
     <None Include="Resources\Templates\TemplateCpp.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -287,18 +305,6 @@
     <None Include="Resources\Templates\TemplateCSharp.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Forms\Tools\PropertyWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tools\PropertyWindow.Designer.cs">
-      <DependentUpon>PropertyWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tools\TaskWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tools\TaskWindow.Designer.cs">
-      <DependentUpon>TaskWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Utils\Logging\HistoryListener.cs" />
     <Compile Include="Utils\HtmlReport\Field.cs" />
@@ -310,12 +316,6 @@
     </Compile>
     <Compile Include="Forms\Dialogs\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tools\HistoryWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tools\HistoryWindow.Designer.cs">
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\ImportWizard.cs">
       <SubType>Form</SubType>
@@ -337,8 +337,26 @@
     <EmbeddedResource Include="Forms\Documents\SinapseDocumentView.resx">
       <DependentUpon>SinapseDocumentView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\NotesToolWindow.resx">
+    <EmbeddedResource Include="Forms\ToolWindows\HistoryWindow.resx">
+      <DependentUpon>HistoryWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolWindows\NotesToolWindow.resx">
       <DependentUpon>NotesToolWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolWindows\PropertyWindow.resx">
+      <DependentUpon>PropertyWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolWindows\Sessions\SavepointsWindow.resx">
+      <DependentUpon>SavepointsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolWindows\TaskWindow.resx">
+      <DependentUpon>TaskWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolWindows\ToolWindow.resx">
+      <DependentUpon>ToolWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolWindows\WorkplaceExplorer.resx">
+      <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.resx">
       <SubType>Designer</SubType>
@@ -396,14 +414,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>TrainingOptionsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\Sessions\SavepointsWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SavepointsWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\TaskWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TaskWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Editors\Training\LearningGraph.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LearningGraph.cs</DependentUpon>
@@ -416,20 +426,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\ToolWindow.resx">
-      <DependentUpon>ToolWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\WorkplaceExplorer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\HistoryWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\ImportWizard.resx">
       <DependentUpon>ImportWizard.cs</DependentUpon>
@@ -438,10 +437,6 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tools\PropertyWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PropertyWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -893,8 +888,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Controls\" />
-    <Folder Include="Forms\Tools\Sources\" />
-    <Folder Include="Forms\Tools\Systems\" />
+    <Folder Include="Forms\ToolWindows\Sources\" />
+    <Folder Include="Forms\ToolWindows\Systems\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
