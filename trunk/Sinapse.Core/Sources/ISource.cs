@@ -33,8 +33,6 @@ namespace Sinapse.Core.Sources
     [Flags]
     public enum DataSourceSet { None = 0, Training = 2, Testing = 8, Validation = 16, };
 
-    public enum DataSourceRole { None = 0, Input = 1, Output = 2 };
-
     /// <summary>
     ///   This class encompass a Adaptive System DataSource, or in other words, a
     ///   source of information that can be used to train and feed Adaptive Systems.
@@ -46,9 +44,9 @@ namespace Sinapse.Core.Sources
         void Shuffle();
 
         object GetData(DataSourceSet set);
-        object GetData(DataSourceSet set, DataSourceRole role);
+        object GetData(DataSourceSet set, InputOutput role);
         object GetData(DataSourceSet set, int subset);
-        object GetData(DataSourceSet set, int subset, DataSourceRole role);
+        object GetData(DataSourceSet set, int subset, InputOutput role);
 
         event EventHandler DataChanged;
     }

@@ -1,6 +1,6 @@
-namespace Sinapse.WinForms.Editors.AdaptiveSystems.Controls
+namespace Sinapse.WinForms.Documents.Systems.Controls
 {
-    partial class LayersControl
+    partial class NetworkLayers
     {
         /// <summary> 
         /// Required designer variable.

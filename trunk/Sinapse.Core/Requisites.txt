@@ -9,3 +9,10 @@ TableDataSource pra agilizar as coisas, mas isto também poderá ser feito manualm
 
 a escolha de training set, testing set e validation set também deve estar no datasource
 a escolha de subgrupos de treinamento tb
+
+
+
+rever: document viewer baseado nas extensoes, cada extensao com um viewer,
+        retira atrelamento de viewer para apenas ISinapseDocuments
+        
+        Workbench.Open(string path)  apenas

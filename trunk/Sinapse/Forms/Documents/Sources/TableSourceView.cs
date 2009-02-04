@@ -15,18 +15,18 @@ using Sinapse.Core.Sources;
 
 using Sinapse.WinForms.Dialogs;
 
-using Sinapse.WinForms.Editors.DataSources;
+//using Sinapse.WinForms.Editors.DataSources;
 
 using Sinapse.WinForms.Core;
 
 namespace Sinapse.WinForms.Documents
 {
-    [DocumentViewer(typeof(TableDataSource))]
+    [DocumentViewer(".source.tds")]
     internal partial class TableSourceView : SinapseDocumentView
     {
 
-        private TableEditor wndTableEditor;
-        private ColumnSpecification wndColumnSpecification;
+        //private TableEditor wndTableEditor;
+        //private ColumnSpecification wndColumnSpecification;
 
 
 
@@ -62,17 +62,17 @@ namespace Sinapse.WinForms.Documents
         private void TableDataSourceEditor_Load(object sender, EventArgs e)
         {
             this.SuspendLayout();
-            this.wndColumnSpecification = new ColumnSpecification();
+        //    this.wndColumnSpecification = new ColumnSpecification();
          //   this.wndColumnSpecification.TableSource = this.tableSource;
-            this.wndColumnSpecification.Show(this.dockPanel, DockState.Document);
+        //    this.wndColumnSpecification.Show(this.dockPanel, DockState.Document);
 
          //   this.wndSourceOverview = new SourceOverview();
          //   this.wndSourceOverview.DataSource = tableSource;
          //   this.wndSourceOverview.Show(this.dockPanel, DockState.Document);
 
-            this.wndTableEditor = new TableEditor();
+         //   this.wndTableEditor = new TableEditor();
         //    this.wndTableEditor.TableSource = tableSource;
-            this.wndTableEditor.Show(this.dockPanel, DockState.Document);
+         //   this.wndTableEditor.Show(this.dockPanel, DockState.Document);
             this.ResumeLayout(true);
             
         }

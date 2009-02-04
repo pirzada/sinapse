@@ -109,9 +109,9 @@ namespace Sinapse.WinForms.Editors.DataSources
             {
                 TableDataSourceColumn col = tableSource.Columns[viewColumn.Name];
 
-                if (col.Role == DataSourceRole.Input)
+                if (col.Role == InputOutput.Input)
                     viewColumn.DefaultCellStyle.BackColor = inputCaption.Color;
-                else if (col.Role == DataSourceRole.Output)
+                else if (col.Role == InputOutput.Output)
                     viewColumn.DefaultCellStyle.BackColor = outputCaption.Color;
 
                 viewColumn.Visible = col.Visible;

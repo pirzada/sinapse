@@ -30,7 +30,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Sinapse.Data;
 using Sinapse.WinForms;
 using Sinapse.WinForms.Documents;
-using Sinapse.WinForms.Training;
+//using Sinapse.WinForms.Training;
 
 using Sinapse.WinForms.Dialogs;
 

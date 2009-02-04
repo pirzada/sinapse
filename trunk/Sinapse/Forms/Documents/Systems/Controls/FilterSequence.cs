@@ -10,15 +10,15 @@ using System.Reflection;
 using Sinapse.Core;
 using Sinapse.Core.Filters;
 
-namespace Sinapse.Controls
+namespace Sinapse.WinForms.Documents.Systems.Controls
 {
-    public partial class FilterSequenceControl : UserControl
+    public partial class FilterSequence : UserControl
     {
 
         FilterCollection filters;
 
 
-        public FilterSequenceControl()
+        public FilterSequence()
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;

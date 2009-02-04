@@ -126,12 +126,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\FileProperties.cs" />
+    <Compile Include="Core\FileSystemProperties.cs" />
+    <Compile Include="Core\FolderProperties.cs" />
     <Compile Include="Core\IconCache.cs" />
     <Compile Include="Forms\Dialogs\OptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Dialogs\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Controls\FilterSequence.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Controls\FilterSequence.Designer.cs">
+      <DependentUpon>FilterSequence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Controls\NetworkLayers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Controls\NetworkLayers.Designer.cs">
+      <DependentUpon>NetworkLayers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Filters\Categorization.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Filters\Categorization.Designer.cs">
+      <DependentUpon>Categorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Filters\FilterEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Filters\FilterEditor.Designer.cs">
+      <DependentUpon>FilterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Filters\Normalization.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Filters\Normalization.Designer.cs">
+      <DependentUpon>Normalization.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Documents\Workplaces\WorkplaceView.cs">
       <SubType>Form</SubType>
@@ -181,44 +214,14 @@
     <Compile Include="Forms\ToolWindows\WorkplaceExplorer.Designer.cs">
       <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.Designer.cs">
-      <DependentUpon>ActivationNetworkOptions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CaptionLabel.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\Controls\FilterSequenceControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\Controls\FilterSequenceControl.Designer.cs">
-      <DependentUpon>FilterSequenceControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialogs\NewDocumentDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Dialogs\NewDocumentDialog.Designer.cs">
       <DependentUpon>NewDocumentDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\ColumnSpecification.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\ColumnSpecification.Designer.cs">
-      <DependentUpon>ColumnSpecification.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\NoteEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\NoteEditor.Designer.cs">
-      <DependentUpon>NoteEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\TableEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\DataSources\TableEditor.Designer.cs">
-      <DependentUpon>TableEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Documents\Systems\NetworkSystemView.cs">
       <SubType>Form</SubType>
@@ -252,47 +255,6 @@
     </Compile>
     <Compile Include="Forms\Dialogs\NewWorkplaceDialog.Designer.cs">
       <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\Controls\LayersControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\Controls\LayersControl.Designer.cs">
-      <DependentUpon>LayersControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\ActivationNetworkDesigner.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\AdaptiveSystems\ActivationNetworkDesigner.Designer.cs">
-      <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\TrainingOptionsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\TrainingOptionsWindow.Designer.cs">
-    </Compile>
-    <Compile Include="Windows\Editors\Training\GraphVisualizer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\GraphVisualizer.Designer.cs">
-      <DependentUpon>GraphVisualizer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\LearningGraph.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\LearningGraph.Designer.cs">
-      <DependentUpon>LearningGraph.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\TableVisualizer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\TableVisualizer.Designer.cs">
-      <DependentUpon>TableVisualizer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\TrainingSessionController.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Editors\Training\TrainingSessionController.Designer.cs">
-      <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Workbench.cs" />
     <Compile Include="Utils\Logging\HistoryEvent.cs" />
@@ -337,6 +299,14 @@
     <EmbeddedResource Include="Forms\Documents\SinapseDocumentView.resx">
       <DependentUpon>SinapseDocumentView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documents\Systems\Controls\FilterSequence.resx">
+      <DependentUpon>FilterSequence.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documents\Systems\Controls\NetworkLayers.resx">
+      <DependentUpon>NetworkLayers.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ToolWindows\HistoryWindow.resx">
       <DependentUpon>HistoryWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -358,29 +328,13 @@
     <EmbeddedResource Include="Forms\ToolWindows\WorkplaceExplorer.resx">
       <DependentUpon>WorkplaceExplorer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\ActivationNetworkOptions.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ActivationNetworkOptions.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CaptionLabel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CaptionLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\FilterSequenceControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FilterSequenceControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\NewDocumentDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewDocumentDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\DataSources\ColumnSpecification.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ColumnSpecification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\DataSources\TableEditor.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TableEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Documents\Systems\NetworkSystemView.resx">
       <SubType>Designer</SubType>
@@ -401,30 +355,6 @@
     <EmbeddedResource Include="Forms\Dialogs\NewWorkplaceDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewWorkplaceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\Controls\LayersControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>LayersControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\AdaptiveSystems\ActivationNetworkDesigner.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ActivationNetworkDesigner.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\Training\TrainingOptionsWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TrainingOptionsWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\Training\LearningGraph.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>LearningGraph.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\Training\TableVisualizer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TableVisualizer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\Training\TrainingSessionController.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TrainingSessionController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -860,6 +790,10 @@
     <None Include="Resources\editdelete.png" />
     <None Include="Resources\editclear1.png" />
     <None Include="Resources\view_text.png" />
+    <None Include="Resources\lock.png" />
+    <None Include="Resources\lock1.png" />
+    <None Include="Resources\unlock.png" />
+    <None Include="Resources\unlocked.png" />
     <Content Include="Sinapse.ico" />
     <Content Include="Web\default.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

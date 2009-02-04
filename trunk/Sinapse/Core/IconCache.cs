@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
+using Sinapse.Core;
 using Sinapse.Core.Documents;
 
 namespace Sinapse.WinForms.Core

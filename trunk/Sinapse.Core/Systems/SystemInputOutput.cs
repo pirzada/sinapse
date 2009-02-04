@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using  System.ComponentModel;
 
 namespace Sinapse.Core.Systems
 {
 
 
     public enum SystemDataType { Nummeric, Category, Boolean, Time };
+    public enum InputOutput { None = 0, Input = 1, Output = 2 };
 
     /// <summary>
     /// SystemInputOutput provides a description for a Input or Output of a System.
@@ -19,12 +22,16 @@ namespace Sinapse.Core.Systems
         private string description;
         private string name;
         private SystemDataType dataType;
+        private InputOutput inputOutput;
+        private int index;
 
-        public SystemInputOutput(string name, SystemDataType type)
+        public SystemInputOutput(string name, SystemDataType type, InputOutput role)
         {
             this.name = name;
             this.dataType = type;
+            this.inputOutput = role;
         }
+
 
         public string Name
         {
@@ -45,12 +52,58 @@ namespace Sinapse.Core.Systems
             set { dataType = value; }
         }
 
+        public InputOutput Role
+        {
+            get { return inputOutput; }
+            set { inputOutput = value; }
+        }
+
+        public int Index
+        {
+            get { return index; }
+            set { index = value; }
+        }
+
     }
 
 
     [Serializable]
-    public class SystemInputOutputCollection : System.ComponentModel.BindingList<SystemInputOutput>
+    public class SystemInputOutputCollection : BindingList<SystemInputOutput>, IBindingList
     {
+
+        public SystemInputOutputCollection()
+        {
+            this.AllowEdit = true;
+            this.AllowNew = true;
+            this.AllowRemove = true;
+        }
+
+        
+
+        public SystemInputOutput this[InputOutput role, int index]
+        {
+            get
+            {
+                foreach (SystemInputOutput io in this)
+                {
+                    if (io.Role == role && io.Index == index)
+                    return io;
+                }
+                throw new InvalidOperationException();
+            }
+        }
+
+
+
+        #region IBindingList Members
+        object IBindingList.AddNew()
+        {
+            SystemInputOutput s = new SystemInputOutput(String.Empty, SystemDataType.Nummeric, InputOutput.Input);
+            this.Add(s);
+            return s;
+        }
+        #endregion
+
     }
 
 }

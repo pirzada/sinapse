@@ -6,13 +6,12 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.WinForms.Editors.AdaptiveSystems.Controls
+namespace Sinapse.WinForms.Documents.Systems.Controls
 {
-    public partial class LayersControl : UserControl
+    public partial class NetworkLayers : UserControl
     {
    
-
-        public LayersControl()
+        public NetworkLayers()
         {
             InitializeComponent();
         }

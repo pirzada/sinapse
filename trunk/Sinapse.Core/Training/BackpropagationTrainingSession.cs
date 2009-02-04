@@ -118,8 +118,8 @@ namespace Sinapse.Core.Training
             {
                 History.Add("Training Starting", status, options);
 
-                object[][] dataInput = DataSource.GetData(DataSourceSet.Training, DataSourceRole.Input);
-                object[][] dataOutput = DataSource.GetData(DataSourceSet.Training, DataSourceRole.Output);
+                object[][] dataInput = DataSource.GetData(DataSourceSet.Training, InputOutput.Input);
+                object[][] dataOutput = DataSource.GetData(DataSourceSet.Training, InputOutput.Output);
 
                 AdaptiveSystem.Preprocess.Apply(dataInput);
                 AdaptiveSystem.Postprocess.Revert(dataOutput);

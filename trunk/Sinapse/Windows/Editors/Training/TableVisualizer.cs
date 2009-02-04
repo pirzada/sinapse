@@ -30,22 +30,22 @@ namespace Sinapse.WinForms
             // Lembrete: O usuário nao deve poder alterar a tabela nesta janela, que
             //  é apenas um visualizador. Então devemos usar cópias de DataTables imutáveis
 
-            int inputCount = dataSource.Columns.GetCount(DataSourceRole.Input);
-            int outputCount = dataSource.Columns.GetCount(DataSourceRole.Output);
+            int inputCount = dataSource.Columns.GetCount(InputOutput.Input);
+            int outputCount = dataSource.Columns.GetCount(InputOutput.Output);
 
 
 
             foreach (DataRow row in currentView.Table.Rows)
             {
-                object[] inputs = dataSource.GetData(row, DataSourceRole.Input);
-                object[] outputs = dataSource.GetData(row, DataSourceRole.Output);
+                object[] inputs = dataSource.GetData(row, InputOutput.Input);
+                object[] outputs = dataSource.GetData(row, InputOutput.Output);
                 double[] rawOutputs;
                 double[] deviations;
 
                 adaptiveSystem.Test(inputs, outputs, out rawOutputs, out deviations);
 
-                dataSource.SetData(row, DataSourceRole.Input, inputs);
-                dataSource.SetData(row, DataSourceRole.Output, outputs);
+                dataSource.SetData(row, InputOutput.Input, inputs);
+                dataSource.SetData(row, InputOutput.Output, outputs);
 
             }
 

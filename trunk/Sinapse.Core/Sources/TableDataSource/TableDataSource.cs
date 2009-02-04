@@ -90,7 +90,7 @@ namespace Sinapse.Core.Sources
                 {
                     TableDataSourceColumn newCol;
                     newCol = new TableDataSourceColumn(dataTable.Columns[col.Name]);
-                    newCol.Role = col.Role;
+                //    newCol.Role = col.Role;
                     newCol.DataType = col.DataType;
                     newCol.Description = col.Description;
                     newCol.Visible = col.Visible;
@@ -136,7 +136,7 @@ namespace Sinapse.Core.Sources
 
                 dataColumnInfo = new TableDataSourceColumn(dataColumn);
                 dataColumnInfo.Visible = false;
-                dataColumnInfo.Role = DataSourceRole.None;
+              //  dataColumnInfo.Role = InputOutput.None;
                 this.columns.Add(dataColumnInfo);
 
                 dataColumn = new DataColumn("@SUBSET", typeof(int));
@@ -145,7 +145,7 @@ namespace Sinapse.Core.Sources
 
                 dataColumnInfo = new TableDataSourceColumn(dataColumn);
                 dataColumnInfo.Visible = false;
-                dataColumnInfo.Role = DataSourceRole.None;
+            //    dataColumnInfo.Role = InputOutput.None;
                 this.columns.Add(dataColumnInfo);
             }
         }
@@ -301,24 +301,24 @@ namespace Sinapse.Core.Sources
             return data;
         }
 
-        public object[][] GetData(DataSourceSet set, DataSourceRole role)
+        public object[][] GetData(DataSourceSet set, InputOutput role)
         {
             DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}'", (int)set));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
             {
-                data[i] = GetData(rows[i], role);
+              //  data[i] = GetData(rows[i], role);
             }
             return data;
         }
 
-        public object[][] GetData(DataSourceSet set, int subset, DataSourceRole role)
+        public object[][] GetData(DataSourceSet set, int subset, InputOutput role)
         {
             DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
             object[][] data = new object[rows.Length][];
             for (int i = 0; i < rows.Length; i++)
             {
-                data[i] = GetData(rows[i], role);
+              //  data[i] = GetData(rows[i], role);
             }
             return data;
         }
@@ -342,7 +342,7 @@ namespace Sinapse.Core.Sources
             throw new NotImplementedException();
         }
 
-
+/*
         /// <summary>
         ///   Gets the input data stored inside a DataRow. The DataRow must be a
         ///   member of the internal DataTable of this TableDataSource.
@@ -350,7 +350,7 @@ namespace Sinapse.Core.Sources
         /// <param name="row"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        public object[] GetData(DataRow row, DataSourceRole role)
+        public object[] GetData(DataRow row, InputOutput role)
         {
             if (row.Table != dataTable)
                 throw new ArgumentException("row");
@@ -363,7 +363,7 @@ namespace Sinapse.Core.Sources
             return data;
         }
 
-        public void SetData(DataRow row, DataSourceRole role, object[] data)
+        public void SetData(DataRow row, InputOutput role, object[] data)
         {
             if (row.Table != dataTable)
                 throw new ArgumentException("row");
@@ -376,6 +376,7 @@ namespace Sinapse.Core.Sources
 
             HasChanges = true;
         }
+ */ 
         #endregion
 
 
@@ -501,12 +502,12 @@ namespace Sinapse.Core.Sources
             return GetData(set, subset);
         }
 
-        object ISource.GetData(DataSourceSet set, DataSourceRole role)
+        object ISource.GetData(DataSourceSet set, InputOutput role)
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        object ISource.GetData(DataSourceSet set, int subset, DataSourceRole role)
+        object ISource.GetData(DataSourceSet set, int subset, InputOutput role)
         {
             throw new Exception("The method or operation is not implemented.");
         }

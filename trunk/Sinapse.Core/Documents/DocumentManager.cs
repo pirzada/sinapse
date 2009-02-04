@@ -7,6 +7,16 @@ using System.IO;
 
 namespace Sinapse.Core.Documents
 {
+
+    public enum DocumentCategory
+    {
+        None = 0,
+        System = 1,
+        Source = 2,
+        Session = 3,
+        Other = 4,
+    }
+
     public static class DocumentManager
     {
 
@@ -92,6 +102,14 @@ namespace Sinapse.Core.Documents
             }
 
             return document;
+        }
+
+        public static ISinapseDocument Create(string name, string fullName, Type type)
+        {
+            // Creates a new instance, then save it to the disk.
+            ISinapseDocument doc = Activator.CreateInstance(type, new object[] { name, new FileInfo(fullName) }) as ISinapseDocument;
+            doc.Save(fullName);
+            return doc;
         }
     }
 }

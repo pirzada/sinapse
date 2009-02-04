@@ -75,10 +75,15 @@ namespace Sinapse.WinForms
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFilePreferences = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuViewProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuViewWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuViewProperties = new System.Windows.Forms.ToolStripMenuItem();
+            this.historyWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taskWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.addAdaptiveSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuWorkplaceAddDataSource = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,11 +130,6 @@ namespace Sinapse.WinForms
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.taskWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.historyWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -345,13 +345,6 @@ namespace Sinapse.WinForms
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // MenuViewProperties
-            // 
-            this.MenuViewProperties.Name = "MenuViewProperties";
-            this.MenuViewProperties.Size = new System.Drawing.Size(178, 22);
-            this.MenuViewProperties.Text = "Properties Window";
-            this.MenuViewProperties.Click += new System.EventHandler(this.MenuViewProperties_Click);
-            // 
             // MenuViewWorkplace
             // 
             this.MenuViewWorkplace.Name = "MenuViewWorkplace";
@@ -364,10 +357,49 @@ namespace Sinapse.WinForms
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(175, 6);
             // 
+            // MenuViewProperties
+            // 
+            this.MenuViewProperties.Name = "MenuViewProperties";
+            this.MenuViewProperties.Size = new System.Drawing.Size(178, 22);
+            this.MenuViewProperties.Text = "Properties Window";
+            this.MenuViewProperties.Click += new System.EventHandler(this.MenuViewProperties_Click);
+            // 
+            // historyWindowToolStripMenuItem
+            // 
+            this.historyWindowToolStripMenuItem.Name = "historyWindowToolStripMenuItem";
+            this.historyWindowToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.historyWindowToolStripMenuItem.Text = "History Window";
+            // 
+            // notesToolStripMenuItem
+            // 
+            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
+            this.notesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.notesToolStripMenuItem.Text = "Notes";
+            // 
+            // taskWindowToolStripMenuItem
+            // 
+            this.taskWindowToolStripMenuItem.Name = "taskWindowToolStripMenuItem";
+            this.taskWindowToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.taskWindowToolStripMenuItem.Text = "Task List";
+            // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
             this.toolStripSeparator10.Size = new System.Drawing.Size(175, 6);
+            // 
+            // otherWindowsToolStripMenuItem
+            // 
+            this.otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startPageToolStripMenuItem1});
+            this.otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
+            this.otherWindowsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.otherWindowsToolStripMenuItem.Text = "Other Windows";
+            // 
+            // startPageToolStripMenuItem1
+            // 
+            this.startPageToolStripMenuItem1.Name = "startPageToolStripMenuItem1";
+            this.startPageToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.startPageToolStripMenuItem1.Text = "Start Page";
             // 
             // MenuWorkplace
             // 
@@ -715,6 +747,7 @@ namespace Sinapse.WinForms
             this.dockMain.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
+            this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new System.Drawing.Size(792, 495);
             this.dockMain.TabIndex = 21;
             // 
@@ -743,38 +776,6 @@ namespace Sinapse.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripMain);
-            // 
-            // otherWindowsToolStripMenuItem
-            // 
-            this.otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startPageToolStripMenuItem1});
-            this.otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
-            this.otherWindowsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.otherWindowsToolStripMenuItem.Text = "Other Windows";
-            // 
-            // startPageToolStripMenuItem1
-            // 
-            this.startPageToolStripMenuItem1.Name = "startPageToolStripMenuItem1";
-            this.startPageToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.startPageToolStripMenuItem1.Text = "Start Page";
-            // 
-            // taskWindowToolStripMenuItem
-            // 
-            this.taskWindowToolStripMenuItem.Name = "taskWindowToolStripMenuItem";
-            this.taskWindowToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.taskWindowToolStripMenuItem.Text = "Task List";
-            // 
-            // historyWindowToolStripMenuItem
-            // 
-            this.historyWindowToolStripMenuItem.Name = "historyWindowToolStripMenuItem";
-            this.historyWindowToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.historyWindowToolStripMenuItem.Text = "History Window";
-            // 
-            // notesToolStripMenuItem
-            // 
-            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
-            this.notesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.notesToolStripMenuItem.Text = "Notes";
             // 
             // MainForm
             // 
