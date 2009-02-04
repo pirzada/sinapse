@@ -19,7 +19,7 @@ using ZedGraph;
 
 using Histogram = AForge.Statistics.Visualizations.Histogram;
 
-namespace Sinapse.Forms.Controls.Controls
+namespace Sinapse.WinForms.Controls.Controls
 {
     public partial class DataHistogramView : UserControl
     {

@@ -1,4 +1,4 @@
-namespace Sinapse.Forms
+namespace Sinapse.WinForms
 {
     partial class TrainingGraph
     {

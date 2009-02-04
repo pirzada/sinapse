@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Controls
+namespace Sinapse.WinForms.Controls
 {
     partial class DataSourceGraphView
     {

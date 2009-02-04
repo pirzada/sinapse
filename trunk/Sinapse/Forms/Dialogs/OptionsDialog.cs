@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Dialogs
 {
     public partial class OptionsDialog : Form
     {

@@ -10,10 +10,10 @@ using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core;
 using Sinapse.Core.Sources;
-using Sinapse.Forms.Dialogs;
+using Sinapse.WinForms.Dialogs;
 
 
-namespace Sinapse.Forms.Editors.DataSources
+namespace Sinapse.WinForms.Editors.DataSources
 {
     public partial class ColumnSpecification : DockContent
     {

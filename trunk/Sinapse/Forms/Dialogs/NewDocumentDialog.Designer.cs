@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Dialogs
 {
     partial class NewDocumentDialog
     {
@@ -216,7 +216,7 @@ namespace Sinapse.Forms.Dialogs
             // btnViewIcon
             // 
             this.btnViewIcon.FlatAppearance.BorderSize = 0;
-            this.btnViewIcon.Image = global::Sinapse.Properties.Resources.view_icon;
+            this.btnViewIcon.Image = global::Sinapse.WinForms.Properties.Resources.view_icon;
             this.btnViewIcon.Location = new System.Drawing.Point(537, 3);
             this.btnViewIcon.Name = "btnViewIcon";
             this.btnViewIcon.Size = new System.Drawing.Size(25, 25);
@@ -228,7 +228,7 @@ namespace Sinapse.Forms.Dialogs
             // 
             this.btnViewList.FlatAppearance.BorderSize = 0;
             this.btnViewList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnViewList.Image = global::Sinapse.Properties.Resources.view_detailed;
+            this.btnViewList.Image = global::Sinapse.WinForms.Properties.Resources.view_detailed;
             this.btnViewList.Location = new System.Drawing.Point(506, 3);
             this.btnViewList.Name = "btnViewList";
             this.btnViewList.Size = new System.Drawing.Size(25, 25);

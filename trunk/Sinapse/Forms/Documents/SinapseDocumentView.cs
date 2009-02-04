@@ -7,9 +7,12 @@ using System.Reflection;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core;
+using Sinapse.Core.Documents;
+
+using Sinapse.WinForms.Core;
 
 
-namespace Sinapse.Forms.Documents
+namespace Sinapse.WinForms.Documents
 {
 
     public class SinapseDocumentView : DockContent
@@ -32,7 +35,7 @@ namespace Sinapse.Forms.Documents
                 this.document.FileSaved += new EventHandler(document_FileSaved);
 
                 saveFileDialog = new SaveFileDialog();
-                saveFileDialog.DefaultExt = DocumentCache.GetExtension(document.GetType());
+                saveFileDialog.DefaultExt = DocumentManager.GetExtension(document.GetType());
             }
         }
 

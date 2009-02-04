@@ -23,7 +23,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Dialogs
 {
     internal sealed partial class AboutBox : Form
     {

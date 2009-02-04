@@ -33,7 +33,7 @@ namespace Sinapse.Controls
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveUp = new System.Windows.Forms.ToolStripButton();
             this.btnMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.dataGridView = new Sinapse.Forms.Controls.IndexDataGridView();
+            this.dataGridView = new Sinapse.WinForms.Controls.IndexDataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -54,7 +54,7 @@ namespace Sinapse.Controls
             // 
             // menuAddFilter
             // 
-            this.menuAddFilter.Image = global::Sinapse.Properties.Resources.edit_add;
+            this.menuAddFilter.Image = global::Sinapse.WinForms.Properties.Resources.edit_add;
             this.menuAddFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuAddFilter.Name = "menuAddFilter";
             this.menuAddFilter.Size = new System.Drawing.Size(82, 22);
@@ -68,7 +68,7 @@ namespace Sinapse.Controls
             // btnMoveUp
             // 
             this.btnMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         //   this.btnMoveUp.Image = global::Sinapse.Properties.Resources._1downarrow;
+         //   this.btnMoveUp.Image = global::Sinapse.WinForms.Properties.Resources._1downarrow;
             this.btnMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(23, 22);
@@ -78,7 +78,7 @@ namespace Sinapse.Controls
             // btnMoveDown
             // 
             this.btnMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          //  this.btnMoveDown.Image = global::Sinapse.Properties.Resources._1uparrow;
+          //  this.btnMoveDown.Image = global::Sinapse.WinForms.Properties.Resources._1uparrow;
             this.btnMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(23, 22);
@@ -131,7 +131,7 @@ namespace Sinapse.Controls
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripDropDownButton menuAddFilter;
-        private Sinapse.Forms.Controls.IndexDataGridView dataGridView;
+        private Sinapse.WinForms.Controls.IndexDataGridView dataGridView;
         private System.Windows.Forms.ToolStripButton btnMoveUp;
         private System.Windows.Forms.ToolStripButton btnMoveDown;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

@@ -8,7 +8,9 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Sinapse.Forms.ToolWindows
+using Sinapse.WinForms.Core;
+
+namespace Sinapse.WinForms.ToolWindows
 {
     public partial class ToolWindow : DockContent
     {

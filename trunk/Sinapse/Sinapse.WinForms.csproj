@@ -7,7 +7,7 @@
     <ProjectGuid>{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sinapse</RootNamespace>
+    <RootNamespace>Sinapse.WinForms</RootNamespace>
     <AssemblyName>Sinapse</AssemblyName>
     <StartupObject>Sinapse.Program</StartupObject>
     <SignAssembly>true</SignAssembly>
@@ -234,10 +234,10 @@
     </Compile>
     <Compile Include="Windows\Editors\Training\TrainingOptionsWindow.Designer.cs">
     </Compile>
-    <Compile Include="Windows\Editors\Training\SavepointsWindow.cs">
+    <Compile Include="Forms\Tools\Sessions\SavepointsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Editors\Training\SavepointsWindow.Designer.cs">
+    <Compile Include="Forms\Tools\Sessions\SavepointsWindow.Designer.cs">
       <DependentUpon>SavepointsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Editors\Training\GraphVisualizer.cs">
@@ -396,7 +396,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>TrainingOptionsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Editors\Training\SavepointsWindow.resx">
+    <EmbeddedResource Include="Forms\Tools\Sessions\SavepointsWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SavepointsWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -463,11 +463,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\Utils.cs" />
-    <Compile Include="Properties\Workbench.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Workbench.settings</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -863,13 +858,13 @@
     <None Include="Resources\1uparrow.png" />
     <None Include="Resources\view_tree1.png" />
     <None Include="Resources\mainDockConfiguration.txt" />
-    <None Include="Properties\Workbench.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Workbench.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Resources\view_detailed.png" />
     <None Include="Resources\view_icon.png" />
     <None Include="Resources\Unknown.ico" />
+    <None Include="Resources\editcut.png" />
+    <None Include="Resources\editdelete.png" />
+    <None Include="Resources\editclear1.png" />
+    <None Include="Resources\view_text.png" />
     <Content Include="Sinapse.ico" />
     <Content Include="Web\default.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -898,6 +893,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Controls\" />
+    <Folder Include="Forms\Tools\Sources\" />
+    <Folder Include="Forms\Tools\Systems\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZedGraph;
 
-namespace Sinapse.Forms.Controls
+namespace Sinapse.WinForms.Controls
 {
    public class DataGraphView  : System.Windows.Forms.Control
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sinapse.Forms.Controls.Properties {
+namespace Sinapse.WinForms.Controls.Properties {
     using System;
     
     

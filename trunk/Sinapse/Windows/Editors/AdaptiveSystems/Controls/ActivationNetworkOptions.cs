@@ -13,7 +13,7 @@ using AForge.Neuro;
 using Sinapse.Tools;
 
 
-namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
+namespace Sinapse.WinForms.Editors.AdaptiveSystems.Controls
 {
     public partial class ActivationNetworkOptions : UserControl
     {

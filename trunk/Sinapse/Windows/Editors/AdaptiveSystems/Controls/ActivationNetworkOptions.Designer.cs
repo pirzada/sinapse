@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
+namespace Sinapse.WinForms.Editors.AdaptiveSystems.Controls
 {
     partial class ActivationNetworkOptions
     {
@@ -33,11 +33,11 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             this.btnPlot = new System.Windows.Forms.Button();
             this.cbActivationFunction = new System.Windows.Forms.ComboBox();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.activationFunctionView = new Sinapse.Forms.Controls.Controls.ActivationFunctionView();
+            this.activationFunctionView = new Sinapse.WinForms.Controls.Controls.ActivationFunctionView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.networkLayersEditor = new Sinapse.Forms.Editors.AdaptiveSystems.Controls.LayersControl();
+            this.networkLayersEditor = new Sinapse.WinForms.Editors.AdaptiveSystems.Controls.LayersControl();
             this.networkDiagram1 = new Sinapse.Diagramming.NetworkDiagram();
             this.groupBox2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -96,7 +96,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             this.activationFunctionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.activationFunctionView.Derivative = Sinapse.Forms.Controls.Controls.ActivationFunctionView.FunctionDerivative.None;
+            this.activationFunctionView.Derivative = Sinapse.WinForms.Controls.Controls.ActivationFunctionView.FunctionDerivative.None;
             this.activationFunctionView.Domain = ((AForge.DoubleRange)(resources.GetObject("activationFunctionView.Domain")));
             this.activationFunctionView.Function = null;
             this.activationFunctionView.Location = new System.Drawing.Point(243, 19);
@@ -187,7 +187,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cbActivationFunction;
         private System.Windows.Forms.PropertyGrid propertyGrid;
-        private Sinapse.Forms.Controls.Controls.ActivationFunctionView activationFunctionView;
+        private Sinapse.WinForms.Controls.Controls.ActivationFunctionView activationFunctionView;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;

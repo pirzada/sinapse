@@ -9,9 +9,12 @@ using System.Reflection;
 using System.IO;
 
 using Sinapse.Core;
+using Sinapse.Core.Documents;
 using Sinapse.Core.Systems;
 
-namespace Sinapse.Forms.Dialogs
+using Sinapse.WinForms.Core;
+
+namespace Sinapse.WinForms.Dialogs
 {
 
     public partial class NewDocumentDialog : Form

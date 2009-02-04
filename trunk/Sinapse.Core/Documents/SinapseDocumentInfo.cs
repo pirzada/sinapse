@@ -5,7 +5,9 @@ using System.Reflection;
 using System.IO;
 using System.ComponentModel;
 
-namespace Sinapse.Core
+using Sinapse.Core.Documents;
+
+namespace Sinapse.Core.Documents
 {
 
     /// <summary>
@@ -22,32 +24,57 @@ namespace Sinapse.Core
     public class SinapseDocumentInfo : INotifyPropertyChanged
     {
 
+        /// <summary>
+        ///   The relative or absolute file path, including filename,
+        ///   extension and directory information.
+        /// </summary>
         private string filePath;
         private Workplace owner; // if null, then the file has absolute path
-
-        private bool missing;
         private Type type;
 
-     //   private FileInfo fileInfo; // can be null
 
 
 
 
         #region Constructors
-        public SinapseDocumentInfo(string path, Workplace workplace)
+        /// <summary>
+        ///   Creates a new SinapseDocumentInfo.
+        /// </summary>
+        /// <param name="path">
+        ///    The path to the SinapseDocument. If workplace is specified, the given
+        ///    path should be relative to this workplace. Otherwise, it should be absolute.
+        /// </param>
+        /// <param name="workplace">
+        ///   The Workplace to which the path is relative to.
+        /// </param>
+        public SinapseDocumentInfo(string filePath, Workplace workplace)
         {
-            initialize(path, workplace);
+            initialize(filePath, workplace);
         }
 
-
+        /// <summary>
+        ///   Creates a new SinapseDocumentInfo.
+        /// </summary>
+        /// <param name="path">
+        ///    The path to the SinapseDocument. If workplace is specified, the given
+        ///    path should be relative to this workplace. Otherwise, it should be absolute.
+        /// </param>
+        /// <param name="workplace">
+        ///   The Workplace to which the path is relative to.
+        /// </param>
+        /// <param name="type">
+        ///   The type of the Document being referenced. It should be one of the ISinapseDocument
+        ///   types or null. Any other types will be treated as null.
+        /// </param>
         public SinapseDocumentInfo(string filePath, Workplace workplace, Type type)
         {
             initialize(filePath, workplace, type);
         }
 
+
         private void initialize(string filePath, Workplace workplace)
         {
-            Type type = DocumentCache.GetType(Utils.GetExtension(filePath, true));
+            Type type = DocumentManager.GetType(Utils.GetExtension(filePath, true));
             initialize(filePath, workplace, type);
         }
 
@@ -61,18 +88,20 @@ namespace Sinapse.Core
             this.filePath = filePath;
             this.owner = workplace;
             this.type = type;
-
-            this.missing = File.Exists(FullName);
         }
         #endregion
 
 
 
-
+        /// <summary>
+        ///   The path for the file referenced by this SinapseDocumentInfo. It
+        ///   can be absolute or relative to the Workplace owner, depending if
+        ///   the Owner property was set or not. 
+        /// </summary>
         public String Path
         {
             get { return filePath; }
-            private set
+            set
             {
                 if (value != filePath)
                 {
@@ -80,22 +109,34 @@ namespace Sinapse.Core
                     if (this.PropertyChanged != null)
                     {
                         this.PropertyChanged.Invoke(this,
-                            new PropertyChangedEventArgs("Name"));
+                            new PropertyChangedEventArgs("Path"));
                     }
                 }
             }
         }
 
+        /// <summary>
+        ///   Gets the filename (including its extension) of the current file
+        ///   referenced by this SinapseDocumentInfo.
+        /// </summary>
         public String Name
         {
             get { return System.IO.Path.GetFileName(filePath); }
         }
 
+        /// <summary>
+        ///   Gets the directory where the file referenced by this SinapseDocumentInfo
+        ///   is located.
+        /// </summary>
         public String Directory
         {
             get { return System.IO.Path.GetDirectoryName(filePath); }
         }
 
+        /// <summary>
+        ///   Gets the Full Name of the file referenced by this SinapseDocumentInfo.
+        ///   The Full Name is always an absolute path.
+        /// </summary>
         public String FullName
         {
             get
@@ -106,6 +147,10 @@ namespace Sinapse.Core
             }
         }
 
+        /// <summary>
+        ///   Gets or sets the Workplace to which relative address correspond. If
+        ///   null, the paths will be considered absolute.
+        /// </summary>
         public Workplace Workplace
         {
             get { return owner; }
@@ -119,10 +164,13 @@ namespace Sinapse.Core
         /// </summary>
         public bool IsPathRelative
         {
-            get { return (owner == null); }
+            get { return (owner != null); }
         }
 
 
+        /// <summary>
+        ///   Gets the type of the document referenced by this SinapseDocumentInfo.
+        /// </summary>
         public Type Type
         {
             get { return type; }
@@ -130,10 +178,26 @@ namespace Sinapse.Core
 
 
 
+        /// <summary>
+        ///   Saves the SinapseDocument referenced by this SinapseDocumentInfo to the disk.
+        ///   If type is null, only creates an empty file.
+        /// </summary>
         public void Create()
         {
-            ISinapseDocument doc = Activator.CreateInstance(type, new object[] {Name, new FileInfo(FullName)}) as ISinapseDocument;
-            doc.Save(FullName);
+            if (type == null)
+            {
+                File.Create(FullName);
+            }
+            else
+            {
+                ISinapseDocument doc = Activator.CreateInstance(type, new object[] { Name, new FileInfo(FullName) }) as ISinapseDocument;
+                doc.Save(FullName);
+            }
+        }
+
+        public void Rename(string newName)
+        {
+            Move(System.IO.Path.Combine(this.Directory, newName));
         }
 
         public void Move(string newPath)
@@ -156,13 +220,11 @@ namespace Sinapse.Core
         }
 
         /// <summary>
-        ///   Opens (instantiates) a Document
+        ///   Opens (instantiates) the referenced SinapseDocument.
         /// </summary>
-        /// <param name="newObject"></param>
-        /// <returns></returns>
         public ISinapseDocument Open()
         {
-            return SinapseDocument.Open(FullName);
+            return DocumentManager.Open(FullName);
         }
 
 

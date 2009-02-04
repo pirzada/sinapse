@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Training
+namespace Sinapse.WinForms.Training
 {
     public partial class GraphVisualizer : Form
     {

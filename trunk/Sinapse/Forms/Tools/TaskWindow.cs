@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using WeifenLuo.WinFormsUI.Docking;
+using Sinapse.WinForms.Core;
 
-namespace Sinapse.Forms.ToolWindows
+namespace Sinapse.WinForms.ToolWindows
 {
     public partial class TaskWindow : ToolWindow
     {

@@ -62,7 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Documents\DocumentCache.cs" />
+    <Compile Include="Documents\Attributes.cs" />
+    <Compile Include="Documents\DocumentManager.cs" />
     <Compile Include="Filters\InputMismatchException.cs" />
     <Compile Include="Filters\Table\Normalization.cs" />
     <Compile Include="Documents\ISinapseDocument.cs" />
@@ -121,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Requisites.txt" />
+    <Content Include="Resources\Unknown.ico" />
     <None Include="Resources\Session.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -142,7 +144,6 @@
     <Folder Include="Filters\Video\" />
     <Folder Include="Reporting\" />
     <Folder Include="Systems\Statistic\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

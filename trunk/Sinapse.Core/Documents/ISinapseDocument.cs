@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
+using System.Runtime.Serialization;
 using System.IO;
 
 
@@ -13,7 +14,18 @@ namespace Sinapse.Core
         string Name { get; set;}
         string Description { get; set;}
         string Remarks { get; set;}
-        FileInfo File { get; }
+
+        /// <summary>
+        ///   The File path of this Document. If left null, it should be
+        ///   specified when the document is first saved.
+        /// </summary>
+        FileInfo File { get; set; }
+
+        /// <summary>
+        ///   The Workplace Owner of this Document. If left null, the
+        ///   document will be treated as a standalone file. Some features
+        ///   may not be available.
+        /// </summary>
         Workplace Owner { get; set; } // Should be optional / can be null
 
         //bool Save(string path);
@@ -32,6 +44,8 @@ namespace Sinapse.Core
         private String name;
         private String description;
         private String remarks;
+
+        [NonSerialized]
         private FileInfo fileInfo;
 
         [field: NonSerialized]
@@ -50,6 +64,16 @@ namespace Sinapse.Core
 
 
         #region Constructors
+        /// <summary>
+        ///   Creates a new SinapseDocument.
+        /// </summary>
+        /// <param name="name">
+        ///   The name of the document.
+        /// </param>
+        /// <param name="fileInfo">
+        ///   The path where it should be stored. If left null, the
+        ///   path will have to be passed whenever Save() is called.
+        /// </param>
         public SinapseDocument(String name, FileInfo fileInfo)
         {
             this.name = name;
@@ -128,6 +152,7 @@ namespace Sinapse.Core
         public FileInfo File
         {
             get { return fileInfo; }
+            set { fileInfo = value; }
         }
 
         public Workplace Owner
@@ -150,7 +175,6 @@ namespace Sinapse.Core
             if (SavepathChanged != null)
                 SavepathChanged.Invoke(this, e);
         }
-
 
 
         #region ISinapseDocument Members
@@ -176,127 +200,9 @@ namespace Sinapse.Core
         // ----------------------------------------------------------
 
 
-
-        #region Static Methods
-        public static ISinapseDocument Open(string fullName)
-        {
-            ISinapseDocument document = null;
-
-            // First we check if file exists,
-            if (System.IO.File.Exists(fullName))
-            {
-                // Determine the type of the document being open
-                Type type = DocumentCache.GetType(Utils.GetExtension(fullName, true));
-                
-                // Create the method info for the static method SerializableObject<T>.Open
-                MethodInfo methodOpen = type.GetMethod("Open",
-                    BindingFlags.Static | BindingFlags.Public);
-
-                // Call the Open method passing the FullPath as its first parameter
-                document = (ISinapseDocument)methodOpen.Invoke(null, new object[] { fullName });
-            }
-            else
-            {
-                // The file does not exists, so we create a new instance.
-                //  component = (ISinapseComponent)Activator.CreateInstance(type);
-                throw new InvalidOperationException();
-            }
-
-            return document;
-        }
-        #endregion
-
     }
 
 
 
-    [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class DocumentDescription : Attribute
-    {
-        private string name;
-        private string extension;
-        private string description;
-        private string defaultName;
-
-        private string iconPath;
-        private int smallIconIndex;
-        private int largeIconIndex;
-
-
-
-        public DocumentDescription(string name)
-        {
-            this.name = name;
-        }
-
-        /// <summary>
-        ///   The default extension for the document file, including
-        ///   the first dot in the filename (e.g. Extension=".txt")
-        /// </summary>
-        public String Extension
-        {
-            get { return extension; }
-            set { extension = value; }
-        }
-
-        public String Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
-
-        public String Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public String DefaultName
-        {
-            get { return defaultName; }
-            set { defaultName = value; }
-        }
-
-        public String IconPath
-        {
-            get { return iconPath; }
-            set { iconPath = value; }
-        }
-
-        public Int32 SmallIconIndex
-        {
-            get { return smallIconIndex; }
-            set { smallIconIndex = value; }
-        }
-
-        public Int32 LargeIconIndex
-        {
-            get { return largeIconIndex; }
-            set { largeIconIndex = value; }
-        }
-
-    }
-
-    [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class DocumentViewer : Attribute
-    {
-        private readonly Type type;
-
-        public DocumentViewer(Type documentType)
-        {
-            if (!typeof(ISinapseDocument).IsAssignableFrom(documentType))
-           {
-               throw new ArgumentException(
-                   "The type must implement ISinapseDocument interface",
-                   "documentType");
-           }
-            this.type = documentType;
-        }
-
-        public Type DocumentType
-        {
-            get { return type; }
-        }
-
-    }
+   
 }

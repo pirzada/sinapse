@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.IO;
 
-namespace Sinapse.Core
+namespace Sinapse.Core.Documents
 {
-    public static class DocumentCache
+    public static class DocumentManager
     {
 
         private static Dictionary<String, Type> cacheByExtension = null; // <extension, type>
@@ -15,7 +16,7 @@ namespace Sinapse.Core
 
         public static Type GetType(string extension)
         {
-            if (cacheByExtension == null) Build();
+            if (cacheByExtension == null) BuildCache();
             if (cacheByExtension.ContainsKey(extension))
                 return cacheByExtension[extension];
             else return null;
@@ -52,7 +53,7 @@ namespace Sinapse.Core
         }
 
 
-        public static void Build()
+        public static void BuildCache()
         {
             cacheByExtension = new Dictionary<String, Type>();
 
@@ -64,6 +65,33 @@ namespace Sinapse.Core
                     cacheByExtension.Add((attr[0] as DocumentDescription).Extension, type);
                 }
             }
+        }
+
+
+
+        public static ISinapseDocument Open(string fullName)
+        {
+            ISinapseDocument document = null;
+
+            // First we check if file exists,
+            if (System.IO.File.Exists(fullName))
+            {
+                // Determine the type of the document being open
+                Type type = DocumentManager.GetType(Utils.GetExtension(fullName, true));
+
+                // Create the method info for the static method SerializableObject<T>.Open
+                MethodInfo methodOpen = type.GetMethod("Open",
+                    BindingFlags.Static | BindingFlags.Public);
+
+                // Call the Open method passing the FullPath as its first parameter
+                document = (ISinapseDocument)methodOpen.Invoke(null, new object[] { fullName });
+            }
+            else
+            {
+                throw new FileNotFoundException("The file could not be found", fullName);
+            }
+
+            return document;
         }
     }
 }

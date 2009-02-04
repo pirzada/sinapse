@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Editors.DataSources
+namespace Sinapse.WinForms.Editors.DataSources
 {
     partial class ColumnSpecification
     {

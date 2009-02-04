@@ -1,4 +1,4 @@
-namespace Sinapse.Forms
+namespace Sinapse.WinForms
 {
     partial class TrainingTableVisualizer
     {
@@ -66,7 +66,7 @@ namespace Sinapse.Forms
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCurrentValidation,
             this.btnCurrentTesting});
-            this.toolStripDropDownButton1.Image = global::Sinapse.Properties.Resources.txt;
+            this.toolStripDropDownButton1.Image = global::Sinapse.WinForms.Properties.Resources.txt;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(92, 22);
@@ -86,7 +86,7 @@ namespace Sinapse.Forms
             // 
             // btnCompute
             // 
-            this.btnCompute.Image = global::Sinapse.Properties.Resources.run;
+            this.btnCompute.Image = global::Sinapse.WinForms.Properties.Resources.run;
             this.btnCompute.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCompute.Name = "btnCompute";
             this.btnCompute.Size = new System.Drawing.Size(70, 22);
@@ -95,7 +95,7 @@ namespace Sinapse.Forms
             // 
             // btnReport
             // 
-            this.btnReport.Image = global::Sinapse.Properties.Resources.view_details;
+            this.btnReport.Image = global::Sinapse.WinForms.Properties.Resources.view_details;
             this.btnReport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(65, 22);

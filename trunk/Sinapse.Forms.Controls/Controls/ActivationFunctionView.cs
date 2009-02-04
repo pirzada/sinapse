@@ -11,7 +11,7 @@ using AForge.Neuro;
 
 using ZedGraph;
 
-namespace Sinapse.Forms.Controls.Controls
+namespace Sinapse.WinForms.Controls.Controls
 {
 
     public partial class ActivationFunctionView : Control

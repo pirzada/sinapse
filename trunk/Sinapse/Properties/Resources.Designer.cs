@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sinapse.Properties {
+namespace Sinapse.WinForms.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Sinapse.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sinapse.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sinapse.WinForms.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -182,6 +182,27 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap edit_remove {
             get {
                 object obj = ResourceManager.GetObject("edit_remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap editclear {
+            get {
+                object obj = ResourceManager.GetObject("editclear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap editcut {
+            get {
+                object obj = ResourceManager.GetObject("editcut", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap editdelete {
+            get {
+                object obj = ResourceManager.GetObject("editdelete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -861,6 +882,13 @@ namespace Sinapse.Properties {
         internal static System.Drawing.Bitmap view_magfit {
             get {
                 object obj = ResourceManager.GetObject("view_magfit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap view_text {
+            get {
+                object obj = ResourceManager.GetObject("view_text", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

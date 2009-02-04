@@ -1,4 +1,4 @@
-﻿namespace Sinapse.Forms.ToolWindows
+﻿namespace Sinapse.WinForms.ToolWindows
 {
     partial class ToolWindow
     {

@@ -24,6 +24,7 @@ using System.ComponentModel;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
 
+using Sinapse.Core.Documents;
 using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 
@@ -43,8 +44,7 @@ namespace Sinapse.Core.Training
         Description = "Teaches a Source to an Activation Network using Backpropagation",
         Extension = ".session.bpp",
         IconPath = "Resources/Session.ico")]
-    public class BackpropagationTrainingSession : TrainingSession,
-        ISinapseDocument, ISerializableObject
+    public class BackpropagationTrainingSession : TrainingSession, ISinapseDocument
     {
 
         private SerializableObject<BackpropagationTrainingSession> serializableObject;
@@ -403,7 +403,9 @@ namespace Sinapse.Core.Training
 
         public static BackpropagationTrainingSession Open(string path)
         {
-            return SerializableObject<BackpropagationTrainingSession>.Open(path);
+            BackpropagationTrainingSession doc = SerializableObject<BackpropagationTrainingSession>.Open(path);
+            doc.File = new System.IO.FileInfo(path);
+            return doc;
         }
 
         public event EventHandler FileSaved
@@ -447,6 +449,7 @@ namespace Sinapse.Core.Training
         public System.IO.FileInfo File
         {
             get { return sinapseDocument.File; }
+            set { sinapseDocument.File = value; }
         }
 
         public Workplace Owner

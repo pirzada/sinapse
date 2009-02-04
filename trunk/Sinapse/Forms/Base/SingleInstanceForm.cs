@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Base
+namespace Sinapse.WinForms.Base
 {
 
     internal class SingleInstanceForm : System.Windows.Forms.Form

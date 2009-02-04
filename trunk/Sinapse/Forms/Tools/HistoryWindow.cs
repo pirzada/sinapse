@@ -25,9 +25,10 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Data;
+using Sinapse.WinForms.Core;
 
 
-namespace Sinapse.Forms.ToolWindows
+namespace Sinapse.WinForms.ToolWindows
 {
     
     public sealed partial class HistoryWindow : ToolWindow

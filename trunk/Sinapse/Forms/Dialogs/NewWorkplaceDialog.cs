@@ -8,8 +8,9 @@ using System.Windows.Forms;
 using System.IO;
 
 using Sinapse.Core;
+using Sinapse.WinForms.Core;
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Dialogs
 {
     public partial class NewWorkplaceDialog : Form
     {
@@ -75,22 +76,33 @@ namespace Sinapse.Forms.Dialogs
             // Verify if name is good
             if (tbName.Text.Length > 0)
             {
+                string location = cbLocation.Text;
+
                 // Check if directory exists
-                if (!Directory.Exists(cbLocation.Text))
+                if (!Directory.Exists(location))
                 {
                     // Directory does not exist
                     DialogResult r = MessageBox.Show("The directory does not exist. Do you want Sinapse to automatically create it for you?");
                     if (r == DialogResult.Yes)
                     {
-                        Directory.CreateDirectory(cbLocation.Text);
+                        Directory.CreateDirectory(location);
                     }
                     else return;
                 }
 
+                Sinapse.Data.HistoryListener.Write("Creating Workplace Directory");
+                
+                if (cbCreateFolder.Checked)
+                {
+                    location = Path.Combine(location, tbName.Text);
+                    Directory.CreateDirectory(location);
+                }
+
+
                 Sinapse.Data.HistoryListener.Write("Creating Workplace");
 
                 Workplace workplace = new Workplace(tbName.Text,
-                    new FileInfo(Path.Combine(cbLocation.Text, tbName.Text + ".workplace")));
+                    new FileInfo(Path.Combine(location, tbName.Text + ".workplace")));
 
                 workplace.Save(); // creates the directory structure
                 workbench.OpenWorkplace(workplace); // opens the workplace in the current workbench.
@@ -98,5 +110,6 @@ namespace Sinapse.Forms.Dialogs
                 this.Close();
             }
         }
+
     }
 }

@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
-namespace Sinapse.Core
+using Sinapse.Core.Documents;
+
+namespace Sinapse.WinForms.Core
 {
     public static class IconCache
     {
@@ -39,11 +41,11 @@ namespace Sinapse.Core
             IntPtr iconPtr;
 
             // Special Icons
-            smallIcons.Add("null", Sinapse.Properties.Resources.Unknown);
-            largeIcons.Add("null", Sinapse.Properties.Resources.Unknown);
+            smallIcons.Add("null", Sinapse.WinForms.Properties.Resources.Unknown);
+            largeIcons.Add("null", Sinapse.WinForms.Properties.Resources.Unknown);
 
             // Document Icons
-            foreach (Type type in DocumentCache.TypeList)
+            foreach (Type type in DocumentManager.TypeList)
             {
                    object[] attr = type.GetCustomAttributes(typeof(DocumentDescription), false);
                    if (attr.Length > 0)
