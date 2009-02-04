@@ -44,6 +44,13 @@ namespace Sinapse.WinForms.Documents
 
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            UpdateCaption();
+        }
+
         
 
 
@@ -116,15 +123,18 @@ namespace Sinapse.WinForms.Documents
 
 
         #region Private Methods
-        private void updateCaption()
+        protected void UpdateCaption()
         {
-            this.Name = this.document.Name;
-            this.Text = this.document.Name;
+            if (this.document != null)
+            {
+                this.Name = this.document.Name;
+                this.Text = this.document.Name;
 
-            this.TabText = this.document.Name;
+                this.TabText = this.document.Name;
 
-            if (this.Document.HasChanges)
-                this.TabText = this.Name + "*";
+                if (this.Document.HasChanges)
+                    this.TabText = this.Name + "*";
+            }
         }
         #endregion
 
@@ -132,12 +142,12 @@ namespace Sinapse.WinForms.Documents
         #region Event Handling
         void document_FileSaved(object sender, EventArgs e)
         {
-            updateCaption();
+            UpdateCaption();
         }
 
         void document_DocumentChanged(object sender, EventArgs e)
         {
-            updateCaption();
+            UpdateCaption();
         }
         #endregion
 
@@ -145,11 +155,11 @@ namespace Sinapse.WinForms.Documents
 
 
         #region Static Methods
-        private static Dictionary<Type, Type> viewers; // <Document Type, Viewer Type>
+        private static Dictionary<String, Type> viewers; // <Document Extension, Viewer Type>
 
         public static void BuildCache()
         {
-            viewers = new Dictionary<Type, Type>();
+            viewers = new Dictionary<String, Type>();
 
             Type[] types = Sinapse.Utils.GetTypesImplementingInterface(
               Assembly.GetAssembly(typeof(SinapseDocumentView)), typeof(SinapseDocumentView));
@@ -159,16 +169,16 @@ namespace Sinapse.WinForms.Documents
                 object[] attr = viewer.GetCustomAttributes(typeof(DocumentViewer), false);
                 if (attr.Length > 0)
                 {
-                    viewers.Add((attr[0] as DocumentViewer).DocumentType, viewer);
+                    viewers.Add((attr[0] as DocumentViewer).Extension, viewer);
                 }
             }
         }
 
-        public static Type GetViewer(Type document)
+        public static Type GetViewer(String extension)
         {
             if (viewers == null)
                 BuildCache();
-            return viewers[document];
+            return viewers[extension];
         }
         #endregion
 

@@ -18,22 +18,20 @@ namespace Sinapse.Core.Sources
         private string columnName; // key
         private string columnDescription;
         private SystemDataType columnDataType;
-        private DataSourceRole columnRole;
         bool visible; // Setar quando o usuário mostrar/esconder na GUI
 
 
 
-        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type, DataSourceRole role)
+        public TableDataSourceColumn(DataColumn dataColumn, SystemDataType type)
         {
             this.table = dataColumn.Table;
             this.columnName = dataColumn.ColumnName;
             this.columnDataType = type;
-            this.columnRole = role;
             this.visible = true;
         }
 
         public TableDataSourceColumn(DataColumn dataColumn)
-            : this(dataColumn, SystemDataType.Nummeric, DataSourceRole.None)
+            : this(dataColumn, SystemDataType.Nummeric)
         {
         }
 
@@ -102,22 +100,6 @@ namespace Sinapse.Core.Sources
             }
         }
 
-        /// <summary>
-        ///   Gets or sets the role for this column, if Input or Output.
-        /// </summary>
-        public DataSourceRole Role
-        {
-            get { return this.columnRole; }
-            set
-            {
-                if (this.columnRole != value)
-                {
-                    this.columnRole = value;
-                    OnPropertyChanged("Role");
-                }
-            }
-        }
-
         
         /// <summary>
         ///   Gets the DataColumn associated with this object.
@@ -170,9 +152,9 @@ namespace Sinapse.Core.Sources
         {
         }
 
+/*
 
-
-        public TableDataSourceColumn[] Select(DataSourceRole role)
+        public TableDataSourceColumn[] Select(InputOutput role)
         {
             List<TableDataSourceColumn> cols = new List<TableDataSourceColumn>(this.Count);
             foreach (TableDataSourceColumn col in this)
@@ -183,10 +165,10 @@ namespace Sinapse.Core.Sources
             return cols.ToArray();
         }
 
-
-        public void Add(DataColumn dataColumn, SystemDataType type, DataSourceRole role)
+        */
+        public void Add(DataColumn dataColumn, SystemDataType type, InputOutput role)
         {
-            Add(new TableDataSourceColumn(dataColumn, type, role));
+            Add(new TableDataSourceColumn(dataColumn, type));
         }
 
 
@@ -228,8 +210,8 @@ namespace Sinapse.Core.Sources
             }
             return false;
         }
-
-        public int GetCount(DataSourceRole role)
+        /*
+        public int GetCount(InputOutput role)
         {
             int count = 0;
             foreach (TableDataSourceColumn col in this)
@@ -239,8 +221,9 @@ namespace Sinapse.Core.Sources
             }
             return count;
         }
-
-        public string[] GetNames(DataSourceRole role)
+        */
+        /*
+        public string[] GetNames(InputOutput role)
         {
             List<string> names = new List<string>(this.Count);
             foreach (TableDataSourceColumn col in this)
@@ -250,7 +233,7 @@ namespace Sinapse.Core.Sources
             }
             return names.ToArray();
         }
-
+        */
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)

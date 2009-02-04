@@ -121,7 +121,7 @@ namespace Sinapse.WinForms.Dialogs
             foreach (DataColumn dataColumn in dataTable.Columns)
             {
                 col = new TableDataSourceColumn(dataColumn);
-                col.Role = DataSourceRole.None;
+              //  col.Role = InputOutput.None;
                 col.Visible = false;
                 col.DataType = SystemDataType.Nummeric;
                 columns.Add(col);
@@ -130,14 +130,14 @@ namespace Sinapse.WinForms.Dialogs
             foreach (string strColumn in clbInput.CheckedItems)
             {
                 col = columns[strColumn];
-                col.Role = DataSourceRole.Input;
+             //   col.Role = InputOutput.Input;
                 col.Visible = true;
             }
 
             foreach (string strColumn in clbOutput.CheckedItems)
             {
                 col = columns[strColumn];
-                col.Role = DataSourceRole.Output;
+           //     col.Role = InputOutput.Output;
                 col.Visible = true;
             }
 

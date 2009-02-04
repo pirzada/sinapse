@@ -42,7 +42,7 @@ namespace Sinapse.Core.Systems
         //----------------------------------------
 
         #region Constructor
-        protected NetworkSystem()
+        protected NetworkSystem() : base()
         {
             
         }
@@ -52,17 +52,11 @@ namespace Sinapse.Core.Systems
 
 
         #region Properties
-
-
         public Network Network
         {
             get { return network; }
             protected set { network = value; }
         }
-
-
-        /// <summary>Gets a string representing the type of the network.</summary>
-        public abstract string Type { get;}
         #endregion
 
 

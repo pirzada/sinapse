@@ -15,27 +15,22 @@ namespace Sinapse.Core.Systems
     public abstract class AdaptiveSystem : ISystem
     {
 
-        private SystemInputOutputCollection inputs;
-        private SystemInputOutputCollection outputs;
+        private SystemInputOutputCollection inputOutput;
+     //   private SystemInputOutputCollection outputs;
         private FilterCollection preprocess;
         private FilterCollection postprocess;
 
 
         public AdaptiveSystem()
         {
-            inputs = new SystemInputOutputCollection();
-            outputs = new SystemInputOutputCollection();
+            inputOutput = new SystemInputOutputCollection();
+     //       outputs = new SystemInputOutputCollection();
         }
 
 
-        public SystemInputOutputCollection Inputs
+        public SystemInputOutputCollection Interface
         {
-            get { return inputs; }
-        }
-
-        public SystemInputOutputCollection Outputs
-        {
-            get { return outputs; }
+            get { return inputOutput; }
         }
 
         public FilterCollection Preprocess
@@ -70,7 +65,7 @@ namespace Sinapse.Core.Systems
             object[][] output = new object[args.Length][];
             for (int i = 0; i < output.Length; i++)
 			{
-                output[i] = Compute(inputs[i]);
+                output[i] = Compute(Interface[InputOutput.Input, i]);
 			}
             return output;
         }

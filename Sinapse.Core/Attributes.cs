@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.IO;
 
-namespace Sinapse.Core.Documents
+namespace Sinapse.Core
 {
     [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class DocumentDescription : Attribute
@@ -14,6 +14,7 @@ namespace Sinapse.Core.Documents
         private string extension;
         private string description;
         private string defaultName;
+        private string category;
 
         private string iconPath;
         private int smallIconIndex;
@@ -53,6 +54,12 @@ namespace Sinapse.Core.Documents
             set { defaultName = value; }
         }
 
+        public String Category
+        {
+            get { return category; }
+            set { category = value; }
+        }
+
         public String IconPath
         {
             get { return iconPath; }
@@ -76,23 +83,32 @@ namespace Sinapse.Core.Documents
     [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class DocumentViewer : Attribute
     {
-        private readonly Type type;
+        private readonly String extension;
 
-        public DocumentViewer(Type documentType)
+        public DocumentViewer(String extension)
         {
-            if (!typeof(ISinapseDocument).IsAssignableFrom(documentType))
-            {
-                throw new ArgumentException(
-                    "The type must implement ISinapseDocument interface",
-                    "documentType");
-            }
-            this.type = documentType;
+            this.extension = extension;
         }
 
-        public Type DocumentType
+        public String Extension
         {
-            get { return type; }
+            get { return extension; }
+        }
+    }
+
+    [global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class FilterEditor : Attribute
+    {
+        private readonly Type filter;
+
+        public FilterEditor(Type filter)
+        {
+            this.filter = filter;
         }
 
+        public Type Filter
+        {
+            get { return filter; }
+        }
     }
 }

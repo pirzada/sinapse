@@ -1,6 +1,6 @@
-namespace Sinapse.Controls
+namespace Sinapse.WinForms.Documents.Systems.Controls
 {
-    partial class FilterSequenceControl
+    partial class FilterSequence
     {
         /// <summary> 
         /// Required designer variable.

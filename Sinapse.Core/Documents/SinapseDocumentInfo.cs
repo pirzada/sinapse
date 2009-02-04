@@ -28,9 +28,9 @@ namespace Sinapse.Core.Documents
         ///   The relative or absolute file path, including filename,
         ///   extension and directory information.
         /// </summary>
-        private string filePath;
-        private Workplace owner; // if null, then the file has absolute path
-        private Type type;
+        private string filePath; // relative or absolute file path
+        private Workplace owner; // if null, the file will have absolute path
+        private Type type;       // type of the stored SinapseDocument
 
 
 
@@ -147,6 +147,11 @@ namespace Sinapse.Core.Documents
             }
         }
 
+        public FileInfo FileInfo
+        {
+            get { return new FileInfo(FullName); }
+        }
+
         /// <summary>
         ///   Gets or sets the Workplace to which relative address correspond. If
         ///   null, the paths will be considered absolute.
@@ -190,6 +195,7 @@ namespace Sinapse.Core.Documents
             }
             else
             {
+                // Creates a new instance, then save it to the disk.
                 ISinapseDocument doc = Activator.CreateInstance(type, new object[] { Name, new FileInfo(FullName) }) as ISinapseDocument;
                 doc.Save(FullName);
             }

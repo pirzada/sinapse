@@ -168,10 +168,10 @@ namespace Sinapse.WinForms.Core
         #region Document Specific Methods
         public void OpenDocument(String fullName)
         {
-            OpenDocument(new SinapseDocumentInfo(fullName, null));
+            OpenDocument(fullName, null);
         }
 
-        public void OpenDocument(SinapseDocumentInfo documentInfo)
+         public void OpenDocument(String fullName, Workplace owner)
         {
             // First: verify if the document isn't already open
             IDockContent[] openDocuments = dockPanel.DocumentsToArray();
@@ -179,7 +179,7 @@ namespace Sinapse.WinForms.Core
             foreach (SinapseDocumentView openDocument in openDocuments)
             {
                 if (openDocument.Document != null && 
-                    openDocument.Document.File.FullName == documentInfo.FullName)
+                    openDocument.Document.File.FullName == fullName)
                 {
                     // The document was already open
                     openDocument.DockHandler.Show(); // Activate it
@@ -188,10 +188,11 @@ namespace Sinapse.WinForms.Core
             }
 
             // The document wasn't open, lets open it:
-            ISinapseDocument document = documentInfo.Open();
+            ISinapseDocument document = DocumentManager.Open(fullName);
+            document.Owner = owner; // If we have an owner Workplace, set it
 
             // Now lets determine the adequate viewer for this document type
-            Type viewerType = SinapseDocumentView.GetViewer(document.GetType());
+            Type viewerType = SinapseDocumentView.GetViewer(Utils.GetExtension(fullName, true));
 
             // Activate the viewer,
             SinapseDocumentView viewer = Activator.CreateInstance(viewerType, this, document) as SinapseDocumentView;
@@ -199,7 +200,7 @@ namespace Sinapse.WinForms.Core
             // And then lets show the new viewer on the main window.
             viewer.DockHandler.Show(dockPanel, DockState.Document);
 
-            mruDocuments.Insert(documentInfo.FullName);
+            mruDocuments.Insert(fullName);
         }
 
         public void ShowOpenDocumentDialog()

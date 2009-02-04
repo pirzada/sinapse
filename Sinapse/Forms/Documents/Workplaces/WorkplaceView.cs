@@ -13,12 +13,12 @@ using Sinapse.Core;
 using Sinapse.Core.Documents;
 using Sinapse.Core.Systems;
 
-using Sinapse.WinForms.Editors.AdaptiveSystems;
-using Sinapse.WinForms.Editors.AdaptiveSystems.Controls;
+//using Sinapse.WinForms.Editors.AdaptiveSystems;
+//using Sinapse.WinForms.Editors.AdaptiveSystems.Controls;
 
 namespace Sinapse.WinForms.Documents
 {
-    [DocumentViewer(typeof(Workplace))]
+    [DocumentViewer(".workplace")]
     internal partial class WorkplaceView : SinapseDocumentView
     {
         public WorkplaceView()

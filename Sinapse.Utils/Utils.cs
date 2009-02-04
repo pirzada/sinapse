@@ -71,6 +71,23 @@ namespace Sinapse
             else return Path.GetExtension(path);
         }
 
+        public static void CopyDirectory(string source, string destination, bool overwrite)
+        {
+            // Create the destination folder if missing.
+            if (!Directory.Exists(destination))
+                Directory.CreateDirectory(destination);
+
+            DirectoryInfo dirInfo = new DirectoryInfo(source);
+
+            // Copy all files.
+            foreach (FileInfo fileInfo in dirInfo.GetFiles())
+                fileInfo.CopyTo(Path.Combine(destination, fileInfo.Name), overwrite);
+
+            // Recursively copy all sub-directories.
+            foreach (DirectoryInfo subDirectoryInfo in dirInfo.GetDirectories())
+                CopyDirectory(subDirectoryInfo.FullName, Path.Combine(destination, subDirectoryInfo.Name), overwrite);
+        }
+
         /// <summary>
         ///   Gets the relative path of the file in relation to a given directory.
         /// </summary>

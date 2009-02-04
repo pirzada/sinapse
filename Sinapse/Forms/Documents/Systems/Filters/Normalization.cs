@@ -1,16 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Forms.Documents.Systems.Filters
 {
-    public partial class NewDatabaseDialog : Form
+    public partial class Normalization : UserControl
     {
-        public NewDatabaseDialog()
+        public Normalization()
         {
             InitializeComponent();
         }

@@ -56,6 +56,7 @@ namespace Sinapse.WinForms.ToolWindows
             nodeWorkplace = new TreeNode("Workplace");
             nodeWorkplace.ImageKey = ".workplace";
             nodeWorkplace.SelectedImageKey = ".workplace";
+            nodeWorkplace.ContextMenuStrip = workplaceContextMenu;
 
             Workbench.WorkplaceOpened += new EventHandler(Workbench_WorkplaceChanged);
             Workbench.WorkplaceClosed += new EventHandler(Workbench_WorkplaceChanged);
@@ -64,8 +65,10 @@ namespace Sinapse.WinForms.ToolWindows
 
         private void WorkplaceExplorer_SelectionChanged(object sender, TreeViewEventArgs e)
         {
-            if (this.SelectedItem != null)
-                Workbench.PropertyWindow.SelectedObject = this.SelectedItem;
+            if (treeViewWorkplace.SelectedNode != null)
+            {
+                Workbench.PropertyWindow.SelectedObject = treeViewWorkplace.SelectedNode.Tag;    
+            }
         }
         #endregion
 
@@ -76,7 +79,7 @@ namespace Sinapse.WinForms.ToolWindows
         /// <summary>
         ///   Gets the current selected WorkplaceContent on the Workplace Window
         /// </summary>
-        public SinapseDocumentInfo SelectedItem
+        public FileSystemProperties SelectedFile
         {
             get
             {
@@ -84,8 +87,8 @@ namespace Sinapse.WinForms.ToolWindows
                 {
                     object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-                    if (tag is SinapseDocumentInfo)
-                        return tag as SinapseDocumentInfo;
+                    if (tag is FileSystemProperties)
+                        return tag as FileSystemProperties;
                 }
                 return null;
             }
@@ -115,13 +118,20 @@ namespace Sinapse.WinForms.ToolWindows
             Workbench_WorkplaceChanged(null, EventArgs.Empty);
         }
 
-        private void treeViewWorkplace_DoubleClick(object sender, EventArgs e)
-        {
-            object tag = this.treeViewWorkplace.SelectedNode.Tag;
 
-            if (tag is SinapseDocumentInfo)
+        private void treeViewWorkplace_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            treeViewWorkplace.SelectedNode = e.Node;
+        }
+
+        private void treeViewWorkplace_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            object tag = e.Node.Tag;
+
+            if (tag is FileProperties)
             {
-                this.Workbench.OpenDocument(tag as SinapseDocumentInfo);
+                string fileName = (tag as FileProperties).FullName;
+                this.Workbench.OpenDocument(fileName);
             }
         }
 
@@ -176,11 +186,11 @@ namespace Sinapse.WinForms.ToolWindows
             treeViewWorkplace.SuspendLayout();
 
             nodeWorkplace.Text = Workbench.Workplace.Name;
-            nodeWorkplace.Tag = Workbench.Workplace;
-            
+            nodeWorkplace.Tag = new FolderProperties(Workbench.Workplace.Root.FullName);
+            nodeWorkplace.Nodes.Clear();
             treeViewWorkplace.Nodes.Clear();
 
-            createTree(Workbench.Workplace.Root.FullName, nodeWorkplace);
+            createTree(Workbench.Workplace.Root.FullName, String.Empty, nodeWorkplace);
             
             treeViewWorkplace.Nodes.Add(nodeWorkplace);
             treeViewWorkplace.TopNode = nodeWorkplace;
@@ -188,62 +198,44 @@ namespace Sinapse.WinForms.ToolWindows
             treeViewWorkplace.ResumeLayout(true);
         }
 
-        private void createTree(string dir, TreeNode root)
+        private void createTree(string rootPath, string dirPath, TreeNode root)
         {
+            
             // get the information of the directory
-            DirectoryInfo directory = new DirectoryInfo(dir);
+            DirectoryInfo directory = new DirectoryInfo(Path.Combine(rootPath, dirPath));
             
             // loop through each subdirectory
             foreach (DirectoryInfo d in directory.GetDirectories())
             {
-                // create a new node
+                // create a new node to represent the directory
                 TreeNode node = new TreeNode(d.Name);
+                node.ContextMenuStrip = folderContextMenu;
+                node.Tag = new FolderProperties(dirPath, rootPath);
 
                 // populate the new node recursively
-                createTree(d.FullName, node);
+                createTree(rootPath, Path.Combine(dirPath, d.Name), node);
+
                 root.Nodes.Add(node); 
             }
 
             // lastly, loop through each file in the directory, and add these as nodes
             foreach (FileInfo f in directory.GetFiles())
             {
-                // get file information
-                SinapseDocumentInfo documentInfo = new SinapseDocumentInfo(Path.Combine(dir, f.Name), Workbench.Workplace);
-                
-                // Verify if it is not of Workplace type
-                if (documentInfo.Type != typeof(Workplace))
-                {
-                   // Workplace.Active.Documents.Add(documentInfo);
-                    TreeNode node = createNode(documentInfo);
-                    
-                    // add it to the root node
-                    root.Nodes.Add(node);
-                }
-            }
-        }
+                if (f.Extension.Equals(".workplace", StringComparison.InvariantCultureIgnoreCase))
+                    continue;
 
+                TreeNode node = new TreeNode(f.Name);
+                node.ContextMenuStrip = documentContextMenu;
+                node.Tag = new FileProperties(Path.Combine(dirPath, f.Name), rootPath);
 
-        private TreeNode createNode(SinapseDocumentInfo document)
-        {
-            TreeNode node = new TreeNode();
-
-            node.Name = document.Name;
-            node.Text = document.Name;
-            node.Tag = document;
-
-            if (document.Type != null)
-            {
-                string extension = DocumentManager.GetExtension(document.Type);
+                string extension = Utils.GetExtension(f.Name, true);
                 node.ImageKey = extension;
                 node.SelectedImageKey = extension;
+                    
+                // add it to the root node
+                root.Nodes.Add(node);
+               
             }
-            else
-            {
-                node.ImageKey = "null";
-                node.SelectedImageKey = "null";
-            }
-
-            return node;
         }
         #endregion
 
@@ -276,27 +268,65 @@ namespace Sinapse.WinForms.ToolWindows
 
 
 
-        private void btnViewAll_Click(object sender, EventArgs e)
+
+
+        private void ContextMenuCut_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void contextMenu_Opening(object sender, CancelEventArgs e)
+        private void ContextMenuCopy_Click(object sender, EventArgs e)
         {
-            SinapseDocumentInfo selection = this.SelectedItem;
-            
-            if (selection != null)
+        }
+
+        private void ContextMenuPaste_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ContextMenuDelete_Click(object sender, EventArgs e)
+        {
+            if (treeViewWorkplace.SelectedNode != null)
             {
-             if (typeof(ISource).IsAssignableFrom(selection.Type))
-                MessageBox.Show("ISource");
-             if (typeof(ISession).IsAssignableFrom(selection.Type))
-                 MessageBox.Show("ISession");
-             if (typeof(ISystem).IsAssignableFrom(selection.Type))
-                 MessageBox.Show("ISystem");
+                if (treeViewWorkplace.SelectedNode.Tag is FileSystemProperties)
+                {
+                    (treeViewWorkplace.SelectedNode.Tag as FileSystemProperties).Delete();
+                }
+               
+                createTree();
             }
         }
 
+        private void ContextMenuRename_Click(object sender, EventArgs e)
+        {
+            treeViewWorkplace.SelectedNode.BeginEdit();
+        }
 
+        private void ContextMenuOpenExplorer_Click(object sender, EventArgs e)
+        {
+            if (SelectedFile != null)
+            {
+                System.Diagnostics.Process.Start("explorer.exe", SelectedFile.FullName);
+            }
+        }
+       
+
+        private void treeViewWorkplace_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            if (e.CancelEdit)
+                return;
+
+            if (e.Node.Tag is FileSystemProperties)
+            {
+                FileSystemProperties file = treeViewWorkplace.SelectedNode.Tag as FileSystemProperties;
+                if (e.Label.Equals(Path.GetFileName(file.FullName)))
+                    return;
+
+                file.MoveTo(Path.Combine(file.FullName, e.Label));
+            }
+        }
+
+       
 
     }
 

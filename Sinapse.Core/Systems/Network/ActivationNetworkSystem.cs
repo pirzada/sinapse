@@ -22,17 +22,7 @@ namespace Sinapse.Core.Systems
         
 
 
-/*
-        public ActivationNetworkSystem(IActivationFunction function, int inputsCount, params int[] neuronsCount)
-        {
-            Network = new ActivationNetwork(function, inputsCount, neuronsCount);
-            Preprocess = new FilterCollection(false);
-            Postprocess = new FilterCollection(true);
-        }
-*/
-
- 
-        public ActivationNetworkSystem(string name, System.IO.FileInfo info)
+        public ActivationNetworkSystem(string name, System.IO.FileInfo info) : base()
         {
             serializableObject = new SerializableObject<ActivationNetworkSystem>(this);
             sinapseDocument = new SinapseDocument(name, info);
@@ -54,10 +44,6 @@ namespace Sinapse.Core.Systems
             set { network = value; }
         }
 
-        public override string Type
-        {
-            get { return "Activation Network"; }
-        }
 
         public string Function
         {
@@ -69,11 +55,6 @@ namespace Sinapse.Core.Systems
 
 
 
-
-        public override object[][] Compute(params object[][] args)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
 
         public override object[] Test(object[] input, object[] desiredOutput, out double[] rawOutput, out double[] deviation)
         {

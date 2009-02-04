@@ -16,7 +16,9 @@ using Sinapse.WinForms.Core;
 
 namespace Sinapse.WinForms.Dialogs
 {
-
+    /// <summary>
+    ///   Adds a new document to the current Workplace.
+    /// </summary>
     public partial class NewDocumentDialog : Form
     {
 
@@ -124,9 +126,9 @@ namespace Sinapse.WinForms.Dialogs
             }
 
             string path = Path.Combine(directory, tbName.Text + selectedDescription.Extension);
-            SinapseDocumentInfo documentInfo = new SinapseDocumentInfo(path, workbench.Workplace, selectedType);
-            documentInfo.Create();
-            workbench.OpenDocument(documentInfo);
+            string fullPath = Path.Combine(workbench.Workplace.Root.FullName, path);
+            DocumentManager.Create(tbName.Text, fullPath, selectedType);
+            workbench.OpenDocument(fullPath, workbench.Workplace);
 
             this.Close();
         }

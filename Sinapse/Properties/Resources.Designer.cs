@@ -60,6 +60,13 @@ namespace Sinapse.WinForms.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _lock {
+            get {
+                object obj = ResourceManager.GetObject("lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap action_apply {
             get {
                 object obj = ResourceManager.GetObject("action_apply", resourceCulture);
@@ -427,6 +434,13 @@ namespace Sinapse.WinForms.Properties {
         internal static System.Drawing.Bitmap led_red {
             get {
                 object obj = ResourceManager.GetObject("led_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap lock1 {
+            get {
+                object obj = ResourceManager.GetObject("lock1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -841,6 +855,20 @@ namespace Sinapse.WinForms.Properties {
             get {
                 object obj = ResourceManager.GetObject("Unknown", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unlock {
+            get {
+                object obj = ResourceManager.GetObject("unlock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unlocked {
+            get {
+                object obj = ResourceManager.GetObject("unlocked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
