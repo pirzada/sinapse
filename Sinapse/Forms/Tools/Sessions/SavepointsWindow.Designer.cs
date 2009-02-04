@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Training
+namespace Sinapse.WinForms.ToolWindows.Sessions
 {
     partial class SavepointsWindow
     {
@@ -74,7 +74,7 @@ namespace Sinapse.Forms.Training
             // 
             // btnSaveCurrent
             // 
-            this.btnSaveCurrent.Image = global::Sinapse.Properties.Resources.file_save;
+            this.btnSaveCurrent.Image = global::Sinapse.WinForms.Properties.Resources.file_save;
             this.btnSaveCurrent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveCurrent.Name = "btnSaveCurrent";
             this.btnSaveCurrent.Size = new System.Drawing.Size(91, 22);
@@ -82,7 +82,7 @@ namespace Sinapse.Forms.Training
             // 
             // btnRevert
             // 
-            this.btnRevert.Image = global::Sinapse.Properties.Resources.quick_restart;
+            this.btnRevert.Image = global::Sinapse.WinForms.Properties.Resources.quick_restart;
             this.btnRevert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRevert.Name = "btnRevert";
             this.btnRevert.Size = new System.Drawing.Size(121, 22);

@@ -23,6 +23,7 @@ using System.Text;
 using System.Runtime.Serialization;
 using System.IO;
 
+using Sinapse.Core.Documents;
 using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Training;
@@ -102,7 +103,9 @@ namespace Sinapse.Core
 
         public static Workplace Open(string path)
         {
-            return SerializableObject<Workplace>.Open(path);
+            Workplace doc = SerializableObject<Workplace>.Open(path);
+            doc.File = new System.IO.FileInfo(path);
+            return doc;
         }
 
         public event EventHandler FileSaved
@@ -143,6 +146,7 @@ namespace Sinapse.Core
         public System.IO.FileInfo File
         {
             get { return sinapseDocument.File; }
+            set { sinapseDocument.File = value; }
         }
 
         public Workplace Owner

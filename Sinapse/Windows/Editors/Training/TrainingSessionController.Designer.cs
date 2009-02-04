@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Training
+namespace Sinapse.WinForms.Training
 {
     partial class TrainingSessionController
     {
@@ -63,7 +63,7 @@ namespace Sinapse.Forms.Training
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::Sinapse.Properties.Resources.player_play_32;
+            this.pictureBox5.Image = global::Sinapse.WinForms.Properties.Resources.player_play_32;
             this.pictureBox5.Location = new System.Drawing.Point(126, 92);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(32, 32);
@@ -73,7 +73,7 @@ namespace Sinapse.Forms.Training
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::Sinapse.Properties.Resources.player_rew_32;
+            this.pictureBox3.Image = global::Sinapse.WinForms.Properties.Resources.player_rew_32;
             this.pictureBox3.Location = new System.Drawing.Point(12, 92);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(32, 32);
@@ -83,7 +83,7 @@ namespace Sinapse.Forms.Training
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Sinapse.Properties.Resources.player_pause_32;
+            this.pictureBox1.Image = global::Sinapse.WinForms.Properties.Resources.player_pause_32;
             this.pictureBox1.Location = new System.Drawing.Point(88, 92);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
@@ -93,7 +93,7 @@ namespace Sinapse.Forms.Training
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::Sinapse.Properties.Resources.player_fwd_32;
+            this.pictureBox4.Image = global::Sinapse.WinForms.Properties.Resources.player_fwd_32;
             this.pictureBox4.Location = new System.Drawing.Point(164, 92);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(32, 32);
@@ -103,7 +103,7 @@ namespace Sinapse.Forms.Training
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::Sinapse.Properties.Resources.player_stop_32;
+            this.pictureBox2.Image = global::Sinapse.WinForms.Properties.Resources.player_stop_32;
             this.pictureBox2.Location = new System.Drawing.Point(50, 92);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(32, 32);

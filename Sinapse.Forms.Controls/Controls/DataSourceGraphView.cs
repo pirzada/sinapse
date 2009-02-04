@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Controls
+namespace Sinapse.WinForms.Controls
 {
     public partial class DataSourceGraphView : UserControl
     {

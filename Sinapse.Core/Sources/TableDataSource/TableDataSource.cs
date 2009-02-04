@@ -413,7 +413,9 @@ namespace Sinapse.Core.Sources
 
         public static TableDataSource Open(string path)
         {
-            return SerializableObject<TableDataSource>.Open(path);
+            TableDataSource doc = SerializableObject<TableDataSource>.Open(path);
+            doc.File = new System.IO.FileInfo(path);
+            return doc;
         }
 
         public event EventHandler FileSaved
@@ -457,6 +459,7 @@ namespace Sinapse.Core.Sources
         public System.IO.FileInfo File
         {
             get { return sinapseDocument.File; }
+            set { sinapseDocument.File = value; }
         }
 
         public event EventHandler Changed;

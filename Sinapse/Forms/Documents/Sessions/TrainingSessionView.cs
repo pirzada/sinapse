@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 using Sinapse.Core;
 using Sinapse.Core.Training;
-using Sinapse.Forms.Training;
+using Sinapse.WinForms.Training;
 
-using WeifenLuo.WinFormsUI.Docking;
+using Sinapse.WinForms.Core;
 
 
-namespace Sinapse.Forms.Documents
+namespace Sinapse.WinForms.Documents
 {
 
     internal partial class TrainingSessionView :  SinapseDocumentView
@@ -21,7 +21,7 @@ namespace Sinapse.Forms.Documents
 
         private BackpropagationTrainingSession session;
         private TrainingSessionController controller;
-        private SavepointsWindow savepoints;
+      //  private SavepointsWindow savepoints;
         private TrainingOptionsWindow options;
 
 
@@ -31,7 +31,7 @@ namespace Sinapse.Forms.Documents
             InitializeComponent();
 
             controller = new TrainingSessionController(session);
-            savepoints = new SavepointsWindow(session.Savepoints);
+         //   savepoints = new SavepointsWindow(session.Savepoints);
             options = new TrainingOptionsWindow(session.Options);
         }
 
@@ -47,11 +47,11 @@ namespace Sinapse.Forms.Documents
             get { return controller; }
         }
 
-        public SavepointsWindow SavepointsWindow
+     /*   public SavepointsWindow SavepointsWindow
         {
             get { return savepoints; }
         }
-
+        */
 
 
 

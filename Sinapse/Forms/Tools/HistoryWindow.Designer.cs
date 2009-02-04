@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.ToolWindows
+namespace Sinapse.WinForms.ToolWindows
 {
     partial class HistoryWindow
     {
@@ -55,9 +55,9 @@ namespace Sinapse.Forms.ToolWindows
             // 
             this.cbAutoscroll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbAutoscroll.AutoSize = true;
-            this.cbAutoscroll.Checked = global::Sinapse.Properties.Settings.Default.history_AutoScroll;
+            this.cbAutoscroll.Checked = global::Sinapse.WinForms.Properties.Settings.Default.history_AutoScroll;
             this.cbAutoscroll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoscroll.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.Properties.Settings.Default, "history_AutoScroll", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbAutoscroll.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sinapse.WinForms.Properties.Settings.Default, "history_AutoScroll", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbAutoscroll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbAutoscroll.Location = new System.Drawing.Point(2, 121);
             this.cbAutoscroll.Name = "cbAutoscroll";
@@ -68,7 +68,7 @@ namespace Sinapse.Forms.ToolWindows
             // 
             // btnAutoScroll
             // 
-            this.btnAutoScroll.Checked = global::Sinapse.Properties.Settings.Default.history_AutoScroll;
+            this.btnAutoScroll.Checked = global::Sinapse.WinForms.Properties.Settings.Default.history_AutoScroll;
             this.btnAutoScroll.CheckOnClick = true;
             this.btnAutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnAutoScroll.Name = "btnAutoScroll";

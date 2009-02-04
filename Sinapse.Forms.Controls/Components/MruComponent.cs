@@ -42,7 +42,7 @@ using System.Text;
 using System.IO;
 
 
-namespace Sinapse.Forms.Controls
+namespace Sinapse.WinForms.Controls
 {
 
     /// <summary>

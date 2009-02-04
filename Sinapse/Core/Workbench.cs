@@ -9,11 +9,13 @@ using System.Reflection;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core;
-using Sinapse.Forms.Documents;
-using Sinapse.Forms.ToolWindows;
+using Sinapse.Core.Documents;
+using Sinapse.WinForms.Documents;
+using Sinapse.WinForms.ToolWindows;
 
+using Sinapse.WinForms.Controls;
 
-namespace Sinapse.Forms
+namespace Sinapse.WinForms.Core
 {
     public sealed class Workbench
     {
@@ -22,12 +24,18 @@ namespace Sinapse.Forms
         private DeserializeDockContent deserializeDockContent;
         private Workplace activeWorkplace;
 
+        // Most Recently Used Lists
+        private MruComponent mruWorkplaces;
+        private MruComponent mruDocuments;
 
-        // Tool Windows
+
+        // Default Tool Windows
         private WorkplaceExplorer toolWorkplaceWindow;
         private PropertyWindow toolPropertyWindow;
         private HistoryWindow toolHistoryWindow;
         private TaskWindow toolTaskWindow;
+
+        // *Other Tool Windows can be specified by custom editors
 
 
         // Dialogs
@@ -38,8 +46,8 @@ namespace Sinapse.Forms
         // Events
         public event CancelEventHandler WorkplaceClosing;
         public event EventHandler WorkplaceClosed;
-        public event EventHandler WorkplaceOpen;
-
+        public event EventHandler WorkplaceOpened;
+        public event EventHandler DocumentOpened;
 
 
         public Workbench(DockPanel dockPanel)
@@ -92,13 +100,25 @@ namespace Sinapse.Forms
         {
             get { return activeWorkplace; }
         }
+
+        public MruComponent MruWorkplace
+        {
+            get { return mruWorkplaces; }
+            set { mruWorkplaces = value; }
+        }
+
+        public MruComponent MruDocuments
+        {
+            get { return mruDocuments; }
+            set { mruDocuments = value; }
+        }
         #endregion
 
 
         #region Workplace Specific Methods
         public void OpenWorkplace(string fullName)
         {
-            OpenWorkplace(SinapseDocument.Open(fullName) as Workplace);
+            OpenWorkplace(DocumentManager.Open(fullName) as Workplace);
         }
 
         public void OpenWorkplace(Workplace workplace)
@@ -107,6 +127,8 @@ namespace Sinapse.Forms
             {
                 this.activeWorkplace = workplace;
                 this.OnActiveWorkplaceOpen(EventArgs.Empty);
+
+                mruWorkplaces.Insert(workplace.File.FullName);
             }
         }
 
@@ -119,6 +141,26 @@ namespace Sinapse.Forms
 
             if (workplaceOpenDialog.ShowDialog(dockPanel) == DialogResult.OK)
                 OpenWorkplace(workplaceOpenDialog.FileName);
+        }
+
+        public bool CloseWorkplace()
+        {
+            if (activeWorkplace != null)
+            {
+                CancelEventArgs e = new CancelEventArgs();
+                this.OnActiveWorkplaceClosing(e);
+                if (e.Cancel == true)
+                    return false;
+
+                if (this.CloseAllDocuments(this.activeWorkplace, true))
+                {
+                    this.activeWorkplace = null;
+                    this.OnActiveWorkplaceClosed(EventArgs.Empty);
+                    return true;
+                }
+                else return false;
+            }
+            else return true;
         }
         #endregion
 
@@ -156,6 +198,8 @@ namespace Sinapse.Forms
 
             // And then lets show the new viewer on the main window.
             viewer.DockHandler.Show(dockPanel, DockState.Document);
+
+            mruDocuments.Insert(documentInfo.FullName);
         }
 
         public void ShowOpenDocumentDialog()
@@ -169,26 +213,6 @@ namespace Sinapse.Forms
 
             if (workplaceOpenDialog.ShowDialog(dockPanel) == DialogResult.OK)
                 OpenDocument(workplaceOpenDialog.FileName);
-        }
-        #endregion
-
-
-        public void SaveAll()
-        {
-            IDockContent[] documents = dockPanel.DocumentsToArray();
-
-            foreach (IDockContent content in documents)
-            {
-                if (content is SinapseDocumentView)
-                {
-                    SinapseDocumentView document = content as SinapseDocumentView;
-                    if (document.HasChanges)
-                        document.Save();
-                }
-            }
-
-            if (activeWorkplace != null)
-                activeWorkplace.Save();
         }
 
         /// <summary>
@@ -230,27 +254,31 @@ namespace Sinapse.Forms
         {
             return CloseAllDocuments(null, askForUnsavedChanges);
         }
+        #endregion
 
 
-        public bool CloseWorkplace()
+        public void SaveAll()
         {
-            if (activeWorkplace != null)
-            {
-                CancelEventArgs e = new CancelEventArgs();
-                this.OnActiveWorkplaceClosing(e);
-                if (e.Cancel == true)
-                    return false;
+            IDockContent[] documents = dockPanel.DocumentsToArray();
 
-                if (this.CloseAllDocuments(this.activeWorkplace, true))
+            foreach (IDockContent content in documents)
+            {
+                if (content is SinapseDocumentView)
                 {
-                    this.activeWorkplace = null;
-                    this.OnActiveWorkplaceClosed(EventArgs.Empty);
-                    return true;
+                    SinapseDocumentView document = content as SinapseDocumentView;
+                    if (document.HasChanges)
+                        document.Save();
                 }
-                else return false;
             }
-            else return true;
+
+            if (activeWorkplace != null)
+                activeWorkplace.Save();
         }
+
+
+
+
+
 
 
 
@@ -270,8 +298,14 @@ namespace Sinapse.Forms
 
         private void OnActiveWorkplaceOpen(EventArgs e)
         {
-            if (WorkplaceOpen != null)
-                WorkplaceOpen.Invoke(this, e);
+            if (WorkplaceOpened != null)
+                WorkplaceOpened.Invoke(this, e);
+        }
+
+        private void OnDocumentOpen(EventArgs e)
+        {
+            if (DocumentOpened != null)
+                DocumentOpened.Invoke(this, e);
         }
         #endregion
 

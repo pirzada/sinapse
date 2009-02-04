@@ -28,20 +28,21 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Core;
+using Sinapse.Core.Documents;
 using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Training;
 
-using Sinapse.Forms.Dialogs;
+using Sinapse.WinForms.Dialogs;
+using Sinapse.WinForms.Core;
 
-
-namespace Sinapse.Forms.ToolWindows
+namespace Sinapse.WinForms.ToolWindows
 {
 
     public partial class WorkplaceExplorer : ToolWindow
     {
 
-        private bool directoryView = true;
+      //  private bool directoryView = true;
 
         private TreeNode nodeWorkplace;
 
@@ -56,8 +57,15 @@ namespace Sinapse.Forms.ToolWindows
             nodeWorkplace.ImageKey = ".workplace";
             nodeWorkplace.SelectedImageKey = ".workplace";
 
-            Workbench.WorkplaceOpen += new EventHandler(Workbench_WorkplaceChanged);
+            Workbench.WorkplaceOpened += new EventHandler(Workbench_WorkplaceChanged);
             Workbench.WorkplaceClosed += new EventHandler(Workbench_WorkplaceChanged);
+            SelectionChanged += new TreeViewEventHandler(WorkplaceExplorer_SelectionChanged);
+        }
+
+        private void WorkplaceExplorer_SelectionChanged(object sender, TreeViewEventArgs e)
+        {
+            if (this.SelectedItem != null)
+                Workbench.PropertyWindow.SelectedObject = this.SelectedItem;
         }
         #endregion
 
@@ -225,7 +233,7 @@ namespace Sinapse.Forms.ToolWindows
 
             if (document.Type != null)
             {
-                string extension = DocumentCache.GetExtension(document.Type);
+                string extension = DocumentManager.GetExtension(document.Type);
                 node.ImageKey = extension;
                 node.SelectedImageKey = extension;
             }
@@ -244,7 +252,7 @@ namespace Sinapse.Forms.ToolWindows
         #region Menu Events
         private void menuAddDocument_Click(object sender, EventArgs e)
         {
-            new Sinapse.Forms.Dialogs.NewDocumentDialog(Workbench, typeof(ISource));
+            new Sinapse.WinForms.Dialogs.NewDocumentDialog(Workbench, typeof(ISource));
         }
 
         private void menuSystemAddNetworkActivation_Click(object sender, EventArgs e)
@@ -271,6 +279,21 @@ namespace Sinapse.Forms.ToolWindows
         private void btnViewAll_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void contextMenu_Opening(object sender, CancelEventArgs e)
+        {
+            SinapseDocumentInfo selection = this.SelectedItem;
+            
+            if (selection != null)
+            {
+             if (typeof(ISource).IsAssignableFrom(selection.Type))
+                MessageBox.Show("ISource");
+             if (typeof(ISession).IsAssignableFrom(selection.Type))
+                 MessageBox.Show("ISession");
+             if (typeof(ISystem).IsAssignableFrom(selection.Type))
+                 MessageBox.Show("ISystem");
+            }
         }
 
 

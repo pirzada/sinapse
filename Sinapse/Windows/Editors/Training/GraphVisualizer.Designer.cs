@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Training
+namespace Sinapse.WinForms.Training
 {
     partial class GraphVisualizer
     {

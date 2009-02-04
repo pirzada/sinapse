@@ -23,7 +23,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Sinapse.Forms.Controls
+namespace Sinapse.WinForms.Controls
 {
 
     /// <summary>

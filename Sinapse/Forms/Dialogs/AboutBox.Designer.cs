@@ -16,7 +16,7 @@
  *                                                                         *
  ***************************************************************************/
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Dialogs
 {
     partial class AboutBox
     {
@@ -91,7 +91,7 @@ namespace Sinapse.Forms.Dialogs
             // logoPictureBox
             // 
             this.logoPictureBox.BackColor = System.Drawing.Color.White;
-            this.logoPictureBox.Image = global::Sinapse.Properties.Resources.globe_128;
+            this.logoPictureBox.Image = global::Sinapse.WinForms.Properties.Resources.globe_128;
             this.logoPictureBox.Location = new System.Drawing.Point(5, 116);
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.Size = new System.Drawing.Size(173, 164);

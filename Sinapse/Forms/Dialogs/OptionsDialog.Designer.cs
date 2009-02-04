@@ -1,4 +1,4 @@
-﻿namespace Sinapse.Forms.Dialogs
+﻿namespace Sinapse.WinForms.Dialogs
 {
     partial class OptionsDialog
     {

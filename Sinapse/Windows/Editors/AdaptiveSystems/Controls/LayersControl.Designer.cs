@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
+namespace Sinapse.WinForms.Editors.AdaptiveSystems.Controls
 {
     partial class LayersControl
     {
@@ -35,7 +35,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveUp = new System.Windows.Forms.ToolStripButton();
             this.btnMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.dataGridView = new Sinapse.Forms.Controls.IndexDataGridView();
+            this.dataGridView = new Sinapse.WinForms.Controls.IndexDataGridView();
             this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -58,7 +58,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             // btnAdd
             // 
             this.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAdd.Image = global::Sinapse.Properties.Resources.edit_add;
+            this.btnAdd.Image = global::Sinapse.WinForms.Properties.Resources.edit_add;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(23, 22);
@@ -68,7 +68,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             // btnRemove
             // 
             this.btnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRemove.Image = global::Sinapse.Properties.Resources.edit_remove;
+            this.btnRemove.Image = global::Sinapse.WinForms.Properties.Resources.edit_remove;
             this.btnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(23, 22);
@@ -84,7 +84,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             // btnMoveUp
             // 
             this.btnMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          //  this.btnMoveUp.Image = global::Sinapse.Properties.Resources._1downarrow;
+          //  this.btnMoveUp.Image = global::Sinapse.WinForms.Properties.Resources._1downarrow;
             this.btnMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(23, 22);
@@ -94,7 +94,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
             // btnMoveDown
             // 
             this.btnMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        //    this.btnMoveDown.Image = global::Sinapse.Properties.Resources._1uparrow;
+        //    this.btnMoveDown.Image = global::Sinapse.WinForms.Properties.Resources._1uparrow;
             this.btnMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(23, 22);
@@ -152,7 +152,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems.Controls
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnMoveUp;
         private System.Windows.Forms.ToolStripButton btnMoveDown;
-        private Sinapse.Forms.Controls.IndexDataGridView dataGridView;
+        private Sinapse.WinForms.Controls.IndexDataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
     }
 }

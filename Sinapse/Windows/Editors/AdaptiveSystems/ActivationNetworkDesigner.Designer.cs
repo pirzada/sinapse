@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Editors.AdaptiveSystems
+namespace Sinapse.WinForms.Editors.AdaptiveSystems
 {
     partial class ActivationNetworkDesigner
     {
@@ -31,7 +31,7 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.inputFilters = new Sinapse.Controls.FilterSequenceControl();
-            this.activationNetworkDesigner1 = new Sinapse.Forms.Editors.AdaptiveSystems.Controls.ActivationNetworkOptions();
+            this.activationNetworkDesigner1 = new Sinapse.WinForms.Editors.AdaptiveSystems.Controls.ActivationNetworkOptions();
             this.outputFilters = new Sinapse.Controls.FilterSequenceControl();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -128,6 +128,6 @@ namespace Sinapse.Forms.Editors.AdaptiveSystems
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Sinapse.Controls.FilterSequenceControl inputFilters;
         private Sinapse.Controls.FilterSequenceControl outputFilters;
-        private Sinapse.Forms.Editors.AdaptiveSystems.Controls.ActivationNetworkOptions activationNetworkDesigner1;
+        private Sinapse.WinForms.Editors.AdaptiveSystems.Controls.ActivationNetworkOptions activationNetworkDesigner1;
     }
 }

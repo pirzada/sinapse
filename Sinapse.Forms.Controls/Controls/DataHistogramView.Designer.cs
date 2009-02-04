@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Controls.Controls
+namespace Sinapse.WinForms.Controls.Controls
 {
     partial class DataHistogramView
     {

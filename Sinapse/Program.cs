@@ -22,8 +22,8 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 
-using Sinapse.Properties;
-using Sinapse.Forms;
+using Sinapse.WinForms.Properties;
+using Sinapse.WinForms;
 
 namespace Sinapse
 {
@@ -59,8 +59,9 @@ namespace Sinapse
             ToolStripManager.VisualStylesEnabled = false;
 
             // Build Caches
-            Sinapse.Core.DocumentCache.Build();
-            Sinapse.Core.IconCache.Build();
+            Sinapse.Core.Documents.DocumentManager.BuildCache();
+            Sinapse.WinForms.Core.IconCache.Build();
+            Sinapse.WinForms.Documents.SinapseDocumentView.BuildCache();
 
             // Load Most Recently Used Lists
             if (Settings.Default.mruDocuments == null)

@@ -28,20 +28,22 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
 using Sinapse.Data;
-using Sinapse.Forms;
-using Sinapse.Forms.Documents;
-using Sinapse.Forms.Training;
+using Sinapse.WinForms;
+using Sinapse.WinForms.Documents;
+using Sinapse.WinForms.Training;
 
-using Sinapse.Forms.Dialogs;
+using Sinapse.WinForms.Dialogs;
 
 using Sinapse.Core;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Systems;
 using Sinapse.Core.Training;
 
+using Sinapse.WinForms.Core;
 
 
-namespace Sinapse.Forms
+
+namespace Sinapse.WinForms
 {
 
     internal sealed partial class MainForm : Form
@@ -91,6 +93,8 @@ namespace Sinapse.Forms
 
                 // Load Workbench Layout
                 workbench.LoadLayout();
+                workbench.MruDocuments = this.mruProviderDocuments;
+                workbench.MruWorkplace = this.mruProviderWorkplace;
 
                 // Show Start Page (if configured to do so)
                 if (Properties.Settings.Default.behaviour_ShowStartPage)
@@ -100,7 +104,7 @@ namespace Sinapse.Forms
                 }
                 
                 // Wire-up some events
-                this.workbench.WorkplaceOpen += new EventHandler(Workbench_WorkplaceChanged);
+                this.workbench.WorkplaceOpened += new EventHandler(Workbench_WorkplaceChanged);
 
                 HistoryListener.Write("Sinapse Interface Loaded");
             }

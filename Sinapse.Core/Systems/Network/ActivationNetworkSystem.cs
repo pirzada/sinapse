@@ -6,6 +6,7 @@ using System.Text;
 using AForge.Neuro;
 
 using Sinapse.Core.Filters;
+using Sinapse.Core.Documents;
 
 
 namespace Sinapse.Core.Systems
@@ -103,7 +104,9 @@ namespace Sinapse.Core.Systems
 
         public static ActivationNetworkSystem Open(string path)
         {
-            return SerializableObject<ActivationNetworkSystem>.Open(path);
+            ActivationNetworkSystem doc = SerializableObject<ActivationNetworkSystem>.Open(path);
+            doc.File = new System.IO.FileInfo(path);
+            return doc;
         }
 
         public event EventHandler FileSaved
@@ -145,6 +148,7 @@ namespace Sinapse.Core.Systems
         public System.IO.FileInfo File
         {
             get { return sinapseDocument.File; }
+            set { sinapseDocument.File = value; }
         }
 
         public Workplace Owner

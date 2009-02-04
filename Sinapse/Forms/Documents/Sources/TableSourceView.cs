@@ -8,13 +8,18 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
+
 using Sinapse.Core;
+using Sinapse.Core.Documents;
 using Sinapse.Core.Sources;
-using Sinapse.Forms.Dialogs;
 
-using Sinapse.Forms.Editors.DataSources;
+using Sinapse.WinForms.Dialogs;
 
-namespace Sinapse.Forms.Documents
+using Sinapse.WinForms.Editors.DataSources;
+
+using Sinapse.WinForms.Core;
+
+namespace Sinapse.WinForms.Documents
 {
     [DocumentViewer(typeof(TableDataSource))]
     internal partial class TableSourceView : SinapseDocumentView

@@ -32,7 +32,7 @@ using Sinapse.Core.Sources;
 using Sinapse.Databases.Csv;
 
 
-namespace Sinapse.Forms.Dialogs
+namespace Sinapse.WinForms.Dialogs
 {
 
     internal sealed partial class ImportWizard : Form

@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.ToolWindows
+namespace Sinapse.WinForms.ToolWindows
 {
     partial class PropertyWindow
     {
@@ -73,6 +73,7 @@ namespace Sinapse.Forms.ToolWindows
             this.ClientSize = new System.Drawing.Size(298, 389);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PropertyWindow";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
             this.TabText = "Properties";
             this.Text = "Properties";
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -7,14 +7,15 @@ using System.Text;
 using System.Windows.Forms;
 
 using Sinapse.Core.Training;
+using Sinapse.WinForms.ToolWindows;
 
-namespace Sinapse.Forms.Training
+namespace Sinapse.WinForms.ToolWindows.Sessions
 {
     /// <summary>
     ///   Display a list of TrainingSavepoints and offers buttons to interact with
     ///   them.
     /// </summary>
-    public partial class SavepointsWindow : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class SavepointsWindow : ToolWindow
     {
 
         private BindingList<TrainingSavepoint> savepoints;

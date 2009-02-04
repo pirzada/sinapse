@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Documents
+namespace Sinapse.WinForms.Documents
 {
     partial class TableSourceView
     {

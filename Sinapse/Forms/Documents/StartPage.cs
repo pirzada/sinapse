@@ -10,11 +10,11 @@ using System.Security.Permissions;
 using System.Runtime.InteropServices;
 using System.IO;
 
-using Sinapse.Properties;
+using Sinapse.WinForms.Properties;
+using Sinapse.WinForms.Core;
 
-using WeifenLuo.WinFormsUI.Docking;
 
-namespace Sinapse.Forms.Documents
+namespace Sinapse.WinForms.Documents
 {
 
 
@@ -29,7 +29,7 @@ namespace Sinapse.Forms.Documents
         public StartPage(Workbench workbench) : base(workbench, null)
         {
             address = Path.Combine(Application.StartupPath,
-                Sinapse.Properties.Settings.Default.startpage_path);
+                Sinapse.WinForms.Properties.Settings.Default.startpage_path);
             
          
             InitializeComponent();
@@ -138,7 +138,7 @@ namespace Sinapse.Forms.Documents
 
             public void WorkplaceNew()
             {
-                new Sinapse.Forms.Dialogs.NewWorkplaceDialog(workbench).ShowDialog();
+                new Sinapse.WinForms.Dialogs.NewWorkplaceDialog(workbench).ShowDialog();
             }
             #endregion
 
@@ -158,7 +158,7 @@ namespace Sinapse.Forms.Documents
 
             public void DocumentNew()
             {
-                new Sinapse.Forms.Dialogs.NewDocumentDialog(workbench).ShowDialog();
+                new Sinapse.WinForms.Dialogs.NewDocumentDialog(workbench).ShowDialog();
             }
             #endregion
 

@@ -11,7 +11,7 @@ using Sinapse.Core.Training;
 using Sinapse.Core.Sources;
 using Sinapse.Core.Systems;
 
-namespace Sinapse.Forms
+namespace Sinapse.WinForms
 {
     public partial class TrainingTableVisualizer : WeifenLuo.WinFormsUI.Docking.DockContent
     {

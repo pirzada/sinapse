@@ -1,4 +1,4 @@
-namespace Sinapse.Properties {
+namespace Sinapse.WinForms.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

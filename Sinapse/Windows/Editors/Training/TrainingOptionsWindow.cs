@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using Sinapse.Core.Training;
 
-namespace Sinapse.Forms.Training
+namespace Sinapse.WinForms.Training
 {
     public partial class TrainingOptionsWindow : Form
     {

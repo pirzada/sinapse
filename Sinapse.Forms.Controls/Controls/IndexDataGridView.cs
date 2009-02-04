@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Drawing;
 
 
-namespace Sinapse.Forms.Controls
+namespace Sinapse.WinForms.Controls
 {
     /// <summary>
     /// display a datagrid with row numbers

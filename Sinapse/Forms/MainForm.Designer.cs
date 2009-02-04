@@ -16,7 +16,7 @@
  *                                                                         *
  ***************************************************************************/
 
-namespace Sinapse.Forms
+namespace Sinapse.WinForms
 {
     partial class MainForm
     {
@@ -78,22 +78,7 @@ namespace Sinapse.Forms
             this.MenuViewProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuViewWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.trainingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trainingWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.savepointsWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.trainingGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.tableVisualizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graphVisualizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuronsVisualizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceEditingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graphViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemEditingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuralNetworkInspectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.systemTestingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuWorkplace = new System.Windows.Forms.ToolStripMenuItem();
             this.addAdaptiveSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuWorkplaceAddDataSource = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,8 +103,8 @@ namespace Sinapse.Forms
             this.MenuHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.MenuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.mruProviderDocuments = new Sinapse.Forms.Controls.MruComponent();
-            this.mruProviderWorkplace = new Sinapse.Forms.Controls.MruComponent();
+            this.mruProviderDocuments = new Sinapse.WinForms.Controls.MruComponent();
+            this.mruProviderWorkplace = new Sinapse.WinForms.Controls.MruComponent();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -140,6 +125,11 @@ namespace Sinapse.Forms
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.taskWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historyWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -219,7 +209,7 @@ namespace Sinapse.Forms
             // 
             // MenuFileWizard
             // 
-            this.MenuFileWizard.Image = global::Sinapse.Properties.Resources.wizard;
+            this.MenuFileWizard.Image = global::Sinapse.WinForms.Properties.Resources.wizard;
             this.MenuFileWizard.Name = "MenuFileWizard";
             this.MenuFileWizard.Size = new System.Drawing.Size(177, 22);
             this.MenuFileWizard.Text = "Run &Wizard...";
@@ -286,7 +276,7 @@ namespace Sinapse.Forms
             // 
             // MenuFileExit
             // 
-            this.MenuFileExit.Image = global::Sinapse.Properties.Resources.shutdown;
+            this.MenuFileExit.Image = global::Sinapse.WinForms.Properties.Resources.shutdown;
             this.MenuFileExit.Name = "MenuFileExit";
             this.MenuFileExit.Size = new System.Drawing.Size(177, 22);
             this.MenuFileExit.Text = "E&xit";
@@ -335,7 +325,7 @@ namespace Sinapse.Forms
             // 
             // MenuFilePreferences
             // 
-            this.MenuFilePreferences.Image = global::Sinapse.Properties.Resources.configure_16;
+            this.MenuFilePreferences.Image = global::Sinapse.WinForms.Properties.Resources.configure_16;
             this.MenuFilePreferences.Name = "MenuFilePreferences";
             this.MenuFilePreferences.Size = new System.Drawing.Size(143, 22);
             this.MenuFilePreferences.Text = "Preferences";
@@ -343,14 +333,14 @@ namespace Sinapse.Forms
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuViewProperties,
             this.MenuViewWorkplace,
             this.toolStripSeparator7,
-            this.trainingToolStripMenuItem,
-            this.sourceEditingToolStripMenuItem,
-            this.systemEditingToolStripMenuItem,
+            this.MenuViewProperties,
+            this.historyWindowToolStripMenuItem,
+            this.notesToolStripMenuItem,
+            this.taskWindowToolStripMenuItem,
             this.toolStripSeparator10,
-            this.systemTestingToolStripMenuItem});
+            this.otherWindowsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -358,130 +348,26 @@ namespace Sinapse.Forms
             // MenuViewProperties
             // 
             this.MenuViewProperties.Name = "MenuViewProperties";
-            this.MenuViewProperties.Size = new System.Drawing.Size(176, 22);
+            this.MenuViewProperties.Size = new System.Drawing.Size(178, 22);
             this.MenuViewProperties.Text = "Properties Window";
             this.MenuViewProperties.Click += new System.EventHandler(this.MenuViewProperties_Click);
             // 
             // MenuViewWorkplace
             // 
             this.MenuViewWorkplace.Name = "MenuViewWorkplace";
-            this.MenuViewWorkplace.Size = new System.Drawing.Size(176, 22);
-            this.MenuViewWorkplace.Text = "Workplace Window";
+            this.MenuViewWorkplace.Size = new System.Drawing.Size(178, 22);
+            this.MenuViewWorkplace.Text = "Workplace Explorer";
             this.MenuViewWorkplace.Click += new System.EventHandler(this.MenuViewWorkplace_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(173, 6);
-            // 
-            // trainingToolStripMenuItem
-            // 
-            this.trainingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.trainingWindowToolStripMenuItem,
-            this.savepointsWindowToolStripMenuItem,
-            this.trainingGraphToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.tableVisualizerToolStripMenuItem,
-            this.graphVisualizerToolStripMenuItem,
-            this.neuronsVisualizerToolStripMenuItem});
-            this.trainingToolStripMenuItem.Name = "trainingToolStripMenuItem";
-            this.trainingToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.trainingToolStripMenuItem.Text = "Training";
-            // 
-            // trainingWindowToolStripMenuItem
-            // 
-            this.trainingWindowToolStripMenuItem.Name = "trainingWindowToolStripMenuItem";
-            this.trainingWindowToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.trainingWindowToolStripMenuItem.Text = "Training Window";
-            // 
-            // savepointsWindowToolStripMenuItem
-            // 
-            this.savepointsWindowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.savepointsWindowToolStripMenuItem.Name = "savepointsWindowToolStripMenuItem";
-            this.savepointsWindowToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.savepointsWindowToolStripMenuItem.Text = "Savepoints Window";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(91, 22);
-            this.toolStripMenuItem1.Text = "a";
-            // 
-            // trainingGraphToolStripMenuItem
-            // 
-            this.trainingGraphToolStripMenuItem.Name = "trainingGraphToolStripMenuItem";
-            this.trainingGraphToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.trainingGraphToolStripMenuItem.Text = "Training Graph";
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(176, 6);
-            // 
-            // tableVisualizerToolStripMenuItem
-            // 
-            this.tableVisualizerToolStripMenuItem.Name = "tableVisualizerToolStripMenuItem";
-            this.tableVisualizerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.tableVisualizerToolStripMenuItem.Text = "Table Visualizer";
-            // 
-            // graphVisualizerToolStripMenuItem
-            // 
-            this.graphVisualizerToolStripMenuItem.Name = "graphVisualizerToolStripMenuItem";
-            this.graphVisualizerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.graphVisualizerToolStripMenuItem.Text = "Graph Visualizer";
-            // 
-            // neuronsVisualizerToolStripMenuItem
-            // 
-            this.neuronsVisualizerToolStripMenuItem.Name = "neuronsVisualizerToolStripMenuItem";
-            this.neuronsVisualizerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.neuronsVisualizerToolStripMenuItem.Text = "Neurons Visualizer";
-            // 
-            // sourceEditingToolStripMenuItem
-            // 
-            this.sourceEditingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.graphViewToolStripMenuItem,
-            this.statisticsToolStripMenuItem});
-            this.sourceEditingToolStripMenuItem.Name = "sourceEditingToolStripMenuItem";
-            this.sourceEditingToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.sourceEditingToolStripMenuItem.Text = "Source Editing";
-            // 
-            // graphViewToolStripMenuItem
-            // 
-            this.graphViewToolStripMenuItem.Name = "graphViewToolStripMenuItem";
-            this.graphViewToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.graphViewToolStripMenuItem.Text = "Graph View";
-            // 
-            // statisticsToolStripMenuItem
-            // 
-            this.statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
-            this.statisticsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.statisticsToolStripMenuItem.Text = "Statistic Tools";
-            // 
-            // systemEditingToolStripMenuItem
-            // 
-            this.systemEditingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neuralNetworkInspectorToolStripMenuItem});
-            this.systemEditingToolStripMenuItem.Name = "systemEditingToolStripMenuItem";
-            this.systemEditingToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.systemEditingToolStripMenuItem.Text = "System Editing";
-            // 
-            // neuralNetworkInspectorToolStripMenuItem
-            // 
-            this.neuralNetworkInspectorToolStripMenuItem.Name = "neuralNetworkInspectorToolStripMenuItem";
-            this.neuralNetworkInspectorToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.neuralNetworkInspectorToolStripMenuItem.Text = "Neural Network Inspector";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(175, 6);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(173, 6);
-            // 
-            // systemTestingToolStripMenuItem
-            // 
-            this.systemTestingToolStripMenuItem.Name = "systemTestingToolStripMenuItem";
-            this.systemTestingToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.systemTestingToolStripMenuItem.Text = "System Testing";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(175, 6);
             // 
             // MenuWorkplace
             // 
@@ -618,7 +504,7 @@ namespace Sinapse.Forms
             // 
             // MenuHelpContents
             // 
-            this.MenuHelpContents.Image = global::Sinapse.Properties.Resources.help;
+            this.MenuHelpContents.Image = global::Sinapse.WinForms.Properties.Resources.help;
             this.MenuHelpContents.Name = "MenuHelpContents";
             this.MenuHelpContents.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpContents.Text = "&Contents";
@@ -645,7 +531,7 @@ namespace Sinapse.Forms
             // 
             // MenuHelpAbout
             // 
-            this.MenuHelpAbout.Image = global::Sinapse.Properties.Resources.network_16;
+            this.MenuHelpAbout.Image = global::Sinapse.WinForms.Properties.Resources.network_16;
             this.MenuHelpAbout.Name = "MenuHelpAbout";
             this.MenuHelpAbout.Size = new System.Drawing.Size(129, 22);
             this.MenuHelpAbout.Text = "&About...";
@@ -660,18 +546,18 @@ namespace Sinapse.Forms
             // mruProviderDocuments
             // 
             this.mruProviderDocuments.DisableWhenEmpty = false;
-            this.mruProviderDocuments.Files = global::Sinapse.Properties.Settings.Default.mruDocuments;
+            this.mruProviderDocuments.Files = global::Sinapse.WinForms.Properties.Settings.Default.mruDocuments;
             this.mruProviderDocuments.KeyMenuItem = this.MenuFileRecentDocuments;
             this.mruProviderDocuments.MaxPathLength = 96;
-            this.mruProviderDocuments.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderDocuments_MenuItemClicked);
+            this.mruProviderDocuments.MenuItemClicked += new Sinapse.WinForms.Controls.MruMenuItemClickedEventHandler(this.mruProviderDocuments_MenuItemClicked);
             // 
             // mruProviderWorkplace
             // 
             this.mruProviderWorkplace.DisableWhenEmpty = false;
-            this.mruProviderWorkplace.Files = global::Sinapse.Properties.Settings.Default.mruWorkplaces;
+            this.mruProviderWorkplace.Files = global::Sinapse.WinForms.Properties.Settings.Default.mruWorkplaces;
             this.mruProviderWorkplace.KeyMenuItem = this.MenuFileRecentWorkplaces;
             this.mruProviderWorkplace.MaxPathLength = 96;
-            this.mruProviderWorkplace.MenuItemClicked += new Sinapse.Forms.Controls.MruMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
+            this.mruProviderWorkplace.MenuItemClicked += new Sinapse.WinForms.Controls.MruMenuItemClickedEventHandler(this.mruProviderWorkplace_MenuItemClicked);
             // 
             // BottomToolStripPanel
             // 
@@ -733,7 +619,7 @@ namespace Sinapse.Forms
             // btnMenuNewWorkplace
             // 
             this.btnMenuNewWorkplace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMenuNewWorkplace.Image = global::Sinapse.Properties.Resources.file_new;
+            this.btnMenuNewWorkplace.Image = global::Sinapse.WinForms.Properties.Resources.file_new;
             this.btnMenuNewWorkplace.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMenuNewWorkplace.Name = "btnMenuNewWorkplace";
             this.btnMenuNewWorkplace.Size = new System.Drawing.Size(23, 22);
@@ -742,7 +628,7 @@ namespace Sinapse.Forms
             // btnMenuAddItem
             // 
             this.btnMenuAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMenuAddItem.Image = global::Sinapse.Properties.Resources.new_window;
+            this.btnMenuAddItem.Image = global::Sinapse.WinForms.Properties.Resources.new_window;
             this.btnMenuAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMenuAddItem.Name = "btnMenuAddItem";
             this.btnMenuAddItem.Size = new System.Drawing.Size(23, 22);
@@ -751,7 +637,7 @@ namespace Sinapse.Forms
             // btnMenuOpen
             // 
             this.btnMenuOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMenuOpen.Image = global::Sinapse.Properties.Resources.file_open;
+            this.btnMenuOpen.Image = global::Sinapse.WinForms.Properties.Resources.file_open;
             this.btnMenuOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMenuOpen.Name = "btnMenuOpen";
             this.btnMenuOpen.Size = new System.Drawing.Size(23, 22);
@@ -760,7 +646,7 @@ namespace Sinapse.Forms
             // btnSave
             // 
             this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Image = global::Sinapse.Properties.Resources.file_save;
+            this.btnSave.Image = global::Sinapse.WinForms.Properties.Resources.file_save;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(23, 22);
@@ -770,7 +656,7 @@ namespace Sinapse.Forms
             // btnSaveAll
             // 
             this.btnSaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveAll.Image = global::Sinapse.Properties.Resources.file_saveall;
+            this.btnSaveAll.Image = global::Sinapse.WinForms.Properties.Resources.file_saveall;
             this.btnSaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(23, 22);
@@ -784,7 +670,7 @@ namespace Sinapse.Forms
             // btnWizard
             // 
             this.btnWizard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnWizard.Image = global::Sinapse.Properties.Resources.wizard;
+            this.btnWizard.Image = global::Sinapse.WinForms.Properties.Resources.wizard;
             this.btnWizard.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnWizard.Name = "btnWizard";
             this.btnWizard.Size = new System.Drawing.Size(23, 22);
@@ -798,7 +684,7 @@ namespace Sinapse.Forms
             // btnShowWorkplaceWindow
             // 
             this.btnShowWorkplaceWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnShowWorkplaceWindow.Image = global::Sinapse.Properties.Resources.view_tree;
+            this.btnShowWorkplaceWindow.Image = global::Sinapse.WinForms.Properties.Resources.view_tree;
             this.btnShowWorkplaceWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnShowWorkplaceWindow.Name = "btnShowWorkplaceWindow";
             this.btnShowWorkplaceWindow.Size = new System.Drawing.Size(23, 22);
@@ -807,7 +693,7 @@ namespace Sinapse.Forms
             // btnShowPropertiesWindow
             // 
             this.btnShowPropertiesWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnShowPropertiesWindow.Image = global::Sinapse.Properties.Resources.kviewshell;
+            this.btnShowPropertiesWindow.Image = global::Sinapse.WinForms.Properties.Resources.kviewshell;
             this.btnShowPropertiesWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnShowPropertiesWindow.Name = "btnShowPropertiesWindow";
             this.btnShowPropertiesWindow.Size = new System.Drawing.Size(23, 22);
@@ -858,6 +744,38 @@ namespace Sinapse.Forms
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripMain);
             // 
+            // otherWindowsToolStripMenuItem
+            // 
+            this.otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startPageToolStripMenuItem1});
+            this.otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
+            this.otherWindowsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.otherWindowsToolStripMenuItem.Text = "Other Windows";
+            // 
+            // startPageToolStripMenuItem1
+            // 
+            this.startPageToolStripMenuItem1.Name = "startPageToolStripMenuItem1";
+            this.startPageToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.startPageToolStripMenuItem1.Text = "Start Page";
+            // 
+            // taskWindowToolStripMenuItem
+            // 
+            this.taskWindowToolStripMenuItem.Name = "taskWindowToolStripMenuItem";
+            this.taskWindowToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.taskWindowToolStripMenuItem.Text = "Task List";
+            // 
+            // historyWindowToolStripMenuItem
+            // 
+            this.historyWindowToolStripMenuItem.Name = "historyWindowToolStripMenuItem";
+            this.historyWindowToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.historyWindowToolStripMenuItem.Text = "History Window";
+            // 
+            // notesToolStripMenuItem
+            // 
+            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
+            this.notesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.notesToolStripMenuItem.Text = "Notes";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -907,8 +825,8 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuFileWizard;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator MenuFileSeparator2;
-        private Sinapse.Forms.Controls.MruComponent mruProviderDocuments;
-        private Sinapse.Forms.Controls.MruComponent mruProviderWorkplace;
+        private Sinapse.WinForms.Controls.MruComponent mruProviderDocuments;
+        private Sinapse.WinForms.Controls.MruComponent mruProviderWorkplace;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolStripMenuItem MenuExtensionsExcel;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
@@ -963,25 +881,15 @@ namespace Sinapse.Forms
         private System.Windows.Forms.ToolStripMenuItem MenuViewProperties;
         private System.Windows.Forms.ToolStripMenuItem MenuViewWorkplace;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem trainingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trainingWindowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem savepointsWindowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem trainingGraphToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sourceEditingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graphViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statisticsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem systemEditingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem tableVisualizerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graphVisualizerToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem systemTestingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuralNetworkInspectorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuronsVisualizerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trainingToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taskWindowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem otherWindowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startPageToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem historyWindowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem notesToolStripMenuItem;
     }
 }

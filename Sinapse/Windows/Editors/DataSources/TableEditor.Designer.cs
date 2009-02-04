@@ -1,4 +1,4 @@
-namespace Sinapse.Forms.Editors.DataSources
+namespace Sinapse.WinForms.Editors.DataSources
 {
     partial class TableEditor
     {
@@ -72,7 +72,7 @@ namespace Sinapse.Forms.Editors.DataSources
             // btnWizard
             // 
             this.btnWizard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnWizard.Image = global::Sinapse.Properties.Resources.wizard;
+            this.btnWizard.Image = global::Sinapse.WinForms.Properties.Resources.wizard;
             this.btnWizard.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnWizard.Name = "btnWizard";
             this.btnWizard.Size = new System.Drawing.Size(23, 22);
@@ -81,7 +81,7 @@ namespace Sinapse.Forms.Editors.DataSources
             // 
             // btnImport
             // 
-            this.btnImport.Image = global::Sinapse.Properties.Resources.file_import;
+            this.btnImport.Image = global::Sinapse.WinForms.Properties.Resources.file_import;
             this.btnImport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(59, 22);
