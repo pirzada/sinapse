@@ -24,12 +24,6 @@ namespace Sinapse.WinForms.Documents
     [DocumentViewer(".source.tds")]
     internal partial class TableSourceView : SinapseDocumentView
     {
-
-        //private TableEditor wndTableEditor;
-        //private ColumnSpecification wndColumnSpecification;
-
-
-
         public TableSourceView(Workbench workbench, ISinapseDocument document)
             : base(workbench, document)
         {
@@ -37,74 +31,29 @@ namespace Sinapse.WinForms.Documents
 
         }
 
-/*
-        public TableDataSource TableSource
+
+        TableDataSource TableDataSource
         {
-            get { return tableSource; }
-            protected set
-            {
-                tableSource = value;
-                
-                if (value != null)
-                {
-                    tableSource.Changed += tableSource_Changed;
-                    tableSource.DataChanged += tableSource_Changed;
-                    tableSource.FileSaved += tableSource_Changed;
-                    updateCaption();
-                }
-            }
+            get { return this.Document as TableDataSource; }
         }
-        */
 
-
-
-        #region Form Events
-        private void TableDataSourceEditor_Load(object sender, EventArgs e)
+        private DataSourceSet currentSet
         {
-            this.SuspendLayout();
-        //    this.wndColumnSpecification = new ColumnSpecification();
-         //   this.wndColumnSpecification.TableSource = this.tableSource;
-        //    this.wndColumnSpecification.Show(this.dockPanel, DockState.Document);
+            get { return (DataSourceSet)this.cbDataSet.ComboBox.SelectedValue; }
+        }
+        
 
-         //   this.wndSourceOverview = new SourceOverview();
-         //   this.wndSourceOverview.DataSource = tableSource;
-         //   this.wndSourceOverview.Show(this.dockPanel, DockState.Document);
 
-         //   this.wndTableEditor = new TableEditor();
-        //    this.wndTableEditor.TableSource = tableSource;
-         //   this.wndTableEditor.Show(this.dockPanel, DockState.Document);
-            this.ResumeLayout(true);
-            
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            this.cbDataSet.ComboBox.DataSource = Enum.GetNames(typeof(DataSourceSet));
+            this.dataGridView1.DataSource = TableDataSource.GetView(currentSet);
         }
 
 
-        #endregion
 
-
-
-   
-
-
-
-        private void btnOverview_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnTable_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnColumns_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNotes_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
 

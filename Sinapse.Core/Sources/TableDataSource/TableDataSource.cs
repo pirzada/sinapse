@@ -58,7 +58,7 @@ namespace Sinapse.Core.Sources
             this.sinapseDocument = new SinapseDocument(name, info);
 
             this.dataTable = new DataTable(name);
-            this.columns = new TableDataSourceColumnCollection();
+            this.columns = new TableDataSourceColumnCollection(dataTable);
             this.Name = name;
 
             // Create the extra two columns for storing the Set and Subset

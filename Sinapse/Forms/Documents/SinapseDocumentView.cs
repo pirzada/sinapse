@@ -51,6 +51,12 @@ namespace Sinapse.WinForms.Documents
             UpdateCaption();
         }
 
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+
+            Workbench.PropertyWindow.SelectedObject = Document;
+        }
         
 
 
@@ -179,6 +185,11 @@ namespace Sinapse.WinForms.Documents
             if (viewers == null)
                 BuildCache();
             return viewers[extension];
+        }
+
+        public static Type GetViewer(ISinapseDocument document)
+        {
+            return GetViewer(DocumentManager.GetExtension(document.GetType()));
         }
         #endregion
 

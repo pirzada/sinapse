@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sinapse.Controls
+namespace Sinapse.WinForms.Documents.Sources.Controls
 {
     public partial class CaptionLabel : UserControl
     {

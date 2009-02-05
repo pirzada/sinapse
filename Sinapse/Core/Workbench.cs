@@ -171,6 +171,18 @@ namespace Sinapse.WinForms.Core
             OpenDocument(fullName, null);
         }
 
+        public void OpenDocument(ISinapseDocument document)
+        {
+            // Now lets determine the adequate viewer for this document type
+            Type viewerType = SinapseDocumentView.GetViewer(document);
+
+            // Activate the viewer
+            SinapseDocumentView viewer = Activator.CreateInstance(viewerType, this, document) as SinapseDocumentView;
+
+            // And then show the viewer on the main window.
+            viewer.DockHandler.Show(dockPanel, DockState.Document);
+        }
+
          public void OpenDocument(String fullName, Workplace owner)
         {
             // First: verify if the document isn't already open

@@ -138,20 +138,29 @@ namespace Sinapse.Core.Sources
 
 
     [Serializable]
-    public sealed class TableDataSourceColumnCollection : BindingList<TableDataSourceColumn>
+    public sealed class TableDataSourceColumnCollection : BindingList<TableDataSourceColumn>, IBindingList
     {
+        private DataTable dataTable;
 
-
-        public TableDataSourceColumnCollection(IList<TableDataSourceColumn> columns)
+        public TableDataSourceColumnCollection(DataTable dataTable, IList<TableDataSourceColumn> columns)
             : base(columns)
         {
+            this.dataTable = dataTable;
         }
 
-        public TableDataSourceColumnCollection()
+        public TableDataSourceColumnCollection(DataTable dataTable)
             : base()
         {
+            this.dataTable = dataTable;
         }
 
+        object IBindingList.AddNew()
+        {
+            DataColumn dataColumn = dataTable.Columns.Add();
+            TableDataSourceColumn col = new TableDataSourceColumn(dataColumn);
+            Add(col);
+            return col;
+        }
 /*
 
         public TableDataSourceColumn[] Select(InputOutput role)
