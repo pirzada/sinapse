@@ -28,7 +28,6 @@ namespace Sinapse.WinForms.Documents
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrainingSessionView));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -62,12 +61,6 @@ namespace Sinapse.WinForms.Documents
             this.label26 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.tbRemarks = new System.Windows.Forms.TextBox();
-            this.tbDescription = new System.Windows.Forms.TextBox();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -99,8 +92,6 @@ namespace Sinapse.WinForms.Documents
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.tabNotes = new System.Windows.Forms.TabPage();
-            this.richTextBoxExtended1 = new RichTextBoxExtended.RichTextBoxExtended();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabSession.SuspendLayout();
@@ -109,7 +100,6 @@ namespace Sinapse.WinForms.Documents
             this.splitContainer1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabSourceSystemMap.SuspendLayout();
@@ -124,7 +114,6 @@ namespace Sinapse.WinForms.Documents
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.tabNotes.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -152,7 +141,6 @@ namespace Sinapse.WinForms.Documents
             this.tabControl1.Controls.Add(this.tabSession);
             this.tabControl1.Controls.Add(this.tabSourceSystemMap);
             this.tabControl1.Controls.Add(this.tabHistory);
-            this.tabControl1.Controls.Add(this.tabNotes);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -189,13 +177,9 @@ namespace Sinapse.WinForms.Documents
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Controls.Add(this.tbRemarks);
-            this.groupBox3.Controls.Add(this.tbDescription);
-            this.groupBox3.Controls.Add(this.tbName);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
@@ -233,7 +217,7 @@ namespace Sinapse.WinForms.Documents
             this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(21, 431);
+            this.groupBox1.Location = new System.Drawing.Point(6, 333);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(518, 131);
             this.groupBox1.TabIndex = 10;
@@ -471,70 +455,11 @@ namespace Sinapse.WinForms.Documents
             this.label10.TabIndex = 9;
             this.label10.Text = "Savepoints";
             // 
-            // tbRemarks
-            // 
-            this.tbRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRemarks.Location = new System.Drawing.Point(21, 224);
-            this.tbRemarks.Multiline = true;
-            this.tbRemarks.Name = "tbRemarks";
-            this.tbRemarks.Size = new System.Drawing.Size(518, 186);
-            this.tbRemarks.TabIndex = 9;
-            // 
-            // tbDescription
-            // 
-            this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDescription.Location = new System.Drawing.Point(21, 96);
-            this.tbDescription.Multiline = true;
-            this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(518, 101);
-            this.tbDescription.TabIndex = 9;
-            // 
-            // tbName
-            // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.Location = new System.Drawing.Point(59, 21);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(480, 20);
-            this.tbName.TabIndex = 9;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(18, 205);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(49, 13);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "Remarks";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 80);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 13);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Description";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Name";
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.groupBox5, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox4, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -549,8 +474,7 @@ namespace Sinapse.WinForms.Documents
             this.groupBox5.Controls.Add(this.linkLabel1);
             this.groupBox5.Controls.Add(this.comboBox2);
             this.groupBox5.Controls.Add(this.tbSystemDescription);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(3, 287);
+            this.groupBox5.Location = new System.Drawing.Point(8, 49);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(210, 278);
             this.groupBox5.TabIndex = 8;
@@ -584,8 +508,7 @@ namespace Sinapse.WinForms.Documents
             this.groupBox4.Controls.Add(this.linkLabel2);
             this.groupBox4.Controls.Add(this.comboBox1);
             this.groupBox4.Controls.Add(this.tbSourceDescription);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Location = new System.Drawing.Point(232, 49);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(210, 278);
             this.groupBox4.TabIndex = 8;
@@ -619,7 +542,7 @@ namespace Sinapse.WinForms.Documents
             this.tabSourceSystemMap.Controls.Add(this.tableLayoutPanel2);
             this.tabSourceSystemMap.Location = new System.Drawing.Point(4, 22);
             this.tabSourceSystemMap.Name = "tabSourceSystemMap";
-            this.tabSourceSystemMap.Size = new System.Drawing.Size(765, 568);
+            this.tabSourceSystemMap.Size = new System.Drawing.Size(766, 568);
             this.tabSourceSystemMap.TabIndex = 6;
             this.tabSourceSystemMap.Text = "Source & System I/O Map";
             this.tabSourceSystemMap.UseVisualStyleBackColor = true;
@@ -638,7 +561,7 @@ namespace Sinapse.WinForms.Documents
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(765, 568);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(766, 568);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
             // dataGridView2
@@ -694,7 +617,7 @@ namespace Sinapse.WinForms.Documents
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(300, 562);
+            this.dataGridView3.Size = new System.Drawing.Size(301, 562);
             this.dataGridView3.TabIndex = 10;
             // 
             // dataGridViewTextBoxColumn1
@@ -750,7 +673,7 @@ namespace Sinapse.WinForms.Documents
             this.tabHistory.Controls.Add(this.toolStrip1);
             this.tabHistory.Location = new System.Drawing.Point(4, 22);
             this.tabHistory.Name = "tabHistory";
-            this.tabHistory.Size = new System.Drawing.Size(765, 568);
+            this.tabHistory.Size = new System.Drawing.Size(766, 568);
             this.tabHistory.TabIndex = 3;
             this.tabHistory.Text = "History";
             this.tabHistory.UseVisualStyleBackColor = true;
@@ -768,7 +691,7 @@ namespace Sinapse.WinForms.Documents
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox7);
-            this.splitContainer2.Size = new System.Drawing.Size(765, 543);
+            this.splitContainer2.Size = new System.Drawing.Size(766, 543);
             this.splitContainer2.SplitterDistance = 581;
             this.splitContainer2.TabIndex = 5;
             // 
@@ -798,7 +721,7 @@ namespace Sinapse.WinForms.Documents
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(0, 0);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(180, 543);
+            this.groupBox7.Size = new System.Drawing.Size(181, 543);
             this.groupBox7.TabIndex = 0;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Details";
@@ -811,7 +734,7 @@ namespace Sinapse.WinForms.Documents
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(765, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(766, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -842,70 +765,6 @@ namespace Sinapse.WinForms.Documents
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "Print";
             // 
-            // tabNotes
-            // 
-            this.tabNotes.Controls.Add(this.richTextBoxExtended1);
-            this.tabNotes.Location = new System.Drawing.Point(4, 22);
-            this.tabNotes.Name = "tabNotes";
-            this.tabNotes.Size = new System.Drawing.Size(765, 568);
-            this.tabNotes.TabIndex = 4;
-            this.tabNotes.Text = "Notes";
-            this.tabNotes.UseVisualStyleBackColor = true;
-            // 
-            // richTextBoxExtended1
-            // 
-            this.richTextBoxExtended1.AcceptsTab = false;
-            this.richTextBoxExtended1.AutoWordSelection = true;
-            this.richTextBoxExtended1.DetectURLs = true;
-            this.richTextBoxExtended1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxExtended1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBoxExtended1.Name = "richTextBoxExtended1";
-            this.richTextBoxExtended1.ReadOnly = false;
-            // 
-            // 
-            // 
-            this.richTextBoxExtended1.RichTextBox.AutoWordSelection = true;
-            this.richTextBoxExtended1.RichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxExtended1.RichTextBox.Location = new System.Drawing.Point(0, 26);
-            this.richTextBoxExtended1.RichTextBox.Name = "rtb1";
-            this.richTextBoxExtended1.RichTextBox.Size = new System.Drawing.Size(765, 542);
-            this.richTextBoxExtended1.RichTextBox.TabIndex = 1;
-            this.richTextBoxExtended1.ShowBold = true;
-            this.richTextBoxExtended1.ShowCenterJustify = true;
-            this.richTextBoxExtended1.ShowColors = true;
-            this.richTextBoxExtended1.ShowCopy = true;
-            this.richTextBoxExtended1.ShowCut = true;
-            this.richTextBoxExtended1.ShowFont = true;
-            this.richTextBoxExtended1.ShowFontSize = true;
-            this.richTextBoxExtended1.ShowItalic = true;
-            this.richTextBoxExtended1.ShowLeftJustify = true;
-            this.richTextBoxExtended1.ShowOpen = true;
-            this.richTextBoxExtended1.ShowPaste = true;
-            this.richTextBoxExtended1.ShowRedo = true;
-            this.richTextBoxExtended1.ShowRightJustify = true;
-            this.richTextBoxExtended1.ShowSave = true;
-            this.richTextBoxExtended1.ShowStamp = true;
-            this.richTextBoxExtended1.ShowStrikeout = true;
-            this.richTextBoxExtended1.ShowToolBarText = false;
-            this.richTextBoxExtended1.ShowUnderline = true;
-            this.richTextBoxExtended1.ShowUndo = true;
-            this.richTextBoxExtended1.Size = new System.Drawing.Size(765, 568);
-            this.richTextBoxExtended1.StampAction = RichTextBoxExtended.StampActions.EditedBy;
-            this.richTextBoxExtended1.StampColor = System.Drawing.Color.Blue;
-            this.richTextBoxExtended1.TabIndex = 0;
-            // 
-            // 
-            // 
-            this.richTextBoxExtended1.Toolbar.Appearance = System.Windows.Forms.ToolBarAppearance.Flat;
-            this.richTextBoxExtended1.Toolbar.ButtonSize = new System.Drawing.Size(16, 16);
-            this.richTextBoxExtended1.Toolbar.Divider = false;
-            this.richTextBoxExtended1.Toolbar.DropDownArrows = true;
-            this.richTextBoxExtended1.Toolbar.Location = new System.Drawing.Point(0, 0);
-            this.richTextBoxExtended1.Toolbar.Name = "tb1";
-            this.richTextBoxExtended1.Toolbar.ShowToolTips = true;
-            this.richTextBoxExtended1.Toolbar.Size = new System.Drawing.Size(765, 26);
-            this.richTextBoxExtended1.Toolbar.TabIndex = 0;
-            // 
             // TrainingSessionView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -922,10 +781,8 @@ namespace Sinapse.WinForms.Documents
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -944,7 +801,6 @@ namespace Sinapse.WinForms.Documents
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.tabNotes.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -956,7 +812,6 @@ namespace Sinapse.WinForms.Documents
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabSession;
         private System.Windows.Forms.TabPage tabHistory;
-        private System.Windows.Forms.TabPage tabNotes;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -964,11 +819,6 @@ namespace Sinapse.WinForms.Documents
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox tbDescription;
-        private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private RichTextBoxExtended.RichTextBoxExtended richTextBoxExtended1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.SplitContainer splitContainer2;
@@ -993,8 +843,6 @@ namespace Sinapse.WinForms.Documents
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox tbRemarks;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label27;

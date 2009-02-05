@@ -115,7 +115,7 @@ namespace Sinapse.WinForms.Dialogs
 
         private void wizardControl_FinishButtonClick(object sender, EventArgs e)
         {
-            columns = new TableDataSourceColumnCollection();
+            columns = new TableDataSourceColumnCollection(dataTable);
             TableDataSourceColumn col = null;
 
             foreach (DataColumn dataColumn in dataTable.Columns)
