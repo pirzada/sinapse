@@ -449,7 +449,7 @@ namespace Sinapse.Data.Network
             System.Random rnd = new Random();
 
             // Remove and throw to the end random rows until we have done so n*3 times (shuffles the dataset)
-            for (int i = 0; i < shuffleIterations; i++)
+            for (int i = 0; i < iterations; i++)
             {
                 index = rnd.Next(0, m_dataTable.Rows.Count - 1);
                 this.m_dataTable.Rows.Add(m_dataTable.Rows[index].ItemArray);
