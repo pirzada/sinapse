@@ -15,34 +15,33 @@ namespace Sinapse.Core.Systems
     public abstract class AdaptiveSystem : ISystem
     {
 
-        private SystemInputOutputCollection inputOutput;
+        private SystemInputOutputCollection m_interface;
      //   private SystemInputOutputCollection outputs;
-        private FilterCollection preprocess;
-        private FilterCollection postprocess;
+        private FilterCollection m_preprocessingFilters;
+        private FilterCollection m_postprocessingFilters;
 
 
         public AdaptiveSystem()
         {
-            inputOutput = new SystemInputOutputCollection();
-     //       outputs = new SystemInputOutputCollection();
+            m_interface = new SystemInputOutputCollection();
         }
 
 
         public SystemInputOutputCollection Interface
         {
-            get { return inputOutput; }
+            get { return m_interface; }
         }
 
         public FilterCollection Preprocess
         {
-            get { return preprocess; }
-            protected set { preprocess = value; }
+            get { return m_preprocessingFilters; }
+            protected set { m_preprocessingFilters = value; }
         }
 
         public FilterCollection Postprocess
         {
-            get { return postprocess; }
-            protected set { postprocess = value; }
+            get { return m_postprocessingFilters; }
+            protected set { m_postprocessingFilters = value; }
         }
 
 

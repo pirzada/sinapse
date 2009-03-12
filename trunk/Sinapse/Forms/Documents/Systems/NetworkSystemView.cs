@@ -40,12 +40,12 @@ namespace Sinapse.WinForms.Documents
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            colRole.DataSource = Enum.GetValues(typeof(InputOutput));
+         //   colRole.DataSource = Enum.GetValues(typeof(InputOutput));
             colType.DataSource = Enum.GetValues(typeof(SystemDataType));
             dgvInterface.DataSource = Network.Interface;
 
-            filterSequenceControl1.Filters = Network.Preprocess;
-            filterSequenceControl2.Filters = Network.Postprocess;
+         //   filterSequenceControl1.Filters = Network.Preprocess;
+          //  filterSequenceControl2.Filters = Network.Postprocess;
         }
 
 

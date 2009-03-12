@@ -26,6 +26,7 @@ using System.ComponentModel;
 using AForge.Mathematics;
 using AForge;
 
+using Sinapse.Core;
 using Sinapse.Core.Systems;
 
 namespace Sinapse.Core.Sources
@@ -277,51 +278,27 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
+        public object[][] GetData(string[] columns, DataSourceSet set)
+        {
+            DataView dataView = new DataView(this.dataTable);
+            dataView.RowFilter = String.Format("[@SET]='{0}'", (int)set);
+            DataTable newTable = dataView.ToTable(false, columns);
+            return newTable.ToArray();
+        }
 
         public object[][] GetData(DataSourceSet set)
         {
             DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}'", (int)set));
-            object[][] data = new object[rows.Length][];
-            for (int i = 0; i < rows.Length; i++)
-            {
-                data[i] = rows[i].ItemArray;
-            }
-            return data;
+            return rows.ToArray();
         }
 
 
         public object[][] GetData(DataSourceSet set, int subset)
         {
             DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
-            object[][] data = new object[rows.Length][];
-            for (int i = 0; i < rows.Length; i++)
-            {
-                data[i] = rows[i].ItemArray;
-            }
-            return data;
+            return rows.ToArray();
         }
 
-        public object[][] GetData(DataSourceSet set, InputOutput role)
-        {
-            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}'", (int)set));
-            object[][] data = new object[rows.Length][];
-            for (int i = 0; i < rows.Length; i++)
-            {
-              //  data[i] = GetData(rows[i], role);
-            }
-            return data;
-        }
-
-        public object[][] GetData(DataSourceSet set, int subset, InputOutput role)
-        {
-            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
-            object[][] data = new object[rows.Length][];
-            for (int i = 0; i < rows.Length; i++)
-            {
-              //  data[i] = GetData(rows[i], role);
-            }
-            return data;
-        }
 
 
         /*
@@ -500,16 +477,6 @@ namespace Sinapse.Core.Sources
         object ISource.GetData(DataSourceSet set, int subset)
         {
             return GetData(set, subset);
-        }
-
-        object ISource.GetData(DataSourceSet set, InputOutput role)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        object ISource.GetData(DataSourceSet set, int subset, InputOutput role)
-        {
-            throw new Exception("The method or operation is not implemented.");
         }
 
         #endregion
