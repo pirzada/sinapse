@@ -136,6 +136,12 @@
     <Compile Include="Forms\Dialogs\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Documents\Systems\Viewers\TableSourceViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Viewers\TableSourceViewer.Designer.cs">
+      <DependentUpon>TableSourceViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Documents\Sources\ToolWindows\EditColumns.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,12 @@
     </Compile>
     <Compile Include="Forms\Documents\Sources\ToolWindows\Histogram.Designer.cs">
       <DependentUpon>Histogram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Controls\FilterProcessing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Documents\Systems\Controls\FilterProcessing.Designer.cs">
+      <DependentUpon>FilterProcessing.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Documents\Systems\Controls\FilterSequence.cs">
       <SubType>UserControl</SubType>
@@ -304,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Documents\SinapseDocumentView.resx">
       <DependentUpon>SinapseDocumentView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documents\Systems\Controls\FilterProcessing.resx">
+      <DependentUpon>FilterProcessing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documents\Systems\Viewers\TableSourceViewer.resx">
+      <DependentUpon>TableSourceViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Documents\Sources\ToolWindows\EditColumns.resx">
       <DependentUpon>EditColumns.cs</DependentUpon>

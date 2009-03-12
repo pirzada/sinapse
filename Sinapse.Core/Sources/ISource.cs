@@ -44,9 +44,7 @@ namespace Sinapse.Core.Sources
         void Shuffle();
 
         object GetData(DataSourceSet set);
-        object GetData(DataSourceSet set, InputOutput role);
         object GetData(DataSourceSet set, int subset);
-        object GetData(DataSourceSet set, int subset, InputOutput role);
 
         event EventHandler DataChanged;
     }

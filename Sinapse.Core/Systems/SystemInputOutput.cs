@@ -21,6 +21,7 @@ namespace Sinapse.Core.Systems
 
         private string description;
         private string name;
+        private string caption;
         private SystemDataType dataType;
         private InputOutput inputOutput;
         private int index;
@@ -37,6 +38,12 @@ namespace Sinapse.Core.Systems
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public string Caption
+        {
+            get { return caption; }
+            set { caption = value; }
         }
 
         public string Description
@@ -78,7 +85,28 @@ namespace Sinapse.Core.Systems
             this.AllowRemove = true;
         }
 
-        
+        public string[] GetNames(InputOutput role)
+        {
+            string[] names = new string[GetCount(role)];
+
+            for (int i = 0; i < names.Length; i++)
+            {
+                names[i] = this[role, i].Name;
+            }
+
+            return names;
+        }
+
+        public int GetCount(InputOutput role)
+        {
+            int count = 0;
+            foreach (SystemInputOutput io in this)
+            {
+                if (io.Role == role)
+                    count++;
+            }
+            return count;
+        }
 
         public SystemInputOutput this[InputOutput role, int index]
         {
