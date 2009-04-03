@@ -392,7 +392,8 @@ namespace Sinapse.Data.Network
                             }
                             else
                             {
-                                row[columnName] = Math.Floor(value).ToString();
+                                row[columnName] = //Math.Floor(value).ToString();
+                                    Math.Max(Math.Floor(value), 0).ToString();
                             }
                         }
                     }
