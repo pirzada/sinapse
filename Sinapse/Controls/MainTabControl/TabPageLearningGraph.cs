@@ -383,10 +383,10 @@ namespace Sinapse.Controls.MainTabControl
             myPane.XAxis.Title.Text = "Epochs";
             myPane.YAxis.Title.Text = "Least-Mean-Square Error";
 
-            RollingPointPairList trainingList = new RollingPointPairList(1200);
-            RollingPointPairList validationList = new RollingPointPairList(1200);
-            RollingPointPairList savepointList = new RollingPointPairList(1200);
-            RollingPointPairList currentSavepointList = new RollingPointPairList(1200);
+            RollingPointPairList trainingList = new RollingPointPairList(5000);
+            RollingPointPairList validationList = new RollingPointPairList(5000);
+            RollingPointPairList savepointList = new RollingPointPairList(5000);
+            RollingPointPairList currentSavepointList = new RollingPointPairList(5000);
 
             // Add a curve
             LineItem curve;
