@@ -30,6 +30,7 @@ namespace AForge.Statistics
     /// </remarks>
     public class SampleMatrix : AForge.Mathematics.Matrix
     {
+        //TODO: maybe rename SampleMatrix to DataFrame?
 
         public enum DataModel { RowsAsObservations, ColumnsAsObservations };
 
