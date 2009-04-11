@@ -103,7 +103,7 @@ namespace AForge
         /// <returns>A System.String representing the current range.</returns>
         public override string ToString()
         {
-            return ToString(String.Empty, null);
+            return String.Concat(min.ToString(), '-', max.ToString());
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace AForge
         /// <returns>A System.String representing the current range.</returns>
         public string ToString(string format)
         {
-            return ToString(format, null);
+            return String.Concat(min.ToString(format), '-', max.ToString(format));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace AForge
         /// <returns>A System.String representing the current range.</returns>
         public string ToString(string format, IFormatProvider provider)
         {
-            return String.Concat(min.ToString(format), '-', max.ToString(format));
+            return String.Concat(min.ToString(format, provider), '-', max.ToString(format, provider));
         }
 
 
