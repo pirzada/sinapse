@@ -154,10 +154,10 @@ namespace Sinapse.Controls.MainTabControl
             this.Controls.SetChildIndex(this.btnCompare, 0);
             this.Controls.SetChildIndex(this.lbNetwork, 0);
             this.Controls.SetChildIndex(this.panelNetworkCaption, 0);
-            this.Controls.SetChildIndex(this.lbSetTitle, 0);
             this.Controls.SetChildIndex(this.lbDelta, 0);
             this.Controls.SetChildIndex(this.lbScore, 0);
             this.Controls.SetChildIndex(this.panelDeltaCaption, 0);
+            this.Controls.SetChildIndex(this.lbSetTitle, 0);
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

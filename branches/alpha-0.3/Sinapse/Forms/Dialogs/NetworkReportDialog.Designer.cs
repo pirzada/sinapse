@@ -44,6 +44,7 @@ namespace Sinapse.Forms.Dialogs
             this.btnTopClose = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.lbStatus = new System.Windows.Forms.Label();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +91,8 @@ namespace Sinapse.Forms.Dialogs
             this.btnConfigure,
             this.toolStripSeparator1,
             this.btnRun,
-            this.btnTopClose});
+            this.btnTopClose,
+            this.toolStripButton1});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(482, 25);
@@ -192,6 +194,16 @@ namespace Sinapse.Forms.Dialogs
             this.lbStatus.Text = "Status";
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // NetworkReportDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,5 +241,6 @@ namespace Sinapse.Forms.Dialogs
         private System.Windows.Forms.ToolStripMenuItem btnPrintOptions;
         private System.Windows.Forms.ToolStripButton btnTopClose;
         private System.Windows.Forms.Label lbStatus;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
