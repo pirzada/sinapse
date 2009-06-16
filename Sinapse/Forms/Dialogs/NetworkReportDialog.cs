@@ -256,5 +256,11 @@ namespace Sinapse.Forms.Dialogs
         }
         #endregion
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            RocViewer viewer = new RocViewer(m_network, m_database);
+            viewer.ShowDialog();
+        }
+
     }
 }

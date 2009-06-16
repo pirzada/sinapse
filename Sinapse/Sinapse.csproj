@@ -279,6 +279,12 @@
     <Compile Include="Forms\NetworkViewer.Designer.cs">
       <DependentUpon>NetworkViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RocViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RocViewer.Designer.cs">
+      <DependentUpon>RocViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SchemaMapper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -517,6 +523,9 @@
     <EmbeddedResource Include="Forms\NetworkInspector.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NetworkInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RocViewer.resx">
+      <DependentUpon>RocViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SchemaEditor.resx">
       <SubType>Designer</SubType>
