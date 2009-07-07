@@ -190,8 +190,8 @@ namespace Sinapse.Forms.Dialogs
             this.cbHiddenLayerNumber.SelectedIndex = 1;
             this.nHidden1.Value = Math.Ceiling((decimal)(m_networkSchema.InputColumns.Length + m_networkSchema.OutputColumns.Length) / 2);
             this.numSigmoidAlpha.Value = 0.5M;
-            this.numRangeHigh.Value = 0.85M;
-            this.numRangeLow.Value = -0.85M;
+            this.numRangeHigh.Value = 1.0M;
+            this.numRangeLow.Value = 0.0M;
         }
 
         private void cbHiddenLayerNumber_SelectedIndexChanged(object sender, EventArgs e)

@@ -32,16 +32,8 @@ namespace Sinapse.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            threshold = 0;
 
-            while (threshold <= 1.001)
-            {
-                this.m_database.ComputeTable(this.m_network, true);
-                this.m_database.Round(true, (float)threshold);
-                GenerateTestingSummary();
 
-                threshold += 0.05f;
-            }
         }
 
         public void GenerateTestingSummary()
@@ -92,52 +84,42 @@ namespace Sinapse.Forms
             }
 
             finalScore = totalScore / testingItems;
-            dataGridView1.Rows.Add(threshold, 1.0 * hitPositive/(hitPositive + errorNegative), 1.0* hitNegative/(hitNegative + errorPositive), hitPositive, hitNegative);
-/*
-            reportBuilder.Replace("[totalDeviation]", totalScore.ToString("N6"));
-            reportBuilder.Replace("[finalDeviation]", finalScore.ToString("N6"));
+            double sens = 1.0 * hitPositive / (hitPositive + errorNegative);
+            double espe = 1.0* hitNegative/(hitNegative + errorPositive);
+            double effc = (sens + espe)/2;
+            dataGridView1.Rows.Add(threshold, sens, espe, effc, hitPositive, hitNegative);
 
-            reportBuilder.Replace("[hits]", hitTotal.ToString());
-            reportBuilder.Replace("[hits%]", ((float)hitTotal / testingItems).ToString("0.00%"));
-
-            reportBuilder.Replace("[errors]", errorTotal.ToString());
-            reportBuilder.Replace("[errors%]", ((float)errorTotal / testingItems).ToString("0.00%"));
-
-            if (hitTotal != 0)
-            {
-                reportBuilder.Replace("[hitsP]", hitPositive.ToString());
-                reportBuilder.Replace("[hitsN]", hitNegative.ToString());
-                reportBuilder.Replace("[hitsP%]", ((float)hitPositive / hitTotal).ToString("0.00%"));
-                reportBuilder.Replace("[hitsN%]", ((float)hitNegative / hitTotal).ToString("0.00%"));
-            }
-            else
-            {
-                reportBuilder.Replace("[hitsP]", "-");
-                reportBuilder.Replace("[hitsN]", "-");
-                reportBuilder.Replace("[hitsP%]", String.Empty);
-                reportBuilder.Replace("[hitsN%]", String.Empty);
-            }
-
-            if (errorTotal != 0)
-            {
-                reportBuilder.Replace("[errorsP]", errorPositive.ToString());
-                reportBuilder.Replace("[errorsN]", errorNegative.ToString());
-                reportBuilder.Replace("[errorsP%]", ((float)errorPositive / errorTotal).ToString("0.00%"));
-                reportBuilder.Replace("[errorsN%]", ((float)errorNegative / errorTotal).ToString("0.00%"));
-            }
-            else
-            {
-                reportBuilder.Replace("[errorsP]", "-");
-                reportBuilder.Replace("[errorsN]", "-");
-                reportBuilder.Replace("[errorsP%]", String.Empty);
-                reportBuilder.Replace("[errorsN%]", String.Empty);
-            }
- */ 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+
+            threshold = 0;
+
+            while (threshold <= 1.001)
+            {
+                this.m_database.ComputeTable(this.m_network, true);
+                this.m_database.Round(true, (float)threshold);
+                GenerateTestingSummary();
+
+                threshold += 1f/(float)numericUpDown1.Value;
+            }
+
+
+            double sum = 0.0;
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                double trapz = ((double)dataGridView1.Rows[i].Cells[1].Value + (double)dataGridView1.Rows[i + 1].Cells[1].Value);
+                trapz = trapz * ((1.0 - (double)dataGridView1.Rows[i + 1].Cells[2].Value) - (1.0 - (double)dataGridView1.Rows[i].Cells[2].Value)) / 2;
+                sum += trapz;
+            }
+            textBox1.Text = Math.Abs(sum).ToString();
         }
     }
 }
