@@ -153,6 +153,7 @@ namespace Sinapse.Extensions.Simplifier.Forms
                     {
                         this.tableAnalysisSource = db.GetWorksheet(t.Selection);
                         this.dgvSample.DataSource = tableAnalysisSource;
+                        this.dgvShiftSample.DataSource = tableAnalysisSource;
                     }
                 }
                 else if (extension == ".xml")
