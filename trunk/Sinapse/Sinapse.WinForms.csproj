@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{38A0657B-12B6-4BE7-B3B4-1D3B82730FC1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -114,7 +114,7 @@
     </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.3321.36371, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\DockPanel\WinFormsUI\bin\Release\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>..\Externals\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
     <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fa7dfa6666a2638, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -135,6 +135,12 @@
     </Compile>
     <Compile Include="Forms\Dialogs\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dialogs\TableSelectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dialogs\TableSelectDialog.designer.cs">
+      <DependentUpon>TableSelectDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Documents\Systems\Viewers\TableSourceViewer.cs">
       <SubType>UserControl</SubType>
@@ -271,9 +277,6 @@
     <Compile Include="Forms\Documents\Sources\TableSourceView.Designer.cs">
       <DependentUpon>TableSourceView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Base\SingleInstanceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\Dialogs\NewWorkplaceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +316,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Dialogs\OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dialogs\TableSelectDialog.resx">
+      <DependentUpon>TableSelectDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Documents\SinapseDocumentView.resx">
       <DependentUpon>SinapseDocumentView.cs</DependentUpon>
@@ -442,10 +449,6 @@
     <ProjectReference Include="..\Sinapse.Databases\Sinapse.Databases.csproj">
       <Project>{9BAD8288-7170-467E-B82C-EC64EBCD64B3}</Project>
       <Name>Sinapse.Databases</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sinapse.Diagramming\Sinapse.Diagramming.csproj">
-      <Project>{4235CA0B-2268-438B-8BD6-F1126753954B}</Project>
-      <Name>Sinapse.Diagramming</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sinapse.Forms.Controls\Sinapse.WinForms.Controls.csproj">
       <Project>{81CA91DE-585F-4ED7-A086-24F1F2C95A6B}</Project>

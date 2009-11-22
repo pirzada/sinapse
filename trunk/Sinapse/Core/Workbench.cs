@@ -118,7 +118,11 @@ namespace Sinapse.WinForms.Core
         #region Workplace Specific Methods
         public void OpenWorkplace(string fullName)
         {
+            if (File.Exists(fullName))
+            {
             OpenWorkplace(DocumentManager.Open(fullName) as Workplace);
+            }
+            else MessageBox.Show("Invalid path");
         }
 
         public void OpenWorkplace(Workplace workplace)

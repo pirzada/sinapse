@@ -61,7 +61,7 @@ namespace Sinapse.WinForms.Documents.Systems.Controls
 
         public void UpdateMenu()
         {
-            Type[] filters = FilterCollection.GetAllFilters();
+            Type[] filters = FilterCollection.ListFilters();
 
             ToolStripItem item;
             menuAddFilter.DropDownItems.Clear();
