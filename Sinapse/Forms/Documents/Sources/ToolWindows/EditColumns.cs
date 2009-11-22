@@ -15,7 +15,7 @@ namespace Sinapse.WinForms.Forms.Documents.Sources.ToolWindows
 {
     public partial class EditColumns : Form
     {
-        private TableDataSourceColumnCollection columns;
+        private DataColumnCollection columnCollection;
 
 
         public EditColumns()
@@ -23,9 +23,9 @@ namespace Sinapse.WinForms.Forms.Documents.Sources.ToolWindows
             InitializeComponent();
         }
 
-        public EditColumns(TableDataSourceColumnCollection columns) : this()
+        public EditColumns(DataColumnCollection columns) : this()
         {
-            this.columns = columns;
+            this.columnCollection = columns;
         }
 
 
@@ -33,7 +33,7 @@ namespace Sinapse.WinForms.Forms.Documents.Sources.ToolWindows
         {
             base.OnLoad(e);
 
-            dataGridView1.DataSource = columns;
+            dataGridView1.DataSource = columnCollection;
         }
 
 

@@ -42,7 +42,6 @@ namespace Sinapse.WinForms.ToolWindows
     public partial class WorkplaceExplorer : ToolWindow
     {
 
-      //  private bool directoryView = true;
 
         private TreeNode nodeWorkplace;
 

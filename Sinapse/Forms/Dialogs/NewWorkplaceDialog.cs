@@ -82,7 +82,7 @@ namespace Sinapse.WinForms.Dialogs
                 if (!Directory.Exists(location))
                 {
                     // Directory does not exist
-                    DialogResult r = MessageBox.Show("The directory does not exist. Do you want Sinapse to automatically create it for you?");
+                    DialogResult r = MessageBox.Show("Directory creation","The directory does not exist. Do you want Sinapse to automatically create it for you?", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes)
                     {
                         Directory.CreateDirectory(location);

@@ -44,7 +44,6 @@ namespace Sinapse.WinForms.Documents
             this.tabControl = new Dotnetrix.Controls.TabControlEX();
             this.tabOverview = new Dotnetrix.Controls.TabPageEX();
             this.splitContainer7 = new System.Windows.Forms.SplitContainer();
-            this.networkDiagram2 = new Sinapse.Diagramming.NetworkDiagram();
             this.tabInterface = new Dotnetrix.Controls.TabPageEX();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -63,7 +62,6 @@ namespace Sinapse.WinForms.Documents
             this.filterProcessing1 = new Sinapse.WinForms.Forms.Documents.Systems.Controls.FilterProcessing();
             this.tabNetwork = new Dotnetrix.Controls.TabPageEX();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-            this.networkDiagram1 = new Sinapse.Diagramming.NetworkDiagram();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.activationFunctionView1 = new Sinapse.WinForms.Controls.Controls.ActivationFunctionView();
             this.tabPageEX2 = new Dotnetrix.Controls.TabPageEX();
@@ -218,18 +216,10 @@ namespace Sinapse.WinForms.Documents
             // 
             // splitContainer7.Panel1
             // 
-            this.splitContainer7.Panel1.Controls.Add(this.networkDiagram2);
             this.splitContainer7.Size = new System.Drawing.Size(891, 526);
             this.splitContainer7.SplitterDistance = 263;
             this.splitContainer7.TabIndex = 2;
-            // 
-            // networkDiagram2
-            // 
-            this.networkDiagram2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.networkDiagram2.Location = new System.Drawing.Point(0, 0);
-            this.networkDiagram2.Name = "networkDiagram2";
-            this.networkDiagram2.Size = new System.Drawing.Size(891, 263);
-            this.networkDiagram2.TabIndex = 2;
+
             // 
             // tabInterface
             // 
@@ -405,7 +395,6 @@ namespace Sinapse.WinForms.Documents
             // 
             // splitContainer6.Panel1
             // 
-            this.splitContainer6.Panel1.Controls.Add(this.networkDiagram1);
             // 
             // splitContainer6.Panel2
             // 
@@ -413,14 +402,7 @@ namespace Sinapse.WinForms.Documents
             this.splitContainer6.Size = new System.Drawing.Size(891, 526);
             this.splitContainer6.SplitterDistance = 263;
             this.splitContainer6.TabIndex = 1;
-            // 
-            // networkDiagram1
-            // 
-            this.networkDiagram1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.networkDiagram1.Location = new System.Drawing.Point(0, 0);
-            this.networkDiagram1.Name = "networkDiagram1";
-            this.networkDiagram1.Size = new System.Drawing.Size(891, 263);
-            this.networkDiagram1.TabIndex = 2;
+
             // 
             // splitContainer3
             // 
@@ -527,7 +509,6 @@ namespace Sinapse.WinForms.Documents
         private Dotnetrix.Controls.TabPageEX tabOverview;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.SplitContainer splitContainer6;
-        private Sinapse.Diagramming.NetworkDiagram networkDiagram1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
@@ -539,7 +520,6 @@ namespace Sinapse.WinForms.Documents
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.SplitContainer splitContainer7;
-        private Sinapse.Diagramming.NetworkDiagram networkDiagram2;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private Sinapse.WinForms.Forms.Documents.Systems.Controls.FilterProcessing filterProcessing1;
