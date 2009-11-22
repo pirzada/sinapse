@@ -38,13 +38,16 @@ namespace Sinapse.Core.Sources
     ///   The source encompassed here is presented as a DataTable, which can be created
     ///   or imported from various other sources like Microsoft Excel or text files. 
     /// </summary>
+    [DocumentDescription("Table Data Source",
+        DefaultName="tableSource",
+        Description="Table Data Source",
+        Extension=".source.tds",
+        IconPath="Resources/Source.ico")]
     [Serializable]
     public class TableDataSource : ISource, ISinapseDocument
     {
 
-        
         private DataTable dataTable;
-        private TableDataSourceColumnCollection columns;
 
 
         [field: NonSerialized]
@@ -52,6 +55,11 @@ namespace Sinapse.Core.Sources
 
 
 
+        /// <summary>
+        ///   Creates a new Table Data Source object.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="info"></param>
         public TableDataSource(String name, System.IO.FileInfo info)
         {
             // Initialize simulated multiple-inheritance helpers
@@ -59,7 +67,6 @@ namespace Sinapse.Core.Sources
             this.sinapseDocument = new SinapseDocument(name, info);
 
             this.dataTable = new DataTable(name);
-            this.columns = new TableDataSourceColumnCollection(dataTable);
             this.Name = name;
 
             // Create the extra two columns for storing the Set and Subset
@@ -78,28 +85,10 @@ namespace Sinapse.Core.Sources
         /// </summary>
         /// <param name="table"></param>
         /// <param name="columns"></param>
-        public void Import(DataTable table, TableDataSourceColumnCollection columns)
+        public void Import(DataTable table)
         {
             // Import the DataTable
             this.dataTable.Merge(table, true, MissingSchemaAction.Add);
-
-            // Import the TableDataColumns (copy)
-            this.columns.RaiseListChangedEvents = false;
-            foreach (TableDataSourceColumn col in columns)
-            {
-                if (!this.columns.Contains(col.Name))
-                {
-                    TableDataSourceColumn newCol;
-                    newCol = new TableDataSourceColumn(dataTable.Columns[col.Name]);
-                //    newCol.Role = col.Role;
-                    newCol.DataType = col.DataType;
-                    newCol.Description = col.Description;
-                    newCol.Visible = col.Visible;
-                    this.columns.Add(newCol);
-                }
-            }
-            this.columns.RaiseListChangedEvents = true;
-            this.columns.ResetBindings();
 
 
             HasChanges = true;
@@ -123,44 +112,29 @@ namespace Sinapse.Core.Sources
             HasChanges = true;
         }
 
+        public void RemoveOutliers()
+        {
+            throw new NotImplementedException();
+        }
 
         private void createExtendedColumns()
         {
             if (!dataTable.Columns.Contains("@SET"))
             {
                 DataColumn dataColumn;
-                TableDataSourceColumn dataColumnInfo;
 
                 dataColumn = new DataColumn("@SET", typeof(int));
                 dataColumn.DefaultValue = DataSourceSet.Training;
                 this.dataTable.Columns.Add(dataColumn);
 
-                dataColumnInfo = new TableDataSourceColumn(dataColumn);
-                dataColumnInfo.Visible = false;
-              //  dataColumnInfo.Role = InputOutput.None;
-                this.columns.Add(dataColumnInfo);
-
                 dataColumn = new DataColumn("@SUBSET", typeof(int));
                 dataColumn.DefaultValue = 0;
                 this.dataTable.Columns.Add(dataColumn);
 
-                dataColumnInfo = new TableDataSourceColumn(dataColumn);
-                dataColumnInfo.Visible = false;
-            //    dataColumnInfo.Role = InputOutput.None;
-                this.columns.Add(dataColumnInfo);
             }
         }
 
 
-
-
-        #region Properties
-        [Browsable(false)]
-        public TableDataSourceColumnCollection Columns
-        {
-            get { return columns; }
-        }
-        #endregion
 
 
 
@@ -270,7 +244,6 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
-
         public DataView GetView(DataSourceSet set, int subset)
         {
             DataView dataView = new DataView(this.dataTable);
@@ -278,84 +251,30 @@ namespace Sinapse.Core.Sources
             return dataView;
         }
 
-        public object[][] GetData(string[] columns, DataSourceSet set)
+        public object GetData(string[] columns, DataSourceSet set)
         {
             DataView dataView = new DataView(this.dataTable);
             dataView.RowFilter = String.Format("[@SET]='{0}'", (int)set);
             DataTable newTable = dataView.ToTable(false, columns);
-            return newTable.ToArray();
+            return newTable;
         }
 
-        public object[][] GetData(DataSourceSet set)
+        public object GetData(DataSourceSet set)
         {
-            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}'", (int)set));
-            return rows.ToArray();
+            DataView dataView = new DataView(this.dataTable);
+            dataView.RowFilter = String.Format("[@SET]='{0}'", (int)set);
+            DataTable newTable = dataView.ToTable(false);
+            return newTable;
         }
 
-
-        public object[][] GetData(DataSourceSet set, int subset)
+        public object GetData(DataSourceSet set, int subset)
         {
-            DataRow[] rows = dataTable.Select(String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset));
-            return rows.ToArray();
+            DataView dataView = new DataView(this.dataTable);
+            dataView.RowFilter = String.Format("[@SET]='{0}' AND [@SUBSET]='{1}'", (int)set, subset);
+            DataTable newTable = dataView.ToTable(false);
+            return newTable;
         }
-
-
-
-        /*
-                public DataTable GetData(DataSourceSet set, int subset, DataSourceRole role)
-                {
-                    DataView view = GetData(set, subset);
-                    DataTable table = view.ToTable(false, this.columns.GetNames(role));
-                    return table;
-                }
-        */
-        public DataView GetExtendedView()
-        {
-            // For each output column, three extra columns should be added, one for
-            //  storing the desired output as seen by a system, one for the raw output
-            //  calculed by the system and other to show the deviation between those
-            //  two raw outputs, the given by the system and the desired.
-
-            throw new NotImplementedException();
-        }
-
-/*
-        /// <summary>
-        ///   Gets the input data stored inside a DataRow. The DataRow must be a
-        ///   member of the internal DataTable of this TableDataSource.
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public object[] GetData(DataRow row, InputOutput role)
-        {
-            if (row.Table != dataTable)
-                throw new ArgumentException("row");
-
-            object[] data = new object[columns.GetCount(role)];
-            for (int i = 0; i < data.Length; i++)
-            {
-                data[i] = row[columns[i].DataColumn];
-            }
-            return data;
-        }
-
-        public void SetData(DataRow row, InputOutput role, object[] data)
-        {
-            if (row.Table != dataTable)
-                throw new ArgumentException("row");
-
-            data = new object[columns.GetCount(role)];
-            for (int i = 0; i < data.Length; i++)
-            {
-                row[columns[i].DataColumn] = data[i];
-            }
-
-            HasChanges = true;
-        }
- */ 
         #endregion
-
 
 
 
@@ -367,6 +286,9 @@ namespace Sinapse.Core.Sources
             if (this.DataChanged != null)
                 this.DataChanged.Invoke(this, e);
         }
+
+
+
 
 
 
@@ -402,9 +324,6 @@ namespace Sinapse.Core.Sources
             remove { serializableObject.FileSaved -= value; }
         }
         #endregion
-
-
-
 
 
         #region IWorkplaceComponent Members
@@ -462,24 +381,6 @@ namespace Sinapse.Core.Sources
         }
         #endregion
 
-
-
-
-
-        #region IDataSource Members
-
-
-        object ISource.GetData(DataSourceSet set)
-        {
-            return GetData(set);
-        }
-
-        object ISource.GetData(DataSourceSet set, int subset)
-        {
-            return GetData(set, subset);
-        }
-
-        #endregion
 
 
     }

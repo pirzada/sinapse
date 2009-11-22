@@ -72,9 +72,9 @@ namespace Sinapse.Core.Systems
             {
                 Preprocess.Apply(input);
             }
-            catch (Filters.InputMismatchException exception)
+            catch (Exception exception)
             {
-                throw new Filters.InputMismatchException(
+                throw new Exception(
                     "Exception ocurred while appling Input processing", exception);
             }
 
@@ -97,9 +97,9 @@ namespace Sinapse.Core.Systems
             {
                 Postprocess.Apply(output);
             }
-            catch (Filters.InputMismatchException exception)
+            catch (Exception exception)
             {
-                throw new Filters.InputMismatchException(
+                throw new Exception(
                     "Exception ocurred while appling Output processing", exception);
             }
 

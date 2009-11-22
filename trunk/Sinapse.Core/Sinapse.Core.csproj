@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CE75E853-93A7-4690-9EE3-6AFB684E48C1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -65,12 +65,9 @@
     <Compile Include="Attributes.cs" />
     <Compile Include="Documents\DocumentManager.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Filters\InputMismatchException.cs" />
     <Compile Include="Filters\Table\Normalization.cs" />
     <Compile Include="Documents\ISinapseDocument.cs" />
     <Compile Include="ISinapseConcept.cs" />
-    <Compile Include="Sources\DataFrame.cs" />
-    <Compile Include="Sources\TableDataSource\TableDataSourceColumn.cs" />
     <Compile Include="ISerializableObject.cs" />
     <Compile Include="Sources\ISource.cs" />
     <Compile Include="Sources\TableDataSource\TableDataSource.cs" />
@@ -139,12 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\DesignerEditors\" />
-    <Folder Include="Filters\Image\" />
-    <Folder Include="Filters\Matrix\" />
-    <Folder Include="Filters\Sound\" />
-    <Folder Include="Filters\Video\" />
-    <Folder Include="Reporting\" />
-    <Folder Include="Systems\Statistic\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

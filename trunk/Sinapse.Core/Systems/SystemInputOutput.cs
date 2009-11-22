@@ -12,8 +12,8 @@ namespace Sinapse.Core.Systems
     public enum InputOutput { None = 0, Input = 1, Output = 2 };
 
     /// <summary>
-    /// SystemInputOutput provides a description for a Input or Output of a System.
-    /// It stores the name, description and type of the input or output.
+    ///   SystemInputOutput provides a description for a Input or Output of a System.
+    ///   It stores the name, description and type of the input or output.
     /// </summary>
     [Serializable]
     public class SystemInputOutput

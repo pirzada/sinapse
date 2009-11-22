@@ -28,6 +28,8 @@ using Sinapse.Core.Documents;
 using Sinapse.Core.Systems;
 using Sinapse.Core.Sources;
 
+using System.Data;
+
 
 namespace Sinapse.Core.Training
 {
@@ -118,16 +120,19 @@ namespace Sinapse.Core.Training
             {
                 History.Add("Training Starting", status, options);
 
-                object[][] dataInput = DataSource.GetData(AdaptiveSystem.Interface.GetNames(InputOutput.Input), DataSourceSet.Training);
-                object[][] dataOutput = DataSource.GetData(AdaptiveSystem.Interface.GetNames(InputOutput.Output), DataSourceSet.Training);
+                string[] inputColumns = AdaptiveSystem.Interface.GetNames(InputOutput.Input);
+                string[] outputColumns = AdaptiveSystem.Interface.GetNames(InputOutput.Output);
+
+                object dataInput = DataSource.GetData(inputColumns, DataSourceSet.Training);
+                object dataOutput = DataSource.GetData(outputColumns, DataSourceSet.Training);
 
                 AdaptiveSystem.Preprocess.Apply(dataInput);
-                AdaptiveSystem.Postprocess.Revert(dataOutput);
+                AdaptiveSystem.Postprocess.Reverse(dataOutput);
 
-                TrainingThreadParameters parameters;
+                TrainingThreadParameters parameters = new TrainingThreadParameters();
                 parameters.Options = this.Options.Copy();
-                parameters.Inputs = convert(dataInput);
-                parameters.Outputs = convert(dataOutput);
+                //parameters.Inputs = convert(dataInput);
+                //parameters.Outputs = convert(dataOutput);
 
 
                 backgroundWorker.RunWorkerAsync(parameters);

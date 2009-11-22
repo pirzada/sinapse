@@ -3,7 +3,7 @@
   <Class Name="Sinapse.Core.Filters.FilterCollection">
     <Position X="12.25" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAAAAAABAEQAAACAAAAAAAABACAAAQAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAAAAABAAABAAAAAAAAAAABACAAAAAAA=</HashCode>
       <FileName>Filters\IFilter.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -13,12 +13,9 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAQAwKGCFMAgYEQAJAAAgEQBAAAEAEAgCAARAAiAEAA=</HashCode>
+      <HashCode>AAAAQKGCFMAgYEQAJAAAgEQBAAAEAEAgAAARAECAEAA=</HashCode>
       <FileName>Sources\TableDataSource\TableDataSource.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Columns" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Sinapse.Core.Sources.ImageDataSource">
@@ -95,25 +92,6 @@
       <FileName>Training\TrainingOptions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sinapse.Core.Sources.TableDataSourceColumn">
-    <Position X="14.75" Y="27.75" Width="2.75" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIgAABAIAAAEAQAgAAAAAAKCABACAAAACA=</HashCode>
-      <FileName>Sources\TableDataSource\TableDataSourceColumn.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Sinapse.Core.Sources.TableDataSourceColumnCollection">
-    <Position X="18.25" Y="28" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAIAAAEABAAAAAAACAAAAAAAAQAAAAAAAAAAAAAQAAA=</HashCode>
-      <FileName>Sources\TableDataSource\TableDataSourceColumn.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="Sinapse.Core.Training.TrainingHistory">
     <Position X="44.75" Y="8" Width="3" />
     <TypeIdentifier>
@@ -180,48 +158,11 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Sinapse.Core.StatisticSystem">
-    <Position X="6.25" Y="9.25" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Systems\Statistic\StatisticSystem.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Sinapse.Core.Systems.DistanceNetworkSystem">
-    <Position X="16" Y="13.25" Width="2" />
-    <InheritanceLine Type="Sinapse.Core.Systems.NetworkSystem" ManuallyRouted="true">
-      <Path>
-        <Point X="16.375" Y="8.444" />
-        <Point X="16.375" Y="9.962" />
-        <Point X="19.5" Y="9.962" />
-        <Point X="19.5" Y="10.75" />
-      </Path>
-    </InheritanceLine>
-    <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAA=</HashCode>
-      <FileName>Systems\Network\DistanceNetworkSystem.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Sinapse.Core.Training.TrainingSavepoint">
     <Position X="46.75" Y="14.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAAAAIAAAAEAAAAACAAAAAgAQAAAA=</HashCode>
       <FileName>Training\TrainingSavepoint.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Sinapse.Core.Systems.NeocognitronNetworkSystem">
-    <Position X="9" Y="13.25" Width="2.25" />
-    <InheritanceLine Type="Sinapse.Core.Systems.NetworkSystem" ManuallyRouted="true">
-      <Path>
-        <Point X="16.375" Y="8.444" />
-        <Point X="16.375" Y="9.962" />
-        <Point X="13.125" Y="9.962" />
-        <Point X="13.125" Y="10.75" />
-      </Path>
-    </InheritanceLine>
-    <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
-      <FileName>Systems\Network\NeocognitronNetworkSystem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sinapse.Core.SerializableObject&lt;T&gt;">
@@ -280,7 +221,7 @@
   <Interface Name="Sinapse.Core.Filters.IFilter">
     <Position X="15" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAAAAAABAAAAQACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Filters\IFilter.cs</FileName>
     </TypeIdentifier>
   </Interface>
