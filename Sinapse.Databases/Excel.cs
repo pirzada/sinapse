@@ -15,9 +15,6 @@ namespace Sinapse.Databases
         private string path;
         private string strConnection;
 
-    //    private bool hasHeaders;
-    //    private bool hasMixedData;
-
 
         public Excel(string path, bool hasHeaders, bool hasMixedData)
         {
@@ -25,12 +22,12 @@ namespace Sinapse.Databases
             OleDbConnectionStringBuilder strBuilder = new OleDbConnectionStringBuilder();
             strBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
             strBuilder.DataSource = path;
-            strBuilder.Add("Extended Properties", "Excel 8.0;"+
+            strBuilder.Add("Extended Properties", "Excel 8.0;" +
                 "HDR=" + (hasHeaders ? "Yes" : "No") + ';' +
                 "Imex=" + (hasMixedData ? "2" : "0") + ';' +
-              ""); 
+              "");
 
-            
+
             strConnection = strBuilder.ToString();
         }
 
@@ -52,6 +49,8 @@ namespace Sinapse.Databases
                     worksheets[i] = (string)tableWorksheets.Rows[i]["TABLE_NAME"];
                     worksheets[i] = worksheets[i].Remove(worksheets[i].Length - 1).Trim('"', '\'');
                     // removes the trailing $ and other characters appended in the table name
+                    while (worksheets[i].EndsWith("$"))
+                        worksheets[i] = worksheets[i].Remove(worksheets[i].Length - 1).Trim('"', '\'');
                 }
             }
             catch (OleDbException ex)
@@ -81,7 +80,7 @@ namespace Sinapse.Databases
             {
                 OleDbConnection connection = new OleDbConnection(strConnection);
                 connection.Open();
-                DataTable tableColumns = connection.GetSchema("Columns", new string[] {null, null, worksheet + '$', null});
+                DataTable tableColumns = connection.GetSchema("Columns", new string[] { null, null, worksheet + '$', null });
                 connection.Close();
 
                 columns = new string[tableColumns.Rows.Count];
