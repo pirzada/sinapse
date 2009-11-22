@@ -43,6 +43,7 @@ namespace Sinapse.Core.Sources
     {
         void Shuffle();
 
+        // TableDataSource should return a DataTable in the GetData method
         object GetData(DataSourceSet set);
         object GetData(DataSourceSet set, int subset);
 

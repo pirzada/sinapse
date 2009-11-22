@@ -27,8 +27,8 @@ namespace Sinapse.Core.Systems
             serializableObject = new SerializableObject<ActivationNetworkSystem>(this);
             sinapseDocument = new SinapseDocument(name, info);
 
-            Preprocess = new FilterCollection(false);
-            Postprocess = new FilterCollection(true);
+            Preprocess = new FilterCollection();
+            Postprocess = new FilterCollection();
 
             this.Name = name;
             this.HasChanges = true;
